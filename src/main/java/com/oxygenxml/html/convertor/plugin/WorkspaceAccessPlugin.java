@@ -1,4 +1,4 @@
-package com.oxygenxml.sdksamples.workspace;
+package com.oxygenxml.html.convertor.plugin;
 
 import ro.sync.exml.plugin.Plugin;
 import ro.sync.exml.plugin.PluginDescriptor;

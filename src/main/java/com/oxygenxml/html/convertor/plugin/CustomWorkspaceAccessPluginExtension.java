@@ -1,4 +1,4 @@
-package com.oxygenxml.sdksamples.workspace;
+package com.oxygenxml.html.convertor.plugin;
 
 import java.awt.event.ActionEvent;
 import java.net.URL;
@@ -8,12 +8,15 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
+
+import com.oxygenxml.html.convertor.view.ConvertorDialog;
 
 import ro.sync.ecss.extensions.api.AuthorAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
@@ -213,42 +216,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		return new AbstractAction("Show Selection") {
 			  @Override
 			  public void actionPerformed(ActionEvent actionevent) {
-				  //Get the current opened XML document
-				  WSEditor editorAccess = pluginWorkspaceAccess.getCurrentEditorAccess(StandalonePluginWorkspace.MAIN_EDITING_AREA);
-				  // The action is available only in Author mode.
-				  if(editorAccess != null){
-					  if (EditorPageConstants.PAGE_AUTHOR.equals(editorAccess.getCurrentPageID())) {
-						  WSAuthorEditorPage authorPageAccess = (WSAuthorEditorPage) editorAccess.getCurrentPage();
-						  AuthorDocumentController controller = authorPageAccess.getDocumentController();
-						  if (authorPageAccess.hasSelection()) {
-							  AuthorDocumentFragment selectionFragment;
-							  try {
-								  // Create fragment from selection
-								  selectionFragment = controller.createDocumentFragment(
-										  authorPageAccess.getSelectionStart(),
-										  authorPageAccess.getSelectionEnd() - 1
-										  );
-								  // Serialize
-								  String serializeFragmentToXML = controller.serializeFragmentToXML(selectionFragment);
-								  // Show fragment
-								  pluginWorkspaceAccess.showInformationMessage(serializeFragmentToXML);
-							  } catch (BadLocationException e) {
-								  pluginWorkspaceAccess.showErrorMessage("Show Selection Source operation failed: " + e.getMessage());
-							  }
-						  } else {
-							  // No selection
-							  pluginWorkspaceAccess.showInformationMessage("No selection available.");
-						  }
-					  } else if (EditorPageConstants.PAGE_TEXT.equals(editorAccess.getCurrentPageID())) {
-						  WSTextEditorPage textPage = (WSTextEditorPage) editorAccess.getCurrentPage();
-						  if (textPage.hasSelection()) {
-							  pluginWorkspaceAccess.showInformationMessage(textPage.getSelectedText());
-						  } else {
-							  // No selection
-							  pluginWorkspaceAccess.showInformationMessage("No selection available.");
-						  }
-					  }
-				  }
+				  ConvertorDialog convertorDialog = new ConvertorDialog((JFrame) pluginWorkspaceAccess.getParentFrame());
 			  }
 		  };
 	}

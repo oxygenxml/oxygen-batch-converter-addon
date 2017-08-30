@@ -8,7 +8,7 @@
  description="Test"
  version="${project.version}"
  vendor="oXygen XML"
- class="com.oxygenxml.sdksamples.workspace.WorkspaceAccessPlugin"
+ class="com.oxygenxml.html.convertor.plugin.WorkspaceAccessPlugin"
  classLoaderType="preferReferencedResources">
  
  <runtime>
@@ -18,7 +18,7 @@
  </runtime>
  
  <extension type="WorkspaceAccess" 
-  class="com.oxygenxml.sdksamples.workspace.CustomWorkspaceAccessPluginExtension"/>
+  class="com.oxygenxml.html.convertor.plugin.CustomWorkspaceAccessPluginExtension"/>
  
   <!--The sample view which will present messages from the sample plugin.-->
   <view id="SampleWorkspaceAccessID" initialSide="WEST" initialRow="0"/>
