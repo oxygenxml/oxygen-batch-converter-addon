@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,7 +36,13 @@ public class InputPanel extends JPanel {
 		setLayout(new GridBagLayout());
 
 		GridBagConstraints gbc = new GridBagConstraints();
-
+		
+		
+		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup.add(checkCurrent);
+		buttonGroup.add(checkOtherFiles);
+		
+		
 		//------------add JLabel for select file
 		gbc.gridx = 0;
 		gbc.gridy = 0;
