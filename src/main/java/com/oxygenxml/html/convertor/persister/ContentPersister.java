@@ -1,6 +1,6 @@
 package com.oxygenxml.html.convertor.persister;
 
-import com.oxygenxml.html.convertor.view.ConvertorDialogInteractor;
+import com.oxygenxml.html.convertor.view.ConvertorInteractor;
 
 /**
  * Used for save and persist  
@@ -12,10 +12,10 @@ public interface ContentPersister {
 	/**
 	 * Save content before close the dialog.
 	 */
-	public void saveState(ConvertorDialogInteractor frame);
+	public void saveState(ConvertorInteractor convertorInteractor);
 	
 	/**
 	 * Load content before start the dialog.
 	 */
-	public void loadState(ConvertorDialogInteractor frame);
+	public void loadState(ConvertorInteractor convertorInteractor);
 }

@@ -18,14 +18,23 @@
       </snapshots>
     </repository>
   </repositories>
-  
-  <dependencies>
-    <dependency>
-      <groupId>com.oxygenxml</groupId>
-      <artifactId>oxygen-sdk</artifactId>
-      <version>19.0.0.0</version>
-      <scope>provided</scope>
-    </dependency>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-sdk</artifactId>
+			<version>19.0.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sf.jtidy/jtidy -->
+		<dependency>
+			<groupId>net.sf.jtidy</groupId>
+			<artifactId>jtidy</artifactId>
+			<version>r938</version>
+		</dependency>
+    
   </dependencies>
   
   <build>

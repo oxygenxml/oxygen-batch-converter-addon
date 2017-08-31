@@ -4,11 +4,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,24 +16,18 @@ import javax.swing.JTextField;
 import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
 
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.ui.ToolbarButton;
 
 public class OutputPanel extends JPanel{
 
-	JTextField outputField = new JTextField();
+	private	JTextField outputField = new JTextField();
 	
-	Action chooserAction = new AbstractAction() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-	};
 	
-	ToolbarButton chooserBtn = new ToolbarButton(chooserAction, false);
+	private ToolbarButton chooserBtn; 
+
 	
-	public OutputPanel(Translator translator) {
+	public OutputPanel(final Translator translator) {
 		
 		setLayout(new GridBagLayout());
 		
@@ -57,6 +51,22 @@ public class OutputPanel extends JPanel{
 		gbc.insets = new Insets(0, 0, 0, 0);
 		gbc.fill = GridBagConstraints.NONE;
 		
+		
+		Action chooserAction = new AbstractAction() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					//open a URL chooser
+					File file = PluginWorkspaceProvider.getPluginWorkspace().chooseDirectory();
+
+					if(file != null){
+						outputField.setText(file.getPath());
+					}
+			}
+		};
+		
+		chooserBtn = new ToolbarButton(chooserAction, false);
+		
 	// Get the image for toolbar button
 		URL imageToLoad = getClass().getClassLoader().getResource("images/chooser.png");
 		if (imageToLoad != null) {
@@ -65,5 +75,13 @@ public class OutputPanel extends JPanel{
 		}
 		
 		add(chooserBtn,gbc);
+	}
+	
+	public String getOutputPath(){
+		return outputField.getText();
+	}
+	
+	public void setOutputPath(String outputPath){
+		outputField.setText(outputPath);
 	}
 }

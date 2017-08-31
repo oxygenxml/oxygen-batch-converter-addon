@@ -14,17 +14,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
 
 import com.oxygenxml.html.convertor.view.ConvertorDialog;
 
 import ro.sync.ecss.extensions.api.AuthorAccess;
-import ro.sync.ecss.extensions.api.AuthorDocumentController;
-import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
 import ro.sync.exml.editor.EditorPageConstants;
 import ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension;
 import ro.sync.exml.workspace.api.editor.WSEditor;
-import ro.sync.exml.workspace.api.editor.page.author.WSAuthorEditorPage;
 import ro.sync.exml.workspace.api.editor.page.text.WSTextEditorPage;
 import ro.sync.exml.workspace.api.listeners.WSEditorChangeListener;
 import ro.sync.exml.workspace.api.standalone.MenuBarCustomizer;
@@ -216,7 +212,14 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		return new AbstractAction("Show Selection") {
 			  @Override
 			  public void actionPerformed(ActionEvent actionevent) {
-				  ConvertorDialog convertorDialog = new ConvertorDialog((JFrame) pluginWorkspaceAccess.getParentFrame());
+			  	WSEditor editorAccess = pluginWorkspaceAccess
+							.getCurrentEditorAccess(StandalonePluginWorkspace.MAIN_EDITING_AREA);
+			  	
+			  	if (editorAccess != null) {
+			  		ConvertorDialog convertorDialog = new ConvertorDialog((JFrame) pluginWorkspaceAccess.getParentFrame(), editorAccess.getEditorLocation().toString());
+			  	} else {
+			  		ConvertorDialog convertorDialog = new ConvertorDialog((JFrame) pluginWorkspaceAccess.getParentFrame(), null);
+			  	}
 			  }
 		  };
 	}

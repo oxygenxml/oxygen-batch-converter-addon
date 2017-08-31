@@ -5,6 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -13,10 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
+
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 
 public class InputPanel extends JPanel {
@@ -29,7 +37,7 @@ public class InputPanel extends JPanel {
 	JButton addBtn = new JButton();
 	JButton rmvBtn = new JButton();
 	
-	public InputPanel(Translator translator) {
+	public InputPanel(final Translator translator) {
 
 		JScrollPane scrollPane = new JScrollPane(inputTable);
 
@@ -68,6 +76,9 @@ public class InputPanel extends JPanel {
 		inputTable.setPreferredScrollableViewportSize(new Dimension(scrollPane.getWidth(), scrollPane.getHeight()));
 		inputTable.setModel(inputTableModel);
 
+		//add list selection listener on table
+		inputTable.getSelectionModel().addListSelectionListener(listSelectionListener);
+		
 		scrollPane.setOpaque(false);
 
 		//------------add scrollPane
@@ -104,5 +115,159 @@ public class InputPanel extends JPanel {
 		// add btnsPanel
 		add(btnsPanel, gbc);
 
+		
+		
+	// add action listener on check current radio button
+			checkCurrent.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					//checkButton.setEnabled(true);
+					inputTable.clearSelection();
+					addBtn.setEnabled(false);
+					rmvBtn.setEnabled(false);
+				}
+			});
+			
+			
+			// add action listener on check other files radio button
+			checkOtherFiles.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					if (getTableUrls().isEmpty()) {
+						// disable the check button if is not other filesToCheck
+					//	checkButton.setEnabled(false);
+					}
+
+					addBtn.setEnabled(true);
+				}
+			});
+			
+		
+		// add action listener on add button
+		addBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//open a URL chooser
+				String file = PluginWorkspaceProvider.getPluginWorkspace()
+						.chooseURLPath(translator.getTranslation(Tags.FILE_CHOOSER_TITLE), new String[] { "html" }, "html files", "");
+
+				if(file != null){
+					if (!tableContains(file)) {
+						inputTableModel.addRow(new String[] { file });
+					}
+				}
+			}
+		});
+		
+		// add action listener on remove button
+		rmvBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int index0 = inputTable.getSelectionModel().getMinSelectionIndex();
+				int index1 = inputTable.getSelectionModel().getMaxSelectionIndex();
+
+				for (int i = index1; i >= index0; i--) {
+					int modelRow = inputTable.convertRowIndexToModel(i);
+					inputTableModel.removeRow(modelRow);
+				}
+
+				if (inputTableModel.getRowCount() == 0) {
+				//	checkButton.setEnabled(false);
+				}
+
+				rmvBtn.setEnabled(false);
+			}
+		});		
+		
 	}
+	
+	
+	/**
+	 * List selection listener.
+	 */
+	ListSelectionListener listSelectionListener = new ListSelectionListener() {
+
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			if(!rmvBtn.isEnabled()){
+				// set remove button enable
+				rmvBtn.setEnabled(true);
+			}
+		}
+	};
+	
+	
+	
+	public boolean isSelectedCheckCurrent() {
+		return checkCurrent.isSelected();
+	}
+
+	public void setSelectedCheckCurrent(boolean state) {
+		if(state){
+			this.checkCurrent.doClick();
+		}
+		else{
+			this.checkOtherFiles.doClick();
+		}
+		
+	}
+
+	public void setEnableCheckCurrent(boolean state) {
+		this.checkCurrent.setEnabled(true);
+	}
+	
+
+
+
+	/**
+	 * Check if table contains the given URL.
+	 * @param url The URL in string format.
+	 * @return <code>true</code>>if URL is in table, <code>false</code>> if isn't.
+	 */
+	private boolean tableContains(String url){
+		boolean toReturn = false;
+		for(int i = 0; i < inputTableModel.getRowCount(); i++){
+			if(url.equals(inputTableModel.getValueAt(i, 0)) ){
+				return true;
+			}
+		}
+
+		return toReturn;
+	}
+	
+	
+	/**
+	 * Get a list with URLs, in string format, from files table.
+	 * @return
+	 */
+	public List<String> getTableUrls() {
+		List<String> toReturn = new ArrayList<String>();
+
+		// add rows in a list
+		for (int i = 0; i < inputTableModel.getRowCount(); i++) {
+			toReturn.add(inputTableModel.getValueAt(i, 0).toString());
+		}
+		return toReturn;
+	}
+	
+	/**
+	 * Add rows in table.
+	 * @param URLs List with URLs in string format.
+	 */
+	public void addRowsInTable(List<String> URLs){
+		int size = URLs.size();
+		for (int i = 0; i < size; i++) {
+			if(!tableContains(URLs.get(i))){
+				inputTableModel.addRow(new String[] { URLs.get(i) });
+			}
+		}
+	}
+	
+	
+	
 }
