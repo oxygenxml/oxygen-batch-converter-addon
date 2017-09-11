@@ -26,22 +26,13 @@
 		<val lang="nl_NL">Convertor</val>
 	</key>
 	
-	
-	<key value="Select_Input_Type_Label_Conv">
-		<comment>Select the input type label</comment>
-		<val lang="en_US">Select the input type:</val>
-		<val lang="de_DE">Select the input type:</val>
-		<val lang="fr_FR">Select the input type:</val>
-		<val lang="ja_JP">Select the input type:</val>
-		<val lang="nl_NL">Select the input type:</val>
-	</key>
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
-		<val lang="en_US">Add input files:</val>
-		<val lang="de_DE">Add input files:</val>
-		<val lang="fr_FR">Add input files:</val>
-		<val lang="ja_JP">Add input files:</val>
-		<val lang="nl_NL">Add input files:</val>
+		<val lang="en_US">Add input files (html / markdown):</val>
+		<val lang="de_DE">Add input files (html / markdown):</val>
+		<val lang="fr_FR">Add input files (html / markdown):</val>
+		<val lang="ja_JP">Add input files (html / markdown):</val>
+		<val lang="nl_NL">Add input files (html / markdown):</val>
 	</key>
 	<key value="File_Table_Head_Conv">
 		<comment>The head of the table with input files</comment>

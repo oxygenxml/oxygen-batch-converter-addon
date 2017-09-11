@@ -19,11 +19,6 @@ public interface Tags {
 	
 	
 	/**
-	 * Label for select input type.
-	 */
-	public final String SELECT_INPUT_TYPE_LABEL = "Select_Input_Type_Label_Conv";
-	
-	/**
 	 * Label for add input files.
 	 */
 	public final String ADD_INPUT_FILES_LABEL = "Add_Input_Label_Conv";

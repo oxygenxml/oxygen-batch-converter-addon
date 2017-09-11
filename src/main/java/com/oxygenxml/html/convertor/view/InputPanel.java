@@ -38,15 +38,6 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 public class InputPanel extends JPanel {
 
 	/**
-	 * Radio button for select html input files
-	 */
-	private JRadioButton htmlRBtn;
-	/**
-	 * Radio button for select markdown input files
-	 */
-	private JRadioButton markdownRBtn;
-	
-	/**
 	 * Table with files to check.
 	 */
 	private JTable tableFiles = new JTable(20, 2);
@@ -83,9 +74,6 @@ public class InputPanel extends JPanel {
 	 */
 	public InputPanel(final Translator translator, final JButton checkButton) {
 		this.translator = translator;
-		
-		htmlRBtn = new JRadioButton(FileType.HTML_TYPE);
-		markdownRBtn = new JRadioButton(FileType.MARKDOWN_TYPE);
 		
 		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE));
 		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE));
@@ -159,32 +147,6 @@ public class InputPanel extends JPanel {
 	}
 	
 	
-	/**
-	 * Get the input type.
-	 * @return The input type
-	 */
-	public String getInputType(){
-		if(htmlRBtn.isSelected()){
-			return FileType.HTML_TYPE;
-		}
-		else{
-			return FileType.MARKDOWN_TYPE;
-		}
-	}
-	
-	/**
-	 * Set the input type.
-	 * @param type The input type
-	 */
-	public void setInputType(String type){
-		if(FileType.HTML_TYPE.equals(type)){
-			htmlRBtn.setSelected(true);
-		}
-		else{
-			markdownRBtn.setSelected(true);
-		}
-	}
-
 	
 	/**
 	 * Get file from files table.
@@ -260,39 +222,12 @@ public class InputPanel extends JPanel {
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 
-		//Create a group with  the radio buttons.
-		ButtonGroup group = new ButtonGroup();
-		group.add(htmlRBtn);
-		group.add(markdownRBtn);
 
-		//------add JLabel for select input type
+		// ------add checkCurrent radio button
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.WEST;
-		this.add(new JLabel(translator.getTranslation(Tags.SELECT_INPUT_TYPE_LABEL)), gbc);
-		
-		// create a panel that contains html and markdown radio buttons
-		JPanel rBtnsPanel = new JPanel();
-		rBtnsPanel.setLayout(new GridLayout(1, 2, 5, 0));
-		rBtnsPanel.setOpaque(false);
-
-		rBtnsPanel.add(htmlRBtn);
-		rBtnsPanel.add(markdownRBtn);
-
-		// ------add html and markdown radio buttons
-		gbc.gridy++;
-		gbc.weightx = 0;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.insets = new Insets(0, 10, 0, 0);
-		this.add(rBtnsPanel, gbc);
-
-		// ------add checkCurrent radio button
-		gbc.gridx = 0;
-		gbc.gridy++;
-		gbc.weightx = 1;
-		gbc.insets = new Insets(10, 0, 0, 0);
 		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL)), gbc);
 			
 		//------add scrollPane

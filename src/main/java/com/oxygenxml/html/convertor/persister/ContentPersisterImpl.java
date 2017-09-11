@@ -23,9 +23,6 @@ public class ContentPersisterImpl implements ContentPersister {
 	public void saveState(ConvertorInteractor interactor) {
 		WSOptionsStorage optionsStorage = PluginWorkspaceProvider.getPluginWorkspace().getOptionsStorage();
 		
-		//save the input type
-		optionsStorage.setOption(OptionKeys.INPUT_TYPE, interactor.getInputType());
-		
 		//save the output type
 		optionsStorage.setOption(OptionKeys.OUTPUT_TYPE, interactor.getOutputType());
 	}
@@ -40,10 +37,6 @@ public class ContentPersisterImpl implements ContentPersister {
 		WSOptionsStorage optionsStorage = PluginWorkspaceProvider.getPluginWorkspace().getOptionsStorage();
 		String value;
 
-		//set the input type
-		value = optionsStorage.getOption(OptionKeys.INPUT_TYPE, FileType.HTML_TYPE);
-		interactor.setInputType(value);
-		
 		//set the output type
 		value = optionsStorage.getOption(OptionKeys.OUTPUT_TYPE, FileType.XHTML_TYPE);
 		interactor.setOutputType(value);

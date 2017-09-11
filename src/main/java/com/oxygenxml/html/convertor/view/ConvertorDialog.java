@@ -91,17 +91,6 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	}
 
 
-	@Override
-	public String getInputType() {
-		return inputPanel.getInputType();
-	}
-
-
-	@Override
-	public void setInputType(String type) {
-		inputPanel.setInputType(type);
-	}
-
 
 	@Override
 	public String getOutputType() {
