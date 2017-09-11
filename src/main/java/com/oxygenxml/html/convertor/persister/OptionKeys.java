@@ -7,10 +7,8 @@ package com.oxygenxml.html.convertor.persister;
  */
 public interface OptionKeys {
 
-	String CONVERT_CURRENT_FILE = "convert.current.file";
+	String INPUT_TYPE = "input.type";
 	
-	String OTHER_FILES_TO_CONVERT = "convert.files.list";
-
-	String OUTPUT_DIRECTORY = "output.directory";
+	String OUTPUT_TYPE = "output.type";
 
 }

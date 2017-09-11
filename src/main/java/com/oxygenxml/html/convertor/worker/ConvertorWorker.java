@@ -1,47 +1,24 @@
 package com.oxygenxml.html.convertor.worker;
 
-import java.io.IOException;
-import java.util.List;
-
 import javax.swing.SwingWorker;
-
-import com.oxygenxml.html.convertor.purifier.ContentPrinter;
-import com.oxygenxml.html.convertor.purifier.HtmlPurifier;
-import com.oxygenxml.html.convertor.purifier.PathGenerator;
 
 public class ConvertorWorker extends SwingWorker<Void, Void> {
 
+	private String inputFolder;
+	private String outputFolder;
+	private Convertor convertor;
 	
-	private List<String> filesUrls;
-	private String folderPath;
-	private HtmlPurifier htmlPurifier = new HtmlPurifier();
-
-	public ConvertorWorker(List<String> filesPaths, String folderPath) {
-		this.filesUrls = filesPaths;
-		this.folderPath = folderPath;
+	
+	public ConvertorWorker(String inputFolder, String outputFolder) {
+		this.inputFolder = inputFolder;
+		this.outputFolder = outputFolder;
+		convertor = new Convertor(inputFolder);
 	}
-	
 	
 	@Override
 	protected Void doInBackground()  {
-		byte purifiedData[];
 		
-		int size = filesUrls.size();
-		
-		for(int i = 0; i < size; i++){
-			try {
-				purifiedData = htmlPurifier.createWellFormedContent(filesUrls.get(i));
-			
-			
-			String savePath = PathGenerator.generate(filesUrls.get(i), folderPath);
-			
-			
-			ContentPrinter.print(purifiedData, savePath);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
+		convertor.convertFiles(inputFolder, outputFolder);
 		
 		return null;
 	}

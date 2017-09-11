@@ -1,10 +1,18 @@
 package com.oxygenxml.html.convertor.purifier;
 
+
 public class PathGenerator {
 
-	public static String generate(String filePath, String folder){
+	public static String generate(String baseInputFolder ,String filePath, String outputFolder){
 		
-	return folder + "/XHTML"+ filePath.substring(filePath.lastIndexOf("/")+1);
+		System.out.println(baseInputFolder + " base");
+		System.out.println(filePath+ " path");
+		
+		System.out.println("index: " + filePath.contains(baseInputFolder));
+		
+		System.out.println("path gen: "+ outputFolder + filePath.substring(filePath.lastIndexOf(baseInputFolder)) );
+		
+	return outputFolder + filePath.substring(filePath.lastIndexOf(baseInputFolder));
 	}
 
 }

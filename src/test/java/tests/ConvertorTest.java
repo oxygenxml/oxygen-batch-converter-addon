@@ -25,7 +25,7 @@ public class ConvertorTest {
 			String directoryPath = "D:/HTMLConvertor/test-sample";
 			String goodSample = "D:/HTMLConvertor/test-sample/goodSample.html";
 			
-			String newFilePath = PathGenerator.generate(path, directoryPath);
+			//String newFilePath = PathGenerator.generate(path, directoryPath);
 			
 			
 			//html purifier
@@ -35,7 +35,7 @@ public class ConvertorTest {
 			byte data[] = htmlPurifier.createWellFormedContent(path);
 
 			//save the purified content at the newFilePath
-			ContentPrinter.print(data, newFilePath);
+			//ContentPrinter.print(data, newFilePath);
 			
 				
 			//get the byteArray of goodSample
@@ -48,7 +48,7 @@ public class ConvertorTest {
 			assertEquals(3, new File(directoryPath).list().length);
 			
 			//delete the file
-			Files.delete(Paths.get(newFilePath));
+	//		Files.delete(Paths.get(newFilePath));
 			
 		} catch (IOException e) {
 			

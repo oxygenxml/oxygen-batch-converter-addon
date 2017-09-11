@@ -4,124 +4,114 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import com.oxygenxml.html.convertor.ConvertorInteractor;
 import com.oxygenxml.html.convertor.persister.ContentPersister;
 import com.oxygenxml.html.convertor.persister.ContentPersisterImpl;
-import com.oxygenxml.html.convertor.translator.OxygenTranslator;
 import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
-import com.oxygenxml.html.convertor.worker.ConvertorWorker;
 
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
-public class ConvertorDialog extends OKCancelDialog implements ConvertorInteractor {
+public class ConvertorDialog extends OKCancelDialog implements ConvertorInteractor{
 
-	private Translator translator = new OxygenTranslator();
+	private InputPanel inputPanel;
 	
-	private InputPanel inputPanel = new InputPanel(translator);
-	
-	private	OutputPanel outputPanel = new OutputPanel(translator);
-	
+	private	OutputPanel outputPanel;
+
 	private ContentPersister contentPersister = new ContentPersisterImpl();
 
-	private String currentFilePath;
 	
-	public ConvertorDialog(Frame parentFrame, String currentFilePath) {
+	public ConvertorDialog(Frame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
-		this.currentFilePath = currentFilePath;
 
+		inputPanel = new InputPanel(translator, this.getOkButton());
+		outputPanel = new OutputPanel(translator);
 		
-		initGUI();
+		initGUI(translator);
 		
 		contentPersister.loadState(this);
 		
 		
 		setTitle(translator.getTranslation(Tags.DIALOG_TITLE));
+		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON));
 		setResizable(true);
-		setMinimumSize(new Dimension(300, 260));
-		setSize(new Dimension(400, 300));
+		setMinimumSize(new Dimension(350, 400));
+		setSize(new Dimension(420, 450));
 		setLocationRelativeTo(parentFrame);
 		setVisible(true);
 	}
 
 
-	private void initGUI(){
+	private void initGUI(Translator translator){
 		
 		JPanel convertorPanel = new JPanel( new GridBagLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
+		//-----Add the input panel
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
 		gbc.weighty = 1;
+		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.fill = GridBagConstraints.BOTH;
+		gbc.insets = new Insets(0, 0, 20, 0);
 		convertorPanel.add(inputPanel, gbc);
 	
-		
+		//-----Add the output panel
 		gbc.gridy++;
-		gbc.weighty = 0.5;
+		gbc.weighty = 0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(0, 0, 10, 0);
 		convertorPanel.add(outputPanel, gbc);
 		
 		this.add(convertorPanel);
 	}
 	
+	/**
+	 * Convert pressed.
+	 */
 	@Override
 	protected void doOK() {
 		List<String> filesPaths = new ArrayList<String>();
 		
-		if(inputPanel.isSelectedCheckCurrent()){
-			filesPaths.add(currentFilePath);
-		}
-		else{
-			filesPaths.addAll(inputPanel.getTableUrls());
-		}
-		ConvertorWorker convertorWorker = new ConvertorWorker(filesPaths, outputPanel.getOutputPath());
-		convertorWorker.execute();
-		
 		contentPersister.saveState(this);
+
+		//ConvertorWorker convertorWorker = new ConvertorWorker(inputPanel.getPath(), outputPanel.getPath());
+		//convertorWorker.execute();
+		
 		
 		super.doOK();
 	}
 
-	//--- implementation of ConvertorInteractor
+
 	@Override
-	public boolean isConvertCurrentFile() {
-		return inputPanel.isSelectedCheckCurrent();
+	public String getInputType() {
+		return inputPanel.getInputType();
 	}
 
 
 	@Override
-	public void setConvertCurrentFile(boolean state) {
-		inputPanel.setSelectedCheckCurrent(state);
+	public void setInputType(String type) {
+		inputPanel.setInputType(type);
 	}
 
 
 	@Override
-	public void setOtherFilesToConvert(List<String> otherFiles) {
-		inputPanel.addRowsInTable(otherFiles);
+	public String getOutputType() {
+		return outputPanel.getOutputType();
 	}
 
 
 	@Override
-	public List<String> getOtherFilesToConvert() {
-		return inputPanel.getTableUrls();
+	public void setOutputType(String type) {
+		outputPanel.setOutputType(type);
 	}
 
-
-	@Override
-	public void setOutputDirectory(String outputDir) {
-		outputPanel.setOutputPath(outputDir);
-		
-	}
-
-
-	@Override
-	public String getOutputDirectory() {
-		return outputPanel.getOutputPath();
-	}
 }

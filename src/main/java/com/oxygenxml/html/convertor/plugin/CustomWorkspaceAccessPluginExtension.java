@@ -15,6 +15,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import com.oxygenxml.html.convertor.translator.OxygenTranslator;
 import com.oxygenxml.html.convertor.view.ConvertorDialog;
 
 import ro.sync.ecss.extensions.api.AuthorAccess;
@@ -212,14 +213,9 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		return new AbstractAction("Show Selection") {
 			  @Override
 			  public void actionPerformed(ActionEvent actionevent) {
-			  	WSEditor editorAccess = pluginWorkspaceAccess
-							.getCurrentEditorAccess(StandalonePluginWorkspace.MAIN_EDITING_AREA);
 			  	
-			  	if (editorAccess != null) {
-			  		ConvertorDialog convertorDialog = new ConvertorDialog((JFrame) pluginWorkspaceAccess.getParentFrame(), editorAccess.getEditorLocation().toString());
-			  	} else {
-			  		ConvertorDialog convertorDialog = new ConvertorDialog((JFrame) pluginWorkspaceAccess.getParentFrame(), null);
-			  	}
+			  		ConvertorDialog convertorDialog = new ConvertorDialog((JFrame) pluginWorkspaceAccess.getParentFrame(),
+			  				new OxygenTranslator());
 			  }
 		  };
 	}
