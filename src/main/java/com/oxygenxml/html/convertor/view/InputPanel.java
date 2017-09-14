@@ -89,7 +89,7 @@ public class InputPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//open a URL chooser
 				File[] files = PluginWorkspaceProvider.getPluginWorkspace()
-						.chooseFiles(null, "" , new String[] { "html", "md" }, "html and markdown files");
+						.chooseFiles(null, "" , new String[] { "html", "md" }, "*.html, *.md");
 
 				if(files != null){
 						//add files in table

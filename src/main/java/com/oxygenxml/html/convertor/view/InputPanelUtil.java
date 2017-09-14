@@ -24,8 +24,6 @@ public class InputPanelUtil {
 			int size = listOfFiles.length;
 			for (int i = 0; i < size; i++) {
 
-				System.out.println(listOfFiles[i].toString());
-				
 				// check if is a file
 				if (listOfFiles[i].isFile()) {
 					String currentfile = listOfFiles[i].getPath();
@@ -34,7 +32,6 @@ public class InputPanelUtil {
 						String extension = currentfile.substring(currentfile.lastIndexOf(".")+1);
 						// check the extension
 						if ("html".equals(extension) || "md".equals(extension)) {
-							System.out.println("gaseste fisier******************");
 							listUrlFiles.add(currentfile);
 						}
 					}

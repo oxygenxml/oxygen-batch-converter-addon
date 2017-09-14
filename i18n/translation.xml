@@ -98,27 +98,27 @@
 	
 	<key value="Progress_Status_Conv">
 		<comment>Progress status.</comment>
-		<val lang="en_US">Validations in progress</val>
-		<val lang="de_DE">Validations in progress</val>
-		<val lang="fr_FR">Validations in progress</val>
-		<val lang="ja_JP">Validations in progress</val>
-		<val lang="nl_NL">Validations in progress</val>
+		<val lang="en_US">Conversion in progress</val>
+		<val lang="de_DE">Conversion in progress</val>
+		<val lang="fr_FR">Conversion in progress</val>
+		<val lang="ja_JP">Conversion in progress</val>
+		<val lang="nl_NL">Conversion in progress</val>
 	</key>
 	<key value="Fail_Status_Conv">
 		<comment>Fail status</comment>
-		<val lang="en_US">Validation fail</val>
-		<val lang="de_DE">Validation fail</val>
-		<val lang="fr_FR">Validation fail</val>
-		<val lang="ja_JP">Validation fail</val>
-		<val lang="nl_NL">Validation fail</val>
+		<val lang="en_US">Conversion fail</val>
+		<val lang="de_DE">Conversion fail</val>
+		<val lang="fr_FR">Conversion fail</val>
+		<val lang="ja_JP">Conversion fail</val>
+		<val lang="nl_NL">Conversion fail</val>
 	</key>
 	<key value="Success_Status_Conv">
 		<comment>Success status</comment>
-		<val lang="en_US">Validation successful</val>
-		<val lang="de_DE">Validation successful</val>
-		<val lang="fr_FR">Validation successful</val>
-		<val lang="ja_JP">Validation successful</val>
-		<val lang="nl_NL">Validation successful</val>
+		<val lang="en_US">Conversion successful</val>
+		<val lang="de_DE">Conversion successful</val>
+		<val lang="fr_FR">Conversion successful</val>
+		<val lang="ja_JP">Conversion successful</val>
+		<val lang="nl_NL">Conversion successful</val>
 	</key>
 	
 	

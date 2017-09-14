@@ -1,5 +1,7 @@
 package com.oxygenxml.html.convertor;
 
+import java.util.List;
+
 public interface ConvertorInteractor {
 
 	/**
@@ -14,4 +16,15 @@ public interface ConvertorInteractor {
 	 */
 	public void setOutputType(String type);
 
+	/**
+	 * Get the input files URLs in String format.
+	 * @return List with input files URLs in String format.
+	 */
+	public List<String> getInputFiles();
+	
+	/**
+	 * Get the output folder path.
+	 * @return The path of output folder.
+	 */
+	public String getOutputFolder();
 }

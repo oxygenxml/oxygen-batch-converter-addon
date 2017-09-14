@@ -15,6 +15,7 @@ import com.oxygenxml.html.convertor.persister.ContentPersister;
 import com.oxygenxml.html.convertor.persister.ContentPersisterImpl;
 import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
+import com.oxygenxml.html.convertor.worker.ConvertorWorker;
 
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
@@ -83,8 +84,9 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 		
 		contentPersister.saveState(this);
 
-		//ConvertorWorker convertorWorker = new ConvertorWorker(inputPanel.getPath(), outputPanel.getPath());
-		//convertorWorker.execute();
+		ConvertorWorker convertorWorker = new ConvertorWorker(this);
+		
+		convertorWorker.execute();
 		
 		
 		super.doOK();
@@ -101,6 +103,18 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	@Override
 	public void setOutputType(String type) {
 		outputPanel.setOutputType(type);
+	}
+
+
+	@Override
+	public List<String> getInputFiles() {
+		return inputPanel.getFilesFromTable();
+	}
+
+
+	@Override
+	public String getOutputFolder() {
+		return outputPanel.getOutputPath();
 	}
 
 }

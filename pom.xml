@@ -42,7 +42,7 @@
 			<artifactId>jtidy</artifactId>
 			<version>r938</version>
 		</dependency>
-    
+    	
   </dependencies>
   
   <build>

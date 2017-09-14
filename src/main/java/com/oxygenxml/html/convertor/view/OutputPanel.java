@@ -175,11 +175,8 @@ public class OutputPanel extends JPanel{
 	
 	
 	//TODO add javaDoc(here and at constructor) or delete. 
-	public String getPath(){
+	public String getOutputPath(){
 		return outputField.getText();
 	}
 	
-	public void setPath(String outputPath){
-		outputField.setText(outputPath);
-	}
 }

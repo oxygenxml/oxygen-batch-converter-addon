@@ -2,23 +2,51 @@ package com.oxygenxml.html.convertor.worker;
 
 import javax.swing.SwingWorker;
 
+import com.oxygenxml.html.convertor.Convertor;
+import com.oxygenxml.html.convertor.ConvertorInteractor;
+import com.oxygenxml.html.convertor.ConvertorToDita;
+import com.oxygenxml.html.convertor.ConvertorToXhtml;
+import com.oxygenxml.html.convertor.FileType;
+import com.oxygenxml.html.convertor.reporter.OxygenProblemReporter;
+import com.oxygenxml.html.convertor.reporter.OxygenStatusReporter;
+import com.oxygenxml.html.convertor.translator.OxygenTranslator;
+import com.oxygenxml.html.convertor.translator.Tags;
+import com.oxygenxml.html.convertor.translator.Translator;
+
 public class ConvertorWorker extends SwingWorker<Void, Void> {
 
-	private String inputFolder;
-	private String outputFolder;
+	private ConvertorInteractor convertorInteractor;
+	private OxygenStatusReporter oxygenStatusReporter;
+	private Translator translator;
 	private Convertor convertor;
 	
-	
-	public ConvertorWorker(String inputFolder, String outputFolder) {
-		this.inputFolder = inputFolder;
-		this.outputFolder = outputFolder;
-		convertor = new Convertor(inputFolder);
+	public ConvertorWorker(ConvertorInteractor convertorInteractor) {
+		this.convertorInteractor = convertorInteractor;
+		oxygenStatusReporter = new OxygenStatusReporter();
+		translator = new OxygenTranslator();
 	}
 	
 	@Override
 	protected Void doInBackground()  {
 		
-		convertor.convertFiles(inputFolder, outputFolder);
+		oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.PROGRESS_STATUS));
+		
+		if(FileType.XHTML_TYPE.equals(convertorInteractor.getOutputType())){
+			//it's selected xhtml output
+			convertor = new ConvertorToXhtml(new OxygenProblemReporter());
+		}
+		else {
+			//it's selected dita output
+			convertor = new ConvertorToDita(new OxygenProblemReporter());
+		}
+		
+		boolean isSuccesfully = convertor.convertFiles(convertorInteractor.getInputFiles(), convertorInteractor.getOutputFolder());
+		
+		if(isSuccesfully){
+			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.SUCCESS_STATUS));
+		}else{
+			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.FAIL_STATUS));
+		}
 		
 		return null;
 	}
