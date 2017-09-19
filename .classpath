@@ -23,20 +23,22 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/asm-5.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/asm-analysis-5.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/asm-tree-5.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/asm-util-5.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/markdown-1.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/parboiled-core-1.1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/parboiled-java-1.1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/pegdown-1.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/New folder (3)/snakeyaml-1.18.jar"/>
-	<classpathentry kind="lib" path="D:/Oxygen XML Editor 19/lib/saxon9ee.jar"/>
-	<classpathentry kind="lib" path="D:/Oxygen XML Editor 19/lib/saxon9-sql.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Downloads/commons-io-2.5/commons-io-2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Downloads/dost-2.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Downloads/com.elovirta.dita.html_0.1.0 (1)/html-0.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/intern4/Downloads/htmlparser-1.4.jar"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/asm-5.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/asm-analysis-5.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/asm-tree-5.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/asm-util-5.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/dost-2.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/markdown-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/parboiled-core-1.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/parboiled-java-1.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/pegdown-1.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/snakeyaml-1.18.jar"/>
+	<classpathentry kind="lib" path="C:/Users/intern4/Desktop/lib/commons-io-2.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

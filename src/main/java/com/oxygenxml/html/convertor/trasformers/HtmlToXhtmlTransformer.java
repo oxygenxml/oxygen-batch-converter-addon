@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 import javax.xml.transform.TransformerException;
 
@@ -24,7 +23,7 @@ public class HtmlToXhtmlTransformer implements Transformer {
 	 * @param contentReader Reader of the document.
 	 * @return The conversion in XHTML.        
 	 */
-	public String convert(URL originalFileLocation, Reader contentReader) throws TransformerException {
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException {
 		//XHTML content to be return
 		String toReturn = null;
 
@@ -43,7 +42,7 @@ public class HtmlToXhtmlTransformer implements Transformer {
 
 			if (contentReader != null) {
 				// parse the content
-				t.parse(new ReaderInputStream(contentReader, StandardCharsets.UTF_8), baos);
+				t.parse(new ReaderInputStream(contentReader, "UTF-8"), baos);
 			}
 			else {
 				InputStream inputStream = originalFileLocation.openStream();
@@ -58,7 +57,7 @@ public class HtmlToXhtmlTransformer implements Transformer {
 			}
 
 			// convert to String
-			toReturn = baos.toString(StandardCharsets.UTF_8.toString());
+			toReturn = baos.toString("UTF-8");
 
 			// close the streams
 			try {
@@ -67,8 +66,7 @@ public class HtmlToXhtmlTransformer implements Transformer {
 			}
 
 		} catch (IOException e1) {
-			//TODO alt mesaj
-			throw new TransformerException(e1.getMessage());
+			throw new TransformerException(e1);
 		}
 
 		return toReturn;

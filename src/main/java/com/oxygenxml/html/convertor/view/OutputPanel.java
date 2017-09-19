@@ -54,16 +54,11 @@ public class OutputPanel extends JPanel{
 	 */
 	private static final String CHOOSER_ICON = "images/chooser.png";
 	
-	/**
-	 * Translator.
-	 */
-	private Translator translator; 
 
 	public OutputPanel(Translator translator) {
-		this.translator = translator;  
 
-		xhtmlRBtn = new JRadioButton(FileType.XHTML_TYPE);
-		ditaRBtn = new JRadioButton(FileType.DITA_TYPE);
+		xhtmlRBtn = new JRadioButton(Tags.XHTML);
+		ditaRBtn = new JRadioButton(Tags.DITA);
 		
 		setLayout(new GridBagLayout());
 		
@@ -152,10 +147,10 @@ public class OutputPanel extends JPanel{
 	 */
 	public String getOutputType(){
 		if(xhtmlRBtn.isSelected()){
-			return FileType.XHTML_TYPE;
+			return FileType.XHTML_TYPE_AND_EXTENSION;
 		}
 		else{
-			return FileType.DITA_TYPE;
+			return FileType.DITA_TYPE_AND_EXTENSION;
 		}
 	}
 	
@@ -164,7 +159,7 @@ public class OutputPanel extends JPanel{
 	 * @param type The output type
 	 */
 	public void setOutputType(String type){
-		if(FileType.XHTML_TYPE.equals(type)){
+		if(FileType.XHTML_TYPE_AND_EXTENSION.equals(type)){
 			xhtmlRBtn.setSelected(true);
 		}
 		else{

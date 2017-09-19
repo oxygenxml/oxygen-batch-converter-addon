@@ -33,7 +33,7 @@ public class OxygenProblemReporter implements ProblemReporter {
 	 * 
 	 */
 	@Override
-	public void reportProblem(Exception ex, String docUrl) {
+	public void reportProblem(final Exception ex, final String docUrl) {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 

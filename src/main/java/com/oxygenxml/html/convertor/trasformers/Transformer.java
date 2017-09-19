@@ -20,8 +20,9 @@ public interface Transformer {
 	 *          The URL location of document.
 	 * @param contentReader
 	 *          Reader of the document. This can be null.
+	 * @param transformerCreator A trasformer creator.         
 	 * @return The conversion result content.
 	 * @throws TransformerException
 	 */
-	public String convert(URL originalFileLocation, Reader contentReader) throws TransformerException;
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException;
 }

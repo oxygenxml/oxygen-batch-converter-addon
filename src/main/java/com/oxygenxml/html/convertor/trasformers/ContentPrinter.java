@@ -8,6 +8,7 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -26,40 +27,57 @@ import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 public class ContentPrinter {
 
 
-	public static void prettifyAndPrint(String method, Reader contentReader, File out, String systemDoctype, String publicDoctype) {
+	public static void prettifyAndPrint( Reader contentReader, File out, String systemDoctype, String publicDoctype, TransformerCreator transformerCreator) {
 		 
+		
+		System.out.println("out " + out.toString());
+		
+		String property = null;
+		
 		try {
-				Transformer transformer = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
-				  createXSLTTransformer( new StreamSource(new StringReader(
-				  "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n"
-				  + "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-				  "    exclude-result-prefixes=\"xs\"\n" + "    version=\"2.0\">\n" +
-				  "    <xsl:template match=\"node() | @*\">\n" + "        <xsl:copy>\n" +
-				  "            <xsl:apply-templates select=\"node() | @*\"/>\n" +
-				  "        </xsl:copy>\n" + "    </xsl:template>\n" + "    \n" +
-				  "</xsl:stylesheet>")), null,
-				  XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
-			
+		
+			Transformer transformer = transformerCreator.createTransformer(null);
 				
 				transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
 				transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, systemDoctype);
 				transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, publicDoctype);
-				transformer.setOutputProperty(OutputKeys.METHOD, method);
+				transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 				transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-				transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+				transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			InputSource inputSource = new InputSource(contentReader);
 
 			out = FilePathGenerator.getFileWithCounter(out);
 			
+			System.out.println("new out: " + out.toString());
+		
+			//get the trasformFactory property 
+			 property = System.getProperty("javax.xml.transform.TransformerFactory");
+			
+			//set the trasformFactory property to "com.saxonica.config.EnterpriseTransformerFactory"	
+			System.setProperty("javax.xml.transform.TransformerFactory", "com.saxonica.config.EnterpriseTransformerFactory");
+			
+			
 			transformer.transform(new SAXSource(inputSource), new StreamResult(out));
 
+			System.out.println("dupa trasform");
+			
 		} catch (TransformerConfigurationException e) {
 			e.printStackTrace();
 		} catch (TransformerException e) {
+			//TODO send to user
 			e.printStackTrace();
 		}
+		finally {
+			//return the initial property of trasformerFactory
+			if (property == null) {
+				System.getProperties().remove("javax.xml.transform.TransformerFactory");
+			} else {
+				System.setProperty("javax.xml.transform.TransformerFactory", property);
+			}
+		}
+		
 	}
 	
 	

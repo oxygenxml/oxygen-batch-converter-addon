@@ -38,7 +38,7 @@ public class ContentPersisterImpl implements ContentPersister {
 		String value;
 
 		//set the output type
-		value = optionsStorage.getOption(OptionKeys.OUTPUT_TYPE, FileType.XHTML_TYPE);
+		value = optionsStorage.getOption(OptionKeys.OUTPUT_TYPE, FileType.XHTML_TYPE_AND_EXTENSION);
 		interactor.setOutputType(value);
 	}
 	

@@ -33,7 +33,7 @@ public class XHTMLToDITATransformer implements com.oxygenxml.html.convertor.tras
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader) throws TransformerException{
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException{
 		
 		//get the htmlParser
 		HtmlParser parser = new HtmlParser();
@@ -55,13 +55,12 @@ public class XHTMLToDITATransformer implements com.oxygenxml.html.convertor.tras
 		//set the trasformFactory property to "com.saxonica.config.EnterpriseTransformerFactory"	
 		System.setProperty("javax.xml.transform.TransformerFactory", "com.saxonica.config.EnterpriseTransformerFactory");
 		
-		final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		
 		try{
 			final StreamSource src = new StreamSource(xslPath);
 		
 			//create the transformer
-			Transformer transformer = transformerFactory.newTransformer(src);
+			Transformer transformer = transformerCreator.createTransformer(src);
 			
 			//set the parameter of transformer
 			transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
@@ -79,7 +78,13 @@ public class XHTMLToDITATransformer implements com.oxygenxml.html.convertor.tras
 			}
 		}
 		
-		return sw.toString();
+		//add an id on root(topic)
+		String ditaContent = sw.toString();
+		int indexOfTopicTag = ditaContent.indexOf("topic") + 5;
+
+		ditaContent = ditaContent.substring(0, indexOfTopicTag) + " id=\"topicID\"" + ditaContent.substring(indexOfTopicTag);  
+		
+		return ditaContent;
 	}
 	
 }

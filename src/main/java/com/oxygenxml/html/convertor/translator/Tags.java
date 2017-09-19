@@ -16,6 +16,10 @@ public interface Tags {
 	 */
 	public final String DIALOG_TITLE = "Dialog_Title_Conv";
 	
+	/**
+	 * Text for menu item.
+	 */
+	public final String MENU_ITEM_TEXT = "Menu_Item_Text_Conv";
 	
 	
 	/**
@@ -51,6 +55,16 @@ public interface Tags {
 	public final String SELECT_OUTPUT_TYPE_LABEL = "Select_Output_Type_Label_Conv";
 	
 	/**
+	 * RadioButton for select XHTML output type.
+	 */
+	public final String XHTML = "XHTML";
+	
+	/**
+	 * RadioButton for select DITA output type.
+	 */
+	public final String DITA = "DITA";
+	
+	/**
 	 * Label for add output folder.
 	 */
 	public final String ADD_OUTPUT_FOLDER_LABEL = "Add_Output_Label_Conv";
@@ -82,16 +96,11 @@ public interface Tags {
 	
 	
 	/**
-	 * Message in progress monitor. 
+	 * Message in progress dialog. 
 	 */
-	public final String PROGRESS_MONITOR_MESSAGE = "Progress_Monitor_Message";
+	public final String PROGRESS_DIALOG_MESSAGE = "Progress_Dialog_Message_Conv";
 
 	
-	/**
-	 * Message displayed when the conditions table is empty and check button is pressed.
-	 */
-	public final String EMPTY_CONDITIONS_TABLE = "Empty_Conditions_Table_Message";
-
 
 }
 

@@ -12,10 +12,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.oxygenxml.html.convertor.purifier.ContentPrinter;
-import com.oxygenxml.html.convertor.purifier.HtmlPurifier;
-import com.oxygenxml.html.convertor.purifier.PathGenerator;
-
 public class ConvertorTest {
 
 	@Test
@@ -55,5 +51,4 @@ public class ConvertorTest {
 		}
 	}
 
-}
-*/
+}*/

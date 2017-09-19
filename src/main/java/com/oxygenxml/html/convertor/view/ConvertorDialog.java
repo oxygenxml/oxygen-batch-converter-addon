@@ -1,13 +1,14 @@
 package com.oxygenxml.html.convertor.view;
 
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.oxygenxml.html.convertor.ConvertorInteractor;
@@ -25,11 +26,19 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	
 	private	OutputPanel outputPanel;
 
+	ConvertorWorker convertorWorker;
+	
 	private ContentPersister contentPersister = new ContentPersisterImpl();
 
+	private JFrame parentFrame;
+
+	private Translator translator;
+
 	
-	public ConvertorDialog(Frame parentFrame, Translator translator) {
+	public ConvertorDialog(JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
+		this.parentFrame = parentFrame;
+		this.translator = translator;
 
 		inputPanel = new InputPanel(translator, this.getOkButton());
 		outputPanel = new OutputPanel(translator);
@@ -42,8 +51,8 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 		setTitle(translator.getTranslation(Tags.DIALOG_TITLE));
 		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON));
 		setResizable(true);
-		setMinimumSize(new Dimension(350, 400));
-		setSize(new Dimension(420, 450));
+		setMinimumSize(new Dimension(350, 300));
+		setSize(new Dimension(420, 350));
 		setLocationRelativeTo(parentFrame);
 		setVisible(true);
 	}
@@ -80,14 +89,23 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	 */
 	@Override
 	protected void doOK() {
-		List<String> filesPaths = new ArrayList<String>();
 		
 		contentPersister.saveState(this);
 
-		ConvertorWorker convertorWorker = new ConvertorWorker(this);
+		final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator);
+				
+		convertorWorker = new ConvertorWorker(this, progressDialog);
+		
+		progressDialog.addCancelActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				convertorWorker.cancel(true);
+				progressDialog.dispose();
+			}
+		});
 		
 		convertorWorker.execute();
-		
 		
 		super.doOK();
 	}
@@ -117,4 +135,5 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 		return outputPanel.getOutputPath();
 	}
 
+	
 }

@@ -11,11 +11,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -36,7 +34,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  *
  */
 public class InputPanel extends JPanel {
-
+	
 	/**
 	 * Table with files to check.
 	 */
@@ -89,7 +87,7 @@ public class InputPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//open a URL chooser
 				File[] files = PluginWorkspaceProvider.getPluginWorkspace()
-						.chooseFiles(null, "" , new String[] { "html", "md" }, "*.html, *.md");
+						.chooseFiles(null, "" , FileType.INPUT_TYPES, "Markdown and HTML files");
 
 				if(files != null){
 						//add files in table

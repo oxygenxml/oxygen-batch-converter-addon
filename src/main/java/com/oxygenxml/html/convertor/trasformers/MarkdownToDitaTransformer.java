@@ -1,12 +1,14 @@
 package com.oxygenxml.html.convertor.trasformers;
 
+import java.io.File;
 import java.io.Reader;
+import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -15,11 +17,13 @@ import org.xml.sax.InputSource;
 import com.elovirta.dita.markdown.MarkdownReader;
 
 /**
- * Class that use com.elovirta.dita.markdown.MarkdownReader for convert Markdown to DITA.
+ * Class that use com.elovirta.dita.markdown.MarkdownReader for convert Markdown
+ * to DITA.
+ * 
  * @author intern4
  *
  */
-public class MarkdownToDitaTransformer implements com.oxygenxml.html.convertor.trasformers.Transformer{
+public class MarkdownToDitaTransformer implements com.oxygenxml.html.convertor.trasformers.Transformer {
 
 	/**
 	 * Convert the markdown document from the given URL in DITA.
@@ -32,63 +36,71 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.html.convertor.t
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader) throws TransformerException  {
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator)
+			throws TransformerException {
 		// content to return
 		String toReturn = null;
-		
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer trasformer = transformerFactory.newTransformer();
-	
-		/*
-		 * Transformer createXSLTTransformer =
-		 * PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
-		 * createXSLTTransformer( new StreamSource(new StringReader(
-		 * "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n"
-		 * + "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-		 * "    exclude-result-prefixes=\"xs\"\n" + "    version=\"2.0\">\n" +
-		 * "    <xsl:template match=\"node() | @*\">\n" + "        <xsl:copy>\n" +
-		 * "            <xsl:apply-templates select=\"node() | @*\"/>\n" +
-		 * "        </xsl:copy>\n" + "    </xsl:template>\n" + "    \n" +
-		 * "</xsl:stylesheet>")), null,
-		 * XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
-		 */
 
-		//get the trasformFactory property 
-		String	property = 	System.getProperty("javax.xml.transform.TransformerFactory");
-		
-		//set the trasformFactory property to "com.saxonica.config.EnterpriseTransformerFactory"
+		Transformer transformer = transformerCreator.createTransformer(null);
+
+		// reader for markdown document
+		final MarkdownReader r = new MarkdownReader();
+
+		// get the trasformFactory property
+		String property = System.getProperty("javax.xml.transform.TransformerFactory");
+
+		System.out.println("property " + property);
+
+		// set the trasformFactory property to
+		// "com.saxonica.config.EnterpriseTransformerFactory"
 		System.setProperty("javax.xml.transform.TransformerFactory", "com.saxonica.config.EnterpriseTransformerFactory");
-		
+
 		try {
-			//reader for markdown document
-			final MarkdownReader r = new MarkdownReader();
-			
-			//input source of document to convert
+
+			System.out.println("aici1");
+
+			// input source of document to convert
 			final InputSource i = new InputSource(originalFileLocation.toString());
-			
+
+			System.out.println("aici2");
+
 			StringWriter sw = new StringWriter();
 			StreamResult res = new StreamResult(sw);
-			
-			//convert the document
-			trasformer.transform(new SAXSource(r, i), res);
-			
-			//get the converted content
+
+			// convert the document
+			transformer.transform(new SAXSource(r, i), res);
+
+			// get the converted content
 			toReturn = sw.toString();
 
 		} finally {
-			//return the initial property of trasformerFactory
-			if(property == null){
+			// return the initial property of trasformerFactory
+			if (property == null) {
 				System.getProperties().remove("javax.xml.transform.TransformerFactory");
-			}
-			else{
+			} else {
 				System.setProperty("javax.xml.transform.TransformerFactory", property);
 			}
 		}
-		
-		
+
 		return toReturn;
 	}
-	
-	
-}
 
+	public static void main(String[] args) {
+		MarkdownToDitaTransformer ditaTransformer = new MarkdownToDitaTransformer();
+
+		try {
+			String ditaContent = ditaTransformer.convert(new URL("file:/C:\\Users\\intern4\\Desktop\\test\\table.md"), null,
+					new TransformerCreatorImpl());
+
+			System.out.println(ditaContent);
+			ContentPrinter.prettifyAndPrint(new StringReader(ditaContent),
+					new File("C:\\Users\\intern4\\Desktop\\test\\table.dita"), "dita", "", new TransformerCreatorImpl());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

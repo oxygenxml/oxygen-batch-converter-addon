@@ -10,29 +10,38 @@
 	
 	<key value="Icon_Hint_Conv">
 		<comment>The hint from toolBar icon.</comment>
-		<val lang="en_US">Check DocBook for Completeness</val>
-		<val lang="de_DE">Check DocBook for Completeness</val>
-		<val lang="fr_FR">Check DocBook for Completeness</val>
-		<val lang="ja_JP">Check DocBook for Completeness</val>
-		<val lang="nl_NL">Check DocBook for Completeness</val>
+		<val lang="en_US">Convertor from Html/Markdown to XHtml/DITA.</val>
+		<val lang="de_DE">Convertor from Html/Markdown to XHtml/DITA.</val>
+		<val lang="fr_FR">Convertor from Html/Markdown to XHtml/DITA.</val>
+		<val lang="ja_JP">Convertor from Html/Markdown to XHtml/DITA.</val>
+		<val lang="nl_NL">Convertor from Html/Markdown to XHtml/DITA.</val>
+	</key>
+	
+	<key value="Menu_Item_Text_Conv">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">HTML/Markdown to XHTML/DITA...</val>
+		<val lang="de_DE">HTML/Markdown to XHTML/DITA...</val>
+		<val lang="fr_FR">HTML/Markdown to XHTML/DITA...</val>
+		<val lang="ja_JP">HTML/Markdown to XHTML/DITA...</val>
+		<val lang="nl_NL">HTML/Markdown to XHTML/DITA...</val>
 	</key>
 
 	<key value="Dialog_Title_Conv">
 		<comment>Title for main dialog</comment>
-		<val lang="en_US">Convertor</val>
-		<val lang="de_DE">Convertor</val>
-		<val lang="fr_FR">Convertor</val>
-		<val lang="ja_JP">Convertor</val>
-		<val lang="nl_NL">Convertor</val>
+		<val lang="en_US">HTML/Markdown to XHTML/DITA</val>
+		<val lang="de_DE">HTML/Markdown to XHTML/DITA</val>
+		<val lang="fr_FR">HTML/Markdown to XHTML/DITA</val>
+		<val lang="ja_JP">HTML/Markdown to XHTML/DITA</val>
+		<val lang="nl_NL">HTML/Markdown to XHTML/DITA</val>
 	</key>
 	
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
-		<val lang="en_US">Add input files (html / markdown):</val>
-		<val lang="de_DE">Add input files (html / markdown):</val>
-		<val lang="fr_FR">Add input files (html / markdown):</val>
-		<val lang="ja_JP">Add input files (html / markdown):</val>
-		<val lang="nl_NL">Add input files (html / markdown):</val>
+		<val lang="en_US">Add input files (HTML / Markdown):</val>
+		<val lang="de_DE">Add input files (HTML / Markdown):</val>
+		<val lang="fr_FR">Add input files (HTML / Markdown):</val>
+		<val lang="ja_JP">Add input files (HTML / Markdown):</val>
+		<val lang="nl_NL">Add input files (HTML / Markdown):</val>
 	</key>
 	<key value="File_Table_Head_Conv">
 		<comment>The head of the table with input files</comment>
@@ -76,13 +85,15 @@
 		<val lang="ja_JP">Select the output type:</val>
 		<val lang="nl_NL">Select the output type:</val>
 	</key>
+	
+	
 	<key value="Add_Output_Label_Conv">
 		<comment>Add output folder label</comment>
-		<val lang="en_US">Add output folder:</val>
-		<val lang="de_DE">Add output folder:</val>
-		<val lang="fr_FR">Add output folder:</val>
-		<val lang="ja_JP">Add output folder:</val>
-		<val lang="nl_NL">Add output folder:</val>
+		<val lang="en_US">Output folder:</val>
+		<val lang="de_DE">Output folder:</val>
+		<val lang="fr_FR">Output folder:</val>
+		<val lang="ja_JP">Output folder:</val>
+		<val lang="nl_NL">Output folder:</val>
 	</key>
 
 
@@ -122,15 +133,13 @@
 	</key>
 	
 	
-	
-	<key value="Progress_Monitor_Message">
+	<key value="Progress_Dialog_Message_Conv">
 		<comment>Message added in progress monitor.</comment>
-		<val lang="en_US">Operation in progress...</val>
-		<val lang="de_DE">Operation in progress...</val>
-		<val lang="fr_FR">Operation in progress...</val>
-		<val lang="ja_JP">Operation in progress...</val>
-		<val lang="nl_NL">Operation in progress...</val>
+		<val lang="en_US">Conversion in progress...</val>
+		<val lang="de_DE">Conversion in progress...</val>
+		<val lang="fr_FR">Conversion in progress...</val>
+		<val lang="ja_JP">Conversion in progress...</val>
+		<val lang="nl_NL">Conversion in progress...</val>
 	</key>
-	
 	
 </translation>

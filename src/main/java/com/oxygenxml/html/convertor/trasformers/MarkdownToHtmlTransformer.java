@@ -6,19 +6,15 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 
 import javax.xml.transform.TransformerException;
 
-import org.parboiled.Parboiled;
-import org.pegdown.Extensions;
-import org.pegdown.LinkRenderer;
-import org.pegdown.Parser;
-import org.pegdown.ToHtmlSerializer;
-import org.pegdown.VerbatimSerializer;
-import org.pegdown.ast.MailLinkNode;
-import org.pegdown.ast.RootNode;
-import org.pegdown.plugins.PegDownPlugins;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.profiles.pegdown.Extensions;
+import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 public class MarkdownToHtmlTransformer implements Transformer{
 
@@ -33,12 +29,43 @@ public class MarkdownToHtmlTransformer implements Transformer{
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader) throws TransformerException   {
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException   {
 		//content to return 
 		String toReturn = null;
 			
+		
+		System.out.println(originalFileLocation.toString());
+		
 		//create the parser
-		Parser parser = Parboiled.createParser(Parser.class,
+		
+		final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+        Extensions.ALL
+				);
+		
+	  Parser parser = Parser.builder(OPTIONS).build();
+    HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).build();
+		
+    //create file path
+    String protocol = originalFileLocation.getProtocol();
+		String stringUrl = originalFileLocation.getFile();
+		
+		Path path = Paths.get(stringUrl.substring(stringUrl.lastIndexOf(protocol)+2));
+		
+		try {
+		// Get the content to parse.
+		String contentToParse = new String(Files.readAllBytes(path), "UTF-8");
+		
+		 Node document = parser.parse(contentToParse);
+    
+		 toReturn = renderer.render(document); 
+		 
+		} catch (IOException e) {
+			e.printStackTrace();
+			//TODO Add a message
+			throw new TransformerException(e);
+		}
+		
+	/*	Parser parser = Parboiled.createParser(Parser.class,
 				// EXM-37621 Nu mai generam linkuri pe headere...
 				(Extensions.ALL ^ Extensions.ANCHORLINKS ^ Extensions.HARDWRAPS) | Extensions.TASKLISTITEMS, 10000L,
 				Parser.DefaultParseRunnerProvider, PegDownPlugins.NONE);
@@ -66,9 +93,9 @@ public class MarkdownToHtmlTransformer implements Transformer{
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new TransformerException(e.getMessage());
+				throw new TransformerException(e);
 			}
-
+	*/
 		return toReturn;
 	}
 }
