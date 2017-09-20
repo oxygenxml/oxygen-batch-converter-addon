@@ -66,7 +66,7 @@ public class HtmlToXhtmlTransformer implements Transformer {
 			}
 
 		} catch (IOException e1) {
-			throw new TransformerException(e1);
+			throw new TransformerException(e1.getMessage(), e1.getCause());
 		}
 
 		return toReturn;

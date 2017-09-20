@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/"
-       class="- topic/topic "
-       ditaarch:DITAArchVersion="1.2"
-       domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-       id="an_exhibit_of_markdown">
+<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="an_exhibit_of_markdown">
    <title class="- topic/title ">An exhibit of Markdown</title>
    <body class="- topic/body ">
       <p class="- topic/p ">This note demonstrates some of what <xref class="- topic/xref " keyref="1">Markdown</xref> is capable of doing.</p>
@@ -13,23 +10,17 @@
          <i class="+ topic/ph hi-d/i ">Note: Feel free to play with this page. Unlike regular notes, this doesn't automatically save itself.</i>
       </p>
    </body>
-   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-          domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-          id="basic_formatting">
+   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="basic_formatting">
       <title class="- topic/title ">Basic formatting</title>
       <body class="- topic/body ">
          <p class="- topic/p ">Paragraphs can be written like so. A paragraph is the basic block of Markdown. A paragraph is what text will turn into when there is no reason it should become anything else.</p>
          <p class="- topic/p ">Paragraphs must be separated by a blank line. Basic formatting of <i class="+ topic/ph hi-d/i ">italics</i> and <b class="+ topic/ph hi-d/b ">bold</b> is supported. This <i class="+ topic/ph hi-d/i ">can be <b class="+ topic/ph hi-d/b ">nested</b> like</i> so.</p>
       </body>
    </topic>
-   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-          domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-          id="lists">
+   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="lists">
       <title class="- topic/title ">Lists</title>
       <body class="- topic/body "/>
-      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-             domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-             id="ordered_list">
+      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="ordered_list">
          <title class="- topic/title ">Ordered list</title>
          <body class="- topic/body ">
             <ol class="- topic/ol ">
@@ -43,9 +34,7 @@
             </p>
          </body>
       </topic>
-      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-             domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-             id="unordered_list">
+      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="unordered_list">
          <title class="- topic/title ">Unordered list</title>
          <body class="- topic/body ">
             <ul class="- topic/ul ">
@@ -57,23 +46,15 @@
          </body>
       </topic>
    </topic>
-   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-          domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-          id="paragraph_modifiers">
+   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="paragraph_modifiers">
       <title class="- topic/title ">Paragraph modifiers</title>
       <body class="- topic/body "/>
-      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-             domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-             id="code_block">
+      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="code_block">
          <title class="- topic/title ">Code block</title>
          <body class="- topic/body ">
-            <codeblock class="+ topic/pre pr-d/codeblock " xml:space="preserve">Code blocks are very useful for developers and other people who look at code or other things that are written in plain text. As you can see, it uses a fixed-width font.</codeblock>
-            <p class="- topic/p ">You can also make <codeph class="+ topic/ph pr-d/codeph ">inline code</codeph> to add code into other things.</p>
-         </body>
+            <codeblock class="+ topic/pre pr-d/codeblock " xml:space="preserve">Code blocks are very useful for developers and other people who look at code or other things that are written in plain text. As you can see, it uses a fixed-width font.</codeblock><p class="- topic/p ">You can also make <codeph class="+ topic/ph pr-d/codeph ">inline code</codeph> to add code into other things.</p></body>
       </topic>
-      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-             domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-             id="quote">
+      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="quote">
          <title class="- topic/title ">Quote</title>
          <body class="- topic/body ">
             <lq class="- topic/lq ">
@@ -82,22 +63,16 @@
          </body>
       </topic>
    </topic>
-   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-          domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-          id="headings">
+   <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="headings">
       <title class="- topic/title ">Headings</title>
       <body class="- topic/body ">
          <p class="- topic/p ">There are six levels of headings. They correspond with the six levels of HTML headings. You've probably noticed them already in the page. Each level down uses one more hash character.</p>
       </body>
-      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-             domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-             id="headings_can_also_contain_formatting">
+      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="headings_can_also_contain_formatting">
          <title class="- topic/title ">Headings can also contain formatting</title>
          <body class="- topic/body "/>
       </topic>
-      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2"
-             domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)"
-             id="they_can_even_contain_inline_code">
+      <topic class="- topic/topic " ditaarch:DITAArchVersion="1.2" domains="(topic hi-d) (topic ut-d) (topic indexing-d) (topic hazard-d) (topic abbrev-d) (topic pr-d) (topic sw-d) (topic ui-d)" id="they_can_even_contain_inline_code">
          <title class="- topic/title ">They can even contain inline code</title>
          <body class="- topic/body ">
             <p class="- topic/p ">Of course, demonstrating what headings look like messes up the structure of the page.</p>

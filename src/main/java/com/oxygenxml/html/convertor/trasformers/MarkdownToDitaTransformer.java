@@ -36,43 +36,48 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.html.convertor.t
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator)
-			throws TransformerException {
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException {
 		// content to return
 		String toReturn = null;
 
 		Transformer transformer = transformerCreator.createTransformer(null);
 
-		// reader for markdown document
-		final MarkdownReader r = new MarkdownReader();
-
 		// get the trasformFactory property
 		String property = System.getProperty("javax.xml.transform.TransformerFactory");
 
-		System.out.println("property " + property);
-
 		// set the trasformFactory property to
-		// "com.saxonica.config.EnterpriseTransformerFactory"
-		System.setProperty("javax.xml.transform.TransformerFactory", "com.saxonica.config.EnterpriseTransformerFactory");
+		// "net.sf.saxon.TransformerFactoryImpl"
+		System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
+		
+		// reader for markdown document
+		final MarkdownReader r = new MarkdownReader();
 
 		try {
 
-			System.out.println("aici1");
-
 			// input source of document to convert
 			final InputSource i = new InputSource(originalFileLocation.toString());
-
-			System.out.println("aici2");
 
 			StringWriter sw = new StringWriter();
 			StreamResult res = new StreamResult(sw);
 
 			// convert the document
+			//TODO problema cu C:\Users\intern4\Documents\OxygenXMLEditor\samples\dita\thunderbird\README.md
 			transformer.transform(new SAXSource(r, i), res);
 
+			System.out.println("aici4");
 			// get the converted content
 			toReturn = sw.toString();
 
+		}catch (Exception e) {
+			if(e instanceof TransformerException){
+				
+				throw new TransformerException(((TransformerException)e).getException().getMessage() , 
+						((TransformerException)e).getException().getCause());
+			}
+			else{
+				e.printStackTrace();
+				throw new TransformerException("Document cannot be converted.");
+			}
 		} finally {
 			// return the initial property of trasformerFactory
 			if (property == null) {
@@ -85,22 +90,4 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.html.convertor.t
 		return toReturn;
 	}
 
-	public static void main(String[] args) {
-		MarkdownToDitaTransformer ditaTransformer = new MarkdownToDitaTransformer();
-
-		try {
-			String ditaContent = ditaTransformer.convert(new URL("file:/C:\\Users\\intern4\\Desktop\\test\\table.md"), null,
-					new TransformerCreatorImpl());
-
-			System.out.println(ditaContent);
-			ContentPrinter.prettifyAndPrint(new StringReader(ditaContent),
-					new File("C:\\Users\\intern4\\Desktop\\test\\table.dita"), "dita", "", new TransformerCreatorImpl());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }

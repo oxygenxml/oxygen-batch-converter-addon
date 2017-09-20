@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,7 +26,7 @@ public class HtmlToXhtmlTest {
 		String sample = "file:" + File.separator + "D:" + File.separator + "HTMLConvertor" + File.separator + "test-sample"
 				+ File.separator + "HtmlToXhtml.html";
 		String goodSample = "D:" + File.separator + "HTMLConvertor" + File.separator + "test-sample" + File.separator
-				+ "goodHtmlToXhtml.html";
+				+ "goodHtmlToXhtml.xhtml";
 
 		String folder = "D:" + File.separator + "HTMLConvertor" + File.separator + "test-sample";
 

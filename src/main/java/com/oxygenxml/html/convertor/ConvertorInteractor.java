@@ -27,4 +27,17 @@ public interface ConvertorInteractor {
 	 * @return The path of output folder.
 	 */
 	public String getOutputFolder();
+	
+	/**
+	 * Set the output folder path.
+	 * @param text The path of output folder.
+	 */
+	public void setOutputFolder(String text);
+	
+	
+	/**
+	 * Set enable/ disable the convert button.
+	 * @param state <code>true</code> to set enable, <code>false</code> to set disable.
+	 */
+	public void setEnableConvert(boolean state);
 }

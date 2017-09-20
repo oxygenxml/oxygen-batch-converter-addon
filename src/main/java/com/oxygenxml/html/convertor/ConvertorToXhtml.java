@@ -31,92 +31,84 @@ public class ConvertorToXhtml implements Convertor {
 	private ProblemReporter problemReporter;
 	private ProgressDialogInteractor progressDialogInteractor;
 	private ConvertorWorkerInteractor workerInteractor;
-	
+
 	private TransformerCreator transformerCreator;
 
-	public ConvertorToXhtml(ProblemReporter problemReporter, ProgressDialogInteractor progressDialogInteractor, ConvertorWorkerInteractor workerInteractor) {
-		
-		
-		System.out.println("convToxhtml0");
+	public ConvertorToXhtml(ProblemReporter problemReporter, ProgressDialogInteractor progressDialogInteractor,
+			ConvertorWorkerInteractor workerInteractor) {
+
 		this.problemReporter = problemReporter;
 		this.progressDialogInteractor = progressDialogInteractor;
 		this.workerInteractor = workerInteractor;
-		
-		System.out.println("convToxhtml1");
-		
+
 		transformerCreator = new OxygenTransformerCreator();
-	
-		System.out.println("convToxhtml2");
-	}	
-	
+	}
+
 	@Override
 	public boolean convertFiles(List<String> inputFiles, String outputFolder) {
 		boolean isSuccessfully = true;
 
+		String contentToPrint= "";
+		
 		List<String> htmlExtensions = Arrays.asList(FileType.INPUT_HTML_EXTENSIONS);
 		List<String> mdExtensions = Arrays.asList(FileType.INPUT_MD_EXTENSIONS);
-		
+
 		// iterate over files
 		int size = inputFiles.size();
 		for (int i = 0; i < size; i++) {
-			if(workerInteractor.isCancelled()){
+			if (workerInteractor.isCancelled()) {
 				break;
 			}
-			for (int is = 0; is < 900000000; is++) {
-				for (int js = 0; js < 900000000; js++) {
-					
-				}
-			}
-			
+
 			// get the current file
 			String currentFile = inputFiles.get(i);
 
 			progressDialogInteractor.setNote(currentFile);
-			
+
 			// get extension
 			String extension = currentFile.substring(currentFile.indexOf(".") + 1);
 
 			try {
-				URL fileUrl ;
+				URL fileUrl;
 
 				if (htmlExtensions.contains(extension)) {
 					// It's html file
 
 					fileUrl = URLUtil.correct(new File(currentFile));
-					
-					String document = htmlToXhtmlTransformer.convert(fileUrl, null, transformerCreator);
 
-					ContentPrinter.prettifyAndPrint( new StringReader(document),
-							FilePathGenerator.generate(currentFile, FileType.XHTML_TYPE_AND_EXTENSION, outputFolder),
-							DOCTYPE_SYSTEM, DOCTYPE_PUBLIC, transformerCreator);
+					contentToPrint = htmlToXhtmlTransformer.convert(fileUrl, null, transformerCreator);
+
+					
 				}
 
 				else if (mdExtensions.contains(extension)) {
 					// it's markdown file
-					
-					fileUrl = new URL("file:/"+currentFile);
+
+					fileUrl = new URL("file:/" + currentFile);
 
 					String htmlContent = markdownToXHtmlTransformer.convert(fileUrl, null, transformerCreator);
-					
-					System.out.println("html: " + htmlContent);
-					
-					String xhtmlContent = htmlToXhtmlTransformer.convert(fileUrl, new StringReader(htmlContent), transformerCreator);
 
-					System.out.println("xhtml: " + xhtmlContent);
-					
-					ContentPrinter.prettifyAndPrint( new StringReader(xhtmlContent),
-							FilePathGenerator.generate(currentFile, FileType.XHTML_TYPE_AND_EXTENSION , outputFolder), 
-							DOCTYPE_SYSTEM, DOCTYPE_PUBLIC, transformerCreator);
-				
+					System.out.println("html: " + htmlContent);
+
+					contentToPrint = htmlToXhtmlTransformer.convert(fileUrl, new StringReader(htmlContent),
+							transformerCreator);
 				}
+				
+				
+				ContentPrinter.prettifyAndPrint(new StringReader(contentToPrint),
+						FilePathGenerator.generate(currentFile, FileType.XHTML_TYPE_AND_EXTENSION, outputFolder), DOCTYPE_SYSTEM,
+						DOCTYPE_PUBLIC, transformerCreator);
+				
 
 			} catch (MalformedURLException e) {
 				isSuccessfully = false;
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (TransformerException e) {
+				problemReporter.reportProblem(e, "file:" + File.separator+ currentFile);
+			} 
+			catch (TransformerException e) {
 				isSuccessfully = false;
-				problemReporter.reportProblem(e, currentFile);
+				problemReporter.reportProblem(e, "file:" + File.separator+ currentFile);
 			}
 		}
 		return isSuccessfully;

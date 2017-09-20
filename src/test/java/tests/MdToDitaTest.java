@@ -36,8 +36,6 @@ public class MdToDitaTest {
 
 		String dita = markdownToDitaTransformer.convert(new URL(sample), null, transformerCreator);
 
-		System.out.println(dita);
-
 		File fileToRead = FilePathGenerator.generate(sample, "dita", folder);
 
 		try {

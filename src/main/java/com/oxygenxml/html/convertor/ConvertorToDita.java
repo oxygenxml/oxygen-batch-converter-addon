@@ -51,6 +51,8 @@ public class ConvertorToDita implements Convertor{
 	public boolean convertFiles(List<String> inputFiles, String outputFolder) {
 		boolean isSuccessfully = true;
 		
+		String contentToPrint = "";
+		
 		List<String> htmlExtensions = Arrays.asList(FileType.INPUT_HTML_EXTENSIONS);
 		List<String> mdExtensions = Arrays.asList(FileType.INPUT_MD_EXTENSIONS);
 		
@@ -61,11 +63,6 @@ public class ConvertorToDita implements Convertor{
 				break;
 			}
 			
-			for (int is = 0; is < 900000000; is++) {
-				for (int js = 0; js < 900000000; js++) {
-					
-				}
-			}
 			
 			// get the current file
 			String currentFile = inputFiles.get(i);
@@ -83,30 +80,29 @@ public class ConvertorToDita implements Convertor{
 					System.out.println("fileUrl: " + fileUrl);
 					String xhtmlDocument =  new HtmlToXhtmlTransformer().convert(fileUrl, null, transformerCreator);
 					System.out.println("xhtml: "+ xhtmlDocument);
-					String document = new XHTMLToDITATransformer().convert(fileUrl, new StringReader(xhtmlDocument), transformerCreator);
-					System.out.println("s-a facut transformarea : " + document);
-
-					ContentPrinter.prettifyAndPrint( new StringReader(document), 
-							FilePathGenerator.generate(currentFile, FileType.DITA_TYPE_AND_EXTENSION, outputFolder), 
-							DOCTYPE_SYSTEM, DOCTYPE_PUBLIC, transformerCreator);
-					
+					 contentToPrint = new XHTMLToDITATransformer().convert(fileUrl, new StringReader(xhtmlDocument), transformerCreator);
 				}
-
 				else if (mdExtensions.contains(extension)) {
 					System.out.println("fileUrl: " + fileUrl);
-						String document = markdownDitaTransformer.convert(fileUrl, null, transformerCreator);
-						System.out.println("s-a facut transformarea : " + document);
-						ContentPrinter.prettifyAndPrint( new StringReader(document),
-								FilePathGenerator.generate(currentFile, FileType.DITA_TYPE_AND_EXTENSION, outputFolder),
-								DOCTYPE_SYSTEM, DOCTYPE_PUBLIC, transformerCreator);
+						 contentToPrint = markdownDitaTransformer.convert(fileUrl, null, transformerCreator);
 				}
+				
+				System.out.println("s-a facut transformarea : " + contentToPrint);
+				ContentPrinter.prettifyAndPrint( new StringReader(contentToPrint), 
+						FilePathGenerator.generate(currentFile, FileType.DITA_TYPE_AND_EXTENSION, outputFolder), 
+						DOCTYPE_SYSTEM, DOCTYPE_PUBLIC, transformerCreator);
+				
+				
 			} catch (MalformedURLException e1) {
 				//TODO poate trimit la user
 				isSuccessfully = false;
 				e1.printStackTrace();
+				problemReporter.reportProblem(e1, "file:" + File.separator+ currentFile);
+				
+				
 			} catch (TransformerException e) {
 				e.printStackTrace();
-				problemReporter.reportProblem(e, currentFile);
+				problemReporter.reportProblem(e, "file:" + File.separator+ currentFile);
 				isSuccessfully = false;
 			}
 		}

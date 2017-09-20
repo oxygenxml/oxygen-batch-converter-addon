@@ -25,7 +25,6 @@ public class FileComparationUtil {
      {
          if(line1 == null || line2 == null)
          {
-        	 System.out.println("null");
              areEqual = false;
               
              break;
@@ -33,14 +32,13 @@ public class FileComparationUtil {
          else if(! line1.equalsIgnoreCase(line2))
          {
         	 
-        	 System.out.println("aici");
              areEqual = false;
               
              break;
          }
           
          line1 = reader1.readLine();
-          
+         
          line2 = reader2.readLine();
           
          System.out.println(line1);
@@ -49,19 +47,14 @@ public class FileComparationUtil {
      }
      
 		}finally{
-			System.out.println("finaly");
 			try {
 				if(reader1 != null){
-					System.out.println("close");
 					reader1.close();
 				}
 				if(reader2 != null){
-					System.out.println("close");
 					reader2.close();
 				}
 			} catch (IOException e) {
-				System.out.println("finaly catch");
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		

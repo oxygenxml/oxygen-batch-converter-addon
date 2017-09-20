@@ -20,12 +20,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import com.oxygenxml.html.convertor.ConvertorInteractor;
 import com.oxygenxml.html.convertor.FileType;
 import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
-
 
 /**
  * Panel for add input files
@@ -34,7 +34,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  *
  */
 public class InputPanel extends JPanel {
-	
+
 	/**
 	 * Table with files to check.
 	 */
@@ -66,17 +66,23 @@ public class InputPanel extends JPanel {
 	 */
 	private Translator translator;
 
+	/**
+	 * Convertor interactor.
+	 */
+	private ConvertorInteractor convertorInteractor;
 
 	/**
 	 * Constructor
 	 */
-	public InputPanel(final Translator translator, final JButton checkButton) {
+	public InputPanel(final Translator translator, final ConvertorInteractor convertorInteractor) {
 		this.translator = translator;
-		
+		this.convertorInteractor = convertorInteractor;
+
 		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE));
 		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE));
 		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE));
-		
+		remvBtn.setEnabled(false);
+
 		// initialize the panel
 		initPanel();
 
@@ -85,20 +91,25 @@ public class InputPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//open a URL chooser
-				File[] files = PluginWorkspaceProvider.getPluginWorkspace()
-						.chooseFiles(null, "" , FileType.INPUT_TYPES, "Markdown and HTML files");
+				// open a URL chooser
+				File[] files = PluginWorkspaceProvider.getPluginWorkspace().chooseFiles(null, "", FileType.INPUT_TYPES,
+						"Markdown and HTML files");
 
-				if(files != null){
-						//add files in table
-						addFilesInTable(files);
-						
-						//set check button enable
-						checkButton.setEnabled(true);
+				if (files != null) {
+
+					if (modelTable.getRowCount() == 0) {
+						convertorInteractor.setOutputFolder(files[0].getParent().toString() + File.separator + "output");
 					}
+
+					// add files in table
+					addFilesInTable(files);
+
+					// set check button enable
+					convertorInteractor.setEnableConvert(true);
+				}
 			}
 		});
-		
+
 		// add action listener on add folder button
 		addFolderBtn.addActionListener(new ActionListener() {
 
@@ -109,18 +120,22 @@ public class InputPanel extends JPanel {
 
 				if (file != null) {
 					List<String> listToAdd = new ArrayList<String>();
-						
+
 					InputPanelUtil.getFilesFromFolder(file, listToAdd);
+
+					if(!listToAdd.isEmpty()){
+						convertorInteractor.setOutputFolder(file.toString()+ File.separator + "output");
+					}
 					
 					// add files in table
 					addFilesInTable(listToAdd);
 
-					// set check button enable
-					checkButton.setEnabled(true);
+					// set convert button enable
+					convertorInteractor.setEnableConvert(true);
 				}
 			}
 		});
-		
+
 		// add action listener on remove button
 		remvBtn.addActionListener(new ActionListener() {
 
@@ -133,21 +148,21 @@ public class InputPanel extends JPanel {
 					int modelRow = tableFiles.convertRowIndexToModel(i);
 					modelTable.removeRow(modelRow);
 				}
-				
-				if(modelTable.getRowCount() == 0){
-					checkButton.setEnabled(false);
+
+				if (modelTable.getRowCount() == 0) {
+					convertorInteractor.setEnableConvert(false);
+					convertorInteractor.setOutputFolder("");
 				}
-				
+
 				remvBtn.setEnabled(false);
-			}				
+			}
 		});
-		
+
 	}
-	
-	
-	
+
 	/**
 	 * Get file from files table.
+	 * 
 	 * @return List with files in String format.
 	 */
 	public List<String> getFilesFromTable() {
@@ -157,69 +172,71 @@ public class InputPanel extends JPanel {
 		for (int i = 0; i < size; i++) {
 			toReturn.add(String.valueOf(modelTable.getValueAt(i, 0)));
 		}
-		
+
 		return toReturn;
 	}
-	
+
 	/**
 	 * Add files in table.
-	 * @param files Vector with files.
+	 * 
+	 * @param files
+	 *          Vector with files.
 	 */
-	public void addFilesInTable(File[] files){
+	public void addFilesInTable(File[] files) {
 		int size = files.length;
 		for (int i = 0; i < size; i++) {
-			if(!tableContains(files[i].toString())){
+			if (!tableContains(files[i].toString())) {
 				modelTable.addRow(new String[] { files[i].toString() });
 			}
 		}
 	}
-	
+
 	/**
 	 * Add files in table.
-	 * @param files List with files in string format.
+	 * 
+	 * @param files
+	 *          List with files in string format.
 	 */
-	public void addFilesInTable(List<String> files){
+	public void addFilesInTable(List<String> files) {
 		int size = files.size();
 		for (int i = 0; i < size; i++) {
-			if(!tableContains(files.get(i).toString())){
-				modelTable.addRow(new String[] { files.get(i)});
+			if (!tableContains(files.get(i).toString())) {
+				modelTable.addRow(new String[] { files.get(i) });
 			}
 		}
 	}
-	
+
 	/**
 	 * Delete all rows from files table.
 	 */
-	public void clearTable(){
+	public void clearTable() {
 		int size = modelTable.getRowCount();
 		for (int i = 0; i < size; i++) {
 			modelTable.removeRow(0);
 		}
 	}
-	
-	
+
 	/**
 	 * Method for initialize the Panel.
 	 */
 	private void initPanel() {
-		
-		modelTable = new DefaultTableModel(new String[]{translator.getTranslation(Tags.FILES_TABLE_HEAD)}, 0);
-		//set modal on table
+
+		modelTable = new DefaultTableModel(new String[] { translator.getTranslation(Tags.FILES_TABLE_HEAD) }, 0);
+		// set modal on table
 		tableFiles.setModel(modelTable);
-			
-		//add list selection listener on table
+
+		// add list selection listener on table
 		tableFiles.getSelectionModel().addListSelectionListener(listSelectionListener);
-		
-		//configure the scroll pane
+
+		// configure the scroll pane
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		tableFiles.setPreferredScrollableViewportSize(new Dimension(scrollPane.getWidth(), scrollPane.getHeight()));
 		scrollPane.setOpaque(false);
 
-		//set layout manager
+		// set layout manager
 		this.setLayout(new GridBagLayout());
-		
-		GridBagConstraints gbc = new GridBagConstraints();
 
+		GridBagConstraints gbc = new GridBagConstraints();
 
 		// ------add checkCurrent radio button
 		gbc.gridx = 0;
@@ -227,8 +244,8 @@ public class InputPanel extends JPanel {
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL)), gbc);
-			
-		//------add scrollPane
+
+		// ------add scrollPane
 		gbc.gridy++;
 		gbc.weightx = 1;
 		gbc.weighty = 1;
@@ -236,29 +253,28 @@ public class InputPanel extends JPanel {
 		gbc.fill = GridBagConstraints.BOTH;
 		this.add(scrollPane, gbc);
 
-		//------add addBtn and removeBtn
+		// ------add addBtn and removeBtn
 		gbc.gridy++;
 		gbc.weightx = 0;
 		gbc.weighty = 0;
 		gbc.insets = new Insets(5, 0, 0, 5);
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.EAST;
-		
-		//create a panel that contains add and remove buttons
+
+		// create a panel that contains add and remove buttons
 		JPanel btnsPanel = new JPanel();
 		btnsPanel.setLayout(new GridLayout(1, 3));
 		btnsPanel.setOpaque(false);
-		
+
 		btnsPanel.add(addFolderBtn);
 		btnsPanel.add(addFilesBtn);
 		btnsPanel.add(remvBtn);
-		
-		//add btnsPanel
+
+		// add btnsPanel
 		this.add(btnsPanel, gbc);
 
 	}
 
-	
 	/**
 	 * List selection listener.
 	 */
@@ -266,24 +282,25 @@ public class InputPanel extends JPanel {
 
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
-			if(!remvBtn.isEnabled()){
+			if (!remvBtn.isEnabled()) {
 				// set remove button enable
 				remvBtn.setEnabled(true);
 			}
 		}
 	};
-	
-	
+
 	/**
 	 * Check if table contains the given URL.
-	 * @param url The URL in string format.
+	 * 
+	 * @param url
+	 *          The URL in string format.
 	 * @return <code>true</code>>if URL is in table, <code>false</code>> if isn't.
 	 */
-	private boolean tableContains(String url){
+	private boolean tableContains(String url) {
 		boolean toReturn = false;
 		int size = modelTable.getRowCount();
-		for(int i = 0; i < size; i++){
-			if(url.equals(modelTable.getValueAt(i, 0)) ){
+		for (int i = 0; i < size; i++) {
+			if (url.equals(modelTable.getValueAt(i, 0))) {
 				return true;
 			}
 		}

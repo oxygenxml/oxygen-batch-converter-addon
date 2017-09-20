@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
 import com.oxygenxml.html.convertor.worker.ConvertorWorker;
 
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
 public class ConvertorDialog extends OKCancelDialog implements ConvertorInteractor{
@@ -35,15 +37,23 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	private Translator translator;
 
 	
-	public ConvertorDialog(JFrame parentFrame, Translator translator) {
+	public ConvertorDialog(List<String> toConvertFiles, JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
 		this.parentFrame = parentFrame;
 		this.translator = translator;
 
-		inputPanel = new InputPanel(translator, this.getOkButton());
+		inputPanel = new InputPanel(translator, this);
 		outputPanel = new OutputPanel(translator);
 		
 		initGUI(translator);
+		
+		if(!toConvertFiles.isEmpty()){
+			getOkButton().setEnabled(true);
+			inputPanel.addFilesInTable(toConvertFiles);
+		}
+		else{
+			getOkButton().setEnabled(false);
+		}
 		
 		contentPersister.loadState(this);
 		
@@ -89,25 +99,30 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	 */
 	@Override
 	protected void doOK() {
-		
-		contentPersister.saveState(this);
 
-		final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator);
-				
-		convertorWorker = new ConvertorWorker(this, progressDialog);
-		
-		progressDialog.addCancelActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				convertorWorker.cancel(true);
-				progressDialog.dispose();
-			}
-		});
-		
-		convertorWorker.execute();
-		
-		super.doOK();
+		if (getOutputFolder().isEmpty()) {
+			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE));
+		} else {
+
+			contentPersister.saveState(this);
+
+			final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator);
+
+			convertorWorker = new ConvertorWorker(this, progressDialog);
+
+			progressDialog.addCancelActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					convertorWorker.cancel(true);
+					progressDialog.dispose();
+				}
+			});
+
+			convertorWorker.execute();
+
+			super.doOK();
+		}
 	}
 
 
@@ -133,6 +148,18 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	@Override
 	public String getOutputFolder() {
 		return outputPanel.getOutputPath();
+	}
+
+
+	@Override
+	public void setOutputFolder(String text) {
+		outputPanel.setOutputPath(text);
+	}
+
+
+	@Override
+	public void setEnableConvert(boolean state) {
+		getOkButton().setEnabled(state);
 	}
 
 	

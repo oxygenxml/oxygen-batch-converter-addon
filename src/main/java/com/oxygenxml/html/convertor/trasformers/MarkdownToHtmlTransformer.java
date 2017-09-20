@@ -62,7 +62,7 @@ public class MarkdownToHtmlTransformer implements Transformer{
 		} catch (IOException e) {
 			e.printStackTrace();
 			//TODO Add a message
-			throw new TransformerException(e);
+			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 		
 	/*	Parser parser = Parboiled.createParser(Parser.class,

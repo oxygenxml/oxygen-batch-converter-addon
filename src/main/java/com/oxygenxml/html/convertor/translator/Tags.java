@@ -94,13 +94,14 @@ public interface Tags {
 	public final String SUCCESS_STATUS = "Success_Status_Conv";
 
 	
-	
 	/**
 	 * Message in progress dialog. 
 	 */
 	public final String PROGRESS_DIALOG_MESSAGE = "Progress_Dialog_Message_Conv";
 
-	
+	/**
+	 * Message when output folder path is empty. 
+	 */
+	public final String EMPTY_OUTPUT_MESSAGE = "Empty_Output_Message_Conv";
 
 }
-

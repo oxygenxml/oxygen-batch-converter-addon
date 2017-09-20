@@ -142,4 +142,12 @@
 		<val lang="nl_NL">Conversion in progress...</val>
 	</key>
 	
+	<key value="Empty_Output_Message_Conv">
+		<comment>Warning message when output path is empty.</comment>
+		<val lang="en_US">You should add a output folder!</val>
+		<val lang="de_DE">You should add a output folder!</val>
+		<val lang="fr_FR">You should add a output folder!</val>
+		<val lang="ja_JP">You should add a output folder!</val>
+		<val lang="nl_NL">You should add a output folder!</val>
+	</key>
 </translation>

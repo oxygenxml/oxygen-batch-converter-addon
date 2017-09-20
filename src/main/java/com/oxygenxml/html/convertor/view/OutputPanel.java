@@ -174,4 +174,8 @@ public class OutputPanel extends JPanel{
 		return outputField.getText();
 	}
 	
+	public void setOutputPath(String text){
+		outputField.setText(text);
+	}
+	
 }

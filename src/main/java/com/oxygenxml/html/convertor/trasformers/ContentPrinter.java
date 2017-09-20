@@ -26,60 +26,31 @@ import ro.sync.exml.workspace.api.util.XMLUtilAccess;
  */
 public class ContentPrinter {
 
+	public static void prettifyAndPrint(Reader contentReader, File out, String systemDoctype, String publicDoctype,
+			TransformerCreator transformerCreator) throws TransformerException  {
 
-	public static void prettifyAndPrint( Reader contentReader, File out, String systemDoctype, String publicDoctype, TransformerCreator transformerCreator) {
-		 
-		
-		System.out.println("out " + out.toString());
-		
-		String property = null;
-		
-		try {
-		
+
 			Transformer transformer = transformerCreator.createTransformer(null);
-				
-				transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-				transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, systemDoctype);
-				transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, publicDoctype);
-				transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-				transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-				transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, systemDoctype);
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, publicDoctype);
+			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
 			InputSource inputSource = new InputSource(contentReader);
 
 			out = FilePathGenerator.getFileWithCounter(out);
-			
-			System.out.println("new out: " + out.toString());
-		
-			//get the trasformFactory property 
-			 property = System.getProperty("javax.xml.transform.TransformerFactory");
-			
-			//set the trasformFactory property to "com.saxonica.config.EnterpriseTransformerFactory"	
-			System.setProperty("javax.xml.transform.TransformerFactory", "com.saxonica.config.EnterpriseTransformerFactory");
-			
-			
-			transformer.transform(new SAXSource(inputSource), new StreamResult(out));
 
-			System.out.println("dupa trasform");
-			
-		} catch (TransformerConfigurationException e) {
-			e.printStackTrace();
-		} catch (TransformerException e) {
-			//TODO send to user
-			e.printStackTrace();
-		}
-		finally {
-			//return the initial property of trasformerFactory
-			if (property == null) {
-				System.getProperties().remove("javax.xml.transform.TransformerFactory");
-			} else {
-				System.setProperty("javax.xml.transform.TransformerFactory", property);
+			try {
+				transformer.transform(new SAXSource(inputSource), new StreamResult(out));
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 			}
-		}
-		
 	}
-	
-	
 
 }
