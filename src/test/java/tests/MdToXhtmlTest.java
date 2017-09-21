@@ -1,11 +1,10 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,8 +17,8 @@ import com.oxygenxml.html.convertor.trasformers.ContentPrinter;
 import com.oxygenxml.html.convertor.trasformers.FilePathGenerator;
 import com.oxygenxml.html.convertor.trasformers.HtmlToXhtmlTransformer;
 import com.oxygenxml.html.convertor.trasformers.MarkdownToHtmlTransformer;
-import com.oxygenxml.html.convertor.trasformers.TransformerCreator;
-import com.oxygenxml.html.convertor.trasformers.TransformerCreatorImpl;
+import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreator;
+import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreatorImpl;
 
 public class MdToXhtmlTest {
 
@@ -32,7 +31,7 @@ public class MdToXhtmlTest {
 
 		String folder = "D:" + File.separator + "HTMLConvertor" + File.separator + "test-sample";
 
-		TransformerCreator transformerCreator = new TransformerCreatorImpl();
+		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 
 		MarkdownToHtmlTransformer markdownToHtmlTransformer = new MarkdownToHtmlTransformer();
 
@@ -48,7 +47,7 @@ public class MdToXhtmlTest {
 
 			ContentPrinter.prettifyAndPrint(new StringReader(xhtmlContent), fileToRead,
 					"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", "-//W3C//DTD XHTML 1.0 Strict//EN",
-					new TransformerCreatorImpl());
+					new TransformerFactoryCreatorImpl());
 
 			System.out.println(goodSample);
 			System.out.println(fileToRead.toString());

@@ -19,6 +19,10 @@ public class OxygenStatusReporter implements StatusReporter {
 	 */
 	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
 	
+	 /**
+	  * Report the given massage.
+	  * @param message Massage to report.
+	  */
 	@Override
 	public void reportStatus(final String message) {
 		try {

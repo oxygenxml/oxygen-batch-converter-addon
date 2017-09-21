@@ -35,7 +35,7 @@ public class XHTMLToDITATransformer implements com.oxygenxml.html.convertor.tras
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator)
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		String ditaContent ="";
@@ -88,24 +88,4 @@ public class XHTMLToDITATransformer implements com.oxygenxml.html.convertor.tras
 
 		return ditaContent;
 	}
-
-	
-	public static void main(String[] args) {
-		
-		String file = "file:\\C:\\Users\\intern4\\Desktop\\testEmpty.html";
-	
-		try {
-			String xhtml = new HtmlToXhtmlTransformer().convert(new URL(file), null, new TransformerCreatorImpl());
-		
-			String dita = new XHTMLToDITATransformer().convert(new URL(file), new StringReader(xhtml), new TransformerCreatorImpl());
-			
-			System.out.println(dita);
-		
-		
-		} catch (MalformedURLException | TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 }

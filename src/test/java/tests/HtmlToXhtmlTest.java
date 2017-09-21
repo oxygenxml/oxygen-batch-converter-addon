@@ -16,8 +16,8 @@ import org.junit.Test;
 import com.oxygenxml.html.convertor.trasformers.ContentPrinter;
 import com.oxygenxml.html.convertor.trasformers.FilePathGenerator;
 import com.oxygenxml.html.convertor.trasformers.HtmlToXhtmlTransformer;
-import com.oxygenxml.html.convertor.trasformers.TransformerCreator;
-import com.oxygenxml.html.convertor.trasformers.TransformerCreatorImpl;
+import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreator;
+import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreatorImpl;
 
 public class HtmlToXhtmlTest {
 
@@ -30,7 +30,7 @@ public class HtmlToXhtmlTest {
 
 		String folder = "D:" + File.separator + "HTMLConvertor" + File.separator + "test-sample";
 
-		TransformerCreator transformerCreator = new TransformerCreatorImpl();
+		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 
 		HtmlToXhtmlTransformer htmlToXhtmlTransformer = new HtmlToXhtmlTransformer();
 
@@ -41,7 +41,7 @@ public class HtmlToXhtmlTest {
 		try {
 			ContentPrinter.prettifyAndPrint(new StringReader(xhtmlContent), fileToRead,
 					"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", "-//W3C//DTD XHTML 1.0 Strict//EN",
-					new TransformerCreatorImpl());
+					new TransformerFactoryCreatorImpl());
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead.toString()));
 

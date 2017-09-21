@@ -2,8 +2,20 @@ package com.oxygenxml.html.convertor.trasformers;
 
 import java.io.File;
 
+/**
+ * File path generator
+ * @author intern4
+ *
+ */
 public class FilePathGenerator {
 
+	/**
+	 * Generate a File according to output folder, extension and origin file.
+	 * @param filePath
+	 * @param extension
+	 * @param outputFolder
+	 * @return
+	 */
 	public static File generate(String filePath, String extension, String outputFolder){
 		
 	String fileName = filePath.substring(filePath.lastIndexOf(File.separator)+1, filePath.lastIndexOf("."));
@@ -15,7 +27,7 @@ public class FilePathGenerator {
 
 	
 	/**
-	 * Add a counter on the given file if exists.
+	 * Add a counter on the given file if it exists.
 	 * 
 	 * @param file
 	 *          The file.

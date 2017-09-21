@@ -23,7 +23,7 @@ public class HtmlToXhtmlTransformer implements Transformer {
 	 * @param contentReader Reader of the document.
 	 * @return The conversion in XHTML.        
 	 */
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException {
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		//XHTML content to be return
 		String toReturn = null;
 

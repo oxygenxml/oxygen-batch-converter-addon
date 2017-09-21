@@ -1,10 +1,7 @@
 package com.oxygenxml.html.convertor.trasformers;
 
-import java.io.File;
 import java.io.Reader;
-import java.io.StringReader;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.transform.Transformer;
@@ -36,7 +33,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.html.convertor.t
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException {
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		// content to return
 		String toReturn = null;
 

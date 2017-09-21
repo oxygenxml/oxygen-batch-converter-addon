@@ -24,5 +24,5 @@ public interface Transformer {
 	 * @return The conversion result content.
 	 * @throws TransformerException
 	 */
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException;
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException;
 }

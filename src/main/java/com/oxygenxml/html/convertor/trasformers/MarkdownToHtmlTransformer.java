@@ -29,7 +29,7 @@ public class MarkdownToHtmlTransformer implements Transformer{
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerCreator transformerCreator) throws TransformerException   {
+	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException   {
 		//content to return 
 		String toReturn = null;
 			

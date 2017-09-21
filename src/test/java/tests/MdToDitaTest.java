@@ -16,8 +16,8 @@ import org.junit.Test;
 import com.oxygenxml.html.convertor.trasformers.ContentPrinter;
 import com.oxygenxml.html.convertor.trasformers.FilePathGenerator;
 import com.oxygenxml.html.convertor.trasformers.MarkdownToDitaTransformer;
-import com.oxygenxml.html.convertor.trasformers.TransformerCreator;
-import com.oxygenxml.html.convertor.trasformers.TransformerCreatorImpl;
+import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreator;
+import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreatorImpl;
 
 public class MdToDitaTest {
 
@@ -30,7 +30,7 @@ public class MdToDitaTest {
 
 		String folder = "D:" + File.separator + "HTMLConvertor" + File.separator + "test-sample";
 
-		TransformerCreator transformerCreator = new TransformerCreatorImpl();
+		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 
 		MarkdownToDitaTransformer markdownToDitaTransformer = new MarkdownToDitaTransformer();
 
@@ -40,7 +40,7 @@ public class MdToDitaTest {
 
 		try {
 			ContentPrinter.prettifyAndPrint(new StringReader(dita), fileToRead, "topic.dtd", "-//OASIS//DTD DITA Topic//EN",
-					new TransformerCreatorImpl());
+					new TransformerFactoryCreatorImpl());
 
 			System.out.println(goodSample);
 			System.out.println(fileToRead.toString());

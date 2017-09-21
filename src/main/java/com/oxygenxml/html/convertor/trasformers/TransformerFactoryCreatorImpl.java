@@ -5,7 +5,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
-public class TransformerCreatorImpl implements com.oxygenxml.html.convertor.trasformers.TransformerCreator{
+public class TransformerFactoryCreatorImpl implements com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreator{
 
 	@Override
 	public Transformer createTransformer(StreamSource streamSource) {

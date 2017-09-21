@@ -9,8 +9,16 @@ import javax.xml.transform.stream.StreamSource;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
-public class OxygenTransformerCreator implements TransformerCreator{
+/**
+ * Oxygen trasformer factory.
+ * @author intern4
+ *
+ */
+public class OxygenTransformerFactoryCreator implements TransformerFactoryCreator{
 
+	/**
+	 * Create a trasformer using  XMLUtilAccess.
+	 */
 	@Override
 	public Transformer createTransformer(StreamSource streamSource) {
 		Transformer transformer = null;
