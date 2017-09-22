@@ -1,8 +1,10 @@
 package com.oxygenxml.html.convertor.proxy;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.swing.Action;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -17,10 +19,6 @@ import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
  *
  */
 public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.reflect.InvocationHandler {
-	/**
-	 * The action that open the DocBook checker.
-	 */
-	private Action checkerDocBook;
 
 	/**
 	 * Logger
@@ -36,6 +34,8 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	 * The action id of predecessor item.
 	 */
 	private static final String PREDECESSOR_ITEM_ACTION_ID = "Project/Compare";
+
+	private List<Action> actions;
 	
 	/**
 	 * Constructor
@@ -44,10 +44,10 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	 *          The action that open the DocBook checker.
 	 */
 	public ProjectPopupMenuCustomizerInvocationHandler(StandalonePluginWorkspace pluginWorkspaceAccess,
-			Action checkerDocBook) {
+			List<Action> actions) {
 
 		this.pluginWorkspaceAccess = pluginWorkspaceAccess;
-		this.checkerDocBook = checkerDocBook;
+		this.actions = actions;
 	}
 
 	/**
@@ -61,6 +61,14 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 
 			// if the method name equals with "customizePopUpMenu"
 			if (method.getName().equals("customizePopUpMenu")) {
+				
+				JMenu batchConvertMenu = new JMenu("Batch Convert");
+
+				int sizeList = actions.size();
+
+				for (int i = 0; i < sizeList; i++) {
+					batchConvertMenu.add(new JMenuItem(actions.get(i)));
+				}
 
 				// cast the args[0] at JPopupMenu
 				JPopupMenu popupMenu = (JPopupMenu) args[0];
@@ -81,17 +89,11 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 					}
 				}
 
-				// item to add in popupMenu
-				JMenuItem projectMenuItem = new JMenuItem();
-
-				// set action on MenuItem
-				projectMenuItem.setAction(checkerDocBook);
-
 				// add a separator
 				popupMenu.addSeparator();
 
 				// add menuItem at popupMenu
-				popupMenu.add(projectMenuItem, index+1);
+				popupMenu.add(batchConvertMenu, index+1);
 
 			}
 

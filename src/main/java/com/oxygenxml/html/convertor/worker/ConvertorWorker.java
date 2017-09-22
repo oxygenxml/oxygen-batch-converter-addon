@@ -36,16 +36,12 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 		
 		System.out.println("worker1");
 		
-		oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.PROGRESS_STATUS));
+		oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.PROGRESS_STATUS,""));
 		
 		progressDialogInteractor.setDialogVisible(true);
 		
 		System.out.println("worker2");
 		
-		if(FileType.XHTML_TYPE_AND_EXTENSION.equals(convertorInteractor.getOutputType()) ){
-			System.out.println("worker2.1");
-			//it's selected xhtml output
-			
 			System.out.println("worker2.2");
 			try {
 				convertor = new ConvertorToXhtml(new OxygenProblemReporter(), progressDialogInteractor, this);
@@ -53,11 +49,6 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		else {
-			//it's selected dita output
-			convertor = new ConvertorToDita(new OxygenProblemReporter(), progressDialogInteractor, this);
-		}
 		
 		System.out.println("worker3");
 		
@@ -66,9 +57,9 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 		System.out.println("worker4");
 		
 		if(isSuccesfully){
-			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.SUCCESS_STATUS));
+			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.SUCCESS_STATUS,""));
 		}else{
-			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.FAIL_STATUS));
+			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.FAIL_STATUS, ""));
 		}
 		
 		progressDialogInteractor.close();

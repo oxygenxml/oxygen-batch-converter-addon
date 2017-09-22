@@ -42,7 +42,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 		gbc.insets = new Insets(0, 15, 5, 15);
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
-		panel.add(new JLabel(translator.getTranslation(Tags.PROGRESS_DIALOG_MESSAGE)), gbc);
+		panel.add(new JLabel(translator.getTranslation(Tags.PROGRESS_DIALOG_MESSAGE,"")), gbc);
 		
 		gbc.gridy++;
 		gbc.weightx = 1;
@@ -57,7 +57,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 	
 		add(panel);
 		
-		setTitle(translator.getTranslation(Tags.DIALOG_TITLE));
+		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, ""));
 		getOkButton().setVisible(false);
 		
 		setResizable(false);

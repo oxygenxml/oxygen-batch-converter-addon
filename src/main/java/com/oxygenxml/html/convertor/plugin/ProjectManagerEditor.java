@@ -29,10 +29,10 @@ public class ProjectManagerEditor {
 	 * 
 	 * @param pluginWorkspaceAccess
 	 *          The StandalonePluginWorkspace.
-	 * @param checkerDocBook
-	 *          The action
+	 * @param actions
+	 *          The actions to add
 	 */
-	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, Action checkerDocBook) {
+	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, List<Action> actions) {
 		// try to get method from 19.1 version
 		try {
 			// get the getProjectManager method
@@ -48,7 +48,7 @@ public class ProjectManagerEditor {
 			// create a ProxyInstance of projectPopupMenuCustomizer
 			Object proxyProjectPopupMenuCustomizerImpl = Proxy.newProxyInstance(
 					projectPopupMenuCustomizerClass.getClassLoader(), new Class[] { projectPopupMenuCustomizerClass },
-					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, checkerDocBook));
+					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, actions));
 
 			// get the project manager object
 			Object projectManager = getProjectManager.invoke(pluginWorkspaceAccess);

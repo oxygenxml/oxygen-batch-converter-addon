@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import com.oxygenxml.html.convertor.ConvertorInteractor;
 import com.oxygenxml.html.convertor.persister.ContentPersister;
-import com.oxygenxml.html.convertor.persister.ContentPersisterImpl;
 import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
 import com.oxygenxml.html.convertor.worker.ConvertorWorker;
@@ -30,14 +29,12 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 
 	ConvertorWorker convertorWorker;
 	
-	private ContentPersister contentPersister = new ContentPersisterImpl();
-
 	private JFrame parentFrame;
 
 	private Translator translator;
 
 	
-	public ConvertorDialog(List<String> toConvertFiles, JFrame parentFrame, Translator translator) {
+	public ConvertorDialog(String convertorType, List<String> toConvertFiles, JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
 		this.parentFrame = parentFrame;
 		this.translator = translator;
@@ -55,11 +52,8 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 			getOkButton().setEnabled(false);
 		}
 		
-		contentPersister.loadState(this);
-		
-		
-		setTitle(translator.getTranslation(Tags.DIALOG_TITLE));
-		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON));
+		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, convertorType));
+		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
 		setResizable(true);
 		setMinimumSize(new Dimension(350, 300));
 		setSize(new Dimension(420, 350));
@@ -101,10 +95,8 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	protected void doOK() {
 
 		if (getOutputFolder().isEmpty()) {
-			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE));
+			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE,""));
 		} else {
-
-			contentPersister.saveState(this);
 
 			final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator);
 
@@ -126,17 +118,6 @@ public class ConvertorDialog extends OKCancelDialog implements ConvertorInteract
 	}
 
 
-
-	@Override
-	public String getOutputType() {
-		return outputPanel.getOutputType();
-	}
-
-
-	@Override
-	public void setOutputType(String type) {
-		outputPanel.setOutputType(type);
-	}
 
 
 	@Override

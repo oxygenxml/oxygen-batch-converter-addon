@@ -78,9 +78,9 @@ public class InputPanel extends JPanel {
 		this.translator = translator;
 		this.convertorInteractor = convertorInteractor;
 
-		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE));
-		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE));
-		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE));
+		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, ""));
+		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE, ""));
+		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE, ""));
 		remvBtn.setEnabled(false);
 
 		// initialize the panel
@@ -221,7 +221,7 @@ public class InputPanel extends JPanel {
 	 */
 	private void initPanel() {
 
-		modelTable = new DefaultTableModel(new String[] { translator.getTranslation(Tags.FILES_TABLE_HEAD) }, 0);
+		modelTable = new DefaultTableModel(new String[] { translator.getTranslation(Tags.FILES_TABLE_HEAD, "") }, 0);
 		// set modal on table
 		tableFiles.setModel(modelTable);
 
@@ -243,7 +243,7 @@ public class InputPanel extends JPanel {
 		gbc.gridy = 0;
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL)), gbc);
+		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL, "")), gbc);
 
 		// ------add scrollPane
 		gbc.gridy++;
