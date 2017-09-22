@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.oxygenxml.html.convertor.ConvertorTypes;
 import com.oxygenxml.html.convertor.translator.OxygenTranslator;
 import com.oxygenxml.html.convertor.translator.Tags;
 import com.oxygenxml.html.convertor.translator.Translator;
@@ -47,8 +48,13 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		// current editing page (Text/Grid or Author).
 		// A sample action which will be mounted on the main menu, toolbar and
 		// contextual menu.
-		final Action convertAction = createConvertDialogAction(pluginWorkspaceAccess);
 
+		final List<Action> actions = new ArrayList<Action>();
+		actions.add(createConvertorAction(ConvertorTypes.HTML_TO_DITA , pluginWorkspaceAccess));
+		actions.add(createConvertorAction(ConvertorTypes.HTML_TO_XHTML , pluginWorkspaceAccess));
+		actions.add(createConvertorAction(ConvertorTypes.MD_TO_XHTML , pluginWorkspaceAccess));
+		actions.add(createConvertorAction(ConvertorTypes.MD_TO_DITA , pluginWorkspaceAccess));
+		
 		// Create your own main menu and add it to Oxygen or remove one of Oxygen's
 		// menus...
 		pluginWorkspaceAccess.addMenuBarCustomizer(new MenuBarCustomizer() {
@@ -57,12 +63,12 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			 */
 			@Override
 			public void customizeMainMenu(JMenuBar mainMenuBar) {
-				addActionInMenuBar(mainMenuBar, convertAction, pluginWorkspaceAccess);
+				addActionsInMenuBar(mainMenuBar, actions, pluginWorkspaceAccess);
 			}
 		});
 
 		// add a item with convertAction in contextual menu of ProjectManager
-		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, convertAction);
+		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, actions);
 
 	}
 
@@ -74,23 +80,23 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	 * @return The "Show Selection" action
 	 */
 	@SuppressWarnings("serial")
-	private AbstractAction createConvertDialogAction(final StandalonePluginWorkspace pluginWorkspaceAccess) {
-		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT)) {
+	private AbstractAction createConvertorAction(final String convertorType, final StandalonePluginWorkspace pluginWorkspaceAccess){
+		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, convertorType)) {
 			@Override
 			public void actionPerformed(ActionEvent actionevent) {
 
 				List<String> selectedFile = new ArrayList<String>();
 
 				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
+
+				System.out.println("actionID: "+ pluginWorkspaceAccess.getOxygenActionID(menuItemAction.getAction() ));
 				
-				
-				System.out.println(convertorMenuItem);
 				if (!menuItemAction.equals(convertorMenuItem)){
 					System.out.println("nu e egal");
 					selectedFile = ProjectManagerEditor.getSelectedHtmlAndMdFiles(pluginWorkspaceAccess);
 				}
 				
-				ConvertorDialog convertorDialog = new ConvertorDialog(selectedFile,
+				ConvertorDialog convertorDialog = new ConvertorDialog(convertorType ,selectedFile,
 						(JFrame) pluginWorkspaceAccess.getParentFrame(), translator);
 
 			}
@@ -98,19 +104,25 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	}
 
 	/**
-	 * Add the given Action in the given JMenuBar.
+	 * Add the given Actions in the given JMenuBar.
 	 *
 	 * @param mainMenuBar
 	 *          The menuBar
-	 * @param actionToAdd
-	 *          The action.
+	 * @param actionsToAdd
+	 *          List with actions to add.
 	 * @param pluginWorkspaceAccess
 	 *          The oxygen PluginWorkspaceAccess.
 	 */
-	private void addActionInMenuBar(JMenuBar mainMenuBar, Action actionToAdd,
+	private void addActionsInMenuBar(JMenuBar mainMenuBar, List<Action> actionsToAdd,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		convertorMenuItem = new JMenuItem(actionToAdd);
+		JMenu batchConvertMenu = new JMenu("Batch Convert");
+		
+		int size = actionsToAdd.size();
+
+		for (int i = 0; i < size; i++) {
+			batchConvertMenu.add(new JMenuItem(actionsToAdd.get(i)));
+		}
 		
 		// get the number of items in MenuBar
 		int menuBarSize = mainMenuBar.getMenuCount();
@@ -140,13 +152,13 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 							// check the menuNameID
 							if (MENU_NAME.equals(actionID.substring(0, indexOfSlash))) {
-
+								
 								// the menuNameId is MENU_NAME
 								// check the menuItemActionID
 								if (ANTERIOR_MENU_ITEM_ACTION_NAME.equals(actionID.substring(indexOfSlash + 1))) {
 									// the MenuIdemActionId is ANTERIOR_MENU_ITEM_ACTION_NAME.
 									// add the action after this index.
-									menu.add(convertorMenuItem, i + 1);
+									menu.add(batchConvertMenu, i + 1);
 
 									// break the loops.
 									j = menuBarSize;

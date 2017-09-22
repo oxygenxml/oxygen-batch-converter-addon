@@ -31,15 +31,6 @@ import ro.sync.exml.workspace.api.standalone.ui.ToolbarButton;
 public class OutputPanel extends JPanel{
 
 	/**
-	 * Radio button for select xhtml output files
-	 */
-	private JRadioButton xhtmlRBtn;
-	/**
-	 * Radio button for select dita output files
-	 */
-	private JRadioButton ditaRBtn;
-	
-	/**
 	 * Filed that contains the output folder.
 	 */
 	private	JTextField outputField = new JTextField();
@@ -57,47 +48,17 @@ public class OutputPanel extends JPanel{
 
 	public OutputPanel(Translator translator) {
 
-		xhtmlRBtn = new JRadioButton(Tags.XHTML);
-		ditaRBtn = new JRadioButton(Tags.DITA);
-		
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
 	
-		// Create a group with the radio buttons.
-		ButtonGroup group = new ButtonGroup();
-		group.add(xhtmlRBtn);
-		group.add(ditaRBtn);
-	
-		// ------add JLabel for select input type
+		// ------------add JLabel for add output folder
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.WEST;
-		this.add(new JLabel(translator.getTranslation(Tags.SELECT_OUTPUT_TYPE_LABEL)), gbc);
-
-		// create a panel that contains html and markdown radio buttons
-		JPanel rBtnsPanel = new JPanel();
-		rBtnsPanel.setLayout(new GridLayout(1, 2, 5, 0));
-		rBtnsPanel.setOpaque(false);
-
-		rBtnsPanel.add(xhtmlRBtn);
-		rBtnsPanel.add(ditaRBtn);
-
-		// ------add html and markdown radio buttons
-		gbc.gridy++;
-		gbc.weightx = 0;
-		gbc.fill = GridBagConstraints.NONE;
-		gbc.insets = new Insets(0, 10, 0, 0);
-		this.add(rBtnsPanel, gbc);
-
-		// ------------add JLabel for add output folder
-		gbc.gridy++;
-		gbc.weightx = 1;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(10, 0, 0, 0);
-		add(new JLabel(translator.getTranslation(Tags.ADD_OUTPUT_FOLDER_LABEL)), gbc);
+		add(new JLabel(translator.getTranslation(Tags.ADD_OUTPUT_FOLDER_LABEL, "")), gbc);
 
 		// -------------add output field
 		gbc.gridy++;
@@ -140,33 +101,6 @@ public class OutputPanel extends JPanel{
 		add(chooserBtn,gbc);
 		
 	}
-	
-	/**
-	 * Get the output type.
-	 * @return The output type
-	 */
-	public String getOutputType(){
-		if(xhtmlRBtn.isSelected()){
-			return FileType.XHTML_TYPE_AND_EXTENSION;
-		}
-		else{
-			return FileType.DITA_TYPE_AND_EXTENSION;
-		}
-	}
-	
-	/**
-	 * Set the output type.
-	 * @param type The output type
-	 */
-	public void setOutputType(String type){
-		if(FileType.XHTML_TYPE_AND_EXTENSION.equals(type)){
-			xhtmlRBtn.setSelected(true);
-		}
-		else{
-			ditaRBtn.setSelected(true);
-		}
-	}
-
 	
 	
 	//TODO add javaDoc(here and at constructor) or delete. 
