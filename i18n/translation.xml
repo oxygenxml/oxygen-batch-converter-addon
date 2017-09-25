@@ -10,35 +10,35 @@
 	
 	<key value="Icon_Hint_Conv_html.to.xhtml">
 		<comment>The hint from toolBar icon.</comment>
-		<val lang="en_US">Convertor from HTML to XHTML.</val>
-		<val lang="de_DE">Convertor from HTML to XHTML.</val>
-		<val lang="fr_FR">Convertor from HTML to XHTML.</val>
-		<val lang="ja_JP">Convertor from HTML to XHTML.</val>
-		<val lang="nl_NL">Convertor from HTML to XHTML.</val>
+		<val lang="en_US">Convert HTML to XHTML.</val>
+		<val lang="de_DE">Convert HTML to XHTML.</val>
+		<val lang="fr_FR">Convert HTML to XHTML.</val>
+		<val lang="ja_JP">Convert HTML to XHTML.</val>
+		<val lang="nl_NL">Convert HTML to XHTML.</val>
 	</key>
 	<key value="Icon_Hint_Conv_html.to.dita">
 		<comment>The hint from toolBar icon.</comment>
-		<val lang="en_US">Convertor from HTML to DITA.</val>
-		<val lang="de_DE">Convertor from HTML to DITA.</val>
-		<val lang="fr_FR">Convertor from HTML to DITA.</val>
-		<val lang="ja_JP">Convertor from HTML to DITA.</val>
-		<val lang="nl_NL">Convertor from HTML to DITA.</val>
+		<val lang="en_US">Convert HTML to DITA.</val>
+		<val lang="de_DE">Convert HTML to DITA.</val>
+		<val lang="fr_FR">Convert HTML to DITA.</val>
+		<val lang="ja_JP">Convert HTML to DITA.</val>
+		<val lang="nl_NL">Convert HTML to DITA.</val>
 	</key>
 	<key value="Icon_Hint_Conv_md.to.xhtml">
 		<comment>The hint from toolBar icon.</comment>
-		<val lang="en_US">Convertor from Markdown to XHTML.</val>
-		<val lang="de_DE">Convertor from Markdown to XHTML.</val>
-		<val lang="fr_FR">Convertor from Markdown to XHTML.</val>
-		<val lang="ja_JP">Convertor from Markdown to XHTML.</val>
-		<val lang="nl_NL">Convertor from Markdown to XHTML.</val>
+		<val lang="en_US">Convert Markdown to XHTML.</val>
+		<val lang="de_DE">Convert Markdown to XHTML.</val>
+		<val lang="fr_FR">Convert Markdown to XHTML.</val>
+		<val lang="ja_JP">Convert Markdown to XHTML.</val>
+		<val lang="nl_NL">Convert Markdown to XHTML.</val>
 	</key>
 	<key value="Icon_Hint_Conv_md.to.dita">
 		<comment>The hint from toolBar icon.</comment>
-		<val lang="en_US">Convertor from Markdown to DITA.</val>
-		<val lang="de_DE">Convertor from Markdown to DITA.</val>
-		<val lang="fr_FR">Convertor from Markdown to DITA.</val>
-		<val lang="ja_JP">Convertor from Markdown to DITA.</val>
-		<val lang="nl_NL">Convertor from Markdown to DITA.</val>
+		<val lang="en_US">Convert Markdown to DITA.</val>
+		<val lang="de_DE">Convert Markdown to DITA.</val>
+		<val lang="fr_FR">Convert Markdown to DITA.</val>
+		<val lang="ja_JP">Convert Markdown to DITA.</val>
+		<val lang="nl_NL">Convert Markdown to DITA.</val>
 	</key>
 	
 	
@@ -192,11 +192,11 @@
 	</key>
 	<key value="Fail_Status_Conv">
 		<comment>Fail status</comment>
-		<val lang="en_US">Conversion fail</val>
-		<val lang="de_DE">Conversion fail</val>
-		<val lang="fr_FR">Conversion fail</val>
-		<val lang="ja_JP">Conversion fail</val>
-		<val lang="nl_NL">Conversion fail</val>
+		<val lang="en_US">Conversion failed</val>
+		<val lang="de_DE">Conversion failed</val>
+		<val lang="fr_FR">Conversion failed</val>
+		<val lang="ja_JP">Conversion failed</val>
+		<val lang="nl_NL">Conversion failed</val>
 	</key>
 	<key value="Success_Status_Conv">
 		<comment>Success status</comment>
@@ -219,10 +219,10 @@
 	
 	<key value="Empty_Output_Message_Conv">
 		<comment>Warning message when output path is empty.</comment>
-		<val lang="en_US">You should add a output folder!</val>
-		<val lang="de_DE">You should add a output folder!</val>
-		<val lang="fr_FR">You should add a output folder!</val>
-		<val lang="ja_JP">You should add a output folder!</val>
-		<val lang="nl_NL">You should add a output folder!</val>
+		<val lang="en_US">Please specify an output folder!</val>
+		<val lang="de_DE">Please specify an output folder!</val>
+		<val lang="fr_FR">Please specify an output folder!</val>
+		<val lang="ja_JP">Please specify an output folder!</val>
+		<val lang="nl_NL">Please specify an output folder!</val>
 	</key>
 </translation>
