@@ -6,18 +6,21 @@ public class ConverterCreator {
 
 	public static Converter create(String converterType){
 		
-		switch (converterType) {
-		case ConverterTypes.MD_TO_XHTML:
+		
+		if(ConverterTypes.MD_TO_XHTML.equals(converterType)){
 			return new MarkdownToXhmlConverter();
-		case ConverterTypes.HTML_TO_XHTML:
-			return new HtmlToXhtmlConverter();
-		case ConverterTypes.HTML_TO_DITA:
-			return new HtmlToDitaConverter();
-		case ConverterTypes.MD_TO_DITA:
-			return new MarkdownToDitaTransformer();
-			
-		default:
-			return null;
 		}
+		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType)){
+			return new HtmlToXhtmlConverter();
+		}
+		else if(ConverterTypes.HTML_TO_DITA.equals(converterType)){
+			return new HtmlToDitaConverter();
+		}
+		else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
+			return new MarkdownToDitaTransformer();
+
+		}
+		
+		return null;
 	}
 }

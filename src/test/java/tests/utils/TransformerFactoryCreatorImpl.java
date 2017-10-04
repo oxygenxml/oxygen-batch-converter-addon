@@ -5,8 +5,6 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
-
 public class TransformerFactoryCreatorImpl implements com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator{
 
 	@Override

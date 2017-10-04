@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * Make the conversion.
+ * Batch converter.
  * @author intern4
  *
  */
