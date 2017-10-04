@@ -1,4 +1,4 @@
-package tests;
+/*package tests;
 
 import static org.junit.Assert.assertTrue;
 
@@ -13,11 +13,13 @@ import javax.xml.transform.TransformerException;
 
 import org.junit.Test;
 
-import com.oxygenxml.html.convertor.trasformers.ContentPrinter;
-import com.oxygenxml.html.convertor.trasformers.FilePathGenerator;
-import com.oxygenxml.html.convertor.trasformers.MarkdownToDitaTransformer;
-import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreator;
-import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreatorImpl;
+import com.oxygenxml.resources.batch.converter.converters.MarkdownToDitaTransformer;
+import com.oxygenxml.resources.batch.converter.printer.ContentPrinterXhtmlAndDita;
+import com.oxygenxml.resources.batch.converter.printer.FilePathGenerator;
+import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+
+import tests.utils.FileComparationUtil;
+import tests.utils.TransformerFactoryCreatorImpl;
 
 public class MdToDitaTest {
 
@@ -39,7 +41,7 @@ public class MdToDitaTest {
 		File fileToRead = FilePathGenerator.generate(sample, "dita", folder);
 
 		try {
-			ContentPrinter.prettifyAndPrint(new StringReader(dita), fileToRead, "topic.dtd", "-//OASIS//DTD DITA Topic//EN",
+			ContentPrinterXhtmlAndDita.prettifyAndPrint(new StringReader(dita), fileToRead, "topic.dtd", "-//OASIS//DTD DITA Topic//EN",
 					new TransformerFactoryCreatorImpl());
 
 			System.out.println(goodSample);
@@ -58,3 +60,4 @@ public class MdToDitaTest {
 	}
 
 }
+*/

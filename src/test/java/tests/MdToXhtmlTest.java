@@ -1,4 +1,4 @@
-package tests;
+/*package tests;
 
 import static org.junit.Assert.assertTrue;
 
@@ -13,12 +13,14 @@ import javax.xml.transform.TransformerException;
 
 import org.junit.Test;
 
-import com.oxygenxml.html.convertor.trasformers.ContentPrinter;
-import com.oxygenxml.html.convertor.trasformers.FilePathGenerator;
-import com.oxygenxml.html.convertor.trasformers.HtmlToXhtmlTransformer;
-import com.oxygenxml.html.convertor.trasformers.MarkdownToHtmlTransformer;
-import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreator;
-import com.oxygenxml.html.convertor.trasformers.TransformerFactoryCreatorImpl;
+import com.oxygenxml.resources.batch.converter.converters.HtmlToXhtmlConverter;
+import com.oxygenxml.resources.batch.converter.converters.MarkdownToHtmlConverter;
+import com.oxygenxml.resources.batch.converter.printer.ContentPrinterXhtmlAndDita;
+import com.oxygenxml.resources.batch.converter.printer.FilePathGenerator;
+import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+
+import tests.utils.FileComparationUtil;
+import tests.utils.TransformerFactoryCreatorImpl;
 
 public class MdToXhtmlTest {
 
@@ -33,11 +35,11 @@ public class MdToXhtmlTest {
 
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 
-		MarkdownToHtmlTransformer markdownToHtmlTransformer = new MarkdownToHtmlTransformer();
+		MarkdownToHtmlConverter markdownToHtmlTransformer = new MarkdownToHtmlConverter();
 
 		String htmlContent = markdownToHtmlTransformer.convert(new URL(sample), null, transformerCreator);
 
-		String xhtmlContent = new HtmlToXhtmlTransformer().convert(null, new StringReader(htmlContent), transformerCreator);
+		String xhtmlContent = new HtmlToXhtmlConverter().convert(null, new StringReader(htmlContent), transformerCreator);
 
 		System.out.println(xhtmlContent);
 
@@ -45,7 +47,7 @@ public class MdToXhtmlTest {
 
 		try {
 
-			ContentPrinter.prettifyAndPrint(new StringReader(xhtmlContent), fileToRead,
+			ContentPrinterXhtmlAndDita.prettifyAndPrint(new StringReader(xhtmlContent), fileToRead,
 					"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", "-//W3C//DTD XHTML 1.0 Strict//EN",
 					new TransformerFactoryCreatorImpl());
 
@@ -63,3 +65,4 @@ public class MdToXhtmlTest {
 		}
 	}
 }
+*/

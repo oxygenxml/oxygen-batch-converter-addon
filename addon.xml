@@ -5,7 +5,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension xmlns:xt="http://www.oxygenxml.com/ns/extension"
-        id="com.oxygenxml.html.convertor.plugin">
+        id="com.oxygenxml.resources.batch.converter.plugin">
         <xt:location href="${project.build.finalName}-plugin.jar"/>
         <xt:version>${project.version}.0</xt:version>
         <xt:oxy_version>17.0+</xt:oxy_version>
