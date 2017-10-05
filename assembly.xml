@@ -29,5 +29,9 @@
       <outputDirectory>/</outputDirectory>
       <filtered>true</filtered>
     </file>
+    <file>
+      <source>i18n/translation.xml</source>
+      <outputDirectory>/i18n</outputDirectory>
+    </file>
   </files>
 </assembly>
