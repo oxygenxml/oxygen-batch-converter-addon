@@ -46,11 +46,7 @@ public class MarkdownToHtmlConverter implements Converter{
 	  Parser parser = Parser.builder(OPTIONS).build();
     HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).build();
 		
-    //create file path
-    String protocol = originalFileLocation.getProtocol();
-		String stringUrl = originalFileLocation.getFile();
-		
-		Path path = Paths.get(stringUrl.substring(stringUrl.lastIndexOf(protocol)+2));
+		Path path = Paths.get(originalFileLocation.getPath().substring(1));
 		
 		try {
 		// Get the content to parse.

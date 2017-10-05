@@ -11,12 +11,20 @@
   </formats>
   <fileSets>
       <fileSet>
-      <directory>target/lib</directory>
-      <outputDirectory>lib</outputDirectory>
-      <includes>
-        <include>**/*</include>
-      </includes>
-    </fileSet>
+        <directory>target/lib</directory>
+        <outputDirectory>lib</outputDirectory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </fileSet>
+
+      <fileSet>
+          <directory>target/generated-resources</directory>
+          <outputDirectory>license</outputDirectory>
+          <includes>
+            <include>**/*</include>
+          </includes>
+         </fileSet>
   </fileSets>
 
   <files>

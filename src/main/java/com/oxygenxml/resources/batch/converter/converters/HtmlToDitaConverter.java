@@ -15,7 +15,7 @@ public class HtmlToDitaConverter implements Converter{
 			throws TransformerException {
 
 		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter();
-		XHTMLToDITATransformer xhtmlToDITATransformer = new XHTMLToDITATransformer();
+		XHTMLToDITAConverter xhtmlToDITATransformer = new XHTMLToDITAConverter();
 		
 		
 		String xhtmlContent = htmlToXhtmlTransformer.convert(originalFileLocation, null, transformerCreator);

@@ -24,7 +24,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  * @author intern4
  *
  */
-public class XHTMLToDITATransformer implements com.oxygenxml.resources.batch.converter.converters.Converter {
+public class XHTMLToDITAConverter implements com.oxygenxml.resources.batch.converter.converters.Converter {
 
 	/**
 	 * Convert the XHTML document from the given URL in DITA.

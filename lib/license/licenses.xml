@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<licenseSummary xmlns="http://mojo.codehaus.org/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://mojo.codehaus.org/ licenses.xsd">
+    <dependencies>
+        <dependency>
+            <groupId>com.elovirta.dita</groupId> 
+            <artifactId>markdown</artifactId> 
+            <licenses>
+                <license>
+                    <name>The Apache Software License, Version 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <licenses>
+                <license>
+                    <name>Unicode/ICU License</name>
+                    <url>http://source.icu-project.org/repos/icu/trunk/icu4j/main/shared/licenses/LICENSE</url>
+                </license>
+            </licenses>
+        </dependency>
+    </dependencies>
+</licenseSummary>
