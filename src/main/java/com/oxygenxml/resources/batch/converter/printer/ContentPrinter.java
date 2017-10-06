@@ -8,6 +8,6 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 
 public interface ContentPrinter {
 
-	public void prettifyAndPrint(String contentToPrint, TransformerFactoryCreator transformerCreator,
+	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator,
 			URL currentDocument, String outputFolder, String converterType) throws TransformerException;
 }

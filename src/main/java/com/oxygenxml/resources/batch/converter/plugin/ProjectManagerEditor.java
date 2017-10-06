@@ -75,8 +75,9 @@ public class ProjectManagerEditor {
 	public static List<String> getSelectedHtmlAndMdFiles(StandalonePluginWorkspace pluginWorkspaceAccess) {
 		List<String> toReturn = new ArrayList<String>();
 		
+		//TODO get the element according to converter type.
 		// the input types
-		List<String> inputTypes = Arrays.asList(FileExtensionType.INPUT_TYPES);
+		List<String> inputTypes = null;//= Arrays.asList(FileExtensionType.INPUT_TYPES);
 		
 		try {
 			// get the getProjectManager method

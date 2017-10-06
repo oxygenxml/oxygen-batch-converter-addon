@@ -1,12 +1,9 @@
 package com.oxygenxml.resources.batch.converter.view;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
-import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
-
-public class InputPanelUtil {
+public class ConverterFileUtil {
 
 	/**
 	 * Get all urls of html or markdown files from given folder and add in given
@@ -17,10 +14,11 @@ public class InputPanelUtil {
 	 * @param listUrlFiles
 	 *          The list.
 	 */
-	public static void getFilesFromFolder(File folder, List<String> listUrlFiles) {
+	//TODO add javadoc ; add a return type
+	public static void getFilesFromFolder(File folder, List<String> listUrlFiles , List<String> extensionsFiles) {
 		// get the files from folder
 		File[] listOfFiles = folder.listFiles();
-
+		
 		if (listOfFiles != null) {
 
 			// iterate over files
@@ -33,13 +31,13 @@ public class InputPanelUtil {
 
 					String extension = currentfile.substring(currentfile.lastIndexOf(".") + 1);
 					// check the extension
-					if (Arrays.asList(FileExtensionType.INPUT_TYPES).contains(extension)) {
+					if (extensionsFiles.contains(extension)) {
 						listUrlFiles.add(currentfile);
 					}
 
 					// check if is a directory
 				} else if (listOfFiles[i].isDirectory()) {
-					getFilesFromFolder(listOfFiles[i], listUrlFiles);
+					getFilesFromFolder(listOfFiles[i], listUrlFiles, extensionsFiles);
 				}
 			}
 		}

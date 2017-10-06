@@ -8,7 +8,8 @@ import javax.xml.transform.TransformerException;
 import com.oxygenxml.resources.batch.converter.converters.Converter;
 import com.oxygenxml.resources.batch.converter.converters.ConverterCreator;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
-import com.oxygenxml.resources.batch.converter.printer.ContentPrinterXhtmlAndDita;
+import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
+import com.oxygenxml.resources.batch.converter.printer.ContentPrinterPrettyXmlImpl;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -50,25 +51,31 @@ public class BatchConverterImpl implements BatchConverter{
 				// get the current file.
 				URL currentFileUrl = inputFiles.get(i);
 
+				System.out.println("batch conv impl: curentUrlFile: " + currentFileUrl.toString());
+				
 				//update the node in progress dialog.
 				progressDialogInteractor.setNote(currentFileUrl.toString());
 				
 				try {
 					
+					System.out.println("inainte de conversie");
 					//convert 
 					 contentToPrint =  transformer.convert(currentFileUrl, null, transformerFactoryCreator);
 				
-					//TODO make a contentPrinterCreater;
-					ContentPrinter contentPrinter = new ContentPrinterXhtmlAndDita();
-					
-					//print the converted content.
-					contentPrinter.prettifyAndPrint(contentToPrint, transformerFactoryCreator, currentFileUrl, outputFolder, converterType);
-					
+					 if(contentToPrint != null){
+						 System.out.println(contentToPrint);
+						 ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
+						 
+						 //print the converted content.
+						 contentPrinter.print(contentToPrint, transformerFactoryCreator, currentFileUrl, outputFolder, converterType);
+					 }
 					
 				} catch (TransformerException e) {
-					e.printStackTrace();
 					problemReporter.reportProblem(e, currentFileUrl.toString());
 					isSuccessfully = false;
+				}
+				catch( Throwable e) {
+					e.printStackTrace();
 				}
 			}
 			return isSuccessfully;

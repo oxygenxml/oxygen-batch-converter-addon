@@ -22,7 +22,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
  * @author intern4
  *
  */
-public class ContentPrinterXhtmlAndDita implements ContentPrinter{
+public class ContentPrinterPrettyXmlImpl implements ContentPrinter{
 
 	/**
 	 * Prettify the given content and write in given output folder.
@@ -33,7 +33,7 @@ public class ContentPrinterXhtmlAndDita implements ContentPrinter{
 	 * @param converterType
 	 * @throws TransformerException
 	 */
-	public void prettifyAndPrint(String contentToPrint, TransformerFactoryCreator transformerCreator,
+	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator,
 			URL currentDocument, String outputFolder, String converterType) throws TransformerException  {
 
 			//create the trasformer

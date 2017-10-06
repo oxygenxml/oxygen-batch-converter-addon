@@ -18,9 +18,13 @@ public class ConverterCreator {
 		}
 		else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
 			return new MarkdownToDitaTransformer();
-
 		}
-		
+		else if(ConverterTypes.XML_TO_JSON.equals(converterType)){
+			return new XmlToJsonConverter();
+		}
+		else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
+			return new JsonToXmlConverter();
+		}
 		return null;
 	}
 }

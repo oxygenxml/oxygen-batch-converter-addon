@@ -40,7 +40,22 @@
 		<val lang="ja_JP">Convert Markdown to DITA.</val>
 		<val lang="nl_NL">Convert Markdown to DITA.</val>
 	</key>
-	
+	<key value="Icon_Hint_Conv_xml.to.json">
+		<comment>The hint from toolBar icon.</comment>
+		<val lang="en_US">Convert XML to JSON.</val>
+		<val lang="de_DE">Convert XML to JSON.</val>
+		<val lang="fr_FR">Convert XML to JSON.</val>
+		<val lang="ja_JP">Convert XML to JSON.</val>
+		<val lang="nl_NL">Convert XML to JSON.</val>
+	</key>
+	<key value="Icon_Hint_Conv_json.to.xml">
+		<comment>The hint from toolBar icon.</comment>
+		<val lang="en_US">Convert JSON to XML.</val>
+		<val lang="de_DE">Convert JSON to XML.</val>
+		<val lang="fr_FR">Convert JSON to XML.</val>
+		<val lang="ja_JP">Convert JSON to XML.</val>
+		<val lang="nl_NL">Convert JSON to XML.</val>
+	</key>
 	
 	
 	<key value="Menu_Item_Text_Conv_html.to.xhtml">
@@ -78,7 +93,23 @@
 		<val lang="ja_JP">Markdown to DITA...</val>
 		<val lang="nl_NL">Markdown to DITA...</val>
 	</key>
-	
+<key value="Menu_Item_Text_Conv_xml.to.json">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">XML to JSON...</val>
+		<val lang="de_DE">XML to JSON...</val>
+		<val lang="fr_FR">XML to JSON...</val>
+		<val lang="ja_JP">XML to JSON...</val>
+		<val lang="nl_NL">XML to JSON...</val>
+	</key>
+	<key value="Menu_Item_Text_Conv_json.to.xml">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">JSON to XML...</val>
+		<val lang="de_DE">JSON to XML...</val>
+		<val lang="fr_FR">JSON to XML...</val>
+		<val lang="ja_JP">JSON to XML...</val>
+		<val lang="nl_NL">JSON to XML...</val>
+	</key>
+		
 	
 	
 	
@@ -114,8 +145,22 @@
 		<val lang="ja_JP">Markdown to DITA</val>
 		<val lang="nl_NL">Markdown to DITA</val>
 	</key>
-
-
+	<key value="Dialog_Title_Conv_xml.to.json">
+		<comment>Title for main dialog</comment>
+		<val lang="en_US">XML to JSON</val>
+		<val lang="de_DE">XML to JSON</val>
+		<val lang="fr_FR">XML to JSON</val>
+		<val lang="ja_JP">XML to JSON</val>
+		<val lang="nl_NL">XML to JSON</val>
+	</key>
+	<key value="Dialog_Title_Conv_json.to.xml">
+		<comment>Title for main dialog</comment>
+		<val lang="en_US">JSON to XML</val>
+		<val lang="de_DE">JSON to XML</val>
+		<val lang="fr_FR">JSON to XML</val>
+		<val lang="ja_JP">JSON to XML</val>
+		<val lang="nl_NL">JSON to XML</val>
+	</key>
 
 
 	

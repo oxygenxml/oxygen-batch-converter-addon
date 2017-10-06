@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -22,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
-import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
@@ -124,7 +124,7 @@ public class InputPanel extends JPanel {
 				if (file != null) {
 					List<String> listToAdd = new ArrayList<String>();
 
-					InputPanelUtil.getFilesFromFolder(file, listToAdd);
+					ConverterFileUtil.getFilesFromFolder(file, listToAdd, Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
 
 					if(!listToAdd.isEmpty()){
 						convertorInteractor.setOutputFolder(file.toString()+ File.separator + "output");

@@ -50,11 +50,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		// A sample action which will be mounted on the main menu, toolbar and
 		// contextual menu.
 
-		final List<Action> actions = new ArrayList<Action>();
-		actions.add(createConvertorAction(ConverterTypes.HTML_TO_DITA , pluginWorkspaceAccess));
-		actions.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML , pluginWorkspaceAccess));
-		actions.add(createConvertorAction(ConverterTypes.MD_TO_XHTML , pluginWorkspaceAccess));
-		actions.add(createConvertorAction(ConverterTypes.MD_TO_DITA , pluginWorkspaceAccess));
+		final List<Action> actions = createActionsList(pluginWorkspaceAccess);
 		
 		// Create your own main menu and add it to Oxygen or remove one of Oxygen's
 		// menus...
@@ -73,38 +69,16 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 	}
 
+
 	/**
-	 * Create the Swing action which shows the current selection.
-	 * 
-	 * @param pluginWorkspaceAccess
-	 *          The plugin workspace access.
-	 * @return The "Show Selection" action
+	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationClosing()
 	 */
-	@SuppressWarnings("serial")
-	private AbstractAction createConvertorAction(final String convertorType, final StandalonePluginWorkspace pluginWorkspaceAccess){
-		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, convertorType)) {
-			@Override
-			public void actionPerformed(ActionEvent actionevent) {
-
-				List<String> selectedFile = new ArrayList<String>();
-
-				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
-
-				System.out.println("actionID: "+ menuItemAction.getAction());
-				
-				if (!menuItemAction.equals(convertorMenuItem)){
-					System.out.println("nu e egal");
-					//TODO get selected item from project manager
-					//selectedFile = ProjectManagerEditor.getSelectedHtmlAndMdFiles(pluginWorkspaceAccess);
-				}
-				
-				ConvertorDialog convertorDialog = new ConvertorDialog(convertorType ,selectedFile,
-						(JFrame) pluginWorkspaceAccess.getParentFrame(), translator);
-
-			}
-		};
+	@Override
+	public boolean applicationClosing() {
+		// You can reject the application closing here
+		return true;
 	}
-
+	
 	/**
 	 * Add the given Actions in the given JMenuBar.
 	 *
@@ -179,13 +153,51 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 		}
 	}
-
+	
+	
 	/**
-	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationClosing()
+	 * Create the Swing action which shows the current selection.
+	 * 
+	 * @param pluginWorkspaceAccess
+	 *          The plugin workspace access.
+	 * @return The "Show Selection" action
 	 */
-	@Override
-	public boolean applicationClosing() {
-		// You can reject the application closing here
-		return true;
+	@SuppressWarnings("serial")
+	private AbstractAction createConvertorAction(final String convertorType, final StandalonePluginWorkspace pluginWorkspaceAccess){
+		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, convertorType)) {
+			@Override
+			public void actionPerformed(ActionEvent actionevent) {
+
+				List<String> selectedFile = new ArrayList<String>();
+
+				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
+
+				System.out.println("actionID: "+ menuItemAction.getAction());
+				
+				if (!menuItemAction.equals(convertorMenuItem)){
+					System.out.println("nu e egal");
+					//TODO get selected item from project manager
+					//selectedFile = ProjectManagerEditor.getSelectedHtmlAndMdFiles(pluginWorkspaceAccess);
+				}
+				
+				ConvertorDialog convertorDialog = new ConvertorDialog(convertorType ,selectedFile,
+						(JFrame) pluginWorkspaceAccess.getParentFrame(), translator);
+
+			}
+		};
 	}
+	
+	private List<Action> createActionsList(StandalonePluginWorkspace pluginWorkspaceAccess){
+		List<Action> toReturn = new ArrayList<Action>();
+		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DITA , pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML , pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_XHTML , pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DITA , pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON , pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML , pluginWorkspaceAccess));
+		
+		
+		return toReturn;
+	}
+	
 }

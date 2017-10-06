@@ -12,30 +12,28 @@ import org.json.XML;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
-public class XmlToJsonConverter implements Converter {
+public class JsonToXmlConverter implements Converter {
 
 	@Override
 	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
-		// Get the content to parse.
-		String contentToParse;
+		String jsonContent;
 		try {
-			contentToParse = ConverterUtils.getUrlContents(originalFileLocation);
-			JSONObject jsonObj = XML.toJSONObject(contentToParse);
+			jsonContent = ConverterUtils.getUrlContents(originalFileLocation);
 
-			return jsonObj.toString(4, false);
+			JSONObject jsonObject = new JSONObject(jsonContent);
+			
+			return XML.toString(jsonObject);
 
-		}
-		catch (JSONException e) {
-			throw new TransformerException(e.getMessage());
-		}		
-		catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			// TODO poate trimit la user
 			e.printStackTrace();
+		} catch (JSONException e) {
+			throw new TransformerException(e.getMessage());
 		}
-
+		
 		return null;
-	}
 
+	}
 }

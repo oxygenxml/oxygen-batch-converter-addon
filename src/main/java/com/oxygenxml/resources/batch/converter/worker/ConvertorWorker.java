@@ -1,4 +1,5 @@
 package com.oxygenxml.resources.batch.converter.worker;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,8 +30,9 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 	private ProgressDialogInteractor progressDialogInteractor;
 	private OxygenProblemReporter oxygenProblemReporter;
 	private String convertorType;
-	
-	public ConvertorWorker(String convertorType, BatchConverterInteractor convertorInteractor, ProgressDialogInteractor progressDialogInteractor) {
+
+	public ConvertorWorker(String convertorType, BatchConverterInteractor convertorInteractor,
+			ProgressDialogInteractor progressDialogInteractor) {
 		this.convertorType = convertorType;
 		this.convertorInteractor = convertorInteractor;
 		this.progressDialogInteractor = progressDialogInteractor;
@@ -38,52 +40,52 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 		oxygenProblemReporter = new OxygenProblemReporter();
 		translator = new OxygenTranslator();
 	}
-	
+
 	@Override
-	protected Void doInBackground()  {
-		
-		oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.PROGRESS_STATUS,""));
+	protected Void doInBackground() {
+
+		oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.PROGRESS_STATUS, ""));
 
 		progressDialogInteractor.setDialogVisible(true);
-		
-		convertor = new BatchConverterImpl(oxygenProblemReporter, progressDialogInteractor, 
-				this, new OxygenTransformerFactoryCreator());
-		
-		boolean isSuccesfully = convertor.convertFiles(convertorType, convertAndCorrectToURL(convertorInteractor.getInputFiles()), 
-				convertorInteractor.getOutputFolder());
-		
-		if(isSuccesfully){
-			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.SUCCESS_STATUS,""));
-		}else{
+
+		convertor = new BatchConverterImpl(oxygenProblemReporter, progressDialogInteractor, this,
+				new OxygenTransformerFactoryCreator());
+
+		boolean isSuccesfully = convertor.convertFiles(convertorType,
+				convertAndCorrectToURL(convertorInteractor.getInputFiles()), convertorInteractor.getOutputFolder());
+
+		if (isSuccesfully) {
+			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.SUCCESS_STATUS, ""));
+		} else {
 			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.FAIL_STATUS, ""));
 		}
-		
+
 		progressDialogInteractor.close();
-		
+
 		return null;
 	}
 
-	
-	private List<URL> convertAndCorrectToURL(List<String> list){
+	private List<URL> convertAndCorrectToURL(List<String> list) {
 		List<URL> toReturn = new ArrayList<URL>();
 		String currentElement;
 		URL currentUrlElement;
-		
+
 		int size = list.size();
 		for (int i = 0; i < size; i++) {
-			 currentElement = list.get(i);
+			currentElement = list.get(i);
+
+			System.out.println("worker: curentEL: " + currentElement);
 			try {
 				currentUrlElement = URLUtil.correct(new File(currentElement));
 				toReturn.add(currentUrlElement);
-			}
-			catch (MalformedURLException e) {
+			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				//TODO poate raportez
+				// TODO poate raportez
 			}
 		}
-		
+		System.out.println("worker: s-a terminat conversia");
 		return toReturn;
 	}
-	
+
 }

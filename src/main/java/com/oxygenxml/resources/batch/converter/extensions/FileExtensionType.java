@@ -9,11 +9,6 @@ package com.oxygenxml.resources.batch.converter.extensions;
 public interface FileExtensionType {
 
 	/**
-	 * All Input type
-	 */
-	public final static String[] INPUT_TYPES = new String[] { "html", "xhtml", "htm", "htx", "markdown", "md" };
-
-	/**
 	 * Extensions of HTML type.
 	 */
 	public final String[] INPUT_HTML_EXTENSIONS = new String[] { "html", "xhtml", "htm", ".htx" };
@@ -24,6 +19,15 @@ public interface FileExtensionType {
 	public final String[] INPUT_MD_EXTENSIONS = new String[] { "md", "markdown" };
 
 	/**
+	 * Extensions of XML type.
+	 */
+	public final String[] INPUT_XML_EXTENSIONS = new String[] { "xml" };
+	/**
+	 * Extensions of JSON type.
+	 */
+	public final String[] INPUT_JSON_EXTENSIONS = new String[] { "json" };
+	
+	/**
 	 * XHtml output type
 	 */
 	public final String XHTML_OUTPUT_EXTENSION = "xhtml";
@@ -33,4 +37,12 @@ public interface FileExtensionType {
 	 */
 	public final String DITA_OUTPUT_EXTENSION = "dita";
 
+	/**
+	 * XML output type
+	 */
+	public final String XML_OUTPUT_EXTENSION = "xml";
+	/**
+	 * JSON output type
+	 */
+	public final String JSON_OUTPUT_EXTENSION = "json";
 }

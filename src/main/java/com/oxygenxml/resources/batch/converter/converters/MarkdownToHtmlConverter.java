@@ -3,9 +3,6 @@ package com.oxygenxml.resources.batch.converter.converters;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.xml.transform.TransformerException;
 
@@ -34,7 +31,7 @@ public class MarkdownToHtmlConverter implements Converter{
 		//content to return 
 		String toReturn = null;
 			
-		
+		System.out.println("md -> html");
 		System.out.println(originalFileLocation.toString());
 		
 		//create the parser
@@ -46,11 +43,9 @@ public class MarkdownToHtmlConverter implements Converter{
 	  Parser parser = Parser.builder(OPTIONS).build();
     HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).build();
 		
-		Path path = Paths.get(originalFileLocation.getPath().substring(1));
-		
 		try {
 		// Get the content to parse.
-		String contentToParse = new String(Files.readAllBytes(path), "UTF-8");
+		String contentToParse =  ConverterUtils.getUrlContents(originalFileLocation);
 		
 		 Node document = parser.parse(contentToParse);
     

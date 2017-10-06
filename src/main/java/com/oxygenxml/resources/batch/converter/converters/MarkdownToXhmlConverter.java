@@ -14,6 +14,7 @@ public class MarkdownToXhmlConverter implements Converter{
 	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
+		System.out.println("acsaidihasfsaygfsaygyugaafsgasfyasfyyasgsdyyu");
 		MarkdownToHtmlConverter markdownToHtmlTransformer = new MarkdownToHtmlConverter();
 		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter();
 		

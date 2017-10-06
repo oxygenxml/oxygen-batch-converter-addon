@@ -29,6 +29,7 @@ public class HtmlToXhtmlConverter implements Converter {
 		//XHTML content to be return
 		String toReturn = null;
 
+		System.out.println("html -> xhtml");
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 

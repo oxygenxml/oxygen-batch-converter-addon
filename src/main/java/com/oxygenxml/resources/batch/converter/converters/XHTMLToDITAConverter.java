@@ -40,6 +40,7 @@ public class XHTMLToDITAConverter implements com.oxygenxml.resources.batch.conve
 	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
+		System.out.println("xhtml -> dita");
 		String ditaContent ="";
 		
 		// get the htmlParser

@@ -38,6 +38,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 		// content to return
 		String toReturn = null;
 
+		System.out.println("md -> dita");
 		Transformer transformer = transformerCreator.createTransformer(null);
 
 		// get the trasformFactory property
@@ -62,7 +63,6 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 			//TODO problema cu C:\Users\intern4\Documents\OxygenXMLEditor\samples\dita\thunderbird\README.md
 			transformer.transform(new SAXSource(r, i), res);
 
-			System.out.println("aici4");
 			// get the converted content
 			toReturn = sw.toString();
 

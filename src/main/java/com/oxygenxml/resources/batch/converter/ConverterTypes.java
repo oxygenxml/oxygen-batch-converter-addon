@@ -8,4 +8,5 @@ public interface ConverterTypes {
 	public final static String MD_TO_DITA = "_md.to.dita";
 	public final static String XML_TO_JSON = "_xml.to.json";
 	public final static String JSON_TO_XML = "_json.to.xml";
+
 }

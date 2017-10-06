@@ -12,7 +12,7 @@ public class DoctypeGetter {
 		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){
 			return Doctypes.DOCTYPE_PUBLIC_XHTML;
 		}
-			return null;
+			return "";
 	}
 		
 	
@@ -24,6 +24,6 @@ public class DoctypeGetter {
 		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){
 			return Doctypes.DOCTYPE_SYSTEM_XHTML;
 		}
-			return null;
+			return "";
 	}
 }
