@@ -1,5 +1,5 @@
 ## Oxygen Batch Converter add-on for Oxygen XML Editor
-This add-on can be installed in  Oxygen XML editor to enable batch conversions between the following formats:  
+This add-on can be installed in Oxygen XML Editor to enable batch conversions between the following formats:  
 
 * HTML to XHTML
 * HTML to DITA
