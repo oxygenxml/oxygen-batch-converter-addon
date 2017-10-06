@@ -1,8 +1,6 @@
 package com.oxygenxml.resources.batch.converter.worker;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +16,6 @@ import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
-
-import ro.sync.util.URLUtil;
 
 public class ConvertorWorker extends SwingWorker<Void, Void> implements ConvertorWorkerInteractor {
 
@@ -52,7 +48,7 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 				new OxygenTransformerFactoryCreator());
 
 		boolean isSuccesfully = convertor.convertFiles(convertorType,
-				convertAndCorrectToURL(convertorInteractor.getInputFiles()), convertorInteractor.getOutputFolder());
+				convertorInteractor.getInputFiles(), convertorInteractor.getOutputFolder());
 
 		if (isSuccesfully) {
 			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.SUCCESS_STATUS, ""));
@@ -63,29 +59,6 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 		progressDialogInteractor.close();
 
 		return null;
-	}
-
-	private List<URL> convertAndCorrectToURL(List<String> list) {
-		List<URL> toReturn = new ArrayList<URL>();
-		String currentElement;
-		URL currentUrlElement;
-
-		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			currentElement = list.get(i);
-
-			System.out.println("worker: curentEL: " + currentElement);
-			try {
-				currentUrlElement = URLUtil.correct(new File(currentElement));
-				toReturn.add(currentUrlElement);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				// TODO poate raportez
-			}
-		}
-		System.out.println("worker: s-a terminat conversia");
-		return toReturn;
 	}
 
 }

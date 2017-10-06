@@ -1,53 +1,28 @@
-# An exhibit of Markdown
+## Oxygen Batch Converter add-on for Oxygen XML Editor
+This add-on can be installed in Oxygen XML Editor to enable batch conversions between the following formats:  
 
-This note demonstrates some of what [Markdown][1] is capable of doing.
+* HTML to XHTML
+* HTML to DITA
+* Markdown to XHTML
+* Markdown to DITA
+* XML to JSON
+* JSON to XML
 
-*Note: Feel free to play with this page. Unlike regular notes, this doesn't automatically save itself.*
 
-## Basic formatting
+## Installation
 
-Paragraphs can be written like so. A paragraph is the basic block of Markdown. A paragraph is what text will turn into when there is no reason it should become anything else.
+The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1. 
 
-Paragraphs must be separated by a blank line. Basic formatting of *italics* and **bold** is supported. This *can be **nested** like* so.
+You can install the add-on by using Oxygen's add-ons support. In Oxygen, go to Help->Install new add-ons... and use this add-on repository URL:
 
-## Lists
+https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml
 
-### Ordered list
+then continue the installation process.
 
-1. Item 1
-2. A second item
-3. Number 3
-4. Ⅳ
 
-*Note: the fourth item uses the Unicode character for [Roman numeral four][2].*
+## Converting a document:
 
-### Unordered list
-
-* An item
-* Another item
-* Yet another item
-* And there's more...
-
-## Paragraph modifiers
-
-### Code block
-
-    Code blocks are very useful for developers and other people who look at code or other things that are written in plain text. As you can see, it uses a fixed-width font.
-
-You can also make `inline code` to add code into other things.
-
-### Quote
-
-> Here is a quote. What this is should be self explanatory. Quotes are automatically indented when they are used.
-
-## Headings
-
-There are six levels of headings. They correspond with the six levels of HTML headings. You've probably noticed them already in the page. Each level down uses one more hash character.
-
-### Headings *can* also contain **formatting**
-
-### They can even contain `inline code`
-
-Of course, demonstrating what headings look like messes up the structure of the page.
-
-I don't recommend using more than three or four levels of headings here, because, when you're smallest heading isn't too small, and you're largest heading isn't too big, and you want each size up to look noticeably larger and more important, there there are only so many sizes that you can use.
+1. Select the type of conversion from the **Tools -> Batch Converter** submenu.
+2. Add the **Input files**.
+3. Choose the path of the **Output folder** that will contain the converted document.
+4. Click the **Convert** button.

@@ -1,121 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
    <head>
-
       <title/>
-
    </head>
-
    <body>
-
-      <h1>
-         <a href="#an-exhibit-of-markdown" id="an-exhibit-of-markdown" shape="rect">An exhibit of Markdown</a>
-      </h1>
-
-      <p>This note demonstrates some of what [Markdown][1] is capable of
-doing.</p>
-
-      <p>
-         <em>Note: Feel free to play with this page. Unlike regular
-notes, this doesn’t automatically save itself.</em>
-      </p>
-
       <h2>
-         <a href="#basic-formatting" id="basic-formatting" shape="rect">Basic
-formatting</a>
+         <a href="#oxygen-batch-converter-add-on-for-oxygen-xml-editor"
+            id="oxygen-batch-converter-add-on-for-oxygen-xml-editor"
+            shape="rect">Oxygen
+Batch Converter add-on for Oxygen XML Editor</a>
       </h2>
-
-      <p>Paragraphs can be written like so. A paragraph is the basic
-block of Markdown. A paragraph is what text will turn into when
-there is no reason it should become anything else.</p>
-
-      <p>Paragraphs must be separated by a blank line. Basic formatting
-of <em>italics</em> and <strong>bold</strong> is supported. This
-<em>can be <strong>nested</strong> like</em> so.</p>
-
-      <h2>
-         <a href="#lists" id="lists" shape="rect">Lists</a>
-      </h2>
-
-      <h3>
-         <a href="#ordered-list" id="ordered-list" shape="rect">Ordered list</a>
-      </h3>
-
-      <ol>
-
-         <li>Item 1</li>
-
-         <li>A second item</li>
-
-         <li>Number 3</li>
-
-         <li>â£</li>
-
-      </ol>
-
-      <p>
-         <em>Note: the fourth item uses the Unicode character for [Roman
-numeral four][2].</em>
-      </p>
-
-      <h3>
-         <a href="#unordered-list" id="unordered-list" shape="rect">Unordered
-list</a>
-      </h3>
-
+      <p>This add-on can be installed in Oxygen XML Editor to enable
+batch conversions between the following formats:</p>
       <ul>
-
-         <li>An item</li>
-
-         <li>Another item</li>
-
-         <li>Yet another item</li>
-
-         <li>And there’s more…</li>
-
+         <li>HTML to XHTML</li>
+         <li>HTML to DITA</li>
+         <li>Markdown to XHTML</li>
+         <li>Markdown to DITA</li>
+         <li>XML to JSON</li>
+         <li>JSON to XML</li>
       </ul>
-
       <h2>
-         <a href="#paragraph-modifiers" id="paragraph-modifiers" shape="rect">Paragraph modifiers</a>
+         <a href="#installation" id="installation" shape="rect">Installation</a>
       </h2>
-
-      <h3>
-         <a href="#code-block" id="code-block" shape="rect">Code block</a>
-      </h3>
-
-      <pre xml:space="preserve">
-<code>
-Code blocks are very useful for developers and other people who look at code or other things that are written in plain text. As you can see, it uses a fixed-width font.
-</code>
-</pre>
-
-<p>You can also make <code>inline code</code> to add code into
-other things.</p>
-<h3><a href="#quote" id="quote" shape="rect">Quote</a></h3>
-<blockquote>
-<p>Here is a quote. What this is should be self explanatory. Quotes
-are automatically indented when they are used.</p>
-</blockquote>
-<h2><a href="#headings" id="headings" shape="rect">Headings</a></h2>
-<p>There are six levels of headings. They correspond with the six
-levels of HTML headings. You’ve probably noticed them already
-in the page. Each level down uses one more hash character.</p>
-<h3><a href="#headings-can-also-contain-formatting" id="headings-can-also-contain-formatting" shape="rect">Headings <em>can</em>
-also contain <strong>formatting</strong></a></h3>
-<h3><a href="#they-can-even-contain-inline-code" id="they-can-even-contain-inline-code" shape="rect">They can even contain
-<code>inline code</code></a></h3>
-<p>Of course, demonstrating what headings look like messes up the
-structure of the page.</p>
-<p>I don’t recommend using more than three or four levels of
-headings here, because, when you’re smallest heading
-isn’t too small, and you’re largest heading isn’t
-too big, and you want each size up to look noticeably larger and
-more important, there there are only so many sizes that you can
-use.</p>
-</body>
-
+      <p>The add-on is compatible with Oxygen XML Editor (or XML Author)
+version 19.1.</p>
+      <p>You can install the add-on by using Oxygen’s add-ons
+support. In Oxygen, go to Help-&gt;Install new add-ons… and
+use this add-on repository URL:</p>
+      <p>
+         <a href="https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml"
+            shape="rect">https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml</a>
+      </p>
+      <p>then continue the installation process.</p>
+      <h2>
+         <a href="#converting-a-document"
+            id="converting-a-document"
+            shape="rect">Converting a document:</a>
+      </h2>
+      <ol>
+         <li>Select the type of conversion from the <strong>Tools -&gt;
+Batch Converter</strong> submenu.</li>
+         <li>Add the <strong>Input files</strong>.</li>
+         <li>Choose the path of the <strong>Output folder</strong> that will
+contain the converted document.</li>
+         <li>Click the <strong>Convert</strong> button.</li>
+      </ol>
+   </body>
 </html>

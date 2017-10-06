@@ -6,12 +6,14 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
+import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorker;
@@ -98,7 +100,7 @@ public class ConvertorDialog extends OKCancelDialog implements BatchConverterInt
 	@Override
 	protected void doOK() {
 
-		if (getOutputFolder().isEmpty()) {
+		if (outputPanel.getOutputPath().isEmpty()) {
 			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE,""));
 		} else {
 
@@ -125,14 +127,14 @@ public class ConvertorDialog extends OKCancelDialog implements BatchConverterInt
 
 
 	@Override
-	public List<String> getInputFiles() {
-		return inputPanel.getFilesFromTable();
+	public List<File> getInputFiles() {
+		return ConverterFileUtils.convertToFile(inputPanel.getFilesFromTable());
 	}
 
 
 	@Override
-	public String getOutputFolder() {
-		return outputPanel.getOutputPath();
+	public File getOutputFolder() {
+		return new File(outputPanel.getOutputPath());
 	}
 
 

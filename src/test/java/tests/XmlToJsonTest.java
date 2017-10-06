@@ -27,13 +27,13 @@ import tests.utils.ProblemReporterTestImpl;
 import tests.utils.ProgressDialogInteractorTestImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 
-public class HtmlToXhtmlTest {
+public class XmlToJsonTest {
 
 	@Test
 	public void test() throws TransformerException, IOException {
-	
-		File sample  = new File("test-sample/HtmlToXhtml.html");		
-		File goodSample = new File("test-sample/goodHtmlToXhtml.xhtml");
+		
+		File sample  = new File("test-sample/xmlTest.xml");		
+		File goodSample = new File("test-sample/jsonTest.json");
 		File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
@@ -45,10 +45,10 @@ public class HtmlToXhtmlTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
-		File fileToRead = FilePathGenerator.generate(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+		File fileToRead = FilePathGenerator.generate(sample, FileExtensionType.JSON_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.HTML_TO_XHTML, inputFiles, outputFolder);
+			converter.convertFiles(ConverterTypes.XML_TO_JSON, inputFiles, outputFolder);
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 
@@ -61,4 +61,5 @@ public class HtmlToXhtmlTest {
 		}
 
 	}
+		
 }

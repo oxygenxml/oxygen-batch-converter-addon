@@ -1,7 +1,6 @@
 package com.oxygenxml.resources.batch.converter.printer;
 
 import java.io.File;
-import java.net.URL;
 
 /**
  * File path generator
@@ -18,14 +17,13 @@ public class FilePathGenerator {
 	 * @param outputFolder
 	 * @return
 	 */
-	public static File generate(URL fileURL, String extension, String outputFolder){
-		
-	String fileName = fileURL.toString();
+	public static File generate(File originalFile, String extension, File outputFolder){
+	String fileName = originalFile.getName();
 
 	//get the file name without extension
-	fileName = fileName.substring(fileName.lastIndexOf("/")+1, fileName.lastIndexOf(".") );
+	fileName = fileName.substring(0, fileName.lastIndexOf("."));
 	
-	File toReturn = new File(outputFolder +  File.separator + fileName +"."+ extension);
+	File toReturn = new File(outputFolder.getAbsolutePath() +  File.separator + fileName +"."+ extension);
 	
 	return toReturn;
 	}

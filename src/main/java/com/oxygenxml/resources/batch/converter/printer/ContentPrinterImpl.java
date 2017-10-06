@@ -14,8 +14,8 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class ContentPrinterImpl implements ContentPrinter {
 
 	@Override
-	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, URL currentDocument,
-			String outputFolder, String converterType) throws TransformerException {
+	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, File currentDocument,
+			File outputFolder, String converterType) throws TransformerException {
 
 		File outFile = FilePathGenerator.generate(currentDocument, ExtensionGetter.getOutputExtension(converterType),
 				outputFolder);

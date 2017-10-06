@@ -1,5 +1,6 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import java.io.File;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -37,7 +38,7 @@ public class XHTMLToDITAConverter implements com.oxygenxml.resources.batch.conve
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		System.out.println("xhtml -> dita");
@@ -70,7 +71,7 @@ public class XHTMLToDITAConverter implements com.oxygenxml.resources.batch.conve
 		System.out.println("aici");
 		try {
 				// convert the document
-				transformer.transform(new StreamSource(contentReader, originalFileLocation.toString()), result);
+				transformer.transform(new StreamSource(contentReader, originalFileLocation.toURI().toString()), result);
 		
 			// add an id on root(topic)
 			ditaContent = sw.toString();

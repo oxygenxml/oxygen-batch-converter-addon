@@ -1,13 +1,14 @@
 package tests.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 
 public class FileComparationUtil {
 
-	public static boolean compareLineToLine(String file1, String file2) throws IOException{
+	public static boolean compareLineToLine(File file1, File file2) throws IOException{
 		 boolean areEqual = true;
 		 BufferedReader reader1 = null;
 		 BufferedReader reader2 = null; 

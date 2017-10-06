@@ -1,8 +1,8 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import java.io.File;
 import java.io.Reader;
 import java.io.StringWriter;
-import java.net.URL;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -34,7 +34,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		// content to return
 		String toReturn = null;
 
@@ -54,7 +54,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 		try {
 
 			// input source of document to convert
-			final InputSource i = new InputSource(originalFileLocation.toString());
+			final InputSource i = new InputSource(originalFileLocation.toURI().toString());
 
 			StringWriter sw = new StringWriter();
 			StreamResult res = new StreamResult(sw);

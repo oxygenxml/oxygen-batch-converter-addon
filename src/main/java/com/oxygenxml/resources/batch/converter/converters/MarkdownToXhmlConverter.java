@@ -1,8 +1,8 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import java.io.File;
 import java.io.Reader;
 import java.io.StringReader;
-import java.net.URL;
 
 import javax.xml.transform.TransformerException;
 
@@ -11,10 +11,9 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class MarkdownToXhmlConverter implements Converter{
 
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
-		System.out.println("acsaidihasfsaygfsaygyugaafsgasfyasfyyasgsdyyu");
 		MarkdownToHtmlConverter markdownToHtmlTransformer = new MarkdownToHtmlConverter();
 		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter();
 		

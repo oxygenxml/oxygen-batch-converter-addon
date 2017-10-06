@@ -1,11 +1,13 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 
 import javax.xml.transform.TransformerException;
 
+import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -27,7 +29,7 @@ public class MarkdownToHtmlConverter implements Converter{
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException   {
+	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException   {
 		//content to return 
 		String toReturn = null;
 			
@@ -45,7 +47,7 @@ public class MarkdownToHtmlConverter implements Converter{
 		
 		try {
 		// Get the content to parse.
-		String contentToParse =  ConverterUtils.getUrlContents(originalFileLocation);
+		String contentToParse =  ConverterFileUtils.readFile(originalFileLocation);
 		
 		 Node document = parser.parse(contentToParse);
     

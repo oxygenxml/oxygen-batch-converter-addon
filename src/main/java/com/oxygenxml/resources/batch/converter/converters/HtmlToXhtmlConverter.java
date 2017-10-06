@@ -1,10 +1,11 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.net.URL;
 
 import javax.xml.transform.TransformerException;
 
@@ -19,17 +20,16 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class HtmlToXhtmlConverter implements Converter {
 
 	/**
-	 * Convert the HTML document from the given URL in XHTML.
+	 * Convert the HTML file in XHTML.
 	 *
 	 * @param originalFileLocation The URL location of document.
 	 * @param contentReader Reader of the document.
 	 * @return The conversion in XHTML.        
 	 */
-	public String convert(URL originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		//XHTML content to be return
 		String toReturn = null;
 
-		System.out.println("html -> xhtml");
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -48,7 +48,7 @@ public class HtmlToXhtmlConverter implements Converter {
 				t.parse(new ReaderInputStream(contentReader, "UTF-8"), baos);
 			}
 			else {
-				InputStream inputStream = originalFileLocation.openStream();
+				InputStream inputStream = new FileInputStream(originalFileLocation);
 				// parse the inputStream
 				t.parse(inputStream, baos);
 				

@@ -2,8 +2,18 @@ package com.oxygenxml.resources.batch.converter.converters;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 
+/**
+ * Creator of Converter
+ * @author intern4
+ *
+ */
 public class ConverterCreator {
 
+	/**
+	 * Create a converter according to given converter type.
+	 * @param converterType The type of converter {@link ConverterTypes}
+	 * @return
+	 */
 	public static Converter create(String converterType){
 		
 		

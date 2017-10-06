@@ -1,6 +1,6 @@
 package com.oxygenxml.resources.batch.converter;
 
-import java.net.URL;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -17,5 +17,5 @@ public interface BatchConverter {
 	 * @param outputFolder The output folder.
 	 * @return <code>true</code> if the process of conversion was finished successfully, <code>false</code> otherwise.
 	 */
-	public boolean convertFiles(String convertorType, List<URL> inputFiles, String outputFolder); 
+	public boolean convertFiles(String convertorType, List<File> inputFiles, File outputFolder); 
 }

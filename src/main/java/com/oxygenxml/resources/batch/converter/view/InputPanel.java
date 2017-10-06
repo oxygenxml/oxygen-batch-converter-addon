@@ -22,6 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
+import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
@@ -124,7 +125,7 @@ public class InputPanel extends JPanel {
 				if (file != null) {
 					List<String> listToAdd = new ArrayList<String>();
 
-					ConverterFileUtil.getFilesFromFolder(file, listToAdd, Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
+					ConverterFileUtils.getFilesFromFolder(file, listToAdd, Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
 
 					if(!listToAdd.isEmpty()){
 						convertorInteractor.setOutputFolder(file.toString()+ File.separator + "output");
