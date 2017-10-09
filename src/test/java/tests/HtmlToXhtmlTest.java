@@ -32,7 +32,7 @@ public class HtmlToXhtmlTest {
 	@Test
 	public void test() throws TransformerException, IOException {
 	
-		File sample  = new File("test-sample/HtmlToXhtml.html");		
+		File sample  = new File("test-sample/htmlTest.html");		
 		File goodSample = new File("test-sample/goodHtmlToXhtml.xhtml");
 		File outputFolder = sample.getParentFile();
 		

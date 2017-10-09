@@ -15,16 +15,20 @@ import org.w3c.tidy.Tidy;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
- * Class which uses HTML Tidy to create a well-formed XHTML.
+ * Converter implementation for HTML to XHTML.
+ * @author intern4
+ *
  */
 public class HtmlToXhtmlConverter implements Converter {
 
 	/**
-	 * Convert the HTML file in XHTML.
+	 * Convert HTML to XHTML.
 	 *
-	 * @param originalFileLocation The URL location of document.
-	 * @param contentReader Reader of the document.
-	 * @return The conversion in XHTML.        
+	 * @param originalFileLocation The HTML file.
+	 * @param contentReader
+	 *          Reader of the document. If the content reader isn't <code>null</code>, 
+	 *          the converter will process this reader and will ignore the given file.
+	 * @return The converted XHTML content..        
 	 */
 	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		//XHTML content to be return

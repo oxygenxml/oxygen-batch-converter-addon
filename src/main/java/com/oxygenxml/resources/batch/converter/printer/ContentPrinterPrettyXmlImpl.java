@@ -54,7 +54,7 @@ public class ContentPrinterPrettyXmlImpl implements ContentPrinter {
 		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "3");
 
 		// get the input source
 		InputSource inputSource = new InputSource(new StringReader(contentToPrint));
