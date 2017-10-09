@@ -15,8 +15,7 @@ import com.elovirta.dita.markdown.MarkdownReader;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
- * Class that use com.elovirta.dita.markdown.MarkdownReader for convert Markdown
- * to DITA.
+ * Converter implementation for Markdown to DITA.
  * 
  * @author intern4
  *
@@ -38,7 +37,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 		// content to return
 		String toReturn = null;
 
-		System.out.println("md -> dita");
+		//create the transformer
 		Transformer transformer = transformerCreator.createTransformer(null);
 
 		// get the trasformFactory property

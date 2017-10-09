@@ -16,11 +16,12 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class HtmlToDitaConverter implements Converter{
 
 	/**
-	 * Convert the given HTML file in DITA.
+	 * Convert the given HTML to DITA.
 	 * @param originalFile
 	 *          The File to convert.
 	 * @param contentReader
-	 *          Reader of the document. This can be null.
+	 *          Reader of the document. If the content reader isn't <code>null</code>, 
+	 *          the converter will process this reader and will ignore the given file.
 	 * @param transformerCreator A transformer creator.         
 	 * @return The converted DITA content in String format.
 	 * @throws TransformerException 
@@ -37,12 +38,7 @@ public class HtmlToDitaConverter implements Converter{
 		
 		String xhtmlContent;
 		//convert the content to XHTML
-		if(contentReader == null){
-			xhtmlContent = htmlToXhtmlTransformer.convert(originalFileLocation, null, transformerCreator);
-		}
-		else{
-			xhtmlContent = htmlToXhtmlTransformer.convert(originalFileLocation, contentReader, transformerCreator);
-		}
+		xhtmlContent = htmlToXhtmlTransformer.convert(originalFileLocation, contentReader, transformerCreator);
 		
 		// convert the converted XHTML content in DITA 
 		return  xhtmlToDITATransformer.convert(originalFileLocation, new StringReader(xhtmlContent),transformerCreator);
