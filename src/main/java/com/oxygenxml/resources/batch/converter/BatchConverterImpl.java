@@ -102,7 +102,7 @@ public class BatchConverterImpl implements BatchConverter {
 					}
 
 				} catch (TransformerException e) {
-					problemReporter.reportProblem(e, currentFile.toString());
+					problemReporter.reportProblem(e, currentFile);
 					isSuccessfully = false;
 				} catch (Throwable e) {
 					e.printStackTrace();

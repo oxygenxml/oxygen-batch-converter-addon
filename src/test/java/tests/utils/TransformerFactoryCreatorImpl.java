@@ -5,8 +5,17 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.log4j.Logger;
+
+import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
+
 public class TransformerFactoryCreatorImpl
 		implements com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator {
+
+	/**
+	 * Logger
+	 */
+	private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
 
 	@Override
 	public Transformer createTransformer(StreamSource streamSource) {
@@ -21,8 +30,7 @@ public class TransformerFactoryCreatorImpl
 				transformer = transformerFactory.newTransformer();
 			}
 		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug(e.getMessage(), e);
 		}
 
 		return transformer;

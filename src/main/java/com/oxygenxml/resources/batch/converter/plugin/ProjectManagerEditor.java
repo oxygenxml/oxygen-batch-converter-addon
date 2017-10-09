@@ -4,14 +4,12 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Action;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.proxy.ProjectPopupMenuCustomizerInvocationHandler;
 
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;

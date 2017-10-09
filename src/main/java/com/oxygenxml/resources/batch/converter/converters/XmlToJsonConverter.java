@@ -13,30 +13,54 @@ import org.json.XML;
 import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
+/**
+ * Converter implementation for XML to JSON.
+ * @author intern4
+ *
+ */
 public class XmlToJsonConverter implements Converter {
-
+	/**
+	 * Convert XML to JSON.
+	 * 
+	 * @param originalFile
+	 *          The XML file.
+	 * @param contentReader
+	 *          Reader of the document. If the content reader isn't <code>null</code>, 
+	 *          the converter will process this reader and will ignore the given file.
+	 * @return The converted JSON content in String format or null if conversion process failed.
+	 * @throws TransformerException
+	 */
 	@Override
-	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
-		// Get the content to parse.
-		String contentToParse;
+		String toReturn = null;
+		
+		String contentToParse = "";
+
 		try {
-			contentToParse = ConverterFileUtils.readFile(originalFileLocation);
+			// Get the content to parse.
+			if (contentReader == null) {
+				contentToParse = ConverterFileUtils.readFile(originalFile);
+			} else {
+				int intValueOfChar;
+				while ((intValueOfChar = contentReader.read()) != -1) {
+					contentToParse += (char) intValueOfChar;
+				}
+			}
+
 			JSONObject jsonObj = XML.toJSONObject(contentToParse);
 
-			return jsonObj.toString(4, false);
+			toReturn = jsonObj.toString(4, false);
 
 		}
 		catch (JSONException e) {
-			throw new TransformerException(e.getMessage());
+			throw new TransformerException(e.getMessage(), e.getCause());
 		}		
 		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 
-		return null;
+		return toReturn;
 	}
-
 }

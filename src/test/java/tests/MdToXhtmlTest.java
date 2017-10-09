@@ -18,7 +18,6 @@ import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
-import com.oxygenxml.resources.batch.converter.printer.FilePathGenerator;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
@@ -46,14 +45,11 @@ public class MdToXhtmlTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
-		File fileToRead = FilePathGenerator.generate(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
 			converter.convertFiles(ConverterTypes.MD_TO_XHTML, inputFiles, outputFolder);
 
-			System.out.println("converted File: " + ConverterFileUtils.readFile(fileToRead));
-			System.out.println("good sample file: "+ ConverterFileUtils.readFile(goodSample));
-			
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 
 		} finally {

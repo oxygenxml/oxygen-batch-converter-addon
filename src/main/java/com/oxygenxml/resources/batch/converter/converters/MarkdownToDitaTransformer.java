@@ -51,7 +51,6 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 		final MarkdownReader r = new MarkdownReader();
 
 		try {
-
 			// input source of document to convert
 			final InputSource i = new InputSource(originalFileLocation.toURI().toString());
 
@@ -59,23 +58,17 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 			StreamResult res = new StreamResult(sw);
 
 			// convert the document
-			//TODO problema cu C:\Users\intern4\Documents\OxygenXMLEditor\samples\dita\thunderbird\README.md
 			transformer.transform(new SAXSource(r, i), res);
 
 			// get the converted content
 			toReturn = sw.toString();
 
-		}catch (Exception e) {
-			if(e instanceof TransformerException){
-				
-				throw new TransformerException(((TransformerException)e).getException().getMessage() , 
-						((TransformerException)e).getException().getCause());
-			}
-			else{
-				e.printStackTrace();
-				throw new TransformerException("Document cannot be converted.");
-			}
-		} finally {
+		}catch (TransformerException e) {
+				throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
+		}catch (Throwable e) {
+			throw new TransformerException(e.getMessage() , e.getCause());
+		} 
+		finally {
 			// return the initial property of trasformerFactory
 			if (property == null) {
 				System.getProperties().remove("javax.xml.transform.TransformerFactory");

@@ -1,9 +1,5 @@
 package com.oxygenxml.resources.batch.converter.worker;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.SwingWorker;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -44,6 +40,8 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 
 		progressDialogInteractor.setDialogVisible(true);
 
+		oxygenProblemReporter.deleteReportedProblems();
+		
 		convertor = new BatchConverterImpl(oxygenProblemReporter, progressDialogInteractor, this,
 				new OxygenTransformerFactoryCreator());
 

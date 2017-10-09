@@ -14,6 +14,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.xml.sax.InputSource;
 
 import com.google.common.io.Files;
+import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -42,7 +43,7 @@ public class ContentPrinterPrettyXmlImpl implements ContentPrinter {
 		// create the trasformer
 		Transformer transformer = transformerCreator.createTransformer(null);
 
-		File outFile = FilePathGenerator.generate(currentDocument, ExtensionGetter.getOutputExtension(converterType),
+		File outFile = ConverterFileUtils.generateOutputFile(currentDocument, ExtensionGetter.getOutputExtension(converterType),
 				outputFolder);
 
 		// set the output properties
@@ -60,17 +61,14 @@ public class ContentPrinterPrettyXmlImpl implements ContentPrinter {
 		InputSource inputSource = new InputSource(new StringReader(contentToPrint));
 
 		// create a unique file path if actual exist
-		outFile = FilePathGenerator.getFileWithCounter(outFile);
+		outFile = ConverterFileUtils.getFileWithCounter(outFile);
 
 		System.out.println("outputFile : " + outFile.toString());
 
 		try {
 			// prettify and print
 			transformer.transform(new SAXSource(inputSource), new StreamResult(outFile));
-			System.out.println("a terminat de printat");
 		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new TransformerException(e.getException().getMessage(), e.getException().getCause());
 		}
 	}
