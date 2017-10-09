@@ -1,5 +1,6 @@
 package com.oxygenxml.resources.batch.converter.plugin;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
@@ -26,34 +28,30 @@ import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
  */
 public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPluginExtension {
 
-	
+	/**
+	 * The name of menu where converter action will be place.
+	 */
 	private final static String MENU_NAME = "Tools";
+	
+	/**
+	 * The anterior menu item.
+	 */
 	private final static String ANTERIOR_MENU_ITEM_ACTION_NAME = "XML_to_JSON";
 
-	private JMenuItem convertorMenuItem;
+	JMenu batchConvertMenuToolbar;
 	private Translator translator = new OxygenTranslator();
 
+	
 	/**
 	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationStarted(ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace)
 	 */
 	@Override
 	public void applicationStarted(final StandalonePluginWorkspace pluginWorkspaceAccess) {
-		// You can set or read global options.
-		// The "ro.sync.exml.options.APIAccessibleOptionTags" contains all
-		// accessible keys.
-		// pluginWorkspaceAccess.setGlobalObjectProperty("can.edit.read.only.files",
-		// Boolean.FALSE);
-		// Check In action
-
-		// You can access the content inside each opened WSEditor depending on the
-		// current editing page (Text/Grid or Author).
-		// A sample action which will be mounted on the main menu, toolbar and
-		// contextual menu.
-
+		
+		//List with actions.
 		final List<Action> actions = createActionsList(pluginWorkspaceAccess);
 		
-		// Create your own main menu and add it to Oxygen or remove one of Oxygen's
-		// menus...
+		// Create a menu and add it to Oxygen 
 		pluginWorkspaceAccess.addMenuBarCustomizer(new MenuBarCustomizer() {
 			/**
 			 * @see ro.sync.exml.workspace.api.standalone.MenuBarCustomizer#customizeMainMenu(javax.swing.JMenuBar)
@@ -64,7 +62,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			}
 		});
 
-		// add a item with convertAction in contextual menu of ProjectManager
+		//add a menu that contains actions in contextual menu of ProjectManager
 		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, actions);
 
 	}
@@ -92,12 +90,12 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	private void addActionsInMenuBar(JMenuBar mainMenuBar, List<Action> actionsToAdd,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		JMenu batchConvertMenu = new JMenu("Batch Convert");
+		 batchConvertMenuToolbar = new JMenu("Batch Convert");
 		
 		int size = actionsToAdd.size();
 
 		for (int i = 0; i < size; i++) {
-			batchConvertMenu.add(new JMenuItem(actionsToAdd.get(i)));
+			batchConvertMenuToolbar.add(new JMenuItem(actionsToAdd.get(i)));
 		}
 		
 		// get the number of items in MenuBar
@@ -134,7 +132,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 								if (ANTERIOR_MENU_ITEM_ACTION_NAME.equals(actionID.substring(indexOfSlash + 1))) {
 									// the MenuIdemActionId is ANTERIOR_MENU_ITEM_ACTION_NAME.
 									// add the action after this index.
-									menu.add(batchConvertMenu, i + 1);
+									menu.add(batchConvertMenuToolbar, i + 1);
 
 									// break the loops.
 									j = menuBarSize;
@@ -172,12 +170,10 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
 
-				System.out.println("actionID: "+ menuItemAction.getAction());
-				
-				if (!menuItemAction.equals(convertorMenuItem)){
-					System.out.println("nu e egal");
-					//TODO get selected item from project manager
-					//selectedFile = ProjectManagerEditor.getSelectedHtmlAndMdFiles(pluginWorkspaceAccess);
+				//if is not JMenu from Toolbar
+				if(! batchConvertMenuToolbar.equals(((JPopupMenu)menuItemAction.getParent()).getInvoker()) ){
+					//get the selectedFile from ProjectManager
+					selectedFile = ProjectManagerEditor.getSelectedFiles(pluginWorkspaceAccess, convertorType);
 				}
 				
 				ConvertorDialog convertorDialog = new ConvertorDialog(convertorType ,selectedFile,

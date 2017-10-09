@@ -4,12 +4,14 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.Action;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.proxy.ProjectPopupMenuCustomizerInvocationHandler;
 
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
@@ -63,19 +65,19 @@ public class ProjectManagerEditor {
 	}
 
 	/**
-	 * For 19.1 oxygen version, get the selected HTML and Markdown files in
-	 * projectManager.
+	 * For 19.1 oxygen version, get the selected files from
+	 * projectManager according to converterType.
 	 * 
 	 * @param pluginWorkspaceAccess
+	 * @param converterType The type of converter.
 	 * @return If oxygen version is 19.1 return a list with URLs in String format,
 	 *         else return a empty list.
 	 */
-	public static List<String> getSelectedHtmlAndMdFiles(StandalonePluginWorkspace pluginWorkspaceAccess) {
+	public static List<String> getSelectedFiles(StandalonePluginWorkspace pluginWorkspaceAccess, String converterType) {
 		List<String> toReturn = new ArrayList<String>();
 		
-		//TODO get the element according to converter type.
 		// the input types
-		List<String> inputTypes = null;//= Arrays.asList(FileExtensionType.INPUT_TYPES);
+		List<String> inputTypes = Arrays.asList(ExtensionGetter.getInputExtension(converterType) );
 		
 		try {
 			// get the getProjectManager method
@@ -96,7 +98,7 @@ public class ProjectManagerEditor {
 			// iterate over files
 			int size = selectedFiles.length;
 			for (int i = 0; i < size; i++) {
-					getAllHtmlAndMdFiles(selectedFiles[i], toReturn, inputTypes);
+				toReturn.addAll(getAllFile(selectedFiles[i], inputTypes));
 			}
 
 		} catch (Exception e) {
@@ -107,15 +109,17 @@ public class ProjectManagerEditor {
 	}
 
 	/**
-	 * If given file is a directory, add all HTML and Markdown file from it in given list, else if it's a file, add it in list. 
+	 * Recursive search for file according to extension list.
 	 * 
 	 * @param file
-	 *          The file of folder.
-	 * @param listUrlFiles
-	 *          The list.
+	 *          The file or directory.
+	 * @param extensions A list with searched extensions.
+	 * @return A list with found files.
 	 */
-	private static void getAllHtmlAndMdFiles(File file, List<String> listUrlFiles, List<String> inputTypes) {
+	private static List<String> getAllFile(File file, List<String> extensions) {
 
+		List<String> toReturn = new ArrayList<>(); 
+		
 		if (file.isDirectory()) {
 			//it's a directory
 			// get the files from folder
@@ -125,7 +129,7 @@ public class ProjectManagerEditor {
 				// iterate over files
 				int size = listOfFiles.length;
 				for (int i = 0; i < size; i++) {
-					getAllHtmlAndMdFiles(listOfFiles[i], listUrlFiles, inputTypes);
+					toReturn.addAll(getAllFile(listOfFiles[i], extensions));
 				}
 			}
 		}
@@ -134,9 +138,10 @@ public class ProjectManagerEditor {
 			String currentFile = file.toString();
 			String extension = currentFile.substring(currentFile.lastIndexOf(".") + 1);
 
-			if (inputTypes.contains(extension)) {
-				listUrlFiles.add(currentFile);
+			if (extensions.contains(extension)) {
+				toReturn.add(currentFile);
 			}
 		}
+		return toReturn;
 	}
 }
