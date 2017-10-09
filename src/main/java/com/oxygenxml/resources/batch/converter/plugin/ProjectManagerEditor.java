@@ -117,8 +117,7 @@ public class ProjectManagerEditor {
 	 * @return A list with found files.
 	 */
 	private static List<String> getAllFile(File file, List<String> extensions) {
-
-		List<String> toReturn = new ArrayList<>(); 
+		List<String> toReturn = new ArrayList<String>(); 
 		
 		if (file.isDirectory()) {
 			//it's a directory

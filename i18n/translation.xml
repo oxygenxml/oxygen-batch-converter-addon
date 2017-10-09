@@ -8,6 +8,15 @@
 		<language description="Dutch" lang="nl_NL" />
 	</languageList>
 	
+	<key value="Menu_Text_Conv">
+		<comment>The text of menu that contains the converters.</comment>
+		<val lang="en_US">Batch Converter</val>
+		<val lang="de_DE">Batch Converter</val>
+		<val lang="fr_FR">Batch Converter</val>
+		<val lang="ja_JP">Batch Converter</val>
+		<val lang="nl_NL">Batch Converter</val>
+	</key>
+	
 	<key value="Icon_Hint_Conv_html.to.xhtml">
 		<comment>The hint from toolBar icon.</comment>
 		<val lang="en_US">Convert HTML to XHTML.</val>

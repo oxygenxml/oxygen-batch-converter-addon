@@ -7,6 +7,12 @@ package com.oxygenxml.resources.batch.converter.translator;
  */
 public interface Tags {
 	
+	
+	/**
+	 * The text of JMenu that contains converters.
+	 */
+	public final String MENU_TEXT = "Menu_Text_Conv";
+	
 	/**
 	 * The hint from the icon.
 	 */

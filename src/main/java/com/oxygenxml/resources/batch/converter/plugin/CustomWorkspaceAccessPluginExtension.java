@@ -1,6 +1,5 @@
 package com.oxygenxml.resources.batch.converter.plugin;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +89,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	private void addActionsInMenuBar(JMenuBar mainMenuBar, List<Action> actionsToAdd,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		 batchConvertMenuToolbar = new JMenu("Batch Convert");
+		 batchConvertMenuToolbar = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
 		
 		int size = actionsToAdd.size();
 
