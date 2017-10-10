@@ -4,14 +4,14 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.stream.StreamSource;
 
 /**
- * Trasformer factory
+ * Transformer factory
  * @author intern4
  *
  */
 public interface TransformerFactoryCreator {
 
 	/**
-	 * Create a trasformer according to given stream source.
+	 * Create a transformer according to given stream source.
 	 * @param streamSource
 	 * @return
 	 */

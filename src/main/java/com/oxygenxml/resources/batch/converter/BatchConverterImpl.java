@@ -5,13 +5,18 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
+import org.apache.log4j.Logger;
+
 import com.oxygenxml.resources.batch.converter.converters.Converter;
 import com.oxygenxml.resources.batch.converter.converters.ConverterCreator;
+import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
+import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
 
 /**
@@ -22,11 +27,29 @@ import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
  */
 public class BatchConverterImpl implements BatchConverter {
 
+	/**
+	 * Problem reporter.
+	 */
 	private ProblemReporter problemReporter;
+	/**
+	 * Progress dialog interactor.
+	 */
 	private ProgressDialogInteractor progressDialogInteractor;
+	/**
+	 * Worker interactor.
+	 */
 	private ConvertorWorkerInteractor workerInteractor;
+	/**
+	 * Transformer creator.
+	 */
 	private TransformerFactoryCreator transformerFactoryCreator;
 
+	/**
+	 * Logger
+	 */
+	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
+	
+	
 	/**
 	 * Constructor.
 	 * 
@@ -37,16 +60,18 @@ public class BatchConverterImpl implements BatchConverter {
 	 * @param workerInteractor
 	 *          Worker interactor.
 	 * @param transformerFactoryCreator
-	 *          Trasformer factory creator.
+	 *          Transformer factory creator.
 	 */
 	public BatchConverterImpl(ProblemReporter problemReporter, ProgressDialogInteractor progressDialogInteractor,
-			ConvertorWorkerInteractor workerInteractor, TransformerFactoryCreator transformerFactoryCreator) {
+			ConvertorWorkerInteractor workerInteractor, TransformerFactoryCreator transformerFactoryCreator) 
+	{
 		this.problemReporter = problemReporter;
 		this.progressDialogInteractor = progressDialogInteractor;
 		this.workerInteractor = workerInteractor;
 		this.transformerFactoryCreator = transformerFactoryCreator;
 	}
 
+	
 	/**
 	 * Convert the given input files and write them in given output folder
 	 * according to given convertorType.
@@ -65,7 +90,7 @@ public class BatchConverterImpl implements BatchConverter {
 		// flag to return
 		boolean isSuccessfully = true;
 
-		// converted content to print
+		// converted content
 		String convertedContent = "";
 
 		// create the converter
@@ -79,7 +104,7 @@ public class BatchConverterImpl implements BatchConverter {
 			int size = inputFiles.size();
 			for (int i = 0; i < size; i++) {
 
-				// check if worker was interruptedW
+				// check if worker was interrupted
 				if (workerInteractor.isCancelled()) {
 					isSuccessfully = false;
 					// break the loop
@@ -89,22 +114,29 @@ public class BatchConverterImpl implements BatchConverter {
 				// get the current file.
 				File currentFile = inputFiles.get(i);
 
-				// update the note in progress dialog.
+				// update the progress dialog note.
 				progressDialogInteractor.setNote(currentFile.toString());
 
 				try {
 					// convert the current file
 					convertedContent = converter.convert(currentFile, null, transformerFactoryCreator);
-
+					
 					if (convertedContent != null) {
+						//generate the output file.
+						File outputFile = ConverterFileUtils.generateOutputFile(currentFile, 
+								ExtensionGetter.getOutputExtension(converterType), outputFolder);
+						
 						// print the converted content.
-						contentPrinter.print(convertedContent, transformerFactoryCreator, currentFile, outputFolder, converterType);
+						contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile);
 					}
 
 				} catch (TransformerException e) {
 					problemReporter.reportProblem(e, currentFile);
 					isSuccessfully = false;
+					
 				} catch (Throwable e) {
+					logger.debug(e.getMessage(), e);
+					//TODO delete printStackTrace();
 					e.printStackTrace();
 				}
 			}
@@ -114,6 +146,5 @@ public class BatchConverterImpl implements BatchConverter {
 		}
 
 		return isSuccessfully;
-
 	}
 }

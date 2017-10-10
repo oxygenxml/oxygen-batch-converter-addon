@@ -10,6 +10,9 @@ import javax.swing.JPopupMenu;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.resources.batch.converter.translator.Tags;
+import com.oxygenxml.resources.batch.converter.translator.Translator;
+
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 
 /**
@@ -35,7 +38,15 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	 */
 	private static final String PREDECESSOR_ITEM_ACTION_ID = "Project/Compare";
 
+	/**
+	 * Actions to be add.
+	 */
 	private List<Action> actions;
+
+	/**
+	 * Translator
+	 */
+	private Translator translator;
 	
 	/**
 	 * Constructor
@@ -44,10 +55,11 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	 *          The action that open the DocBook checker.
 	 */
 	public ProjectPopupMenuCustomizerInvocationHandler(StandalonePluginWorkspace pluginWorkspaceAccess,
-			List<Action> actions) {
+			List<Action> actions, Translator translator) {
 
 		this.pluginWorkspaceAccess = pluginWorkspaceAccess;
 		this.actions = actions;
+		this.translator = translator;
 	}
 
 	/**
@@ -62,10 +74,11 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 			// if the method name equals with "customizePopUpMenu"
 			if (method.getName().equals("customizePopUpMenu")) {
 				
-				JMenu batchConvertMenu = new JMenu("Batch Convert");
+				// create a menu
+				JMenu batchConvertMenu = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
+				//add actions in batchConvertMenu
 				int sizeList = actions.size();
-
 				for (int i = 0; i < sizeList; i++) {
 					batchConvertMenu.add(new JMenuItem(actions.get(i)));
 				}

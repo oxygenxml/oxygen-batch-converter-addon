@@ -11,11 +11,10 @@ public class ConverterCreator {
 
 	/**
 	 * Create a converter according to given converter type.
-	 * @param converterType The type of converter {@link ConverterTypes}
+	 * @param converterType The type of converter: {@link ConverterTypes}
 	 * @return
 	 */
 	public static Converter create(String converterType){
-		
 		
 		if(ConverterTypes.MD_TO_XHTML.equals(converterType)){
 			return new MarkdownToXhmlConverter();

@@ -6,8 +6,9 @@ import java.io.Reader;
 
 import javax.xml.transform.TransformerException;
 
-import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
+import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -29,8 +30,9 @@ public class MarkdownToHtmlConverter implements Converter {
 	 * @param originalFile
 	 *          The markdown file.
 	 * @param contentReader
-	 *          Reader of the document. If the content reader isn't <code>null</code>, the converter will process this reader and will ignore the given file.
-	 * @return The converted HTML content in String format or null if conversion
+	 *          Reader of the document. If the content reader isn't <code>null</code>, 
+	 *          the converter will process this reader and will ignore the given file.
+	 * @return The converted HTML content in String format or <code>null</code> if conversion
 	 *         process failed.
 	 * @throws TransformerException
 	 */
@@ -54,10 +56,7 @@ public class MarkdownToHtmlConverter implements Converter {
 			if (contentReader == null) {
 				contentToParse = ConverterFileUtils.readFile(originalFile);
 			} else {
-				int intValueOfChar;
-				while ((intValueOfChar = contentReader.read()) != -1) {
-					contentToParse += (char) intValueOfChar;
-				}
+				contentToParse = ConverterReaderUtils.getString(contentReader);
 			}
 
 			// Parse the content.

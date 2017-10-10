@@ -1,15 +1,14 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.io.StringWriter;
 
 import javax.xml.transform.TransformerException;
 
-import org.apache.commons.io.input.ReaderInputStream;
 import org.w3c.tidy.Tidy;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -31,52 +30,46 @@ public class HtmlToXhtmlConverter implements Converter {
 	 * @return The converted XHTML content..        
 	 */
 	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
-		//XHTML content to be return
-		String toReturn = null;
+	//XHTML content to be return
+			String toReturn = null;
 
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-			/* Transforms to well-formed XHTML */
-			Tidy t = new Tidy();
-
-			// set the Tidy parser
-			t.setXHTML(true);
-			t.setQuiet(true);
-			t.setShowWarnings(false);
-			t.setTidyMark(false);
-			t.setForceOutput(true);
-
-			if (contentReader != null) {
-				// parse the content
-				t.parse(new ReaderInputStream(contentReader, "UTF-8"), baos);
-			}
-			else {
-				InputStream inputStream = new FileInputStream(originalFileLocation);
-				// parse the inputStream
-				t.parse(inputStream, baos);
-				
-				//close the inputStream
-				try {
-					inputStream.close();
-				} catch (Exception e) {
-				}
-			}
-
-			// convert to String
-			toReturn = baos.toString("UTF-8");
-
-			// close the streams
 			try {
-				baos.close();
-			} catch (Exception e) {
+				StringWriter sw = new StringWriter();
+
+				/* Transforms to well-formed XHTML */
+				Tidy t = new Tidy();
+
+				// set the Tidy parser
+				t.setXHTML(true);
+				t.setQuiet(true);
+				t.setShowWarnings(false);
+				t.setTidyMark(false);
+				t.setForceOutput(true);
+
+				if (contentReader != null) {
+					// parse the content
+					t.parse(contentReader, sw);
+				}
+				else {
+					InputStream inputStream = new FileInputStream(originalFileLocation);
+					// parse the inputStream
+					t.parse(inputStream, sw);
+					
+					//close the inputStream
+					try {
+						inputStream.close();
+					} catch (Exception e) {
+					}
+				}
+
+				// convert to String
+				toReturn = sw.toString();
+
+			} catch (IOException e1) {
+				throw new TransformerException(e1.getMessage(), e1.getCause());
 			}
 
-		} catch (IOException e1) {
-			throw new TransformerException(e1.getMessage(), e1.getCause());
+			return toReturn;
 		}
-
-		return toReturn;
-	}
 
 }

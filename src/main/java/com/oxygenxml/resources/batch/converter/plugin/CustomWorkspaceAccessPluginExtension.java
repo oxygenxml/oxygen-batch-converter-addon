@@ -16,7 +16,7 @@ import com.oxygenxml.resources.batch.converter.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
-import com.oxygenxml.resources.batch.converter.view.ConvertorDialog;
+import com.oxygenxml.resources.batch.converter.view.ConverterDialog;
 
 import ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension;
 import ro.sync.exml.workspace.api.standalone.MenuBarCustomizer;
@@ -28,29 +28,28 @@ import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPluginExtension {
 
 	/**
-	 * The name of menu where converter action will be place.
+	 * The id of menu where converter action will be place.
 	 */
-	private final static String MENU_NAME = "Tools";
-	
+	private final static String MENU_ID = "Tools";
+
 	/**
-	 * The anterior menu item.
+	 * The preceding menu item.
 	 */
-	private final static String ANTERIOR_MENU_ITEM_ACTION_NAME = "XML_to_JSON";
+	private final static String PRECEDING_MENU_ITEM_ACTION_ID = "XML_to_JSON";
 
 	JMenu batchConvertMenuToolbar;
 	private Translator translator = new OxygenTranslator();
 
-	
 	/**
 	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationStarted(ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace)
 	 */
 	@Override
 	public void applicationStarted(final StandalonePluginWorkspace pluginWorkspaceAccess) {
-		
-		//List with actions.
+
+		// List with actions.
 		final List<Action> actions = createActionsList(pluginWorkspaceAccess);
-		
-		// Create a menu and add it to Oxygen 
+
+		// Create a menu with actions and add it to Oxygen
 		pluginWorkspaceAccess.addMenuBarCustomizer(new MenuBarCustomizer() {
 			/**
 			 * @see ro.sync.exml.workspace.api.standalone.MenuBarCustomizer#customizeMainMenu(javax.swing.JMenuBar)
@@ -61,11 +60,10 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			}
 		});
 
-		//add a menu that contains actions in contextual menu of ProjectManager
-		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, actions);
+		// add a menu with actions in contextual menu of ProjectManager
+		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, actions, translator);
 
 	}
-
 
 	/**
 	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationClosing()
@@ -75,7 +73,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		// You can reject the application closing here
 		return true;
 	}
-	
+
 	/**
 	 * Add the given Actions in the given JMenuBar.
 	 *
@@ -89,32 +87,31 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	private void addActionsInMenuBar(JMenuBar mainMenuBar, List<Action> actionsToAdd,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		 batchConvertMenuToolbar = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
-		
-		int size = actionsToAdd.size();
+		batchConvertMenuToolbar = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
+		//add actions in batchConvertMenuToolbar 
+		int size = actionsToAdd.size();
 		for (int i = 0; i < size; i++) {
 			batchConvertMenuToolbar.add(new JMenuItem(actionsToAdd.get(i)));
 		}
-		
+
 		// get the number of items in MenuBar
 		int menuBarSize = mainMenuBar.getMenuCount();
 
-		// iterate over items in menuBar
+		// iterate over menus in menuBar
 		for (int j = 0; j < menuBarSize; j++) {
 
 			// get the menu with index j
-			JMenu menu = mainMenuBar.getMenu(j);
+			JMenu currentMenu = mainMenuBar.getMenu(j);
 
-			if (menu != null) {
-
-				int sizeMenu = menu.getItemCount();
+			if (currentMenu != null) {
+				//iterate over menu items in currentMenu 
+				int sizeMenu = currentMenu.getItemCount();
 				for (int i = 0; i < sizeMenu; i++) {
 
-					JMenuItem menuItem = menu.getItem(i);
+					JMenuItem menuItem = currentMenu.getItem(i);
 
 					if (menuItem != null) {
-
 						Action action = menuItem.getAction();
 						if (action != null) {
 							// get the actionID
@@ -123,15 +120,15 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 							// The actionId is in format: menuNameId/menuItemActionID
 							int indexOfSlash = actionID.indexOf("/");
 
-							// check the menuNameID
-							if (MENU_NAME.equals(actionID.substring(0, indexOfSlash))) {
-								
-								// the menuNameId is MENU_NAME
+							// check the menuNameId
+							if (MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
+
+								// the menuNameId is MENU_ID
 								// check the menuItemActionID
-								if (ANTERIOR_MENU_ITEM_ACTION_NAME.equals(actionID.substring(indexOfSlash + 1))) {
-									// the MenuIdemActionId is ANTERIOR_MENU_ITEM_ACTION_NAME.
+								if (PRECEDING_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
+									// the MenuIdemActionId is PRECEDING_MENU_ITEM_ACTION_ID.
 									// add the action after this index.
-									menu.add(batchConvertMenuToolbar, i + 1);
+									currentMenu.add(batchConvertMenuToolbar, i + 1);
 
 									// break the loops.
 									j = menuBarSize;
@@ -150,18 +147,20 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 		}
 	}
-	
-	
+
 	/**
-	 * Create the Swing action which shows the current selection.
+	 * Create the Swing action which shows the converter according to converter type.
 	 * 
+	 * @param convertorType The type of converter.
 	 * @param pluginWorkspaceAccess
 	 *          The plugin workspace access.
-	 * @return The "Show Selection" action
+	 * @return The converter action
 	 */
 	@SuppressWarnings("serial")
-	private AbstractAction createConvertorAction(final String convertorType, final StandalonePluginWorkspace pluginWorkspaceAccess){
-		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, convertorType)) {
+	private AbstractAction createConvertorAction(final String converterType, 
+			final StandalonePluginWorkspace pluginWorkspaceAccess) {
+		
+		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)) {
 			@Override
 			public void actionPerformed(ActionEvent actionevent) {
 
@@ -169,30 +168,34 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
 
-				//if is not JMenu from Toolbar
-				if(! batchConvertMenuToolbar.equals(((JPopupMenu)menuItemAction.getParent()).getInvoker()) ){
-					//get the selectedFile from ProjectManager
-					selectedFile = ProjectManagerEditor.getSelectedFiles(pluginWorkspaceAccess, convertorType);
+				// if is not JMenu from Toolbar
+				if (!batchConvertMenuToolbar.equals(((JPopupMenu) menuItemAction.getParent()).getInvoker())) {
+					// get the selectedFile from ProjectManager
+					selectedFile = ProjectManagerEditor.getSelectedFiles(pluginWorkspaceAccess, converterType);
 				}
-				
-				ConvertorDialog convertorDialog = new ConvertorDialog(convertorType ,selectedFile,
+
+				ConverterDialog convertorDialog = new ConverterDialog(converterType, selectedFile,
 						(JFrame) pluginWorkspaceAccess.getParentFrame(), translator);
 
 			}
 		};
 	}
-	
-	private List<Action> createActionsList(StandalonePluginWorkspace pluginWorkspaceAccess){
+
+	/**
+	 * Create a list with Swing actions for all converters.
+	 * @param pluginWorkspaceAccess
+	 * @return
+	 */
+	private List<Action> createActionsList(StandalonePluginWorkspace pluginWorkspaceAccess) {
 		List<Action> toReturn = new ArrayList<Action>();
-		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DITA , pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML , pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_XHTML , pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DITA , pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON , pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML , pluginWorkspaceAccess));
-		
-		
+		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DITA, pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML, pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_XHTML, pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
+		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
+
 		return toReturn;
 	}
-	
+
 }

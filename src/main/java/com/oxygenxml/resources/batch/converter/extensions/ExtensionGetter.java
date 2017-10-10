@@ -1,9 +1,18 @@
 package com.oxygenxml.resources.batch.converter.extensions;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
-
+/**
+ * Getter for extensions.
+ * @author intern4
+ *
+ */
 public class ExtensionGetter {
 
+	/**
+	 * Get the input extensions according to given converter type.
+	 * @param converterType The converter type.
+	 * @return A vector with extensions or <code>null</code> if isn't declared a extension for given converter type.
+	 */
 	public static String[] getInputExtension(String converterType) {
 
 		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.HTML_TO_XHTML.equals(converterType)){
@@ -25,6 +34,12 @@ public class ExtensionGetter {
 	}
 
 	
+
+	/**
+	 * Get the output extension according to given converter type.
+	 * @param converterType The converter type.
+	 * @return The extension in String format or <code>null</code> if isn't declared a extension for given converter type.
+	 */
 	public static String getOutputExtension(String converterType){
 	
 		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)){

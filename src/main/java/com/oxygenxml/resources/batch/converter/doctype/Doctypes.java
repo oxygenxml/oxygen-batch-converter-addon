@@ -1,5 +1,10 @@
 package com.oxygenxml.resources.batch.converter.doctype;
 
+/**
+ * Document types.
+ * @author intern4
+ *
+ */
 public interface Doctypes {
 
 	/**

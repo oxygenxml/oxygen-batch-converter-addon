@@ -1,7 +1,7 @@
 package com.oxygenxml.resources.batch.converter.extensions;
 
 /**
- * The file types used in this app
+ * The files extensions.
  * 
  * @author intern4
  *

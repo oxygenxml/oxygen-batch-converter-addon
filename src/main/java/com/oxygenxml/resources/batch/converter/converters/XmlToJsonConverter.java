@@ -10,8 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
-import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
+import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
 /**
  * Converter implementation for XML to JSON.
@@ -43,10 +44,7 @@ public class XmlToJsonConverter implements Converter {
 			if (contentReader == null) {
 				contentToParse = ConverterFileUtils.readFile(originalFile);
 			} else {
-				int intValueOfChar;
-				while ((intValueOfChar = contentReader.read()) != -1) {
-					contentToParse += (char) intValueOfChar;
-				}
+				contentToParse = ConverterReaderUtils.getString(contentReader);
 			}
 
 			JSONObject jsonObj = XML.toJSONObject(contentToParse);

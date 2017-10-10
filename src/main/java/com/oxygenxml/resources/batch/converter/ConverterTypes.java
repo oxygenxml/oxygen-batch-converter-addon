@@ -6,7 +6,6 @@ package com.oxygenxml.resources.batch.converter;
  *
  */
 public interface ConverterTypes {
-//TODO maybe change to enum
 	/**
 	 * HTML -> XHTML
 	 */

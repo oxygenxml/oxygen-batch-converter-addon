@@ -1,9 +1,7 @@
 package com.oxygenxml.resources.batch.converter.printer;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.StringReader;
-import java.net.URL;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -13,14 +11,12 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.xml.sax.InputSource;
 
-import com.google.common.io.Files;
-import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
-import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 /**
- * Content printer
+ * Content pretty printer implementation.
  * 
  * @author intern4
  *
@@ -28,23 +24,20 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class ContentPrinterPrettyXmlImpl implements ContentPrinter {
 
 	/**
-	 * Prettify the given content and write in given output folder.
+	 * Prettify the given content and write in given output file.
 	 * 
-	 * @param contentToPrint
-	 * @param transformerCreator
-	 * @param currentDocument
-	 * @param outputFolder
-	 * @param converterType
+	 * @param contentToPrint The content to print.
+	 * @param transformerCreator A transformer creator.
+	 * @param converterType The type of converter.
+	 * @param outputFile The output file.
 	 * @throws TransformerException
 	 */
-	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, File currentDocument,
-			File outputFolder, String converterType) throws TransformerException {
+		public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, String converterType,
+				File outputFile)
+				throws TransformerException {
 
-		// create the trasformer
+		// create the transformer
 		Transformer transformer = transformerCreator.createTransformer(null);
-
-		File outFile = ConverterFileUtils.generateOutputFile(currentDocument, ExtensionGetter.getOutputExtension(converterType),
-				outputFolder);
 
 		// set the output properties
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
@@ -61,16 +54,15 @@ public class ContentPrinterPrettyXmlImpl implements ContentPrinter {
 		InputSource inputSource = new InputSource(new StringReader(contentToPrint));
 
 		// create a unique file path if actual exist
-		outFile = ConverterFileUtils.getFileWithCounter(outFile);
-
-		System.out.println("outputFile : " + outFile.toString());
+		outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
 
 		try {
 			// prettify and print
-			transformer.transform(new SAXSource(inputSource), new StreamResult(outFile));
+			transformer.transform(new SAXSource(inputSource), new StreamResult(outputFile));
 		} catch (TransformerException e) {
 			throw new TransformerException(e.getException().getMessage(), e.getException().getCause());
 		}
 	}
+
 
 }

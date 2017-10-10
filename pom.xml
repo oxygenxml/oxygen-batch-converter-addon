@@ -36,6 +36,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.elovirta.dita</groupId>
+			<artifactId>markdown</artifactId>
+			<version>1.3.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/markdown-1.3.0.jar</systemPath>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io -->
 		<dependency>
 			<groupId>org.apache.directory.studio</groupId>
@@ -43,21 +51,14 @@
 			<version>2.4</version>
 		</dependency>
 
-		 <dependency> 
-			<groupId>com.elovirta.dita</groupId> 
-			<artifactId>markdown</artifactId> 
-			<version>1.3.0</version> 
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/markdown-1.3.0.jar</systemPath>
-		</dependency>
-		<dependency> 
+		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>0.0.0</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/json.jar</systemPath>
 		</dependency>
-	
+
 		<!-- https://mvnrepository.com/artifact/net.sf.jtidy/jtidy -->
 		<dependency>
 			<groupId>net.sf.jtidy</groupId>
@@ -257,7 +258,7 @@
 				<version>1.14</version>
 				<configuration>
 					<licensesConfigFile>${project.basedir}/lib/license/licenses.xml</licensesConfigFile>
-					<includedScopes>compile</includedScopes>
+					<includedScopes>system,compile</includedScopes>
 					<sortByGroupIdAndArtifactId>true</sortByGroupIdAndArtifactId>
 				</configuration>
 				<executions>

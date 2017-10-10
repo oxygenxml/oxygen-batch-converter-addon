@@ -4,28 +4,37 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.xml.transform.TransformerException;
 
-import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
-import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
+/**
+ * A simple content printer implementation.
+ * @author intern4
+ *
+ */
 public class ContentPrinterImpl implements ContentPrinter {
 
+	/**
+	 * Print the given content in output file(The content isn't indented).
+	 * 
+	 * @param contentToPrint The content to print.
+	 * @param transformerCreator A transformer creator.
+	 * @param converterType The type of converter.
+	 * @param outputFile The output file.
+	 * @throws TransformerException
+	 */
 	@Override
-	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, File currentDocument,
-			File outputFolder, String converterType) throws TransformerException {
-
-		File outFile = ConverterFileUtils.generateOutputFile(currentDocument, ExtensionGetter.getOutputExtension(converterType),
-				outputFolder);
+		public void print(String contentToPrint, TransformerFactoryCreator transformerCreator,String converterType, File outputFile)
+				throws TransformerException {
 
 		// create a unique file path if actual exist
-		outFile = ConverterFileUtils.getFileWithCounter(outFile);
+		outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
 
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(outFile));
+			BufferedWriter out = new BufferedWriter(new FileWriter(outputFile));
 			out.write(contentToPrint);
 
 			try {
@@ -37,4 +46,5 @@ public class ContentPrinterImpl implements ContentPrinter {
 		}
 
 	}
+
 }

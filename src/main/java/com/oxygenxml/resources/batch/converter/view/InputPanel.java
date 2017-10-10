@@ -22,10 +22,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
-import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
@@ -69,9 +69,9 @@ public class InputPanel extends JPanel {
 	private Translator translator;
 
 	/**
-	 * Convertor interactor.
+	 * Converter interactor.
 	 */
-	private BatchConverterInteractor convertorInteractor;
+	private BatchConverterInteractor converterInteractor;
 
 
 	/**
@@ -79,7 +79,7 @@ public class InputPanel extends JPanel {
 	 */
 	public InputPanel(final String converterType, final Translator translator, final BatchConverterInteractor convertorInteractor) {
 		this.translator = translator;
-		this.convertorInteractor = convertorInteractor;
+		this.converterInteractor = convertorInteractor;
 
 		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, ""));
 		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE, ""));

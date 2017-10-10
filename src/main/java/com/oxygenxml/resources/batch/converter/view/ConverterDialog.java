@@ -13,52 +13,81 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
-import com.oxygenxml.resources.batch.converter.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
-import com.oxygenxml.resources.batch.converter.worker.ConvertorWorker;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
+import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
-public class ConvertorDialog extends OKCancelDialog implements BatchConverterInteractor{
+/**
+ * Converter dialog.
+ * @author intern4
+ *
+ */
+public class ConverterDialog extends OKCancelDialog implements BatchConverterInteractor{
 
+	/**
+	 * The input panel.
+	 */
 	private InputPanel inputPanel;
 	
+	/**
+	 * The output panel.
+	 */
 	private	OutputPanel outputPanel;
 
-	ConvertorWorker convertorWorker;
+	/**
+	 * Converter worker.
+	 */
+	private ConverterWorker converterWorker;
 	
+	/**
+	 * The parent frame.
+	 */
 	private JFrame parentFrame;
 
+	/**
+	 * Traslator.
+	 */
 	private Translator translator;
 
 	/**
-	 * The type of convertor.
+	 * The type of converter.
 	 */
-	private String convertorType;
+	private String converterType;
 
 	
-	public ConvertorDialog(String convertorType, List<String> toConvertFiles, JFrame parentFrame, Translator translator) {
+	/**
+	 * Constructor.
+	 * @param converterType The type of converter.
+	 * @param toConvertFiles List with files to convert.
+	 * @param parentFrame The parent frame.
+	 * @param translator Translator.
+	 */
+	public ConverterDialog(String converterType, List<String> toConvertFiles, JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
-		this.convertorType = convertorType;
+		this.converterType = converterType;
 		this.parentFrame = parentFrame;
 		this.translator = translator;
 
-		inputPanel = new InputPanel(convertorType, translator, this);
+		inputPanel = new InputPanel(converterType, translator, this);
 		outputPanel = new OutputPanel(translator);
 		
 		initGUI(translator);
 		
+		//if the given list with files is empty.
 		if(!toConvertFiles.isEmpty()){
 			getOkButton().setEnabled(true);
 			inputPanel.addFilesInTable(toConvertFiles);
+			//TODO to create the output file according to given files.
 		}
 		else{
 			getOkButton().setEnabled(false);
 		}
 		
-		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, convertorType));
+		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, converterType));
 		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
 		setResizable(true);
 		setMinimumSize(new Dimension(350, 300));
@@ -67,7 +96,11 @@ public class ConvertorDialog extends OKCancelDialog implements BatchConverterInt
 		setVisible(true);
 	}
 
-
+	/**
+	 * Initialize the GUI.
+	 * 
+	 * @param translator
+	 */
 	private void initGUI(Translator translator){
 		
 		JPanel convertorPanel = new JPanel( new GridBagLayout());
@@ -101,29 +134,32 @@ public class ConvertorDialog extends OKCancelDialog implements BatchConverterInt
 	protected void doOK() {
 
 		if (outputPanel.getOutputPath().isEmpty()) {
+			//output panel is empty.
+			//show a warning message.
 			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE,""));
 		} else {
 
+			//create a progress dialog
 			final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator);
 
-			convertorWorker = new ConvertorWorker(convertorType, this, progressDialog);
+			//create a converter worker.
+			converterWorker = new ConverterWorker(converterType, this, progressDialog);
 
+			//add a action listener on cancel button for progress dialog
 			progressDialog.addCancelActionListener(new ActionListener() {
-
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					convertorWorker.cancel(true);
+					converterWorker.cancel(true);
 					progressDialog.dispose();
 				}
 			});
 
-			convertorWorker.execute();
+			//start the worker.
+			converterWorker.execute();
 
 			super.doOK();
 		}
 	}
-
-
 
 
 	@Override

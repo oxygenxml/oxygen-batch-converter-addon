@@ -10,14 +10,14 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
 /**
- * Oxygen trasformer factory.
+ * Oxygen transformer factory.
  * @author intern4
  *
  */
 public class OxygenTransformerFactoryCreator implements TransformerFactoryCreator{
 
 	/**
-	 * Create a trasformer using  XMLUtilAccess.
+	 * Create a transformer using  XMLUtilAccess.
 	 */
 	@Override
 	public Transformer createTransformer(StreamSource streamSource) {

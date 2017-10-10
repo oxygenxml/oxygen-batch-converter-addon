@@ -13,7 +13,7 @@ import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
 
-public class ConvertorWorker extends SwingWorker<Void, Void> implements ConvertorWorkerInteractor {
+public class ConverterWorker extends SwingWorker<Void, Void> implements ConvertorWorkerInteractor {
 
 	private BatchConverterInteractor convertorInteractor;
 	private OxygenStatusReporter oxygenStatusReporter;
@@ -23,7 +23,7 @@ public class ConvertorWorker extends SwingWorker<Void, Void> implements Converto
 	private OxygenProblemReporter oxygenProblemReporter;
 	private String convertorType;
 
-	public ConvertorWorker(String convertorType, BatchConverterInteractor convertorInteractor,
+	public ConverterWorker(String convertorType, BatchConverterInteractor convertorInteractor,
 			ProgressDialogInteractor progressDialogInteractor) {
 		this.convertorType = convertorType;
 		this.convertorInteractor = convertorInteractor;

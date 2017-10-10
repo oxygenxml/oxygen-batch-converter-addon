@@ -13,9 +13,15 @@ import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.proxy.ProjectPopupMenuCustomizerInvocationHandler;
+import com.oxygenxml.resources.batch.converter.translator.Translator;
 
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 
+/**
+ * Project manager editor.
+ * @author intern4
+ *
+ */
 public class ProjectManagerEditor {
 
 	/**
@@ -24,7 +30,7 @@ public class ProjectManagerEditor {
 	private static final Logger logger = Logger.getLogger(ProjectManagerEditor.class);
 
 	/**
-	 * For 19.1 oxygen version add a MenuItem with given action in contextual menu
+	 * For 19.1 oxygen version add a Menu with given actions in contextual menu
 	 * of project manager. For older version than 19.1 do nothing.
 	 * 
 	 * @param pluginWorkspaceAccess
@@ -32,7 +38,7 @@ public class ProjectManagerEditor {
 	 * @param actions
 	 *          The actions to add
 	 */
-	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, List<Action> actions) {
+	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, List<Action> actions, Translator translator) {
 		// try to get method from 19.1 version
 		try {
 			// get the getProjectManager method
@@ -48,7 +54,7 @@ public class ProjectManagerEditor {
 			// create a ProxyInstance of projectPopupMenuCustomizer
 			Object proxyProjectPopupMenuCustomizerImpl = Proxy.newProxyInstance(
 					projectPopupMenuCustomizerClass.getClassLoader(), new Class[] { projectPopupMenuCustomizerClass },
-					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, actions));
+					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, actions, translator));
 
 			// get the project manager object
 			Object projectManager = getProjectManager.invoke(pluginWorkspaceAccess);
@@ -70,7 +76,7 @@ public class ProjectManagerEditor {
 	 * 
 	 * @param pluginWorkspaceAccess
 	 * @param converterType The type of converter.
-	 * @return If oxygen version is 19.1 return a list with URLs in String format,
+	 * @return If oxygen version is 19.1 return a list with files paths ,
 	 *         else return a empty list.
 	 */
 	public static List<String> getSelectedFiles(StandalonePluginWorkspace pluginWorkspaceAccess, String converterType) {

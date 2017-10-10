@@ -23,13 +23,14 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.converter.converters.Converter {
 
 	/**
-	 * Convert the markdown document from the given URL in DITA.
+	 * Convert Markdown to DITA.
 	 * 
-	 * @param originalFileLocation
-	 *          The URL location of document.
+	 * @param originalFile
+	 *          The Markdowm file.
 	 * @param contentReader
-	 *          Reader of the document.
-	 * @return The conversion in DITA.
+	 *          Reader of the document. If the content reader isn't <code>null</code>, 
+	 *          the converter will process this reader and will ignore the given file.
+	 * @return The converted DITA content in String format or <code>null</code> if conversion process failed.
 	 * @throws TransformerException
 	 */
 	@Override
@@ -52,13 +53,19 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 
 		try {
 			// input source of document to convert
-			final InputSource i = new InputSource(originalFileLocation.toURI().toString());
-
+			InputSource inputSource;
+			if (contentReader == null) {
+				inputSource = new InputSource(originalFileLocation.toURI().toString());
+			}
+			else{
+				inputSource = new InputSource(contentReader);
+			}
+			
 			StringWriter sw = new StringWriter();
 			StreamResult res = new StreamResult(sw);
 
 			// convert the document
-			transformer.transform(new SAXSource(r, i), res);
+			transformer.transform(new SAXSource(r, inputSource), res);
 
 			// get the converted content
 			toReturn = sw.toString();

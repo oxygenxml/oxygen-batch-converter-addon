@@ -21,7 +21,8 @@ public interface Converter {
 	 * @param originalFile
 	 *          The File to convert.
 	 * @param contentReader
-	 *          Reader of the document. This can be null.
+	 *          Reader of the document. If the content reader isn't <code>null</code>, 
+	 *          the converter will process this reader and will ignore the given file.
 	 * @param transformerCreator
 	 *          A transformer creator.
 	 * @return The converted content in String format.

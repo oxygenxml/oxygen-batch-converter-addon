@@ -1,12 +1,19 @@
-package com.oxygenxml.resources.batch.converter;
+package com.oxygenxml.resources.batch.converter.utils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * File utilities. 
+ * @author intern4
+ *
+ */
 public class ConverterFileUtils {
 
 	/**
@@ -18,20 +25,20 @@ public class ConverterFileUtils {
 	 * @throws IOException
 	 */
 	public static String readFile(File file) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		String toReturn = "";
+		
+		InputStream inputStream = new FileInputStream(file);
+		Reader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+		
+		toReturn = ConverterReaderUtils.getString(inputStreamReader);
+		
 		try {
-			StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-
-			while (line != null) {
-				sb.append(line);
-				sb.append("\n");
-				line = br.readLine();
-			}
-			return sb.toString();
-		} finally {
-			br.close();
+			inputStream.close();
+			inputStreamReader.close();
+		} catch (Exception e) {
 		}
+		
+		return toReturn;
 	}
 
 	/**
