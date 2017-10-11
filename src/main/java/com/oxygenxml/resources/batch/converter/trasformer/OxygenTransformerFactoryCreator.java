@@ -6,6 +6,10 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.log4j.Logger;
+
+import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
+
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
@@ -16,6 +20,11 @@ import ro.sync.exml.workspace.api.util.XMLUtilAccess;
  */
 public class OxygenTransformerFactoryCreator implements TransformerFactoryCreator{
 
+	/**
+	 * Logger
+	 */
+	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
+	
 	/**
 	 * Create a transformer using  XMLUtilAccess.
 	 */
@@ -40,7 +49,7 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 				  createXSLTTransformer(streamSource , null,
 				  	  XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
 		} catch (TransformerConfigurationException e) {
-			e.printStackTrace();
+			logger.debug(e.getMessage(), e);
 		}
 	
 		

@@ -2,7 +2,6 @@ package com.oxygenxml.resources.batch.converter.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -10,13 +9,10 @@ import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
@@ -103,13 +99,20 @@ public class OutputPanel extends JPanel{
 	}
 	
 	
-	//TODO add javaDoc(here and at constructor) or delete. 
+	/**
+	 * Get the output path from outputField
+	 * @return The output path.
+	 */
 	public String getOutputPath(){
 		return outputField.getText();
 	}
 	
-	public void setOutputPath(String text){
-		outputField.setText(text);
+	/**
+	 * Set the output path with given path.
+	 * @param text The output path to set.
+	 */
+	public void setOutputPath(String path){
+		outputField.setText(path);
 	}
 	
 }

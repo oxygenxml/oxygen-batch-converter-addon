@@ -17,14 +17,29 @@ import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
 import ro.sync.ecss.extensions.commons.ui.OKCancelDialog;
-
+/**
+ * Progress dialog
+ * @author intern4
+ *
+ */
 public class ProgressDialog extends OKCancelDialog implements ProgressDialogInteractor {
 
-
+	/**
+	 * Progress bar
+	 */
 	private JProgressBar progressBar;
+	/**
+	 * Label for notes.
+	 */
 	private JLabel noteLabel;
 	
-	public ProgressDialog(JFrame parentFrame, Translator translator) {
+	/**
+	 * Constructor
+	 * @param parentFrame Parent frame.
+	 * @param translator Translator. 
+	 * @param converterType The type of converter.
+	 */
+	public ProgressDialog(JFrame parentFrame, Translator translator, String converterType) {
 		super(parentFrame , "", true);
 		
 		noteLabel = new JLabel();
@@ -37,6 +52,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 	
 		GridBagConstraints gbc = new GridBagConstraints();
 		
+		// add the message from progress dialog
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(0, 15, 5, 15);
@@ -44,12 +60,14 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		panel.add(new JLabel(translator.getTranslation(Tags.PROGRESS_DIALOG_MESSAGE,"")), gbc);
 		
+		// add the progress bar
 		gbc.gridy++;
 		gbc.weightx = 1;
 		gbc.weighty = 1;
 		gbc.insets = new Insets(0, 5, 0, 5);
 		panel.add(progressBar, gbc);
 		
+		// add the label for post notes
 		gbc.gridy++;
 		gbc.weightx = 0;
 		gbc.insets = new Insets(0, 5, 10, 5);
@@ -57,7 +75,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 	
 		add(panel);
 		
-		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, ""));
+		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, converterType));
 		getOkButton().setVisible(false);
 		
 		setResizable(false);
@@ -66,6 +84,10 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 		
 	}
 
+	/**
+	 * Set the dialog visible.
+	 */
+	@Override
 	public void setDialogVisible(boolean state) {
 			SwingUtilities.invokeLater(new Runnable(){	
 			@Override
@@ -75,6 +97,10 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 			});
 	}
 
+	/**
+	 * Set the given note in label for notes.
+	 * @param note The note to set.
+	 */
 	@Override
 	public void setNote(final String note){
 		SwingUtilities.invokeLater(new Runnable() {
@@ -87,6 +113,9 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 		});
 	}
 	
+	/**
+	 * Close the dialog.
+	 */
 	@Override
 	public void close(){
 		SwingUtilities.invokeLater(new Runnable() {
@@ -100,9 +129,11 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 	}
 	
 	
+	/**
+	 * Add the given action listener to cancel buttons
+	 * @param actionListener Action listener to add.
+	 */
 	public void addCancelActionListener(ActionListener actionListener){
 		getCancelButton().addActionListener(actionListener);
 	}
 }
-
-

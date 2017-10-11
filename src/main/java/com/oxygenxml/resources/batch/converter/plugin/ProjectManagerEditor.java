@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.proxy.ProjectPopupMenuCustomizerInvocationHandler;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 
@@ -79,8 +80,8 @@ public class ProjectManagerEditor {
 	 * @return If oxygen version is 19.1 return a list with files paths ,
 	 *         else return a empty list.
 	 */
-	public static List<String> getSelectedFiles(StandalonePluginWorkspace pluginWorkspaceAccess, String converterType) {
-		List<String> toReturn = new ArrayList<String>();
+	public static List<File> getSelectedFiles(StandalonePluginWorkspace pluginWorkspaceAccess, String converterType) {
+		List<File> toReturn = new ArrayList<File>();
 		
 		// the input types
 		List<String> inputTypes = Arrays.asList(ExtensionGetter.getInputExtension(converterType) );
@@ -104,49 +105,13 @@ public class ProjectManagerEditor {
 			// iterate over files
 			int size = selectedFiles.length;
 			for (int i = 0; i < size; i++) {
-				toReturn.addAll(getAllFile(selectedFiles[i], inputTypes));
+				toReturn.addAll(ConverterFileUtils.getAllFiles(selectedFiles[i], inputTypes));
 			}
 
 		} catch (Exception e) {
 			logger.debug(e.getMessage(), e);
 		}
 
-		return toReturn;
-	}
-
-	/**
-	 * Recursive search for file according to extension list.
-	 * 
-	 * @param file
-	 *          The file or directory.
-	 * @param extensions A list with searched extensions.
-	 * @return A list with found files.
-	 */
-	private static List<String> getAllFile(File file, List<String> extensions) {
-		List<String> toReturn = new ArrayList<String>(); 
-		
-		if (file.isDirectory()) {
-			//it's a directory
-			// get the files from folder
-			File[] listOfFiles = file.listFiles();
-
-			if (listOfFiles != null) {
-				// iterate over files
-				int size = listOfFiles.length;
-				for (int i = 0; i < size; i++) {
-					toReturn.addAll(getAllFile(listOfFiles[i], extensions));
-				}
-			}
-		}
-		else{
-			//it's a file
-			String currentFile = file.toString();
-			String extension = currentFile.substring(currentFile.lastIndexOf(".") + 1);
-
-			if (extensions.contains(extension)) {
-				toReturn.add(currentFile);
-			}
-		}
 		return toReturn;
 	}
 }

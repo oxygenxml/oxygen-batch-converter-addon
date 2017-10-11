@@ -21,7 +21,7 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
  * @author intern4
  *
  */
-public class ContentPrinterPrettyXmlImpl implements ContentPrinter {
+public class PrettyContentPrinterImpl implements ContentPrinter {
 
 	/**
 	 * Prettify the given content and write in given output file.

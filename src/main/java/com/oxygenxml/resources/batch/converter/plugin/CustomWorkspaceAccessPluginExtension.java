@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter.plugin;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,7 +165,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			@Override
 			public void actionPerformed(ActionEvent actionevent) {
 
-				List<String> selectedFile = new ArrayList<String>();
+				List<File> selectedFile = new ArrayList<File>();
 
 				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
 

@@ -94,13 +94,12 @@ public class InputPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// open a URL chooser
+				// open a file chooser
 				File[] files = PluginWorkspaceProvider.getPluginWorkspace().chooseFiles(null, "", 
 						ExtensionGetter.getInputExtension(converterType),
 						"");
 
 				if (files != null) {
-
 					if (modelTable.getRowCount() == 0) {
 						convertorInteractor.setOutputFolder(files[0].getParent().toString() + File.separator + "output");
 					}
@@ -123,9 +122,10 @@ public class InputPanel extends JPanel {
 				File file = PluginWorkspaceProvider.getPluginWorkspace().chooseDirectory();
 
 				if (file != null) {
-					List<String> listToAdd = new ArrayList<String>();
+					List<File> listToAdd = new ArrayList<File>();
 
-					ConverterFileUtils.getFilesFromFolder(file, listToAdd, Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
+				listToAdd =	ConverterFileUtils.getAllFiles(file,
+						Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
 
 					if(!listToAdd.isEmpty()){
 						convertorInteractor.setOutputFolder(file.toString()+ File.separator + "output");
@@ -167,16 +167,15 @@ public class InputPanel extends JPanel {
 	/**
 	 * Get file from files table.
 	 * 
-	 * @return List with files in String format.
+	 * @return List with files.
 	 */
-	public List<String> getFilesFromTable() {
-		List<String> toReturn = new ArrayList<String>();
-
+	public List<File> getFilesFromTable() {
+		List<File> toReturn = new ArrayList<File>();
 		int size = modelTable.getRowCount();
+		
 		for (int i = 0; i < size; i++) {
-			toReturn.add(String.valueOf(modelTable.getValueAt(i, 0)));
+			toReturn.add( (File)modelTable.getValueAt(i, 0) );
 		}
-
 		return toReturn;
 	}
 
@@ -189,8 +188,8 @@ public class InputPanel extends JPanel {
 	public void addFilesInTable(File[] files) {
 		int size = files.length;
 		for (int i = 0; i < size; i++) {
-			if (!tableContains(files[i].toString())) {
-				modelTable.addRow(new String[] { files[i].toString() });
+			if (!tableContains(files[i])) {
+				modelTable.addRow(new File[] { files[i] });
 			}
 		}
 	}
@@ -201,11 +200,11 @@ public class InputPanel extends JPanel {
 	 * @param files
 	 *          List with files in string format.
 	 */
-	public void addFilesInTable(List<String> files) {
+	public void addFilesInTable(List<File> files) {
 		int size = files.size();
 		for (int i = 0; i < size; i++) {
-			if (!tableContains(files.get(i).toString())) {
-				modelTable.addRow(new String[] { files.get(i) });
+			if (!tableContains(files.get(i))) {
+				modelTable.addRow(new File[] { files.get(i) });
 			}
 		}
 	}
@@ -294,17 +293,17 @@ public class InputPanel extends JPanel {
 	};
 
 	/**
-	 * Check if table contains the given URL.
+	 * Check if table contains the given file.
 	 * 
-	 * @param url
-	 *          The URL in string format.
-	 * @return <code>true</code>>if URL is in table, <code>false</code>> if isn't.
+	 * @param file
+	 *          The file.
+	 * @return <code>true</code>>if file is in table, <code>false</code>> if isn't.
 	 */
-	private boolean tableContains(String url) {
+	private boolean tableContains(File file) {
 		boolean toReturn = false;
 		int size = modelTable.getRowCount();
 		for (int i = 0; i < size; i++) {
-			if (url.equals(modelTable.getValueAt(i, 0))) {
+			if (file.equals(modelTable.getValueAt(i, 0))) {
 				return true;
 			}
 		}

@@ -12,4 +12,10 @@ public interface StatusReporter {
 	 */
 	public void reportStatus(String message);
 
+	/**
+	 * Report the finish status that contains the result of conversion.
+	 * @param nuOfConverted The number of converted file.
+	 * @param nuOfFailed The number of files that aren't converted.
+	 */
+	public void reportFinishStatus(int nuOfConverted, int nuOfFailed);
 }

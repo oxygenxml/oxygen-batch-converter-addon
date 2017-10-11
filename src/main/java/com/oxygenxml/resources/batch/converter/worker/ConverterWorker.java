@@ -13,19 +13,53 @@ import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
 
+/**
+ * Worker that execute the conversion.
+ * @author intern4
+ *
+ */
 public class ConverterWorker extends SwingWorker<Void, Void> implements ConvertorWorkerInteractor {
-
+	/**
+	 * Batch converter interactor.
+	 */
 	private BatchConverterInteractor convertorInteractor;
+	/**
+	 * Status reporter.
+	 */
 	private OxygenStatusReporter oxygenStatusReporter;
+	/**
+	 * Translator
+	 */
 	private Translator translator;
+	
+	/**
+	 * The converter
+	 */
 	private BatchConverter convertor;
+	/**
+	 * Progress dialog interactor.
+	 */
 	private ProgressDialogInteractor progressDialogInteractor;
+	/**
+	 * Problem reporter.
+	 */
 	private OxygenProblemReporter oxygenProblemReporter;
-	private String convertorType;
+	/**
+	 * Converter type
+	 */
+	private String converterType;
 
-	public ConverterWorker(String convertorType, BatchConverterInteractor convertorInteractor,
+	
+	
+	/**
+	 * Constructor
+	 * @param converterType The type of convertor.
+	 * @param convertorInteractor A converter interactor.
+	 * @param progressDialogInteractor A progress dialog interactor.
+	 */
+	public ConverterWorker(String converterType, BatchConverterInteractor convertorInteractor,
 			ProgressDialogInteractor progressDialogInteractor) {
-		this.convertorType = convertorType;
+		this.converterType = converterType;
 		this.convertorInteractor = convertorInteractor;
 		this.progressDialogInteractor = progressDialogInteractor;
 		oxygenStatusReporter = new OxygenStatusReporter();
@@ -33,30 +67,32 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 		translator = new OxygenTranslator();
 	}
 
+
+	/**
+	 * Convert the files.
+	 * Note: this method is executed in a background thread.
+	 */
 	@Override
 	protected Void doInBackground() {
-
+		//report the progress status
 		oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.PROGRESS_STATUS, ""));
 
+		//set the progress dialog visible 
 		progressDialogInteractor.setDialogVisible(true);
 
+		//delete reported problems from other conversion
 		oxygenProblemReporter.deleteReportedProblems();
-		
-		convertor = new BatchConverterImpl(oxygenProblemReporter, progressDialogInteractor, this,
+
+		//create the converter
+		convertor = new BatchConverterImpl(oxygenProblemReporter, oxygenStatusReporter, progressDialogInteractor, this,
 				new OxygenTransformerFactoryCreator());
 
-		boolean isSuccesfully = convertor.convertFiles(convertorType,
-				convertorInteractor.getInputFiles(), convertorInteractor.getOutputFolder());
+		//convert the files
+		convertor.convertFiles(converterType,	convertorInteractor.getInputFiles(), convertorInteractor.getOutputFolder());
 
-		if (isSuccesfully) {
-			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.SUCCESS_STATUS, ""));
-		} else {
-			oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.FAIL_STATUS, ""));
-		}
-
+		//close the progress dialog
 		progressDialogInteractor.close();
 
 		return null;
 	}
-
 }

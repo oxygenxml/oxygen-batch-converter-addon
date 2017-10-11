@@ -5,16 +5,14 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
-import org.apache.log4j.Logger;
-
 import com.oxygenxml.resources.batch.converter.converters.Converter;
 import com.oxygenxml.resources.batch.converter.converters.ConverterCreator;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
-import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
+import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
@@ -31,6 +29,12 @@ public class BatchConverterImpl implements BatchConverter {
 	 * Problem reporter.
 	 */
 	private ProblemReporter problemReporter;
+	
+	/**
+	 * Status reporter.
+	 */
+	private StatusReporter statusReporter;
+	
 	/**
 	 * Progress dialog interactor.
 	 */
@@ -44,11 +48,6 @@ public class BatchConverterImpl implements BatchConverter {
 	 */
 	private TransformerFactoryCreator transformerFactoryCreator;
 
-	/**
-	 * Logger
-	 */
-	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
-	
 	
 	/**
 	 * Constructor.
@@ -62,10 +61,12 @@ public class BatchConverterImpl implements BatchConverter {
 	 * @param transformerFactoryCreator
 	 *          Transformer factory creator.
 	 */
-	public BatchConverterImpl(ProblemReporter problemReporter, ProgressDialogInteractor progressDialogInteractor,
-			ConvertorWorkerInteractor workerInteractor, TransformerFactoryCreator transformerFactoryCreator) 
+	public BatchConverterImpl(ProblemReporter problemReporter, StatusReporter statusReporter,
+			ProgressDialogInteractor progressDialogInteractor, ConvertorWorkerInteractor workerInteractor,
+			TransformerFactoryCreator transformerFactoryCreator) 
 	{
 		this.problemReporter = problemReporter;
+		this.statusReporter = statusReporter;
 		this.progressDialogInteractor = progressDialogInteractor;
 		this.workerInteractor = workerInteractor;
 		this.transformerFactoryCreator = transformerFactoryCreator;
@@ -90,6 +91,12 @@ public class BatchConverterImpl implements BatchConverter {
 		// flag to return
 		boolean isSuccessfully = true;
 
+		//number of converted files
+		int convertedFile = 0;
+		
+		//number of failed files
+		int failedFile = 0;
+		
 		// converted content
 		String convertedContent = "";
 
@@ -99,6 +106,7 @@ public class BatchConverterImpl implements BatchConverter {
 		// create a content printer
 		ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
 
+		
 		if (converter != null) {
 			// iterate over files
 			int size = inputFiles.size();
@@ -107,6 +115,7 @@ public class BatchConverterImpl implements BatchConverter {
 				// check if worker was interrupted
 				if (workerInteractor.isCancelled()) {
 					isSuccessfully = false;
+					failedFile += size-i;
 					// break the loop
 					break;
 				}
@@ -128,23 +137,24 @@ public class BatchConverterImpl implements BatchConverter {
 						
 						// print the converted content.
 						contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile);
+					
+						convertedFile ++;
 					}
 
 				} catch (TransformerException e) {
 					problemReporter.reportProblem(e, currentFile);
 					isSuccessfully = false;
-					
-				} catch (Throwable e) {
-					logger.debug(e.getMessage(), e);
-					//TODO delete printStackTrace();
-					e.printStackTrace();
+					failedFile ++;
 				}
 			}
 
 		} else {
 			isSuccessfully = false;
+			failedFile = inputFiles.size();
 		}
 
+		//report the finish status
+		statusReporter.reportFinishStatus(convertedFile, failedFile);
 		return isSuccessfully;
 	}
 }

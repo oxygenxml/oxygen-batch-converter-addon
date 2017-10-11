@@ -33,7 +33,7 @@ public interface FileExtensionType {
 	public final String XHTML_OUTPUT_EXTENSION = "xhtml";
 
 	/**
-	 * Dita output type
+	 * DITA output type
 	 */
 	public final String DITA_OUTPUT_EXTENSION = "dita";
 

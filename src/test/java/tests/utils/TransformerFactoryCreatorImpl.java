@@ -9,6 +9,11 @@ import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
 
+/**
+ * Implementation of TransformerFactoryCreator for JUnits 
+ * @author intern4
+ *
+ */
 public class TransformerFactoryCreatorImpl
 		implements com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator {
 

@@ -20,7 +20,7 @@ public class OxygenStatusReporter implements StatusReporter {
 	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
 	
 	 /**
-	  * Report the given massage.
+	  * Report the given message.
 	  * @param message Massage to report.
 	  */
 	@Override
@@ -41,4 +41,30 @@ public class OxygenStatusReporter implements StatusReporter {
 		
 	}
 
+	/**
+	 * Report the finish status that contains the result of conversion.
+	 * @param nuOfConverted The number of converted file.
+	 * @param nuOfFailures  The number of files that aren't converted.
+	 */
+	@Override
+	public void reportFinishStatus(final int nuOfConverted, final int nuOfFailures) {
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				
+				@Override
+				public void run() {
+					String message = nuOfConverted + " resources converted, " + nuOfFailures + " failures";
+					PluginWorkspaceProvider.getPluginWorkspace().showStatusMessage(message);
+				}
+			});
+		} catch (InvocationTargetException e) {
+			logger.debug(e.getMessage(), e);
+		} catch (InterruptedException e) {
+			logger.debug(e.getMessage(), e);
+		}
+		
+		
+	}
+
+	
 }

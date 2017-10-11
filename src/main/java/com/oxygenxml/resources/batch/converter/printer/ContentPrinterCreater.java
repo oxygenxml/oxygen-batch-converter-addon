@@ -12,9 +12,9 @@ public class ContentPrinterCreater {
 	public static ContentPrinter create(String converterType){
 		if(ConverterTypes.XML_TO_JSON.equals(converterType)){
 			//return a printer that does't edit(indent) the content of conversion.
-			return new ContentPrinterImpl();
+			return new SimpleContentPrinterImpl();
 		}
 			//return a printer that prettify the content.
-		else return new ContentPrinterPrettyXmlImpl();
+		else return new PrettyContentPrinterImpl();
 	}
 }

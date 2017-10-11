@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
-import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -66,7 +65,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 * @param parentFrame The parent frame.
 	 * @param translator Translator.
 	 */
-	public ConverterDialog(String converterType, List<String> toConvertFiles, JFrame parentFrame, Translator translator) {
+	public ConverterDialog(String converterType, List<File> toConvertFiles, JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
 		this.converterType = converterType;
 		this.parentFrame = parentFrame;
@@ -77,11 +76,13 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		
 		initGUI(translator);
 		
-		//if the given list with files is empty.
+		//if the given list with files isn't empty.
 		if(!toConvertFiles.isEmpty()){
 			getOkButton().setEnabled(true);
 			inputPanel.addFilesInTable(toConvertFiles);
-			//TODO to create the output file according to given files.
+
+			//set the output folder according to given files to be converted
+			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent().toString() + File.separator + "output");
 		}
 		else{
 			getOkButton().setEnabled(false);
@@ -140,7 +141,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		} else {
 
 			//create a progress dialog
-			final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator);
+			final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator, converterType);
 
 			//create a converter worker.
 			converterWorker = new ConverterWorker(converterType, this, progressDialog);
@@ -164,7 +165,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 
 	@Override
 	public List<File> getInputFiles() {
-		return ConverterFileUtils.convertToFile(inputPanel.getFilesFromTable());
+		return inputPanel.getFilesFromTable();
 	}
 
 

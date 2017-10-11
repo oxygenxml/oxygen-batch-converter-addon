@@ -41,65 +41,46 @@ public class ConverterFileUtils {
 		return toReturn;
 	}
 
+
 	/**
-	 * Cast a list of String to a list of File.
+	 * Recursive search for file according to extension list.
 	 * 
-	 * @param list
-	 * @return
-	 */
-	public static List<File> convertToFile(List<String> list) {
+	 * @param file
+	 *          The file or directory.
+	 * 
+	 * @param extensionsFiles
+	 *          The extensions.
+	 */ 
+	public static List<File> getAllFiles(File file, List<String> extensionsFiles) {
+
 		List<File> toReturn = new ArrayList<File>();
-		String currentElement;
-		File currentFile;
 
-		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			currentElement = list.get(i);
-
-			currentFile = new File(currentElement);
-			toReturn.add(currentFile);
-
-		}
-		return toReturn;
-	}
-
-	/**
-	 * Get all urls of html or markdown files from given folder and add in given
-	 * list
-	 * 
-	 * @param folder
-	 *          The file of folder.
-	 * @param listUrlFiles
-	 *          The list.
-	 */
-	// TODO add javadoc ; add a return type
-	public static void getFilesFromFolder(File folder, List<String> listUrlFiles, List<String> extensionsFiles) {
-		// get the files from folder
-		File[] listOfFiles = folder.listFiles();
-
-		if (listOfFiles != null) {
-
-			// iterate over files
-			int size = listOfFiles.length;
-			for (int i = 0; i < size; i++) {
-
-				// check if is a file
-				if (listOfFiles[i].isFile()) {
-					String currentfile = listOfFiles[i].getPath();
-
-					String extension = currentfile.substring(currentfile.lastIndexOf(".") + 1);
-					// check the extension
-					if (extensionsFiles.contains(extension)) {
-						listUrlFiles.add(currentfile);
-					}
-
-					// check if is a directory
-				} else if (listOfFiles[i].isDirectory()) {
-					getFilesFromFolder(listOfFiles[i], listUrlFiles, extensionsFiles);
+		if (file.isDirectory()) {
+			// the given file is a directory.
+			// get the files from folder
+			File[] listOfFiles = file.listFiles();
+			
+			if (listOfFiles != null) {
+				// iterate over files
+				int size = listOfFiles.length;
+				for (int i = 0; i < size; i++) {
+					toReturn.addAll(getAllFiles(listOfFiles[i], extensionsFiles));
 				}
+			}
+			
+		} else {
+			// get the fileName
+			String fileName = file.getName();
+			// get the extension
+			String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+			// check the extension
+			if (extensionsFiles.contains(extension)) {
+				toReturn.add(file);
 			}
 		}
 
+		return toReturn;
 	}
 
 	/**

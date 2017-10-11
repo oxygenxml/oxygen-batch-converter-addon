@@ -25,8 +25,14 @@ import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
 import tests.utils.ProblemReporterTestImpl;
 import tests.utils.ProgressDialogInteractorTestImpl;
+import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 
+/**
+ * JUnit for Markdown to Xhtml conversion.
+ * @author intern4
+ *
+ */
 public class MdToXhtmlTest {
 
 	@Test
@@ -39,7 +45,7 @@ public class MdToXhtmlTest {
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
 		
-		BatchConverter converter = new BatchConverterImpl(problemReporter, new ProgressDialogInteractorTestImpl(),
+		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
 		List<File> inputFiles = new ArrayList<File>();

@@ -30,8 +30,8 @@ public class HtmlToXhtmlConverter implements Converter {
 	 * @return The converted XHTML content..        
 	 */
 	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
-	//XHTML content to be return
-			String toReturn = null;
+		//XHTML content to be return
+		String toReturn = null;
 
 			try {
 				StringWriter sw = new StringWriter();
