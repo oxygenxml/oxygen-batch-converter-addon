@@ -13,7 +13,7 @@ before_script:
   - ./travis/checkForTag.sh
 script:
  - mvn clean
- - mvn clean install
+ - mvn install
 before_deploy:
   - ./travis/deploy.sh
 deploy:
