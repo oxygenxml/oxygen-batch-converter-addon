@@ -12,7 +12,8 @@ before_script:
   - echo "https://${MY_GH_TOKEN_OXYGEN}:@github.com" > .git/credentials
   - ./travis/checkForTag.sh
 script:
- - mvn install
+ - mvn clean
+ - mvn clean install
 before_deploy:
   - ./travis/deploy.sh
 deploy:
