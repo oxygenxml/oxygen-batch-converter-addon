@@ -34,6 +34,9 @@ public class ConverterCreator {
 		else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
 			return new JsonToXmlConverter();
 		}
+		else if(ConverterTypes.MD_TO_DB5.equals(converterType)){
+			return new MarkdownToDocbook5Converter();
+		}
 		return null;
 	}
 }

@@ -14,10 +14,6 @@ public interface Tags {
 	public final String MENU_TEXT = "Menu_Text_Conv";
 	
 	/**
-	 * The hint from the icon.
-	 */
-	public final String ICON_HINT = "Icon_Hint_Conv";
-	/**
 	 * Title of checker frame
 	 */
 	public final String DIALOG_TITLE = "Dialog_Title_Conv";

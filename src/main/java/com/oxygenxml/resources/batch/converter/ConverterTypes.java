@@ -30,5 +30,10 @@ public interface ConverterTypes {
 	 * JSON -> XML
 	 */
 	public final static String JSON_TO_XML = "_json.to.xml";
+	
+	/**
+	 * MARKDOWN -> Docbook5
+	 */
+	public final static String MD_TO_DB5 = "_md.to.db5";
 
 }

@@ -10,7 +10,7 @@ public class ContentPrinterCreater {
 	 * @return The contentPrinter
 	 */
 	public static ContentPrinter create(String converterType){
-		if(ConverterTypes.XML_TO_JSON.equals(converterType)){
+		if(ConverterTypes.XML_TO_JSON.equals(converterType) || ConverterTypes.MD_TO_DB5.equals(converterType)){
 			//return a printer that does't edit(indent) the content of conversion.
 			return new SimpleContentPrinterImpl();
 		}

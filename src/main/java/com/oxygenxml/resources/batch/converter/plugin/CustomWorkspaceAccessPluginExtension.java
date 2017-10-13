@@ -195,7 +195,9 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
 		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
 		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
-
+		//root problem 
+		//toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
+		
 		return toReturn;
 	}
 

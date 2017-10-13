@@ -19,7 +19,8 @@ public class ExtensionGetter {
 			return FileExtensionType.INPUT_HTML_EXTENSIONS;
 
 		}
-		else if(ConverterTypes.MD_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){
+		else if(ConverterTypes.MD_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType) 
+				|| ConverterTypes.MD_TO_DB5.equals(converterType)){
 			return FileExtensionType.INPUT_MD_EXTENSIONS;
 		}
 		else if(ConverterTypes.XML_TO_JSON.equals(converterType)) {
@@ -51,7 +52,7 @@ public class ExtensionGetter {
 		else if(ConverterTypes.XML_TO_JSON.equals(converterType)) {
 			return FileExtensionType.JSON_OUTPUT_EXTENSION;
 		}
-		else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
+		else if(ConverterTypes.JSON_TO_XML.equals(converterType) || ConverterTypes.MD_TO_DB5.equals(converterType)){
 			return FileExtensionType.XML_OUTPUT_EXTENSION;
 		}
 			return null;

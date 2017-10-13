@@ -39,7 +39,7 @@ public class OutputPanel extends JPanel{
 	/**
 	 * Path to icon for button that open the directory chooser.
 	 */
-	private static final String CHOOSER_ICON = "images/chooser.png";
+	private static final String CHOOSER_ICON = "images/Open16.png";
 	
 
 	public OutputPanel(Translator translator) {

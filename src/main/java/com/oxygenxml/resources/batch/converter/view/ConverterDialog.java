@@ -57,6 +57,10 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 */
 	private String converterType;
 
+	/**
+	 * Link to GitHub repository description.
+	 */
+	private static final String LINK_TO_GIT_HUB = "https://github.com/oxygenxml/oxygen-resources-convertor";
 	
 	/**
 	 * Constructor.
@@ -186,5 +190,9 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		getOkButton().setEnabled(state);
 	}
 
-	
+	@Override
+	public String getHelpPageID() {
+		return LINK_TO_GIT_HUB;
+	}
+
 }
