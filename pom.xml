@@ -145,6 +145,10 @@
 					<artifactId>ant-apache-resolver</artifactId>
 				</exclusion>
 
+				<exclusion>
+					<groupId>com.ibm.icu</groupId>
+					<artifactId>icu4j</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
