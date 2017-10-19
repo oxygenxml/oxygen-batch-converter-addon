@@ -11,7 +11,7 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 
 ## Installation
 
-The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1. 
+The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1 or newer. 
 
 You can install the add-on by using Oxygen's add-ons support. In Oxygen, go to Help->Install new add-ons... and use this add-on repository URL:
 
