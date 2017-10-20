@@ -24,7 +24,7 @@ import ro.sync.exml.workspace.api.standalone.MenuBarCustomizer;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 
 /**
- * Plugin extension - workspace access extension.
+ * Plugin extension - Resources Batch Converter
  */
 public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPluginExtension {
 

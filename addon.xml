@@ -18,7 +18,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
             </head>
             <body>
                 <div>
-                    <p>Oxygen XML plugin which allows conversion of HTML/Markdown to XHTML/DITA </p>
+                    <p>Oxygen XML plugin which allows batch conversion.</p>
                     <p>For more details see <a
                         href="https://github.com/oxygenxml/oxygen-resources-convertor"
                         >https://github.com/oxygenxml/oxygen-resources-convertor</a>

@@ -3,9 +3,9 @@
 <!DOCTYPE plugin SYSTEM "../plugin.dtd">
 
 <plugin
- id="com.oxygenxml.plugin.WorkspaceAccess"
- name="CustomWorkspaceAccess"
- description="Test"
+ id="com.oxygenxml.batch.converter"
+ name="ResourcesBatchConverter"
+ description="Oxygen XML plugin which allows batch conversion."
  version="${project.version}"
  vendor="oXygen XML"
  class="com.oxygenxml.resources.batch.converter.plugin.WorkspaceAccessPlugin"
@@ -19,9 +19,4 @@
  
  <extension type="WorkspaceAccess" 
   class="com.oxygenxml.resources.batch.converter.plugin.CustomWorkspaceAccessPluginExtension"/>
- 
-  <!--The sample view which will present messages from the sample plugin.-->
-  <view id="SampleWorkspaceAccessID" initialSide="WEST" initialRow="0"/>
-  <!--The sample toolbar which will present messages from the sample plugin.-->
-  <toolbar id="SampleWorkspaceAccessToolbarID" initialSide="NORTH" initialRow="1"/>
 </plugin>
