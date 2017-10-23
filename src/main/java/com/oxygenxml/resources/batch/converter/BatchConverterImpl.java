@@ -106,6 +106,10 @@ public class BatchConverterImpl implements BatchConverter {
 		// create a content printer
 		ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
 
+		//make the output directory if it doesn't exist
+		if(!outputFolder.exists()){
+			outputFolder.mkdirs();
+		}
 		
 		if (converter != null) {
 			// iterate over files

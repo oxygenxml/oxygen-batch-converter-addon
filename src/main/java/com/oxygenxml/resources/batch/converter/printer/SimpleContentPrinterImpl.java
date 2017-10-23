@@ -8,6 +8,9 @@ import java.io.OutputStreamWriter;
 
 import javax.xml.transform.TransformerException;
 
+import org.apache.log4j.Logger;
+
+import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
@@ -18,7 +21,11 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
  *
  */
 public class SimpleContentPrinterImpl implements ContentPrinter {
-
+	/**
+	 * Logger
+	 */
+	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
+	
 	/**
 	 * Print the given content in output file(The content isn't indented).
 	 * 
@@ -54,7 +61,8 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 		finally {
 			try {
 				writer.close();
-			} catch (IOException e) {
+			} catch (Exception e) {
+				logger.debug(e.getMessage(), e);
 			}
 		}
 
