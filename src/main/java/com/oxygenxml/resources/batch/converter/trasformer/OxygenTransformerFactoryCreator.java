@@ -29,11 +29,11 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 	 * Create a transformer using  XMLUtilAccess.
 	 */
 	@Override
-	public Transformer createTransformer(StreamSource streamSource) {
+	public Transformer createTransformer(StreamSource styleSource) {
 		Transformer transformer = null;
 		
-		if(streamSource == null){
-			streamSource = new StreamSource(new StringReader(
+		if(styleSource == null){
+			styleSource = new StreamSource(new StringReader(
 					  "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n"
 					  + "    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
 					  "    exclude-result-prefixes=\"xs\"\n" + "    version=\"2.0\">\n" +
@@ -46,7 +46,7 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 		
 		try {
 			transformer = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
-				  createXSLTTransformer(streamSource , null,
+				  createXSLTTransformer(styleSource , null,
 				  	  XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
 		} catch (TransformerConfigurationException e) {
 			logger.debug(e.getMessage(), e);

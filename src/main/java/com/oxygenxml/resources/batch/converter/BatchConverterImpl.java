@@ -10,6 +10,7 @@ import com.oxygenxml.resources.batch.converter.converters.ConverterCreator;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
+import com.oxygenxml.resources.batch.converter.printer.StyleSourceGetter;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
@@ -140,7 +141,8 @@ public class BatchConverterImpl implements BatchConverter {
 								ExtensionGetter.getOutputExtension(converterType), outputFolder);
 						
 						// print the converted content.
-						contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile);
+						contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile, 
+								StyleSourceGetter.getStyleSource(converterType));
 					
 						convertedFile ++;
 					}

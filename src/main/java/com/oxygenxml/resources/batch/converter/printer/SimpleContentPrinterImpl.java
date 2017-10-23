@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
@@ -37,11 +38,12 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 	 *          The type of converter.
 	 * @param outputFile
 	 *          The output file.
+	 * @param styleSource This is not used.
 	 * @throws TransformerException
 	 */
 	@Override
 	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, String converterType,
-			File outputFile) throws TransformerException {
+			File outputFile, StreamSource styleSource) throws TransformerException {
 
 		// create a unique file path if actual exist
 		outputFile = ConverterFileUtils.getFileWithCounter(outputFile);

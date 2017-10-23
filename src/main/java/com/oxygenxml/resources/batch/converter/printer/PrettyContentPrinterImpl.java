@@ -8,6 +8,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.xml.sax.InputSource;
 
@@ -30,14 +31,15 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 	 * @param transformerCreator A transformer creator.
 	 * @param converterType The type of converter.
 	 * @param outputFile The output file.
+	 * @param styleSource The source XSL, or <code>null</code> 
 	 * @throws TransformerException
 	 */
 		public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, String converterType,
-				File outputFile)
+				File outputFile,  StreamSource styleSource)
 				throws TransformerException {
 
 		// create the transformer
-		Transformer transformer = transformerCreator.createTransformer(null);
+		Transformer transformer = transformerCreator.createTransformer(styleSource);
 
 		// set the output properties
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
