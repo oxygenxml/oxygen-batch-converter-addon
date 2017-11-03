@@ -23,6 +23,13 @@ then continue the installation process.
 ## Converting a document:
 
 1. Select the type of conversion from the **Tools -> Batch Converter** submenu.
-2. Add the **Input files**.
-3. Choose the path of the **Output folder** that will contain the converted document.
-4. Click the **Convert** button.
+1. Add the **Input files**.
+1. Choose the path of the **Output folder** that will contain the converted document.
+1. Click the **Convert** button.
+
+or:
+
+1. Select a folder or a set of files in the Project view, right click, choose **Batch Convertor** 
+1. Choose the path of the **Output folder** that will contain the converted document.
+1. Click the **Convert** button.
+
