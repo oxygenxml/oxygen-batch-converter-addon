@@ -90,7 +90,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 		batchConvertMenuToolbar = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
-		//add actions in batchConvertMenuToolbar 
+		// add actions in batchConvertMenuToolbar
 		int size = actionsToAdd.size();
 		for (int i = 0; i < size; i++) {
 			batchConvertMenuToolbar.add(new JMenuItem(actionsToAdd.get(i)));
@@ -106,7 +106,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			JMenu currentMenu = mainMenuBar.getMenu(j);
 
 			if (currentMenu != null) {
-				//iterate over menu items in currentMenu 
+				// iterate over menu items in currentMenu
 				int sizeMenu = currentMenu.getItemCount();
 				for (int i = 0; i < sizeMenu; i++) {
 
@@ -118,27 +118,29 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 							// get the actionID
 							String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
 
-							// The actionId is in format: menuNameId/menuItemActionID
-							int indexOfSlash = actionID.indexOf("/");
+							if (actionID != null) {
+								// The actionId is in format: menuNameId/menuItemActionID
+								int indexOfSlash = actionID.indexOf("/");
 
-							// check the menuNameId
-							if (MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
+								// check the menuNameId
+								if (MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
 
-								// the menuNameId is MENU_ID
-								// check the menuItemActionID
-								if (PRECEDING_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
-									// the MenuIdemActionId is PRECEDING_MENU_ITEM_ACTION_ID.
-									// add the action after this index.
-									currentMenu.add(batchConvertMenuToolbar, i + 1);
+									// the menuNameId is MENU_ID
+									// check the menuItemActionID
+									if (PRECEDING_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
+										// the MenuIdemActionId is PRECEDING_MENU_ITEM_ACTION_ID.
+										// add the action after this index.
+										currentMenu.add(batchConvertMenuToolbar, i + 1);
 
-									// break the loops.
-									j = menuBarSize;
+										// break the loops.
+										j = menuBarSize;
+										break;
+									}
+
+								} else {
+									// the menuNameId is not MENU_NAME
 									break;
 								}
-
-							} else {
-								// the menuNameId is not MENU_NAME
-								break;
 							}
 						}
 

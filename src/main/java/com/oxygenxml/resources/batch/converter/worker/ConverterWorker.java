@@ -1,5 +1,7 @@
 package com.oxygenxml.resources.batch.converter.worker;
 
+import java.io.File;
+
 import javax.swing.SwingWorker;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -12,6 +14,11 @@ import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
+
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
+import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 
 /**
  * Worker that execute the conversion.
@@ -90,6 +97,13 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 		//convert the files
 		convertor.convertFiles(converterType,	convertorInteractor.getInputFiles(), convertorInteractor.getOutputFolder());
 
+		//refresh the output folder from the project manager.
+		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();		
+		ProjectController projectManager = ((StandalonePluginWorkspace)pluginWorkspace).getProjectManager();
+		
+		projectManager.refreshFolders(new File[]{convertorInteractor.getOutputFolder().getParentFile()});
+		
+		
 		//close the progress dialog
 		progressDialogInteractor.close();
 
