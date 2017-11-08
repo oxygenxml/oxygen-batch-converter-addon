@@ -91,17 +91,21 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 
 				//get the index of predecessor item.
 				int index = 0;
-				for ( index = 0; index < size; index++) {
-					try {
-						JMenuItem item = (JMenuItem) popupMenu.getComponent(index);
-						
-						if(PREDECESSOR_ITEM_ACTION_ID.equals(pluginWorkspaceAccess.getOxygenActionID(item.getAction()))){
+				for (index = 0; index < size; index++) {
+
+					// get the current element
+					Object currentElement = popupMenu.getComponent(index);
+
+					if (currentElement instanceof JMenuItem) {
+						JMenuItem item = (JMenuItem) currentElement;
+
+						if (PREDECESSOR_ITEM_ACTION_ID.equals(pluginWorkspaceAccess.getOxygenActionID(item.getAction()))) {
+							// the predecessor index was found.
 							break;
 						}
-					} catch (Exception e) {
 					}
 				}
-
+				
 				// add a separator
 				popupMenu.addSeparator();
 

@@ -224,9 +224,10 @@ public class InputPanel extends JPanel {
 	 */
 	private void initPanel() {
 
-		modelTable = new DefaultTableModel(new String[] { translator.getTranslation(Tags.FILES_TABLE_HEAD, "") }, 0);
+		modelTable = new DefaultTableModel(0, 1);
 		// set modal on table
 		tableFiles.setModel(modelTable);
+		tableFiles.setTableHeader(null);
 
 		// add list selection listener on table
 		tableFiles.getSelectionModel().addListSelectionListener(listSelectionListener);

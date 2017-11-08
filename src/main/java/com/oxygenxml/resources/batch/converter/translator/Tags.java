@@ -30,11 +30,6 @@ public interface Tags {
 	public final String ADD_INPUT_FILES_LABEL = "Add_Input_Label_Conv";
 
 	/**
-	 * The head of the table with input files.
-	 */
-	public final String FILES_TABLE_HEAD = "File_Table_Head_Conv";
-	
-	/**
 	 * Add file button of table.
 	 */
 	public final String ADD_FILE_TABLE = "Add_File_Table_Button_Conv"; 
