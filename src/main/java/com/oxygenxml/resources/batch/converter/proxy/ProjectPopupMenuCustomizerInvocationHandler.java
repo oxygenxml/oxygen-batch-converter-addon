@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -77,6 +78,10 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 				// create a menu
 				JMenu batchConvertMenu = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
+				ImageIcon imageIcon = new ImageIcon();
+				//set a empty icon(because the alignment will be wrong on MacOS without a icon)
+				batchConvertMenu.setIcon(imageIcon);
+				
 				//add actions in batchConvertMenu
 				int sizeList = actions.size();
 				for (int i = 0; i < sizeList; i++) {

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -89,7 +90,11 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
 		batchConvertMenuToolbar = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
-
+		
+		//set a empty icon(because the alignment will be wrong on MacOS without a icon)
+		ImageIcon imageIcon = new ImageIcon();
+		batchConvertMenuToolbar.setIcon(imageIcon);
+		
 		// add actions in batchConvertMenuToolbar
 		int size = actionsToAdd.size();
 		for (int i = 0; i < size; i++) {
