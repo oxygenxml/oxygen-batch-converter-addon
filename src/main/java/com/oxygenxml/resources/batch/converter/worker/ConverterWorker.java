@@ -61,7 +61,7 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 	
 	/**
 	 * Constructor
-	 * @param converterType The type of convertor.
+	 * @param converterType The type of converter.
 	 * @param convertorInteractor A converter interactor.
 	 * @param progressDialogInteractor A progress dialog interactor.
 	 */
@@ -96,7 +96,8 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 				new OxygenTransformerFactoryCreator());
 
 		//convert the files
-		convertor.convertFiles(converterType,	convertorInteractor.getInputFiles(), convertorInteractor.getOutputFolder());
+		convertor.convertFiles(converterType,	convertorInteractor.getInputFiles(), convertorInteractor.getOutputFolder(),
+				convertorInteractor.mustOpenConvertedFiles());
 
 		//refresh the output folder from the project manager.
 		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();		

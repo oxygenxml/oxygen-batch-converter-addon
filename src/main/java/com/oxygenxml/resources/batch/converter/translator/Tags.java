@@ -51,21 +51,16 @@ public interface Tags {
 	 */
 	public final String SELECT_OUTPUT_TYPE_LABEL = "Select_Output_Type_Label_Conv";
 	
-	/**
-	 * RadioButton for select XHTML output type.
-	 */
-	public final String XHTML = "XHTML";
-	
-	/**
-	 * RadioButton for select DITA output type.
-	 */
-	public final String DITA = "DITA";
 	
 	/**
 	 * Label for add output folder.
 	 */
 	public final String ADD_OUTPUT_FOLDER_LABEL = "Add_Output_Label_Conv";
 
+	/**
+	 * Label for add output folder.
+	 */
+	public final String OPEN_FILE_CHECK_BOX = "Open_File_Check_Box";
 	
 	
 	/**

@@ -179,6 +179,14 @@
 		<val lang="nl_NL">Output folder:</val>
 	</key>
 
+	<key value="Open_File_Check_Box">
+		<comment>Check box for select to open the converted files after conversion. </comment>
+		<val lang="en_US">Open the converted files</val>
+		<val lang="de_DE">Open the converted files</val>
+		<val lang="fr_FR">Open the converted files</val>
+		<val lang="ja_JP">Open the converted files</val>
+		<val lang="nl_NL">Open the converted files</val>
+	</key>
 
 	<key value="Convert_Button_Conv">
 		<comment>Button for convert</comment>

@@ -9,10 +9,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
@@ -21,7 +20,6 @@ import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
-import ro.sync.exml.workspace.api.standalone.ui.Table;
 
 /**
  * Converter dialog.
@@ -29,6 +27,11 @@ import ro.sync.exml.workspace.api.standalone.ui.Table;
  *
  */
 public class ConverterDialog extends OKCancelDialog implements BatchConverterInteractor{
+
+	/**
+	 * Default serial version ID
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The input panel.
@@ -44,6 +47,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 * Converter worker.
 	 */
 	private ConverterWorker converterWorker;
+	
+	/**
+	 * CheckBox for select to open converted files after conversion.
+	 */
+	private JCheckBox openFilesCBox;
 	
 	/**
 	 * Translator.
@@ -74,6 +82,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 
 		inputPanel = new InputPanel(converterType, translator, this);
 		outputPanel = new OutputPanel(translator);
+		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX , ""));
 		
 		initGUI(translator);
 		
@@ -117,15 +126,18 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		gbc.weighty = 1;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.insets = new Insets(0, 0, 20, 0);
+		gbc.insets = new Insets(0, 0, 10, 0);
 		convertorPanel.add(inputPanel, gbc);
 	
 		//-----Add the output panel
 		gbc.gridy++;
 		gbc.weighty = 0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.insets = new Insets(0, 0, 10, 0);
 		convertorPanel.add(outputPanel, gbc);
+		
+		//----Add the checkBox for select to open converted files after conversion 
+		gbc.gridy++;
+		convertorPanel.add(openFilesCBox, gbc);
 		
 		this.add(convertorPanel);
 	}
@@ -191,6 +203,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	@Override
 	public String getHelpPageID() {
 		return LINK_TO_GIT_HUB;
+	}
+
+	@Override
+	public boolean mustOpenConvertedFiles() {
+		return openFilesCBox.isSelected();
 	}
 
 }

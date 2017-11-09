@@ -28,6 +28,12 @@ public interface BatchConverterInteractor {
 	 */
 	public void setOutputFolder(String text);
 	
+
+	/**
+	 * Return if the converted file must be opened.
+	 * @return <code>true</code> if converted files must be opened, <code>false</code>otherwise.
+	 */
+	public boolean mustOpenConvertedFiles();
 	
 	/**
 	 * Set enable/ disable the convert button.

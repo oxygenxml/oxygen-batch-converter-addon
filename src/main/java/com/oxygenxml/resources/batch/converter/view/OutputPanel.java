@@ -27,6 +27,11 @@ import ro.sync.exml.workspace.api.standalone.ui.ToolbarButton;
 public class OutputPanel extends JPanel{
 
 	/**
+	 * Default serial version ID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Filed that contains the output folder.
 	 */
 	private	JTextField outputField = new JTextField();
@@ -70,6 +75,11 @@ public class OutputPanel extends JPanel{
 		//action for chooserBtn
 		Action chooserAction = new AbstractAction() {
 			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					//open a directory chooser

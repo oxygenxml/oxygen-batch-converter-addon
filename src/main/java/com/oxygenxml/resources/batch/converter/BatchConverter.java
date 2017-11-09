@@ -15,7 +15,8 @@ public interface BatchConverter {
 	 * @param convertorType The converter type.
 	 * @param inputFiles	The input files.
 	 * @param outputFolder The output folder.
+	 * @param openConvertedFiles <code>true</code> to open the converted files in Oxygen, <code>false</code> otherwise.
 	 * @return <code>true</code> if the process of conversion was finished successfully, <code>false</code> otherwise.
 	 */
-	public boolean convertFiles(String convertorType, List<File> inputFiles, File outputFolder); 
+	public boolean convertFiles(String convertorType, List<File> inputFiles, File outputFolder, boolean openConvertedFiles); 
 }

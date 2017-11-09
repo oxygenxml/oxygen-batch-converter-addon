@@ -7,8 +7,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
-
 /**
  * Implementation of TransformerFactoryCreator for JUnits 
  * @author intern4
@@ -20,7 +18,7 @@ public class TransformerFactoryCreatorImpl
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
+	private static final Logger logger = Logger.getLogger(TransformerFactoryCreatorImpl.class);
 
 	@Override
 	public Transformer createTransformer(StreamSource streamSource) {

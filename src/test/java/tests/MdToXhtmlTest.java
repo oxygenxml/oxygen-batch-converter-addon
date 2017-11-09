@@ -54,7 +54,7 @@ public class MdToXhtmlTest {
 		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.MD_TO_XHTML, inputFiles, outputFolder);
+			converter.convertFiles(ConverterTypes.MD_TO_XHTML, inputFiles, outputFolder, false);
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 

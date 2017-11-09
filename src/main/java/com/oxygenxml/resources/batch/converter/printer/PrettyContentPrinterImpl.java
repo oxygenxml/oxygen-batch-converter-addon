@@ -14,7 +14,6 @@ import org.xml.sax.InputSource;
 
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
-import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 /**
  * Content pretty printer implementation.
@@ -55,9 +54,6 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 
 		// get the input source
 		InputSource inputSource = new InputSource(new StringReader(contentToPrint));
-
-		// create a unique file path if actual exist
-		outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
 
 		try {
 			// prettify and print

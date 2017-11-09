@@ -1,9 +1,13 @@
 package com.oxygenxml.resources.batch.converter;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.xml.transform.TransformerException;
+
+import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.converters.Converter;
 import com.oxygenxml.resources.batch.converter.converters.ConverterCreator;
@@ -17,6 +21,8 @@ import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
+
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**
  * Batch converter implementation.
@@ -48,7 +54,10 @@ public class BatchConverterImpl implements BatchConverter {
 	 * Transformer creator.
 	 */
 	private TransformerFactoryCreator transformerFactoryCreator;
-
+	/**
+	 * Logger
+	 */
+	 private static final Logger logger = Logger.getLogger(BatchConverterImpl.class);
 	
 	/**
 	 * Constructor.
@@ -84,11 +93,12 @@ public class BatchConverterImpl implements BatchConverter {
 	 *          The input files.
 	 * @param outputFolder
 	 *          The output folder.
+	 * @param openConvertedFiles <code>true</code> to open the converted files in Oxygen, <code>false</code> otherwise.
 	 * @return <code>true</code> if the process of conversion was finished
 	 *         successfully, <code>false</code> otherwise.
 	 */
 	@Override
-	public boolean convertFiles(String converterType, List<File> inputFiles, File outputFolder) {
+	public boolean convertFiles(String converterType, List<File> inputFiles, File outputFolder, boolean openConvertedFile) {
 		// flag to return
 		boolean isSuccessfully = true;
 
@@ -140,10 +150,24 @@ public class BatchConverterImpl implements BatchConverter {
 						File outputFile = ConverterFileUtils.generateOutputFile(currentFile, 
 								ExtensionGetter.getOutputExtension(converterType), outputFolder);
 						
+						// create a unique file path if actual exist
+						outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
+						
 						// print the converted content.
 						contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile, 
 								StyleSourceGetter.getStyleSource(converterType));
 					
+						if(openConvertedFile){
+							//open the converted file
+							URL convertedFileUrl;
+							try {
+								convertedFileUrl = outputFile.toURI().toURL();
+								PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl);
+							} catch (MalformedURLException e) {
+								logger.debug(e.getMessage(), e);
+							}
+						}
+						
 						convertedFile ++;
 					}
 

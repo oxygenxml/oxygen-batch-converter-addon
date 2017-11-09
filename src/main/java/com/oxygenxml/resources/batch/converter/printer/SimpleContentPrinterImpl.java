@@ -11,9 +11,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
-import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 /**
  * A simple content printer implementation.
@@ -25,7 +23,7 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 	/**
 	 * Logger
 	 */
-	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
+	 private static final Logger logger = Logger.getLogger(SimpleContentPrinterImpl.class);
 	
 	/**
 	 * Print the given content in output file(The content isn't indented).
@@ -45,9 +43,6 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, String converterType,
 			File outputFile, StreamSource styleSource) throws TransformerException {
 
-		// create a unique file path if actual exist
-		outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
-		
 		OutputStream outputStream = null;
 		OutputStreamWriter writer = null;
 
@@ -62,8 +57,10 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 		} 
 		finally {
 			try {
-				writer.close();
-			} catch (Exception e) {
+				if(writer != null){
+					writer.close();
+				}
+			} catch (IOException e) {
 				logger.debug(e.getMessage(), e);
 			}
 		}

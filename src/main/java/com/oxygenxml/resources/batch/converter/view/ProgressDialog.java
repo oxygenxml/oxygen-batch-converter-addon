@@ -25,6 +25,10 @@ import ro.sync.ecss.extensions.commons.ui.OKCancelDialog;
 public class ProgressDialog extends OKCancelDialog implements ProgressDialogInteractor {
 
 	/**
+	 * Default serial version ID
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Progress bar
 	 */
 	private JProgressBar progressBar;

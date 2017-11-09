@@ -169,6 +169,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			final StandalonePluginWorkspace pluginWorkspaceAccess) {
 		
 		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)) {
+			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent actionevent) {
 

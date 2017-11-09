@@ -8,8 +8,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
-
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
@@ -23,7 +21,7 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 	/**
 	 * Logger
 	 */
-	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
+	 private static final Logger logger = Logger.getLogger(OxygenTransformerFactoryCreator.class);
 	
 	/**
 	 * Create a transformer using  XMLUtilAccess.

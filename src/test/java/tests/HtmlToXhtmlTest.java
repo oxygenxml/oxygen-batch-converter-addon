@@ -54,7 +54,7 @@ public class HtmlToXhtmlTest {
 		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.HTML_TO_XHTML, inputFiles, outputFolder);
+			converter.convertFiles(ConverterTypes.HTML_TO_XHTML, inputFiles, outputFolder, false);
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 

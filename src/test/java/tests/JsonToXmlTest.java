@@ -53,7 +53,7 @@ public class JsonToXmlTest {
 		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.XML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.JSON_TO_XML, inputFiles, outputFolder);
+			converter.convertFiles(ConverterTypes.JSON_TO_XML, inputFiles, outputFolder, false);
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 

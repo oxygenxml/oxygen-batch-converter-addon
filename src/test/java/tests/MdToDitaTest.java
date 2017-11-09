@@ -54,7 +54,7 @@ public class MdToDitaTest {
 		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.MD_TO_DITA, inputFiles, outputFolder);
+			converter.convertFiles(ConverterTypes.MD_TO_DITA, inputFiles, outputFolder, false);
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 

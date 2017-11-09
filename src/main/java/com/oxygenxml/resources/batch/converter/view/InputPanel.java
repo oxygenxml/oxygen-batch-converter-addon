@@ -39,6 +39,10 @@ import ro.sync.exml.workspace.api.standalone.ui.Table;
 public class InputPanel extends JPanel {
 
 	/**
+	 * Default serial version ID
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Table with files to check.
 	 */
 	private Table tableFiles = new Table();
