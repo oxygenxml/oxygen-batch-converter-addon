@@ -43,8 +43,10 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 
 		// set the output properties
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-		if(!(DoctypeGetter.getSystemDoctype(converterType).isEmpty() || DoctypeGetter.getPublicDoctype(converterType).isEmpty()) ){
+		if(!DoctypeGetter.getSystemDoctype(converterType).isEmpty()){
 			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, DoctypeGetter.getSystemDoctype(converterType));
+		}
+		if(!DoctypeGetter.getPublicDoctype(converterType).isEmpty()){
 			transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, DoctypeGetter.getPublicDoctype(converterType));
 		}
 		transformer.setOutputProperty(OutputKeys.METHOD, "xml");

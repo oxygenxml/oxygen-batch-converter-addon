@@ -19,9 +19,5 @@ public interface Doctypes {
 	/**
 	 * System doctype in XHTML files.
 	 */
-	static final String DOCTYPE_SYSTEM_XHTML = "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd";
-	/**
-	 * Public doctype in XHTML files.
-	 */
-	static final String DOCTYPE_PUBLIC_XHTML = "-//W3C//DTD XHTML 1.0 Strict//EN";
+	static final String DOCTYPE_SYSTEM_XHTML = "about:legacy-compat";
 }

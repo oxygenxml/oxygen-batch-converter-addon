@@ -19,9 +19,6 @@ public class DoctypeGetter {
 		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)){
 			return Doctypes.DOCTYPE_PUBLIC_DITA;
 		}
-		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){
-			return Doctypes.DOCTYPE_PUBLIC_XHTML;
-		}
 			return "";
 	}
 		
