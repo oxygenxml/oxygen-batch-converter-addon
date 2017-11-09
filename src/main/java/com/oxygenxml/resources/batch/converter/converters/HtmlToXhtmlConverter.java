@@ -42,6 +42,7 @@ public class HtmlToXhtmlConverter implements Converter {
 				// set the Tidy parser
 				t.setXHTML(true);
 				t.setQuiet(true);
+				t.setDocType("omit");
 				t.setShowWarnings(false);
 				t.setTidyMark(false);
 				t.setForceOutput(true);
