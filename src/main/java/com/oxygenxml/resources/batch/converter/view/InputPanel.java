@@ -28,6 +28,7 @@ import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.standalone.ui.Table;
 
 /**
  * Panel for add input files
@@ -40,8 +41,7 @@ public class InputPanel extends JPanel {
 	/**
 	 * Table with files to check.
 	 */
-	private JTable tableFiles = new JTable(20, 2);
-
+	private Table tableFiles = new Table();
 	/**
 	 * Model of table
 	 */
@@ -49,7 +49,7 @@ public class InputPanel extends JPanel {
 	/**
 	 * ScrollPane for table.
 	 */
-	private JScrollPane scrollPane = new JScrollPane(tableFiles);
+	private JScrollPane scrollPane;
 	/**
 	 * Button for add files in table
 	 */
@@ -68,19 +68,16 @@ public class InputPanel extends JPanel {
 	 */
 	private Translator translator;
 
-	/**
-	 * Converter interactor.
-	 */
-	private BatchConverterInteractor converterInteractor;
-
 
 	/**
 	 * Constructor
 	 */
 	public InputPanel(final String converterType, final Translator translator, final BatchConverterInteractor convertorInteractor) {
 		this.translator = translator;
-		this.converterInteractor = convertorInteractor;
 
+		JTable jTable = ((JTable)tableFiles);
+		scrollPane = new JScrollPane(jTable);
+		
 		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, ""));
 		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE, ""));
 		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE, ""));
@@ -219,6 +216,7 @@ public class InputPanel extends JPanel {
 		}
 	}
 
+	
 	/**
 	 * Method for initialize the Panel.
 	 */

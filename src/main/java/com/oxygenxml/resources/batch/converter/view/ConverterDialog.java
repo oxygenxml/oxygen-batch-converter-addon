@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
@@ -19,6 +21,7 @@ import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
+import ro.sync.exml.workspace.api.standalone.ui.Table;
 
 /**
  * Converter dialog.
@@ -43,12 +46,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	private ConverterWorker converterWorker;
 	
 	/**
-	 * The parent frame.
-	 */
-	private JFrame parentFrame;
-
-	/**
-	 * Traslator.
+	 * Translator.
 	 */
 	private Translator translator;
 
@@ -72,7 +70,6 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	public ConverterDialog(String converterType, List<File> toConvertFiles, JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
 		this.converterType = converterType;
-		this.parentFrame = parentFrame;
 		this.translator = translator;
 
 		inputPanel = new InputPanel(converterType, translator, this);
@@ -95,10 +92,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, converterType));
 		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
 		setResizable(true);
-		setMinimumSize(new Dimension(350, 300));
-		setSize(new Dimension(420, 350));
+		pack();
+		setMinimumSize(new Dimension(getSize().width , getSize().height + 70));
 		setLocationRelativeTo(parentFrame);
 		setVisible(true);
+
 	}
 
 	/**
@@ -145,7 +143,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		} else {
 
 			//create a progress dialog
-			final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator, converterType);
+			final ProgressDialog progressDialog = new ProgressDialog((JFrame)super.getParent(), translator, converterType);
 
 			//create a converter worker.
 			converterWorker = new ConverterWorker(converterType, this, progressDialog);

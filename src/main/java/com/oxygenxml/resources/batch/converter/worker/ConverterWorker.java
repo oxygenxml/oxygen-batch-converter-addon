@@ -2,6 +2,7 @@ package com.oxygenxml.resources.batch.converter.worker;
 
 import java.io.File;
 
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -99,9 +100,16 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 
 		//refresh the output folder from the project manager.
 		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();		
-		ProjectController projectManager = ((StandalonePluginWorkspace)pluginWorkspace).getProjectManager();
+		final ProjectController projectManager = ((StandalonePluginWorkspace)pluginWorkspace).getProjectManager();
 		
-		projectManager.refreshFolders(new File[]{convertorInteractor.getOutputFolder().getParentFile()});
+		//refresh the project manager parent directory
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				projectManager.refreshFolders(new File[]{convertorInteractor.getOutputFolder().getParentFile()});
+				
+			}
+		});
 		
 		
 		//close the progress dialog
