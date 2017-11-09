@@ -57,10 +57,7 @@ public class HtmlToXhtmlConverter implements Converter {
 					t.parse(inputStream, sw);
 					
 					//close the inputStream
-					try {
-						inputStream.close();
-					} catch (Exception e) {
-					}
+					inputStream.close();
 				}
 
 				// convert to String

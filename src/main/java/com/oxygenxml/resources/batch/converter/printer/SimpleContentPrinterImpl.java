@@ -59,6 +59,10 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 			try {
 				if(writer != null){
 					writer.close();
+				}else{
+					if(outputStream != null){
+						outputStream.close();
+					}
 				}
 			} catch (IOException e) {
 				logger.debug(e.getMessage(), e);

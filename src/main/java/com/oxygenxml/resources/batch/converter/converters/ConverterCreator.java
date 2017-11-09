@@ -9,6 +9,10 @@ import com.oxygenxml.resources.batch.converter.ConverterTypes;
  */
 public class ConverterCreator {
 
+  private ConverterCreator() {
+    throw new IllegalStateException("Utility class");
+  }
+	
 	/**
 	 * Create a converter according to given converter type.
 	 * @param converterType The type of converter: {@link ConverterTypes}
