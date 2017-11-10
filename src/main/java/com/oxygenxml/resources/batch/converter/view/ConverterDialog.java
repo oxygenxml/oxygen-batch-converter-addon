@@ -113,7 +113,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
 		setResizable(true);
 		pack();
-		setMinimumSize(new Dimension(getSize().width , getSize().height + 70));
+		setMinimumSize(new Dimension(getSize().width , getSize().height));
 		setLocationRelativeTo(parentFrame);
 		setVisible(true);
 

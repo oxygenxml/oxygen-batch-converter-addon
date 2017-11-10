@@ -81,6 +81,7 @@ public class InputPanel extends JPanel {
 
 		JTable jTable = ((JTable)tableFiles);
 		scrollPane = new JScrollPane(jTable);
+		scrollPane.setPreferredSize(new Dimension(300, 70));
 		
 		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, ""));
 		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE, ""));
