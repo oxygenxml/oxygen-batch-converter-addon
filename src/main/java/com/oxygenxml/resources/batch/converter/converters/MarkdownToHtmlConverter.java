@@ -19,7 +19,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 /**
  * Converter implementation for Markdown to HTML.
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class MarkdownToHtmlConverter implements Converter {
@@ -44,10 +44,10 @@ public class MarkdownToHtmlConverter implements Converter {
 		String toReturn = null;
 
 		// create the parser
-		final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(true, Extensions.ALL );
+		final DataHolder options = PegdownOptionsAdapter.flexmarkOptions(true, Extensions.ALL );
 
-		Parser parser = Parser.builder(OPTIONS).build();
-		HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).build();
+		Parser parser = Parser.builder(options).build();
+		HtmlRenderer renderer = HtmlRenderer.builder(options).build();
 
 		String contentToParse = "";
 

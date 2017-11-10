@@ -2,7 +2,7 @@ package com.oxygenxml.resources.batch.converter.worker;
 
 /**
  * Converter worker interactor.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public interface ConvertorWorkerInteractor {

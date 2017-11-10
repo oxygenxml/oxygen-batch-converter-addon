@@ -9,7 +9,7 @@ import javax.xml.transform.TransformerException;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 /**
  * Converter implementation for Markdown to XHTML
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class MarkdownToXhmlConverter implements Converter{

@@ -4,7 +4,7 @@ import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
 
 /**
  * Implementation of StatusReporter for JUnits.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class StatusReporterImpl implements StatusReporter {

@@ -6,7 +6,7 @@ import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 
 /**
  * Implementation of ProblemReporter for JUnits.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ProblemReporterTestImpl implements ProblemReporter {

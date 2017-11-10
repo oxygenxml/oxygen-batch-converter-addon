@@ -33,7 +33,7 @@ import ro.sync.exml.workspace.api.standalone.ui.Table;
 /**
  * Panel for add input files
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class InputPanel extends JPanel {
@@ -70,7 +70,7 @@ public class InputPanel extends JPanel {
 	/**
 	 * Translator
 	 */
-	private Translator translator;
+	private transient Translator translator;
 
 
 	/**
@@ -79,8 +79,7 @@ public class InputPanel extends JPanel {
 	public InputPanel(final String converterType, final Translator translator, final BatchConverterInteractor convertorInteractor) {
 		this.translator = translator;
 
-		JTable jTable = ((JTable)tableFiles);
-		scrollPane = new JScrollPane(jTable);
+		scrollPane = new JScrollPane((JTable)tableFiles);
 		scrollPane.setPreferredSize(new Dimension(300, 70));
 		
 		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, ""));
@@ -103,7 +102,7 @@ public class InputPanel extends JPanel {
 
 				if (files != null) {
 					if (modelTable.getRowCount() == 0) {
-						convertorInteractor.setOutputFolder(files[0].getParent().toString() + File.separator + "output");
+						convertorInteractor.setOutputFolder(files[0].getParent() + File.separator + "output");
 					}
 
 					// add files in table
@@ -124,9 +123,7 @@ public class InputPanel extends JPanel {
 				File file = PluginWorkspaceProvider.getPluginWorkspace().chooseDirectory();
 
 				if (file != null) {
-					List<File> listToAdd = new ArrayList<File>();
-
-				listToAdd =	ConverterFileUtils.getAllFiles(file,
+					List<File> listToAdd =	ConverterFileUtils.getAllFiles(file,
 						Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
 
 					if(!listToAdd.isEmpty()){
@@ -285,7 +282,7 @@ public class InputPanel extends JPanel {
 	/**
 	 * List selection listener.
 	 */
-	ListSelectionListener listSelectionListener = new ListSelectionListener() {
+	transient ListSelectionListener listSelectionListener = new ListSelectionListener() {
 
 		@Override
 		public void valueChanged(ListSelectionEvent e) {

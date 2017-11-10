@@ -6,11 +6,18 @@ import java.io.Reader;
 /**
  * Reader utilities.
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ConverterReaderUtils {
 
+	/**
+	 * Private constructor.
+	 */
+	private ConverterReaderUtils() {
+    throw new IllegalStateException("Utility class");
+  }
+	
 	/**
 	 * Get the String from the given reader.
 	 * 

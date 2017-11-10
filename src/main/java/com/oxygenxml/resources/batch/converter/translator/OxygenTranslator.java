@@ -5,7 +5,7 @@ import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 
 /**
  * Implement internationalization using PluginResourceBundle
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class OxygenTranslator implements Translator {

@@ -30,7 +30,7 @@ import tests.utils.TransformerFactoryCreatorImpl;
 
 /**
  * JUnit for Markdown to Xhtml conversion.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class MdToXhtmlTest {

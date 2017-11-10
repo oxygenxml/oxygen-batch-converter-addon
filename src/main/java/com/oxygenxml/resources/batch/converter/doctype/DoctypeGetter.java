@@ -4,11 +4,18 @@ import com.oxygenxml.resources.batch.converter.ConverterTypes;
 
 /**
  * Getter for document type.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class DoctypeGetter {
 
+	/**
+	 * Private constructor.
+	 */
+  private DoctypeGetter() {
+    throw new IllegalStateException("Utility class");
+  }
+	
 	/**
 	 * Get the public document type according to given converter type.
 	 * @param converterType The converter type.

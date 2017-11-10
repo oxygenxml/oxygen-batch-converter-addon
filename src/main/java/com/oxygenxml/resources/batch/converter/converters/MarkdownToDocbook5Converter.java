@@ -10,7 +10,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 
 /**
  * Converter implementation for Markdown to Docbook5.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class MarkdownToDocbook5Converter implements Converter {

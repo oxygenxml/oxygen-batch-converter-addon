@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Implementation of TransformerFactoryCreator for JUnits 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class TransformerFactoryCreatorImpl

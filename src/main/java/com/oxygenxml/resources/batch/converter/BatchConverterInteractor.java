@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Interactor with batch converter.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public interface BatchConverterInteractor {

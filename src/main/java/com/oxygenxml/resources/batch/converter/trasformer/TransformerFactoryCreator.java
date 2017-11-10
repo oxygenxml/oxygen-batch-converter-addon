@@ -5,7 +5,7 @@ import javax.xml.transform.stream.StreamSource;
 
 /**
  * Transformer factory
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public interface TransformerFactoryCreator {

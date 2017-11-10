@@ -20,11 +20,18 @@ import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 
 /**
  * Project manager editor.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ProjectManagerEditor {
 
+	/**
+	 * Private constructor.
+	 */
+  private ProjectManagerEditor() {
+    throw new IllegalStateException("Utility class");
+  }
+	
 	/**
 	 * Logger
 	 */

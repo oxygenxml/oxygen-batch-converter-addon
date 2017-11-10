@@ -4,7 +4,7 @@ import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor
 
 /**
  * Implementation of ProgressDialogInteractor for JUnits.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ProgressDialogInteractorTestImpl implements ProgressDialogInteractor {

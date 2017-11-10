@@ -15,7 +15,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 
 /**
  * Converter implementation for HTML to XHTML.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class HtmlToXhtmlConverter implements Converter {

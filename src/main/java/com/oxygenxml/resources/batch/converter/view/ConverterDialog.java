@@ -25,7 +25,7 @@ import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
 /**
  * Converter dialog.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ConverterDialog extends OKCancelDialog implements BatchConverterInteractor{
@@ -48,7 +48,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	/**
 	 * Converter worker.
 	 */
-	private ConverterWorker converterWorker;
+	private transient ConverterWorker converterWorker;
 	
 	/**
 	 * CheckBox for select to open converted files after conversion.
@@ -58,7 +58,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	/**
 	 * Translator.
 	 */
-	private Translator translator;
+	private transient Translator translator;
 
 	/**
 	 * The type of converter.
@@ -68,7 +68,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	/**
 	 * Used for persistence.
 	 */
-	private ContentPersister contentPersister;
+	private transient ContentPersister contentPersister;
 
 	/**
 	 * Link to GitHub repository description.
@@ -92,7 +92,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		outputPanel = new OutputPanel(translator);
 		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX , ""));
 		
-		initGUI(translator);
+		initGUI();
 		
 		//if the given list with files isn't empty.
 		if(!toConvertFiles.isEmpty()){
@@ -100,7 +100,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 			inputPanel.addFilesInTable(toConvertFiles);
 
 			//set the output folder according to given files to be converted
-			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent().toString() + File.separator + "output");
+			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent() + File.separator + "output");
 		}
 		else{
 			getOkButton().setEnabled(false);
@@ -122,9 +122,8 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	/**
 	 * Initialize the GUI.
 	 * 
-	 * @param translator
 	 */
-	private void initGUI(Translator translator){
+	private void initGUI(){
 		
 		JPanel convertorPanel = new JPanel( new GridBagLayout());
 		

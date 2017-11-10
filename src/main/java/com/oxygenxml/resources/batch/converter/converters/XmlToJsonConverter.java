@@ -16,7 +16,7 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
 /**
  * Converter implementation for XML to JSON.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class XmlToJsonConverter implements Converter {

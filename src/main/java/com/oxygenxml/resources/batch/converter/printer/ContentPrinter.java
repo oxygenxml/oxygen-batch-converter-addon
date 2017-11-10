@@ -7,6 +7,11 @@ import javax.xml.transform.stream.StreamSource;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
+/**
+ * Interface for print converted content.
+ * @author Cosmin Duna
+ *
+ */
 public interface ContentPrinter {
 
 	/**

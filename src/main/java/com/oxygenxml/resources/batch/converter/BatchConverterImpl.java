@@ -59,6 +59,21 @@ public class BatchConverterImpl implements BatchConverter {
 	 */
 	 private static final Logger logger = Logger.getLogger(BatchConverterImpl.class);
 	
+	 /**
+	  *  The flag of conversion. <code>True</code> when conversion was successfully, <code>false</code> otherwise.
+	  */
+		private boolean isSuccessfully ;
+
+		/**
+		 * Number of converted files
+		 */
+		private int convertedFile;
+		
+		/**
+		 * Number of files that cannot be converted.
+		 */
+		private int failedFile;
+	 
 	/**
 	 * Constructor.
 	 * 
@@ -99,18 +114,11 @@ public class BatchConverterImpl implements BatchConverter {
 	 */
 	@Override
 	public boolean convertFiles(String converterType, List<File> inputFiles, File outputFolder, boolean openConvertedFile) {
-		// flag to return
-		boolean isSuccessfully = true;
-
-		//number of converted files
-		int convertedFile = 0;
 		
-		//number of failed files
-		int failedFile = 0;
-		
-		// converted content
-		String convertedContent = "";
-
+		isSuccessfully = true;
+		convertedFile = 0;
+		failedFile = 0;
+				
 		// create the converter
 		Converter converter = ConverterCreator.create(converterType);
 
@@ -141,41 +149,16 @@ public class BatchConverterImpl implements BatchConverter {
 				// update the progress dialog note.
 				progressDialogInteractor.setNote(currentFile.toString());
 
-				try {
-					// convert the current file
-					convertedContent = converter.convert(currentFile, null, transformerFactoryCreator);
-					
-					if (convertedContent != null) {
-						//generate the output file.
-						File outputFile = ConverterFileUtils.generateOutputFile(currentFile, 
-								ExtensionGetter.getOutputExtension(converterType), outputFolder);
-						
-						// create a unique file path if actual exist
-						outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
-						
-						// print the converted content.
-						contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile, 
-								StyleSourceGetter.getStyleSource(converterType));
-					
-						if(openConvertedFile){
-							//open the converted file
-							URL convertedFileUrl;
-							try {
-								convertedFileUrl = outputFile.toURI().toURL();
-								PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl);
-							} catch (MalformedURLException e) {
-								logger.debug(e.getMessage(), e);
-							}
-						}
-						
-						convertedFile ++;
-					}
-
-				} catch (TransformerException e) {
-					problemReporter.reportProblem(e, currentFile);
-					isSuccessfully = false;
-					failedFile ++;
-				}
+				//generate the output file.
+				File outputFile = ConverterFileUtils.generateOutputFile(currentFile, 
+						ExtensionGetter.getOutputExtension(converterType), outputFolder);
+				
+				// create a unique file path if actual exist
+				outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
+				
+				//convert and print the current file.
+				convertAndPrintFile(currentFile, outputFile, converter, contentPrinter, converterType, openConvertedFile);
+				
 			}
 
 		} else {
@@ -186,5 +169,50 @@ public class BatchConverterImpl implements BatchConverter {
 		//report the finish status
 		statusReporter.reportFinishStatus(convertedFile, failedFile);
 		return isSuccessfully;
+	}
+	
+	
+	/**
+	 * Convert the given file using the given converter and print the converted result using the given contentPrinter. 
+	 * @param file The file.
+	 * @param outputFile The outputFile
+	 * @param converter The converter. 
+	 * @param contentPrinter The contentPrinter.
+	 * @param converterType The converterType.
+	 * @param openConvertedFile <code>true</code>To open the converted file in Oxygen, <code>false</code> otherwise.
+ 	 */
+	private void convertAndPrintFile(File file, File outputFile, Converter converter, ContentPrinter contentPrinter,
+			String converterType, boolean openConvertedFile) {
+
+		String convertedContent = null;
+		try {
+			// convert the current file
+			convertedContent = converter.convert(file, null, transformerFactoryCreator);
+
+			if (convertedContent != null) {
+
+				// print the converted content.
+				contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile,
+						StyleSourceGetter.getStyleSource(converterType));
+
+				convertedFile++;
+
+				if (openConvertedFile) {
+					// open the converted file
+					URL convertedFileUrl;
+					convertedFileUrl = outputFile.toURI().toURL();
+					PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl);
+				}
+
+			}
+
+		} catch (TransformerException e) {
+			problemReporter.reportProblem(e, file);
+			isSuccessfully = false;
+			failedFile++;
+		} catch (MalformedURLException e) {
+			logger.debug(e.getMessage(), e);
+		}
+
 	}
 }

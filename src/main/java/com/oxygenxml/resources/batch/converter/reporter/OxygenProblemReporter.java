@@ -15,6 +15,11 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.results.ResultsManager;
 import ro.sync.exml.workspace.api.results.ResultsManager.ResultType;
 
+/**
+ * Implementation used for reports problem in Oxygen.
+ * @author Cosmin Duna
+ *
+ */
 public class OxygenProblemReporter implements ProblemReporter {
 	/**
 	 * Logger

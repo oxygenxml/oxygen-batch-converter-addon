@@ -2,7 +2,7 @@ package com.oxygenxml.resources.batch.converter.translator;
 
 /**
  * Interface used for internationalization.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public interface Translator {

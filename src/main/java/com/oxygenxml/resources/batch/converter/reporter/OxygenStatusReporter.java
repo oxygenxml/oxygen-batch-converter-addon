@@ -8,8 +8,8 @@ import org.apache.log4j.Logger;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 /**
- * Report status in oxygen using PluginWorkspace
- * @author intern4
+ * Report status in Oxygen using PluginWorkspace
+ * @author Cosmin Duna
  *
  */
 public class OxygenStatusReporter implements StatusReporter {

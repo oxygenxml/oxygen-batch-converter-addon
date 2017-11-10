@@ -32,14 +32,21 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	/**
 	 * The id of menu where converter action will be place.
 	 */
-	private final static String MENU_ID = "Tools";
+	private static final String MENU_ID = "Tools";
 
 	/**
 	 * The preceding menu item.
 	 */
-	private final static String PRECEDING_MENU_ITEM_ACTION_ID = "XML_to_JSON";
+	private static final String PRECEDING_MENU_ITEM_ACTION_ID = "XML_to_JSON";
 
-	JMenu batchConvertMenuToolbar;
+	/**
+	 * JMenu that contains items with all converter actions. 
+	 */
+	private JMenu batchConvertMenuToolbar;
+	
+	/**
+	 * Translator
+	 */
 	private Translator translator = new OxygenTranslator();
 
 	/**
@@ -125,7 +132,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 							if (actionID != null) {
 								// The actionId is in format: menuNameId/menuItemActionID
-								int indexOfSlash = actionID.indexOf("/");
+								int indexOfSlash = actionID.indexOf('/');
 
 								// check the menuNameId
 								if (MENU_ID.equals(actionID.substring(0, indexOfSlash))) {

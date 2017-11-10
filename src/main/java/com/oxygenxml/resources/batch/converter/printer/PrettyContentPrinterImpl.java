@@ -18,7 +18,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 /**
  * Content pretty printer implementation.
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class PrettyContentPrinterImpl implements ContentPrinter {

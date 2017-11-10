@@ -21,7 +21,7 @@ import ro.sync.exml.workspace.api.standalone.ui.ToolbarButton;
 
 /**
  * Panel for add output folder.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class OutputPanel extends JPanel{

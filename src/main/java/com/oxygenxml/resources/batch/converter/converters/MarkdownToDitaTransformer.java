@@ -23,6 +23,17 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.converter.converters.Converter {
 
 	/**
+	 * The key for system property of transformer factory.
+	 */
+	private static final String KEY_TRANSFORMER_FACTORY = "javax.xml.transform.TransformerFactory";
+	
+	/**
+	 * Property value of transformer factory. 
+	 */
+	private static final String VALUE_TRANSFORMER_FACTORY = "net.sf.saxon.TransformerFactoryImpl";
+	
+	
+	/**
 	 * Convert Markdown to DITA.
 	 * 
 	 * @param originalFile
@@ -42,11 +53,11 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 		Transformer transformer = transformerCreator.createTransformer(null);
 
 		// get the trasformFactory property
-		String property = System.getProperty("javax.xml.transform.TransformerFactory");
+		String property = System.getProperty(KEY_TRANSFORMER_FACTORY);
 
 		// set the trasformFactory property to
 		// "net.sf.saxon.TransformerFactoryImpl"
-		System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
+		System.setProperty(KEY_TRANSFORMER_FACTORY, VALUE_TRANSFORMER_FACTORY);
 		
 		// reader for markdown document
 		final MarkdownReader r = new MarkdownReader();
@@ -72,15 +83,12 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 
 		}catch (TransformerException e) {
 				throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
-		}catch (Throwable e) {
-			throw new TransformerException(e.getMessage() , e.getCause());
-		} 
-		finally {
+		}finally {
 			// return the initial property of trasformerFactory
 			if (property == null) {
-				System.getProperties().remove("javax.xml.transform.TransformerFactory");
+				System.getProperties().remove(KEY_TRANSFORMER_FACTORY);
 			} else {
-				System.setProperty("javax.xml.transform.TransformerFactory", property);
+				System.setProperty(KEY_TRANSFORMER_FACTORY, property);
 			}
 		}
 

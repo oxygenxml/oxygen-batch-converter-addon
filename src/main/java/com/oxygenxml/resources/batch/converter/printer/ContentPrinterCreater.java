@@ -2,8 +2,20 @@ package com.oxygenxml.resources.batch.converter.printer;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 
+/**
+ * Class for create the printer that write the converted content.
+ * @author Cosmin Duna
+ *
+ */
 public class ContentPrinterCreater {
 
+	/**
+	 * Private constructor.
+	 */
+  private ContentPrinterCreater() {
+    throw new IllegalStateException("Utility class");
+  }
+	
 	/**
 	 * Create a ContentPrinter according to given converter type.
 	 * @param converterType The type of converter.

@@ -30,7 +30,7 @@ import tests.utils.TransformerFactoryCreatorImpl;
 
 /**
  * JUnit for XML to JSON conversion.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class XmlToJsonTest {

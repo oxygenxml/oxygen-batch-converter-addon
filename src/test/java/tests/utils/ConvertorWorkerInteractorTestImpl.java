@@ -4,7 +4,7 @@ import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
 
 /**
  * Implementation of ConverterWorkerInteractor  for JUnits
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ConvertorWorkerInteractorTestImpl implements ConvertorWorkerInteractor {

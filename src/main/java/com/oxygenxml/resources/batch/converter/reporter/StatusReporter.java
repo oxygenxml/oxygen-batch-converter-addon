@@ -1,7 +1,7 @@
 package com.oxygenxml.resources.batch.converter.reporter;
 /**
  * Used by checker for report statuses. 
- * @author intern4
+ * @author Cosmin Duna
  */
 
 public interface StatusReporter {

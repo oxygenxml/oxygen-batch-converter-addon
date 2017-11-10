@@ -9,13 +9,28 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 /**
  * File utilities. 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ConverterFileUtils {
-
+	
+	/**
+	 * Logger
+	 */
+	 private static final Logger logger = Logger.getLogger(ConverterFileUtils.class);
+	
+	
+	/**
+	 * Private constructor.
+	 */
+	 private ConverterFileUtils() {
+	    throw new IllegalStateException("Utility class");
+	  }
+	
 	/**
 	 * Read the content of given file.
 	 * 
@@ -33,9 +48,9 @@ public class ConverterFileUtils {
 		toReturn = ConverterReaderUtils.getString(inputStreamReader);
 		
 		try {
-			inputStream.close();
 			inputStreamReader.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
+			logger.debug(e.getMessage(), e);
 		}
 		
 		return toReturn;
@@ -72,7 +87,7 @@ public class ConverterFileUtils {
 			// get the fileName
 			String fileName = file.getName();
 			// get the extension
-			String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+			String extension = fileName.substring(fileName.lastIndexOf('.') + 1);
 
 			// check the extension
 			if (extensionsFiles.contains(extension)) {
@@ -89,17 +104,15 @@ public class ConverterFileUtils {
 	 * @param filePath
 	 * @param extension
 	 * @param outputFolder
-	 * @return
+	 * @return The generated file.
 	 */
 	public static File generateOutputFile(File originalFile, String extension, File outputFolder) {
 		String fileName = originalFile.getName();
 
 		// get the file name without extension
-		fileName = fileName.substring(0, fileName.lastIndexOf("."));
+		fileName = fileName.substring(0, fileName.lastIndexOf('.'));
 
-		File toReturn = new File(outputFolder.getAbsolutePath() + File.separator + fileName + "." + extension);
-
-		return toReturn;
+		return  new File(outputFolder.getAbsolutePath() + File.separator + fileName + '.' + extension);
 	}
 
 	/**
@@ -112,14 +125,14 @@ public class ConverterFileUtils {
 	public static File getFileWithCounter(File file) {
 
 		String filePath = file.getAbsolutePath();
-		int idOfDot = filePath.indexOf(".");
+		int idOfDot = filePath.indexOf('.');
 		String name = filePath.substring(0, idOfDot);
 		String extension = filePath.substring(idOfDot + 1);
 		int counter = 1;
 
 		while (file.exists()) {
 
-			filePath = name + "(" + counter + ")." + extension;
+			filePath = name + '(' + counter + ")." + extension;
 			file = new File(filePath);
 			counter++;
 		}

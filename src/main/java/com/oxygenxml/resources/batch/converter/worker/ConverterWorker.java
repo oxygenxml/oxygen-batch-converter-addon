@@ -23,7 +23,7 @@ import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 
 /**
  * Worker that execute the conversion.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ConverterWorker extends SwingWorker<Void, Void> implements ConvertorWorkerInteractor {
@@ -40,10 +40,6 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 	 */
 	private Translator translator;
 	
-	/**
-	 * The converter
-	 */
-	private BatchConverter convertor;
 	/**
 	 * Progress dialog interactor.
 	 */
@@ -92,7 +88,7 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 		oxygenProblemReporter.deleteReportedProblems();
 
 		//create the converter
-		convertor = new BatchConverterImpl(oxygenProblemReporter, oxygenStatusReporter, progressDialogInteractor, this,
+		BatchConverter convertor = new BatchConverterImpl(oxygenProblemReporter, oxygenStatusReporter, progressDialogInteractor, this,
 				new OxygenTransformerFactoryCreator());
 
 		//convert the files

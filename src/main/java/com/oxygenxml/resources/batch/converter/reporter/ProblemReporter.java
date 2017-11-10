@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  * Reporter for problem.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public interface ProblemReporter {

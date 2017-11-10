@@ -9,7 +9,7 @@ import ro.sync.exml.workspace.api.options.WSOptionsStorage;
  * Use WSOptionStorage for save content from GUI and load saved content
  * 
  * 
- * @author Duna Cosmin
+ * @author Cosmin Duna
  *
  */
 public class ContentPersisterImpl implements ContentPersister {

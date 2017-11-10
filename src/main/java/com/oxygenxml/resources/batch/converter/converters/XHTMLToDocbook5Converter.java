@@ -18,7 +18,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**
  * Converter implementation for XHTML to Docbook5
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class XHTMLToDocbook5Converter implements Converter {

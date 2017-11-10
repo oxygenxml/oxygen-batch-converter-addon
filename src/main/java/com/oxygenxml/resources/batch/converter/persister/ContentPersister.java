@@ -4,7 +4,7 @@ import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 
 /**
  * Used for save and persist  
- * @author Duna Cosmin
+ * @author Cosmin Duna
  *
  */
 public interface ContentPersister {

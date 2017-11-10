@@ -13,7 +13,7 @@ import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
 /**
  * Oxygen transformer factory.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class OxygenTransformerFactoryCreator implements TransformerFactoryCreator{

@@ -2,7 +2,7 @@ package com.oxygenxml.resources.batch.converter.reporter;
 
 /**
  * Progress dialog interactor.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public interface ProgressDialogInteractor {

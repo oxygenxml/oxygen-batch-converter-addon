@@ -29,7 +29,7 @@ import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 /**
  * JUnit for JSON to XML conversion.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class JsonToXmlTest {

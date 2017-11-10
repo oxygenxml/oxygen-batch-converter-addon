@@ -19,7 +19,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 /**
  * Converter implementation for XHTML to DITA
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class XHTMLToDITAConverter implements Converter {

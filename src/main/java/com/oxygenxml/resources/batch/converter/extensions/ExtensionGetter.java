@@ -3,11 +3,19 @@ package com.oxygenxml.resources.batch.converter.extensions;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 /**
  * Getter for extensions.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ExtensionGetter {
 
+	/**
+	 * Private constructor.
+	 */
+	 private ExtensionGetter() {
+	    throw new IllegalStateException("Utility class");
+	  }
+	
+	
 	/**
 	 * Get the input extensions according to given converter type.
 	 * @param converterType The converter type.
@@ -30,7 +38,7 @@ public class ExtensionGetter {
 			return FileExtensionType.INPUT_JSON_EXTENSIONS;
 		}
 		
-			return null;
+			return new String[]{};
 		
 	}
 

@@ -2,10 +2,10 @@ package com.oxygenxml.resources.batch.converter;
 
 /**
  * The types of converter.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
-public interface ConverterTypes {
+public class ConverterTypes {
 	/**
 	 * HTML -> XHTML
 	 */
