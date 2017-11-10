@@ -153,7 +153,7 @@
 		<dependency>
 			<groupId>com.vladsch.flexmark</groupId>
 			<artifactId>flexmark-profile-pegdown</artifactId>
-			<version>0.27.0</version>
+			<version>0.28.2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/nu.validator.htmlparser/htmlparser -->

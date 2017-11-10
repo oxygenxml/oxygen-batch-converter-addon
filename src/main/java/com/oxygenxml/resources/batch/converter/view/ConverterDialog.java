@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
+import com.oxygenxml.resources.batch.converter.persister.ContentPersister;
+import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
@@ -62,6 +64,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 * The type of converter.
 	 */
 	private String converterType;
+	
+	/**
+	 * Used for persistence.
+	 */
+	private ContentPersister contentPersister;
 
 	/**
 	 * Link to GitHub repository description.
@@ -79,7 +86,8 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		super(parentFrame, "" , true);
 		this.converterType = converterType;
 		this.translator = translator;
-
+		contentPersister = new ContentPersisterImpl();
+		
 		inputPanel = new InputPanel(converterType, translator, this);
 		outputPanel = new OutputPanel(translator);
 		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX , ""));
@@ -97,6 +105,9 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		else{
 			getOkButton().setEnabled(false);
 		}
+		
+		//  Load saved state of the dialog
+		contentPersister.loadState(this);
 		
 		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, converterType));
 		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
@@ -172,6 +183,9 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 			//start the worker.
 			converterWorker.execute();
 
+			// Save the state of dialog.
+			contentPersister.saveState(this);
+			
 			super.doOK();
 		}
 	}
@@ -208,6 +222,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	@Override
 	public boolean mustOpenConvertedFiles() {
 		return openFilesCBox.isSelected();
+	}
+
+	@Override
+	public void setOpenConvertedFiles(boolean state) {
+		openFilesCBox.setSelected(state);
 	}
 
 }

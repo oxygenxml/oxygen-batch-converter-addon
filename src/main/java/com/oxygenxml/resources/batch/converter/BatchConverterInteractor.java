@@ -36,6 +36,12 @@ public interface BatchConverterInteractor {
 	public boolean mustOpenConvertedFiles();
 	
 	/**
+	 * Set if the converted file must be opened.
+	 * @param <code>true</code> if converted files must be opened, <code>false</code>otherwise.
+	 */
+	public void setOpenConvertedFiles(boolean state);
+	
+	/**
 	 * Set enable/ disable the convert button.
 	 * @param state <code>true</code> to set enable, <code>false</code> to set disable.
 	 */
