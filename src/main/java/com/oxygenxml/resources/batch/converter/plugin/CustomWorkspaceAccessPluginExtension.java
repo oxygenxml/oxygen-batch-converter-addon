@@ -40,10 +40,10 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	private static final String PRECEDING_MENU_ITEM_ACTION_ID = "XML_to_JSON";
 
 	/**
-	 * JMenu that contains items with all converter actions. 
+	 * JMenu that contains items with all converter actions.
 	 */
 	private JMenu batchConvertMenuToolbar;
-	
+
 	/**
 	 * Translator
 	 */
@@ -97,11 +97,11 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
 		batchConvertMenuToolbar = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
-		
-		//set a empty icon(because the alignment will be wrong on MacOS without a icon)
+
+		// set a empty icon(because the alignment will be wrong on MacOS without a icon)
 		ImageIcon imageIcon = new ImageIcon();
 		batchConvertMenuToolbar.setIcon(imageIcon);
-		
+
 		// add actions in batchConvertMenuToolbar
 		int size = actionsToAdd.size();
 		for (int i = 0; i < size; i++) {
@@ -144,7 +144,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 										// add the action after this index.
 										currentMenu.add(batchConvertMenuToolbar, i + 1);
 
-										// break the loops.
+										// break the first loops.
 										j = menuBarSize;
 										break;
 									}
@@ -164,17 +164,19 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 	}
 
 	/**
-	 * Create the Swing action which shows the converter according to converter type.
+	 * Create the Swing action which shows the converter according to converter
+	 * type.
 	 * 
-	 * @param convertorType The type of converter.
+	 * @param convertorType
+	 *          The type of converter.
 	 * @param pluginWorkspaceAccess
 	 *          The plugin workspace access.
 	 * @return The converter action
 	 */
 	@SuppressWarnings("serial")
-	private AbstractAction createConvertorAction(final String converterType, 
+	private AbstractAction createConvertorAction(final String converterType,
 			final StandalonePluginWorkspace pluginWorkspaceAccess) {
-		
+
 		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)) {
 			@SuppressWarnings("unused")
 			@Override
@@ -199,6 +201,7 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 
 	/**
 	 * Create a list with Swing actions for all converters.
+	 * 
 	 * @param pluginWorkspaceAccess
 	 * @return
 	 */
@@ -210,9 +213,10 @@ public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPlug
 		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
 		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
 		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
-		//root problem 
-		//toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
-		
+		// root problem
+		// toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5,
+		// pluginWorkspaceAccess));
+
 		return toReturn;
 	}
 

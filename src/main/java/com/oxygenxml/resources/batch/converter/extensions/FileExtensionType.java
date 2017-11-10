@@ -6,24 +6,32 @@ package com.oxygenxml.resources.batch.converter.extensions;
  *
  */
 public class FileExtensionType {
+	
+	/**
+	 * Private constructor.
+	 */
+	 private FileExtensionType() {
+	    throw new IllegalStateException("Utility class");
+	  }
+	
 	/**
 	 * Extensions of HTML type.
 	 */
-	public static final String[] INPUT_HTML_EXTENSIONS = new String[] { "html", "xhtml", "htm", ".htx" };
+	protected static final String[] INPUT_HTML_EXTENSIONS = new String[] { "html", "xhtml", "htm", ".htx" };
 
 	/**
 	 * Extensions of Markdown type.
 	 */
-	public static final String[] INPUT_MD_EXTENSIONS = new String[] { "md", "markdown" };
+	protected static final String[] INPUT_MD_EXTENSIONS = new String[] { "md", "markdown" };
 
 	/**
 	 * Extensions of XML type.
 	 */
-	public static final String[] INPUT_XML_EXTENSIONS = new String[] { "xml" };
+	protected static final String[] INPUT_XML_EXTENSIONS = new String[] { "xml" };
 	/**
 	 * Extensions of JSON type.
 	 */
-	public static final String[] INPUT_JSON_EXTENSIONS = new String[] { "json" };
+	protected static final String[] INPUT_JSON_EXTENSIONS = new String[] { "json" };
 	
 	/**
 	 * XHtml output type

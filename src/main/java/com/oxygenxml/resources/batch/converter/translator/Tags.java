@@ -7,6 +7,12 @@ package com.oxygenxml.resources.batch.converter.translator;
  */
 public class Tags {
 	
+	/**
+	 * Private constructor.
+	 */
+	 private Tags() {
+	    throw new IllegalStateException("Utility class");
+	  }
 	
 	/**
 	 * The text of JMenu that contains converters.

@@ -27,7 +27,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 /**
  * Batch converter implementation.
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class BatchConverterImpl implements BatchConverter {

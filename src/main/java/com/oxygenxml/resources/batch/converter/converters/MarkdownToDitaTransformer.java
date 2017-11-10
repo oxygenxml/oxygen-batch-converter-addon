@@ -17,7 +17,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 /**
  * Converter implementation for Markdown to DITA.
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.converter.converters.Converter {

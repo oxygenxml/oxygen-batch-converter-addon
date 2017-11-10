@@ -8,6 +8,14 @@ package com.oxygenxml.resources.batch.converter.doctype;
 public class Doctypes {
 
 	/**
+	 * Private constructor.
+	 */
+  private Doctypes() {
+    throw new IllegalStateException("Utility class");
+  }
+	
+	
+	/**
 	 * System doctype in DITA files.
 	 */
 	public static final String DOCTYPE_SYSTEM_DITA = "topic.dtd";

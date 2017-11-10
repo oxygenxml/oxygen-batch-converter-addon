@@ -35,12 +35,9 @@ public class StyleSourceGetter {
 			"            <xsl:apply-templates select=\"node()|@*\"/>\n" + 
 			"        </xsl:copy>\n" + 
 			"    </xsl:template>\n" + 
-			"    \n" + 
 			"    <xsl:template match=\"topic/@class\" />\n" + 
 			"    <xsl:template match=\"topic/@ditaarch:DITAArchVersion\" />\n" + 
 			"    <xsl:template match=\"topic/@domains\" />\n" + 
-			"    \n" + 
-			"    \n" + 
 			"</xsl:stylesheet>";
 	
 	/**

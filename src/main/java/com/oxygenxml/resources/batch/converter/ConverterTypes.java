@@ -6,6 +6,14 @@ package com.oxygenxml.resources.batch.converter;
  *
  */
 public class ConverterTypes {
+	
+	/**
+	 * Private constructor.
+	 */
+  private ConverterTypes() {
+    throw new IllegalStateException("Utility class");
+  }
+	
 	/**
 	 * HTML -> XHTML
 	 */

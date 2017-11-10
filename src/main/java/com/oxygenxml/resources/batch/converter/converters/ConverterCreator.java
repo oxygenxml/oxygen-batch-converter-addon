@@ -4,7 +4,7 @@ import com.oxygenxml.resources.batch.converter.ConverterTypes;
 
 /**
  * Creator of Converter
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class ConverterCreator {

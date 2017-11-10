@@ -16,7 +16,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 /**
  * A simple content printer implementation.
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class SimpleContentPrinterImpl implements ContentPrinter {

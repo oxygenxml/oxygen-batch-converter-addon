@@ -10,7 +10,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 /**
  * Interface for convert a document in other type.
  * 
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public interface Converter {

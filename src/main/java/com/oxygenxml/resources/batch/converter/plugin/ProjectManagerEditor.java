@@ -69,7 +69,7 @@ public class ProjectManagerEditor {
 
 			// get the addPopUpMenuCustomizer method
 			Method addPopUpMenuCustomizerMethod = projectManagerClass.getMethod("addPopUpMenuCustomizer",
-					new Class[] { projectPopupMenuCustomizerClass });
+					projectPopupMenuCustomizerClass );
 			// invoke addPopUpMenuCustomizer method
 			addPopUpMenuCustomizerMethod.invoke(projectManager, proxyProjectPopupMenuCustomizerImpl);
 

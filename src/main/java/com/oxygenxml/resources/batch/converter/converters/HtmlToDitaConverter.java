@@ -10,7 +10,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 
 /**
  * Implementation of Converter for HTML to DITA.
- * @author intern4
+ * @author Cosmin Duna
  *
  */
 public class HtmlToDitaConverter implements Converter{
