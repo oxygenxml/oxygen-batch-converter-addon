@@ -27,7 +27,7 @@ import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 /**
  * Plugin extension - Resources Batch Converter
  */
-public class CustomWorkspaceAccessPluginExtension implements WorkspaceAccessPluginExtension {
+public class BatchConverterPluginExtension implements WorkspaceAccessPluginExtension {
 
 	/**
 	 * The id of menu where converter action will be place.

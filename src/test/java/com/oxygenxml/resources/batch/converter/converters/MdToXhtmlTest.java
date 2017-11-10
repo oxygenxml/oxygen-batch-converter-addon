@@ -1,4 +1,4 @@
-package tests;
+package com.oxygenxml.resources.batch.converter.converters;
 
 import static org.junit.Assert.assertTrue;
 
@@ -29,17 +29,17 @@ import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 
 /**
- * JUnit for Html to Xhtml conversion.
+ * JUnit for Markdown to Xhtml conversion.
  * @author Cosmin Duna
  *
  */
-public class HtmlToXhtmlTest {
+public class MdToXhtmlTest {
 
 	@Test
 	public void test() throws TransformerException, IOException {
 	
-		File sample  = new File("test-sample/htmlTest.html");		
-		File goodSample = new File("test-sample/goodHtmlToXhtml.xhtml");
+		File sample  = new File("test-sample/markdownTest.md");		
+		File goodSample = new File("test-sample/goodMdToXhtml.xhtml");
 		File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
@@ -54,7 +54,7 @@ public class HtmlToXhtmlTest {
 		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.HTML_TO_XHTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.MD_TO_XHTML, inputFiles, outputFolder, false);
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 
@@ -67,4 +67,5 @@ public class HtmlToXhtmlTest {
 		}
 
 	}
+		
 }

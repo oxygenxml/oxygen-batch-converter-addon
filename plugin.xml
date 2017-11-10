@@ -8,7 +8,7 @@
  description="Oxygen XML plugin which allows batch conversion."
  version="${project.version}"
  vendor="oXygen XML"
- class="com.oxygenxml.resources.batch.converter.plugin.WorkspaceAccessPlugin"
+ class="com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin"
  classLoaderType="preferReferencedResources">
  
  <runtime>
@@ -18,5 +18,5 @@
  </runtime>
  
  <extension type="WorkspaceAccess" 
-  class="com.oxygenxml.resources.batch.converter.plugin.CustomWorkspaceAccessPluginExtension"/>
+  class="com.oxygenxml.resources.batch.converter.plugin.BatchConverterPluginExtension"/>
 </plugin>

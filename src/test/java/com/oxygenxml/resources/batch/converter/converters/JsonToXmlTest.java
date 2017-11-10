@@ -1,4 +1,4 @@
-package tests;
+package com.oxygenxml.resources.batch.converter.converters;
 
 import static org.junit.Assert.assertTrue;
 
@@ -27,19 +27,18 @@ import tests.utils.ProblemReporterTestImpl;
 import tests.utils.ProgressDialogInteractorTestImpl;
 import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
-
 /**
- * JUnit for Markdown to Xhtml conversion.
+ * JUnit for JSON to XML conversion.
  * @author Cosmin Duna
  *
  */
-public class MdToXhtmlTest {
+public class JsonToXmlTest {
 
 	@Test
 	public void test() throws TransformerException, IOException {
 	
-		File sample  = new File("test-sample/markdownTest.md");		
-		File goodSample = new File("test-sample/goodMdToXhtml.xhtml");
+		File sample  = new File("test-sample/jsonTest.json");		
+		File goodSample = new File("test-sample/xmlTest.xml");
 		File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
@@ -51,10 +50,10 @@ public class MdToXhtmlTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
-		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.XML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.MD_TO_XHTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.JSON_TO_XML, inputFiles, outputFolder, false);
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 

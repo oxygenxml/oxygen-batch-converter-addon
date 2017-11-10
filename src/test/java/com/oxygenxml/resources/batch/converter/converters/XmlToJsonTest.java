@@ -1,4 +1,4 @@
-package tests;
+package com.oxygenxml.resources.batch.converter.converters;
 
 import static org.junit.Assert.assertTrue;
 
