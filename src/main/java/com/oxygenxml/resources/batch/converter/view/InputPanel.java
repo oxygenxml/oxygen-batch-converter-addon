@@ -251,9 +251,8 @@ public class InputPanel extends JPanel {
 
 		// ------add scrollPane
 		gbc.gridy++;
-		gbc.weightx = 1;
 		gbc.weighty = 1;
-		gbc.insets = new Insets(5, 15, 0, 5);
+		gbc.insets = new Insets(5, 0, 0, 0);
 		gbc.fill = GridBagConstraints.BOTH;
 		this.add(scrollPane, gbc);
 
@@ -261,7 +260,6 @@ public class InputPanel extends JPanel {
 		gbc.gridy++;
 		gbc.weightx = 0;
 		gbc.weighty = 0;
-		gbc.insets = new Insets(5, 0, 0, 5);
 		gbc.fill = GridBagConstraints.NONE;
 		gbc.anchor = GridBagConstraints.EAST;
 

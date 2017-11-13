@@ -63,13 +63,12 @@ public class OutputPanel extends JPanel{
 
 		// -------------add output field
 		gbc.gridy++;
-		gbc.insets = new Insets(5, 15, 0, 0);
+		gbc.insets = new Insets(5, 0, 0, 0);
 		add(outputField, gbc);
 
 		// -------------add directoryChooser button
 		gbc.gridx++;
 		gbc.weightx = 0;
-		gbc.insets = new Insets(5, 0, 0, 0);
 		gbc.fill = GridBagConstraints.NONE;
 
 		//action for chooserBtn
