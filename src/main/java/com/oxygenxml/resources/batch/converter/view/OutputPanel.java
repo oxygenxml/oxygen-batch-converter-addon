@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
@@ -41,11 +42,6 @@ public class OutputPanel extends JPanel{
 	 */
 	private ToolbarButton chooserBtn;
 
-	/**
-	 * Path to icon for button that open the directory chooser.
-	 */
-	private static final String CHOOSER_ICON = "images/Open16.png";
-	
 
 	public OutputPanel(Translator translator) {
 
@@ -94,7 +90,7 @@ public class OutputPanel extends JPanel{
 		chooserBtn = new ToolbarButton(chooserAction, false);
 		
 		// Get the image for chooserBtn
-		URL imageToLoad = getClass().getClassLoader().getResource(CHOOSER_ICON);
+		URL imageToLoad = getClass().getClassLoader().getResource(Images.CHOOSER_ICON);
 		
 		if (imageToLoad != null) {
 			//set the icon

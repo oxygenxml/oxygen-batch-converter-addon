@@ -2,12 +2,12 @@ package com.oxygenxml.resources.batch.converter.plugin;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
@@ -23,6 +24,7 @@ import com.oxygenxml.resources.batch.converter.view.ConverterDialog;
 import ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension;
 import ro.sync.exml.workspace.api.standalone.MenuBarCustomizer;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
+import ro.sync.exml.workspace.api.standalone.ui.Menu;
 
 /**
  * Plugin extension - Resources Batch Converter
@@ -40,15 +42,16 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private static final String PRECEDING_MENU_ITEM_ACTION_ID = "XML_to_JSON";
 
 	/**
-	 * JMenu that contains items with all converter actions.
+	 * Menu that contains items with all converter actions.
 	 */
-	private JMenu batchConvertMenuToolbar;
+	private Menu batchConvertMenuToolbar;
 
 	/**
 	 * Translator
 	 */
 	private Translator translator = new OxygenTranslator();
 
+	
 	/**
 	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationStarted(ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace)
 	 */
@@ -96,16 +99,19 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private void addActionsInMenuBar(JMenuBar mainMenuBar, List<Action> actionsToAdd,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		batchConvertMenuToolbar = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
+		batchConvertMenuToolbar = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
-		// set a empty icon(because the alignment will be wrong on MacOS without a icon)
-		ImageIcon imageIcon = new ImageIcon();
-		batchConvertMenuToolbar.setIcon(imageIcon);
-
+		// Get the empty image for JMenuItems
+		URL emptyImageToLoad = getClass().getClassLoader().getResource(Images.EMPTY_IMAGE);
+		
 		// add actions in batchConvertMenuToolbar
 		int size = actionsToAdd.size();
 		for (int i = 0; i < size; i++) {
-			batchConvertMenuToolbar.add(new JMenuItem(actionsToAdd.get(i)));
+			JMenuItem jMenuItem = new JMenuItem(actionsToAdd.get(i));
+			if(emptyImageToLoad != null){
+				jMenuItem.setIcon(ro.sync.ui.Icons.getIcon(emptyImageToLoad.toString()));
+			}
+			batchConvertMenuToolbar.add(jMenuItem);
 		}
 
 		// get the number of items in MenuBar

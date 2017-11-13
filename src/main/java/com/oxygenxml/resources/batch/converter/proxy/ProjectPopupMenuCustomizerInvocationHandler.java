@@ -1,20 +1,21 @@
 package com.oxygenxml.resources.batch.converter.proxy;
 
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
+import ro.sync.exml.workspace.api.standalone.ui.Menu;
 
 /**
  * InvocationHandler for ProjectPopupMenuCustomizer
@@ -76,16 +77,19 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 			if (method.getName().equals("customizePopUpMenu")) {
 				
 				// create a menu
-				JMenu batchConvertMenu = new JMenu(translator.getTranslation(Tags.MENU_TEXT, ""));
+				Menu batchConvertMenu = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
-				ImageIcon imageIcon = new ImageIcon();
-				//set a empty icon(because the alignment will be wrong on MacOS without a icon)
-				batchConvertMenu.setIcon(imageIcon);
+			// Get the empty image for JMenuItems
+				URL emptyImageToLoad = getClass().getClassLoader().getResource(Images.EMPTY_IMAGE);
 				
 				//add actions in batchConvertMenu
 				int sizeList = actions.size();
 				for (int i = 0; i < sizeList; i++) {
-					batchConvertMenu.add(new JMenuItem(actions.get(i)));
+					JMenuItem jMenuItem = new JMenuItem(actions.get(i));
+					if(emptyImageToLoad != null){
+						jMenuItem.setIcon(ro.sync.ui.Icons.getIcon(emptyImageToLoad.toString()));
+					}
+					batchConvertMenu.add(jMenuItem);
 				}
 
 				// cast the args[0] at JPopupMenu
