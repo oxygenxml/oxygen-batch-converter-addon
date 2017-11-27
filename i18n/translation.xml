@@ -137,27 +137,27 @@
 	
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
-		<val lang="en_US">Add input files :</val>
-		<val lang="de_DE">Add input files :</val>
-		<val lang="fr_FR">Add input files :</val>
-		<val lang="ja_JP">Add input files :</val>
-		<val lang="nl_NL">Add input files :</val>
+		<val lang="en_US">Input files:</val>
+		<val lang="de_DE">Input files:</val>
+		<val lang="fr_FR">Input files:</val>
+		<val lang="ja_JP">Input files:</val>
+		<val lang="nl_NL">Input files:</val>
 	</key>
 	<key value="Add_File_Table_Button_Conv">
 		<comment>Button for add files in table.</comment>
-		<val lang="en_US">Add files</val>
-		<val lang="de_DE">Add files</val>
-		<val lang="fr_FR">Add files</val>
-		<val lang="ja_JP">Add files</val>
-		<val lang="nl_NL">Add files</val>
+		<val lang="en_US">Add files...</val>
+		<val lang="de_DE">Add files...</val>
+		<val lang="fr_FR">Add files...</val>
+		<val lang="ja_JP">Add files...</val>
+		<val lang="nl_NL">Add files...</val>
 	</key>
 	<key value="Add_Folder_Table_Button_Conv">
 		<comment>Button for add folder in table.</comment>
-		<val lang="en_US">Add folder</val>
-		<val lang="de_DE">Add folder</val>
-		<val lang="fr_FR">Add folder</val>
-		<val lang="ja_JP">Add folder</val>
-		<val lang="nl_NL">Add folder</val>
+		<val lang="en_US">Add folder...</val>
+		<val lang="de_DE">Add folder...</val>
+		<val lang="fr_FR">Add folder...</val>
+		<val lang="ja_JP">Add folder...</val>
+		<val lang="nl_NL">Add folder...</val>
 	</key>
 	<key value="Remove_Table_Button_Conv">
 		<comment>Button for remove row from table</comment>
