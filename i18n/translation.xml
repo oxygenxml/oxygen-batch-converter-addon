@@ -73,7 +73,14 @@
 		<val lang="ja_JP">Markdown to Docbook5...</val>
 		<val lang="nl_NL">Markdown to Docbook5...</val>
 	</key>
-	
+	<key value="Menu_Item_Text_Conv_md.to.db4">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">Markdown to Docbook4...</val>
+		<val lang="de_DE">Markdown to Docbook4...</val>
+		<val lang="fr_FR">Markdown to Docbook4...</val>
+		<val lang="ja_JP">Markdown to Docbook4...</val>
+		<val lang="nl_NL">Markdown to Docbook4...</val>
+	</key>
 	
 	
 	<key value="Dialog_Title_Conv_html.to.xhtml">
@@ -131,6 +138,14 @@
 		<val lang="fr_FR">Markdown to Docbook5</val>
 		<val lang="ja_JP">Markdown to Docbook5</val>
 		<val lang="nl_NL">Markdown to Docbook5</val>
+	</key>
+	<key value="Dialog_Title_Conv_md.to.db4">
+		<comment>Title for main dialog</comment>
+		<val lang="en_US">Markdown to Docbook4</val>
+		<val lang="de_DE">Markdown to Docbook4</val>
+		<val lang="fr_FR">Markdown to Docbook4</val>
+		<val lang="ja_JP">Markdown to Docbook4</val>
+		<val lang="nl_NL">Markdown to Docbook4</val>
 	</key>
 
 

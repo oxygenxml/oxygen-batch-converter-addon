@@ -40,8 +40,13 @@ public class ConverterTypes {
 	public static final String JSON_TO_XML = "_json.to.xml";
 	
 	/**
-	 * MARKDOWN -> Docbook5
+	 * MARKDOWN -> Docbook4
 	 */
-	public static final String MD_TO_DB5 = "_md.to.db5";
+	public static final String MD_TO_DB4 = "_md.to.db4";
+	
+	 /**
+   * MARKDOWN -> Docbook5
+   */
+  public static final String MD_TO_DB5 = "_md.to.db5";
 
 }

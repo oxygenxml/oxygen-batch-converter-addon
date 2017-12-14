@@ -35,6 +35,10 @@ public class MarkdownToDocbook5Converter implements Converter {
 		
 		//convert the markdown file to XHTML
 		String xhtmlContent = markdownToXhmlConverter.convert(originalFile, contentReader, transformerCreator);
+		
+		System.out.println("XHTML CONTENT: \n" + xhtmlContent);
+		System.out.println("----------------------------------");
+		
 
 		//convert the XHTML content to Docbook and return
 		return  xhtmlToDocbook5Converter.convert(originalFile, new StringReader(xhtmlContent),transformerCreator);

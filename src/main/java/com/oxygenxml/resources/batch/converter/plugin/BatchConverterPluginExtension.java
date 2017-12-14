@@ -57,7 +57,6 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	 */
 	@Override
 	public void applicationStarted(final StandalonePluginWorkspace pluginWorkspaceAccess) {
-
 		// List with actions.
 		final List<Action> actions = createActionsList(pluginWorkspaceAccess);
 
@@ -198,7 +197,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 					selectedFile = ProjectManagerEditor.getSelectedFiles(pluginWorkspaceAccess, converterType);
 				}
 
-				ConverterDialog convertorDialog = new ConverterDialog(converterType, selectedFile,
+			new ConverterDialog(converterType, selectedFile,
 						(JFrame) pluginWorkspaceAccess.getParentFrame(), translator);
 
 			}
@@ -220,8 +219,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
 		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
 		// root problem
-		// toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5,
-		// pluginWorkspaceAccess));
+		//toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
+		//toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
 
 		return toReturn;
 	}

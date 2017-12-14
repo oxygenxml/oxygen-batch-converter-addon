@@ -22,25 +22,28 @@ public class ConverterCreator {
 		
 		if(ConverterTypes.MD_TO_XHTML.equals(converterType)){
 			return new MarkdownToXhmlConverter();
-		}
-		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType)){
+		
+		}else if(ConverterTypes.HTML_TO_XHTML.equals(converterType)){
 			return new HtmlToXhtmlConverter();
-		}
-		else if(ConverterTypes.HTML_TO_DITA.equals(converterType)){
+		
+		}else if(ConverterTypes.HTML_TO_DITA.equals(converterType)){
 			return new HtmlToDitaConverter();
-		}
-		else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
+		
+		}else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
 			return new MarkdownToDitaTransformer();
-		}
-		else if(ConverterTypes.XML_TO_JSON.equals(converterType)){
+		
+		}else if(ConverterTypes.XML_TO_JSON.equals(converterType)){
 			return new XmlToJsonConverter();
-		}
-		else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
+		
+		}else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
 			return new JsonToXmlConverter();
-		}
-		else if(ConverterTypes.MD_TO_DB5.equals(converterType)){
+		
+		}else if(ConverterTypes.MD_TO_DB5.equals(converterType)){
 			return new MarkdownToDocbook5Converter();
-		}
-		return null;
+			
+		} else if(ConverterTypes.MD_TO_DB4.equals(converterType)){
+      return new MarkdownToDocbook5Converter();
+    
+		}return null;
 	}
 }
