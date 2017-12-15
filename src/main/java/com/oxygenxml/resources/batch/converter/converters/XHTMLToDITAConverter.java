@@ -75,15 +75,14 @@ public class XHTMLToDITAConverter implements Converter {
 			int indexOfTopicTag = ditaContent.indexOf("topic");
 			
 			if(indexOfTopicTag != -1){
-				ditaContent = ditaContent.substring(0, indexOfTopicTag + 5) + " id=\"topicID\""
-						+ ditaContent.substring(indexOfTopicTag + 5);
+				ditaContent = ditaContent.substring(0, indexOfTopicTag + "topic".length()) + " id=\"topicID\""
+						+ ditaContent.substring(indexOfTopicTag + "topic".length());
 			}
-			
 			
 		}catch (TransformerException e) {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
-
 		return ditaContent;
 	}
+	
 }

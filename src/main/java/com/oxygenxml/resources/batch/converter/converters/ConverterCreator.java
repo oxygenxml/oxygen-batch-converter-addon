@@ -42,7 +42,7 @@ public class ConverterCreator {
 			return new MarkdownToDocbook5Converter();
 			
 		} else if(ConverterTypes.MD_TO_DB4.equals(converterType)){
-      return new MarkdownToDocbook5Converter();
+      return new MarkdownToDocbook4Converter();
     
 		}return null;
 	}

@@ -218,9 +218,12 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
 		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
 		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
-		// root problem
-		//toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
-		//toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
+
+		Float oxyVersion = Float.valueOf(pluginWorkspaceAccess.getVersion());
+		if(oxyVersion > 19.1) {
+		  toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
+		  toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
+		}
 
 		return toReturn;
 	}

@@ -9,8 +9,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
-
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 import nu.validator.htmlparser.common.DoctypeExpectation;
@@ -25,11 +23,6 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  */
 public class XHTMLToDocbook4Converter implements Converter {
   
-  /**
-   * Logger for logging.
-   */
-  private static final Logger logger = Logger.getLogger(XHTMLToDocbook4Converter.class.getName());
-
 	/**
 	 * Convert the given XHTML to Docbook5.
 	 * 
@@ -44,9 +37,6 @@ public class XHTMLToDocbook4Converter implements Converter {
 	@Override
 	public String convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
-	  
-	  
-	  
 
 		String docbookContent ="";
 		
@@ -62,8 +52,6 @@ public class XHTMLToDocbook4Converter implements Converter {
 				null);
 		xslPath = xslPath + "/docbook/resources/xhtml2db4Driver.xsl";
 		
-		System.out.println("DOCBOOK 4 Driver:" + xslPath);
-
 		StringWriter sw = new StringWriter();
 		StreamResult result = new StreamResult(sw);
 		final StreamSource src = new StreamSource(xslPath);
@@ -73,9 +61,7 @@ public class XHTMLToDocbook4Converter implements Converter {
 		// set the parameter of transformer
 		transformer.setParameter("context.path.names", "article");
 		transformer.setParameter("context.path.uris", "http://docbook.org/ns/docbook");
-		transformer.setParameter("context.item.separator", ",");
 		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
-		
 		
 		
 		try {

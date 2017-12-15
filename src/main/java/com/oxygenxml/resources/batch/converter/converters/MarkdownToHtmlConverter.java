@@ -44,7 +44,7 @@ public class MarkdownToHtmlConverter implements Converter {
 		String toReturn = null;
 
 		// create the parser
-		final DataHolder options = PegdownOptionsAdapter.flexmarkOptions(true, Extensions.ALL );
+		final DataHolder options = PegdownOptionsAdapter.flexmarkOptions(true, Extensions.ALL - Extensions.EXTANCHORLINKS);
 
 		Parser parser = Parser.builder(options).build();
 		HtmlRenderer renderer = HtmlRenderer.builder(options).build();

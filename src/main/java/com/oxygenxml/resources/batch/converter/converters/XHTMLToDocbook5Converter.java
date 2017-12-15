@@ -63,10 +63,7 @@ public class XHTMLToDocbook5Converter implements Converter {
 		// set the parameter of transformer
 		transformer.setParameter("context.path.names", "article");
 		transformer.setParameter("context.path.uris", "http://docbook.org/ns/docbook");
-		transformer.setParameter("context.item.separator", ",");
 		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
-		
-		
 		
 		try {
 				// convert the document

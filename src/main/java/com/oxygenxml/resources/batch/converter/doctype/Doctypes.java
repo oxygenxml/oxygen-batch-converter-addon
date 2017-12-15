@@ -24,6 +24,16 @@ public class Doctypes {
 	 */
 	public static final String DOCTYPE_PUBLIC_DITA = "-//OASIS//DTD DITA Topic//EN";
 
+	 /**
+   * System doctype in DB4 files.
+   */
+	public static final String DOCTYPE_PUBLIC_DB4 = "-//OASIS//DTD DocBook XML V4.5//EN";
+	
+	 /**
+   * Public doctype in DB4 files.
+   */
+	public static final String DOCTYPE_SYSTEM_DB4 = "http://docbook.org/xml/4.5/docbookx.dtd";
+	
 	/**
 	 * System doctype in XHTML files.
 	 */
