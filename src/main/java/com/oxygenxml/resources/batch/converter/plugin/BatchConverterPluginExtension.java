@@ -44,7 +44,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	/**
 	 * Menu that contains items with all converter actions.
 	 */
-	private Menu batchConvertMenuToolbar;
+	private Menu batchConvertMenu;
 
 	/**
 	 * Translator
@@ -98,9 +98,85 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private void addActionsInMenuBar(JMenuBar mainMenuBar, List<Action> actionsToAdd,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		batchConvertMenuToolbar = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
+		batchConvertMenu = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
-		// Get the empty image for JMenuItems
+		int indexToInsert = -1;
+		
+		// add actions in batch converterMenu.
+		addActionsInMenu(actionsToAdd);
+
+		// get the number of items in MenuBar
+		int menuBarSize = mainMenuBar.getMenuCount();
+
+    // iterate over menus in menuBar
+    for (int i = 0; i < menuBarSize; i++) {
+      // get the menu with index i
+      JMenu currentMenu = mainMenuBar.getMenu(i);
+      if(currentMenu != null) {
+        indexToInsert = searchForPosition(currentMenu, pluginWorkspaceAccess);
+        
+        if (indexToInsert != -1) {
+          currentMenu.add(batchConvertMenu, indexToInsert);
+          break;
+        }
+      }
+    }
+	}
+
+
+/**
+ * Search for position to insert the menu with actions in given menu.
+ * @param menu The menu to search.
+ * @param pluginWorkspaceAccess StandalonePluginWorkspace
+ * @return The index of menu, or -1 if wasn't find the position.
+ */
+  private int searchForPosition(JMenu menu, StandalonePluginWorkspace pluginWorkspaceAccess) {
+    int index = -1;
+    // iterate over menu items in currentMenu
+    int sizeMenu = menu.getItemCount();
+    for (int i = 0; i < sizeMenu; i++) {
+      JMenuItem menuItem = menu.getItem(i);
+
+      if (menuItem != null) {
+        Action action = menuItem.getAction();
+        if (action != null) {
+          // get the actionID
+          String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
+
+          if (actionID != null) {
+            // The actionId is in format: menuNameId/menuItemActionID
+            int indexOfSlash = actionID.indexOf('/');
+
+            // check the menuNameId
+            if (MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
+
+              // the menuNameId is MENU_ID
+              // check the menuItemActionID
+              if (PRECEDING_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
+                // the MenuIdemActionId is PRECEDING_MENU_ITEM_ACTION_ID.
+                // this is the index
+                index = i + 1;
+                menu.add(batchConvertMenu, i + 1);
+                break;
+              }
+
+            } else {
+              // the menuNameId is not MENU_NAME
+              break;
+            }
+          }
+        }
+      }
+    }
+    return index;
+  }
+
+	/**
+	 * Add the given actions in batch convert menu.
+	 * @param actionsToAdd The actions.
+	 */
+  private void addActionsInMenu(List<Action> actionsToAdd) {
+    // Get the empty image for JMenuItems
 		URL emptyImageToLoad = getClass().getClassLoader().getResource(Images.EMPTY_IMAGE);
 		
 		// add actions in batchConvertMenuToolbar
@@ -110,64 +186,10 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 			if(emptyImageToLoad != null){
 				jMenuItem.setIcon(ro.sync.ui.Icons.getIcon(emptyImageToLoad.toString()));
 			}
-			batchConvertMenuToolbar.add(jMenuItem);
+			batchConvertMenu.add(jMenuItem);
 		}
-
-		// get the number of items in MenuBar
-		int menuBarSize = mainMenuBar.getMenuCount();
-
-		// iterate over menus in menuBar
-		for (int j = 0; j < menuBarSize; j++) {
-
-			// get the menu with index j
-			JMenu currentMenu = mainMenuBar.getMenu(j);
-
-			if (currentMenu != null) {
-				// iterate over menu items in currentMenu
-				int sizeMenu = currentMenu.getItemCount();
-				for (int i = 0; i < sizeMenu; i++) {
-
-					JMenuItem menuItem = currentMenu.getItem(i);
-
-					if (menuItem != null) {
-						Action action = menuItem.getAction();
-						if (action != null) {
-							// get the actionID
-							String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
-
-							if (actionID != null) {
-								// The actionId is in format: menuNameId/menuItemActionID
-								int indexOfSlash = actionID.indexOf('/');
-
-								// check the menuNameId
-								if (MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
-
-									// the menuNameId is MENU_ID
-									// check the menuItemActionID
-									if (PRECEDING_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
-										// the MenuIdemActionId is PRECEDING_MENU_ITEM_ACTION_ID.
-										// add the action after this index.
-										currentMenu.add(batchConvertMenuToolbar, i + 1);
-
-										// break the first loops.
-										j = menuBarSize;
-										break;
-									}
-
-								} else {
-									// the menuNameId is not MENU_NAME
-									break;
-								}
-							}
-						}
-
-					}
-				}
-			}
-
-		}
-	}
-
+  }
+	
 	/**
 	 * Create the Swing action which shows the converter according to converter
 	 * type.
@@ -192,7 +214,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
 
 				// if is not JMenu from Toolbar
-				if (!batchConvertMenuToolbar.equals(((JPopupMenu) menuItemAction.getParent()).getInvoker())) {
+				if (!batchConvertMenu.equals(((JPopupMenu) menuItemAction.getParent()).getInvoker())) {
 					// get the selectedFile from ProjectManager
 					selectedFile = ProjectManagerEditor.getSelectedFiles(pluginWorkspaceAccess, converterType);
 				}

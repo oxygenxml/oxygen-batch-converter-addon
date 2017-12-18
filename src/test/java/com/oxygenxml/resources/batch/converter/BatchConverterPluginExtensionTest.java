@@ -1,7 +1,5 @@
 package com.oxygenxml.resources.batch.converter;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class BatchConverterPluginExtensionTest {

@@ -11,9 +11,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
-import nu.validator.htmlparser.common.DoctypeExpectation;
-import nu.validator.htmlparser.common.Heuristics;
-import nu.validator.htmlparser.sax.HtmlParser;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**
@@ -40,13 +37,6 @@ public class XHTMLToDocbook4Converter implements Converter {
 
 		String docbookContent ="";
 		
-		// get the htmlParser
-		HtmlParser parser = new HtmlParser();
-
-		//configure the parser
-		parser.setDoctypeExpectation(DoctypeExpectation.AUTO);
-		parser.setHeuristics(Heuristics.ICU);
-
 		// get the XSL path from oxygen
 		String xslPath = PluginWorkspaceProvider.getPluginWorkspace().getUtilAccess().expandEditorVariables("${frameworks}",
 				null);
