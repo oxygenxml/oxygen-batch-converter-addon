@@ -3,6 +3,13 @@ package com.oxygenxml.resources.batch.converter.resources;
 public class Images {
 
 	/**
+	 * Private constructor.
+	 */
+  private Images() {
+    throw new IllegalStateException("Utility class");
+  }
+	
+	/**
 	 * Empty image to be set on menuItems.
 	 */
 	public static final String EMPTY_IMAGE = "images/Empty16.png";
