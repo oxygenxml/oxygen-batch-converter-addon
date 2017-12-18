@@ -24,6 +24,16 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  */
 public class XHTMLToDITAConverter implements Converter {
 
+  /**
+   * The local name of root element.
+   */
+  private static final String ROOT_ELEMENT_NAME = "topic";
+
+  /**
+   * The attributes from the topic root element.
+   */
+  private static final String TOPIC_ATTRIBUTES =  " id=\"topicID\"";
+  
 	/**
 	 * Convert the given XHTML to DITA.
 	 * 
@@ -63,7 +73,7 @@ public class XHTMLToDITAConverter implements Converter {
 
 		// set the parameter of transformer
 		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
-		transformer.setParameter("context.path.names", "topic");
+		transformer.setParameter("context.path.names", ROOT_ELEMENT_NAME);
 
 		try {
 				// convert the document
@@ -72,11 +82,15 @@ public class XHTMLToDITAConverter implements Converter {
 			// add an id on root(topic)
 			ditaContent = sw.toString();
 			
-			int indexOfTopicTag = ditaContent.indexOf("topic");
+			int indexOfTopicTag = ditaContent.indexOf(ROOT_ELEMENT_NAME) + ROOT_ELEMENT_NAME.length();
 			
 			if(indexOfTopicTag != -1){
-				ditaContent = ditaContent.substring(0, indexOfTopicTag + "topic".length()) + " id=\"topicID\""
-						+ ditaContent.substring(indexOfTopicTag + "topic".length());
+			  // Add the topic attributes(id).
+			  StringBuilder sb = new StringBuilder();
+			  sb.append(ditaContent.substring(0, indexOfTopicTag));
+			  sb.append(TOPIC_ATTRIBUTES);
+			  sb.append(ditaContent.substring(indexOfTopicTag));
+			  ditaContent = sb.toString();
 			}
 			
 		}catch (TransformerException e) {

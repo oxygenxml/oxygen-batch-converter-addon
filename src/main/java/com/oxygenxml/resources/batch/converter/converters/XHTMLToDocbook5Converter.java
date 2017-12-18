@@ -23,6 +23,17 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  */
 public class XHTMLToDocbook5Converter implements Converter {
 
+  /**
+   * The attributes from the article root element.
+   */
+  private static final String ARTICLE_ATTRIBUTES = " xmlns=\"http://docbook.org/ns/docbook\"" + 
+      " xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"5.0\"";
+  
+  /**
+   * The local name of root element.
+   */
+  private static final String ROOT_ELEMENT = "article";
+  
 	/**
 	 * Convert the given XHTML to Docbook5.
 	 * 
@@ -61,7 +72,7 @@ public class XHTMLToDocbook5Converter implements Converter {
 		Transformer transformer = transformerCreator.createTransformer(src);
 
 		// set the parameter of transformer
-		transformer.setParameter("context.path.names", "article");
+		transformer.setParameter("context.path.names", ROOT_ELEMENT);
 		transformer.setParameter("context.path.uris", "http://docbook.org/ns/docbook");
 		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
 		
@@ -75,6 +86,16 @@ public class XHTMLToDocbook5Converter implements Converter {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
 
+		int indexOfRootTag = docbookContent.indexOf(ROOT_ELEMENT) + ROOT_ELEMENT.length();
+    if(indexOfRootTag != -1){
+      // Add the article attributes.
+      StringBuilder sb = new StringBuilder();
+      sb.append(docbookContent.substring(0, indexOfRootTag ));
+      sb.append(ARTICLE_ATTRIBUTES);
+      sb.append(docbookContent.substring(indexOfRootTag));
+      docbookContent = sb.toString();
+    }
+		
 		return docbookContent;
 	}
 
