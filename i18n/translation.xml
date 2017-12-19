@@ -165,8 +165,22 @@
 		<val lang="ja_JP">Markdown to Docbook4</val>
 		<val lang="nl_NL">Markdown to Docbook4</val>
 	</key>
-
-
+	<key value="Dialog_Title_Conv_html.to.db5">
+		<comment>Title for main dialog</comment>
+		<val lang="en_US">HTML to Docbook5</val>
+		<val lang="de_DE">HTML to Docbook5</val>
+		<val lang="fr_FR">HTML to Docbook5</val>
+		<val lang="ja_JP">HTML to Docbook5</val>
+		<val lang="nl_NL">HTML to Docbook5</val>
+	</key>
+	<key value="Dialog_Title_Conv_html.to.db4">
+		<comment>Title for main dialog</comment>
+		<val lang="en_US">HTML to Docbook4</val>
+		<val lang="de_DE">HTML to Docbook4</val>
+		<val lang="fr_FR">HTML to Docbook4</val>
+		<val lang="ja_JP">HTML to Docbook4</val>
+		<val lang="nl_NL">HTML to Docbook4</val>
+	</key>
 	
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>

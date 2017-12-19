@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.Action;
 
@@ -46,7 +47,7 @@ public class ProjectManagerEditor {
 	 * @param actions
 	 *          The actions to add
 	 */
-	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, List<Action> actions, Translator translator) {
+	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, Map<String, List<Action>> actions, Translator translator) {
 		// try to get method from 19.1 version
 		try {
 			// get the getProjectManager method
