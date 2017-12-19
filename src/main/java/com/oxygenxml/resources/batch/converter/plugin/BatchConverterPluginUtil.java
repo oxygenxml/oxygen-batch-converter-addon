@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.JMenuItem;
 
 import com.oxygenxml.resources.batch.converter.resources.Images;
 
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.images.ImageUtilities;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.ui.Menu;
 
@@ -47,7 +51,7 @@ public class BatchConverterPluginUtil {
         // add actions in batchConvertMenuToolbar
         JMenuItem jMenuItem = new JMenuItem(keyValue.get(i));
         if(emptyImageToLoad != null){
-          jMenuItem.setIcon(ro.sync.ui.Icons.getIcon(emptyImageToLoad.toString()));
+          jMenuItem.setIcon(getIcon(emptyImageToLoad));
         }
         menu.add(jMenuItem);
       }
@@ -58,5 +62,19 @@ public class BatchConverterPluginUtil {
     }
 
     return menu;
+  }
+  
+  /**
+   * Get the Icon from given URL.
+   * @param resource The URL
+   * @return The icon.
+   */
+  public static Icon getIcon(URL resource) {
+    Icon toReturn = null;
+    PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+    if (resource != null && pluginWorkspace != null) {
+      toReturn = (Icon) pluginWorkspace.getImageUtilities().loadIcon(resource);
+    }
+    return toReturn;
   }
 }

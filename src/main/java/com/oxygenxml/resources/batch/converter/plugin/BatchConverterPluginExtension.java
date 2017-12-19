@@ -185,7 +185,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private AbstractAction createConvertorAction(final String converterType,
 			final StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)) {
+		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)+ "...") {
 			@Override
 			public void actionPerformed(ActionEvent actionevent) {
 

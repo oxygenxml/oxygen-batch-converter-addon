@@ -109,7 +109,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		//  Load saved state of the dialog
 		contentPersister.loadState(this);
 		
-		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, converterType));
+		setTitle(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType));
 		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
 		setResizable(true);
 		pack();
