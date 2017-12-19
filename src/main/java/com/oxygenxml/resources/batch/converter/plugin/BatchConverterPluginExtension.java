@@ -205,7 +205,6 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 			final StandalonePluginWorkspace pluginWorkspaceAccess) {
 
 		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)) {
-			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent actionevent) {
 
@@ -243,6 +242,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 
 		Float oxyVersion = Float.valueOf(pluginWorkspaceAccess.getVersion());
 		if(oxyVersion > 19.1) {
+			toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
+		  toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
 		  toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
 		  toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
 		}

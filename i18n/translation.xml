@@ -65,6 +65,24 @@
 		<val lang="ja_JP">JSON to XML...</val>
 		<val lang="nl_NL">JSON to XML...</val>
 	</key>
+
+
+	<key value="Menu_Item_Text_Conv_html.to.db5">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">HTML to Docbook5...</val>
+		<val lang="de_DE">HTML to Docbook5...</val>
+		<val lang="fr_FR">HTML to Docbook5...</val>
+		<val lang="ja_JP">HTML to Docbook5...</val>
+		<val lang="nl_NL">HTML to Docbook5...</val>
+	</key>
+	<key value="Menu_Item_Text_Conv_html.to.db4">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">HTML to Docbook4...</val>
+		<val lang="de_DE">HTML to Docbook4...</val>
+		<val lang="fr_FR">HTML to Docbook4...</val>
+		<val lang="ja_JP">HTML to Docbook4...</val>
+		<val lang="nl_NL">HTML to Docbook4...</val>
+	</key>
 	<key value="Menu_Item_Text_Conv_md.to.db5">
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Markdown to Docbook5...</val>

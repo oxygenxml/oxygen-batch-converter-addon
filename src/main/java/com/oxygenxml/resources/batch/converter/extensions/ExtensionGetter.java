@@ -23,7 +23,8 @@ public class ExtensionGetter {
 	 */
 	public static String[] getInputExtension(String converterType) {
 
-		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.HTML_TO_XHTML.equals(converterType)){
+		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.HTML_TO_XHTML.equals(converterType)
+				|| ConverterTypes.HTML_TO_DB4.equals(converterType) || ConverterTypes.HTML_TO_DB5.equals(converterType)){
 			return FileExtensionType.INPUT_HTML_EXTENSIONS;
 
 		}
@@ -61,7 +62,8 @@ public class ExtensionGetter {
 			return FileExtensionType.JSON_OUTPUT_EXTENSION;
 		}
 		else if(ConverterTypes.JSON_TO_XML.equals(converterType) || ConverterTypes.MD_TO_DB5.equals(converterType) || 
-		    ConverterTypes.MD_TO_DB4.equals(converterType)){
+		    ConverterTypes.MD_TO_DB4.equals(converterType) || ConverterTypes.HTML_TO_DB4.equals(converterType) ||
+		    ConverterTypes.HTML_TO_DB5.equals(converterType)){
 			return FileExtensionType.XML_OUTPUT_EXTENSION;
 		}
 			return null;
