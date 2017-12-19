@@ -213,26 +213,26 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	 * @return
 	 */
 	private Map<String, List<Action>> createActionsMap(StandalonePluginWorkspace pluginWorkspaceAccess) {
-	  Map<String, List<Action>> toReturn = new HashMap<>();
-		List<Action> dita = new ArrayList<>();
+	  Map<String, List<Action>> toReturn = new HashMap<String, List<Action>>();
+		List<Action> dita = new ArrayList<Action>();
 		
 		dita.add(createConvertorAction(ConverterTypes.HTML_TO_DITA, pluginWorkspaceAccess));
 		dita.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
 		toReturn.put("ditaSection", dita);
 		
-		List<Action> xhtml = new ArrayList();
+		List<Action> xhtml = new ArrayList<Action>();
 		xhtml.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML, pluginWorkspaceAccess));
 		xhtml.add(createConvertorAction(ConverterTypes.MD_TO_XHTML, pluginWorkspaceAccess));
 		toReturn.put("xhtmlSection", xhtml);
 		
-		List<Action> json = new ArrayList();
+		List<Action> json = new ArrayList<Action>();
 		json.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
 		json.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
 		toReturn.put("jsonSection", json);
 		
 		Float oxyVersion = Float.valueOf(pluginWorkspaceAccess.getVersion());
 		if(oxyVersion > 19.1) {
-		  List<Action> docbook = new ArrayList();
+		  List<Action> docbook = new ArrayList<Action>();
 		  docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
 			docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
 			docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
