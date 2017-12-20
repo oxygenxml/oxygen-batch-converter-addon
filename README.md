@@ -7,8 +7,10 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * Markdown to DITA
 * XML to JSON
 * JSON to XML
-
-
+* HTML to DocBook4 (Oxygen 20 or newer) 
+* HTML to DocBook5 (Oxygen 20 or newer) 
+* Markdown to DocBook5 (Oxygen 20 or newer) 
+* Markdown to DocBook5 (Oxygen 20 or newer) 
 ## Installation
 
 The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1 or newer. 
