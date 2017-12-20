@@ -20,11 +20,6 @@ public class Tags {
 	public static final String MENU_TEXT = "Menu_Text_Conv";
 	
 	/**
-	 * Title of checker frame
-	 */
-	public static final String DIALOG_TITLE = "Dialog_Title_Conv";
-	
-	/**
 	 * Text for menu item.
 	 */
 	public static final String MENU_ITEM_TEXT = "Menu_Item_Text_Conv";

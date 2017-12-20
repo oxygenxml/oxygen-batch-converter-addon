@@ -3,6 +3,7 @@ package com.oxygenxml.resources.batch.converter.proxy;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.JMenuItem;
@@ -10,6 +11,7 @@ import javax.swing.JPopupMenu;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPluginUtil;
 import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
@@ -43,7 +45,7 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	/**
 	 * Actions to be add.
 	 */
-	private List<Action> actions;
+	private Map<String, List<Action>> actions;
 
 	/**
 	 * Translator
@@ -57,7 +59,7 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	 *          The action that open the DocBook checker.
 	 */
 	public ProjectPopupMenuCustomizerInvocationHandler(StandalonePluginWorkspace pluginWorkspaceAccess,
-			List<Action> actions, Translator translator) {
+			Map<String, List<Action>> actions, Translator translator) {
 
 		this.pluginWorkspaceAccess = pluginWorkspaceAccess;
 		this.actions = actions;
@@ -79,19 +81,9 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 				// create a menu
 				Menu batchConvertMenu = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
 
-			// Get the empty image for JMenuItems
-				URL emptyImageToLoad = getClass().getClassLoader().getResource(Images.EMPTY_IMAGE);
+				// Add actions in menu.
+				batchConvertMenu = BatchConverterPluginUtil.addActionsInMenu(batchConvertMenu, actions);
 				
-				//add actions in batchConvertMenu
-				int sizeList = actions.size();
-				for (int i = 0; i < sizeList; i++) {
-					JMenuItem jMenuItem = new JMenuItem(actions.get(i));
-					if(emptyImageToLoad != null){
-						jMenuItem.setIcon(ro.sync.ui.Icons.getIcon(emptyImageToLoad.toString()));
-					}
-					batchConvertMenu.add(jMenuItem);
-				}
-
 				// cast the args[0] at JPopupMenu
 				JPopupMenu popupMenu = (JPopupMenu) args[0];
 

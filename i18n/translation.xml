@@ -19,154 +19,87 @@
 	
 	<key value="Menu_Item_Text_Conv_html.to.xhtml">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">HTML to XHTML...</val>
-		<val lang="de_DE">HTML to XHTML...</val>
-		<val lang="fr_FR">HTML to XHTML...</val>
-		<val lang="ja_JP">HTML to XHTML...</val>
-		<val lang="nl_NL">HTML to XHTML...</val>
-	</key>
-	<key value="Menu_Item_Text_Conv_html.to.dita">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">HTML to DITA...</val>
-		<val lang="de_DE">HTML to DITA...</val>
-		<val lang="fr_FR">HTML to DITA...</val>
-		<val lang="ja_JP">HTML to DITA...</val>
-		<val lang="nl_NL">HTML to DITA...</val>
-	</key>
-<key value="Menu_Item_Text_Conv_md.to.xhtml">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Markdown to XHTML...</val>
-		<val lang="de_DE">Markdown to XHTML...</val>
-		<val lang="fr_FR">Markdown to XHTML...</val>
-		<val lang="ja_JP">Markdown to XHTML...</val>
-		<val lang="nl_NL">Markdown to XHTML...</val>
-	</key>
-<key value="Menu_Item_Text_Conv_md.to.dita">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Markdown to DITA...</val>
-		<val lang="de_DE">Markdown to DITA...</val>
-		<val lang="fr_FR">Markdown to DITA...</val>
-		<val lang="ja_JP">Markdown to DITA...</val>
-		<val lang="nl_NL">Markdown to DITA...</val>
-	</key>
-<key value="Menu_Item_Text_Conv_xml.to.json">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">XML to JSON...</val>
-		<val lang="de_DE">XML to JSON...</val>
-		<val lang="fr_FR">XML to JSON...</val>
-		<val lang="ja_JP">XML to JSON...</val>
-		<val lang="nl_NL">XML to JSON...</val>
-	</key>
-	<key value="Menu_Item_Text_Conv_json.to.xml">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">JSON to XML...</val>
-		<val lang="de_DE">JSON to XML...</val>
-		<val lang="fr_FR">JSON to XML...</val>
-		<val lang="ja_JP">JSON to XML...</val>
-		<val lang="nl_NL">JSON to XML...</val>
-	</key>
-
-
-	<key value="Menu_Item_Text_Conv_html.to.db5">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">HTML to Docbook5...</val>
-		<val lang="de_DE">HTML to Docbook5...</val>
-		<val lang="fr_FR">HTML to Docbook5...</val>
-		<val lang="ja_JP">HTML to Docbook5...</val>
-		<val lang="nl_NL">HTML to Docbook5...</val>
-	</key>
-	<key value="Menu_Item_Text_Conv_html.to.db4">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">HTML to Docbook4...</val>
-		<val lang="de_DE">HTML to Docbook4...</val>
-		<val lang="fr_FR">HTML to Docbook4...</val>
-		<val lang="ja_JP">HTML to Docbook4...</val>
-		<val lang="nl_NL">HTML to Docbook4...</val>
-	</key>
-	<key value="Menu_Item_Text_Conv_md.to.db5">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Markdown to Docbook5...</val>
-		<val lang="de_DE">Markdown to Docbook5...</val>
-		<val lang="fr_FR">Markdown to Docbook5...</val>
-		<val lang="ja_JP">Markdown to Docbook5...</val>
-		<val lang="nl_NL">Markdown to Docbook5...</val>
-	</key>
-	<key value="Menu_Item_Text_Conv_md.to.db4">
-		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Markdown to Docbook4...</val>
-		<val lang="de_DE">Markdown to Docbook4...</val>
-		<val lang="fr_FR">Markdown to Docbook4...</val>
-		<val lang="ja_JP">Markdown to Docbook4...</val>
-		<val lang="nl_NL">Markdown to Docbook4...</val>
-	</key>
-	
-	
-	<key value="Dialog_Title_Conv_html.to.xhtml">
-		<comment>Title for main dialog</comment>
 		<val lang="en_US">HTML to XHTML</val>
 		<val lang="de_DE">HTML to XHTML</val>
 		<val lang="fr_FR">HTML to XHTML</val>
 		<val lang="ja_JP">HTML to XHTML</val>
 		<val lang="nl_NL">HTML to XHTML</val>
 	</key>
-	<key value="Dialog_Title_Conv_html.to.dita">
-		<comment>Title for main dialog</comment>
+	<key value="Menu_Item_Text_Conv_html.to.dita">
+		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">HTML to DITA</val>
 		<val lang="de_DE">HTML to DITA</val>
 		<val lang="fr_FR">HTML to DITA</val>
 		<val lang="ja_JP">HTML to DITA</val>
 		<val lang="nl_NL">HTML to DITA</val>
 	</key>
-	<key value="Dialog_Title_Conv_md.to.xhtml">
-		<comment>Title for main dialog</comment>
+<key value="Menu_Item_Text_Conv_md.to.xhtml">
+		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Markdown to XHTML</val>
 		<val lang="de_DE">Markdown to XHTML</val>
 		<val lang="fr_FR">Markdown to XHTML</val>
 		<val lang="ja_JP">Markdown to XHTML</val>
 		<val lang="nl_NL">Markdown to XHTML</val>
 	</key>
-	<key value="Dialog_Title_Conv_md.to.dita">
-		<comment>Title for main dialog</comment>
+<key value="Menu_Item_Text_Conv_md.to.dita">
+		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Markdown to DITA</val>
 		<val lang="de_DE">Markdown to DITA</val>
 		<val lang="fr_FR">Markdown to DITA</val>
 		<val lang="ja_JP">Markdown to DITA</val>
 		<val lang="nl_NL">Markdown to DITA</val>
 	</key>
-	<key value="Dialog_Title_Conv_xml.to.json">
-		<comment>Title for main dialog</comment>
+<key value="Menu_Item_Text_Conv_xml.to.json">
+		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">XML to JSON</val>
 		<val lang="de_DE">XML to JSON</val>
 		<val lang="fr_FR">XML to JSON</val>
 		<val lang="ja_JP">XML to JSON</val>
 		<val lang="nl_NL">XML to JSON</val>
 	</key>
-	<key value="Dialog_Title_Conv_json.to.xml">
-		<comment>Title for main dialog</comment>
+	<key value="Menu_Item_Text_Conv_json.to.xml">
+		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">JSON to XML</val>
 		<val lang="de_DE">JSON to XML</val>
 		<val lang="fr_FR">JSON to XML</val>
 		<val lang="ja_JP">JSON to XML</val>
 		<val lang="nl_NL">JSON to XML</val>
 	</key>
-	<key value="Dialog_Title_Conv_md.to.db5">
-		<comment>Title for main dialog</comment>
+
+
+	<key value="Menu_Item_Text_Conv_html.to.db5">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">HTML to Docbook5</val>
+		<val lang="de_DE">HTML to Docbook5</val>
+		<val lang="fr_FR">HTML to Docbook5</val>
+		<val lang="ja_JP">HTML to Docbook5</val>
+		<val lang="nl_NL">HTML to Docbook5</val>
+	</key>
+	<key value="Menu_Item_Text_Conv_html.to.db4">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">HTML to Docbook4</val>
+		<val lang="de_DE">HTML to Docbook4</val>
+		<val lang="fr_FR">HTML to Docbook4</val>
+		<val lang="ja_JP">HTML to Docbook4</val>
+		<val lang="nl_NL">HTML to Docbook4</val>
+	</key>
+	<key value="Menu_Item_Text_Conv_md.to.db5">
+		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Markdown to Docbook5</val>
 		<val lang="de_DE">Markdown to Docbook5</val>
 		<val lang="fr_FR">Markdown to Docbook5</val>
 		<val lang="ja_JP">Markdown to Docbook5</val>
 		<val lang="nl_NL">Markdown to Docbook5</val>
 	</key>
-	<key value="Dialog_Title_Conv_md.to.db4">
-		<comment>Title for main dialog</comment>
+	<key value="Menu_Item_Text_Conv_md.to.db4">
+		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Markdown to Docbook4</val>
 		<val lang="de_DE">Markdown to Docbook4</val>
 		<val lang="fr_FR">Markdown to Docbook4</val>
 		<val lang="ja_JP">Markdown to Docbook4</val>
 		<val lang="nl_NL">Markdown to Docbook4</val>
 	</key>
-
-
+	
 	
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
@@ -178,19 +111,19 @@
 	</key>
 	<key value="Add_File_Table_Button_Conv">
 		<comment>Button for add files in table.</comment>
-		<val lang="en_US">Add files...</val>
-		<val lang="de_DE">Add files...</val>
-		<val lang="fr_FR">Add files...</val>
-		<val lang="ja_JP">Add files...</val>
-		<val lang="nl_NL">Add files...</val>
+		<val lang="en_US">Add files</val>
+		<val lang="de_DE">Add files</val>
+		<val lang="fr_FR">Add files</val>
+		<val lang="ja_JP">Add files</val>
+		<val lang="nl_NL">Add files</val>
 	</key>
 	<key value="Add_Folder_Table_Button_Conv">
 		<comment>Button for add folder in table.</comment>
-		<val lang="en_US">Add folder...</val>
-		<val lang="de_DE">Add folder...</val>
-		<val lang="fr_FR">Add folder...</val>
-		<val lang="ja_JP">Add folder...</val>
-		<val lang="nl_NL">Add folder...</val>
+		<val lang="en_US">Add folder</val>
+		<val lang="de_DE">Add folder</val>
+		<val lang="fr_FR">Add folder</val>
+		<val lang="ja_JP">Add folder</val>
+		<val lang="nl_NL">Add folder</val>
 	</key>
 	<key value="Remove_Table_Button_Conv">
 		<comment>Button for remove row from table</comment>
@@ -259,11 +192,11 @@
 	
 	<key value="Progress_Dialog_Message_Conv">
 		<comment>Message added in progress monitor.</comment>
-		<val lang="en_US">Conversion in progress...</val>
-		<val lang="de_DE">Conversion in progress...</val>
-		<val lang="fr_FR">Conversion in progress...</val>
-		<val lang="ja_JP">Conversion in progress...</val>
-		<val lang="nl_NL">Conversion in progress...</val>
+		<val lang="en_US">Conversion in progress</val>
+		<val lang="de_DE">Conversion in progress</val>
+		<val lang="fr_FR">Conversion in progress</val>
+		<val lang="ja_JP">Conversion in progress</val>
+		<val lang="nl_NL">Conversion in progress</val>
 	</key>
 	
 	<key value="Empty_Output_Message_Conv">

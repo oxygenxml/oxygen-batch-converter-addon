@@ -43,7 +43,13 @@ public class ConverterCreator {
 			
 		} else if(ConverterTypes.MD_TO_DB4.equals(converterType)){
       return new MarkdownToDocbook4Converter();
-    
+      
+	  }else if(ConverterTypes.HTML_TO_DB5.equals(converterType)){
+      return new HtmlToDocbook5Converter();
+      
+    } else if(ConverterTypes.HTML_TO_DB4.equals(converterType)){
+      return new HtmlToDocbook4Converter();
+      
 		}return null;
 	}
 }

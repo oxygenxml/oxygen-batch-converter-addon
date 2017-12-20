@@ -2,9 +2,10 @@ package com.oxygenxml.resources.batch.converter.plugin;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -15,7 +16,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
-import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
@@ -58,7 +58,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	@Override
 	public void applicationStarted(final StandalonePluginWorkspace pluginWorkspaceAccess) {
 		// List with actions.
-		final List<Action> actions = createActionsList(pluginWorkspaceAccess);
+		final Map<String, List<Action>> actions = createActionsMap(pluginWorkspaceAccess);
 
 		// Create a menu with actions and add it to Oxygen
 		pluginWorkspaceAccess.addMenuBarCustomizer(new MenuBarCustomizer() {
@@ -90,12 +90,12 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	 *
 	 * @param mainMenuBar
 	 *          The menuBar
-	 * @param actionsToAdd
+	 * @param actions
 	 *          List with actions to add.
 	 * @param pluginWorkspaceAccess
 	 *          The oxygen PluginWorkspaceAccess.
 	 */
-	private void addActionsInMenuBar(JMenuBar mainMenuBar, List<Action> actionsToAdd,
+	private void addActionsInMenuBar(JMenuBar mainMenuBar, Map<String, List<Action>> actions,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
 		batchConvertMenu = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
@@ -103,7 +103,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		int indexToInsert = -1;
 		
 		// add actions in batch converterMenu.
-		addActionsInMenu(actionsToAdd);
+		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenu, actions);
 
 		// get the number of items in MenuBar
 		int menuBarSize = mainMenuBar.getMenuCount();
@@ -156,7 +156,6 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
                 // the MenuIdemActionId is PRECEDING_MENU_ITEM_ACTION_ID.
                 // this is the index
                 index = i + 1;
-                menu.add(batchConvertMenu, i + 1);
                 break;
               }
 
@@ -171,24 +170,6 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     return index;
   }
 
-	/**
-	 * Add the given actions in batch convert menu.
-	 * @param actionsToAdd The actions.
-	 */
-  private void addActionsInMenu(List<Action> actionsToAdd) {
-    // Get the empty image for JMenuItems
-		URL emptyImageToLoad = getClass().getClassLoader().getResource(Images.EMPTY_IMAGE);
-		
-		// add actions in batchConvertMenuToolbar
-		int size = actionsToAdd.size();
-		for (int i = 0; i < size; i++) {
-			JMenuItem jMenuItem = new JMenuItem(actionsToAdd.get(i));
-			if(emptyImageToLoad != null){
-				jMenuItem.setIcon(ro.sync.ui.Icons.getIcon(emptyImageToLoad.toString()));
-			}
-			batchConvertMenu.add(jMenuItem);
-		}
-  }
 	
 	/**
 	 * Create the Swing action which shows the converter according to converter
@@ -204,7 +185,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private AbstractAction createConvertorAction(final String converterType,
 			final StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)) {
+		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)+ "...") {
 			@Override
 			public void actionPerformed(ActionEvent actionevent) {
 
@@ -231,21 +212,32 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	 * @param pluginWorkspaceAccess
 	 * @return
 	 */
-	private List<Action> createActionsList(StandalonePluginWorkspace pluginWorkspaceAccess) {
-		List<Action> toReturn = new ArrayList<Action>();
-		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DITA, pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML, pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_XHTML, pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
-		toReturn.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
-
+	private Map<String, List<Action>> createActionsMap(StandalonePluginWorkspace pluginWorkspaceAccess) {
+	  Map<String, List<Action>> toReturn = new HashMap<String, List<Action>>();
+		List<Action> dita = new ArrayList<Action>();
+		
+		dita.add(createConvertorAction(ConverterTypes.HTML_TO_DITA, pluginWorkspaceAccess));
+		dita.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
+		toReturn.put("ditaSection", dita);
+		
+		List<Action> xhtml = new ArrayList<Action>();
+		xhtml.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML, pluginWorkspaceAccess));
+		xhtml.add(createConvertorAction(ConverterTypes.MD_TO_XHTML, pluginWorkspaceAccess));
+		toReturn.put("xhtmlSection", xhtml);
+		
+		List<Action> json = new ArrayList<Action>();
+		json.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
+		json.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
+		toReturn.put("jsonSection", json);
+		
 		Float oxyVersion = Float.valueOf(pluginWorkspaceAccess.getVersion());
 		if(oxyVersion > 19.1) {
-			toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
-		  toReturn.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
-		  toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
-		  toReturn.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
+		  List<Action> docbook = new ArrayList<Action>();
+		  docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
+			docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
+			docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
+			docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
+			toReturn.put("docbookSection", docbook);
 		}
 
 		return toReturn;

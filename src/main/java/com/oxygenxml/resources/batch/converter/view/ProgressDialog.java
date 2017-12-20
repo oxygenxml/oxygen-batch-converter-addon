@@ -79,7 +79,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 	
 		add(panel);
 		
-		setTitle(translator.getTranslation(Tags.DIALOG_TITLE, converterType));
+		setTitle(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType));
 		getOkButton().setVisible(false);
 		
 		setResizable(false);

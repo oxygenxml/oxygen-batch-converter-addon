@@ -82,8 +82,8 @@ public class InputPanel extends JPanel {
 		scrollPane = new JScrollPane((JTable)tableFiles);
 		scrollPane.setPreferredSize(new Dimension(300, 70));
 		
-		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, ""));
-		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE, ""));
+		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, "") + "...");
+		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE, "") + "...");
 		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE, ""));
 		remvBtn.setEnabled(false);
 
@@ -242,7 +242,7 @@ public class InputPanel extends JPanel {
 
 		GridBagConstraints gbc = new GridBagConstraints();
 
-		// ------add checkCurrent radio button
+		// ------add label for input file
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1;
