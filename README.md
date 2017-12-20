@@ -9,7 +9,7 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * JSON to XML
 * HTML to DocBook4 (Oxygen 20 or newer) 
 * HTML to DocBook5 (Oxygen 20 or newer) 
-* Markdown to DocBook5 (Oxygen 20 or newer) 
+* Markdown to DocBook4 (Oxygen 20 or newer) 
 * Markdown to DocBook5 (Oxygen 20 or newer) 
 ## Installation
 
