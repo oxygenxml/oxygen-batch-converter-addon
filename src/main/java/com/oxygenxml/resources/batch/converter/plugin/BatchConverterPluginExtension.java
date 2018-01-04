@@ -230,8 +230,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		json.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
 		toReturn.put("jsonSection", json);
 		
-		Float oxyVersion = Float.valueOf(pluginWorkspaceAccess.getVersion());
-		if(oxyVersion > 19.1) {
+		float oxyVersion = Float.valueOf(pluginWorkspaceAccess.getVersion());
+		if(oxyVersion > (float) 19.1) {
 		  List<Action> docbook = new ArrayList<Action>();
 		  docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
 			docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
