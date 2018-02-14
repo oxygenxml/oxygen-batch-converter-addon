@@ -11,6 +11,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.util.UtilAccess;
+import ro.sync.util.URLUtil;
+
 /**
  * File utilities. 
  * @author Cosmin Duna
@@ -41,18 +46,26 @@ public class ConverterFileUtils {
 	 */
 	public static String readFile(File file) throws IOException {
 		String toReturn = "";
+		Reader reader = null;
 		
-		InputStream inputStream = new FileInputStream(file);
-		Reader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-		
-		toReturn = ConverterReaderUtils.getString(inputStreamReader);
-		
+		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+		if(pluginWorkspace != null) {
+			UtilAccess utilAccess = pluginWorkspace.getUtilAccess();
+			reader = utilAccess.createReader(URLUtil.correct(file), "UTF-8");
+
+		} else {
+			InputStream inputStream = new FileInputStream(file);
+			 reader = new InputStreamReader(inputStream, "UTF-8");
+		} 
+
+		toReturn = ConverterReaderUtils.getString(reader);
+
 		try {
-			inputStreamReader.close();
+			reader.close();
 		} catch (IOException e) {
 			logger.debug(e.getMessage(), e);
 		}
-		
+
 		return toReturn;
 	}
 
