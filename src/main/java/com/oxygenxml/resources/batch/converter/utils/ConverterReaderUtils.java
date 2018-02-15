@@ -89,8 +89,9 @@ public class ConverterReaderUtils {
 				try {
 					inputStream.close();
 				} catch (IOException e1) {
-					logger.debug(e.getMessage(), e);
+					logger.debug(e1.getMessage(), e1);
 				}
+				throw e;
 			}
 		} 
 		
