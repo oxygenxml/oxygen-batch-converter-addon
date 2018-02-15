@@ -16,12 +16,6 @@ import org.apache.log4j.Logger;
 public class ConverterFileUtils {
 	
 	/**
-	 * Logger
-	 */
-	 private static final Logger logger = Logger.getLogger(ConverterFileUtils.class);
-	
-	
-	/**
 	 * Private constructor.
 	 */
 	 private ConverterFileUtils() {
@@ -39,14 +33,7 @@ public class ConverterFileUtils {
 	public static String readFile(File file) throws IOException {
 		String toReturn = "";
 		Reader reader = ConverterReaderUtils.createReader(file);
-		
 		toReturn = ConverterReaderUtils.getString(reader);
-
-		try {
-			reader.close();
-		} catch (IOException e) {
-			logger.debug(e.getMessage(), e);
-		}
 
 		return toReturn;
 	}

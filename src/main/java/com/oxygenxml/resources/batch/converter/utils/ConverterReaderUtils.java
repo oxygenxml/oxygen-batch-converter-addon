@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+
+import org.apache.log4j.Logger;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -20,6 +24,11 @@ import ro.sync.util.URLUtil;
  */
 public class ConverterReaderUtils {
 
+	/**
+	 *  Logger.
+	 */
+	private static final Logger logger = Logger.getLogger(ConverterReaderUtils.class);
+	
 	/**
 	 * Private constructor.
 	 */
@@ -41,10 +50,17 @@ public class ConverterReaderUtils {
 		StringBuilder buffer = new StringBuilder();
 		int numCharsRead;
 	
-		while ((numCharsRead = reader.read(arr, 0, arr.length)) != -1) {
-			buffer.append(arr, 0, numCharsRead);
+		try {
+			while ((numCharsRead = reader.read(arr, 0, arr.length)) != -1) {
+				buffer.append(arr, 0, numCharsRead);
+			}
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				logger.debug(e.getMessage(), e);
+			}
 		}
-		reader.close();
 
 		return buffer.toString();
 	}
@@ -55,6 +71,7 @@ public class ConverterReaderUtils {
 	 *  
 	 * @param file The file to be open.
 	 * @return A reader form the given file.
+	 * @throws MalformedURLException 
 	 * @throws IOException 
 	 */
 	public static Reader createReader(File file) throws IOException {
@@ -66,7 +83,15 @@ public class ConverterReaderUtils {
 			reader = utilAccess.createReader(URLUtil.correct(file), "UTF-8");
 		} else {
 			InputStream inputStream = new FileInputStream(file);
-			 reader = new InputStreamReader(inputStream, "UTF-8");
+			 try {
+				reader = new InputStreamReader(inputStream, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				try {
+					inputStream.close();
+				} catch (IOException e1) {
+					logger.debug(e.getMessage(), e);
+				}
+			}
 		} 
 		
 		return reader;
