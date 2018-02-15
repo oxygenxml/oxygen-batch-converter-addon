@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
 
@@ -13,6 +14,7 @@ import org.xml.sax.InputSource;
 
 import com.elovirta.dita.markdown.MarkdownReader;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
 /**
  * Converter implementation for Markdown to DITA.
@@ -66,11 +68,10 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 			// input source of document to convert
 			InputSource inputSource;
 			if (contentReader == null) {
-				inputSource = new InputSource(originalFileLocation.toURI().toString());
+				contentReader = ConverterReaderUtils.createReader(originalFileLocation);
 			}
-			else{
-				inputSource = new InputSource(contentReader);
-			}
+			
+			inputSource = new InputSource(contentReader);
 			
 			StringWriter sw = new StringWriter();
 			StreamResult res = new StreamResult(sw);
@@ -83,6 +84,8 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 
 		}catch (TransformerException e) {
 				throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
+		} catch (IOException e) {
+			throw new TransformerException(e.getMessage(), e.getCause());
 		}finally {
 			// return the initial property of trasformerFactory
 			if (property == null) {

@@ -1,9 +1,7 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringWriter;
 
@@ -12,6 +10,7 @@ import javax.xml.transform.TransformerException;
 import org.w3c.tidy.Tidy;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
 /**
  * Converter implementation for HTML to XHTML.
@@ -47,26 +46,30 @@ public class HtmlToXhtmlConverter implements Converter {
 				t.setTidyMark(false);
 				t.setForceOutput(true);
 
-				if (contentReader != null) {
-					// parse the content
-					t.parse(contentReader, sw);
+				if (contentReader == null) {
+					contentReader = ConverterReaderUtils.createReader(originalFileLocation);
 				}
-				else {
-					InputStream inputStream = new FileInputStream(originalFileLocation);
-					// parse the inputStream
-					t.parse(inputStream, sw);
-					
-					//close the inputStream
-					inputStream.close();
-				}
+				
+				// parse the content
+				t.parse(contentReader, sw);
 
 				// convert to String
 				toReturn = sw.toString();
 
 			} catch (IOException e1) {
 				throw new TransformerException(e1.getMessage(), e1.getCause());
+			
+			} finally {
+				//Close the reader.
+				if(contentReader != null) {
+					try {
+						contentReader.close();
+					} catch (IOException e) {
+						// Do nothing.
+					}
+				}
 			}
-
+			
 			return toReturn;
 		}
 

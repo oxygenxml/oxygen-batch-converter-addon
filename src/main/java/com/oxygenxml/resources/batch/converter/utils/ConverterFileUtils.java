@@ -1,20 +1,12 @@
 package com.oxygenxml.resources.batch.converter.utils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
-import ro.sync.exml.workspace.api.PluginWorkspace;
-import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
-import ro.sync.exml.workspace.api.util.UtilAccess;
-import ro.sync.util.URLUtil;
 
 /**
  * File utilities. 
@@ -46,18 +38,8 @@ public class ConverterFileUtils {
 	 */
 	public static String readFile(File file) throws IOException {
 		String toReturn = "";
-		Reader reader = null;
+		Reader reader = ConverterReaderUtils.createReader(file);
 		
-		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
-		if(pluginWorkspace != null) {
-			UtilAccess utilAccess = pluginWorkspace.getUtilAccess();
-			reader = utilAccess.createReader(URLUtil.correct(file), "UTF-8");
-
-		} else {
-			InputStream inputStream = new FileInputStream(file);
-			 reader = new InputStreamReader(inputStream, "UTF-8");
-		} 
-
 		toReturn = ConverterReaderUtils.getString(reader);
 
 		try {
