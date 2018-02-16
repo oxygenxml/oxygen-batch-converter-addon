@@ -51,7 +51,7 @@ public class MdToDitaTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
-		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
+		File fileToRead = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
 			converter.convertFiles(ConverterTypes.MD_TO_DITA, inputFiles, outputFolder, false);

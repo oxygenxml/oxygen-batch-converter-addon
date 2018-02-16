@@ -51,7 +51,7 @@ public class XmlToJsonTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
-		File fileToRead = ConverterFileUtils.generateOutputFile(sample, FileExtensionType.JSON_OUTPUT_EXTENSION , outputFolder);
+		File fileToRead = ConverterFileUtils.getOutputFile(sample, FileExtensionType.JSON_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
 			converter.convertFiles(ConverterTypes.XML_TO_JSON, inputFiles, outputFolder, false);

@@ -150,7 +150,7 @@ public class BatchConverterImpl implements BatchConverter {
 				progressDialogInteractor.setNote(currentFile.toString());
 
 				//generate the output file.
-				File outputFile = ConverterFileUtils.generateOutputFile(currentFile, 
+				File outputFile = ConverterFileUtils.getOutputFile(currentFile, 
 						ExtensionGetter.getOutputExtension(converterType), outputFolder);
 				
 				// create a unique file path if actual exist

@@ -65,7 +65,7 @@ public class ConverterFileUtils {
 				}
 			}
 			
-		} else {
+		} else if(file.isFile()){
 			// get the fileName
 			String fileName = file.getName();
 			// get the extension
@@ -81,14 +81,14 @@ public class ConverterFileUtils {
 	}
 
 	/**
-	 * Generate a File according to output folder, extension and origin file.
+	 * Get the output File according to output folder, extension and origin file.
 	 * 
-	 * @param filePath
-	 * @param extension
-	 * @param outputFolder
-	 * @return The generated file.
+	 * @param originalFile The file that is converted.
+	 * @param extension The extension of the converted file. 
+	 * @param outputFolder The output folder.
+	 * @return The output file.
 	 */
-	public static File generateOutputFile(File originalFile, String extension, File outputFolder) {
+	public static File getOutputFile(File originalFile, String extension, File outputFolder) {
 		String fileName = originalFile.getName();
 
 		// get the file name without extension
