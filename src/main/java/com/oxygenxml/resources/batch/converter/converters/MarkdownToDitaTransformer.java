@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 
 import com.elovirta.dita.markdown.MarkdownReader;
@@ -92,6 +93,14 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 				System.getProperties().remove(KEY_TRANSFORMER_FACTORY);
 			} else {
 				System.setProperty(KEY_TRANSFORMER_FACTORY, property);
+			}
+			
+			if (contentReader != null) {
+				try {
+					contentReader.close();
+				} catch (IOException e) {
+					// Do nothing.
+				}
 			}
 		}
 
