@@ -38,7 +38,7 @@ public class JsonToXmlTest {
 	public void test() throws TransformerException, IOException {
 	
 		File sample  = new File("test-sample/jsonTest.json");		
-		File goodSample = new File("test-sample/xmlTest.xml");
+		File goodSample = new File("test-sample/goodJsonToXML.xml");
 		File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();

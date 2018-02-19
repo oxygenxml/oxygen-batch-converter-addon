@@ -36,7 +36,7 @@ public class JsonToXmlConverter implements Converter {
 	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
-		String toReturn = null;
+		StringBuilder toReturn = new StringBuilder();
 		String jsonContent = "";
 		
 		try {
@@ -51,15 +51,20 @@ public class JsonToXmlConverter implements Converter {
 			JSONObject jsonObject = new JSONObject(jsonContent);
 			
 			//convert the jsonOject in XML
-			toReturn = XML.toString(jsonObject);
+			String xmlContent = XML.toString(jsonObject);
 
+			// Add root element.
+			toReturn.append("<JSON>");
+			toReturn.append(xmlContent);
+			toReturn.append("</JSON>");
+			
 		} catch (IOException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		} catch (JSONException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 
-		return toReturn;
+		return toReturn.toString();
 
 	}
 }
