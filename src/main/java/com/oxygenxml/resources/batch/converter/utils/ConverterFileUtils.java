@@ -6,8 +6,6 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 /**
  * File utilities. 
  * @author Cosmin Duna
@@ -84,7 +82,7 @@ public class ConverterFileUtils {
 	 * Get the output File according to output folder, extension and origin file.
 	 * 
 	 * @param originalFile The file that is converted.
-	 * @param extension The extension of the converted file. 
+	 * @param extension The extension of the output file. 
 	 * @param outputFolder The output folder.
 	 * @return The output file.
 	 */
