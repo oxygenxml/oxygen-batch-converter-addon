@@ -53,10 +53,15 @@ public class JsonToXmlConverter implements Converter {
 			//convert the jsonOject in XML
 			String xmlContent = XML.toString(jsonObject);
 
-			// Add root element.
-			toReturn.append("<JSON>");
-			toReturn.append(xmlContent);
-			toReturn.append("</JSON>");
+			if(jsonObject.length() != 1) {
+				System.out.println("are o lungime mai mare decat 1");
+				// Add root element.
+				toReturn.append("<JSON>");
+				toReturn.append(xmlContent);
+				toReturn.append("</JSON>");
+			} else {
+				toReturn.append(xmlContent);
+			}
 			
 		} catch (IOException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
