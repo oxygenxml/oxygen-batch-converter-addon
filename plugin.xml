@@ -4,7 +4,7 @@
 
 <plugin
  id="com.oxygenxml.batch.converter"
- name="ResourcesBatchConverter"
+ name="Batch Converter"
  description="Oxygen XML plugin which allows batch conversion."
  version="${project.version}"
  vendor="oXygen XML"
