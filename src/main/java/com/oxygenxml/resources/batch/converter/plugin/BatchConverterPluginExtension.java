@@ -52,9 +52,9 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private Translator translator = new OxygenTranslator();
 	
 	/**
-	 * Flag that is <code>true</code> when the actions are inserted in Tools toolbar.
+	 * Flag that is <code>true</code> when the actions are added in Tools toolbar.
 	 */
-	private boolean areInsertedActions; 
+	private boolean actionsInserted; 
 	
 	/**
 	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationStarted(ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace)
@@ -62,7 +62,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	@Override
 	public void applicationStarted(final StandalonePluginWorkspace pluginWorkspaceAccess) {
 	  
-	  areInsertedActions = false;
+	  actionsInserted = false;
 	  
 		// List with actions.
 		final Map<String, List<Action>> actions = createActionsMap(pluginWorkspaceAccess);
@@ -74,10 +74,10 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 			 */
 			@Override
 			public void customizeMainMenu(JMenuBar mainMenuBar) {
-			  //EXM-41075 - Check if the actions are added. 
-			  if(!areInsertedActions) {
+			  // Check if the actions are added. 
+			  if(!actionsInserted) {
 			    addActionsInMenuBar(mainMenuBar, actions, pluginWorkspaceAccess);
-			    areInsertedActions = true;
+			    actionsInserted = true;
 			  }
 			}
 		});
