@@ -1,7 +1,11 @@
 package com.oxygenxml.resources.batch.converter.printer;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.StringReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -10,6 +14,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
@@ -22,7 +27,12 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
  *
  */
 public class PrettyContentPrinterImpl implements ContentPrinter {
-
+	
+	/**
+	 * Logger
+	 */
+	private static final Logger logger = Logger.getLogger(PrettyContentPrinterImpl.class);
+	
 	/**
 	 * Prettify the given content and write in given output file.
 	 * 
@@ -59,7 +69,10 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 			// prettify and print
 			transformer.transform(new SAXSource(inputSource), new StreamResult(outputFile));
 		} catch (TransformerException e) {
-			throw new TransformerException(e.getException().getMessage(), e.getException().getCause());
+			logger.debug(e.getMessage(), e);
+			// Stop indenting and create the output file.
+			SimpleContentPrinterImpl simpleContentPrinter = new SimpleContentPrinterImpl();
+			simpleContentPrinter.print(contentToPrint, transformerCreator, converterType, outputFile, styleSource);
 		}
 	}
 
