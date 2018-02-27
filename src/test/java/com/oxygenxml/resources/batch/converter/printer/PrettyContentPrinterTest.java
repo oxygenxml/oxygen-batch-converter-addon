@@ -53,7 +53,7 @@ public class PrettyContentPrinterTest extends TestCase {
 				"<title>title</title>" + 
 				"<body>" + 
 				"<section>" + 
-				"<title>DESCRIPTION</title>\n" + 
+				"<title>DESCRIPTION</title>" + 
 				" </section>" + 
 				" </body>" + 
 				"</topic>";
@@ -69,13 +69,12 @@ public class PrettyContentPrinterTest extends TestCase {
 				"\n" + 
 				"<!DOCTYPE topic\n" + 
 				"  PUBLIC \"-//OASIS//DTD DITA Topic//EN\" \"topic.dtd\">\n" + 
-				"<topic id=\"topicID\">    \n" + 
-				"   <title>title</title>    \n" + 
-				"   <body>        \n" + 
+				"<topic id=\"topicID\">\n" + 
+				"   <title>title</title>\n" + 
+				"   <body>\n" + 
 				"      <section>\n" + 
-				"         <title>DESCRIPTION</title>\n" + 
-				"        \n" + 
-				"      </section>    \n" + 
+				"         <title>DESCRIPTION</title> \n" + 
+				"      </section> \n" + 
 				"   </body>\n" + 
 				"</topic>", FileComparationUtil.readFile(outputFile.toString()));
 	}
