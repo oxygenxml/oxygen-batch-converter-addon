@@ -62,7 +62,7 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 		InputSource inputSource = new InputSource(new StringReader(contentToPrint));
 
 		try {
-			// prettify and print
+			// pretty print
 			transformer.transform(new SAXSource(inputSource), new StreamResult(outputFile));
 		} catch (TransformerException e) {
 			logger.debug(e.getMessage(), e);

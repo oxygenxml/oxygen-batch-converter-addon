@@ -54,7 +54,6 @@ public class JsonToXmlConverter implements Converter {
 			String xmlContent = XML.toString(jsonObject);
 
 			if(jsonObject.length() != 1) {
-				System.out.println("are o lungime mai mare decat 1");
 				// Add root element.
 				toReturn.append("<JSON>");
 				toReturn.append(xmlContent);
