@@ -2,6 +2,7 @@ package tests.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -57,5 +58,26 @@ public class FileComparationUtil {
 		}
 	return areEqual;
 
+	}
+	
+	/**
+	 * Read the given file.
+	 * @param filePath The path of the file to read.
+	 * @return The content of the file in String format.
+	 * @throws IOException 
+	 */
+	public static String readFile(String filePath) throws IOException{
+		FileReader fileReader = new FileReader(filePath);
+		String fileContents = "";
+		int i ;
+		try {
+			while((i =  fileReader.read())!=-1){
+				char ch = (char)i;
+				fileContents = fileContents + ch; 
+			}
+		} finally {
+			fileReader.close();
+		}
+		return fileContents;
 	}
 }
