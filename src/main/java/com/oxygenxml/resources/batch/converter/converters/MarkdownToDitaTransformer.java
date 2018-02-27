@@ -10,7 +10,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 
 import com.elovirta.dita.markdown.MarkdownReader;

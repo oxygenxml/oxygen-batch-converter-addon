@@ -1,7 +1,6 @@
 package com.oxygenxml.resources.batch.converter.proxy;
 
 import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import javax.swing.JPopupMenu;
 import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPluginUtil;
-import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 

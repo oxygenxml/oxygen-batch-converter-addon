@@ -17,7 +17,6 @@ public class FileExtensionType {
 	/**
 	 * Extensions of HTML type.
 	 */
-	 @SuppressWarnings(value = { "S1192" })
 	protected static final String[] INPUT_HTML_EXTENSIONS = new String[] { "html", "xhtml", "htm", ".htx" };
 
 	/**
