@@ -13,6 +13,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
@@ -31,7 +33,7 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 	  * Pattern from extract the encoding from a xml file.
 	  */
 	 private static final Pattern ENCODING_PATTERN = Pattern.compile(
-				"<\\?xml[\\s]+version[\\s]*=[\\s]*\"1\\.0\"[\\s]+encoding=[\\s]*\"[\\s]*([^\\s\"]*)[\\s]*\"[\\s]*\\?>");
+				"^[\\s]*<\\?xml[\\s]+version[\\s]*=[\\s]*\"1\\.0\"[\\s]+encoding=[\\s]*\"[\\s]*([^\\s\"]*)[\\s]*\"[\\s]*\\?>");
 	 
 	/**
 	 * Print the given content in output file(The content isn't indented).
@@ -53,10 +55,19 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 
 		String encoding = "UTF-8";
 		
-		// Get the encoding from content to print.
-		Matcher matcher = ENCODING_PATTERN.matcher(contentToPrint);
-		if(matcher.find()) {
-			encoding = matcher.group(1);
+		if(converterType != ConverterTypes.XML_TO_JSON) {
+			String encodingLine = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+			// Get the encoding from content to print.
+			Matcher matcher = ENCODING_PATTERN.matcher(contentToPrint);
+			if(matcher.find()) {
+				encoding = matcher.group(1);
+				encodingLine = matcher.group(0);
+				//Delete encoding line.
+				contentToPrint = matcher.replaceFirst("");
+				contentToPrint = contentToPrint.replaceAll("^\\s", "");
+			}
+			// EXM-41083 -- Add the document type.
+			contentToPrint = addEncodingAndDoctype(contentToPrint, encodingLine, converterType);
 		}
 		
 		OutputStream outputStream = null;
@@ -85,5 +96,24 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 			}
 		}
 
+	}
+	
+	/**
+	 * Add the doctype and the encoding at the given content.
+	 * @param content Content to modify.
+	 * @param encodingLine The encoding line that should be add.
+	 * @param convertedType The type of conversion.
+	 * @return The content with doctype and encoding.
+	 */
+	private String addEncodingAndDoctype(String content, String encodingLine, String convertedType) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(encodingLine).append("\n");
+		String doctype = DoctypeGetter.getDoctype(convertedType);
+		if(!doctype.isEmpty()) {
+			sb.append(DoctypeGetter.getDoctype(convertedType)).append("\n");
+		}
+		sb.append(content);
+
+		return sb.toString();
 	}
 }

@@ -92,8 +92,8 @@ public class PrettyContentPrinterTest extends TestCase {
 	 */
 	@Test
 	public void testPrettyPrintFallback() throws TransformerException, IOException {
-		String contentToPrint = ""
-				+ "<p>Withour root.</p>\n" + 
+		String contentToPrint = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
+				"<p>Withour root.</p>\n" + 
 				"<topic id=\"topicID\">\n" + 
 				"    <title>title</title>\n" + 
 				"    <body>\n" + 
@@ -110,6 +110,16 @@ public class PrettyContentPrinterTest extends TestCase {
 				outputFile,
 				null);
 	
-		assertEquals(contentToPrint, FileComparationUtil.readFile(outputFile.toString()));
+		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+				"<!DOCTYPE topic PUBLIC \"-//OASIS//DTD DITA Topic//EN\" \"topic.dtd\">\n" + 
+				"<p>Withour root.</p>\n" + 
+				"<topic id=\"topicID\">\n" + 
+				"    <title>title</title>\n" + 
+				"    <body>\n" + 
+				"        <section>\n" + 
+				"            <title>DESCRIPTION</title>\n" + 
+				"        </section>\n" + 
+				"    </body>\n" + 
+				"</topic>", FileComparationUtil.readFile(outputFile.toString()));
 	}
 }
