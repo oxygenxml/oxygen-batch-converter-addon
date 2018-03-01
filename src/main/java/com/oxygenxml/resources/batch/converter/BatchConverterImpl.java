@@ -22,6 +22,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
 
+import ro.sync.exml.editor.EditorPageConstants;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**
@@ -201,7 +202,7 @@ public class BatchConverterImpl implements BatchConverter {
 					// open the converted file
 					URL convertedFileUrl;
 					convertedFileUrl = outputFile.toURI().toURL();
-					PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl);
+					PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl, EditorPageConstants.PAGE_TEXT);
 				}
 
 			}

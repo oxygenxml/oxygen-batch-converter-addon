@@ -107,10 +107,15 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 	 */
 	private String addEncodingAndDoctype(String content, String encodingLine, String convertedType) {
 		StringBuilder sb = new StringBuilder();
+		// Add encoding.
 		sb.append(encodingLine).append("\n");
-		String doctype = DoctypeGetter.getDoctype(convertedType);
-		if(!doctype.isEmpty()) {
-			sb.append(DoctypeGetter.getDoctype(convertedType)).append("\n");
+		
+		if(!content.contains("<!DOCTYPE")) {
+			// Add doctype.
+			String doctype = DoctypeGetter.getDoctype(convertedType);
+			if(!doctype.isEmpty()) {
+				sb.append(DoctypeGetter.getDoctype(convertedType)).append("\n");
+			}
 		}
 		sb.append(content);
 
