@@ -39,3 +39,9 @@ or:
 1. Choose the path of the **Output folder** that will contain the converted document.
 1. Click the **Convert** button.
 
+Copyright and License
+---------------------
+Copyright 2018 Syncro Soft SRL.
+
+This project is licensed under [Apache License 2.0](https://github.com/oxygenxml/oxygen-resources-converter/blob/master/LICENSE)
+
