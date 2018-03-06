@@ -82,9 +82,10 @@ public class XHTMLToDITAConverter implements Converter {
 			// add an id on root(topic)
 			ditaContent = sw.toString();
 			
-			int indexOfTopicTag = ditaContent.indexOf(ROOT_ELEMENT_NAME) + ROOT_ELEMENT_NAME.length();
+			int indexOfTopicTag = ditaContent.indexOf(ROOT_ELEMENT_NAME);
 			
 			if(indexOfTopicTag != -1){
+				indexOfTopicTag += ROOT_ELEMENT_NAME.length();
 			  // Add the topic attributes(id).
 			  StringBuilder sb = new StringBuilder();
 			  sb.append(ditaContent.substring(0, indexOfTopicTag));
