@@ -76,8 +76,9 @@ public class XHTMLToDocbook5Converter implements Converter {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
 
-		int indexOfRootTag = docbookContent.indexOf(ROOT_ELEMENT) + ROOT_ELEMENT.length();
+		int indexOfRootTag = docbookContent.indexOf(ROOT_ELEMENT);
     if(indexOfRootTag != -1){
+    	indexOfRootTag += ROOT_ELEMENT.length();
       // Add the article attributes.
       StringBuilder sb = new StringBuilder();
       sb.append(docbookContent.substring(0, indexOfRootTag ));
