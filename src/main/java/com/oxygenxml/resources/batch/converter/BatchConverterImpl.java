@@ -207,12 +207,12 @@ public class BatchConverterImpl implements BatchConverter {
 
 			}
 
-		} catch (TransformerException e) {
+		} catch (MalformedURLException e) {
+			logger.debug(e.getMessage(), e);
+		} catch (Exception e) {
 			problemReporter.reportProblem(e, file);
 			isSuccessfully = false;
 			failedFile++;
-		} catch (MalformedURLException e) {
-			logger.debug(e.getMessage(), e);
 		}
 
 	}
