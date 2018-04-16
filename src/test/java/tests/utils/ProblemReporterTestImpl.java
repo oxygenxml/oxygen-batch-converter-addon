@@ -16,7 +16,7 @@ public class ProblemReporterTestImpl implements ProblemReporter {
 	/**
 	 * Reported problems in convert process.
 	 */
-	List<Exception> reportedProblems = new ArrayList<>();
+	List<Exception> reportedProblems = new ArrayList<Exception>();
 	
 	@Override
 	public void reportProblem(Exception ex, File docUrl) {
