@@ -31,9 +31,9 @@ import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 
 /**
- * JUnit for Markdown to DITA conversion.
+ * JUnit test for the Markdown to DITA conversion.
+ * 
  * @author Cosmin Duna
- *
  */
 public class MdToDitaTest {
 
@@ -70,11 +70,10 @@ public class MdToDitaTest {
 	}
 	
 	/**
-	 * <p><b>Description:</b> We have a invalid markdown file. Check if a problem is reported</p>
+	 * <p><b>Description:</b> We have an invalid Markdown file. Check if a problem is reported.</p>
 	 * <p><b>Bug ID:</b> EXM-41340</p>
 	 * 
 	 * @author cosmin_duna
-	 *
 	 */
 	@Test
 	public void testDocumentWithProblems_EXM_41340() throws TransformerException, IOException {
@@ -107,6 +106,7 @@ public class MdToDitaTest {
 				try {
 					Files.delete(Paths.get(convertedFile.getPath()));
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
