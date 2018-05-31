@@ -19,12 +19,19 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  *
  */
 public class XHTMLToDocbook5Converter implements Converter {
-
   /**
-   * The attributes from the article root element.
+   * The NAMESPACE attribute and value from the article root element.
    */
-  private static final String ARTICLE_ATTRIBUTES = " xmlns=\"http://docbook.org/ns/docbook\"" + 
-      " xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"5.0\"";
+  private static final String  NAMESPACE  = "xmlns=\"http://docbook.org/ns/docbook\"";
+  /**
+   * The SCHEMA attribute and value from the article root element.
+   */
+  private static final String  SCHEMA  = "xmlns:xlink=\"http://www.w3.org/1999/xlink\"";
+	
+  /**
+   * The VERSION attribute and value from the article root element.
+   */
+  private static final String  VERSION  = "version=\"5.0\"";
   
   /**
    * The local name of root element.
@@ -76,19 +83,45 @@ public class XHTMLToDocbook5Converter implements Converter {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
 
-		int indexOfRootTag = docbookContent.indexOf(ROOT_ELEMENT);
-    if(indexOfRootTag != -1){
-    	int endTag = docbookContent.indexOf('>');
-    	indexOfRootTag += ROOT_ELEMENT.length();
-      // Add the article attributes.
-      StringBuilder sb = new StringBuilder();
-      sb.append(docbookContent.substring(0, indexOfRootTag ));
-      sb.append(ARTICLE_ATTRIBUTES);
-      sb.append(docbookContent.substring(endTag));
-      docbookContent = sb.toString();
-    }
-		
+		docbookContent = updateArticleRootAttributes(docbookContent);
 		return docbookContent;
 	}
 
+	/**
+	 * Add the namespace, schema and version if those don't exist.
+	 * @param documentContent The document content to be updated.
+	 * @return A document with namespace, schema and version.
+	 */
+	private String updateArticleRootAttributes(String documentContent) {
+		int indexOfRootTag = documentContent.indexOf(ROOT_ELEMENT);
+		if(indexOfRootTag != -1){
+			int rootCloseTag = documentContent.indexOf('>');
+			String rootContent = documentContent.substring(0, rootCloseTag);
+			if(!rootContent.contains(NAMESPACE)) {
+				indexOfRootTag += ROOT_ELEMENT.length();
+				StringBuilder sb = new StringBuilder();
+				sb.append(documentContent.substring(0, indexOfRootTag ));
+				sb.append(NAMESPACE).append(" ");
+				sb.append(documentContent.substring(indexOfRootTag));
+				documentContent = sb.toString();
+			}
+			if(!rootContent.contains(SCHEMA)) {
+				int newRootCloseTag = documentContent.indexOf('>'); 
+				StringBuilder sb = new StringBuilder();
+				sb.append(documentContent.substring(0, newRootCloseTag));
+				sb.append(" ").append(SCHEMA);
+				sb.append(documentContent.substring(newRootCloseTag));
+				documentContent = sb.toString();
+			}
+			if(!rootContent.contains(VERSION)) {
+				int newRootCloseTag = documentContent.indexOf('>'); 
+				StringBuilder sb = new StringBuilder();
+				sb.append(documentContent.substring(0, newRootCloseTag));
+				sb.append(" ").append(VERSION);
+				sb.append(documentContent.substring(newRootCloseTag));
+				documentContent = sb.toString();
+			}
+		}
+		return documentContent;
+	}
 }
