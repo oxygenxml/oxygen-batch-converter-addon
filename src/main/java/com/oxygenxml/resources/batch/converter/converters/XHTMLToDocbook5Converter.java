@@ -23,8 +23,8 @@ public class XHTMLToDocbook5Converter implements Converter {
    *  Attributes and values from the article root element.
    */
   private static final String[] ROOT_ATTRIBUTES = new String[] {"xmlns=\"http://docbook.org/ns/docbook\"",
-  																									"xmlns:xlink=\"http://www.w3.org/1999/xlink\"",
-  																									"version=\"5.0\""};
+  		"xmlns:xlink=\"http://www.w3.org/1999/xlink\"",
+  		"version=\"5.0\""};
   /**
    * The local name of root element.
    */
@@ -90,16 +90,17 @@ public class XHTMLToDocbook5Converter implements Converter {
 			int rootCloseTag = documentContent.indexOf('>');
 			String rootContent = documentContent.substring(0, rootCloseTag);
 			int nuOfAttributes = ROOT_ATTRIBUTES.length;
+			StringBuilder attributesBuilder = new StringBuilder();
 			for (int i = 0; i < nuOfAttributes; i++) {
 				String currentAttr = ROOT_ATTRIBUTES[i];
 				if(!rootContent.contains(currentAttr)) {
-					StringBuilder sb = new StringBuilder();
-					sb.append(documentContent.substring(0, rootCloseTag));
-					sb.append(" ").append(currentAttr);
-					sb.append(documentContent.substring(rootCloseTag));
-					documentContent = sb.toString();
-					rootCloseTag += currentAttr.length() + 1;
+					attributesBuilder.append(" ").append(currentAttr);
 				}
+			}
+			if(attributesBuilder.length() > 0) {
+				attributesBuilder.insert(0, documentContent.substring(0, rootCloseTag));
+				attributesBuilder.append(documentContent.substring(rootCloseTag));
+				documentContent = attributesBuilder.toString();
 			}
 		}
 		return documentContent;
