@@ -18,7 +18,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
             </head>
             <body>
                 <div>
-                    <p>Oxygen XML plugin which batch converts (HTML, Markdown)->XHTML, XML->JSON, JSON->XML, and (HTML, Markdown)->DITA.</p>
+                    <p>This add-on contributes actions in the Tools menu and contextual menu to enable batch conversion between various formats (HTML to XHTML/DITA/DocBook, Markdown to XHTML/DITA/DocBook, XML to JSON, JSON to XML).</p>
                     <p>For more details see <a
                         href="https://github.com/oxygenxml/oxygen-resources-convertor"
                         >https://github.com/oxygenxml/oxygen-resources-convertor</a>
