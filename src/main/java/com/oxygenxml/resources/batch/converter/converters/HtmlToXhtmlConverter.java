@@ -58,7 +58,6 @@ public class HtmlToXhtmlConverter implements Converter {
 				while((len = contentReader.read(cbuf)) != -1) {
 					sb.append(cbuf, 0, len);
 				}
-				contentReader.close();
 				
 				// parse the content
 				t.parse(new StringReader(sb.toString()), sw);
