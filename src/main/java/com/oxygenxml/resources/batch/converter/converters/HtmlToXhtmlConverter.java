@@ -3,6 +3,7 @@ package com.oxygenxml.resources.batch.converter.converters;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 import java.io.StringWriter;
 
 import javax.xml.transform.TransformerException;
@@ -50,14 +51,23 @@ public class HtmlToXhtmlConverter implements Converter {
 					contentReader = ConverterReaderUtils.createReader(originalFileLocation);
 				}
 				
+				// Read the content from the readear to catch the encoding problems.
+				StringBuilder sb = new StringBuilder();
+				int len = -1;
+				char[] cbuf = new char[1024];
+				while((len = contentReader.read(cbuf)) != -1) {
+					sb.append(cbuf, 0, len);
+				}
+				contentReader.close();
+				
 				// parse the content
-				t.parse(contentReader, sw);
+				t.parse(new StringReader(sb.toString()), sw);
 
 				// convert to String
 				toReturn = sw.toString();
 
 			} catch (IOException e1) {
-				throw new TransformerException(e1.getMessage(), e1.getCause());
+				throw new TransformerException(e1.getMessage(), e1);
 			
 			} finally {
 				//Close the reader.
