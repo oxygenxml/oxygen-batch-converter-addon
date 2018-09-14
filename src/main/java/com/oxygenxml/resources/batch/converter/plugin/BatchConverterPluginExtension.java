@@ -139,7 +139,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
  * Search for position to insert the menu with actions in given menu.
  * @param menu The menu to search.
  * @param pluginWorkspaceAccess StandalonePluginWorkspace
- * @return The index of menu, or -1 if wasn't find the position.
+ * @return The index of menu, or 0 if the menu is good, but a position cannot be found
+ *  or -1 if wasn't find the position.
  */
   private int searchForPosition(JMenu menu, StandalonePluginWorkspace pluginWorkspaceAccess) {
     int index = -1;
@@ -160,7 +161,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 
             // check the menuNameId
             if (MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
-
+            	index = 0;
               // the menuNameId is MENU_ID
               // check the menuItemActionID
               if (PRECEDING_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
