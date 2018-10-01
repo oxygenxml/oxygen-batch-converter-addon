@@ -6,8 +6,8 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension xmlns:xt="http://www.oxygenxml.com/ns/extension"
         id="com.oxygenxml.resources.batch.converter.plugin">
-        <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/1.1.10/oxygen-batch-converter-1.1.10-plugin.jar"/>
-        <xt:version>1.1.10</xt:version>
+        <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/1.1.11/oxygen-batch-converter-1.1.11-plugin.jar"/>
+        <xt:version>1.1.11</xt:version>
         <xt:oxy_version>19.1+</xt:oxy_version>
         <xt:type>plugin</xt:type>
         <xt:author>Syncro Soft SRL</xt:author>
