@@ -49,6 +49,9 @@ public class ConverterCreator {
       
     } else if(ConverterTypes.HTML_TO_DB4.equals(converterType)){
       return new HtmlToDocbook4Converter();
+
+	  } else if(ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
+      return new ExcelToDITAConverter();
       
 		}return null;
 	}

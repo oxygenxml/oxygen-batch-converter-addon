@@ -99,6 +99,14 @@
 		<val lang="ja_JP">Markdown to Docbook4</val>
 		<val lang="nl_NL">Markdown to Docbook4</val>
 	</key>
+	<key value="Menu_Item_Text_Conv_excel.to.dita">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">Excel to DITA</val>
+		<val lang="de_DE">Excel to DITA</val>
+		<val lang="fr_FR">Excel to DITA</val>
+		<val lang="ja_JP">Excel to DITA</val>
+		<val lang="nl_NL">Excel to DITA</val>
+	</key>
 	
 	
 	<key value="Add_Input_Label_Conv">

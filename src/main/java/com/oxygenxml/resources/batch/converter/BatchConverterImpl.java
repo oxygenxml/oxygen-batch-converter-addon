@@ -5,8 +5,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import javax.xml.transform.TransformerException;
-
 import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.converters.Converter;

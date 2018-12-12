@@ -59,4 +59,8 @@ public class ConverterTypes {
    */
   public static final String MD_TO_DB5 = "_md.to.db5";
 
+  /**
+	 * EXCEL -> XML
+	 */
+	public static final String EXCEL_TO_DITA = "_excel.to.dita";
 }

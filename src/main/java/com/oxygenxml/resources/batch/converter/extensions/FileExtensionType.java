@@ -32,6 +32,11 @@ public class FileExtensionType {
 	 * Extensions of JSON type.
 	 */
 	protected static final String[] INPUT_JSON_EXTENSIONS = new String[] { "json" };
+
+	/**
+	 * Extensions of Excel type.
+	 */
+	public static final String[] INPUT_EXCEL_EXTENSIONS = new String[] { "xls", "xlsx", "xlsm", "xlsb" };
 	
 	/**
 	 * XHtml output type

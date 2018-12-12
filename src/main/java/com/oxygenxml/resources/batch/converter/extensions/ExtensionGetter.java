@@ -38,7 +38,9 @@ public class ExtensionGetter {
 		else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
 			return FileExtensionType.INPUT_JSON_EXTENSIONS;
 		}
-		
+		else if(ConverterTypes.EXCEL_TO_DITA.equals(converterType)) {
+			return FileExtensionType.INPUT_EXCEL_EXTENSIONS;
+		}
 			return new String[]{};
 		
 	}
@@ -52,7 +54,8 @@ public class ExtensionGetter {
 	 */
 	public static String getOutputExtension(String converterType){
 	
-		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)){
+		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)
+				|| ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
 			return FileExtensionType.DITA_OUTPUT_EXTENSION;
 		}
 		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){

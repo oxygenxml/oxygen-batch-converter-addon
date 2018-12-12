@@ -230,6 +230,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		
 		dita.add(createConvertorAction(ConverterTypes.HTML_TO_DITA, pluginWorkspaceAccess));
 		dita.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
+		dita.add(createConvertorAction(ConverterTypes.EXCEL_TO_DITA, pluginWorkspaceAccess));
 		toReturn.put("ditaSection", dita);
 		
 		List<Action> xhtml = new ArrayList<Action>();
