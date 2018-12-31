@@ -23,10 +23,8 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.xml.sax.InputSource;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
-import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
 /**
  * The converter from EXCEL to DITA
@@ -43,12 +41,7 @@ public class ExcelToDITAConverter implements Converter {
 	public String convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 		try {
-			if (contentReader == null) {
-				contentReader = ConverterReaderUtils.createReader(originalFile);
-			}
-			// Input source of the document to convert.
-			InputSource inputSource = new InputSource(contentReader);
-			return convertInternal(originalFile, inputSource);
+			return convertInternal(originalFile);
 		} catch (IOException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		} finally {
@@ -66,13 +59,11 @@ public class ExcelToDITAConverter implements Converter {
 	 * Convert the given excel inputSource in DITA.
 	 * 
 	 * @param originalFile 				The source file.
- 	 * @param inputSourceContent 	The input source.
  	 * 
 	 * @return The converted DITA content in String format.
  	 * @throws IOException
 	 */
-	private String convertInternal(File originalFile, InputSource inputSourceContent) throws IOException {
-		InputStream is = inputSourceContent.getByteStream();
+	private String convertInternal(File originalFile) throws IOException {
 		int headerRowsNo = 1;
 		URL url = originalFile.toURI().toURL();
 		// Check out how many header rows we should have
@@ -93,17 +84,15 @@ public class ExcelToDITAConverter implements Converter {
 				}
 			}
 		}
-		if (is == null) {
-			URL urlForConnect = url;
-			if ("file".equals(url.getProtocol())) {
-				String urlStr = urlForConnect.toString();
-				if (urlStr.contains("?")) {
-					// Remove query part
-					urlForConnect = new URL(urlStr.substring(0, urlStr.indexOf('?')));
-				}
+		URL urlForConnect = url;
+		if ("file".equals(url.getProtocol())) {
+			String urlStr = urlForConnect.toString();
+			if (urlStr.contains("?")) {
+				// Remove query part
+				urlForConnect = new URL(urlStr.substring(0, urlStr.indexOf('?')));
 			}
-			is = urlForConnect.openStream();
 		}
+		InputStream is = urlForConnect.openStream();
 		StringBuilder sb = new StringBuilder();
 		String name = originalFile.getName();
 		int dotIndex = name.lastIndexOf('.');
