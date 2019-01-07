@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<topic xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="excel" class="- topic/topic " ditaarch:DITAArchVersion="1.3" domains="(topic abbrev-d)                            a(props deliveryTarget)                            (topic equation-d)                            (topic hazard-d)                            (topic hi-d)                            (topic indexing-d)                            (topic markup-d)                            (topic mathml-d)                            (topic pr-d)                            (topic relmgmt-d)                            (topic sw-d)                            (topic svg-d)                            (topic ui-d)                            (topic ut-d)                            (topic markup-d xml-d)   ">
-   <title class="- topic/title ">excel</title>
-   <body class="- topic/body ">
-      <table id="sample" class="- topic/table ">
-         <title class="- topic/title ">sample</title>
-         <tgroup cols="4" class="- topic/tgroup ">
-            <thead class="- topic/thead ">
-               <row class="- topic/row ">
-                  <entry class="- topic/entry ">Part</entry>
-                  <entry class="- topic/entry ">Description</entry>
-                  <entry class="- topic/entry ">First Quarter</entry>
-                  <entry class="- topic/entry ">Second Quarter</entry>
+
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="excel">
+   <title>excel</title>
+   <body>
+      <table id="sample">
+         <title>sample</title>
+         <tgroup cols="4">
+            <thead>
+               <row>
+                  <entry>Part</entry>
+                  <entry>Description</entry>
+                  <entry>First Quarter</entry>
+                  <entry>Second Quarter</entry>
                </row>
             </thead>
-            <tbody class="- topic/tbody ">
-               <row class="- topic/row ">
-                  <entry class="- topic/entry ">Wheel</entry>
-                  <entry class="- topic/entry ">Steering helper</entry>
-                  <entry class="- topic/entry ">5</entry>
-                  <entry class="- topic/entry ">1</entry>
+            <tbody>
+               <row>
+                  <entry>Wheel</entry>
+                  <entry>Steering helper</entry>
+                  <entry>5</entry>
+                  <entry>1</entry>
                </row>
-               <row class="- topic/row ">
-                  <entry class="- topic/entry ">Door</entry>
-                  <entry class="- topic/entry ">Exit mechanism</entry>
-                  <entry class="- topic/entry ">4</entry>
-                  <entry class="- topic/entry ">2</entry>
+               <row>
+                  <entry>Door</entry>
+                  <entry>Exit mechanism</entry>
+                  <entry>4</entry>
+                  <entry>2</entry>
                </row>
-               <row class="- topic/row ">
-                  <entry class="- topic/entry ">Engine</entry>
-                  <entry class="- topic/entry ">Core part</entry>
-                  <entry class="- topic/entry ">1</entry>
-                  <entry class="- topic/entry ">6</entry>
+               <row>
+                  <entry>Engine</entry>
+                  <entry>Core part</entry>
+                  <entry>1</entry>
+                  <entry>6</entry>
                </row>
-               <row class="- topic/row ">
-                  <entry class="- topic/entry ">Tire</entry>
-                  <entry class="- topic/entry ">Ground interaction</entry>
-                  <entry class="- topic/entry ">7</entry>
-                  <entry class="- topic/entry ">7</entry>
+               <row>
+                  <entry>Tire</entry>
+                  <entry>Ground interaction</entry>
+                  <entry>7</entry>
+                  <entry>7</entry>
                </row>
             </tbody>
          </tgroup>

@@ -23,7 +23,9 @@ public class DoctypeGetter {
 	 */
 	public static String getPublicDoctype(String converterType) {
 
-		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)){
+		if(ConverterTypes.HTML_TO_DITA.equals(converterType) ||
+				ConverterTypes.MD_TO_DITA.equals(converterType) ||
+				ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
 			return Doctypes.DOCTYPE_PUBLIC_DITA;
 
 		} else if (ConverterTypes.MD_TO_DB4.equals(converterType) || ConverterTypes.HTML_TO_DB4.equals(converterType)){
@@ -40,7 +42,9 @@ public class DoctypeGetter {
 	 */
 	public static String getSystemDoctype(String converterType){
 		
-		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)){
+		if(ConverterTypes.HTML_TO_DITA.equals(converterType) ||
+				ConverterTypes.MD_TO_DITA.equals(converterType) || 
+				ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
 			return Doctypes.DOCTYPE_SYSTEM_DITA;
 		
 		} else if (ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){
@@ -60,7 +64,9 @@ public class DoctypeGetter {
 	 */
 	public static String getDoctype(String converterType) {
 		String toReturn = "";
-		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)){
+		if(ConverterTypes.HTML_TO_DITA.equals(converterType) ||
+				ConverterTypes.MD_TO_DITA.equals(converterType) || 
+				ConverterTypes.EXCEL_TO_DITA.equals(converterType)	){
 			toReturn = Doctypes.DOCTYPE_DITA;
 		
 		}	else if (ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){

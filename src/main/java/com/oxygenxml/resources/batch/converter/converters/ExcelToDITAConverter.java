@@ -107,32 +107,30 @@ public class ExcelToDITAConverter implements Converter {
 				name = name.substring(0, name.lastIndexOf('.'));
 			}
 		}
-		sb.append("<topic id='" + name + "' class='- topic/topic ' "
-				+ "xmlns:ditaarch=\"http://dita.oasis-open.org/architecture/2005/\" ditaarch:DITAArchVersion=\"1.3\""
-				+ " domains='(topic abbrev-d)                            a(props deliveryTarget)                            (topic equation-d)                            (topic hazard-d)                            (topic hi-d)                            (topic indexing-d)                            (topic markup-d)                            (topic mathml-d)                            (topic pr-d)                            (topic relmgmt-d)                            (topic sw-d)                            (topic svg-d)                            (topic ui-d)                            (topic ut-d)                            (topic markup-d xml-d)   '>");
-		sb.append("<title class='- topic/title '>" + name + "</title>");
+		sb.append("<topic id='" + name + "'>");
+		sb.append("<title>" + name + "</title>");
 		Workbook workbook = createWorkbook(extension, is);
 		int noSheets = workbook.getNumberOfSheets();
-		sb.append("<body class='- topic/body '>");
+		sb.append("<body>");
 		for (int i = 0; i < noSheets; i++) {
 			Sheet datatypeSheet = workbook.getSheetAt(i);
 			Iterator<Row> iterator = datatypeSheet.iterator();
 			if (iterator.hasNext()) {
-				sb.append("<table id='" + datatypeSheet.getSheetName().replace(' ', '_') + "' class='- topic/table '>");
-				sb.append("<title class=\"- topic/title \">").append(datatypeSheet.getSheetName()).append("</title>");
+				sb.append("<table id='" + datatypeSheet.getSheetName().replace(' ', '_') + "'>");
+				sb.append("<title>").append(datatypeSheet.getSheetName()).append("</title>");
 				List<StringBuilder> rowsData = new ArrayList<StringBuilder>();
 				// For each sheet we have a table
 				int maxColCount = 0;
 				while (iterator.hasNext()) {
 					StringBuilder rowData = new StringBuilder();
-					rowData.append("<row class=\"- topic/row \">");
+					rowData.append("<row>");
 					Row currentRow = iterator.next();
 					Iterator<Cell> cellIterator = currentRow.iterator();
 					int colCount = 0;
 					while (cellIterator.hasNext()) {
 						colCount++;
 						Cell currentCell = cellIterator.next();
-						rowData.append("<entry class='- topic/entry '>");
+						rowData.append("<entry>");
 						rowData.append(getImportRepresentation(currentCell, true).replace("<", "&lt;").replace("&", "&amp;"));
 						rowData.append("</entry>");
 					}
@@ -142,15 +140,15 @@ public class ExcelToDITAConverter implements Converter {
 					rowData.append("</row>");
 					rowsData.add(rowData);
 				}
-				sb.append("<tgroup cols='" + maxColCount + "' class=\"- topic/tgroup \">");
+				sb.append("<tgroup cols='" + maxColCount + "'>");
 				if (headerRowsNo > 0) {
-					sb.append("<thead class=\"- topic/thead \">");
+					sb.append("<thead>");
 					for (int j = 0; j < headerRowsNo && j < rowsData.size(); j++) {
 						sb.append(rowsData.get(j));
 					}
 					sb.append("</thead>");
 				}
-				sb.append("<tbody class=\"- topic/tbody \">");
+				sb.append("<tbody>");
 				for (int j = headerRowsNo; j < rowsData.size(); j++) {
 					sb.append(rowsData.get(j));
 				}
@@ -178,18 +176,26 @@ public class ExcelToDITAConverter implements Converter {
 	 */
 	private static Workbook createWorkbook(String extension, InputStream is) throws IOException {
 		Workbook wb = null;
-		if ("xlsx".equals(extension)) {
-			// New XML-type Excel files.
-			try {
-				Class<?> clazz = Class.forName("org.apache.poi.xssf.usermodel.XSSFWorkbook");
-				Constructor<?> constructor = clazz.getConstructor(new Class[] { InputStream.class });
-				wb = (Workbook) constructor.newInstance(new Object[] { is });
-			} catch (Exception e) {
-				throw new IOException(e);
+		try {
+			if ("xlsx".equals(extension)) {
+				// New XML-type Excel files.
+				try {
+					Class<?> clazz = Class.forName("org.apache.poi.xssf.usermodel.XSSFWorkbook");
+					Constructor<?> constructor = clazz.getConstructor(new Class[] { InputStream.class });
+					wb = (Workbook) constructor.newInstance(new Object[] { is });
+				} catch (Exception e) {
+					throw new IOException(e);
+				}
+			} else {
+				POIFSFileSystem fs = new POIFSFileSystem(is);
+				wb = new HSSFWorkbook(fs);
 			}
-		} else {
-			POIFSFileSystem fs = new POIFSFileSystem(is);
-			wb = new HSSFWorkbook(fs);
+		} finally {
+			try {
+				is.close();
+			} catch (Exception e) {
+				// Do nothing.
+			}
 		}
 		return wb;
 	}
