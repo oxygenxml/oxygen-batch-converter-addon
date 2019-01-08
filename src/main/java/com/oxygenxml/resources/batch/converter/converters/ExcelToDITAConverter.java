@@ -96,14 +96,14 @@ public class ExcelToDITAConverter implements Converter {
 		StringBuilder sb = new StringBuilder();
 		String name = originalFile.getName();
 		int dotIndex = name.lastIndexOf('.');
+		String extension = "";
 		if (dotIndex > -1) {
+			extension = name.substring(dotIndex + 1);
 			name = name.substring(0, dotIndex);
 		}
-		String extension = "";
 		if (name.contains("/")) {
 			name = name.substring(name.lastIndexOf('/') + 1, name.length());
 			if (name.contains(".")) {
-				extension = name.substring(name.lastIndexOf('.') + 1, name.length());
 				name = name.substring(0, name.lastIndexOf('.'));
 			}
 		}
