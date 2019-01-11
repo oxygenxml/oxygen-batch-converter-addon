@@ -200,7 +200,7 @@ public class BatchConverterImpl implements BatchConverter {
 					// open the converted file
 					URL convertedFileUrl;
 					convertedFileUrl = outputFile.toURI().toURL();
-					PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl, EditorPageConstants.PAGE_TEXT);
+					PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl);
 				}
 
 			}
