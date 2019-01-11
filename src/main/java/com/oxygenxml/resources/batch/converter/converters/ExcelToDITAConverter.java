@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,6 +22,8 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
@@ -179,13 +180,7 @@ public class ExcelToDITAConverter implements Converter {
 		try {
 			if ("xlsx".equals(extension)) {
 				// New XML-type Excel files.
-				try {
-					Class<?> clazz = Class.forName("org.apache.poi.xssf.usermodel.XSSFWorkbook");
-					Constructor<?> constructor = clazz.getConstructor(new Class[] { InputStream.class });
-					wb = (Workbook) constructor.newInstance(new Object[] { is });
-				} catch (Exception e) {
-					throw new IOException(e);
-				}
+				wb = new XSSFWorkbook(is);
 			} else {
 				POIFSFileSystem fs = new POIFSFileSystem(is);
 				wb = new HSSFWorkbook(fs);
@@ -243,10 +238,7 @@ public class ExcelToDITAConverter implements Converter {
 						fe = new HSSFFormulaEvaluator((HSSFWorkbook) cell.getSheet().getWorkbook());
 					} else {
 						// Or newer 2007+
-						Class<?> newEvaluatorClazz = Class.forName("org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator");
-						Class<?> wbClazz = Class.forName("org.apache.poi.xssf.usermodel.XSSFWorkbook");
-						Constructor<?> constructor = newEvaluatorClazz.getConstructor(new Class[] { wbClazz });
-						fe = (FormulaEvaluator) constructor.newInstance(new Object[] { cell.getSheet().getWorkbook() });
+						fe = new XSSFFormulaEvaluator(new XSSFWorkbook());
 					}
 					fe.evaluateInCell(cell);
 					// After evaluation, the cell will change its type.

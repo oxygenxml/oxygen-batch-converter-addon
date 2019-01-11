@@ -46,9 +46,8 @@
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
+			<artifactId>poi-ooxml</artifactId>
 			<version>3.10-FINAL</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io -->
