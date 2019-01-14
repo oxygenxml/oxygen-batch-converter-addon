@@ -11,6 +11,7 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * HTML to DocBook5 (Oxygen 20 or newer) 
 * Markdown to DocBook4 (Oxygen 20 or newer) 
 * Markdown to DocBook5 (Oxygen 20 or newer) 
+* Excel to DITA
 
 ## Compatibility
 
