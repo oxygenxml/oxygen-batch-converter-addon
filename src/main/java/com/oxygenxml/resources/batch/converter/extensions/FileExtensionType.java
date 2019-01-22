@@ -17,7 +17,7 @@ public class FileExtensionType {
 	/**
 	 * Extensions of HTML type.
 	 */
-	protected static final String[] INPUT_HTML_EXTENSIONS = new String[] { "html", "xhtml", "htm", ".htx" };
+	protected static final String[] INPUT_HTML_EXTENSIONS = new String[] { "html", "xhtml", "htm", ".htx" }; //NOSONAR 
 
 	/**
 	 * Extensions of Markdown type.
@@ -36,7 +36,7 @@ public class FileExtensionType {
 	/**
 	 * Extensions of Excel type.
 	 */
-	public static final String[] INPUT_EXCEL_EXTENSIONS = new String[] { "xls", "xlsx", "xlsm", "xlsb" };
+	protected static final String[] INPUT_EXCEL_EXTENSIONS = new String[] { "xls", "xlsx", "xlsm", "xlsb" };
 	
 	/**
 	 * XHtml output type

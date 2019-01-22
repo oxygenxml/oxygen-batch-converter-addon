@@ -23,7 +23,7 @@ public class BatchConverterPlugin extends Plugin {
     if (instance != null) {
       throw new IllegalStateException("Already instantiated!");
     }
-    instance = this;
+    instance = this; //NOSONAR
   }
   
   /**

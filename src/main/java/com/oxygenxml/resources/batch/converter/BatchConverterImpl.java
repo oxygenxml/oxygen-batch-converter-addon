@@ -20,7 +20,6 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
 
-import ro.sync.exml.editor.EditorPageConstants;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**

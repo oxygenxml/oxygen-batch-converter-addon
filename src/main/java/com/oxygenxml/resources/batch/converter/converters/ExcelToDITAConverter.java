@@ -74,13 +74,12 @@ public class ExcelToDITAConverter implements Converter {
 			for (int i = 0; i < paramNameValue.length; i++) {
 				String nameValue = paramNameValue[i];
 				String[] nameAndValue = nameValue.split("=");
-				if (nameAndValue != null && nameAndValue.length == 2) {
-					if ("headerRowsNo".equals(nameAndValue[0])) {
-						try {
-							headerRowsNo = Integer.parseInt(nameAndValue[1]);
-						} catch (Exception ex) {
-							logger.warn(ex.getMessage(), ex);
-						}
+				if (nameAndValue != null && nameAndValue.length == 2 
+						&& "headerRowsNo".equals(nameAndValue[0])) {
+					try {
+						headerRowsNo = Integer.parseInt(nameAndValue[1]);
+					} catch (Exception ex) {
+						logger.warn(ex.getMessage(), ex);
 					}
 				}
 			}
@@ -111,7 +110,10 @@ public class ExcelToDITAConverter implements Converter {
 		sb.append("<topic id='" + name + "'>");
 		sb.append("<title>" + name + "</title>");
 		Workbook workbook = createWorkbook(extension, is);
-		int noSheets = workbook.getNumberOfSheets();
+		int noSheets = 0;
+		if(workbook != null) {
+			noSheets = workbook.getNumberOfSheets();
+		}
 		sb.append("<body>");
 		for (int i = 0; i < noSheets; i++) {
 			Sheet datatypeSheet = workbook.getSheetAt(i);
@@ -202,8 +204,6 @@ public class ExcelToDITAConverter implements Converter {
 	 * @param cell
 	 *          Excel cell to check.
 	 * @return true if cell is succeptible of showing a date.
-	 * 
-	 * @see #isInternalDateFormat(int)
 	 */
 	private static boolean isCellDateFormatted(Cell cell) {
 		// Starting with POI 3.5 we rely on a new mechanism to discover if the
