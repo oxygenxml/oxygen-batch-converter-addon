@@ -7,7 +7,7 @@
  name="Batch Converter"
  description="Oxygen XML plugin which allows batch conversion."
  version="${project.version}"
- vendor="oXygen XML"
+ vendor="Syncro Soft"
  class="com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin"
  classLoaderType="preferReferencedResources">
  
