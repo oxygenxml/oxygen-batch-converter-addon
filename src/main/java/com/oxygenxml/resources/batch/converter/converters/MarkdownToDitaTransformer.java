@@ -10,11 +10,18 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLFilter;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.AttributesImpl;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 import com.elovirta.dita.markdown.MarkdownReader;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
+
 
 /**
  * Converter implementation for Markdown to DITA.
@@ -77,7 +84,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 			StreamResult res = new StreamResult(sw);
 
 			// convert the document
-			transformer.transform(new SAXSource(r, inputSource), res);
+			transformer.transform(new SAXSource(createXMLFilter(r), inputSource), res);
 
 			// get the converted content
 			toReturn = sw.toString();
@@ -105,5 +112,47 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 
 		return toReturn;
 	}
+	
+	/**
+	 * Create an XML filter for remove "class", "domains" and "DITAArchVersion" attributes.
+	 * 
+	 * @param reader The document reader.
+	 * 
+	 * @return	The xml filter.
+	 */
+	private XMLFilter createXMLFilter(XMLReader reader) {
+		return  new XMLFilterImpl(reader) {
+      /**
+       * @see org.xml.sax.helpers.XMLFilterImpl#startPrefixMapping(java.lang.String, java.lang.String)
+       */
+      @Override
+      public void startPrefixMapping(String prefix, String uri) throws SAXException {
+        // Do not declare the "ditaarch" namespace prefix.
+        if (!"ditaarch".equals(prefix)) {
+          super.startPrefixMapping(prefix, uri);
+        }
+      }
 
+      /**
+       * @see org.xml.sax.helpers.XMLFilterImpl#startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
+       */
+      @Override
+      public void startElement(String uri, String localName, String qName,
+          Attributes atts) throws SAXException {
+        AttributesImpl attributes = new AttributesImpl();
+        if (atts != null) {
+          attributes.setAttributes(atts);
+          for (int i = attributes.getLength() - 1; i >= 0; i--) {
+            String attrName = attributes.getLocalName(i);
+            // Remove "class", "domains" and "DITAArchVersion" attributes.
+            if ("class".equals(attrName) || "domains".equals(attrName) 
+                || "DITAArchVersion".equals(attrName)) {
+              attributes.removeAttribute(i);
+            }
+          }
+        }
+        super.startElement(uri, localName, qName, attributes);
+      }
+    };
+	}
 }
