@@ -63,7 +63,8 @@ public class WordToHtmlConverterTest {
 		try {
 			converter.convertFiles(ConverterTypes.WORD_TO_HTML, inputFiles, outputFolder, false);
 
-			assertEquals(FileUtils.readFileToString(expectedResultFile), FileUtils.readFileToString(fileToRead));
+			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img"),
+					FileUtils.readFileToString(fileToRead));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
@@ -105,7 +106,8 @@ public class WordToHtmlConverterTest {
 		try {
 			converter.convertFiles(ConverterTypes.WORD_TO_HTML, inputFiles, outputFolder, false);
 
-			assertEquals(FileUtils.readFileToString(expectedResultFile), FileUtils.readFileToString(fileToRead));
+			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img"),
+					FileUtils.readFileToString(fileToRead));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
