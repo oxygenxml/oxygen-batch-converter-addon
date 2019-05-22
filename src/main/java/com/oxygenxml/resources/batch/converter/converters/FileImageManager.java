@@ -37,7 +37,7 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	/**
 	 * A map between the Media type of images and the extensions.
 	 */
-	private static final Map<String, String> MIME_EXTENSION = new HashMap<>();
+	private static final Map<String, String> MIME_EXTENSION = new HashMap<String, String>();
 	static	{
 		MIME_EXTENSION.put("image/bmp", "bmp");
 		MIME_EXTENSION.put("image/cis-cod", "cod");
