@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileSystemUtils;
@@ -112,9 +113,8 @@ public class WordToHtmlConverterTest {
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
 			assertEquals(2, images.length);
-			
-			assertEquals("img(1).png", images[0].getName());
-			assertEquals("img.png", images[1].getName());
+			assertTrue(Arrays.asList(images).toString().contains("img(1).png"));
+	   	assertTrue(Arrays.asList(images).toString().contains("img.png"));
 			
 		} finally {
 			FileComparationUtil.deleteRecursivelly(outputFolder);
