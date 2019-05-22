@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +45,13 @@ public class ExcelToDitaTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
-		File fileToRead = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
+		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
 			converter.convertFiles(ConverterTypes.EXCEL_TO_DITA, inputFiles, outputFolder, false);
-			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
+			assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
 		} finally {
-			Files.delete(Paths.get(fileToRead.getPath()));
+			Files.delete(convertedFile.toPath());
 		}
 	}
 }

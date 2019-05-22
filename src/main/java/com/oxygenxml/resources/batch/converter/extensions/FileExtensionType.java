@@ -39,6 +39,16 @@ public class FileExtensionType {
 	protected static final String[] INPUT_EXCEL_EXTENSIONS = new String[] { "xls", "xlsx", "xlsm", "xlsb" };
 	
 	/**
+	 * Extensions of Word type.
+	 */
+	protected static final String[] INPUT_WORD_EXTENSIONS = new String[] { "doc", "docx" };
+	
+	/**
+	 * Html output type
+	 */
+	public static final String HTML_OUTPUT_EXTENSION = "html";
+	
+	/**
 	 * XHtml output type
 	 */
 	public static final String XHTML_OUTPUT_EXTENSION = "xhtml";

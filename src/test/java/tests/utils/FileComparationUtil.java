@@ -2,7 +2,6 @@ package tests.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -26,7 +25,6 @@ public class FileComparationUtil {
       
      String line1 = reader1.readLine();
      String line2 = reader2.readLine();
-    
      while (line1 != null || line2 != null)
      {
          if(line1 == null || line2 == null)
@@ -80,4 +78,27 @@ public class FileComparationUtil {
 		}
 		return fileContents;
 	}
+	
+	 /**
+   *  Deletes recursively the specified directory.
+   * 
+   *@param  file   The file or directory to be deleted.
+   */
+  public static void deleteRecursivelly(File file) {
+    if (!file.exists()) {
+      // Nothing to do.
+      return;
+    }
+    if (file.isDirectory()) {
+      File[] files = file.listFiles();
+      if (files != null) {
+        for (int i = 0; i < files.length; i++) {
+          deleteRecursivelly(files[i]);
+        }
+      }
+      file.delete();
+    } else {
+      file.delete();
+    }
+  }
 }

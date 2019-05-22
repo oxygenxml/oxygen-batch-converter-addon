@@ -54,7 +54,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public String convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		// content to return
 		String toReturn = null;
 

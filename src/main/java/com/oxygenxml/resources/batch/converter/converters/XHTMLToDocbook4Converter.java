@@ -32,7 +32,7 @@ public class XHTMLToDocbook4Converter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		String docbookContent ="";

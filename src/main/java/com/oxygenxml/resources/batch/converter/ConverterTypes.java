@@ -63,4 +63,14 @@ public class ConverterTypes {
 	 * EXCEL -> XML
 	 */
 	public static final String EXCEL_TO_DITA = "_excel.to.dita";
+	
+	/**
+	 * WORD -> HTML
+	 */
+	public static final String WORD_TO_HTML = "_word.to.html";
+	
+	/**
+	 * WORD -> DITA
+	 */
+	public static final String WORD_TO_DITA = "_word.to.dita";
 }

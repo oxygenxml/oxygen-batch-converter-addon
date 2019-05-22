@@ -37,7 +37,7 @@ public class MarkdownToHtmlConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		// content to return

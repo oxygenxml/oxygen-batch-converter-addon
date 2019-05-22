@@ -47,8 +47,15 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.10-FINAL</version>
+			<version>4.1.0</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
+	 	<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-scratchpad</artifactId>
+		    <version>4.1.0</version>
+		</dependency> 
 
 		<!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io -->
 		<dependency>
@@ -159,6 +166,12 @@
 			</exclusions>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.zwobble.mammoth/mammoth -->
+		<dependency>
+		    <groupId>org.zwobble.mammoth</groupId>
+		    <artifactId>mammoth</artifactId>
+		    <version>1.4.0</version>
+		</dependency>		
 	</dependencies>
 
 	<build>
