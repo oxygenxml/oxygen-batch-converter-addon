@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileSystemUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -60,7 +63,7 @@ public class WordToHtmlConverterTest {
 		try {
 			converter.convertFiles(ConverterTypes.WORD_TO_HTML, inputFiles, outputFolder, false);
 
-			assertTrue(FileComparationUtil.compareLineToLine(expectedResultFile, fileToRead));
+			assertEquals(FileUtils.readFileToString(expectedResultFile), FileUtils.readFileToString(fileToRead));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
@@ -102,7 +105,7 @@ public class WordToHtmlConverterTest {
 		try {
 			converter.convertFiles(ConverterTypes.WORD_TO_HTML, inputFiles, outputFolder, false);
 
-			assertTrue(FileComparationUtil.compareLineToLine(expectedResultFile, fileToRead));
+			assertEquals(FileUtils.readFileToString(expectedResultFile), FileUtils.readFileToString(fileToRead));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
