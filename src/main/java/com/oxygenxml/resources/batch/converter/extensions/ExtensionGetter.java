@@ -41,7 +41,11 @@ public class ExtensionGetter {
 		else if(ConverterTypes.EXCEL_TO_DITA.equals(converterType)) {
 			return FileExtensionType.INPUT_EXCEL_EXTENSIONS;
 		}
-			return new String[]{};
+		else if(ConverterTypes.WORD_TO_HTML.equals(converterType) 
+				|| ConverterTypes.WORD_TO_DITA.equals(converterType)) {
+			return FileExtensionType.INPUT_WORD_EXTENSIONS;
+		}
+		return new String[]{};
 		
 	}
 
@@ -54,8 +58,10 @@ public class ExtensionGetter {
 	 */
 	public static String getOutputExtension(String converterType){
 	
-		if(ConverterTypes.HTML_TO_DITA.equals(converterType) || ConverterTypes.MD_TO_DITA.equals(converterType)
-				|| ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
+		if(ConverterTypes.HTML_TO_DITA.equals(converterType) 
+				|| ConverterTypes.MD_TO_DITA.equals(converterType)
+				|| ConverterTypes.EXCEL_TO_DITA.equals(converterType) 
+				|| ConverterTypes.WORD_TO_DITA.equals(converterType) ){
 			return FileExtensionType.DITA_OUTPUT_EXTENSION;
 		}
 		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){
@@ -68,6 +74,9 @@ public class ExtensionGetter {
 		    ConverterTypes.MD_TO_DB4.equals(converterType) || ConverterTypes.HTML_TO_DB4.equals(converterType) ||
 		    ConverterTypes.HTML_TO_DB5.equals(converterType)){
 			return FileExtensionType.XML_OUTPUT_EXTENSION;
+		} 
+		else if	(ConverterTypes.WORD_TO_HTML.equals(converterType)){
+			return FileExtensionType.HTML_OUTPUT_EXTENSION;
 		}
 			return null;
 	}

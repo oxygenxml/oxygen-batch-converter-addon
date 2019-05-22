@@ -16,6 +16,7 @@ import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -39,7 +40,7 @@ public class ExcelToDITAConverter implements Converter {
 	private static final Logger logger = Logger.getLogger(ExcelToDITAConverter.class);
 	
 	@Override
-	public String convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 		try {
 			return convertInternal(originalFile);
@@ -229,7 +230,7 @@ public class ExcelToDITAConverter implements Converter {
 		DataFormatter df = null;
 		if (cell != null) {
 			df = new DataFormatter();
-			if (displayDataAsInExcel && (cell.getCellType() == Cell.CELL_TYPE_FORMULA)) {
+			if (displayDataAsInExcel && (cell.getCellType() == CellType.FORMULA)) {
 				// We are trying to evaluate the formula.
 				FormulaEvaluator fe = null;
 				try {
@@ -252,7 +253,7 @@ public class ExcelToDITAConverter implements Converter {
 				}
 			}
 			switch (cell.getCellType()) {
-			case Cell.CELL_TYPE_NUMERIC:
+			case NUMERIC:
 				// Numeric types are succeptible of being dates/time too.
 				boolean isDateCell = isCellDateFormatted(cell);
 				if (isDateCell) {
@@ -273,21 +274,21 @@ public class ExcelToDITAConverter implements Converter {
 					}
 				}
 				break;
-			case Cell.CELL_TYPE_STRING:
+			case STRING:
 				importPresentationString = displayDataAsInExcel ? df.formatCellValue(cell)
 						: cell.getRichStringCellValue().getString();
 				break;
-			case Cell.CELL_TYPE_BLANK:
+			case BLANK:
 				importPresentationString = "";
 				break;
-			case Cell.CELL_TYPE_BOOLEAN:
+			case BOOLEAN:
 				importPresentationString = displayDataAsInExcel ? df.formatCellValue(cell)
 						: Boolean.toString(cell.getBooleanCellValue());
 				break;
-			case Cell.CELL_TYPE_ERROR:
+			case ERROR:
 				importPresentationString = "#ERROR: " + Byte.toString(cell.getErrorCellValue());
 				break;
-			case Cell.CELL_TYPE_FORMULA:
+			case FORMULA:
 				importPresentationString = displayDataAsInExcel ? df.formatCellValue(cell) : getDescriptionOfFormula(cell);
 				break;
 			default:
@@ -311,7 +312,7 @@ public class ExcelToDITAConverter implements Converter {
 	private static String getDescriptionOfFormula(Cell cell) {
 		String descr = "";
 		switch (cell.getCachedFormulaResultType()) {
-		case Cell.CELL_TYPE_NUMERIC:
+		case NUMERIC:
 			// Numeric types are succeptible of being dates/time too.
 			boolean isDateCell = isCellDateFormatted(cell);
 			if (isDateCell) {
@@ -327,15 +328,15 @@ public class ExcelToDITAConverter implements Converter {
 				}
 			}
 			break;
-		case Cell.CELL_TYPE_BOOLEAN:
+		case BOOLEAN:
 			descr = Boolean.toString(cell.getBooleanCellValue());
 			break;
-		case Cell.CELL_TYPE_ERROR:
+		case ERROR:
 			// The formula cannot be evaluated ...
 			// Byte.toString(cell.getErrorCellValue()) is not an interesting value ..
 			descr = "#ERROR: " + cell.getCellFormula();
 			break;
-		case Cell.CELL_TYPE_STRING:
+		case STRING:
 			descr = cell.getRichStringCellValue().getString();
 			break;
 		default:

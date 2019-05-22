@@ -59,11 +59,7 @@ public class XmlToJsonTest {
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 
 		} finally {
-			try {
-				Files.delete(Paths.get(fileToRead.getPath()));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			Files.delete(fileToRead.toPath());
 		}
 
 	}

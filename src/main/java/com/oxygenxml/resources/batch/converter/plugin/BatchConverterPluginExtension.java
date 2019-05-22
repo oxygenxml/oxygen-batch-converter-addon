@@ -231,11 +231,13 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		dita.add(createConvertorAction(ConverterTypes.HTML_TO_DITA, pluginWorkspaceAccess));
 		dita.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
 		dita.add(createConvertorAction(ConverterTypes.EXCEL_TO_DITA, pluginWorkspaceAccess));
+		dita.add(createConvertorAction(ConverterTypes.WORD_TO_DITA, pluginWorkspaceAccess));
 		toReturn.put("ditaSection", dita);
 		
 		List<Action> xhtml = new ArrayList<Action>();
 		xhtml.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML, pluginWorkspaceAccess));
 		xhtml.add(createConvertorAction(ConverterTypes.MD_TO_XHTML, pluginWorkspaceAccess));
+		xhtml.add(createConvertorAction(ConverterTypes.WORD_TO_HTML, pluginWorkspaceAccess));
 		toReturn.put("xhtmlSection", xhtml);
 		
 		List<Action> json = new ArrayList<Action>();

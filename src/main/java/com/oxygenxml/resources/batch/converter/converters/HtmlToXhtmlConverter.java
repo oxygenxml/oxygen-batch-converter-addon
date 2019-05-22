@@ -29,7 +29,7 @@ public class HtmlToXhtmlConverter implements Converter {
 	 *          the converter will process this reader and will ignore the given file.
 	 * @return The converted XHTML content..        
 	 */
-	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public String convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		//XHTML content to be return
 		String toReturn = null;
 

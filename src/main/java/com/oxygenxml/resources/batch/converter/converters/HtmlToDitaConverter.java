@@ -27,7 +27,7 @@ public class HtmlToDitaConverter implements Converter{
 	 * @throws TransformerException 
 	 */
 	@Override
-	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		//create a HTML to XHTML converter
@@ -38,10 +38,10 @@ public class HtmlToDitaConverter implements Converter{
 		
 		String xhtmlContent;
 		//convert the content to XHTML
-		xhtmlContent = htmlToXhtmlTransformer.convert(originalFileLocation, contentReader, transformerCreator);
+		xhtmlContent = htmlToXhtmlTransformer.convert(originalFileLocation, contentReader, baseDir, transformerCreator);
 		
 		// convert the converted XHTML content in DITA 
-		return  xhtmlToDITATransformer.convert(originalFileLocation, new StringReader(xhtmlContent),transformerCreator);
+		return  xhtmlToDITATransformer.convert(originalFileLocation, new StringReader(xhtmlContent), baseDir, transformerCreator);
 		
 	}
 

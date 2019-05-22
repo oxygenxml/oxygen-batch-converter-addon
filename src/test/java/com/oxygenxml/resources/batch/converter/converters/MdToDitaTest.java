@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,11 +60,7 @@ public class MdToDitaTest {
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 
 		} finally {
-			try {
-				Files.delete(Paths.get(fileToRead.getPath()));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			Files.delete(fileToRead.toPath());
 		}
 	}
 	
@@ -103,11 +98,7 @@ public class MdToDitaTest {
 			
 		} finally {
 			if(convertedFile.exists()) {
-				try {
-					Files.delete(Paths.get(convertedFile.getPath()));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				Files.delete(convertedFile.toPath());
 			}
 		}
 

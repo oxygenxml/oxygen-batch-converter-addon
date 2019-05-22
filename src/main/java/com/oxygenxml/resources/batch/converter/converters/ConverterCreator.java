@@ -52,7 +52,13 @@ public class ConverterCreator {
 
 	  } else if(ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
       return new ExcelToDITAConverter();
-      
-		}return null;
+
+	  } else if(ConverterTypes.WORD_TO_HTML.equals(converterType)){
+	  	return new WordToHTMLConverter();
+    
+	  } else if(ConverterTypes.WORD_TO_DITA.equals(converterType)){
+      return new WordToDITAConverter();
+	  }
+		return null;
 	}
 }

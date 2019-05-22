@@ -86,8 +86,7 @@ public class BatchConverterImpl implements BatchConverter {
 	 */
 	public BatchConverterImpl(ProblemReporter problemReporter, StatusReporter statusReporter,
 			ProgressDialogInteractor progressDialogInteractor, ConvertorWorkerInteractor workerInteractor,
-			TransformerFactoryCreator transformerFactoryCreator) 
-	{
+			TransformerFactoryCreator transformerFactoryCreator) {
 		this.problemReporter = problemReporter;
 		this.statusReporter = statusReporter;
 		this.progressDialogInteractor = progressDialogInteractor;
@@ -119,10 +118,16 @@ public class BatchConverterImpl implements BatchConverter {
 				
 		// create the converter
 		Converter converter = ConverterCreator.create(converterType);
-
+		if(logger.isDebugEnabled()) {
+			logger.debug("Created converter: " + converter);
+		}
+		
 		// create a content printer
 		ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
-
+		if(logger.isDebugEnabled()) {
+			logger.debug("Content printer: " + contentPrinter);
+		}
+		
 		//make the output directory if it doesn't exist
 		if(!outputFolder.exists()){
 			outputFolder.mkdirs();
@@ -143,7 +148,10 @@ public class BatchConverterImpl implements BatchConverter {
 
 				// get the current file.
 				File currentFile = inputFiles.get(i);
-
+				if(logger.isDebugEnabled()) {
+					logger.debug("File to convert: " + currentFile);
+				}
+				
 				// update the progress dialog note.
 				progressDialogInteractor.setNote(currentFile.toString());
 
@@ -185,10 +193,15 @@ public class BatchConverterImpl implements BatchConverter {
 		String convertedContent = null;
 		try {
 			// convert the current file
-			convertedContent = converter.convert(file, null, transformerFactoryCreator);
-
+			convertedContent = converter.convert(file, null, outputFile.getParentFile(), transformerFactoryCreator);
+			if(logger.isDebugEnabled()) {
+				logger.debug("Converted content: " + convertedContent);
+			}
+			
 			if (convertedContent != null) {
-
+				if(logger.isDebugEnabled()) {
+					logger.debug("Print converted content in: " + outputFile);
+				}
 				// print the converted content.
 				contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile,
 						StyleSourceGetter.getStyleSource(converterType));
@@ -211,6 +224,8 @@ public class BatchConverterImpl implements BatchConverter {
 			isSuccessfully = false;
 			failedFile++;
 		}
-
+		if(logger.isDebugEnabled()) {
+			logger.debug("Conversion " + (isSuccessfully ? "successful" : "fail"));
+		}
 	}
 }

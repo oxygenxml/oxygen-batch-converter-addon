@@ -33,7 +33,7 @@ public class JsonToXmlConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		StringBuilder toReturn = new StringBuilder();

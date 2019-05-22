@@ -23,11 +23,13 @@ public interface Converter {
 	 * @param contentReader
 	 *          Reader of the document. If the content reader isn't <code>null</code>, 
 	 *          the converter will process this reader and will ignore the given file.
+	 * @param baseDir 
+	 * 					The base directory.
 	 * @param transformerCreator
 	 *          A transformer creator.
 	 * @return The converted content in String format.
 	 * @throws TransformerException
 	 */
-	public String convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator)
+	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException;
 }
