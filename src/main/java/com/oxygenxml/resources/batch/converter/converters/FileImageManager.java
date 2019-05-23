@@ -35,6 +35,11 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	private static final String IMAGES_RELATIVE_PATH = "media/img";
 	
 	/**
+	 * Map between image extension and the file name counter of the last saved image.
+	 */
+	private Map<String, Integer> lastImageFileNameCounterMap = new HashMap<>();  
+	
+	/**
 	 * A map between the Media type of images and the extensions.
 	 */
 	private static final Map<String, String> MIME_EXTENSION = new HashMap<String, String>();
@@ -121,8 +126,22 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	 String saveImageInternal(InputStream imageIs, String extension) throws IOException {
 		// Create an unique file
 		File imageFile = new File(baseDir, IMAGES_RELATIVE_PATH + '.' + extension);
-		File uniqueImageFile = ConverterFileUtils.getFileWithCounter(imageFile);
+		Integer lastImageCounter = lastImageFileNameCounterMap.get(extension);
+		if(lastImageCounter == null) {
+			lastImageCounter = 0;
+		}
+		File uniqueImageFile = ConverterFileUtils.getFileWithCounter(imageFile, lastImageCounter + 1);
 
+		String name = uniqueImageFile.getName();
+		int openBracket = name.lastIndexOf('(');
+		int closeBracket = name.lastIndexOf(')');
+		if(openBracket != -1 && closeBracket != -1 && openBracket < closeBracket) {
+			lastImageFileNameCounterMap.put(
+					extension, new Integer(name.substring(openBracket + 1, closeBracket)));
+		} else {
+			lastImageFileNameCounterMap.put(extension, 0);
+		}
+		
 		imageFile.getParentFile().mkdirs();
 		Files.copy(imageIs, uniqueImageFile.toPath());
 

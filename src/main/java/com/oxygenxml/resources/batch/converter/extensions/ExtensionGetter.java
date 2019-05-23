@@ -41,8 +41,10 @@ public class ExtensionGetter {
 		else if(ConverterTypes.EXCEL_TO_DITA.equals(converterType)) {
 			return FileExtensionType.INPUT_EXCEL_EXTENSIONS;
 		}
-		else if(ConverterTypes.WORD_TO_HTML.equals(converterType) 
-				|| ConverterTypes.WORD_TO_DITA.equals(converterType)) {
+		else if(ConverterTypes.WORD_TO_XHTML.equals(converterType) 
+				|| ConverterTypes.WORD_TO_DITA.equals(converterType) 
+				|| ConverterTypes.WORD_TO_DB4.equals(converterType) 
+				|| ConverterTypes.WORD_TO_DB5.equals(converterType) ) {
 			return FileExtensionType.INPUT_WORD_EXTENSIONS;
 		}
 		return new String[]{};
@@ -64,20 +66,23 @@ public class ExtensionGetter {
 				|| ConverterTypes.WORD_TO_DITA.equals(converterType) ){
 			return FileExtensionType.DITA_OUTPUT_EXTENSION;
 		}
-		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType) || ConverterTypes.MD_TO_XHTML.equals(converterType)){
+		else if(ConverterTypes.HTML_TO_XHTML.equals(converterType) 
+				|| ConverterTypes.MD_TO_XHTML.equals(converterType) 
+				|| ConverterTypes.WORD_TO_XHTML.equals(converterType)){
 			return FileExtensionType.XHTML_OUTPUT_EXTENSION;
 		}
 		else if(ConverterTypes.XML_TO_JSON.equals(converterType)) {
 			return FileExtensionType.JSON_OUTPUT_EXTENSION;
 		}
-		else if(ConverterTypes.JSON_TO_XML.equals(converterType) || ConverterTypes.MD_TO_DB5.equals(converterType) || 
-		    ConverterTypes.MD_TO_DB4.equals(converterType) || ConverterTypes.HTML_TO_DB4.equals(converterType) ||
-		    ConverterTypes.HTML_TO_DB5.equals(converterType)){
+		else if(ConverterTypes.JSON_TO_XML.equals(converterType) 
+				|| ConverterTypes.MD_TO_DB5.equals(converterType) 
+				|| ConverterTypes.MD_TO_DB4.equals(converterType) 
+				|| ConverterTypes.HTML_TO_DB4.equals(converterType) 
+				|| ConverterTypes.HTML_TO_DB5.equals(converterType)
+				|| ConverterTypes.WORD_TO_DB4.equals(converterType)
+				|| ConverterTypes.WORD_TO_DB5.equals(converterType)){
 			return FileExtensionType.XML_OUTPUT_EXTENSION;
 		} 
-		else if	(ConverterTypes.WORD_TO_HTML.equals(converterType)){
-			return FileExtensionType.HTML_OUTPUT_EXTENSION;
-		}
 			return null;
 	}
 		

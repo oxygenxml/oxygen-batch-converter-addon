@@ -9,12 +9,12 @@ import javax.xml.transform.TransformerException;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
- * Converter implementation for Word to DITA.
+ * Converter implementation for Word to DocBook4.
  * 
  * @author Cosmin Duna
  *
  */
-public class WordToDITAConverter implements Converter {
+public class WordToDocbook4Conversion implements Converter{
 
 	@Override
 	public String convert(File originalFile, Reader contentReader, File baseDir,
@@ -22,13 +22,14 @@ public class WordToDITAConverter implements Converter {
 		// Create a WORD to HTML converter
 		WordToXHTMLConverter wordToHTMLConverter = new WordToXHTMLConverter();
 		
-		// Create a HTML to DITA converter
-		HtmlToDitaConverter htmlToDITATransformer = new HtmlToDitaConverter();
+		// Create a HTML to DB4 converter
+		HtmlToDocbook4Converter htmlToDb4Converter = new HtmlToDocbook4Converter();
 			
 		// Convert the WORD content to HTML
 		String htmlContent = wordToHTMLConverter.convert(originalFile, contentReader, baseDir, transformerCreator);
 		
-		// Convert the converted HTML content to DITA 
-		return  htmlToDITATransformer.convert(originalFile, new StringReader(htmlContent), baseDir, transformerCreator);
+		// Convert the converted HTML content to DB4 
+		return  htmlToDb4Converter.convert(originalFile, new StringReader(htmlContent), baseDir, transformerCreator);
 	}
+
 }

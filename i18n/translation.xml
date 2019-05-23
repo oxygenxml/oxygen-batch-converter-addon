@@ -33,7 +33,7 @@
 		<val lang="ja_JP">HTML to DITA</val>
 		<val lang="nl_NL">HTML to DITA</val>
 	</key>
-<key value="Menu_Item_Text_Conv_md.to.xhtml">
+	<key value="Menu_Item_Text_Conv_md.to.xhtml">
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Markdown to XHTML</val>
 		<val lang="de_DE">Markdown to XHTML</val>
@@ -41,7 +41,7 @@
 		<val lang="ja_JP">Markdown to XHTML</val>
 		<val lang="nl_NL">Markdown to XHTML</val>
 	</key>
-<key value="Menu_Item_Text_Conv_md.to.dita">
+	<key value="Menu_Item_Text_Conv_md.to.dita">
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Markdown to DITA</val>
 		<val lang="de_DE">Markdown to DITA</val>
@@ -49,7 +49,7 @@
 		<val lang="ja_JP">Markdown to DITA</val>
 		<val lang="nl_NL">Markdown to DITA</val>
 	</key>
-<key value="Menu_Item_Text_Conv_xml.to.json">
+	<key value="Menu_Item_Text_Conv_xml.to.json">
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">XML to JSON</val>
 		<val lang="de_DE">XML to JSON</val>
@@ -107,13 +107,13 @@
 		<val lang="ja_JP">Excel to DITA</val>
 		<val lang="nl_NL">Excel to DITA</val>
 	</key>
-	<key value="Menu_Item_Text_Conv_word.to.html">
+	<key value="Menu_Item_Text_Conv_word.to.xhtml">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Word to HTML</val>
-		<val lang="de_DE">Word to HTML</val>
-		<val lang="fr_FR">Word vers HTML</val>
-		<val lang="ja_JP">Word to HTML</val>
-		<val lang="nl_NL">Word to HTML</val>
+		<val lang="en_US">Word to XHTML</val>
+		<val lang="de_DE">Word to XHTML</val>
+		<val lang="fr_FR">Word vers XHTML</val>
+		<val lang="ja_JP">Word to XHTML</val>
+		<val lang="nl_NL">Word to XHTML</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -123,7 +123,23 @@
 		<val lang="ja_JP">Word to DITA</val>
 		<val lang="nl_NL">Word to DITA</val>
 	</key>
-	
+	<key value="Menu_Item_Text_Conv_word.to.db4">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">Word to Docbook4</val>
+		<val lang="de_DE">Word to Docbook4</val>
+		<val lang="fr_FR">Word vers Docbook4</val>
+		<val lang="ja_JP">Word to Docbook4</val>
+		<val lang="nl_NL">Word to Docbook4</val>
+	</key>
+	<key value="Menu_Item_Text_Conv_word.to.db5">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">Word to Docbook5</val>
+		<val lang="de_DE">Word to Docbook5</val>
+		<val lang="fr_FR">Word vers Docbook5</val>
+		<val lang="ja_JP">Word to Docbook5</val>
+		<val lang="nl_NL">Word to Docbook5</val>
+	</key>
+
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
 		<val lang="en_US">Input files:</val>
@@ -169,7 +185,8 @@
 	</key>
 
 	<key value="Open_File_Check_Box">
-		<comment>Check box for select to open the converted files after conversion. </comment>
+		<comment>Check box for select to open the converted files after
+			conversion. </comment>
 		<val lang="en_US">Open the converted files</val>
 		<val lang="de_DE">Open the converted files</val>
 		<val lang="fr_FR">Ouvrir les fichiers convertis</val>

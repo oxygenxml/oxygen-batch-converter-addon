@@ -103,21 +103,33 @@ public class ConverterFileUtils {
 	 * @return A unique file.
 	 */
 	public static File getFileWithCounter(File file) {
+		return getFileWithCounter(file, 1);
+	}
+
+	/**
+	 * Add a counter on the given file if it exists.
+	 * 
+	 * @param file
+	 *          The file.
+	 * @param startCounter 
+	 * 					The start counter.
+	 * 					
+	 * @return A unique file.
+	 */
+	public static File getFileWithCounter(File file, int startCounter) {
 
 		String filePath = file.getAbsolutePath();
 		int idOfDot = filePath.indexOf('.');
 		String name = filePath.substring(0, idOfDot);
 		String extension = filePath.substring(idOfDot + 1);
-		int counter = 1;
 
 		while (file.exists()) {
 
-			filePath = name + '(' + counter + ")." + extension;
+			filePath = name + '(' + startCounter + ")." + extension;
 			file = new File(filePath);
-			counter++;
+			startCounter++;
 		}
 
 		return file;
 	}
-
 }

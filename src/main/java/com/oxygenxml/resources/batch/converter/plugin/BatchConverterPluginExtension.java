@@ -237,7 +237,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		List<Action> xhtml = new ArrayList<Action>();
 		xhtml.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML, pluginWorkspaceAccess));
 		xhtml.add(createConvertorAction(ConverterTypes.MD_TO_XHTML, pluginWorkspaceAccess));
-		xhtml.add(createConvertorAction(ConverterTypes.WORD_TO_HTML, pluginWorkspaceAccess));
+		xhtml.add(createConvertorAction(ConverterTypes.WORD_TO_XHTML, pluginWorkspaceAccess));
 		toReturn.put("xhtmlSection", xhtml);
 		
 		List<Action> json = new ArrayList<Action>();
@@ -252,6 +252,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 			docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
 			docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
 			docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
+			docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB4, pluginWorkspaceAccess));
+			docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB5, pluginWorkspaceAccess));
 			toReturn.put("docbookSection", docbook);
 		}
 

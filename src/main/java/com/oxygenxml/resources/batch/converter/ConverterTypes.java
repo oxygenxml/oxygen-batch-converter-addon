@@ -67,10 +67,20 @@ public class ConverterTypes {
 	/**
 	 * WORD -> HTML
 	 */
-	public static final String WORD_TO_HTML = "_word.to.html";
+	public static final String WORD_TO_XHTML = "_word.to.xhtml";
 	
 	/**
 	 * WORD -> DITA
 	 */
 	public static final String WORD_TO_DITA = "_word.to.dita";
+	
+	/**
+	 * WORD -> Docbook4
+	 */
+	public static final String WORD_TO_DB4 = "_word.to.db4";
+	
+	/**
+	 * WORD -> Docbook5
+	 */
+	public static final String WORD_TO_DB5 = "_word.to.db5";
 }

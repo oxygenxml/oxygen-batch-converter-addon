@@ -29,7 +29,9 @@ public class DoctypeGetter {
 				ConverterTypes.WORD_TO_DITA.equals(converterType)){
 			return Doctypes.DOCTYPE_PUBLIC_DITA;
 
-		} else if (ConverterTypes.MD_TO_DB4.equals(converterType) || ConverterTypes.HTML_TO_DB4.equals(converterType)){
+		} else if (ConverterTypes.MD_TO_DB4.equals(converterType) 
+				|| ConverterTypes.HTML_TO_DB4.equals(converterType)
+				|| ConverterTypes.WORD_TO_DB4.equals(converterType)){
 	      return Doctypes.DOCTYPE_PUBLIC_DB4;
 	   }
 			return "";
@@ -51,11 +53,12 @@ public class DoctypeGetter {
 		
 		} else if (ConverterTypes.HTML_TO_XHTML.equals(converterType) 
 				|| ConverterTypes.MD_TO_XHTML.equals(converterType)
-				|| ConverterTypes.WORD_TO_HTML.equals(converterType)){
+				|| ConverterTypes.WORD_TO_XHTML.equals(converterType)){
 		  return Doctypes.DOCTYPE_SYSTEM_XHTML;
 		
 		} else if (ConverterTypes.MD_TO_DB4.equals(converterType) 
-				|| ConverterTypes.HTML_TO_DB4.equals(converterType)){
+				|| ConverterTypes.HTML_TO_DB4.equals(converterType)
+				|| ConverterTypes.WORD_TO_DB4.equals(converterType)){
       return Doctypes.DOCTYPE_SYSTEM_DB4;
 		}
 			return "";
@@ -76,11 +79,12 @@ public class DoctypeGetter {
 		
 		}	else if (ConverterTypes.HTML_TO_XHTML.equals(converterType) 
 				|| ConverterTypes.MD_TO_XHTML.equals(converterType)
-				|| ConverterTypes.WORD_TO_HTML.equals(converterType)){
+				|| ConverterTypes.WORD_TO_XHTML.equals(converterType)){
 			toReturn = Doctypes.DOCTYPE_XHTML;
 		
 		} else if (ConverterTypes.MD_TO_DB4.equals(converterType) 
-				|| ConverterTypes.HTML_TO_DB4.equals(converterType)){
+				|| ConverterTypes.HTML_TO_DB4.equals(converterType)
+				|| ConverterTypes.WORD_TO_DB4.equals(converterType)){
 			toReturn = Doctypes.DOCTYPE_DB4;
 		}
 		return toReturn;

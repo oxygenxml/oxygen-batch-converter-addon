@@ -1,9 +1,9 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
@@ -32,12 +32,12 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
  * 
  * @author cosmin_duna
  */
-public class WordToHTMLConverter implements Converter {
+public class WordToXHTMLConverter implements Converter {
 
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(WordToHTMLConverter.class);
+	private static final Logger logger = Logger.getLogger(WordToXHTMLConverter.class);
 	
 	/**
 	 * The extension of the docx files.
@@ -109,10 +109,11 @@ public class WordToHTMLConverter implements Converter {
 		wordToHtmlConverter.processDocument(wordDocument);
 		Document htmlDocument = wordToHtmlConverter.getDocument();
 
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		StringWriter stringWriter = new StringWriter();
+		String html = "";
 		try {
 			DOMSource domSource = new DOMSource(htmlDocument);
-			StreamResult streamResult = new StreamResult(out);
+			StreamResult streamResult = new StreamResult(stringWriter);
 
 			TransformerFactory tf = TransformerFactory.newInstance();
 			Transformer serializer = tf.newTransformer();
@@ -120,11 +121,11 @@ public class WordToHTMLConverter implements Converter {
 			serializer.setOutputProperty( OutputKeys.INDENT, "yes" );
 			serializer.setOutputProperty( OutputKeys.METHOD, "xhtml" );
 			serializer.transform(domSource, streamResult);
+			html = URLEncoder.encode(stringWriter.toString(), "UTF-8");
 		} finally {
-			out.close();
+			stringWriter.close();
 		}
 
-		String html = URLEncoder.encode(new String(out.toByteArray(), "UTF-8"), "UTF-8");
 		return  URLDecoder.decode(html, "UTF-8");
 	}
 	

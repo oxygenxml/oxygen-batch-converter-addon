@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.io.FileSystemUtils;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -29,15 +27,15 @@ import tests.utils.ProgressDialogInteractorTestImpl;
 import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 /**
- * JUnit for WORD to HTML conversion.
+ * JUnit for WORD to XHTML conversion.
  *  
  * @author cosmin_duna
  *
  */
-public class WordToHtmlConverterTest {
+public class WordToXHtmlConverterTest {
 
 	/**
-   * <p><b>Description:</b> Test conversion from a docx file to HTML.</p>
+   * <p><b>Description:</b> Test conversion from a docx file to XHTML.</p>
    *
    * @author cosmin_duna
    *
@@ -46,7 +44,7 @@ public class WordToHtmlConverterTest {
 	@Test
 	public void testConversionFromDocx() throws IOException {
 		File inputFile  = new File("test-sample/wordTo/test.docx");		
-		File expectedResultFile = new File("test-sample/wordTo/resultOfDocxToHTML.html");
+		File expectedResultFile = new File("test-sample/wordTo/resultOfDocxToXHTML.xhtml");
 		File outputFolder = inputFile.getParentFile();
 		outputFolder = new File(outputFolder, "output");
 		
@@ -59,10 +57,10 @@ public class WordToHtmlConverterTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(inputFile);
 				
-		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.HTML_OUTPUT_EXTENSION , outputFolder);
+		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.WORD_TO_HTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
 
 			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img"),
 					FileUtils.readFileToString(fileToRead));
@@ -80,7 +78,7 @@ public class WordToHtmlConverterTest {
 	}
 
 	/**
-   * <p><b>Description:</b> Test conversion from a doc file to HTML.</p>
+   * <p><b>Description:</b> Test conversion from a doc file to XHTML.</p>
    *
    * @author cosmin_duna
    *
@@ -89,7 +87,7 @@ public class WordToHtmlConverterTest {
 	@Test
 	public void testConversionFromDoc() throws IOException {
 		File inputFile  = new File("test-sample/wordTo/test.doc");		
-		File expectedResultFile = new File("test-sample/wordTo/resultOfDocToHTML.html");
+		File expectedResultFile = new File("test-sample/wordTo/resultOfDocToXHTML.xhtml");
 		File outputFolder = inputFile.getParentFile();
 		outputFolder = new File(outputFolder, "output");
 		
@@ -102,10 +100,10 @@ public class WordToHtmlConverterTest {
 		List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(inputFile);
 				
-		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.HTML_OUTPUT_EXTENSION , outputFolder);
+		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.WORD_TO_HTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
 
 			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img"),
 					FileUtils.readFileToString(fileToRead));

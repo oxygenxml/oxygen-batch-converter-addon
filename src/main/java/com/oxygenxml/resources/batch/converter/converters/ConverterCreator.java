@@ -18,47 +18,53 @@ public class ConverterCreator {
 	 * @param converterType The type of converter: {@link ConverterTypes}
 	 * @return
 	 */
-	public static Converter create(String converterType){
-		
-		if(ConverterTypes.MD_TO_XHTML.equals(converterType)){
-			return new MarkdownToXhmlConverter();
-		
-		}else if(ConverterTypes.HTML_TO_XHTML.equals(converterType)){
-			return new HtmlToXhtmlConverter();
-		
-		}else if(ConverterTypes.HTML_TO_DITA.equals(converterType)){
-			return new HtmlToDitaConverter();
-		
-		}else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
-			return new MarkdownToDitaTransformer();
-		
-		}else if(ConverterTypes.XML_TO_JSON.equals(converterType)){
-			return new XmlToJsonConverter();
-		
-		}else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
-			return new JsonToXmlConverter();
-		
-		}else if(ConverterTypes.MD_TO_DB5.equals(converterType)){
-			return new MarkdownToDocbook5Converter();
-			
-		} else if(ConverterTypes.MD_TO_DB4.equals(converterType)){
-      return new MarkdownToDocbook4Converter();
-      
-	  }else if(ConverterTypes.HTML_TO_DB5.equals(converterType)){
-      return new HtmlToDocbook5Converter();
-      
-    } else if(ConverterTypes.HTML_TO_DB4.equals(converterType)){
-      return new HtmlToDocbook4Converter();
+  public static Converter create(String converterType){
 
-	  } else if(ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
-      return new ExcelToDITAConverter();
+  	if(ConverterTypes.MD_TO_XHTML.equals(converterType)){
+  		return new MarkdownToXhmlConverter();
 
-	  } else if(ConverterTypes.WORD_TO_HTML.equals(converterType)){
-	  	return new WordToHTMLConverter();
-    
-	  } else if(ConverterTypes.WORD_TO_DITA.equals(converterType)){
-      return new WordToDITAConverter();
-	  }
-		return null;
-	}
+  	} else if(ConverterTypes.HTML_TO_XHTML.equals(converterType)){
+  		return new HtmlToXhtmlConverter();
+
+  	} else if(ConverterTypes.HTML_TO_DITA.equals(converterType)){
+  		return new HtmlToDitaConverter();
+
+  	} else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
+  		return new MarkdownToDitaTransformer();
+
+  	} else if(ConverterTypes.XML_TO_JSON.equals(converterType)){
+  		return new XmlToJsonConverter();
+
+  	} else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
+  		return new JsonToXmlConverter();
+
+  	} else if(ConverterTypes.MD_TO_DB5.equals(converterType)){
+  		return new MarkdownToDocbook5Converter();
+
+  	} else if(ConverterTypes.MD_TO_DB4.equals(converterType)){
+  		return new MarkdownToDocbook4Converter();
+
+  	} else if(ConverterTypes.HTML_TO_DB5.equals(converterType)){
+  		return new HtmlToDocbook5Converter();
+
+  	} else if(ConverterTypes.HTML_TO_DB4.equals(converterType)){
+  		return new HtmlToDocbook4Converter();
+
+  	} else if(ConverterTypes.EXCEL_TO_DITA.equals(converterType)){
+  		return new ExcelToDITAConverter();
+
+  	} else if(ConverterTypes.WORD_TO_XHTML.equals(converterType)){
+  		return new WordToXHTMLConverter();
+
+  	} else if(ConverterTypes.WORD_TO_DITA.equals(converterType)){
+  		return new WordToDITAConverter();
+
+  	} else if(ConverterTypes.WORD_TO_DB4.equals(converterType)){
+  		return new WordToDocbook4Conversion();
+
+  	} else if(ConverterTypes.WORD_TO_DB5.equals(converterType)){
+  		return new WordToDocbook5Conversion();
+  	}
+  	return null;
+  }
 }
