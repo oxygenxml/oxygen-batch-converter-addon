@@ -55,7 +55,7 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 
 		String encoding = "UTF-8";
 		
-		if(converterType != ConverterTypes.XML_TO_JSON) {
+		if(!ConverterTypes.XML_TO_JSON.equals(converterType)) {
 			String encodingLine = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 			// Get the encoding from content to print.
 			Matcher matcher = ENCODING_PATTERN.matcher(contentToPrint);

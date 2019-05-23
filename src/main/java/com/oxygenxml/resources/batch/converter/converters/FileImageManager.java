@@ -37,7 +37,7 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	/**
 	 * Map between image extension and the file name counter of the last saved image.
 	 */
-	private Map<String, Integer> lastImageFileNameCounterMap = new HashMap<>();  
+	private Map<String, Integer> lastImageFileNameCounterMap = new HashMap<String, Integer>(); 
 	
 	/**
 	 * A map between the Media type of images and the extensions.
