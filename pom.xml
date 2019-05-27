@@ -166,12 +166,11 @@
 			</exclusions>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.zwobble.mammoth/mammoth -->
 		<dependency>
 		    <groupId>org.zwobble.mammoth</groupId>
 		    <artifactId>mammoth</artifactId>
-		    <version>1.4.0</version>
-		</dependency>		
+		    <version>1.4.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -255,7 +254,7 @@
 				</executions>
 			</plugin>
 
-			<!-- Add markdown-1.3.0.jar and json.jar in local repository -->
+			<!-- Add markdown-1.3.0.jar, json.jar and mammoth-1.4.0-SNAPSHOT.jar in local repository -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -270,6 +269,22 @@
 							<groupId>com.elovirta.dita</groupId>
 							<artifactId>markdown</artifactId>
 							<version>1.3.0</version>
+							<packaging>jar</packaging>
+							<generatePom>true</generatePom>
+						</configuration>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>install-external-mammoth</id>
+						<phase>clean</phase>
+						<configuration>
+							<file>${basedir}/lib/mammoth-1.4.0-SNAPSHOT.jar</file>
+							<repositoryLayout>default</repositoryLayout>
+							<groupId>org.zwobble.mammoth</groupId>
+							<artifactId>mammoth</artifactId>
+							<version>1.4.0-SNAPSHOT</version>
 							<packaging>jar</packaging>
 							<generatePom>true</generatePom>
 						</configuration>

@@ -110,7 +110,6 @@ public class WordToXHTMLConverter implements Converter {
 		Document htmlDocument = wordToHtmlConverter.getDocument();
 
 		StringWriter stringWriter = new StringWriter();
-		String html = "";
 		try {
 			DOMSource domSource = new DOMSource(htmlDocument);
 			StreamResult streamResult = new StreamResult(stringWriter);
@@ -121,11 +120,11 @@ public class WordToXHTMLConverter implements Converter {
 			serializer.setOutputProperty( OutputKeys.INDENT, "yes" );
 			serializer.setOutputProperty( OutputKeys.METHOD, "xhtml" );
 			serializer.transform(domSource, streamResult);
-			html = URLEncoder.encode(stringWriter.toString(), "UTF-8");
 		} finally {
 			stringWriter.close();
 		}
 
+		String html = URLEncoder.encode(stringWriter.toString(), "UTF-8");
 		return  URLDecoder.decode(html, "UTF-8");
 	}
 	

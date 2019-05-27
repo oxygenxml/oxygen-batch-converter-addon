@@ -24,5 +24,15 @@
                 </license>
             </licenses>
         </dependency>
+        <dependency>
+            <groupId>org.zwobble.mammoth</groupId>
+            <artifactId>mammoth</artifactId>
+            <licenses>
+                <license>
+                    <name>BSD 2-Clause "Simplified" License</name>
+                    <url>https://raw.githubusercontent.com/mwilliamson/java-mammoth/master/LICENSE</url>
+                </license>
+            </licenses>
+        </dependency>
     </dependencies>
 </licenseSummary>
