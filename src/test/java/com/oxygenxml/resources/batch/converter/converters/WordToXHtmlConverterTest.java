@@ -121,6 +121,46 @@ public class WordToXHtmlConverterTest {
 	}
 	
 	/**
+	 * <p><b>Description:</b> Test conversion from a docx file with multiple equations to XHTML.</p>
+	 *
+	 * @author cosmin_duna
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testConversionFromDocxWithMultipleEquation() throws IOException {
+		File inputFile  = new File("test-sample/wordTo/multipleEquations.docx");		
+		File expectedResultFile = new File("test-sample/wordTo/multipleEquations.xhtml");
+		File outputFolder = inputFile.getParentFile();
+		outputFolder = new File(outputFolder, "output");
+		
+		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+		ProblemReporter problemReporter = new ProblemReporterTestImpl();
+		
+		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+	
+		List<File> inputFiles = new ArrayList<File>();
+		inputFiles.add(inputFile);
+				
+		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+		
+		try {
+			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+	
+			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img");
+			assertEquals(filterMathAttributes(expected),
+					filterMathAttributes(FileUtils.readFileToString(fileToRead)));
+	
+			File mediaFolder = new File(outputFolder, "media");
+			assertTrue(!mediaFolder.exists());
+			
+		} finally {
+			FileComparationUtil.deleteRecursivelly(outputFolder);
+		}
+	}
+
+	/**
 	 * Filter some math attributes in the html content.
 	 * 
 	 * @param html The html content.
