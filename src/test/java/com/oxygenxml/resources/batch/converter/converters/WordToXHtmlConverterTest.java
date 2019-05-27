@@ -62,8 +62,9 @@ public class WordToXHtmlConverterTest {
 		try {
 			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
 
-			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img"),
-					FileUtils.readFileToString(fileToRead));
+			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img");
+			assertEquals(filterMathAttributes(expected),
+					filterMathAttributes(FileUtils.readFileToString(fileToRead)));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
@@ -117,5 +118,17 @@ public class WordToXHtmlConverterTest {
 		} finally {
 			FileComparationUtil.deleteRecursivelly(outputFolder);
 		}
+	}
+	
+	/**
+	 * Filter some math attributes in the html content.
+	 * 
+	 * @param html The html content.
+	 * 
+	 * @return
+	 */
+	private String filterMathAttributes(String html) {
+		html = html.replace("w:ascii=\"Cambria Math\"", "");
+		return html.replace("w:cs=\"Cambria Math\"", "");
 	}
 }
