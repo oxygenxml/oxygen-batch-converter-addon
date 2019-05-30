@@ -153,7 +153,7 @@ public class BatchConverterImpl implements BatchConverter {
 				}
 				
 				// update the progress dialog note.
-				progressDialogInteractor.setNote(currentFile.toString());
+				progressDialogInteractor.setNote(currentFile);
 
 				//generate the output file.
 				File outputFile = ConverterFileUtils.getOutputFile(currentFile, 

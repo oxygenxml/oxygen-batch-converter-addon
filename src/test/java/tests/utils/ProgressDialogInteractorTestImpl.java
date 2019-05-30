@@ -1,5 +1,7 @@
 package tests.utils;
 
+import java.io.File;
+
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 
 /**
@@ -14,8 +16,8 @@ public class ProgressDialogInteractorTestImpl implements ProgressDialogInteracto
 	}
 
 	@Override
-	public void setNote(String note) {
-		System.out.println("Note: "+ note);
+	public void setNote(File note) {
+		System.out.println("Note: "+ note.getAbsolutePath());
 	}
 
 	@Override
