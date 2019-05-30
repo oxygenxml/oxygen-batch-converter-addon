@@ -3,17 +3,21 @@ package com.oxygenxml.resources.batch.converter.converters;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.URIResolver;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.hwpf.HWPFDocumentCore;
@@ -26,6 +30,9 @@ import org.zwobble.mammoth.Result;
 import org.zwobble.mammoth.images.ImageConverter;
 
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**
  * Converter implementation for Word to HTML.
@@ -53,7 +60,7 @@ public class WordToXHTMLConverter implements Converter {
 		try {
 			FileImageManager imageManager = new FileImageManager(baseDir);
 			if (originalFile.getAbsolutePath().toLowerCase().endsWith(DOCX_EXTENSION)) {
-				convertedContent = convertDocxFile(originalFile, imageManager);
+				convertedContent = convertDocxFile(originalFile, imageManager, transformerCreator);
 			} else {
 				convertedContent = convertDocFile(originalFile, imageManager);
 			}
@@ -71,7 +78,7 @@ public class WordToXHTMLConverter implements Converter {
 
 	 * @throws IOException 
 	 */
-	public String convertDocxFile(File file, ImageConverter.ImgElement imagesManager) throws IOException{
+	public String convertDocxFile(File file, ImageConverter.ImgElement imagesManager, TransformerFactoryCreator transformerFactory) throws IOException{
 		DocumentConverter converter = new DocumentConverter()
 				.addStyleMap("p[style-name='Title'] => h1:fresh\n" +
 						"p[style-name='Heading 1'] => h2:fresh\n" +
@@ -88,7 +95,13 @@ public class WordToXHTMLConverter implements Converter {
 			logger.debug("Warnings from the conversion process: " + result.getWarnings());
 		}
 		
-		return wrapHtmlBodyContent(result.getValue());
+		String htmlContent = wrapHtmlBodyContent(result.getValue());
+		
+		if(htmlContent.contains("<!--<m:oMath")) {
+			htmlContent = resolveMaths(htmlContent, transformerFactory);
+		}
+		
+		return htmlContent;
 	}
 
 	/**
@@ -142,5 +155,73 @@ public class WordToXHTMLConverter implements Converter {
 		htmlContent.append(bodyContent);
 		htmlContent.append("\n</body>\n</html>");
 		return htmlContent.toString();
+	}
+	
+	/**
+	 * Resolves the math equations from the given HTML content.
+	 * 
+	 * @param htmlContent					The html content.
+	 * @param transformerCreator	The transformer creator.s
+	 * 
+	 * @return HTML content with MathML equations.
+	 */
+	private String resolveMaths(String htmlContent, TransformerFactoryCreator transformerCreator) {
+		boolean wasXslResolved = false;
+		final String teiXslPath = "http://www.tei-c.org/release/xml/tei/stylesheet/docx/from/omml2mml.xsl";
+
+		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+		if(pluginWorkspace != null) {
+			URIResolver uriResolver = pluginWorkspace.getXMLUtilAccess().getURIResolver();
+			try {
+				Source resolved = uriResolver.resolve(teiXslPath, "");
+				if(resolved != null) {
+					wasXslResolved = true;
+				}
+			} catch (TransformerException e) {
+				logger.debug(e.getException().getMessage(), e.getException());
+			}
+		}
+		
+		if(wasXslResolved) {
+			StringBuilder xslt = new StringBuilder();
+			xslt.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+					"<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" + 
+					"    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" + 
+					"    xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"\n" + 
+					"    exclude-result-prefixes=\"xs\"\n" + 
+					"    version=\"3.0\">\n" + 
+					"    <xsl:include href=\"");
+			xslt.append(teiXslPath);
+			xslt.append("\"/>\n" + 
+					"    \n" + 
+					"    <xsl:template match=\"node() | @*\">\n" + 
+					"        <xsl:copy>\n" + 
+					"            <xsl:apply-templates select=\"node() | @*\"/>\n" + 
+					"        </xsl:copy>\n" + 
+					"    </xsl:template>\n" + 
+					"    <xsl:template match=\"m:oMath\" >\n" + 
+					"        <math xmlns='http://www.w3.org/1998/Math/MathML'>\n" + 
+					"            <xsl:apply-templates/>\n" + 
+					"        </math>    \n" + 
+					"    </xsl:template>\n" + 
+					"    <xsl:template match=\"comment()[starts-with(., '&lt;m:oMath')]\">\n" + 
+					"            <xsl:apply-templates select=\"parse-xml(.)\"/>\n" + 
+					"    </xsl:template>\n" + 
+					"</xsl:stylesheet>");
+
+			final StreamSource src = new StreamSource(new StringReader(xslt.toString()));
+			StringWriter sw = new StringWriter();
+			StreamResult result = new StreamResult(sw);
+			
+			Transformer transformer = transformerCreator.createTransformer(src);
+			try {
+				transformer.transform(new StreamSource(new StringReader(htmlContent)), result);
+				htmlContent = sw.toString();
+			} catch (TransformerException e) {
+				logger.debug(e.getMessage(), e);
+			}
+		}
+
+		return htmlContent;
 	}
 }
