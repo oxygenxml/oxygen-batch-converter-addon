@@ -19,6 +19,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
             <body>
                 <div>
                     <p>This add-on contributes actions in the Tools menu and contextual menu to enable batch conversion between various formats: 
+                    </p>
                     	<ul>
                     		<li>HTML to XHTML/DITA/DocBook</li>
                     		<li>Markdown to XHTML/DITA/DocBook</li>
@@ -27,7 +28,6 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                     		<li>Excel to DITA</li>
                     		<li>Word to XHTML/DITA/DocBook - experimental</li>
                     	</ul>
-                    </p>
                     <p>For more details see <a
                         href="https://github.com/oxygenxml/oxygen-resources-convertor"
                         >https://github.com/oxygenxml/oxygen-resources-convertor</a>
@@ -60,7 +60,7 @@ License: Apache License 2.0 ( http://www.apache.org/licenses/LICENSE-2.0)
 
 mammoth-1.4.0.jar
 Site: https://github.com/mwilliamson/java-mammoth
-License: BSD 2-Clause "Simplified" License ( https://raw.githubusercontent.com/mwilliamson/java-mammoth/master/LICENSE)
+License: BSD 2-Clause Simplified License ( https://raw.githubusercontent.com/mwilliamson/java-mammoth/master/LICENSE)
 
 ]]></xt:license>
     </xt:extension>
