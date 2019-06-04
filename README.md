@@ -12,6 +12,10 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * Markdown to DocBook4 (Oxygen 20 or newer) 
 * Markdown to DocBook5 (Oxygen 20 or newer) 
 * Excel to DITA
+* Word to XHTML - experimental
+* Word to DITA - experimental
+* Word to DocBook4 (Oxygen 20 or newer) - experimental
+* Word to DocBook5 (Oxygen 20 or newer) - experimental
 
 ## Compatibility
 
