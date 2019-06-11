@@ -29,9 +29,9 @@ public class HtmlToXhtmlConverter implements Converter {
 	 *          the converter will process this reader and will ignore the given file.
 	 * @return The converted XHTML content..        
 	 */
-	public String convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public ConversionResult convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		//XHTML content to be return
-		String toReturn = null;
+		String convertedContent = null;
 
 			try {
 				StringWriter sw = new StringWriter();
@@ -46,7 +46,8 @@ public class HtmlToXhtmlConverter implements Converter {
 				t.setShowWarnings(false);
 				t.setTidyMark(false);
 				t.setForceOutput(true);
-
+				t.setXmlTags(true);
+				
 				if (contentReader == null) {
 					contentReader = ConverterReaderUtils.createReader(originalFileLocation);
 				}
@@ -63,7 +64,7 @@ public class HtmlToXhtmlConverter implements Converter {
 				t.parse(new StringReader(sb.toString()), sw);
 
 				// convert to String
-				toReturn = sw.toString();
+				convertedContent = sw.toString();
 
 			} catch (IOException e1) {
 				throw new TransformerException(e1.getMessage(), e1);
@@ -79,7 +80,7 @@ public class HtmlToXhtmlConverter implements Converter {
 				}
 			}
 			
-			return toReturn;
+			return new ConversionResult(convertedContent);
 		}
 
 }

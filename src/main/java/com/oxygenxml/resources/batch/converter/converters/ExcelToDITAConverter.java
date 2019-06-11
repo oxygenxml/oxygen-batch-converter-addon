@@ -40,10 +40,10 @@ public class ExcelToDITAConverter implements Converter {
 	private static final Logger logger = Logger.getLogger(ExcelToDITAConverter.class);
 	
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 		try {
-			return convertInternal(originalFile);
+			return new ConversionResult(convertInternal(originalFile));
 		} catch (IOException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		} finally {

@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -32,7 +33,7 @@ public class XHTMLToDocbook4Converter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		String docbookContent ="";
@@ -63,8 +64,16 @@ public class XHTMLToDocbook4Converter implements Converter {
 		}catch (TransformerException e) {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
-
-		return docbookContent;
+		
+		final ConversionResult conversionResult;
+		if (docbookContent.contains("mml:math")) {
+			conversionResult = new ConversionResult(
+					docbookContent, Doctypes.DOCTYPE_PUBLIC_DB4_MAHTML, Doctypes.DOCTYPE_SYSTEM_DB4_MATHML);
+		} else {
+			conversionResult = new ConversionResult(docbookContent);
+		}
+		
+		return conversionResult;
 	}
 
 }

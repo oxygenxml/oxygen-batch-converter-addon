@@ -26,14 +26,15 @@ public class MarkdownToXhmlConverter implements Converter{
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		MarkdownToHtmlConverter markdownToHtmlTransformer = new MarkdownToHtmlConverter();
 		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter();
 		
 		// Convert the markdown file to HTML.
-		String htmlContent = markdownToHtmlTransformer.convert(originalFile, contentReader, baseDir, transformerCreator);
+		String htmlContent = markdownToHtmlTransformer.convert(
+				originalFile, contentReader, baseDir, transformerCreator).getConvertedContent();
 
 		// Convert the HTML content to XHTML and return.
     return  htmlToXhtmlTransformer.convert(originalFile, new StringReader(htmlContent), baseDir, transformerCreator);

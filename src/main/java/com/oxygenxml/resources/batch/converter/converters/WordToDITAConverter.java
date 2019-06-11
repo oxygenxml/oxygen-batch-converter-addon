@@ -17,7 +17,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 public class WordToDITAConverter implements Converter {
 
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir,
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir,
 			TransformerFactoryCreator transformerCreator) throws TransformerException {
 		// Create a WORD to HTML converter
 		WordToXHTMLConverter wordToHTMLConverter = new WordToXHTMLConverter();
@@ -26,7 +26,8 @@ public class WordToDITAConverter implements Converter {
 		HtmlToDitaConverter htmlToDITATransformer = new HtmlToDitaConverter();
 			
 		// Convert the WORD content to HTML
-		String htmlContent = wordToHTMLConverter.convert(originalFile, contentReader, baseDir, transformerCreator);
+		String htmlContent = wordToHTMLConverter.convert(
+				originalFile, contentReader, baseDir, transformerCreator).getConvertedContent();
 		
 		// Convert the converted HTML content to DITA 
 		return  htmlToDITATransformer.convert(originalFile, new StringReader(htmlContent), baseDir, transformerCreator);

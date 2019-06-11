@@ -8,6 +8,7 @@ import javax.xml.transform.TransformerException;
 import org.junit.Test;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 
 import junit.framework.TestCase;
 import tests.utils.FileComparationUtil;
@@ -59,7 +60,7 @@ public class PrettyContentPrinterTest extends TestCase {
 				"</topic>";
 	
 		PrettyContentPrinterImpl printerImpl = new PrettyContentPrinterImpl();
-		printerImpl.print(contentToPrint, 
+		printerImpl.print(new ConversionResult(contentToPrint), 
 				new TransformerFactoryCreatorImpl(),
 				ConverterTypes.HTML_TO_DITA,
 				outputFile,
@@ -104,7 +105,7 @@ public class PrettyContentPrinterTest extends TestCase {
 				"</topic>";
 	
 		PrettyContentPrinterImpl printerImpl = new PrettyContentPrinterImpl();
-		printerImpl.print(contentToPrint, 
+		printerImpl.print(new ConversionResult(contentToPrint), 
 				new TransformerFactoryCreatorImpl(),
 				ConverterTypes.HTML_TO_DITA,
 				outputFile,

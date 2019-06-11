@@ -14,6 +14,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
@@ -38,8 +39,8 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 	/**
 	 * Print the given content in output file(The content isn't indented).
 	 * 
-	 * @param contentToPrint
-	 *          The content to print.
+	 * @param conversionResult
+	 *          The conversion result.
 	 * @param transformerCreator
 	 *          A transformer creator.
 	 * @param converterType
@@ -50,11 +51,12 @@ public class SimpleContentPrinterImpl implements ContentPrinter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, String converterType,
+	public void print(ConversionResult conversionResult, TransformerFactoryCreator transformerCreator, String converterType,
 			File outputFile, StreamSource styleSource) throws TransformerException {
 
 		String encoding = "UTF-8";
 		
+		String contentToPrint = conversionResult.getConvertedContent();
 		if(!ConverterTypes.XML_TO_JSON.equals(converterType)) {
 			String encodingLine = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 			// Get the encoding from content to print.

@@ -27,14 +27,15 @@ public class HtmlToDocbook5Converter  implements Converter {
 		 * @throws TransformerException
 		 */
 		@Override
-		public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+		public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 				throws TransformerException {
 
 			HtmlToXhtmlConverter htmlToXhtmlConverter = new HtmlToXhtmlConverter();
 			XHTMLToDocbook5Converter xhtmlToDocbook5Converter = new XHTMLToDocbook5Converter();
 			
 			//convert the HTML to XHTML
-			String xhtmlContent = htmlToXhtmlConverter.convert(originalFile, contentReader, baseDir, transformerCreator);
+			String xhtmlContent = htmlToXhtmlConverter.convert(
+					originalFile, contentReader, baseDir, transformerCreator).getConvertedContent();
 			
 			//convert the XHTML content to Docbook5 and return
 			return  xhtmlToDocbook5Converter.convert(originalFile, new StringReader(xhtmlContent), baseDir, transformerCreator);

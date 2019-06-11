@@ -33,10 +33,10 @@ public class JsonToXmlConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
-		StringBuilder toReturn = new StringBuilder();
+		StringBuilder convertedContent = new StringBuilder();
 		String jsonContent = "";
 		
 		try {
@@ -55,11 +55,11 @@ public class JsonToXmlConverter implements Converter {
 
 			if(jsonObject.length() != 1) {
 				// Add root element.
-				toReturn.append("<JSON>");
-				toReturn.append(xmlContent);
-				toReturn.append("</JSON>");
+				convertedContent.append("<JSON>");
+				convertedContent.append(xmlContent);
+				convertedContent.append("</JSON>");
 			} else {
-				toReturn.append(xmlContent);
+				convertedContent.append(xmlContent);
 			}
 			
 		} catch (IOException e) {
@@ -68,7 +68,7 @@ public class JsonToXmlConverter implements Converter {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 
-		return toReturn.toString();
+		return new ConversionResult(convertedContent.toString());
 
 	}
 }

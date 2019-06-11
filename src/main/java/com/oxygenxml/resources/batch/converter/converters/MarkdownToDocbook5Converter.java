@@ -27,14 +27,15 @@ public class MarkdownToDocbook5Converter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		MarkdownToXhmlConverter markdownToXhmlConverter = new MarkdownToXhmlConverter();
 		XHTMLToDocbook5Converter xhtmlToDocbook5Converter = new XHTMLToDocbook5Converter();
 		
 		//convert the markdown file to XHTML
-		String xhtmlContent = markdownToXhmlConverter.convert(originalFile, contentReader, baseDir, transformerCreator);
+		String xhtmlContent = markdownToXhmlConverter.convert(
+				originalFile, contentReader, baseDir, transformerCreator).getConvertedContent();
 		
 		//convert the XHTML content to Docbook and return
 		return  xhtmlToDocbook5Converter.convert(originalFile, new StringReader(xhtmlContent), baseDir, transformerCreator);

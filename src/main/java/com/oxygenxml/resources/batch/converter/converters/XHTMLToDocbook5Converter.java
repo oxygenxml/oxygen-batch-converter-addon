@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -30,6 +31,9 @@ public class XHTMLToDocbook5Converter implements Converter {
    */
   private static final String ROOT_ELEMENT = "article";
   
+  private static final String MATHML_MODELS = "<?xml-model href=\"http://docbook.org/xml/5.0/rng/docbook.rng\" type=\"application/xml\" schematypens=\"http://purl.oclc.org/dsdl/schematron\"?>\r\n" + 
+  		"<?xml-model href=\"http://www.oxygenxml.com/docbook/xml/5.0/rng/dbmathml.rng\" schematypens=\"http://relaxng.org/ns/structure/1.0\"?>\n";
+  
 	/**
 	 * Convert the given XHTML to Docbook5.
 	 * 
@@ -42,7 +46,7 @@ public class XHTMLToDocbook5Converter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		String docbookContent ="";
@@ -75,10 +79,36 @@ public class XHTMLToDocbook5Converter implements Converter {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
 
+		final ConversionResult conversionResult;
 		docbookContent = updateArticleRootAttributes(docbookContent);
-		return docbookContent;
+		
+		if(docbookContent.contains("mml:math")) {
+			docbookContent = addMathmlModels(docbookContent);
+			conversionResult = new ConversionResult(
+					docbookContent, Doctypes.DOCTYPE_PUBLIC_DB5_MAHTML, Doctypes.DOCTYPE_SYSTEM_DB5_MATHML);
+		} else {
+			conversionResult = new ConversionResult(docbookContent);
+		}
+		
+		return conversionResult;
 	}
 
+	/**
+	 * Add mathml models to given document content.
+	 * 
+	 * @param documentContent The document content.
+	 * 
+	 * @return A document that contains mathml models.
+	 */
+	private String addMathmlModels(String documentContent) {
+		int indexOfRootTag = documentContent.indexOf(ROOT_ELEMENT);
+		if(indexOfRootTag != -1){
+			documentContent = documentContent.substring(0, indexOfRootTag - 1) 
+					+ MATHML_MODELS + documentContent.substring(indexOfRootTag - 1);
+ 		}
+		return documentContent;
+	}
+	
 	/**
 	 * Add the root attributes if those don't exist.
 	 * @param documentContent The document content to be updated.

@@ -32,10 +32,10 @@ public class XmlToJsonConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
-		String toReturn = null;
+		String convertedContent = null;
 		
 		String contentToParse = "";
 
@@ -49,7 +49,7 @@ public class XmlToJsonConverter implements Converter {
 
 			JSONObject jsonObj = XML.toJSONObject(contentToParse);
 
-			toReturn = jsonObj.toString(4, false);
+			convertedContent = jsonObj.toString(4, false);
 
 		}
 		catch (JSONException e) {
@@ -59,6 +59,6 @@ public class XmlToJsonConverter implements Converter {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 
-		return toReturn;
+		return new ConversionResult(convertedContent);
 	}
 }

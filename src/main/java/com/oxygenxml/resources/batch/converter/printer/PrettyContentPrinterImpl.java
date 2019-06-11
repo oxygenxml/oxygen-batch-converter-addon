@@ -13,6 +13,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 
+import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
@@ -32,14 +33,14 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 	/**
 	 * Prettify the given content and write in given output file.
 	 * 
-	 * @param contentToPrint The content to print.
+	 * @param conversionResult The conversion result.
 	 * @param transformerCreator A transformer creator.
 	 * @param converterType The type of converter.
 	 * @param outputFile The output file.
 	 * @param styleSource The source XSL, or <code>null</code> 
 	 * @throws TransformerException
 	 */
-		public void print(String contentToPrint, TransformerFactoryCreator transformerCreator, String converterType,
+		public void print(ConversionResult conversionResult, TransformerFactoryCreator transformerCreator, String converterType,
 				File outputFile,  StreamSource styleSource)
 				throws TransformerException {
 
@@ -48,18 +49,22 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 
 		// set the output properties
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-		if(!DoctypeGetter.getSystemDoctype(converterType).isEmpty()){
-			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, DoctypeGetter.getSystemDoctype(converterType));
+		final String systemDocType = DoctypeGetter.getSystemDoctype(conversionResult, converterType);
+		if(!systemDocType.isEmpty()){
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, systemDocType);
 		}
-		if(!DoctypeGetter.getPublicDoctype(converterType).isEmpty()){
-			transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, DoctypeGetter.getPublicDoctype(converterType));
+		
+		final String publicDocType = DoctypeGetter.getPublicDoctype(conversionResult, converterType);
+		if(!publicDocType.isEmpty()){
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, publicDocType);
 		}
 		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
+		
 		// get the input source
-		InputSource inputSource = new InputSource(new StringReader(contentToPrint));
+		InputSource inputSource = new InputSource(new StringReader(conversionResult.getConvertedContent()));
 
 		try {
 			// pretty print
@@ -68,7 +73,8 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 			logger.debug(e.getMessage(), e);
 			// Stop indenting and create the output file.
 			SimpleContentPrinterImpl simpleContentPrinter = new SimpleContentPrinterImpl();
-			simpleContentPrinter.print(contentToPrint, transformerCreator, converterType, outputFile, styleSource);
+			simpleContentPrinter.print(
+					conversionResult, transformerCreator, converterType, outputFile, styleSource);
 		}
 	}
 

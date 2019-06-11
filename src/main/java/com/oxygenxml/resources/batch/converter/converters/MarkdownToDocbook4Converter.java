@@ -28,7 +28,7 @@ public class MarkdownToDocbook4Converter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 	  
 		MarkdownToXhmlConverter generatedXhtml = new MarkdownToXhmlConverter();
@@ -36,7 +36,8 @@ public class MarkdownToDocbook4Converter implements Converter {
 		XHTMLToDocbook4Converter generatedDB4 = new XHTMLToDocbook4Converter();
 		
 		// Convert the markdown file to XHTML.
-		String xhtmlContent = generatedXhtml.convert(originalFile, contentReader, baseDir, transformerCreator);
+		String xhtmlContent = generatedXhtml.convert(
+				originalFile, contentReader, baseDir, transformerCreator).getConvertedContent();
 		
 		StringReader readerOverXHTML = new StringReader(xhtmlContent);
     return generatedDB4.convert(originalFile, readerOverXHTML, baseDir, transformerCreator);

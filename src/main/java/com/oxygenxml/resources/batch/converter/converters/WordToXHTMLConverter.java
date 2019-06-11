@@ -52,7 +52,7 @@ public class WordToXHTMLConverter implements Converter {
 	private static final String DOCX_EXTENSION = "docx";
 
 	@Override
-	public String convert(
+	public ConversionResult convert(
 			File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 					throws TransformerException {
 		String convertedContent= "";
@@ -67,7 +67,7 @@ public class WordToXHTMLConverter implements Converter {
 		} catch (Exception e) {
 			throw new TransformerException(e.getMessage() , e.getCause());
 		} 
-		return convertedContent;
+		return new ConversionResult(convertedContent);
 	}
 
 	/**

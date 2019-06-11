@@ -30,6 +30,6 @@ public interface Converter {
 	 * @return The converted content in String format.
 	 * @throws TransformerException
 	 */
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException;
 }

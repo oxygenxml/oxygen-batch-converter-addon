@@ -37,11 +37,11 @@ public class MarkdownToHtmlConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		// content to return
-		String toReturn = null;
+		String convertedContent = null;
 
 		// create the parser
 		final DataHolder options = PegdownOptionsAdapter.flexmarkOptions(true, Extensions.ALL - Extensions.EXTANCHORLINKS);
@@ -62,11 +62,11 @@ public class MarkdownToHtmlConverter implements Converter {
 			// Parse the content.
 			Node document = parser.parse(contentToParse);
 
-			toReturn = renderer.render(document);
+			convertedContent = renderer.render(document);
 		} catch (IOException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 
-		return toReturn;
+		return new ConversionResult(convertedContent);
 	}
 }

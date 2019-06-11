@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 import com.oxygenxml.resources.batch.converter.converters.Converter;
 import com.oxygenxml.resources.batch.converter.converters.ConverterCreator;
 import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
@@ -190,10 +191,9 @@ public class BatchConverterImpl implements BatchConverter {
 	private void convertAndPrintFile(File file, File outputFile, Converter converter, ContentPrinter contentPrinter,
 			String converterType, boolean openConvertedFile) {
 
-		String convertedContent = null;
 		try {
-			// convert the current file
-			convertedContent = converter.convert(file, null, outputFile.getParentFile(), transformerFactoryCreator);
+			ConversionResult conversionResult = converter.convert(file, null, outputFile.getParentFile(), transformerFactoryCreator);
+			String convertedContent = conversionResult.getConvertedContent();
 			if(logger.isDebugEnabled()) {
 				logger.debug("Converted content: " + convertedContent);
 			}
@@ -203,7 +203,7 @@ public class BatchConverterImpl implements BatchConverter {
 					logger.debug("Print converted content in: " + outputFile);
 				}
 				// print the converted content.
-				contentPrinter.print(convertedContent, transformerFactoryCreator, converterType, outputFile,
+				contentPrinter.print(conversionResult, transformerFactoryCreator, converterType, outputFile,
 						StyleSourceGetter.getStyleSource(converterType));
 
 				convertedFile++;

@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter.doctype;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 
 /**
  * Getter for document type.
@@ -21,7 +22,7 @@ public class DoctypeGetter {
 	 * @param converterType The converter type.
 	 * @return The public document type or a empty String if isn't declared a doctype for given converter type.
 	 */
-	public static String getPublicDoctype(String converterType) {
+	private static String getPublicDoctype(String converterType) {
 
 		if(ConverterTypes.HTML_TO_DITA.equals(converterType) ||
 				ConverterTypes.MD_TO_DITA.equals(converterType) ||
@@ -43,7 +44,7 @@ public class DoctypeGetter {
 	 * @param converterType The converter type.
 	 * @return The system document type or a empty String if isn't declared a doctype for given converter type.
 	 */
-	public static String getSystemDoctype(String converterType){
+	private static String getSystemDoctype(String converterType){
 		
 		if(ConverterTypes.HTML_TO_DITA.equals(converterType) 
 				|| ConverterTypes.MD_TO_DITA.equals(converterType)
@@ -89,4 +90,39 @@ public class DoctypeGetter {
 		}
 		return toReturn;
 	}
+	
+	/**
+	 * Get the public document type according to the conversion result and the conversion type.
+	 * 
+	 * @param result The result of the conversion.
+	 * @param converterType The converter type.
+	 * @return The public document type or a empty String if isn't declared a doctype for given converter type.
+	 */
+	public static String getPublicDoctype(ConversionResult result, String converterType) {
+		final String doctype;
+		if (result.getImposedPublicDoctype() != null) {
+			doctype = result.getImposedPublicDoctype();
+		} else {
+			doctype = getPublicDoctype(converterType);
+		}
+		return doctype;
+	}
+	
+	/**
+	 * Get the system document type according to the conversion result and the conversion type.
+	 * 
+	 * @param result The result of the conversion.
+	 * @param converterType The converter type.
+	 * @return The public document type or a empty String if isn't declared a doctype for given converter type.
+	 */
+	public static String getSystemDoctype(ConversionResult result, String converterType) {
+		final String doctype;
+		if (result.getImposedSystemDoctype() != null) {
+			doctype = result.getImposedSystemDoctype();
+		} else {
+			doctype = getSystemDoctype(converterType);
+		}
+		return doctype;
+	}
+	
 }

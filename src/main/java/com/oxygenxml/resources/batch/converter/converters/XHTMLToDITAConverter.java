@@ -27,8 +27,13 @@ public class XHTMLToDITAConverter implements Converter {
   /**
    * The local name of root element.
    */
-  private static final String ROOT_ELEMENT_NAME = "topic";
+  private static final String TOPIC_ROOT_ELEMENT_NAME = "topic";
 
+  /**
+   * The local name of root element.
+   */
+  private static final String COMPOSITE_ROOT_ELEMENT_NAME = "<dita>";
+  
   /**
    * The attributes from the topic root element.
    */
@@ -46,7 +51,7 @@ public class XHTMLToDITAConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
 		String ditaContent ="";
@@ -73,7 +78,8 @@ public class XHTMLToDITAConverter implements Converter {
 
 		// set the parameter of transformer
 		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
-		transformer.setParameter("context.path.names", ROOT_ELEMENT_NAME);
+		transformer.setParameter("context.path.names", TOPIC_ROOT_ELEMENT_NAME);
+		transformer.setParameter("invokedFromBatchConverter", Boolean.TRUE);
 
 		try {
 				// convert the document
@@ -82,10 +88,10 @@ public class XHTMLToDITAConverter implements Converter {
 			// add an id on root(topic)
 			ditaContent = sw.toString();
 			
-			int indexOfTopicTag = ditaContent.indexOf(ROOT_ELEMENT_NAME);
+			int indexOfTopicTag = ditaContent.indexOf(TOPIC_ROOT_ELEMENT_NAME);
 			
 			if(indexOfTopicTag != -1){
-				indexOfTopicTag += ROOT_ELEMENT_NAME.length();
+				indexOfTopicTag += TOPIC_ROOT_ELEMENT_NAME.length();
 			  // Add the topic attributes(id).
 			  StringBuilder sb = new StringBuilder();
 			  sb.append(ditaContent.substring(0, indexOfTopicTag));
@@ -97,7 +103,8 @@ public class XHTMLToDITAConverter implements Converter {
 		}catch (TransformerException e) {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
-		return ditaContent;
+		
+		return new ConversionResult(ditaContent);
 	}
 	
 }

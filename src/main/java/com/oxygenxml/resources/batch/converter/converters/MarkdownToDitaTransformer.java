@@ -54,9 +54,9 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 	 * @throws TransformerException
 	 */
 	@Override
-	public String convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public ConversionResult convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		// content to return
-		String toReturn = null;
+		String convertedContent = null;
 
 		//create the transformer
 		Transformer transformer = transformerCreator.createTransformer(null);
@@ -87,7 +87,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 			transformer.transform(new SAXSource(createXMLFilter(r), inputSource), res);
 
 			// get the converted content
-			toReturn = sw.toString();
+			convertedContent = sw.toString();
 
 		}catch (TransformerException e) {
 				throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
@@ -110,7 +110,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 			}
 		}
 
-		return toReturn;
+		return new ConversionResult(convertedContent);
 	}
 	
 	/**
