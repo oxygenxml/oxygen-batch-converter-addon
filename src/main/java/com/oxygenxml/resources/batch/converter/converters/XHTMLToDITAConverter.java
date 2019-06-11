@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 import nu.validator.htmlparser.common.DoctypeExpectation;
@@ -37,7 +38,7 @@ public class XHTMLToDITAConverter implements Converter {
   /**
    * The attributes from the topic root element.
    */
-  private static final String TOPIC_ATTRIBUTES =  " id=\"topicID\"";
+  private static final String TOPIC_ATTRIBUTES =  " id=\"topicID";
   
 	/**
 	 * Convert the given XHTML to DITA.
@@ -54,8 +55,6 @@ public class XHTMLToDITAConverter implements Converter {
 	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 			throws TransformerException {
 
-		String ditaContent ="";
-		
 		// get the htmlParser
 		HtmlParser parser = new HtmlParser();
 
@@ -81,30 +80,57 @@ public class XHTMLToDITAConverter implements Converter {
 		transformer.setParameter("context.path.names", TOPIC_ROOT_ELEMENT_NAME);
 		transformer.setParameter("invokedFromBatchConverter", Boolean.TRUE);
 
+		final ConversionResult conversionResult;
 		try {
 				// convert the document
 				transformer.transform(new StreamSource(contentReader, originalFile.toURI().toString()), result);
 		
 			// add an id on root(topic)
-			ditaContent = sw.toString();
+			String ditaContent = sw.toString();
 			
-			int indexOfTopicTag = ditaContent.indexOf(TOPIC_ROOT_ELEMENT_NAME);
+			ditaContent = addIdForTopics(ditaContent);
 			
-			if(indexOfTopicTag != -1){
-				indexOfTopicTag += TOPIC_ROOT_ELEMENT_NAME.length();
-			  // Add the topic attributes(id).
-			  StringBuilder sb = new StringBuilder();
-			  sb.append(ditaContent.substring(0, indexOfTopicTag));
-			  sb.append(TOPIC_ATTRIBUTES);
-			  sb.append(ditaContent.substring(indexOfTopicTag));
-			  ditaContent = sb.toString();
+			if(ditaContent.startsWith(COMPOSITE_ROOT_ELEMENT_NAME)) {
+				conversionResult = new ConversionResult(
+						ditaContent, Doctypes.DOCTYPE_PUBLIC_DITA_COMPOSITE, Doctypes.DOCTYPE_SYSTEM_DITA_COMPOSITE);
+			} else {
+				conversionResult = new ConversionResult(ditaContent);
 			}
 			
 		}catch (TransformerException e) {
 			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
 		}
 		
-		return new ConversionResult(ditaContent);
+		return conversionResult;
+	}
+	
+	/**
+	 * Add id attribute on topic elements.
+	 * 
+	 * @param ditaContent The DITA content.
+	 * 
+	 * @return The updated DITA content.
+	 */
+	private String addIdForTopics(String ditaContent) {
+		String topicStartElement = '<' + TOPIC_ROOT_ELEMENT_NAME;
+		int topicStartElementLenght = topicStartElement.length();
+		StringBuilder contentToReturn = new StringBuilder();
+		
+ 		int indexOfTopicTag = ditaContent.indexOf(topicStartElement);
+		int beginIndex = 0;
+		int topicsCounter = 1;
+		while (indexOfTopicTag != -1) {
+			indexOfTopicTag += topicStartElementLenght;
+			contentToReturn.append(ditaContent.substring(beginIndex, indexOfTopicTag));
+			// Add the id attribute.
+			contentToReturn.append(TOPIC_ATTRIBUTES).append(topicsCounter).append("\"");
+			beginIndex = indexOfTopicTag;
+			indexOfTopicTag = ditaContent.indexOf(topicStartElement, indexOfTopicTag);
+			topicsCounter++;
+		}
+		
+		contentToReturn.append(ditaContent.substring(beginIndex));
+		return contentToReturn.toString();
 	}
 	
 }
