@@ -78,7 +78,7 @@ public class XHTMLToDITAConverter implements Converter {
 		// set the parameter of transformer
 		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
 		transformer.setParameter("context.path.names", TOPIC_ROOT_ELEMENT_NAME);
-		transformer.setParameter("invokedFromBatchConverter", Boolean.TRUE);
+		transformer.setParameter("wrapMultipleSectionsInARoot", Boolean.TRUE);
 
 		final ConversionResult conversionResult;
 		try {

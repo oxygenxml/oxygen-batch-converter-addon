@@ -53,7 +53,7 @@ public class XHTMLToDocbook4Converter implements Converter {
 		transformer.setParameter("context.path.names", "article");
 		transformer.setParameter("context.path.uris", "http://docbook.org/ns/docbook");
 		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
-		transformer.setParameter("invokedFromBatchConverter", Boolean.TRUE);
+		transformer.setParameter("wrapMultipleSectionsInARoot", Boolean.TRUE);
 		
 		
 		try {
