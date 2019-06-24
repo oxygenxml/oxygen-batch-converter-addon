@@ -1,5 +1,6 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -10,6 +11,8 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -38,7 +41,7 @@ public class HtmlToXhtmlTest {
 	public void test() throws TransformerException, IOException {
 	
 		File sample  = new File("test-sample/htmlTest.html");		
-		File goodSample = new File("test-sample/goodHtmlToXhtml.xhtml");
+		File expectedResult = new File("test-sample/goodHtmlToXhtml.xhtml");
 		File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
@@ -55,7 +58,7 @@ public class HtmlToXhtmlTest {
 		try {
 			converter.convertFiles(ConverterTypes.HTML_TO_XHTML, inputFiles, outputFolder, false);
 
-			assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
+			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
 
 		} finally {
 			Files.delete(convertedFile.toPath());

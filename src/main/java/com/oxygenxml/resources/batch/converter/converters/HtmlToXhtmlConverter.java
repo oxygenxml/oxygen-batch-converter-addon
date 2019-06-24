@@ -46,7 +46,7 @@ public class HtmlToXhtmlConverter implements Converter {
 				t.setShowWarnings(false);
 				t.setTidyMark(false);
 				t.setForceOutput(true);
-				t.setXmlTags(true);
+				t.setXmlTags(imposeXmlOutput());
 				
 				if (contentReader == null) {
 					contentReader = ConverterReaderUtils.createReader(originalFileLocation);
@@ -83,4 +83,7 @@ public class HtmlToXhtmlConverter implements Converter {
 			return new ConversionResult(convertedContent);
 		}
 
+  protected boolean imposeXmlOutput() {
+  	return false;
+  }
 }

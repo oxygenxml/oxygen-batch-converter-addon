@@ -30,7 +30,10 @@ public class HtmlToDocbook5Converter  implements Converter {
 		public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
 				throws TransformerException {
 
-			HtmlToXhtmlConverter htmlToXhtmlConverter = new HtmlToXhtmlConverter();
+			HtmlToXhtmlConverter htmlToXhtmlConverter = new HtmlToXhtmlConverter() {
+				@Override
+				protected boolean imposeXmlOutput() {return true;}
+			};
 			XHTMLToDocbook5Converter xhtmlToDocbook5Converter = new XHTMLToDocbook5Converter();
 			
 			//convert the HTML to XHTML
