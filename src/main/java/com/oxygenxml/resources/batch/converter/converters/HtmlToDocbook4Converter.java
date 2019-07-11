@@ -32,7 +32,7 @@ public class HtmlToDocbook4Converter  implements Converter {
 
 			HtmlToXhtmlConverter htmlToXhtmlConverter = new HtmlToXhtmlConverter() {
 				@Override
-				protected boolean imposeXmlOutput() {return true;}
+				protected boolean imposeXmlOutput() {return false;}
 			};
 			XHTMLToDocbook4Converter xhtmlToDocbook4Converter = new XHTMLToDocbook4Converter();
 			

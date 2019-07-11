@@ -33,7 +33,7 @@ public class HtmlToDitaConverter implements Converter{
 		//create a HTML to XHTML converter
 		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter() {
 			@Override
-			protected boolean imposeXmlOutput() {return true;}
+			protected boolean imposeXmlOutput() {return false;}
 		};
 		
 		//create a XHTML to DITA converter
