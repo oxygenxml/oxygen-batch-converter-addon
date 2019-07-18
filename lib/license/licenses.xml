@@ -34,5 +34,15 @@
                 </license>
             </licenses>
         </dependency>
+         <dependency>
+            <groupId>jtidy</groupId>
+            <artifactId>jtidy</artifactId>
+            <licenses>
+                <license>
+                    <name>Java HTML Tidy - JTidy License</name>
+                    <url>https://raw.githubusercontent.com/jtidy/jtidy/master/LICENSE.txt</url>
+                </license>
+            </licenses>
+        </dependency>
     </dependencies>
 </licenseSummary>

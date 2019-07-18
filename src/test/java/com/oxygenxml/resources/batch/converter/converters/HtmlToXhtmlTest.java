@@ -38,10 +38,10 @@ import tests.utils.TransformerFactoryCreatorImpl;
 public class HtmlToXhtmlTest {
 
 	@Test
-	public void test() throws TransformerException, IOException {
+	public void testConversion() throws TransformerException, IOException {
 	
 		File sample  = new File("test-sample/htmlTest.html");		
-		File expectedResult = new File("test-sample/goodHtmlToXhtml.xhtml");
+		File expectedResult = new File("test-sample/expected/HtmlToXhtml.xhtml");
 		File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
@@ -64,5 +64,42 @@ public class HtmlToXhtmlTest {
 			Files.delete(convertedFile.toPath());
 		}
 
+	}
+
+  /**
+   * <p><b>Description:</b> Test unknown tags are not ignored in HTML to XHTML conversion.</p>
+   * <p><b>Bug ID:</b> EXM-20562</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+	@Test
+	public void testUnknownTagsAreNotRemoved() throws Exception {
+	
+		File sample  = new File("test-sample/htmlWithUnknownTags.html");		
+		File expectedResult = new File("test-sample/expected/XHtmlWithUnknownTags.xhtml");
+		File outputFolder = sample.getParentFile();
+		
+		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+		ProblemReporter problemReporter = new ProblemReporterTestImpl();
+		
+		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+	
+		List<File> inputFiles = new ArrayList<File>();
+		inputFiles.add(sample);
+				
+		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+		
+		try {
+			converter.convertFiles(ConverterTypes.HTML_TO_XHTML, inputFiles, outputFolder, false);
+	
+			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
+	
+		} finally {
+			Files.delete(convertedFile.toPath());
+		}
+	
 	}
 }

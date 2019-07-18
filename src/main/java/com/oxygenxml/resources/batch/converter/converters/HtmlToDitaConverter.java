@@ -31,10 +31,7 @@ public class HtmlToDitaConverter implements Converter{
 			throws TransformerException {
 
 		//create a HTML to XHTML converter
-		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter() {
-			@Override
-			protected boolean imposeXmlOutput() {return false;}
-		};
+		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter();
 		
 		//create a XHTML to DITA converter
 		XHTMLToDITAConverter xhtmlToDITATransformer = new XHTMLToDITAConverter();
