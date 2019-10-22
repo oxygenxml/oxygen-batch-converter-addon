@@ -6,6 +6,7 @@ addons:
     token:
       secure: "${SONAR_CLOUD_TOKEN}"
 
+dist: trusty
 jdk:
  - oraclejdk8
 matrix:
