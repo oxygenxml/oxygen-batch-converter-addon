@@ -147,6 +147,7 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 
 		int rootLength = baseDir.getAbsolutePath().length();
 		String absFileName = uniqueImageFile.getAbsolutePath();
-		return absFileName.substring(rootLength + 1);
+		String relativePath = absFileName.substring(rootLength + 1);
+		return relativePath.replace('\\', '/');
 	}
 }
