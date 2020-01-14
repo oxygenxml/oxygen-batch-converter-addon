@@ -35,6 +35,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 */
 	private static final long serialVersionUID = 1L;
 
+  /**
+   * The default width limit for text fields.
+   */
+  public static final int TEXT_FIELD_DEFAULT_WIDTH_LIMIT = 400;
+	
 	/**
 	 * The input panel.
 	 */
@@ -88,8 +93,26 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		this.translator = translator;
 		contentPersister = new ContentPersisterImpl();
 		
-		inputPanel = new InputPanel(converterType, translator, this);
-		outputPanel = new OutputPanel(translator);
+		inputPanel = new InputPanel(converterType, translator, this) {
+			@Override
+			public Dimension getPreferredSize() {
+				 Dimension preferredSize = super.getPreferredSize();
+			    if (preferredSize.width > TEXT_FIELD_DEFAULT_WIDTH_LIMIT) {
+			        preferredSize.width = TEXT_FIELD_DEFAULT_WIDTH_LIMIT;
+			    }
+			    return preferredSize; 
+			}
+		};
+		outputPanel = new OutputPanel(translator) {
+			@Override
+			public Dimension getPreferredSize() {
+				 Dimension preferredSize = super.getPreferredSize();
+			    if (preferredSize.width > TEXT_FIELD_DEFAULT_WIDTH_LIMIT) {
+			        preferredSize.width = TEXT_FIELD_DEFAULT_WIDTH_LIMIT;
+			    }
+			    return preferredSize; 
+			}
+		};
 		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX , ""));
 		
 		initGUI();
