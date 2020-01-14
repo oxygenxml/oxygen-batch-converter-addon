@@ -42,6 +42,13 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private static final String PRECEDING_MENU_ITEM_ACTION_ID = "XML_to_JSON";
 
 	/**
+	 * The new succeeding menu item.
+	 * PRECEDING_MENU_ITEM_ACTION_ID was moved in Oxygen 22.
+	 */
+	private static final String NEW_SUCCEEDING_MENU_ITEM_ACTION_ID = "Format_and_indent_files";
+
+	
+	/**
 	 * Menu that contains items with all converter actions.
 	 */
 	private Menu batchConvertMenu;
@@ -170,7 +177,13 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
                 index = i + 1;
                 break;
               }
-
+              // In Oxygen 22, the PRECEDING_MENU_ITEM_ACTION_ID was moved from this menu.
+              // We need a new reference action id.
+              if (NEW_SUCCEEDING_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
+                index = i - 1;
+                break;
+              }
+              
             } else {
               // the menuNameId is not MENU_NAME
               break;
