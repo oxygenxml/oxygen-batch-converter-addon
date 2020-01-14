@@ -106,7 +106,7 @@ public class FileImageManagerTest {
 
 	  	String srcAttr = imageAttributes.get("src");
 	  	assertEquals(1, imageAttributes.size());
-			assertEquals("media" +File.separatorChar+ "img.jpg", srcAttr);
+			assertEquals("media/img.jpg", srcAttr);
 	  	assertNull(imageAttributes.get("alt"));
 	  	
 	  	File srcImage = new File(baseDir, srcAttr);
@@ -134,7 +134,7 @@ public class FileImageManagerTest {
 	  	
 	  	assertEquals(2, imageAttributes.size());
 	  	srcAttr = imageAttributes.get("src");
-	  	assertEquals("media" +File.separatorChar+ "img.tif", srcAttr);
+	  	assertEquals("media/img.tif", srcAttr);
 	  	assertEquals("altText", imageAttributes.get("alt"));
 	  	
 	  	srcImage = new File(baseDir, srcAttr);
@@ -170,7 +170,7 @@ public class FileImageManagerTest {
 	  			Files.readAllBytes(image.toPath()), PictureType.JPEG, "bla.jgp", 0, 0);
 	  	
 	  	assertTrue(mediaDir.exists());
-			assertEquals("media" +File.separatorChar+ "img.jpg", imagePath);
+			assertEquals("media/img.jpg", imagePath);
 	  	
 	  	File srcImage = new File(baseDir, imagePath);
 	  	assertTrue(srcImage.exists());

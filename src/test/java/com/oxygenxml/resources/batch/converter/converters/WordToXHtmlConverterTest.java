@@ -62,7 +62,7 @@ public class WordToXHtmlConverterTest {
 		try {
 			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
 
-			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img");
+			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
 			assertEquals(filterMathAttributes(expected),
 					filterMathAttributes(FileUtils.readFileToString(fileToRead)));
 
@@ -106,7 +106,7 @@ public class WordToXHtmlConverterTest {
 		try {
 			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
 
-			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img"),
+			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img"),
 					FileUtils.readFileToString(fileToRead));
 
 			File mediaFolder = new File(outputFolder, "media");
