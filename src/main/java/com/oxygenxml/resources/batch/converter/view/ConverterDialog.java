@@ -35,11 +35,6 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 */
 	private static final long serialVersionUID = 1L;
 
-  /**
-   * The default width limit for text fields.
-   */
-  public static final int TEXT_FIELD_DEFAULT_WIDTH_LIMIT = 400;
-	
 	/**
 	 * The input panel.
 	 */
@@ -93,44 +88,15 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		this.translator = translator;
 		contentPersister = new ContentPersisterImpl();
 		
-		inputPanel = new InputPanel(converterType, translator, this) {
-			@Override
-			public Dimension getPreferredSize() {
-				 Dimension preferredSize = super.getPreferredSize();
-			    if (preferredSize.width > TEXT_FIELD_DEFAULT_WIDTH_LIMIT) {
-			        preferredSize.width = TEXT_FIELD_DEFAULT_WIDTH_LIMIT;
-			    }
-			    return preferredSize; 
-			}
-		};
-		outputPanel = new OutputPanel(translator) {
-			@Override
-			public Dimension getPreferredSize() {
-				 Dimension preferredSize = super.getPreferredSize();
-			    if (preferredSize.width > TEXT_FIELD_DEFAULT_WIDTH_LIMIT) {
-			        preferredSize.width = TEXT_FIELD_DEFAULT_WIDTH_LIMIT;
-			    }
-			    return preferredSize; 
-			}
-		};
+		inputPanel = new InputPanel(converterType, translator, this);
+		outputPanel = new OutputPanel(translator);
 		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX , ""));
 		
 		initGUI();
 		
-		//if the given list with files isn't empty.
-		if(!toConvertFiles.isEmpty()){
-			getOkButton().setEnabled(true);
-			inputPanel.addFilesInTable(toConvertFiles);
-
-			//set the output folder according to given files to be converted
-			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent() + File.separator + "output");
-		}
-		else{
-			getOkButton().setEnabled(false);
-		}
-		
 		//  Load saved state of the dialog
 		contentPersister.loadState(this);
+		getOkButton().setEnabled(!toConvertFiles.isEmpty());
 		
 		setTitle(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType));
 		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
@@ -138,8 +104,14 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		pack();
 		setMinimumSize(new Dimension(getSize().width , getSize().height));
 		setLocationRelativeTo(parentFrame);
+		
+		if (!toConvertFiles.isEmpty()){
+			// Set the input files and the output folder
+			inputPanel.addFilesInTable(toConvertFiles);
+			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent() + File.separator + "output");
+		}
+		
 		setVisible(true);
-
 	}
 
 	/**
