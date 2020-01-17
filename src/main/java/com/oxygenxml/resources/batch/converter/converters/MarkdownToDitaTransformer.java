@@ -19,6 +19,8 @@ import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.XMLFilterImpl;
 
 import com.elovirta.dita.markdown.MarkdownReader;
+import com.oxygenxml.resources.batch.converter.doctype.DitaConstants;
+import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
@@ -109,8 +111,17 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 				}
 			}
 		}
-
-		return new ConversionResult(convertedContent);
+		
+		final ConversionResult conversionResult;
+		if (convertedContent != null && convertedContent.startsWith(
+				DitaConstants.ENCODING_DECLARATION_LINE + DitaConstants.COMPOSITE_ROOT_ELEMENT)) {
+			conversionResult = new ConversionResult(convertedContent,
+					Doctypes.DOCTYPE_PUBLIC_DITA_COMPOSITE, Doctypes.DOCTYPE_SYSTEM_DITA_COMPOSITE);
+		} else {
+			conversionResult = new ConversionResult(convertedContent);
+		}
+		
+		return conversionResult;
 	}
 	
 	/**

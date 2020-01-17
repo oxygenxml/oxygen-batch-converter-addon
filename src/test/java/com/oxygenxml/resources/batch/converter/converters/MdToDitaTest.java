@@ -101,7 +101,41 @@ public class MdToDitaTest {
 				Files.delete(convertedFile.toPath());
 			}
 		}
-
 	}
 		
+	/**
+	 * <p><b>Description:</b> Test conversion of MD to DITA Composite.</p>
+	 * <p><b>Bug ID:</b> EXM-44491</p>
+	 * 
+	 * @author cosmin_duna
+	 */
+	@Test
+	public void testMarkdownToComposite_EXM_44491() throws TransformerException, IOException {
+		
+		File sample  = new File("test-sample/EXM-44491/sample.md");
+		File goodOutput  = new File("test-sample/EXM-44491/outputFile.dita");
+		File outputFolder = sample.getParentFile();
+		
+		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+		ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
+		
+		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+
+		List<File> inputFiles = new ArrayList<File>();
+		inputFiles.add(sample);
+				
+		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
+		
+		try {
+			converter.convertFiles(ConverterTypes.MD_TO_DITA, inputFiles, outputFolder, false);
+			
+			assertEquals(FileComparationUtil.readFile(goodOutput.getAbsolutePath()),
+					FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
+		} finally {
+			if(convertedFile.exists()) {
+				Files.delete(convertedFile.toPath());
+			}
+		}
+	}
 }

@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import com.oxygenxml.resources.batch.converter.doctype.DitaConstants;
 import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
@@ -30,11 +31,6 @@ public class XHTMLToDITAConverter implements Converter {
    */
   private static final String TOPIC_ROOT_ELEMENT_NAME = "topic";
 
-  /**
-   * The local name of root element.
-   */
-  private static final String COMPOSITE_ROOT_ELEMENT_NAME = "<dita>";
-  
   /**
    * The attributes from the topic root element.
    */
@@ -90,7 +86,7 @@ public class XHTMLToDITAConverter implements Converter {
 			
 			ditaContent = addIdForTopics(ditaContent);
 			
-			if(ditaContent.startsWith(COMPOSITE_ROOT_ELEMENT_NAME)) {
+			if(ditaContent.startsWith(DitaConstants.COMPOSITE_ROOT_ELEMENT)) {
 				conversionResult = new ConversionResult(
 						ditaContent, Doctypes.DOCTYPE_PUBLIC_DITA_COMPOSITE, Doctypes.DOCTYPE_SYSTEM_DITA_COMPOSITE);
 			} else {
