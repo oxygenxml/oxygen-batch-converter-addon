@@ -69,35 +69,35 @@
 
 	<key value="Menu_Item_Text_Conv_html.to.db5">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">HTML to Docbook5</val>
-		<val lang="de_DE">HTML to Docbook5</val>
-		<val lang="fr_FR">HTML vers Docbook5</val>
-		<val lang="ja_JP">HTML to Docbook5</val>
-		<val lang="nl_NL">HTML to Docbook5</val>
+		<val lang="en_US">HTML to DocBook 5</val>
+		<val lang="de_DE">HTML to DocBook 5</val>
+		<val lang="fr_FR">HTML vers DocBook 5</val>
+		<val lang="ja_JP">HTML to DocBook 5</val>
+		<val lang="nl_NL">HTML to DocBook 5</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_html.to.db4">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">HTML to Docbook4</val>
-		<val lang="de_DE">HTML to Docbook4</val>
-		<val lang="fr_FR">HTML vers Docbook4</val>
-		<val lang="ja_JP">HTML to Docbook4</val>
-		<val lang="nl_NL">HTML to Docbook4</val>
+		<val lang="en_US">HTML to DocBook 4</val>
+		<val lang="de_DE">HTML to DocBook 4</val>
+		<val lang="fr_FR">HTML vers DocBook 4</val>
+		<val lang="ja_JP">HTML to DocBook 4</val>
+		<val lang="nl_NL">HTML to DocBook 4</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_md.to.db5">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Markdown to Docbook5</val>
-		<val lang="de_DE">Markdown to Docbook5</val>
-		<val lang="fr_FR">Markdown vers Docbook5</val>
-		<val lang="ja_JP">Markdown to Docbook5</val>
-		<val lang="nl_NL">Markdown to Docbook5</val>
+		<val lang="en_US">Markdown to DocBook 5</val>
+		<val lang="de_DE">Markdown to DocBook 5</val>
+		<val lang="fr_FR">Markdown vers DocBook 5</val>
+		<val lang="ja_JP">Markdown to DocBook 5</val>
+		<val lang="nl_NL">Markdown to DocBook 5</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_md.to.db4">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Markdown to Docbook4</val>
-		<val lang="de_DE">Markdown to Docbook4</val>
-		<val lang="fr_FR">Markdown vers Docbook4</val>
-		<val lang="ja_JP">Markdown to Docbook4</val>
-		<val lang="nl_NL">Markdown to Docbook4</val>
+		<val lang="en_US">Markdown to DocBook 4</val>
+		<val lang="de_DE">Markdown to DocBook 4</val>
+		<val lang="fr_FR">Markdown vers DocBook 4</val>
+		<val lang="ja_JP">Markdown to DocBook 4</val>
+		<val lang="nl_NL">Markdown to DocBook 4</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_excel.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -125,19 +125,19 @@
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.db4">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Word to Docbook4 (experimental)</val>
-		<val lang="de_DE">Word to Docbook4 (experimental)</val>
-		<val lang="fr_FR">Word vers Docbook4 (expérimentale)</val>
-		<val lang="ja_JP">Word to Docbook4 (experimental)</val>
-		<val lang="nl_NL">Word to Docbook4 (experimental)</val>
+		<val lang="en_US">Word to DocBook 4 (experimental)</val>
+		<val lang="de_DE">Word to DocBook 4 (experimental)</val>
+		<val lang="fr_FR">Word vers DocBook 4 (expérimentale)</val>
+		<val lang="ja_JP">Word to DocBook 4 (experimental)</val>
+		<val lang="nl_NL">Word to DocBook 4 (experimental)</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.db5">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Word to Docbook5 (experimental)</val>
-		<val lang="de_DE">Word to Docbook5 (experimental)</val>
-		<val lang="fr_FR">Word vers Docbook5 (expérimentale)</val>
-		<val lang="ja_JP">Word to Docbook5 (experimental)</val>
-		<val lang="nl_NL">Word to Docbook5 (experimental)</val>
+		<val lang="en_US">Word to DocBook 5 (experimental)</val>
+		<val lang="de_DE">Word to DocBook 5 (experimental)</val>
+		<val lang="fr_FR">Word vers DocBook 5 (expérimentale)</val>
+		<val lang="ja_JP">Word to DocBook 5 (experimental)</val>
+		<val lang="nl_NL">Word to DocBook 5 (experimental)</val>
 	</key>
 
 	<key value="Add_Input_Label_Conv">
