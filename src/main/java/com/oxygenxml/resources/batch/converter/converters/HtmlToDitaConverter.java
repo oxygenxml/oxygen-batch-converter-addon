@@ -33,13 +33,22 @@ public class HtmlToDitaConverter implements Converter{
 		//create a HTML to XHTML converter
 		HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter();
 		
+		// Additional processing of XHTML content
+		AdditionalXHTMLProcessor additionalXHTMLProcessor = new AdditionalXHTMLProcessor();
+		
 		//create a XHTML to DITA converter
 		XHTMLToDITAConverter xhtmlToDITATransformer = new XHTMLToDITAConverter();
 		
-		String xhtmlContent;
 		//convert the content to XHTML
-		xhtmlContent = htmlToXhtmlTransformer.convert(
+		String xhtmlContent = htmlToXhtmlTransformer.convert(
 				originalFileLocation, contentReader, baseDir, transformerCreator).getConvertedContent();
+		
+		String processedXhtml = additionalXHTMLProcessor.convert(
+        originalFileLocation, new StringReader(xhtmlContent), baseDir, transformerCreator).getConvertedContent();
+		
+		if (!processedXhtml.isEmpty()) {
+		  xhtmlContent = processedXhtml;
+		}
 		
 		// convert the converted XHTML content in DITA 
 		return  xhtmlToDITATransformer.convert(originalFileLocation, new StringReader(xhtmlContent), baseDir, transformerCreator);

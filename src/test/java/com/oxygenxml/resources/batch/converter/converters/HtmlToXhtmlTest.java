@@ -1,7 +1,6 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +11,6 @@ import java.util.List;
 import javax.xml.transform.TransformerException;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -24,7 +22,6 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import tests.utils.ConvertorWorkerInteractorTestImpl;
-import tests.utils.FileComparationUtil;
 import tests.utils.ProblemReporterTestImpl;
 import tests.utils.ProgressDialogInteractorTestImpl;
 import tests.utils.StatusReporterImpl;

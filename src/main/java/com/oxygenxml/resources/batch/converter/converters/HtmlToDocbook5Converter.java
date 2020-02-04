@@ -32,11 +32,21 @@ public class HtmlToDocbook5Converter  implements Converter {
 
 			HtmlToXhtmlConverter htmlToXhtmlConverter = new HtmlToXhtmlConverter();
 			
+	    // Additional processing of XHTML content
+      AdditionalXHTMLProcessor additionalXHTMLProcessor = new AdditionalXHTMLProcessor();
+			
 			XHTMLToDocbook5Converter xhtmlToDocbook5Converter = new XHTMLToDocbook5Converter();
 			
 			//convert the HTML to XHTML
 			String xhtmlContent = htmlToXhtmlConverter.convert(
 					originalFile, contentReader, baseDir, transformerCreator).getConvertedContent();
+			
+			String processedXhtml = additionalXHTMLProcessor.convert(
+			    originalFile, new StringReader(xhtmlContent), baseDir, transformerCreator).getConvertedContent();
+
+			if (!processedXhtml.isEmpty()) {
+			  xhtmlContent = processedXhtml;
+			}
 			
 			//convert the XHTML content to Docbook5 and return
 			return  xhtmlToDocbook5Converter.convert(originalFile, new StringReader(xhtmlContent), baseDir, transformerCreator);

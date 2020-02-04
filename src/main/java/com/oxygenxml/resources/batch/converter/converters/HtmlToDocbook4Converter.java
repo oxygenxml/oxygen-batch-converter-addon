@@ -31,12 +31,22 @@ public class HtmlToDocbook4Converter  implements Converter {
 				throws TransformerException {
 
 			HtmlToXhtmlConverter htmlToXhtmlConverter = new HtmlToXhtmlConverter();
-			
+		
+			// Additional processing of XHTML content
+	    AdditionalXHTMLProcessor additionalXHTMLProcessor = new AdditionalXHTMLProcessor();
+	    
 			XHTMLToDocbook4Converter xhtmlToDocbook4Converter = new XHTMLToDocbook4Converter();
 			
 			//convert the HTML to XHTML
 			String xhtmlContent = htmlToXhtmlConverter.convert(
 					originalFile, contentReader, baseDir, transformerCreator).getConvertedContent();
+			
+			String processedXhtml = additionalXHTMLProcessor.convert(
+			    originalFile, new StringReader(xhtmlContent), baseDir, transformerCreator).getConvertedContent();
+	    
+	    if (!processedXhtml.isEmpty()) {
+	      xhtmlContent = processedXhtml;
+	    }
 			
 			//convert the XHTML content to Docbook4 and return
 			return  xhtmlToDocbook4Converter.convert(originalFile, new StringReader(xhtmlContent), baseDir, transformerCreator);
