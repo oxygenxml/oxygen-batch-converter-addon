@@ -13,15 +13,15 @@ import javax.xml.transform.stream.StreamSource;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
- * Additional processing of the XHTML content before to apply conversion to DITA or DocBook.
+ * Additional processing of the well-formed HTML5 content before to apply conversion to DITA or DocBook.
  * Some unknown HTML5 elements are deleted in this.
  * 
  * @author cosmin_duna
  */
-public class AdditionalXHTMLProcessor implements Converter {
+public class HTML5Cleaner implements Converter {
 
   /**
-   * Process the given XHTML content.
+   * Process the given HTML5 content, cleaning the unknown HTML5 elements.
    * 
    * @param originalFile
    *          The XHTML file.

@@ -12,12 +12,12 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 import tests.utils.TransformerFactoryCreatorImpl;
 
 /**
- * Test AditionalXHTMLProcessor.
+ * Test HTML5Cleaner.
  * 
  * @author cosmin_duna
  *
  */
-public class AdditionalXHTMLProcessorTest {
+public class HTML5CleanerTest {
 
   /**
    * <p><b>Description:</b> Test unknown HTML 5 elements are removed when XHTML content is processed.< </p>
@@ -35,7 +35,7 @@ public class AdditionalXHTMLProcessorTest {
     //create a HTML to XHTML converter
     HtmlToXhtmlConverter htmlToXhtmlTransformer = new HtmlToXhtmlConverter();
     // Additional processing of XHTML content
-    AdditionalXHTMLProcessor additionalXHTMLProcessor = new AdditionalXHTMLProcessor();
+    HTML5Cleaner additionalXHTMLProcessor = new HTML5Cleaner();
     
     //convert the content to XHTML
     String xhtmlContent = htmlToXhtmlTransformer.convert(

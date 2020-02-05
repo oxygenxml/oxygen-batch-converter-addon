@@ -104,7 +104,7 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 			}
 			
 			String relativePath = saveImageInternal(image.getInputStream(), extension);
-	    Map<String, String> attributes = new HashMap();
+	    Map<String, String> attributes = new HashMap<String, String>();
 			attributes.put("src", relativePath);
 
 			Optional<String> altText = image.getAltText();
