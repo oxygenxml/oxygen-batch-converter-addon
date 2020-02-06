@@ -58,7 +58,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 	@Override
 	public ConversionResult convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
 		// content to return
-		String convertedContent = null;
+		String convertedContent = "";
 
 		//create the transformer
 		Transformer transformer = transformerCreator.createTransformer(null);
@@ -112,13 +112,19 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 			}
 		}
 		
+		
 		final ConversionResult conversionResult;
-		if (convertedContent != null && convertedContent.startsWith(
-				DitaConstants.ENCODING_DECLARATION_LINE + DitaConstants.COMPOSITE_ROOT_ELEMENT)) {
-			conversionResult = new ConversionResult(convertedContent,
-					Doctypes.DOCTYPE_PUBLIC_DITA_COMPOSITE, Doctypes.DOCTYPE_SYSTEM_DITA_COMPOSITE);
+		String compositePrefix = DitaConstants.ENCODING_DECLARATION_LINE + DitaConstants.COMPOSITE_ROOT_ELEMENT;
+		String convertedStartSection = "";
+		if (convertedContent.length() > compositePrefix.length()) {
+		  convertedStartSection = convertedContent.substring(0, compositePrefix.length());
+		}
+		
+		if (convertedStartSection.equalsIgnoreCase(compositePrefix)) {
+		  conversionResult = new ConversionResult(convertedContent,
+		      Doctypes.DOCTYPE_PUBLIC_DITA_COMPOSITE, Doctypes.DOCTYPE_SYSTEM_DITA_COMPOSITE);
 		} else {
-			conversionResult = new ConversionResult(convertedContent);
+		  conversionResult = new ConversionResult(convertedContent);
 		}
 		
 		return conversionResult;
