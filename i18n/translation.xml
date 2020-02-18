@@ -109,35 +109,35 @@
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.xhtml">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Word to XHTML (experimental)</val>
-		<val lang="de_DE">Word to XHTML (experimental)</val>
-		<val lang="fr_FR">Word vers XHTML (expérimentale)</val>
-		<val lang="ja_JP">Word to XHTML (experimental)</val>
-		<val lang="nl_NL">Word to XHTML (experimental)</val>
+		<val lang="en_US">Word to XHTML</val>
+		<val lang="de_DE">Word to XHTML</val>
+		<val lang="fr_FR">Word vers XHTML</val>
+		<val lang="ja_JP">Word to XHTML</val>
+		<val lang="nl_NL">Word to XHTML</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.dita">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Word to DITA (experimental)</val>
-		<val lang="de_DE">Word to DITA (experimental)</val>
-		<val lang="fr_FR">Word vers DITA (expérimentale)</val>
-		<val lang="ja_JP">Word to DITA (experimental)</val>
-		<val lang="nl_NL">Word to DITA (experimental)</val>
+		<val lang="en_US">Word to DITA</val>
+		<val lang="de_DE">Word to DITA</val>
+		<val lang="fr_FR">Word vers DITA</val>
+		<val lang="ja_JP">Word to DITA</val>
+		<val lang="nl_NL">Word to DITA</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.db4">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Word to DocBook 4 (experimental)</val>
-		<val lang="de_DE">Word to DocBook 4 (experimental)</val>
-		<val lang="fr_FR">Word vers DocBook 4 (expérimentale)</val>
-		<val lang="ja_JP">Word to DocBook 4 (experimental)</val>
-		<val lang="nl_NL">Word to DocBook 4 (experimental)</val>
+		<val lang="en_US">Word to DocBook 4</val>
+		<val lang="de_DE">Word to DocBook 4</val>
+		<val lang="fr_FR">Word vers DocBook 4</val>
+		<val lang="ja_JP">Word to DocBook 4</val>
+		<val lang="nl_NL">Word to DocBook 4</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.db5">
 		<comment>Text from MenuItem.</comment>
-		<val lang="en_US">Word to DocBook 5 (experimental)</val>
-		<val lang="de_DE">Word to DocBook 5 (experimental)</val>
-		<val lang="fr_FR">Word vers DocBook 5 (expérimentale)</val>
-		<val lang="ja_JP">Word to DocBook 5 (experimental)</val>
-		<val lang="nl_NL">Word to DocBook 5 (experimental)</val>
+		<val lang="en_US">Word to DocBook 5</val>
+		<val lang="de_DE">Word to DocBook 5</val>
+		<val lang="fr_FR">Word vers DocBook 5</val>
+		<val lang="ja_JP">Word to DocBook 5</val>
+		<val lang="nl_NL">Word to DocBook 5</val>
 	</key>
 
 	<key value="Add_Input_Label_Conv">
