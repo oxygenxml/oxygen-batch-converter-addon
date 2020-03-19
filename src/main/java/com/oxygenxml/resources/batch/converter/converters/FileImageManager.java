@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -97,57 +99,68 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	
 	@Override
 	public Map<String, String> convert(Image image) throws IOException {
-			String extension = "png";
-			String contentType = image.getContentType();
-			if (contentType != null && MIME_EXTENSION.containsKey(contentType)) {
-				extension = MIME_EXTENSION.get(contentType);
-			}
-			
-			String relativePath = saveImageInternal(image.getInputStream(), extension);
-	    Map<String, String> attributes = new HashMap<String, String>();
-			attributes.put("src", relativePath);
+	  Map<String, String> attributes = new HashMap<String, String>();
 
-			Optional<String> altText = image.getAltText();
-			if(altText.isPresent()) {
-				attributes.put("alt", altText.get());
-			}
-	    return attributes;
+	  String imagePath = image.getPath();
+	  imagePath = imagePath.replace('\\', '/');
+	  attributes.put("src", imagePath);
+	  boolean isRelative = true;
+	  try {
+      isRelative = ! new URI(imagePath).isAbsolute();
+    } catch (URISyntaxException e) {
+      logger.debug(e.getMessage());
+    }
+	  if(isRelative) {
+	    String extension = "png";
+	    String contentType = image.getContentType();
+	    if (contentType != null && MIME_EXTENSION.containsKey(contentType)) {
+	      extension = MIME_EXTENSION.get(contentType);
+	      String relativePath = saveImageInternal(image.getInputStream(), extension);
+	      attributes.put("src", relativePath);
+	    }
+
+	    Optional<String> altText = image.getAltText();
+	    if(altText.isPresent()) {
+	      attributes.put("alt", altText.get());
+	    }
+	  }
+	  return attributes;
 	}
 
-	/**
-	 * Save the image on the disk
-	 * 
-	 * @param imageIs 		The input stream of the image content.
-	 * @param extension 	The extension of the image.
-	 * 
-	 * @return The relative path of the image.
-	 * @throws IOException
-	 */
-	 String saveImageInternal(InputStream imageIs, String extension) throws IOException {
-		// Create an unique file
-		File imageFile = new File(baseDir, IMAGES_RELATIVE_PATH + '.' + extension);
-		Integer lastImageCounter = lastImageFileNameCounterMap.get(extension);
-		if(lastImageCounter == null) {
-			lastImageCounter = 0;
-		}
-		File uniqueImageFile = ConverterFileUtils.getFileWithCounter(imageFile, lastImageCounter + 1);
+	  /**
+	   * Save the image on the disk
+	   * 
+	   * @param imageIs 		The input stream of the image content.
+	   * @param extension 	The extension of the image.
+	   * 
+	   * @return The relative path of the image.
+	   * @throws IOException
+	   */
+	  String saveImageInternal(InputStream imageIs, String extension) throws IOException {
+	    // Create an unique file
+	    File imageFile = new File(baseDir, IMAGES_RELATIVE_PATH + '.' + extension);
+	    Integer lastImageCounter = lastImageFileNameCounterMap.get(extension);
+	    if(lastImageCounter == null) {
+	      lastImageCounter = 0;
+	    }
+	    File uniqueImageFile = ConverterFileUtils.getFileWithCounter(imageFile, lastImageCounter + 1);
 
-		String name = uniqueImageFile.getName();
-		int openBracket = name.lastIndexOf('(');
-		int closeBracket = name.lastIndexOf(')');
-		if(openBracket != -1 && closeBracket != -1 && openBracket < closeBracket) {
-			lastImageFileNameCounterMap.put(
-					extension, new Integer(name.substring(openBracket + 1, closeBracket)));
-		} else {
-			lastImageFileNameCounterMap.put(extension, 0);
-		}
-		
-		imageFile.getParentFile().mkdirs();
-		Files.copy(imageIs, uniqueImageFile.toPath());
+	    String name = uniqueImageFile.getName();
+	    int openBracket = name.lastIndexOf('(');
+	    int closeBracket = name.lastIndexOf(')');
+	    if(openBracket != -1 && closeBracket != -1 && openBracket < closeBracket) {
+	      lastImageFileNameCounterMap.put(
+	          extension, new Integer(name.substring(openBracket + 1, closeBracket)));
+	    } else {
+	      lastImageFileNameCounterMap.put(extension, 0);
+	    }
 
-		int rootLength = baseDir.getAbsolutePath().length();
-		String absFileName = uniqueImageFile.getAbsolutePath();
-		String relativePath = absFileName.substring(rootLength + 1);
-		return relativePath.replace('\\', '/');
-	}
+	    imageFile.getParentFile().mkdirs();
+	    Files.copy(imageIs, uniqueImageFile.toPath());
+
+	    int rootLength = baseDir.getAbsolutePath().length();
+	    String absFileName = uniqueImageFile.getAbsolutePath();
+	    String relativePath = absFileName.substring(rootLength + 1);
+	    return relativePath.replace('\\', '/');
+	  }
 }

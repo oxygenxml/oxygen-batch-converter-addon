@@ -88,15 +88,15 @@ public class FileImageManagerTest {
 	  	
 	  	// Save an image without alt text
 	  	Map<String, String> imageAttributes = fileImageManager.convert(new Image() {
-				@Override
 				public InputStream getInputStream() throws IOException {
 					return imageIs;
 				}
-				@Override
+			  public String getPath() {
+			    return "";
+			  }
 				public String getContentType() {
 					return "image/jpeg";
 				}
-				@Override
 				public Optional<String> getAltText() {
 					return  Optional.empty();
 				}
@@ -116,15 +116,15 @@ public class FileImageManagerTest {
 	  	// Save an image with alt text
 	  	FileComparationUtil.deleteRecursivelly(mediaDir);
 	  	imageAttributes = fileImageManager.convert(new Image() {
-				@Override
 				public InputStream getInputStream() throws IOException {
 					return imageIs;
 				}
-				@Override
+			  public String getPath() {
+          return "";
+        }
 				public String getContentType() {
 					return "image/tiff";
 				}
-				@Override
 				public Optional<String> getAltText() {
 					return Optional.of("altText");
 				}
@@ -180,4 +180,52 @@ public class FileImageManagerTest {
 	  	FileComparationUtil.deleteRecursivelly(mediaDir);
 		}
 	}
+
+  /**
+   * <p><b>Description:</b> Test the 'convert' method from the {@link FileImageManager}.
+   * We check if the 'src' attribute is properly returned 
+   * when the image has an absolute path.</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testConvertAbsoluteImagePath() throws Exception {
+  	File baseDir  = new File("test-sample/wordTo");
+  	final File image = new File(baseDir, "image.png");
+    File mediaDir = new File(baseDir, "media");
+  
+    final InputStream imageIs = new FileInputStream(image);
+    FileImageManager fileImageManager = new FileImageManager(baseDir);
+    
+    try {
+    	assertFalse(mediaDir.exists());
+    	
+    	// Save an image without alt text
+    	Map<String, String> imageAttributes = fileImageManager.convert(new Image() {
+  			public InputStream getInputStream() throws IOException {
+  				return imageIs;
+  			}
+  		  public String getPath() {
+  		    return image.getAbsolutePath();
+  		  }
+  			public String getContentType() {
+  				return "image/png";
+  			}
+  			public Optional<String> getAltText() {
+  				return  Optional.empty();
+  			}
+  		});
+    	
+    	String srcAttr = imageAttributes.get("src");
+    	assertEquals(1, imageAttributes.size());
+  		assertEquals(image.getAbsolutePath().replace("\\", "/"), srcAttr);
+    	
+  		assertFalse("The absolute images from word document shouldn't be saved on disk",
+  		    mediaDir.exists());
+    } finally {
+    	FileComparationUtil.deleteRecursivelly(mediaDir);
+  	}
+  }
 }
