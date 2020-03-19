@@ -104,13 +104,7 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	  String imagePath = image.getPath();
 	  imagePath = imagePath.replace('\\', '/');
 	  attributes.put("src", imagePath);
-	  boolean isRelative = true;
-	  try {
-      isRelative = ! new URI(imagePath).isAbsolute();
-    } catch (URISyntaxException e) {
-      logger.debug(e.getMessage());
-    }
-	  if(isRelative) {
+	  if(! new File(imagePath).isAbsolute()) {
 	    String extension = "png";
 	    String contentType = image.getContentType();
 	    if (contentType != null && MIME_EXTENSION.containsKey(contentType)) {
