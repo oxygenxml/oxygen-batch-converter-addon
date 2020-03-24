@@ -171,4 +171,49 @@ public class WordToXHtmlConverterTest {
 		html = html.replace("w:ascii=\"Cambria Math\"", "");
 		return html.replace("w:cs=\"Cambria Math\"", "");
 	}
+
+  /**
+   * <p><b>Description:</b> Test conversion from a docx file to XHTML.
+   * The docx contains embedded and linked images.
+   * The embedded images should be saved on disk and referred with relative paths.
+   * The linked images should be referred with absolute paths.</p>
+   * <p><b>Bug ID:</b> EXM-45096</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testConversionFromDocxWithAbsoluteImages() throws IOException {
+  	File inputFile  = new File("test-sample/EXM-45096/input.docx");		
+  	File expectedResultFile = new File("test-sample/EXM-45096/expectedOutput.xhtml");
+  	File outputFolder = inputFile.getParentFile();
+  	outputFolder = new File(outputFolder, "output");
+  	
+  	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+  	ProblemReporter problemReporter = new ProblemReporterTestImpl();
+  	
+  	BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+  			new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+  	List<File> inputFiles = new ArrayList<File>();
+  	inputFiles.add(inputFile);
+  			
+  	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+  	
+  	try {
+  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+  
+  		String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+  		assertEquals(expected, FileUtils.readFileToString(fileToRead));
+  
+  		File mediaFolder = new File(outputFolder, "media");
+  		File[] images = mediaFolder.listFiles();
+  		assertEquals("Only the embedded images should be saved in the media folder.",
+  		    1, images.length);
+  		
+  	} finally {
+  		FileComparationUtil.deleteRecursivelly(outputFolder);
+  	}
+  }
 }

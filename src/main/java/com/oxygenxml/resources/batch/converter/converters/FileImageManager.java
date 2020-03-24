@@ -104,7 +104,13 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	  String imagePath = image.getPath();
 	  imagePath = imagePath.replace('\\', '/');
 	  attributes.put("src", imagePath);
-	  if(! new File(imagePath).isAbsolute()) {
+	  boolean isLinkedImage = false;
+	  try {
+      isLinkedImage = new URI(imagePath).isAbsolute();
+    } catch (URISyntaxException e) {
+      // Do nothing
+    } 
+	  if(!isLinkedImage) {
 	    String extension = "png";
 	    String contentType = image.getContentType();
 	    if (contentType != null && MIME_EXTENSION.containsKey(contentType)) {
@@ -113,10 +119,10 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
 	      attributes.put("src", relativePath);
 	    }
 
-	    Optional<String> altText = image.getAltText();
-	    if(altText.isPresent()) {
-	      attributes.put("alt", altText.get());
-	    }
+	  }
+	  Optional<String> altText = image.getAltText();
+	  if(altText.isPresent()) {
+	    attributes.put("alt", altText.get());
 	  }
 	  return attributes;
 	}
