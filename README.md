@@ -1,21 +1,21 @@
 ## Oxygen Batch Converter add-on for Oxygen XML Editor
 This add-on can be installed in Oxygen XML Editor to enable batch conversions between the following formats:  
 
-* HTML to XHTML
 * HTML to DITA
-* Markdown to XHTML
 * Markdown to DITA
+* Excel to DITA
+* Word to DITA
+
 * XML to JSON
 * JSON to XML
-* HTML to DocBook4 (Oxygen 20 or newer) 
-* HTML to DocBook5 (Oxygen 20 or newer) 
-* Markdown to DocBook4 (Oxygen 20 or newer) 
-* Markdown to DocBook5 (Oxygen 20 or newer) 
-* Excel to DITA
+
+* HTML to XHTML
+* Markdown to XHTML
 * Word to XHTML
-* Word to DITA
-* Word to DocBook4 (Oxygen 20 or newer)
-* Word to DocBook5 (Oxygen 20 or newer)
+
+* HTML to DocBook4 / DocBook5 (Oxygen 20 or newer) 
+* Markdown to DocBook4 / DocBook5 (Oxygen 20 or newer) 
+* Word to DocBook4 / DocBook5(Oxygen 20 or newer)
 
 ## Compatibility
 
