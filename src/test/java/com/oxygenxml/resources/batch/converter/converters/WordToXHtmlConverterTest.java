@@ -216,4 +216,43 @@ public class WordToXHtmlConverterTest {
   		FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
   }
+
+  /**
+   * <p><b>Description:</b> Test conversion from a docx file to XHTML.
+   * The docx contains "none" value for the "w:val" attributes.
+   * For example: "<w:u w:val="none" />". We test it is correctly interpreted 
+   * and the converted text in correctly underlined. 
+   * "</p>
+   * <p><b>Bug ID:</b> EXM-45460</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testConversionFromDocxWithNoneStyleValue() throws IOException {
+  	File inputFile  = new File("test-sample/EXM-45460/input.docx");		
+  	File expectedResultFile = new File("test-sample/EXM-45460/expectedOutput.xhtml");
+  	File outputFolder = inputFile.getParentFile();
+  	outputFolder = new File(outputFolder, "output");
+  	
+  	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+  	ProblemReporter problemReporter = new ProblemReporterTestImpl();
+  	
+  	BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+  			new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+  	List<File> inputFiles = new ArrayList<File>();
+  	inputFiles.add(inputFile);
+  			
+  	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+  	
+  	try {
+  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+  		assertEquals(FileUtils.readFileToString(expectedResultFile),
+  		    FileUtils.readFileToString(fileToRead));
+  	} finally {
+  		FileComparationUtil.deleteRecursivelly(outputFolder);
+  	}
+  }
 }
