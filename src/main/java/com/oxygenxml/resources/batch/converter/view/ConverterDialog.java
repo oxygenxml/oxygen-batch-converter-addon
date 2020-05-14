@@ -7,7 +7,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -76,6 +79,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	private static final String LINK_TO_GIT_HUB = "https://github.com/oxygenxml/oxygen-resources-convertor";
 	
 	/**
+	 * The additional 
+	 */
+	private Map<String, JCheckBox> additionalOptions = new HashMap<String, JCheckBox>();
+	
+	/**
 	 * Constructor.
 	 * @param converterType The type of converter.
 	 * @param toConvertFiles List with files to convert.
@@ -131,7 +139,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		gbc.weighty = 1;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.insets = new Insets(0, 0, 10, 0);
+		gbc.insets = new Insets(0, 0, 7, 0);
 		convertorPanel.add(inputPanel, gbc);
 	
 		//-----Add the output panel
@@ -143,6 +151,15 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		//----Add the checkBox for select to open converted files after conversion 
 		gbc.gridy++;
 		convertorPanel.add(openFilesCBox, gbc);
+		
+		List<String> imposedAdditionalOptions = ConverterAdditionalOptionsProvider.getImposedAdditionalOptions(converterType);
+		for (String imposedOption : imposedAdditionalOptions) {
+		  JCheckBox optionCombo = new JCheckBox(translator.getTranslation(
+		      ConverterAdditionalOptionsProvider.getTranslationTagFor(imposedOption), ""));
+		  additionalOptions.put(imposedOption, optionCombo);
+		  gbc.gridy++;
+	    convertorPanel.add(optionCombo, gbc);
+    }
 		
 		this.add(convertorPanel);
 	}
@@ -184,7 +201,6 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		}
 	}
 
-
 	@Override
 	public List<File> getInputFiles() {
 		return inputPanel.getFilesFromTable();
@@ -217,10 +233,34 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	public boolean mustOpenConvertedFiles() {
 		return openFilesCBox.isSelected();
 	}
+	
+  @Override
+  public void setOpenConvertedFiles(boolean state) {
+    openFilesCBox.setSelected(state);
+  }
 
 	@Override
-	public void setOpenConvertedFiles(boolean state) {
-		openFilesCBox.setSelected(state);
+	public Boolean getAdditionalOptionValue(String additionalOptionId) {
+	  Boolean toRet = null;
+	  JCheckBox optionCombo = additionalOptions.get(additionalOptionId);
+	  if (optionCombo != null) {
+	    toRet = optionCombo.isSelected();
+	  }
+	  return toRet;
 	}
+	
+	@Override
+	public Set<String> getAdditionalOptions() {
+	  return additionalOptions.keySet();
+	}
+	
+	@Override
+	public void setAdditionalOptionValue(String additionalOptionId, boolean state) {
+	  JCheckBox optionCombo = additionalOptions.get(additionalOptionId);
+    if (optionCombo != null) {
+     optionCombo.setSelected(state);
+    }
+	}
+	
 
 }

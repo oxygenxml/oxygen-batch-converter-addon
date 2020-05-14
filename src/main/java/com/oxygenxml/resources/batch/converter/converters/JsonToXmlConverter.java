@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
@@ -33,7 +34,7 @@ public class JsonToXmlConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public ConversionResult convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
 			throws TransformerException {
 
 		StringBuilder convertedContent = new StringBuilder();

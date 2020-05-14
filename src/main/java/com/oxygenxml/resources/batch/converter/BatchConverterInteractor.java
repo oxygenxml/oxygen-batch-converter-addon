@@ -1,39 +1,34 @@
 package com.oxygenxml.resources.batch.converter;
 
-import java.io.File;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Interactor with batch converter.
  * @author Cosmin Duna
  *
  */
-public interface BatchConverterInteractor {
+public interface BatchConverterInteractor extends UserInputsProvider{
 
-	/**
-	 * Get the input files URLs in String format.
-	 * @return List with input files URLs in String format.
-	 */
-	public List<File> getInputFiles();
-	
-	/**
-	 * Get the output folder path.
-	 * @return The path of output folder.
-	 */
-	public File getOutputFolder();
-	
 	/**
 	 * Set the output folder path.
 	 * @param text The path of output folder.
 	 */
 	public void setOutputFolder(String text);
 	
-
 	/**
-	 * Return if the converted file must be opened.
-	 * @return <code>true</code> if converted files must be opened, <code>false</code>otherwise.
-	 */
-	public boolean mustOpenConvertedFiles();
+   * Set the selected value for the given additional option.
+   * 
+   * @param additionalOptionId The id of the additional option.
+   * @param state <code>true</code> to set selected.
+   */
+  public void setAdditionalOptionValue(String additionalOptionId, boolean state);
+	
+  /**
+   * Get all additional options used in this conversion.
+   * 
+   * @return All additional options
+   */
+	public Set<String> getAdditionalOptions();
 	
 	/**
 	 * Set if the converted file must be opened.

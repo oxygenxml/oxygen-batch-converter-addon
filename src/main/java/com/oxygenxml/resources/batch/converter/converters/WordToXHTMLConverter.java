@@ -29,6 +29,7 @@ import org.zwobble.mammoth.DocumentConverter;
 import org.zwobble.mammoth.Result;
 import org.zwobble.mammoth.images.ImageConverter;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;
@@ -53,12 +54,12 @@ public class WordToXHTMLConverter implements Converter {
 
 	@Override
 	public ConversionResult convert(
-			File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+			File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
 					throws TransformerException {
 		String convertedContent= "";
 		
 		try {
-			FileImageManager imageManager = new FileImageManager(baseDir);
+			FileImageManager imageManager = new FileImageManager(userInputsProvider.getOutputFolder());
 			if (originalFile.getAbsolutePath().toLowerCase().endsWith(DOCX_EXTENSION)) {
 				convertedContent = convertDocxFile(originalFile, imageManager, transformerCreator);
 			} else {

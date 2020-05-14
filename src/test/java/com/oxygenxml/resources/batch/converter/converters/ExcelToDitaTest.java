@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.oxygenxml.resources.batch.converter.BatchConverter;
 import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -34,7 +35,7 @@ public class ExcelToDitaTest {
 	public void test() throws Exception {
 		File sample  = new File("test-sample/excel.xls");		
 		File goodSample = new File("test-sample/excelToDITA.dita");
-		File outputFolder = sample.getParentFile();
+		final File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -42,13 +43,30 @@ public class ExcelToDitaTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-		List<File> inputFiles = new ArrayList<File>();
+		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
 		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.EXCEL_TO_DITA, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.EXCEL_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
 		} finally {
 			Files.delete(convertedFile.toPath());

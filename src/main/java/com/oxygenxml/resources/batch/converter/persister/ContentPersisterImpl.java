@@ -1,5 +1,8 @@
 package com.oxygenxml.resources.batch.converter.persister;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -14,11 +17,6 @@ import ro.sync.exml.workspace.api.options.WSOptionsStorage;
  */
 public class ContentPersisterImpl implements ContentPersister {
 
-	/**
-	 * Key for openConvertedDocument checkBox.
-	 */
-	 private static final String OPEN_CONVERTED_DOCUMENT = "open.converted.document.batch.converter";
-	
 	
 	 /**
 	  * Save the content from dialog.
@@ -29,8 +27,19 @@ public class ContentPersisterImpl implements ContentPersister {
 		WSOptionsStorage optionsStorage = PluginWorkspaceProvider.getPluginWorkspace().getOptionsStorage();
 
 		// save state of openConvertedDocument checkBox
-		optionsStorage.setOption(OPEN_CONVERTED_DOCUMENT, String.valueOf(interactor.mustOpenConvertedFiles()));
+		optionsStorage.setOption(OptionTags.OPEN_CONVERTED_DOCUMENT, String.valueOf(interactor.mustOpenConvertedFiles()));
 		
+		Set<String> additionalOptions = interactor.getAdditionalOptions();
+		if(additionalOptions != null) {
+		  Iterator<String> additionalOptionsIterator = additionalOptions.iterator();
+		  while (additionalOptionsIterator.hasNext()) {
+        String option = additionalOptionsIterator.next();
+        Boolean additionalOptionValue = interactor.getAdditionalOptionValue(option);
+        if(additionalOptionValue != null) {
+          optionsStorage.setOption(option, String.valueOf(additionalOptionValue));
+        }
+      }
+		}
 	}
 
 
@@ -44,7 +53,17 @@ public class ContentPersisterImpl implements ContentPersister {
 		String value;
 	
 		//set selected document type
-		value = optionsStorage.getOption(OPEN_CONVERTED_DOCUMENT, String.valueOf(false));		
+		value = optionsStorage.getOption(OptionTags.OPEN_CONVERTED_DOCUMENT, String.valueOf(false));		
 		interactor.setOpenConvertedFiles(Boolean.valueOf(value));
+		
+		Set<String> additionalOptions = interactor.getAdditionalOptions();
+    if(additionalOptions != null) {
+      Iterator<String> additionalOptionsIterator = additionalOptions.iterator();
+      while (additionalOptionsIterator.hasNext()) {
+        String option = additionalOptionsIterator.next();
+        value = optionsStorage.getOption(option, String.valueOf(true)); 
+        interactor.setAdditionalOptionValue(option, Boolean.valueOf(value));
+      }
+    }
 	}
 }

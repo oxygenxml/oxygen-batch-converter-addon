@@ -79,6 +79,20 @@ public class ConverterFileUtils {
 	}
 
 	/**
+   * Get an unique output File according to output folder, extension and origin file.
+   * 
+   * @param originalFile The file that is converted.
+   * @param extension The extension of the output file. 
+   * @param outputFolder The output folder.
+   * 
+   * @return The unique output file.
+   */
+	public static File getUniqueOutputFile(File originalFile, String extension, File outputFolder) {
+	  File outputFile = getOutputFile(originalFile, extension, outputFolder);
+	  return getFileWithCounter(outputFile);
+	}
+	
+	/**
 	 * Get the output File according to output folder, extension and origin file.
 	 * 
 	 * @param originalFile The file that is converted.

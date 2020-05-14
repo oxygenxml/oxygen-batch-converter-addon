@@ -19,6 +19,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.XMLFilterImpl;
 
 import com.elovirta.dita.markdown.MarkdownReader;
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.doctype.DitaConstants;
 import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -56,7 +57,7 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
 	 * @throws TransformerException
 	 */
 	@Override
-	public ConversionResult convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public ConversionResult convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider) throws TransformerException {
 		// content to return
 		String convertedContent = "";
 

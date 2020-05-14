@@ -26,6 +26,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
@@ -40,7 +41,7 @@ public class ExcelToDITAConverter implements Converter {
 	private static final Logger logger = Logger.getLogger(ExcelToDITAConverter.class);
 	
 	@Override
-	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
 			throws TransformerException {
 		try {
 			return new ConversionResult(convertInternal(originalFile));

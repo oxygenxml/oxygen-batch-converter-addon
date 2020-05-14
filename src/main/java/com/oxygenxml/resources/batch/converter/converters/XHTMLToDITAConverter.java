@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.doctype.DitaConstants;
 import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -44,11 +45,13 @@ public class XHTMLToDITAConverter implements Converter {
 	 * @param contentReader
 	 *          Reader of the document. If the content reader isn't <code>null</code>, 
 	 *          the converter will process this reader and will ignore the given file.
+	 * @param transformerCreator  A transformer creator.
+	 * @param userInputsProvider  Provider for the options set by user.          
 	 * @return The conversion in DITA.
 	 * @throws TransformerException
 	 */
 	@Override
-	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
 			throws TransformerException {
 
 		// get the htmlParser

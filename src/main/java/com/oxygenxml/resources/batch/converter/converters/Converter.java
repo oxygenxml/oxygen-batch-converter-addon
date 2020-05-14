@@ -5,6 +5,7 @@ import java.io.Reader;
 
 import javax.xml.transform.TransformerException;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
@@ -23,13 +24,12 @@ public interface Converter {
 	 * @param contentReader
 	 *          Reader of the document. If the content reader isn't <code>null</code>, 
 	 *          the converter will process this reader and will ignore the given file.
-	 * @param baseDir 
-	 * 					The base directory.
 	 * @param transformerCreator
 	 *          A transformer creator.
-	 * @return The converted content in String format.
+	 * @param userInputsProvider Provider for the options set by user.
+	 * @return The conversion result.
 	 * @throws TransformerException
 	 */
-	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
 			throws TransformerException;
 }

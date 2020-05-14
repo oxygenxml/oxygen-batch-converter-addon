@@ -6,6 +6,7 @@ import java.io.Reader;
 
 import javax.xml.transform.TransformerException;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
@@ -37,7 +38,7 @@ public class MarkdownToHtmlConverter implements Converter {
 	 * @throws TransformerException
 	 */
 	@Override
-	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
 			throws TransformerException {
 
 		// content to return

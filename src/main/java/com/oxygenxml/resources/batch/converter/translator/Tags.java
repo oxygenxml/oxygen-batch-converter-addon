@@ -96,5 +96,12 @@ public class Tags {
 	 * Message when output folder path is empty. 
 	 */
 	public static final String EMPTY_OUTPUT_MESSAGE = "Empty_Output_Message_Conv";
+	
+	/**
+   * Option used to configure if the result will be a DITA Map or a DITA Topic.
+   * 
+   *  en: Create DITA Maps for Word documents containing multiple sections 
+   */
+  public static final String CREATE_DITA_MAP_OPTION = "Create_Dita_Map_Option";
 
 }

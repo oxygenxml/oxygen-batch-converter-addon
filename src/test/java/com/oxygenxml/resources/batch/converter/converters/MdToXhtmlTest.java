@@ -15,6 +15,7 @@ import org.junit.Test;
 import com.oxygenxml.resources.batch.converter.BatchConverter;
 import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -39,7 +40,7 @@ public class MdToXhtmlTest {
 	
 		File sample  = new File("test-sample/markdownTest.md");		
 		File goodSample = new File("test-sample/goodMdToXhtml.xhtml");
-		File outputFolder = sample.getParentFile();
+		final File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -47,13 +48,30 @@ public class MdToXhtmlTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-		List<File> inputFiles = new ArrayList<File>();
+		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
 		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.MD_TO_XHTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.MD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
 

@@ -1,16 +1,8 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
-import java.io.File;
-import java.io.Reader;
-import java.io.StringWriter;
-
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
@@ -19,7 +11,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
  * @author Cosmin Duna
  *
  */
-public class XHTMLToDocbook5Converter implements Converter {
+public class XHTMLToDocbook5Converter extends StylesheetConverter {
 	/**
    *  Attributes and values from the article root element.
    */
@@ -34,66 +26,47 @@ public class XHTMLToDocbook5Converter implements Converter {
   private static final String MATHML_MODELS = "<?xml-model href=\"http://docbook.org/xml/5.0/rng/docbook.rng\" type=\"application/xml\" schematypens=\"http://purl.oclc.org/dsdl/schematron\"?>\r\n" + 
   		"<?xml-model href=\"http://www.oxygenxml.com/docbook/xml/5.0/rng/dbmathml.rng\" schematypens=\"http://relaxng.org/ns/structure/1.0\"?>\n";
   
-	/**
-	 * Convert the given XHTML to Docbook5.
-	 * 
-	 * @param originalFile
-	 *          The XHTML file.
-	 * @param contentReader
-	 *          Reader of the document. If the content reader isn't <code>null</code>, 
-	 *          the converter will process this reader and will ignore the given file.
-	 * @return The conversion in Docbook5.
-	 * @throws TransformerException
-	 */
-	@Override
-	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
-			throws TransformerException {
-
-		String docbookContent ="";
-		
-		// get the XSL path from oxygen
-		String xslPath = PluginWorkspaceProvider.getPluginWorkspace().getUtilAccess().expandEditorVariables("${frameworks}",
-				null);
-		xslPath = xslPath + "/docbook/resources/xhtml2db5Driver.xsl";
-
-		StringWriter sw = new StringWriter();
-		StreamResult result = new StreamResult(sw);
-
-		final StreamSource src = new StreamSource(xslPath);
-
-		// create the transformer
-		Transformer transformer = transformerCreator.createTransformer(src);
-
-		// set the parameter of transformer
-		transformer.setParameter("context.path.names", ROOT_ELEMENT);
-		transformer.setParameter("context.path.uris", "http://docbook.org/ns/docbook");
-		transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
-		transformer.setParameter("wrapMultipleSectionsInARoot", Boolean.TRUE);
-		
-		try {
-				// convert the document
-				transformer.transform(new StreamSource(contentReader, originalFile.toURI().toString()), result);
-		
-				docbookContent = sw.toString();
-			
-		}catch (TransformerException e) {
-			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
-		}
-
-		final ConversionResult conversionResult;
-		docbookContent = updateArticleRootAttributes(docbookContent);
-		
-		if(docbookContent.contains("mml:math")) {
-			docbookContent = addMathmlModels(docbookContent);
-			conversionResult = new ConversionResult(
-					docbookContent, Doctypes.DOCTYPE_PUBLIC_DB5_MAHTML, Doctypes.DOCTYPE_SYSTEM_DB5_MATHML);
-		} else {
-			conversionResult = new ConversionResult(docbookContent);
-		}
-		
-		return conversionResult;
-	}
-
+  /**
+   * @see StylesheetConverter#getStylesheetPath()
+   */
+  @Override
+  public String getStylesheetPath() {
+    // get the XSL path from oxygen
+    String xslPath = PluginWorkspaceProvider.getPluginWorkspace().getUtilAccess().expandEditorVariables("${frameworks}",
+        null);
+    return xslPath + "/docbook/resources/xhtml2db5Driver.xsl";
+  }
+  
+  /**
+   * @see StylesheetConverter#setTransformationParam(Transformer)
+   */
+  @Override
+  public void setTransformationParam(Transformer transformer) {
+    // set the parameter of transformer
+    transformer.setParameter("context.path.names", ROOT_ELEMENT);
+    transformer.setParameter("context.path.uris", "http://docbook.org/ns/docbook");
+    transformer.setParameter("replace.entire.root.contents", Boolean.TRUE);
+    transformer.setParameter("wrapMultipleSectionsInARoot", Boolean.TRUE);
+  }
+  
+  /**
+   * @see StylesheetConverter#processConversionResult(String)
+   */
+  @Override
+  public ConversionResult processConversionResult(String docbookContent) {
+    final ConversionResult conversionResult;
+    docbookContent = updateArticleRootAttributes(docbookContent);
+    
+    if(docbookContent.contains("mml:math")) {
+      docbookContent = addMathmlModels(docbookContent);
+      conversionResult = new ConversionResult(
+          docbookContent, Doctypes.DOCTYPE_PUBLIC_DB5_MAHTML, Doctypes.DOCTYPE_SYSTEM_DB5_MATHML);
+    } else {
+      conversionResult = new ConversionResult(docbookContent);
+    }
+    return conversionResult;
+  }
+  
 	/**
 	 * Add mathml models to given document content.
 	 * 

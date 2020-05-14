@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
@@ -28,11 +29,13 @@ public class XmlToJsonConverter implements Converter {
 	 * @param contentReader
 	 *          Reader of the document. If the content reader isn't <code>null</code>, 
 	 *          the converter will process this reader and will ignore the given file.
+	 * @param transformerCreator  A transformer creator.
+	 * @param userInputsProvider  Provider for the options set by user.
 	 * @return The converted JSON content in String format or null if conversion process failed.
 	 * @throws TransformerException
 	 */
 	@Override
-	public ConversionResult convert(File originalFile, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator)
+	public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
 			throws TransformerException {
 
 		String convertedContent = null;

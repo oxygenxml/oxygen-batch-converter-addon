@@ -6,6 +6,7 @@ import java.io.StringReader;
 
 import javax.xml.transform.TransformerException;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
@@ -18,23 +19,28 @@ public abstract class PipelineConverter implements Converter{
   /**
    * Get the converters that will be used in conversion.
    * 
+   * @param userInputsProvider Provider for the options set by user.
+   * 
    * @return The used converters in order.
    */
-  protected abstract Converter[] getUsedConverters();
+  protected abstract Converter[] getUsedConverters(UserInputsProvider userInputsProvider);
   
   @Override
-  public ConversionResult convert(File originalFile, Reader contentReader, File baseDir,
-      TransformerFactoryCreator transformerCreator) throws TransformerException {
+  public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator,
+      UserInputsProvider userInputsProvider) throws TransformerException {
 
     ConversionResult result = new ConversionResult("");
-    Converter[] converters = getUsedConverters();
+    Converter[] converters = getUsedConverters(userInputsProvider);
     
     int noOfCoverters = converters.length;
     for (int i = 0; i < noOfCoverters; i++) {
       if(i != 0) {
         contentReader = new StringReader(result.getConvertedContent());
       }
-      result = converters[i].convert(originalFile, contentReader, baseDir, transformerCreator);
+      ConversionResult currentResult = converters[i].convert(originalFile, contentReader, transformerCreator, userInputsProvider);
+      if(!currentResult.shouldKeepTheLastResult()) {
+        result = currentResult;
+      }
     }
     
     return result;

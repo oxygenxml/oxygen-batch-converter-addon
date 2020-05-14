@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerException;
 
 import org.w3c.tidy.Tidy;
 
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
@@ -29,7 +30,7 @@ public class HtmlToXhtmlConverter implements Converter {
 	 *          the converter will process this reader and will ignore the given file.
 	 * @return The converted XHTML content..        
 	 */
-	public ConversionResult convert(File originalFileLocation, Reader contentReader, File baseDir, TransformerFactoryCreator transformerCreator) throws TransformerException {
+	public ConversionResult convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider) throws TransformerException {
 		//XHTML content to be return
 		String convertedContent = null;
 

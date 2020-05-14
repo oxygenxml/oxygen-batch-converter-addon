@@ -100,18 +100,14 @@ public class BatchConverterImpl implements BatchConverter {
 	 * Convert the given input files and write them in given output folder
 	 * according to given convertorType.
 	 * 
-	 * @param convertorType
-	 *          The converter type.
-	 * @param inputFiles
-	 *          The input files.
-	 * @param outputFolder
-	 *          The output folder.
-	 * @param openConvertedFiles <code>true</code> to open the converted files in Oxygen, <code>false</code> otherwise.
+	 * @param convertorType        The converter type.
+   * @param inputsProvider       Provider for the user inputs like input files, output directory and another options.
+
 	 * @return <code>true</code> if the process of conversion was finished
 	 *         successfully, <code>false</code> otherwise.
 	 */
 	@Override
-	public boolean convertFiles(String converterType, List<File> inputFiles, File outputFolder, boolean openConvertedFile) {
+	public boolean convertFiles(String converterType, UserInputsProvider inputsProvider) {
 		
 		isSuccessfully = true;
 		convertedFile = 0;
@@ -130,12 +126,14 @@ public class BatchConverterImpl implements BatchConverter {
 		}
 		
 		//make the output directory if it doesn't exist
-		if(!outputFolder.exists()){
-			outputFolder.mkdirs();
+		File outputFolder = inputsProvider.getOutputFolder();
+    if(!outputFolder.exists()){
+		  inputsProvider.getOutputFolder().mkdirs();
 		}
 		
 		if (converter != null) {
 			// iterate over files
+		  List<File> inputFiles = inputsProvider.getInputFiles();
 			int size = inputFiles.size();
 			for (int i = 0; i < size; i++) {
 
@@ -157,20 +155,16 @@ public class BatchConverterImpl implements BatchConverter {
 				progressDialogInteractor.setNote(currentFile);
 
 				//generate the output file.
-				File outputFile = ConverterFileUtils.getOutputFile(currentFile, 
-						ExtensionGetter.getOutputExtension(converterType), outputFolder);
-				
-				// create a unique file path if actual exist
-				outputFile = ConverterFileUtils.getFileWithCounter(outputFile);
+				File outputFile = ConverterFileUtils.getUniqueOutputFile(currentFile, 
+            ExtensionGetter.getOutputExtension(converterType), outputFolder);
 				
 				//convert and print the current file.
-				convertAndPrintFile(currentFile, outputFile, converter, contentPrinter, converterType, openConvertedFile);
-				
+				convertAndPrintFile(currentFile, outputFile, converter, contentPrinter, converterType, inputsProvider);
 			}
 
 		} else {
 			isSuccessfully = false;
-			failedFile = inputFiles.size();
+			failedFile = inputsProvider.getInputFiles().size();
 		}
 
 		//report the finish status
@@ -181,34 +175,42 @@ public class BatchConverterImpl implements BatchConverter {
 	
 	/**
 	 * Convert the given file using the given converter and print the converted result using the given contentPrinter. 
-	 * @param file The file.
-	 * @param outputFile The outputFile
-	 * @param converter The converter. 
-	 * @param contentPrinter The contentPrinter.
-	 * @param converterType The converterType.
-	 * @param openConvertedFile <code>true</code>To open the converted file in Oxygen, <code>false</code> otherwise.
+	 * @param file            The file.
+	 * @param outputFile      The outputFile
+	 * @param converter       The converter. 
+	 * @param contentPrinter  The contentPrinter.
+	 * @param converterType   The converterType.
+   * @param inputsProvider  Provider for the user inputs like input files, output directory and another options.
  	 */
 	private void convertAndPrintFile(File file, File outputFile, Converter converter, ContentPrinter contentPrinter,
-			String converterType, boolean openConvertedFile) {
+			String converterType, UserInputsProvider inputsProvider) {
 
 		try {
-			ConversionResult conversionResult = converter.convert(file, null, outputFile.getParentFile(), transformerFactoryCreator);
+			ConversionResult conversionResult = converter.convert(file, null, transformerFactoryCreator, inputsProvider);
 			String convertedContent = conversionResult.getConvertedContent();
 			if(logger.isDebugEnabled()) {
-				logger.debug("Converted content: " + convertedContent);
+			  logger.debug("Converted content: " + convertedContent);
 			}
 			
 			if (convertedContent != null) {
 				if(logger.isDebugEnabled()) {
 					logger.debug("Print converted content in: " + outputFile);
 				}
+				
+				if (conversionResult.getImposedOutputFileExtension() != null) {
+			    outputFile = ConverterFileUtils.getUniqueOutputFile(
+			        file, 
+			        conversionResult.getImposedOutputFileExtension(),
+	            inputsProvider.getOutputFolder());
+				}
+				
 				// print the converted content.
 				contentPrinter.print(conversionResult, transformerFactoryCreator, converterType, outputFile,
 						StyleSourceGetter.getStyleSource(converterType));
 
 				convertedFile++;
 
-				if (openConvertedFile) {
+				if (inputsProvider.mustOpenConvertedFiles()) {
 					// open the converted file
 					URL convertedFileUrl;
 					convertedFileUrl = outputFile.toURI().toURL();

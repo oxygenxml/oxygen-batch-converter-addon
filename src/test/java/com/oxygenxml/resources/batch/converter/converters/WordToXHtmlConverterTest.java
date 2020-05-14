@@ -15,6 +15,7 @@ import org.junit.Test;
 import com.oxygenxml.resources.batch.converter.BatchConverter;
 import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -45,8 +46,7 @@ public class WordToXHtmlConverterTest {
 	public void testConversionFromDocx() throws IOException {
 		File inputFile  = new File("test-sample/wordTo/test.docx");		
 		File expectedResultFile = new File("test-sample/wordTo/resultOfDocxToXHTML.xhtml");
-		File outputFolder = inputFile.getParentFile();
-		outputFolder = new File(outputFolder, "output");
+		final File outputFolder  = new File(inputFile.getParentFile(), "output");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -54,13 +54,30 @@ public class WordToXHtmlConverterTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-		List<File> inputFiles = new ArrayList<File>();
+	  final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(inputFile);
 				
 		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
 
 			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
 			assertEquals(filterMathAttributes(expected),
@@ -89,8 +106,7 @@ public class WordToXHtmlConverterTest {
 	public void testConversionFromDoc() throws IOException {
 		File inputFile  = new File("test-sample/wordTo/test.doc");		
 		File expectedResultFile = new File("test-sample/wordTo/resultOfDocToXHTML.xhtml");
-		File outputFolder = inputFile.getParentFile();
-		outputFolder = new File(outputFolder, "output");
+		final File outputFolder  = new File(inputFile.getParentFile(), "output");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -98,13 +114,30 @@ public class WordToXHtmlConverterTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-		List<File> inputFiles = new ArrayList<File>();
+		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(inputFile);
 				
 		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
 
 			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img"),
 					FileUtils.readFileToString(fileToRead));
@@ -131,8 +164,7 @@ public class WordToXHtmlConverterTest {
 	public void testConversionFromDocxWithMultipleEquation() throws IOException {
 		File inputFile  = new File("test-sample/wordTo/multipleEquations.docx");		
 		File expectedResultFile = new File("test-sample/wordTo/multipleEquations.xhtml");
-		File outputFolder = inputFile.getParentFile();
-		outputFolder = new File(outputFolder, "output");
+		final File outputFolder  = new File(inputFile.getParentFile(), "output");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -140,13 +172,30 @@ public class WordToXHtmlConverterTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 	
-		List<File> inputFiles = new ArrayList<File>();
+		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(inputFile);
 				
 		File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
 	
 			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img");
 			assertEquals(filterMathAttributes(expected),
@@ -187,8 +236,7 @@ public class WordToXHtmlConverterTest {
   public void testConversionFromDocxWithAbsoluteImages() throws IOException {
   	File inputFile  = new File("test-sample/EXM-45096/input.docx");		
   	File expectedResultFile = new File("test-sample/EXM-45096/expectedOutput.xhtml");
-  	File outputFolder = inputFile.getParentFile();
-  	outputFolder = new File(outputFolder, "output");
+  	final File outputFolder  = new File(inputFile.getParentFile(), "output");
   	
   	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
   	ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -196,13 +244,30 @@ public class WordToXHtmlConverterTest {
   	BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
   			new ConvertorWorkerInteractorTestImpl() , transformerCreator);
   
-  	List<File> inputFiles = new ArrayList<File>();
+  	final List<File> inputFiles = new ArrayList<File>();
   	inputFiles.add(inputFile);
   			
   	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
   	
   	try {
-  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
   
   		String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
   		assertEquals(expected, FileUtils.readFileToString(fileToRead));
@@ -233,8 +298,7 @@ public class WordToXHtmlConverterTest {
   public void testConversionFromDocxWithNoneStyleValue() throws IOException {
   	File inputFile  = new File("test-sample/EXM-45460/input.docx");		
   	File expectedResultFile = new File("test-sample/EXM-45460/expectedOutput.xhtml");
-  	File outputFolder = inputFile.getParentFile();
-  	outputFolder = new File(outputFolder, "output");
+  	final File outputFolder  = new File(inputFile.getParentFile(), "output");
   	
   	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
   	ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -242,13 +306,30 @@ public class WordToXHtmlConverterTest {
   	BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
   			new ConvertorWorkerInteractorTestImpl() , transformerCreator);
   
-  	List<File> inputFiles = new ArrayList<File>();
+  	final List<File> inputFiles = new ArrayList<File>();
   	inputFiles.add(inputFile);
   			
   	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
   	
   	try {
-  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, inputFiles, outputFolder, false);
+  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
   		    FileUtils.readFileToString(fileToRead));
   	} finally {

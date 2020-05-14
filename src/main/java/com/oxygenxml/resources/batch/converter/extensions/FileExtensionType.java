@@ -57,6 +57,11 @@ public class FileExtensionType {
 	 * DITA output type
 	 */
 	public static final String DITA_OUTPUT_EXTENSION = "dita";
+	
+	/**
+   * DITA Map output type
+   */
+  public static final String DITA_MAP_OUTPUT_EXTENSION = "ditamap";
 
 	/**
 	 * XML output type

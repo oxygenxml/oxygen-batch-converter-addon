@@ -17,6 +17,7 @@ import org.junit.Test;
 import com.oxygenxml.resources.batch.converter.BatchConverter;
 import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
@@ -41,7 +42,7 @@ public class MdToDitaTest {
 		
 		File sample  = new File("test-sample/markdownTest.md");		
 		File goodSample = new File("test-sample/goodMdToDita.dita");
-		File outputFolder = sample.getParentFile();
+		final File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -49,13 +50,35 @@ public class MdToDitaTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-		List<File> inputFiles = new ArrayList<File>();
+		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
 		File fileToRead = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.MD_TO_DITA, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.MD_TO_DITA, 
+			    new UserInputsProvider() {
+            
+            @Override
+            public boolean mustOpenConvertedFiles() {
+              return false;
+            }
+            
+            @Override
+            public File getOutputFolder() {
+              return outputFolder;
+            }
+            
+            @Override
+            public List<File> getInputFiles() {
+              return inputFiles;
+            }
+            
+            @Override
+            public Boolean getAdditionalOptionValue(String additionalOptionId) {
+              return null;
+            }
+          });
 
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
 
@@ -74,7 +97,7 @@ public class MdToDitaTest {
 	public void testDocumentWithProblems_EXM_41340() throws TransformerException, IOException {
 		
 		File sample  = new File("test-sample/invalidDoc.md");		
-		File outputFolder = sample.getParentFile();
+		final File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
@@ -82,13 +105,30 @@ public class MdToDitaTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-		List<File> inputFiles = new ArrayList<File>();
+		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
 		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.MD_TO_DITA, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.MD_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
 			assertFalse("The file shouldn't be generated.", convertedFile.exists());
 
 			// Check the reported problem
@@ -114,7 +154,7 @@ public class MdToDitaTest {
 		
 		File sample  = new File("test-sample/EXM-44491/sample.md");
 		File goodOutput  = new File("test-sample/EXM-44491/outputFile.dita");
-		File outputFolder = sample.getParentFile();
+		final File outputFolder = sample.getParentFile();
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
@@ -122,13 +162,30 @@ public class MdToDitaTest {
 		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-		List<File> inputFiles = new ArrayList<File>();
+		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
 		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		
 		try {
-			converter.convertFiles(ConverterTypes.MD_TO_DITA, inputFiles, outputFolder, false);
+			converter.convertFiles(ConverterTypes.MD_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
 			
 			assertEquals(FileComparationUtil.readFile(goodOutput.getAbsolutePath()),
 					FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
