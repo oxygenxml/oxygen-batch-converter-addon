@@ -50,7 +50,11 @@ abstract class StylesheetConverter implements Converter {
 		      result);
 		  conversionResult = processConversionResult(sw.toString());
 		}catch (TransformerException e) {
-			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
+		  if(e.getException() != null) {
+		    throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
+		  } else {
+		    throw e;
+		  }
 		}
 		
 		return conversionResult;
