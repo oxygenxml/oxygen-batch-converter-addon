@@ -5,7 +5,10 @@
     xmlns:xrf="http://www.oxygenxml.com/ns/xmlRefactoring/functions"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0" exclude-result-prefixes="xra xrf xs f">
     
-    <xsl:param name="matchElement" select="('section', 'topic')"></xsl:param>
+    <!-- DITA Composite output format -->
+    <xsl:output name="dita" exclude-result-prefixes="#all" indent="yes" doctype-public="-//OASIS//DTD DITA Composite//EN" doctype-system="ditabase.dtd"/>
+   
+    <xsl:param name="matchElement" select="('dita', 'section', 'topic', 'task', 'glossentry', 'concept', 'glossgroup', 'reference', 'troubleshooting')"/>
     <xsl:import href="http://www.oxygenxml.com/extensions/frameworks/dita/refactoring/convert-nested-topics-to-new-topic.xsl"/>
     
     <xsl:template match="/*">
@@ -13,7 +16,14 @@
             <xsl:when test="count(.//*[f:match4extraction(.)]) > 0">
                 <xsl:element name="map">
                     <title><xsl:value-of select="title"/></title>
-                    <xsl:apply-templates  mode="topicRefEmit" select="."/>
+                    <xsl:choose>
+                        <xsl:when test="'dita' = local-name(.) and count(./*[not(f:match4extraction(.))]) > 0">
+                            <xsl:apply-templates  mode="topicRefEmit" select="."/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates  mode="topicRefEmit" select="./*"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:element>
             </xsl:when>
             <xsl:otherwise>
