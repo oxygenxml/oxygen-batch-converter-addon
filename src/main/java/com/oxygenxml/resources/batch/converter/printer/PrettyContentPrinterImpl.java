@@ -17,6 +17,11 @@ import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.util.PrettyPrintException;
+import ro.sync.exml.workspace.api.util.XMLUtilAccess;
+
 /**
  * Content pretty printer implementation.
  * 
@@ -59,15 +64,26 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 			transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, publicDocType);
 		}
 		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
 		
-		// get the input source
-		InputSource inputSource = new InputSource(new StringReader(conversionResult.getConvertedContent()));
-
+		StringReader convertedContent = new StringReader(conversionResult.getConvertedContent());
+		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+		if(pluginWorkspace != null) {
+		  XMLUtilAccess xmlUtilAccess = pluginWorkspace.getXMLUtilAccess();
+		  try {
+		    String prettyPrintedContent = xmlUtilAccess.prettyPrint(convertedContent, outputFile.getAbsolutePath());
+		    convertedContent = new StringReader(prettyPrintedContent);
+		  } catch (PrettyPrintException e) {
+		    logger.debug(e.getMessage(), e);
+		  }
+		} else {
+		  // For TCs.
+		  transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		}
+		
+    InputSource inputSource = new InputSource(convertedContent);
 		try {
-			// pretty print
 			transformer.transform(new SAXSource(inputSource), new StreamResult(outputFile));
 		} catch (TransformerException e) {
 			logger.debug(e.getMessage(), e);
@@ -77,6 +93,4 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 					conversionResult, transformerCreator, converterType, outputFile, styleSource);
 		}
 	}
-
-
 }
