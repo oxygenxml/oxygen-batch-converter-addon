@@ -17,11 +17,11 @@
                 <xsl:element name="map">
                     <title><xsl:value-of select="title"/></title>
                     <xsl:choose>
-                        <xsl:when test="'dita' = local-name(.) and count(./*[not(f:match4extraction(.))]) > 0">
-                            <xsl:apply-templates  mode="topicRefEmit" select="."/>
+                        <xsl:when test="'dita' = local-name(.) and not(count(./*[not(f:match4extraction(.))]) > 0)">
+                            <xsl:apply-templates  mode="topicRefEmit" select="./*"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:apply-templates  mode="topicRefEmit" select="./*"/>
+                            <xsl:apply-templates  mode="topicRefEmit" select="."/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:element>
