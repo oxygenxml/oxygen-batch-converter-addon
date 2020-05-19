@@ -2,14 +2,23 @@ package com.oxygenxml.resources.batch.converter.converters;
 
 import java.io.File;
 import java.io.Reader;
+import java.io.StringReader;
 import java.net.URL;
 
 import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
+
+import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
+import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
+
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.util.PrettyPrintException;
+import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
 /**
  * Convert a DITA Topic with multiple topics or sections into a DITA Map with referred DITA Topics.
@@ -17,6 +26,26 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
  * @author cosmin_duna
  */
 public class MapWithTopicsConverter extends StylesheetConverter{
+  
+  /**
+   * Logger for logging.
+   */
+  private static final Logger logger = Logger.getLogger(MapWithTopicsConverter.class);
+
+  
+  @Override
+  public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator,
+      UserInputsProvider userInputsProvider) throws TransformerException {
+    
+    XMLUtilAccess xmlUtilAccess = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess();
+    try {
+      String prettyPrintedContent = xmlUtilAccess.prettyPrint(contentReader, originalFile.getAbsolutePath());
+      contentReader = new StringReader(prettyPrintedContent);
+    } catch (PrettyPrintException e) {
+      logger.debug(e.getMessage(), e);
+    }
+    return super.convert(originalFile, contentReader, transformerCreator, userInputsProvider);
+  }
   
   /**
    * @see StylesheetConverter#getStylesheetPath()
