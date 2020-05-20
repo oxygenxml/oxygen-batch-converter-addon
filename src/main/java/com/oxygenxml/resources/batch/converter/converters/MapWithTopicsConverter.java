@@ -3,6 +3,7 @@ package com.oxygenxml.resources.batch.converter.converters;
 import java.io.File;
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.transform.Source;
@@ -39,9 +40,12 @@ public class MapWithTopicsConverter extends StylesheetConverter{
     
     XMLUtilAccess xmlUtilAccess = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess();
     try {
-      String prettyPrintedContent = xmlUtilAccess.prettyPrint(contentReader, originalFile.getAbsolutePath());
+      String prettyPrintedContent = xmlUtilAccess.prettyPrint(
+          contentReader, originalFile.toURI().toURL().toExternalForm());
       contentReader = new StringReader(prettyPrintedContent);
     } catch (PrettyPrintException e) {
+      logger.debug(e.getMessage(), e);
+    } catch (MalformedURLException e) {
       logger.debug(e.getMessage(), e);
     }
     return super.convert(originalFile, contentReader, transformerCreator, userInputsProvider);

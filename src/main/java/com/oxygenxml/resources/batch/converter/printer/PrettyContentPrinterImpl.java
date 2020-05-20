@@ -2,6 +2,7 @@ package com.oxygenxml.resources.batch.converter.printer;
 
 import java.io.File;
 import java.io.StringReader;
+import java.net.MalformedURLException;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -68,29 +69,34 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 
 		
 		StringReader convertedContent = new StringReader(conversionResult.getConvertedContent());
-		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
-		if(pluginWorkspace != null) {
-		  XMLUtilAccess xmlUtilAccess = pluginWorkspace.getXMLUtilAccess();
-		  try {
-		    String prettyPrintedContent = xmlUtilAccess.prettyPrint(convertedContent, outputFile.getAbsolutePath());
-		    convertedContent = new StringReader(prettyPrintedContent);
-		  } catch (PrettyPrintException e) {
-		    logger.debug(e.getMessage(), e);
-		  }
-		} else {
-		  // For TCs.
-		  transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		}
-		
-    InputSource inputSource = new InputSource(convertedContent);
 		try {
-			transformer.transform(new SAXSource(inputSource), new StreamResult(outputFile));
+		  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+		  if(pluginWorkspace != null) {
+		    XMLUtilAccess xmlUtilAccess = pluginWorkspace.getXMLUtilAccess();
+		    try {
+		      String prettyPrintedContent = xmlUtilAccess.prettyPrint(
+		          convertedContent, outputFile.toURI().toURL().toExternalForm());
+		      convertedContent = new StringReader(prettyPrintedContent);
+		    } catch (PrettyPrintException e ) {
+		      logger.debug(e.getMessage(), e);
+		    } catch (MalformedURLException e) {
+		      logger.debug(e.getMessage(), e);
+        }
+		  } else {
+		    // For TCs.
+		    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		  }
+
+		  InputSource inputSource = new InputSource(convertedContent);
+		  transformer.transform(new SAXSource(inputSource), new StreamResult(outputFile));
 		} catch (TransformerException e) {
 			logger.debug(e.getMessage(), e);
 			// Stop indenting and create the output file.
 			SimpleContentPrinterImpl simpleContentPrinter = new SimpleContentPrinterImpl();
 			simpleContentPrinter.print(
 					conversionResult, transformerCreator, converterType, outputFile, styleSource);
-		}
+		} finally {
+      convertedContent.close();
+    }
 	}
 }
