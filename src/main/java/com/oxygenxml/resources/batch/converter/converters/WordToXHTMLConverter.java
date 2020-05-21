@@ -81,13 +81,15 @@ public class WordToXHTMLConverter implements Converter {
 	 */
 	public String convertDocxFile(File file, ImageConverter.ImgElement imagesManager, TransformerFactoryCreator transformerFactory) throws IOException{
 		DocumentConverter converter = new DocumentConverter()
-				.addStyleMap("p[style-name='Title'] => h1:fresh\n" +
-						"p[style-name='Heading 1'] => h2:fresh\n" +
-						"p[style-name='Heading 2'] => h3:fresh\n" +
-						"p[style-name='Heading 3'] => h4:fresh\n" +
-						"p[style-name='Heading 4'] => h5:fresh\n" +
-						"p[style-name='Heading 5'] => h6:fresh\n" +
-						"p[style-name='Heading 6'] => p:fresh\n" +
+				.addStyleMap("p[style-name='Title'] => h1:fresh\n" + // Topic in DITA
+				    "p[style-name='Document Title'] => h1:fresh\n" + // Topic in DITA
+				    "p[style-name='Book Title'] => h1:fresh\n" + // Topic in DITA
+						"p[style-name='Heading 1'] => h1:fresh\n" + // Topic in DITA
+						"p[style-name='Heading 2'] => h2:fresh\n" + // Section in DITA
+						"p[style-name='Heading 3'] => h3:fresh\n" +
+						"p[style-name='Heading 4'] => h4:fresh\n" +
+						"p[style-name='Heading 5'] => h5:fresh\n" +
+						"p[style-name='Heading 6'] => h6:fresh\n" +
 						"u => u:fresh\n")
 				.imageConverter(imagesManager);
 		
