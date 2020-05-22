@@ -250,10 +250,10 @@
 	
 	<key value="Create_Dita_Map_Option">
 		<comment>Option used to configure if the result will be a DITA Map or a DITA Topic.</comment>
-		<val lang="en_US">Create DITA Maps for Word documents containing multiple sections</val>
-		<val lang="de_DE">Create DITA Maps for Word documents containing multiple sections</val>
-		<val lang="fr_FR">Create DITA Maps for Word documents containing multiple sections</val>
-		<val lang="ja_JP">Create DITA Maps for Word documents containing multiple sections</val>
-		<val lang="nl_NL">Create DITA Maps for Word documents containing multiple sections</val>
+		<val lang="en_US">Create DITA maps for Word documents containing multiple sections</val>
+		<val lang="de_DE">Create DITA maps for Word documents containing multiple sections</val>
+		<val lang="fr_FR">Create DITA maps for Word documents containing multiple sections</val>
+		<val lang="ja_JP">Create DITA maps for Word documents containing multiple sections</val>
+		<val lang="nl_NL">Create DITA maps for Word documents containing multiple sections</val>
 	</key>
 </translation>
