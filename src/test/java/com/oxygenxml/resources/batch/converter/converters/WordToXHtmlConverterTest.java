@@ -20,6 +20,7 @@ import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
+import com.oxygenxml.resources.batch.converter.word.styles.WordStyleMapLoader;
 
 import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
@@ -385,6 +386,113 @@ public class WordToXHtmlConverterTest {
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
   		    FileUtils.readFileToString(fileToRead));
   	} finally {
+  		FileComparationUtil.deleteRecursivelly(outputFolder);
+  	}
+  }
+
+  /**
+   * <p><b>Description:</b> Test conversion from a docx file to XHTML 
+   * takes account of default stylemap.
+   * <p><b>Bug ID:</b> EXM-44654</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testConversionFromDocx_defaultStyleMap() throws IOException {
+  	File inputFile  = new File("test-sample/EXM-45677/input.docx");		
+  	File expectedResultFile = new File("test-sample/EXM-45677/expectedOutput.xhtml");
+  	final File outputFolder  = new File(inputFile.getParentFile(), "output");
+  	
+  	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+  	ProblemReporter problemReporter = new ProblemReporterTestImpl();
+  	
+  	BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+  			new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+  	final List<File> inputFiles = new ArrayList<File>();
+  	inputFiles.add(inputFile);
+  			
+  	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+  	
+  	try {
+  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+  		assertEquals(FileUtils.readFileToString(expectedResultFile),
+  		    FileUtils.readFileToString(fileToRead));
+  	} finally {
+  		FileComparationUtil.deleteRecursivelly(outputFolder);
+  	}
+  }
+
+  /**
+   * <p><b>Description:</b> Test conversion from a docx file to XHTML 
+   * takes account of a custom stylemap.
+   * <p><b>Bug ID:</b> EXM-44654</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testConversionFromDocx_customStyleMap() throws IOException {
+  	File inputFile  = new File("test-sample/EXM-45677/input.docx");		
+  	File expectedResultFile = new File("test-sample/EXM-45677/expectedCustomOutput.xhtml");
+  	final File outputFolder  = new File(inputFile.getParentFile(), "output");
+  	File customStyleMap = new File("test-sample/EXM-45677/wordStyleMap.xml");
+  	
+  	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+  	ProblemReporter problemReporter = new ProblemReporterTestImpl();
+  	
+  	BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+  			new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+  	final List<File> inputFiles = new ArrayList<File>();
+  	inputFiles.add(inputFile);
+  			
+  	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+  	
+  	WordStyleMapLoader.imposeStyleMapURL(customStyleMap.toURI().toURL());
+  	try {
+  		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+  		assertEquals(FileUtils.readFileToString(expectedResultFile),
+  		    FileUtils.readFileToString(fileToRead));
+  	} finally {
+  	  WordStyleMapLoader.imposeStyleMapURL(null);
   		FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
   }

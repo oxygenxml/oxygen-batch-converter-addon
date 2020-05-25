@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -31,6 +32,7 @@ import org.zwobble.mammoth.images.ImageConverter;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.word.styles.WordStyleMapLoader;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -80,22 +82,26 @@ public class WordToXHTMLConverter implements Converter {
 	 * @throws IOException 
 	 */
 	public String convertDocxFile(File file, ImageConverter.ImgElement imagesManager, TransformerFactoryCreator transformerFactory) throws IOException{
-		DocumentConverter converter = new DocumentConverter()
-				.addStyleMap("p[style-name='Title'] => h1:fresh\n" + // Topic in DITA
-				    "p[style-name='Document Title'] => h1:fresh\n" + // Topic in DITA
-				    "p[style-name='Book Title'] => h1:fresh\n" + // Topic in DITA
-						"p[style-name='Heading 1'] => h1:fresh\n" + // Topic in DITA
-						"p[style-name='Heading 2'] => h2:fresh\n" + // Section in DITA
-						"p[style-name='Heading 3'] => h3:fresh\n" +
-						"p[style-name='Heading 4'] => h4:fresh\n" +
-						"p[style-name='Heading 5'] => h5:fresh\n" +
-						"p[style-name='Heading 6'] => h6:fresh\n" +
-						"u => u:fresh\n")
+	  String styleMap;
+    try {
+      styleMap = WordStyleMapLoader.loadStyleMap();
+    } catch (JAXBException e) {
+      StringBuilder message = new StringBuilder();
+      message.append("Invalid Word style map configuration file: ");
+      if(e.getLinkedException() != null) {
+        message.append(e.getLinkedException().getMessage());
+      } else {
+        message.append(e.getMessage());
+      }
+      throw new IOException(message.toString());
+    }
+	  DocumentConverter converter = new DocumentConverter()
+	      .addStyleMap(styleMap)
 				.imageConverter(imagesManager);
 		
 		Result<String> result = converter.convertToHtml(file);
 		if(logger.isDebugEnabled()) {
-			logger.debug("Warnings from the conversion process: " + result.getWarnings());
+		  logger.debug("Warnings from the conversion process: " + result.getWarnings());
 		}
 		
 		String htmlContent = wrapHtmlBodyContent(result.getValue());

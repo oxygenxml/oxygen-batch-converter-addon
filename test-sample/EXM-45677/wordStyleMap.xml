@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<styleMap>
+    <toHTML>
+        <relation>
+            <element>p</element>
+            <styleName>Title</styleName>
+            <resultedHTML fresh="false">h1</resultedHTML>
+        </relation>
+		<relation>
+            <element>p</element>
+            <styleName>Subtitle</styleName>
+            <resultedHTML>p</resultedHTML>
+        </relation>
+        
+        <relation>
+            <element>p</element>
+            <styleName>Heading 1</styleName>
+            <resultedHTML>h2</resultedHTML>
+        </relation>
+        <relation>
+            <element>p</element>
+            <styleName>Heading 2</styleName>
+            <resultedHTML>h3</resultedHTML>
+        </relation>
+        <relation>
+            <element>p</element>
+            <styleName>Heading 3</styleName>
+            <resultedHTML>h4</resultedHTML>
+        </relation>
+		<relation>
+            <element>p</element>
+            <styleName>Heading 6</styleName>
+            <resultedHTML>p</resultedHTML>
+        </relation>
+        
+    </toHTML>
+    
+     <customToDefault>  
+        <styleRelation>
+            <customStyle>Document Title</customStyle>
+            <defaultStyle>Title</defaultStyle>
+        </styleRelation>
+		<styleRelation>
+            <customStyle>Document Subtitle</customStyle>
+            <defaultStyle>Subtitle</defaultStyle>
+        </styleRelation>
+    </customToDefault>
+</styleMap>
