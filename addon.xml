@@ -8,7 +8,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
         id="com.oxygenxml.resources.batch.converter.plugin">
         <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/${project.version}/${project.build.finalName}-plugin.jar"/>
         <xt:version>${project.version}</xt:version>
-        <xt:oxy_version>19.1+</xt:oxy_version>
+        <xt:oxy_version>20.0+</xt:oxy_version>
         <xt:type>plugin</xt:type>
         <xt:author>Syncro Soft</xt:author>
         <xt:name>Batch Converter</xt:name>
@@ -26,7 +26,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                     		<li>XML to JSON</li>
                     		<li>JSON to XML</li>
                     		<li>Excel to DITA</li>
-                    		<li>Word to XHTML/DITA/DocBook - experimental</li>
+                    		<li>Word to XHTML/DITA/DocBook</li>
                     	</ul>
                     <p>For more details see <a
                         href="https://github.com/oxygenxml/oxygen-resources-convertor"
