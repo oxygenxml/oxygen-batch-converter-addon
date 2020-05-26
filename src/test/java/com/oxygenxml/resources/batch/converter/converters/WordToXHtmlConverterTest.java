@@ -22,6 +22,7 @@ import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCrea
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.word.styles.WordStyleMapLoader;
 
+import junit.framework.TestCase;
 import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
 import tests.utils.ProblemReporterTestImpl;
@@ -34,8 +35,20 @@ import tests.utils.TransformerFactoryCreatorImpl;
  * @author cosmin_duna
  *
  */
-public class WordToXHtmlConverterTest {
+public class WordToXHtmlConverterTest extends TestCase{
 
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    WordStyleMapLoader.imposeStyleMapURL(new File("config/wordStyleMap.xml").toURI().toURL());
+  }
+  
+  @Override
+  protected void tearDown() throws Exception {
+    WordStyleMapLoader.imposeStyleMapURL(null);
+    super.tearDown();
+  }
+  
 	/**
    * <p><b>Description:</b> Test conversion from a docx file to XHTML.</p>
    *
@@ -438,6 +451,7 @@ public class WordToXHtmlConverterTest {
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
   		    FileUtils.readFileToString(fileToRead));
   	} finally {
+  	  WordStyleMapLoader.imposeStyleMapURL(null);
   		FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
   }

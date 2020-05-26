@@ -12,7 +12,11 @@ public class OxygenTranslator implements Translator {
 
 	@Override
 	public String getTranslation(String key, String convertorType) {
-		return ((StandalonePluginWorkspace)PluginWorkspaceProvider.getPluginWorkspace()).getResourceBundle().getMessage(key + convertorType);
+		String toRet = key;
+	  StandalonePluginWorkspace pluginWorkspace = (StandalonePluginWorkspace)PluginWorkspaceProvider.getPluginWorkspace();
+	  if(pluginWorkspace != null) {
+	    toRet = pluginWorkspace.getResourceBundle().getMessage(key + convertorType);
+	  }
+	  return toRet;
 	}
-	
 }

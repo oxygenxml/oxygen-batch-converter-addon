@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter.word.styles;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -8,17 +9,34 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.log4j.Logger;
+
+import com.oxygenxml.resources.batch.converter.converters.ExcelToDITAConverter;
+import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
+import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
+import com.oxygenxml.resources.batch.converter.translator.Tags;
+import com.oxygenxml.resources.batch.converter.translator.Translator;
+
 /**
  * Loader for the style map used in conversion from Word format.
  * 
  * @author cosmin_duna
  */
 public class WordStyleMapLoader {
-
+  /**
+   * Logger.
+   */
+  private static final Logger logger = Logger.getLogger(WordStyleMapLoader.class);
+  
+  /**
+   * Translator
+   */
+  private static Translator translator = new OxygenTranslator();
+  
   /**
    * Path to style map configuration file.
    */
-  private static final String STYLE_MAP_PATH = "config/wordStyleMap.xml";
+  private static final String STYLE_MAP_PATH = "/config/wordStyleMap.xml";
 
   /**
    * An imposed URL of style map. It's used in TCs.
@@ -41,7 +59,12 @@ public class WordStyleMapLoader {
     if(styleMap == null) {
       URL resource = null;
       if(imposedStyleMapURL == null) {
-        resource = WordStyleMapLoader.class.getClassLoader().getResource(STYLE_MAP_PATH);
+        File baseDir = BatchConverterPlugin.getInstance().getDescriptor().getBaseDir();
+        try {
+          resource = new File(baseDir, STYLE_MAP_PATH).toURI().toURL();
+        } catch (MalformedURLException e) {
+          logger.debug(e, e);
+        }
       } else {
         resource = imposedStyleMapURL;
       }
@@ -51,6 +74,8 @@ public class WordStyleMapLoader {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         WordStyleMap styleMapObj = (WordStyleMap) unmarshaller.unmarshal(new File(resource.getFile()));
         styleMap = convertToStringFormat(styleMapObj);
+      } else {
+        throw(new JAXBException(translator.getTranslation(Tags.CONFIG_FILE_NOT_FOUND,"")));
       }
     }
     return styleMap;

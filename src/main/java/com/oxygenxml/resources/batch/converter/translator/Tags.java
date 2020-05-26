@@ -104,4 +104,8 @@ public class Tags {
    */
   public static final String CREATE_DITA_MAP_OPTION = "Create_Dita_Map_Option";
 
+  /**
+   *  en: The configuration file was not found.
+   */
+  public static final String CONFIG_FILE_NOT_FOUND = "Config_file_not_found";
 }

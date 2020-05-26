@@ -17,6 +17,13 @@
           <include>**/*</include>
         </includes>
       </fileSet>
+      <fileSet>
+        <directory>target/config</directory>
+        <outputDirectory>config</outputDirectory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </fileSet>
 
       <fileSet>
           <directory>target/generated-resources</directory>
