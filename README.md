@@ -1,4 +1,4 @@
-## Oxygen Batch Converter add-on for Oxygen XML Editor
+# Oxygen Batch Converter add-on for Oxygen XML Editor
 This add-on can be installed in Oxygen XML Editor to enable batch conversions between the following formats:  
 
 * HTML to DITA
@@ -13,10 +13,16 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * Markdown to XHTML
 * Word to XHTML
 
-* HTML to DocBook4 / DocBook5 (Oxygen 20 or newer) 
-* Markdown to DocBook4 / DocBook5 (Oxygen 20 or newer) 
-* Word to DocBook4 / DocBook5(Oxygen 20 or newer)
+* HTML to DocBook4 / DocBook5
+* Markdown to DocBook4 / DocBook5 
+* Word to DocBook4 / DocBook5
 
+## Word to DITA
+This conversion works best if you only use the default MS Word styles to semantically mark up your document.
+ 
+The **Create DITA maps from Word documents containing multiple sections** option from the conversion dialog box allows you to decide whether the output will be a DITA map or a DITA topic.
+When this option is selected, all sections from your Word document marked by titles or headings will be separated into individual DITA topics and they are referenced in a DITA map. If the word document does not contain multiple sections, the output will be a single topic.
+When this option is not selected, the output will be a topic with nested topics or sections according to the number of sections from the Word document.
 ## Compatibility
 
 The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1 or newer. 

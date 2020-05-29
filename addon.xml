@@ -33,6 +33,17 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                         >https://github.com/oxygenxml/oxygen-resources-convertor</a>
                     </p>
                 </div>
+                <hr/>
+                <div>
+                    <h3>What's new in version 2.0.0</h3>
+                    <ol>
+                        <li>Improved the Word to DITA conversion, adding a new option that allows you to convert Word documents with multiple sections into <b>DITA maps with referenced DITA topics.</b></li>
+                        <li>Improved the styling configuration for conversions from Word.</li>
+                        <li>Fixed the conversion of Word documents with embedded images.</li>
+                        <li>Fixed the indentation of conversion results that contain consecutive inline elements.</li>
+                        <li>Fixed various other small bugs.</li>
+                    </ol>
+                </div>
             </body>
         </html>
         </xt:description>
