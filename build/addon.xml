@@ -6,9 +6,9 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension xmlns:xt="http://www.oxygenxml.com/ns/extension"
         id="com.oxygenxml.resources.batch.converter.plugin">
-        <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/1.1.17/oxygen-batch-converter-1.1.17-plugin.jar"/>
-        <xt:version>1.1.17</xt:version>
-        <xt:oxy_version>19.1+</xt:oxy_version>
+        <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/2.0.0/oxygen-batch-converter-2.0.0-plugin.jar"/>
+        <xt:version>2.0.0</xt:version>
+        <xt:oxy_version>20.0+</xt:oxy_version>
         <xt:type>plugin</xt:type>
         <xt:author>Syncro Soft</xt:author>
         <xt:name>Batch Converter</xt:name>
@@ -26,12 +26,23 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                     		<li>XML to JSON</li>
                     		<li>JSON to XML</li>
                     		<li>Excel to DITA</li>
-                    		<li>Word to XHTML/DITA/DocBook - experimental</li>
+                    		<li>Word to XHTML/DITA/DocBook</li>
                     	</ul>
                     <p>For more details see <a
                         href="https://github.com/oxygenxml/oxygen-resources-convertor"
                         >https://github.com/oxygenxml/oxygen-resources-convertor</a>
                     </p>
+                </div>
+                <hr/>
+                <div>
+                    <h3>What's new in version 2.0.0</h3>
+                    <ol>
+                        <li>Improved the Word to DITA conversion, adding a new option that allows you to convert Word documents with multiple sections into <b>DITA maps with referenced DITA topics.</b></li>
+                        <li>Improved the styling configuration for conversions from Word.</li>
+                        <li>Fixed the conversion of Word documents with embedded images.</li>
+                        <li>Fixed the indentation of conversion results that contain consecutive inline elements.</li>
+                        <li>Fixed various other small bugs.</li>
+                    </ol>
                 </div>
             </body>
         </html>
