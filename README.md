@@ -25,7 +25,7 @@ When this option is selected, all sections from your Word document marked by tit
 When this option is not selected, the output will be a topic with nested topics or sections according to the number of sections from the Word document.
 ## Compatibility
 
-The add-on is compatible with Oxygen XML Editor (or XML Author) version 20.0 or newer. 
+The add-on is compatible with Oxygen XML Editor/Author/Developer version 20.0 or newer. 
 
 ## How to Install
 
