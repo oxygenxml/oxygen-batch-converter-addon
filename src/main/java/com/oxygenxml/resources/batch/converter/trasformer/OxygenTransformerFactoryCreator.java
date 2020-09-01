@@ -41,11 +41,10 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 					  "</xsl:stylesheet>"));
 		}
 		
-		
 		try {
 			transformer = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
 				  createXSLTTransformer(styleSource , null,
-				  	  XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
+				  	  XMLUtilAccess.TRANSFORMER_SAXON_HOME_EDITION);
 		} catch (TransformerConfigurationException e) {
 			logger.debug(e.getMessage(), e);
 		}
