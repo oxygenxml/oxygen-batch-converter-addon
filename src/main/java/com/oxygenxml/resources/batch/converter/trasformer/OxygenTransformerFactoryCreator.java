@@ -44,7 +44,7 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 		try {
 			transformer = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
 				  createXSLTTransformer(styleSource , null,
-				  	  XMLUtilAccess.TRANSFORMER_SAXON_HOME_EDITION);
+				  	  XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
 		} catch (TransformerConfigurationException e) {
 			logger.debug(e.getMessage(), e);
 		}
