@@ -41,10 +41,17 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 					  "</xsl:stylesheet>"));
 		}
 		
+		String version = PluginWorkspaceProvider.getPluginWorkspace().getVersion();
+		boolean shouldUseHE = false;
+		if(version != null &&  Float.parseFloat(version) >= (float) 23.0) {
+		  shouldUseHE = true;
+		}
+	    
 		try {
 			transformer = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
 				  createXSLTTransformer(styleSource , null,
-				  	  XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
+				      shouldUseHE ? XMLUtilAccess.TRANSFORMER_SAXON_HOME_EDITION
+				          : XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
 		} catch (TransformerConfigurationException e) {
 			logger.debug(e.getMessage(), e);
 		}
