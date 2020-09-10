@@ -43,8 +43,11 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 		
 		String version = PluginWorkspaceProvider.getPluginWorkspace().getVersion();
 		boolean shouldUseHE = false;
-		if(version != null &&  Float.parseFloat(version) >= (float) 23.0) {
-		  shouldUseHE = true;
+		if(version != null) {
+		  String[] versionItems = version.split("\\.");
+		  if(versionItems.length > 0 && 23 >= Integer.valueOf(versionItems[0])) {
+		    shouldUseHE = true;
+		  }
 		}
 	    
 		try {

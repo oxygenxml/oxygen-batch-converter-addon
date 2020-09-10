@@ -258,17 +258,14 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		json.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
 		toReturn.put("jsonSection", json);
 		
-		float oxyVersion = Float.parseFloat(pluginWorkspaceAccess.getVersion());
-		if(oxyVersion > (float) 19.1) {
-		  List<Action> docbook = new ArrayList<Action>();
-		  docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
-			docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
-			docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
-			docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
-			docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB4, pluginWorkspaceAccess));
-			docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB5, pluginWorkspaceAccess));
-			toReturn.put("docbookSection", docbook);
-		}
+		List<Action> docbook = new ArrayList<Action>();
+		docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
+		docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
+		docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
+		docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
+		docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB4, pluginWorkspaceAccess));
+		docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB5, pluginWorkspaceAccess));
+		toReturn.put("docbookSection", docbook);
 
 		return toReturn;
 	}
