@@ -45,7 +45,7 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 		boolean shouldUseHE = false;
 		if(version != null) {
 		  String[] versionItems = version.split("\\.");
-		  if(versionItems.length > 0 && 23 >= Integer.valueOf(versionItems[0])) {
+		  if(versionItems.length > 0 && Integer.valueOf(versionItems[0]) >= 23) {
 		    shouldUseHE = true;
 		  }
 		}
