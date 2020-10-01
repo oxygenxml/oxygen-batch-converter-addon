@@ -17,6 +17,7 @@ import com.oxygenxml.resources.batch.converter.printer.StyleSourceGetter;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
+import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
@@ -73,6 +74,28 @@ public class BatchConverterImpl implements BatchConverter {
 		 */
 		private int failedFile;
 	 
+	  /**
+	   * Constructor.
+	   * 
+	   * @param problemReporter
+	   *          Problem reporter.
+	   * @param progressDialogInteractor
+	   *          Progress dialog interactor.
+	   * @param workerInteractor
+	   *          Worker interactor.
+	   * @param transformerFactoryCreator
+	   *          Transformer factory creator.
+	   */
+	  public BatchConverterImpl(ProblemReporter problemReporter, StatusReporter statusReporter, ProgressDialogInteractor progressDialogInteractor) {
+	    this(problemReporter, statusReporter, progressDialogInteractor, new ConvertorWorkerInteractor() {
+        @Override
+        public boolean isCancelled() {
+          return false;
+        }
+      }, new OxygenTransformerFactoryCreator());
+	    
+	  }
+		
 	/**
 	 * Constructor.
 	 * 
