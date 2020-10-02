@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter.trasformer;
 
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 
 /**
@@ -14,7 +15,8 @@ public interface TransformerFactoryCreator {
 	 * Create a transformer according to given stream source.
 	 * @param styleSource The source XSL, or <code>null</code> 
 	 * @return
+	 * @throws TransformerConfigurationException 
 	 */
-	public Transformer createTransformer(StreamSource styleSource);
+	public Transformer createTransformer(StreamSource styleSource) throws TransformerConfigurationException;
 
 }

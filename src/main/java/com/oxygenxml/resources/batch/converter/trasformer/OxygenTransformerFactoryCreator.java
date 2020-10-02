@@ -25,11 +25,10 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 	
 	/**
 	 * Create a transformer using  XMLUtilAccess.
+	 * @throws TransformerConfigurationException 
 	 */
 	@Override
-	public Transformer createTransformer(StreamSource styleSource) {
-		Transformer transformer = null;
-		
+	public Transformer createTransformer(StreamSource styleSource) throws TransformerConfigurationException {
 		if(styleSource == null){
 			styleSource = new StreamSource(new StringReader(
 					  "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n"
@@ -50,18 +49,10 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
 		  }
 		}
 	    
-		try {
-			transformer = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
-				  createXSLTTransformer(styleSource , null,
-				      shouldUseHE ? XMLUtilAccess.TRANSFORMER_SAXON_HOME_EDITION
-				          : XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
-		} catch (TransformerConfigurationException e) {
-			logger.debug(e.getMessage(), e);
-		}
-	
-		
-		return transformer;
-				
+		return PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
+        createXSLTTransformer(styleSource , null,
+            shouldUseHE ? XMLUtilAccess.TRANSFORMER_SAXON_HOME_EDITION
+                : XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
 	}
 
 }

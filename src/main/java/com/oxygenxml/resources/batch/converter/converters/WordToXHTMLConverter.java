@@ -222,8 +222,8 @@ public class WordToXHTMLConverter implements Converter {
 			StringWriter sw = new StringWriter();
 			StreamResult result = new StreamResult(sw);
 			
-			Transformer transformer = transformerCreator.createTransformer(src);
 			try {
+			  Transformer transformer = transformerCreator.createTransformer(src);
 				transformer.transform(new StreamSource(new StringReader(htmlContent)), result);
 				htmlContent = sw.toString();
 			} catch (TransformerException e) {
