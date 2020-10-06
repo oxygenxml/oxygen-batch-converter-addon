@@ -1,21 +1,23 @@
 package com.oxygenxml.resources.batch.converter.reporter;
 /**
- * Used by checker for report statuses. 
+ * Used by checker to report statuses. 
  * @author Cosmin Duna
  */
 
 public interface StatusReporter {
 	
 	/**
-	 * Report a status
-	 * @param message the status
+	 * Set the given status message.
+	 *  
+	 * @param message The status message to set.
 	 */
-	public void reportStatus(String message);
+	public void setStatusMessage(String message);
 
 	/**
-	 * Report the finish status that contains the result of conversion.
-	 * @param nuOfConverted The number of converted file.
-	 * @param nuOfFailed The number of files that aren't converted.
+	 * Report the conversion was finished.
+	 * 
+	 * @param convertedCnt   The counter of files that was successfully converted.
+	 * @param failedCnt      The counter of files that was not converted.  
 	 */
-	public void reportFinishStatus(int nuOfConverted, int nuOfFailed);
+	public void conversionFinished(int convertedCnt, int failedCnt);
 }

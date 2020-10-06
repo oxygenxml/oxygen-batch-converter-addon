@@ -117,7 +117,27 @@ public class BatchConverterImpl implements BatchConverter {
 		this.workerInteractor = workerInteractor;
 		this.transformerFactoryCreator = transformerFactoryCreator;
 	}
-
+	 
+  /**
+  * Convert the given input files and write them in given output folder according to given convertorType.
+  *
+  * @param inputFormat      The input format to check.
+  * @param outputFormat      The output format to check.
+  * @param inputsProvider    Provider for the user inputs like input files, output directory and another options.
+  * 
+  * @return <code>true</code> if the process of conversion was finished successfully, <code>false</code> otherwise.
+  */
+	@Override
+	public boolean convertFiles(String inputFormat, String outputFormat, UserInputsProvider inputsProvider) {
+	  String converterType = ConversionFormatUtil.getConverterType(inputFormat, outputFormat);
+	  if(converterType != null) {
+	    convertFiles(converterType, inputsProvider);
+	  } else {
+	     problemReporter.reportProblem(new Exception(
+	         "The " + inputFormat + " to " + outputFormat + " conversion format is not supported."), null);
+	  }
+	  return false;
+	}
 	
 	/**
 	 * Convert the given input files and write them in given output folder
@@ -175,7 +195,7 @@ public class BatchConverterImpl implements BatchConverter {
 				}
 				
 				// update the progress dialog note.
-				progressDialogInteractor.setNote(currentFile);
+				progressDialogInteractor.conversionInProgress(currentFile);
 
 				//generate the output file.
 				File outputFile = ConverterFileUtils.getUniqueOutputFile(currentFile, 
@@ -191,7 +211,7 @@ public class BatchConverterImpl implements BatchConverter {
 		}
 
 		//report the finish status
-		statusReporter.reportFinishStatus(convertedFile, failedFile);
+		statusReporter.conversionFinished(convertedFile, failedFile);
 		return isSuccessfully;
 	}
 	

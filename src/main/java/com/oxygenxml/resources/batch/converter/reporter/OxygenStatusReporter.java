@@ -24,7 +24,7 @@ public class OxygenStatusReporter implements StatusReporter {
 	  * @param message Massage to report.
 	  */
 	@Override
-	public void reportStatus(final String message) {
+	public void setStatusMessage(final String message) {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				
@@ -45,17 +45,17 @@ public class OxygenStatusReporter implements StatusReporter {
 
 	/**
 	 * Report the finish status that contains the result of conversion.
-	 * @param nuOfConverted The number of converted file.
+	 * @param convertedCnt The number of converted file.
 	 * @param nuOfFailures  The number of files that aren't converted.
 	 */
 	@Override
-	public void reportFinishStatus(final int nuOfConverted, final int nuOfFailures) {
+	public void conversionFinished(final int convertedCnt, final int nuOfFailures) {
 		try {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				
 				@Override
 				public void run() {
-					String message = nuOfConverted + " resources converted, " + nuOfFailures + " failures";
+					String message = convertedCnt + " resources converted, " + nuOfFailures + " failures";
 					PluginWorkspaceProvider.getPluginWorkspace().showStatusMessage(message);
 				}
 			});

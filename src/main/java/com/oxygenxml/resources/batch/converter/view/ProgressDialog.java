@@ -157,7 +157,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 	 * @param note The note to set.
 	 */
 	@Override
-	public void setNote(final File note){
+	public void conversionInProgress(final File note){
 		fileNote = note;
 		changeNotesCoalescingTimer.restart();
 	}

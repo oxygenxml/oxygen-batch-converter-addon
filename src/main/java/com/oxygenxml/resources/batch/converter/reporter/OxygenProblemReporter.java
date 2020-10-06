@@ -3,7 +3,6 @@ package com.oxygenxml.resources.batch.converter.reporter;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.util.List;
 
 import javax.swing.SwingUtilities;
 
@@ -32,11 +31,6 @@ public class OxygenProblemReporter implements ProblemReporter {
 	private ResultsManager resultManager = PluginWorkspaceProvider.getPluginWorkspace().getResultsManager();
 
 	/**
-	 * The tab key.
-	 */
-	private static final String TAB_KEY = "Batch-Converter";
-	
-	/**
 	 * Report a problem using resultManager.
 	 * 
 	 */
@@ -51,9 +45,9 @@ public class OxygenProblemReporter implements ProblemReporter {
 					DocumentPositionedInfo result;
 					try {
 						result = new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_ERROR, ex.getMessage(),
-								docFile.toURI().toURL().toString());
+						    docFile != null ? docFile.toURI().toURL().toString() : null);
 						// add exception in tabKey
-						resultManager.addResult(TAB_KEY, result, ResultType.PROBLEM, true, true);
+						resultManager.addResult(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY, result, ResultType.PROBLEM, true, true);
 
 					} catch (MalformedURLException e) {
 						logger.debug(e.getMessage(), e);
@@ -69,30 +63,4 @@ public class OxygenProblemReporter implements ProblemReporter {
 	    Thread.currentThread().interrupt();
 		}
 	}
-
-	/**
-	 * Delete the reported problems.
-	 */
-	@Override
-	public void deleteReportedProblems() {
-	try {
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					List<DocumentPositionedInfo> resultsList = resultManager.getAllResults(TAB_KEY);
-					int size = resultsList.size();
-					for (int i = size - 1; i >= 0; i--) {
-						resultManager.removeResult(TAB_KEY, resultsList.get(i));
-					}
-				}
-			});
-		} catch (InvocationTargetException e) {
-			logger.debug(e.getMessage(), e);
-		} catch (InterruptedException e) {
-			logger.debug(e.getMessage(), e);
-			// Restore interrupted state...
-	    Thread.currentThread().interrupt();
-		}
-	}
-
 }

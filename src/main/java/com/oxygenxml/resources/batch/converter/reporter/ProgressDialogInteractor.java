@@ -16,10 +16,11 @@ public interface ProgressDialogInteractor {
 	public void setDialogVisible(boolean state);
 	
 	/**
-	 * Set the given note in dialog.
-	 * @param note The note.
+	 * The conversion of the given file is in progress.
+	 * 
+	 * @param file The converted file.
 	 */
-	public void setNote(File note);
+	public void conversionInProgress(File file);
 	
 	/**
 	 * Close the dialog

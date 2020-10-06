@@ -11,6 +11,7 @@ import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.reporter.OxygenProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
+import com.oxygenxml.resources.batch.converter.reporter.ResultsUtil;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
@@ -79,13 +80,13 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 	@Override
 	protected Void doInBackground() {
 		//report the progress status
-		oxygenStatusReporter.reportStatus(translator.getTranslation(Tags.PROGRESS_STATUS, ""));
+		oxygenStatusReporter.setStatusMessage(translator.getTranslation(Tags.PROGRESS_STATUS, ""));
 
 		//set the progress dialog visible 
 		progressDialogInteractor.setDialogVisible(true);
 
 		//delete reported problems from other conversion
-		oxygenProblemReporter.deleteReportedProblems();
+		ResultsUtil.deleteReportedProblems();
 
 		//create the converter
 		BatchConverter convertor = new BatchConverterImpl(oxygenProblemReporter, oxygenStatusReporter, progressDialogInteractor, this,

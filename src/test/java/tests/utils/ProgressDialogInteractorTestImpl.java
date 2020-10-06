@@ -16,7 +16,7 @@ public class ProgressDialogInteractorTestImpl implements ProgressDialogInteracto
 	}
 
 	@Override
-	public void setNote(File note) {
+	public void conversionInProgress(File note) {
 		System.out.println("Note: "+ note.getAbsolutePath());
 	}
 

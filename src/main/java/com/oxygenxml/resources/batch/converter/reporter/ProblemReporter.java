@@ -16,9 +16,4 @@ public interface ProblemReporter {
 	 */
 	public void reportProblem(Exception ex, File docFile);
 
-
-	/**
-	 * Delete the reported problems
-	 */
-	public void deleteReportedProblems();
 }

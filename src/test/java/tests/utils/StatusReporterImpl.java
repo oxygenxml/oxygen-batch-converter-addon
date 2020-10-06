@@ -10,12 +10,12 @@ import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
 public class StatusReporterImpl implements StatusReporter {
 
 	@Override
-	public void reportStatus(String message) {
+	public void setStatusMessage(String message) {
 
 	}
 
 	@Override
-	public void reportFinishStatus(int nuOfConverted, int nuOfFailed) {
+	public void conversionFinished(int convertedCnt, int failedCnt) {
 
 	}
 

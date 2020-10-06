@@ -23,10 +23,6 @@ public class ProblemReporterTestImpl implements ProblemReporter {
 		reportedProblems.add(ex);
 	}
 
-	@Override
-	public void deleteReportedProblems() {
-	}
-
 	/**
 	 * Getter for reported problems in convert process.
 	 * @return Reported problems in convert process.

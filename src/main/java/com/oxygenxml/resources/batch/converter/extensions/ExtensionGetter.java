@@ -1,5 +1,7 @@
 package com.oxygenxml.resources.batch.converter.extensions;
 
+import com.oxygenxml.resources.batch.converter.ConversionFormat;
+import com.oxygenxml.resources.batch.converter.ConversionFormatUtil;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 /**
  * Getter for extensions.
@@ -15,7 +17,21 @@ public class ExtensionGetter {
 	    throw new IllegalStateException("Utility class");
 	  }
 	
-	
+	 /**
+	   * Get the input extensions according to given conversion formats.
+	   * @param inputFormat    The input format
+	   * @param outputFormat   The output format.
+	   * @return A vector with extensions or <code>null</code> if isn't declared a extension for given conversion formats.
+	   */
+	  public static String[] getInputExtension(String inputFormat, String outputFormat) {
+	    String[] toRet = null;
+	    String converterType = ConversionFormatUtil.getConverterType(inputFormat, outputFormat);
+	    if(converterType != null) {
+	      toRet = getInputExtension(converterType);
+	    }
+	    return toRet;
+	  }
+	 
 	/**
 	 * Get the input extensions according to given converter type.
 	 * @param converterType The converter type.
