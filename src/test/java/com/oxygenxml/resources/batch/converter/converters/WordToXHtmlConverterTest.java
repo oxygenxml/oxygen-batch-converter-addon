@@ -40,7 +40,7 @@ public class WordToXHtmlConverterTest extends TestCase{
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    WordStyleMapLoader.imposeStyleMapURL(new File("config/wordStyleMap.xml").toURI().toURL());
+    WordStyleMapLoader.imposeStyleMapURL(new File("config/wordStyleMap.xml"));
   }
   
   @Override
@@ -483,7 +483,7 @@ public class WordToXHtmlConverterTest extends TestCase{
   			
   	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
   	
-  	WordStyleMapLoader.imposeStyleMapURL(customStyleMap.toURI().toURL());
+  	WordStyleMapLoader.imposeStyleMapURL(customStyleMap);
   	try {
   		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
         @Override

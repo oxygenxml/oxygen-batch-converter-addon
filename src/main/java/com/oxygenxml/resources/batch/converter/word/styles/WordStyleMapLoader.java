@@ -39,9 +39,9 @@ public class WordStyleMapLoader {
   private static final String STYLE_MAP_PATH = "/config/wordStyleMap.xml";
 
   /**
-   * An imposed URL of style map. It's used in TCs.
+   * An imposed file of style map. It's used in TCs.
    */
-  private static URL imposedStyleMapURL = null;
+  private static File imposedStyleMap = null;
   
   /**
    * Cached style map.
@@ -57,22 +57,18 @@ public class WordStyleMapLoader {
    */
   public static final String loadStyleMap() throws JAXBException {
     if(styleMap == null) {
-      URL resource = null;
-      if(imposedStyleMapURL == null) {
+      File styleMapFile = null;
+      if(imposedStyleMap == null) {
         File baseDir = BatchConverterPlugin.getInstance().getDescriptor().getBaseDir();
-        try {
-          resource = new File(baseDir, STYLE_MAP_PATH).toURI().toURL();
-        } catch (MalformedURLException e) {
-          logger.debug(e, e);
-        }
+        styleMapFile = new File(baseDir, STYLE_MAP_PATH);
       } else {
-        resource = imposedStyleMapURL;
+        styleMapFile = imposedStyleMap;
       }
 
-      if(resource != null) {
+      if(styleMapFile != null) {
         JAXBContext context = JAXBContext.newInstance(WordStyleMap.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        WordStyleMap styleMapObj = (WordStyleMap) unmarshaller.unmarshal(new File(resource.getFile()));
+        WordStyleMap styleMapObj = (WordStyleMap) unmarshaller.unmarshal(styleMapFile);
         styleMap = convertToStringFormat(styleMapObj);
       } else {
         throw(new JAXBException(translator.getTranslation(Tags.CONFIG_FILE_NOT_FOUND,"")));
@@ -143,12 +139,12 @@ public class WordStyleMapLoader {
   }
   
   /**
-   * Impose a style map URL. Used in TCs.
+   * Impose a style map file. Used in TCs.
    * 
-   * @param styleMapURL The URL of style map to be imposed.
+   * @param styleMapURL The style map file to be imposed.
    */
-  public static void imposeStyleMapURL(URL styleMapURL) {  
-    imposedStyleMapURL = styleMapURL;
+  public static void imposeStyleMapURL(File styleMapURL) {  
+    imposedStyleMap = styleMapURL;
     styleMap = null;
   }
 }
