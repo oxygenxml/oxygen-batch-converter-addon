@@ -15,10 +15,13 @@ public class HtmlToDitaConverter extends PipelineConverter{
    */
   @Override
   protected Converter[] getUsedConverters(UserInputsProvider userInputsProvider) {
-    return new Converter[] {
+    Converter ditaConverter = createDitaMapConverter(userInputsProvider);
+    Converter[] converters = new Converter[] {
         new HtmlToXhtmlConverter(),
         new HTML5Cleaner(),
-        new XHTMLToDITAConverter()
+        new XHTMLToDITAConverter(),
+        ditaConverter
     };
+    return converters;
   }
 }

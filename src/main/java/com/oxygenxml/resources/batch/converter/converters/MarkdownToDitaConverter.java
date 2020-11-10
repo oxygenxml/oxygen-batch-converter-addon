@@ -32,7 +32,7 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
  * @author Cosmin Duna
  *
  */
-public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.converter.converters.Converter {
+public class MarkdownToDitaConverter extends PipelineConverter implements com.oxygenxml.resources.batch.converter.converters.Converter {
 
 	/**
 	 * The key for system property of transformer factory.
@@ -173,4 +173,11 @@ public class MarkdownToDitaTransformer implements com.oxygenxml.resources.batch.
       }
     };
 	}
+
+  @Override
+  protected Converter[] getUsedConverters(UserInputsProvider userInputsProvider) {
+    Converter ditaConverter = createDitaMapConverter(userInputsProvider);
+    Converter[] converters = new Converter[] {this, ditaConverter};
+    return converters;
+  }
 }

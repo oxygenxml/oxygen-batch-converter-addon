@@ -30,7 +30,7 @@ public class ConverterCreator {
   		return new HtmlToDitaConverter();
 
   	} else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
-  		return new MarkdownToDitaTransformer();
+  		return new MarkdownToDitaConverter();
 
   	} else if(ConverterTypes.XML_TO_JSON.equals(converterType)){
   		return new XmlToJsonConverter();
