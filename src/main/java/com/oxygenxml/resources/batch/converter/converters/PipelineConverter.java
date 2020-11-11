@@ -7,7 +7,6 @@ import java.io.StringReader;
 import javax.xml.transform.TransformerException;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 
 /**
@@ -47,16 +46,4 @@ public abstract class PipelineConverter implements Converter{
     return result;
   }
   
-  /**
-   * Create DitaMap depending on check box status
-   * @param userInputsProvider options from user
-   */
-  public Converter createDitaMapConverter(UserInputsProvider userInputsProvider){
-    Boolean shoultCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
-        OptionTags.CREATE_DITA_MAP_FROM_WORD);
-    if(shoultCreateDitaMap != null && shoultCreateDitaMap) {
-      return new MapWithTopicsConverter();
-    }
-    return null;
-  }
 }

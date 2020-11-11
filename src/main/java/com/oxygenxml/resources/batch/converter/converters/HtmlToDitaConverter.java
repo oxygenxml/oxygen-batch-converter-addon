@@ -1,6 +1,11 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
+import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 
 /**
  * Implementation of Converter for HTML to DITA.
@@ -15,13 +20,16 @@ public class HtmlToDitaConverter extends PipelineConverter{
    */
   @Override
   protected Converter[] getUsedConverters(UserInputsProvider userInputsProvider) {
-    Converter ditaConverter = createDitaMapConverter(userInputsProvider);
-    Converter[] converters = new Converter[] {
-        new HtmlToXhtmlConverter(),
-        new HTML5Cleaner(),
-        new XHTMLToDITAConverter(),
-        ditaConverter
-    };
-    return converters;
+    List<Converter> converters = new ArrayList<Converter>();
+    converters.add( new HtmlToXhtmlConverter());
+    converters.add(new HTML5Cleaner());
+    converters.add(new XHTMLToDITAConverter());
+    
+    Boolean shoultCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
+        OptionTags.CREATE_DITA_MAP_FROM_HTML);
+    if(shoultCreateDitaMap != null && shoultCreateDitaMap) {
+      converters.add(new MapWithTopicsConverter());
+    }
+    return  converters.toArray(new Converter[0]);
   }
 }
