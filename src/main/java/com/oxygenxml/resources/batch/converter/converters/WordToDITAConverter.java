@@ -21,7 +21,6 @@ public class WordToDITAConverter extends PipelineConverter {
     List<Converter> converters = new ArrayList<Converter>();
     converters.add(new WordToXHTMLConverter());
     converters.add(new HtmlToDitaConverter());
-
     Boolean shoultCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
         OptionTags.CREATE_DITA_MAP_FROM_WORD);
     if(shoultCreateDitaMap != null && shoultCreateDitaMap) {

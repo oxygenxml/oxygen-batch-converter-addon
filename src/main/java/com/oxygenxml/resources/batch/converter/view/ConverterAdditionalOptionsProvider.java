@@ -21,7 +21,9 @@ public class ConverterAdditionalOptionsProvider {
    */
   private static Map<String, String> addionalOptionToTranslationTag = new HashMap<String, String>();
   static {
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, Tags.CREATE_DITA_MAP_OPTION);
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, Tags.CREATE_DITA_MAP_OPTION_WORD);
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD, Tags.CREATE_DITA_MAP_OPTION_MD);
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML, Tags.CREATE_DITA_MAP_OPTION_HTML);
   }
   
   /**
@@ -39,8 +41,12 @@ public class ConverterAdditionalOptionsProvider {
    */
   public static final List<String> getImposedAdditionalOptions(String convertionType){
     List<String> options= new ArrayList<String>();
-    if(ConverterTypes.WORD_TO_DITA.equals(convertionType)) {
+    if( ConverterTypes.WORD_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_WORD);
+    } else if(ConverterTypes.MD_TO_DITA.equals(convertionType)) {
+      options.add(OptionTags.CREATE_DITA_MAP_FROM_MD);
+    } else if(ConverterTypes.HTML_TO_DITA.equals(convertionType)) {
+      options.add(OptionTags.CREATE_DITA_MAP_FROM_HTML);
     }
     return options;
   }

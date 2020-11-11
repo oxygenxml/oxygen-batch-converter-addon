@@ -1,32 +1,26 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 
+
 /**
- * Implementation of Converter for HTML to DITA.
+ * Converter implementation for Markdown to DITA.
  * 
- * @author cosmin_duna
+ * @author Cosmin Duna
  *
  */
-public class HtmlToDitaConverter extends PipelineConverter{
+public class MarkdownToDitaConverter extends PipelineConverter {
 
-  /**
-   * Get the converters used in HTML to DITA conversion.
-   */
   @Override
   protected Converter[] getUsedConverters(UserInputsProvider userInputsProvider) {
     List<Converter> converters = new ArrayList<Converter>();
-    converters.add( new HtmlToXhtmlConverter());
-    converters.add(new HTML5Cleaner());
-    converters.add(new XHTMLToDITAConverter());
-    
+    converters.add(new MarkdownToDitaInternalConverter());
     Boolean shoultCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
-        OptionTags.CREATE_DITA_MAP_FROM_HTML);
+        OptionTags.CREATE_DITA_MAP_FROM_MD);
     if(shoultCreateDitaMap != null && shoultCreateDitaMap) {
       converters.add(new MapWithTopicsConverter());
     }
