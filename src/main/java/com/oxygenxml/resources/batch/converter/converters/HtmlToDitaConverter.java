@@ -25,9 +25,9 @@ public class HtmlToDitaConverter extends PipelineConverter{
     converters.add(new HTML5Cleaner());
     converters.add(new XHTMLToDITAConverter());
     
-    Boolean shoultCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
+    Boolean shouldCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
         OptionTags.CREATE_DITA_MAP_FROM_HTML);
-    if(shoultCreateDitaMap != null && shoultCreateDitaMap) {
+    if(shouldCreateDitaMap != null && shouldCreateDitaMap) {
       converters.add(new MapWithTopicsConverter());
     }
     return  converters.toArray(new Converter[0]);

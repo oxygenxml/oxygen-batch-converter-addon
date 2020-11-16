@@ -19,9 +19,9 @@ public class MarkdownToDitaConverter extends PipelineConverter {
   protected Converter[] getUsedConverters(UserInputsProvider userInputsProvider) {
     List<Converter> converters = new ArrayList<Converter>();
     converters.add(new MarkdownToDitaInternalConverter());
-    Boolean shoultCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
+    Boolean shouldCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
         OptionTags.CREATE_DITA_MAP_FROM_MD);
-    if(shoultCreateDitaMap != null && shoultCreateDitaMap) {
+    if(shouldCreateDitaMap != null && shouldCreateDitaMap) {
       converters.add(new MapWithTopicsConverter());
     }
     return  converters.toArray(new Converter[0]);
