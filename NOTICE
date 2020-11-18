@@ -5,8 +5,9 @@
 =========================================================================
 This product includes software from the following projects:
 
-markdown-1.3.0.jar
-Site: https://github.com/jelovirt/dita-ot-markdown/ 
+oxygen-patched-lwdita-for-batch-converter-2.4.1.jar
+Patch for Lightweight DITA for DITA-OT library.
+Site: https://github.com/jelovirt/org.lwdita 
 License: Apache License 2.0 ( http://www.apache.org/licenses/LICENSE-2.0)
 
 mammoth-1.4.0.jar

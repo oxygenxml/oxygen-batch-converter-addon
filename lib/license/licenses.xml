@@ -5,8 +5,8 @@
     xsi:schemaLocation="http://mojo.codehaus.org/ licenses.xsd">
     <dependencies>
         <dependency>
-            <groupId>com.elovirta.dita</groupId> 
-            <artifactId>markdown</artifactId> 
+            <groupId>com.oxygenxml</groupId> 
+            <artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId> 
             <licenses>
                 <license>
                     <name>The Apache Software License, Version 2.0</name>

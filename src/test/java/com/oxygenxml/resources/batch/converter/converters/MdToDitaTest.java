@@ -1,8 +1,6 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,9 +35,12 @@ import tests.utils.TransformerFactoryCreatorImpl;
  */
 public class MdToDitaTest {
 
+  /**
+   * Test Markdown to DITA conversion
+   * @throws Exception
+   */
 	@Test
-	public void test() throws TransformerException, IOException {
-		
+	public void testConversion() throws Exception {
 		File sample  = new File("test-sample/markdownTest.md");		
 		File goodSample = new File("test-sample/goodMdToDita.dita");
 		final File outputFolder = sample.getParentFile();
@@ -53,8 +54,7 @@ public class MdToDitaTest {
 		final List<File> inputFiles = new ArrayList<File>();
 		inputFiles.add(sample);
 				
-		File fileToRead = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
-		
+		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
 		try {
 			converter.convertFiles(ConverterTypes.MD_TO_DITA, 
 			    new UserInputsProvider() {
@@ -80,69 +80,14 @@ public class MdToDitaTest {
             }
           });
 
-			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
-
+		  String expected = FileComparationUtil.readFile(goodSample.getAbsolutePath()).toString();
+      String actual = FileComparationUtil.readFile(convertedFile.getAbsolutePath()).toString();
+      assertEquals(expected, actual);
 		} finally {
-			Files.delete(fileToRead.toPath());
+			Files.delete(convertedFile.toPath());
 		}
 	}
 	
-	/**
-	 * <p><b>Description:</b> We have an invalid Markdown file. Check if a problem is reported.</p>
-	 * <p><b>Bug ID:</b> EXM-41340</p>
-	 * 
-	 * @author cosmin_duna
-	 */
-	@Test
-	public void testDocumentWithProblems_EXM_41340() throws TransformerException, IOException {
-		
-		File sample  = new File("test-sample/invalidDoc.md");		
-		final File outputFolder = sample.getParentFile();
-		
-		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
-		ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
-		
-		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
-				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
-
-		final List<File> inputFiles = new ArrayList<File>();
-		inputFiles.add(sample);
-				
-		File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
-		
-		try {
-			converter.convertFiles(ConverterTypes.MD_TO_DITA, new UserInputsProvider() {
-        @Override
-        public boolean mustOpenConvertedFiles() {
-          return false;
-        }
-        @Override
-        public File getOutputFolder() {
-          return outputFolder;
-        }
-        @Override
-        public List<File> getInputFiles() {
-          return inputFiles;
-        }
-        @Override
-        public Boolean getAdditionalOptionValue(String additionalOptionId) {
-          return null;
-        }
-      });
-			assertFalse("The file shouldn't be generated.", convertedFile.exists());
-
-			// Check the reported problem
-			List<Exception> reportedProblems = problemReporter.getReportedProblems();
-			assertEquals(1, reportedProblems.size());
-			assertEquals("Failed to parse Markdown: Header level raised from 2 to 4 without intermediate header level", reportedProblems.get(0).getMessage());
-			
-		} finally {
-			if(convertedFile.exists()) {
-				Files.delete(convertedFile.toPath());
-			}
-		}
-	}
-		
 	/**
 	 * <p><b>Description:</b> Test conversion of MD to DITA Composite.</p>
 	 * <p><b>Bug ID:</b> EXM-44491</p>
@@ -195,4 +140,110 @@ public class MdToDitaTest {
 			}
 		}
 	}
+	
+	 /**
+   * <p><b>Description:</b> Test that conversion of MD to DITA is more relaxed and accepts files 
+   * that starts with a high heading level or the level is increased with more than one unit.</p>
+   * <p><b>Bug ID:</b> EXM-45707</p>
+   * 
+   * @author cosmin_duna
+   */
+  @Test
+  public void testStartWithHighHeadingLevel() throws TransformerException, IOException {
+    File inputFile  = new File("test-sample/EXM-45707/start_with_high_level.md");
+    File expectedOutputFile  = new File("test-sample/EXM-45707/start_with_high_level.dita");
+    final File outputFolder = inputFile.getParentFile();
+    
+    TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+    ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
+    
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+        new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+
+    final List<File> inputFiles = new ArrayList<File>();
+    inputFiles.add(inputFile);
+        
+    File convertedFile = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
+    
+    try {
+      converter.convertFiles(ConverterTypes.MD_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+      
+      assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
+          FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
+    } finally {
+      if(convertedFile.exists()) {
+        Files.delete(convertedFile.toPath());
+      }
+    }
+  }
+
+  /**
+   * <p><b>Description:</b> Test that conversion of MD to DITA is more relaxed and accepts files 
+   * that starts with a high heading level or the level is increased with more than one unit.</p>
+   * <p><b>Bug ID:</b> EXM-45707</p>
+   * 
+   * @author cosmin_duna
+   */
+  @Test
+  public void testStartWithHighHeadingLevel2() throws TransformerException, IOException {
+    File inputFile  = new File("test-sample/EXM-45707/start_with_high_level2.md");
+    File expectedOutputFile  = new File("test-sample/EXM-45707/start_with_high_level2.dita");
+    final File outputFolder = inputFile.getParentFile();
+    
+    TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+    ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
+    
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+        new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+    final List<File> inputFiles = new ArrayList<File>();
+    inputFiles.add(inputFile);
+        
+    File convertedFile = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
+    
+    try {
+      converter.convertFiles(ConverterTypes.MD_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+      
+      assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
+          FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
+    } finally {
+      if(convertedFile.exists()) {
+        Files.delete(convertedFile.toPath());
+      }
+    }
+  }
 }

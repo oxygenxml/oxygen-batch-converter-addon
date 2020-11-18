@@ -15,7 +15,7 @@ The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1.
 
 You can install the add-on by using Oxygen's add-ons support. In Oxygen, go to Help->Install new add-ons... and use this add-on repository URL:
 
-https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml
+[https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml](https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml)
 
 then continue the installation process.
 
