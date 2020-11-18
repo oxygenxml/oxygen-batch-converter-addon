@@ -125,7 +125,7 @@ public class WordToXHTMLConverter implements Converter {
 		HWPFDocumentCore wordDocument = WordToHtmlUtils.loadDoc(file);
 
 		WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
-				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()); //NOSONAR
 		wordToHtmlConverter.setPicturesManager(picturesManager);
 
 		wordToHtmlConverter.processDocument(wordDocument);
@@ -136,7 +136,7 @@ public class WordToXHTMLConverter implements Converter {
 			DOMSource domSource = new DOMSource(htmlDocument);
 			StreamResult streamResult = new StreamResult(stringWriter);
 
-			TransformerFactory tf = TransformerFactory.newInstance();
+			TransformerFactory tf = TransformerFactory.newInstance(); //NOSONAR
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty( OutputKeys.ENCODING, "UTF-8" );
 			serializer.setOutputProperty( OutputKeys.INDENT, "yes" );
