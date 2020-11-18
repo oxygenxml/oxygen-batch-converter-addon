@@ -1,21 +1,13 @@
 package com.oxygenxml.resources.batch.converter.word.styles;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.log4j.Logger;
-
-import com.oxygenxml.resources.batch.converter.converters.ExcelToDITAConverter;
 import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
-import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
-import com.oxygenxml.resources.batch.converter.translator.Tags;
-import com.oxygenxml.resources.batch.converter.translator.Translator;
 
 /**
  * Loader for the style map used in conversion from Word format.
@@ -23,15 +15,6 @@ import com.oxygenxml.resources.batch.converter.translator.Translator;
  * @author cosmin_duna
  */
 public class WordStyleMapLoader {
-  /**
-   * Logger.
-   */
-  private static final Logger logger = Logger.getLogger(WordStyleMapLoader.class);
-  
-  /**
-   * Translator
-   */
-  private static Translator translator = new OxygenTranslator();
   
   /**
    * Path to style map configuration file.
@@ -64,15 +47,11 @@ public class WordStyleMapLoader {
       } else {
         styleMapFile = imposedStyleMap;
       }
-
-      if(styleMapFile != null) {
-        JAXBContext context = JAXBContext.newInstance(WordStyleMap.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        WordStyleMap styleMapObj = (WordStyleMap) unmarshaller.unmarshal(styleMapFile);
-        styleMap = convertToStringFormat(styleMapObj);
-      } else {
-        throw(new JAXBException(translator.getTranslation(Tags.CONFIG_FILE_NOT_FOUND,"")));
-      }
+      
+      JAXBContext context = JAXBContext.newInstance(WordStyleMap.class);
+      Unmarshaller unmarshaller = context.createUnmarshaller();
+      WordStyleMap styleMapObj = (WordStyleMap) unmarshaller.unmarshal(styleMapFile);
+      styleMap = convertToStringFormat(styleMapObj);
     }
     return styleMap;
   }
