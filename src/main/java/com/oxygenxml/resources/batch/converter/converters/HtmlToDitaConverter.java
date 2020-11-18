@@ -1,7 +1,6 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;

@@ -80,7 +80,7 @@ public class ConverterReaderUtils {
 
 		if(pluginWorkspace != null) {
 			UtilAccess utilAccess = pluginWorkspace.getUtilAccess();
-			reader = utilAccess.createReader(URLUtil.correct(file), "UTF-8");
+			reader = utilAccess.createReader(URLUtil.correct(file), "UTF-8"); //NOSONAR
 		} else {
 			InputStream inputStream = new FileInputStream(file);
 			 try {

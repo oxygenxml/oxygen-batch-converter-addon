@@ -1,7 +1,7 @@
 package com.oxygenxml.resources.batch.converter.word.styles;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -17,9 +17,16 @@ import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
 public class WordStyleMapLoader {
   
   /**
+   * Private constructor
+   */
+  private WordStyleMapLoader() {
+    //avoid instatiation
+  }
+  
+  /**
    * Path to style map configuration file.
    */
-  private static final String STYLE_MAP_PATH = "/config/wordStyleMap.xml";
+  private static final String STYLE_MAP_PATH = "/config/wordStyleMap.xml"; //NOSONAR
 
   /**
    * An imposed file of style map. It's used in TCs.
@@ -65,13 +72,13 @@ public class WordStyleMapLoader {
    */
   private static final String convertToStringFormat(WordStyleMap styleMap) {
     StringBuilder toRet = new StringBuilder();
-    ArrayList<WordStyleToHtmlRelation> styleToHtmlList = styleMap.getStyleToHtmlList();
+    List<WordStyleToHtmlRelation> styleToHtmlList = styleMap.getStyleToHtmlList();
     for (WordStyleToHtmlRelation styleToHtmlRelation : styleToHtmlList) {
      appendStyleInfo(toRet, styleToHtmlRelation.getElement(),
          styleToHtmlRelation.getStyleName(), styleToHtmlRelation.getResultedHTML());
     }
     
-    ArrayList<CustomToDefaultStyleRelation> customToDefaultList = styleMap.getCustomToDefaultList();
+    List<CustomToDefaultStyleRelation> customToDefaultList = styleMap.getCustomToDefaultList();
     for (int i = 0; i < customToDefaultList.size(); i++) {
       CustomToDefaultStyleRelation styleRelation = customToDefaultList.get(i);
       String defaultStyle = styleRelation.getDefaultStyle();

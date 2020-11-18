@@ -10,9 +10,11 @@ import java.net.URLEncoder;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
@@ -22,6 +24,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.hwpf.HWPFDocumentCore;
+import org.apache.poi.hwpf.converter.AbstractWordUtils;
 import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
 import org.apache.poi.hwpf.converter.WordToHtmlUtils;
@@ -120,9 +123,12 @@ public class WordToXHTMLConverter implements Converter {
 	 * @param picturesManager		An images manager. It's used to convert images.
 
 	 * @throws IOException 
+	 * @throws ParserConfigurationException 
+	 * @throws TransformerException 
 	 */
-	public String convertDocFile(File file, PicturesManager picturesManager) throws Exception{
-		HWPFDocumentCore wordDocument = WordToHtmlUtils.loadDoc(file);
+	public String convertDocFile(File file, PicturesManager picturesManager) 
+	    throws IOException, ParserConfigurationException, TransformerException {
+		HWPFDocumentCore wordDocument = AbstractWordUtils.loadDoc(file);
 
 		WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
 				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()); //NOSONAR
@@ -132,13 +138,14 @@ public class WordToXHTMLConverter implements Converter {
 		Document htmlDocument = wordToHtmlConverter.getDocument();
 
 		StringWriter stringWriter = new StringWriter();
-		try {
+		final String UTF = "UTF-8";
+    try {
 			DOMSource domSource = new DOMSource(htmlDocument);
 			StreamResult streamResult = new StreamResult(stringWriter);
 
 			TransformerFactory tf = TransformerFactory.newInstance(); //NOSONAR
 			Transformer serializer = tf.newTransformer();
-			serializer.setOutputProperty( OutputKeys.ENCODING, "UTF-8" );
+			serializer.setOutputProperty( OutputKeys.ENCODING, UTF );
 			serializer.setOutputProperty( OutputKeys.INDENT, "yes" );
 			serializer.setOutputProperty( OutputKeys.METHOD, "xhtml" );
 			serializer.transform(domSource, streamResult);
@@ -146,8 +153,8 @@ public class WordToXHTMLConverter implements Converter {
 			stringWriter.close();
 		}
 
-		String html = URLEncoder.encode(stringWriter.toString(), "UTF-8");
-		return  URLDecoder.decode(html, "UTF-8");
+		String html = URLEncoder.encode(stringWriter.toString(), UTF);
+		return  URLDecoder.decode(html, UTF);
 	}
 	
 	/**
@@ -176,7 +183,7 @@ public class WordToXHTMLConverter implements Converter {
 	 */
 	private String resolveMaths(String htmlContent, TransformerFactoryCreator transformerCreator) {
 		boolean wasXslResolved = false;
-		final String teiXslPath = "http://www.tei-c.org/release/xml/tei/stylesheet/docx/from/omml2mml.xsl";
+		final String teiXslPath = "http://www.tei-c.org/release/xml/tei/stylesheet/docx/from/omml2mml.xsl"; //NOSONAR
 
 		PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
 		if(pluginWorkspace != null) {
