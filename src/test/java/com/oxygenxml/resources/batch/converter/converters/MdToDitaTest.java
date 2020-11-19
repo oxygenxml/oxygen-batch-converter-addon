@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class MdToDitaTest {
 	public void testConversion() throws Exception {
 		File sample  = new File("test-sample/markdownTest.md");		
 		File goodSample = new File("test-sample/goodMdToDita.dita");
-		final File outputFolder = sample.getParentFile();
+    final File outputFolder = new File(sample.getParentFile(), "output");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -85,6 +86,7 @@ public class MdToDitaTest {
       assertEquals(expected, actual);
 		} finally {
 			Files.delete(convertedFile.toPath());
+			Files.delete(outputFolder.toPath());
 		}
 	}
 	
@@ -99,7 +101,7 @@ public class MdToDitaTest {
 		
 		File sample  = new File("test-sample/EXM-44491/sample.md");
 		File goodOutput  = new File("test-sample/EXM-44491/outputFile.dita");
-		final File outputFolder = sample.getParentFile();
+		final File outputFolder = new File(sample.getParentFile(), "output");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
@@ -137,6 +139,7 @@ public class MdToDitaTest {
 		} finally {
 			if(convertedFile.exists()) {
 				Files.delete(convertedFile.toPath());
+				Files.delete(outputFolder.toPath());
 			}
 		}
 	}
@@ -152,7 +155,7 @@ public class MdToDitaTest {
   public void testStartWithHighHeadingLevel() throws TransformerException, IOException {
     File inputFile  = new File("test-sample/EXM-45707/start_with_high_level.md");
     File expectedOutputFile  = new File("test-sample/EXM-45707/start_with_high_level.dita");
-    final File outputFolder = inputFile.getParentFile();
+    final File outputFolder = new File(inputFile.getParentFile(), "output");
     
     TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
     ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
@@ -190,6 +193,7 @@ public class MdToDitaTest {
     } finally {
       if(convertedFile.exists()) {
         Files.delete(convertedFile.toPath());
+        Files.delete(outputFolder.toPath());
       }
     }
   }
@@ -205,7 +209,7 @@ public class MdToDitaTest {
   public void testStartWithHighHeadingLevel2() throws TransformerException, IOException {
     File inputFile  = new File("test-sample/EXM-45707/start_with_high_level2.md");
     File expectedOutputFile  = new File("test-sample/EXM-45707/start_with_high_level2.dita");
-    final File outputFolder = inputFile.getParentFile();
+    final File outputFolder = new File(inputFile.getParentFile(), "output");
     
     TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
     ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
@@ -243,6 +247,60 @@ public class MdToDitaTest {
     } finally {
       if(convertedFile.exists()) {
         Files.delete(convertedFile.toPath());
+        Files.delete(outputFolder.toPath());
+      }
+    }
+  }
+  
+  /**
+   * <p><b>Description:</b> Test that conversion of MD to DITA is more relaxed and accepts sections that don't have level higher than heading.</p>
+   * <p><b>Bug ID:</b> EXM-45707</p>
+   * 
+   * @author cosmin_duna
+   */
+  @Test
+  public void testLevelOfSection() throws TransformerException, IOException {
+    File inputFile  = new File("test-sample/EXM-45707/start_with_high_level3.md");
+    File expectedOutputFile  = new File("test-sample/EXM-45707/start_with_high_level3.dita");
+    final File outputFolder = new File(inputFile.getParentFile(), "output");
+    
+    TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+    ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
+    
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+        new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+    final List<File> inputFiles = new ArrayList<File>();
+    inputFiles.add(inputFile);
+        
+    File convertedFile = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
+    
+    try {
+      converter.convertFiles(ConverterTypes.MD_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+      
+      assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
+          FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
+    } finally {
+      if(convertedFile.exists()) {
+        Files.delete(convertedFile.toPath());
+        Files.delete(outputFolder.toPath());
       }
     }
   }
