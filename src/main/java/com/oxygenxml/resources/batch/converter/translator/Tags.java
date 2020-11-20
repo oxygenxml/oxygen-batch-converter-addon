@@ -109,15 +109,8 @@ public class Tags {
    * 
    *  en: Create DITA Maps for Markdown documents containing multiple sections 
    */
-  public static final String CREATE_DITA_MAP_OPTION_MD = "Create_Dita_Map_Option_MD";
+  public static final String CREATE_DITA_MAP_OPTION_FOR = "Create_Dita_Map_Option_For";
   
-  /**
-   * Option used to configure if the result will be a DITA Map or a DITA Topic.
-   * 
-   *  en: Create DITA Maps for HTML documents containing multiple sections 
-   */
-  public static final String CREATE_DITA_MAP_OPTION_HTML = "Create_Dita_Map_Option_HTML";
-
   /**
    *  en: The configuration file was not found.
    */

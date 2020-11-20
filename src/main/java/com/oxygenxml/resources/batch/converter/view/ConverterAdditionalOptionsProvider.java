@@ -1,5 +1,6 @@
 package com.oxygenxml.resources.batch.converter.view;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
+import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 
 /**
@@ -17,13 +19,18 @@ import com.oxygenxml.resources.batch.converter.translator.Tags;
 public class ConverterAdditionalOptionsProvider {
   
   /**
+   * Translator for internalisation
+   */
+  private static OxygenTranslator translator = new OxygenTranslator();
+  
+  /**
    * Map between options and translation tags.
    */
   private static Map<String, String> addionalOptionToTranslationTag = new HashMap<String, String>();
   static {
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, Tags.CREATE_DITA_MAP_OPTION_WORD);
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD, Tags.CREATE_DITA_MAP_OPTION_MD);
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML, Tags.CREATE_DITA_MAP_OPTION_HTML);
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "Markdown"));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "HTML"));
   }
   
   /**
@@ -58,7 +65,7 @@ public class ConverterAdditionalOptionsProvider {
    * 
    * @return The translation tag associated with the option.
    */
-  public static final String getTranslationTagFor(String additionalOption) {
+  public static final String getTranslationMessageFor(String additionalOption) {
     return addionalOptionToTranslationTag.get(additionalOption);
   }
 }

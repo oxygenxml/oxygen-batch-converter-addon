@@ -31,7 +31,7 @@ import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
  * @author Cosmin Duna
  *
  */
-public class ConverterDialog extends OKCancelDialog implements BatchConverterInteractor{
+public class ConverterDialog extends OKCancelDialog implements BatchConverterInteractor{ //NOSONAR parent
 
 	/**
 	 * Default serial version ID
@@ -155,7 +155,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		List<String> imposedAdditionalOptions = ConverterAdditionalOptionsProvider.getImposedAdditionalOptions(converterType);
 		for (String imposedOption : imposedAdditionalOptions) {
 		  JCheckBox optionCombo = new JCheckBox(translator.getTranslation(
-		      ConverterAdditionalOptionsProvider.getTranslationTagFor(imposedOption), ""));
+		      ConverterAdditionalOptionsProvider.getTranslationMessageFor(imposedOption), ""));
 		  additionalOptions.put(imposedOption, optionCombo);
 		  gbc.gridy++;
 	    convertorPanel.add(optionCombo, gbc);
