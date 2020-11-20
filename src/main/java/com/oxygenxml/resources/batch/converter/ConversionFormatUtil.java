@@ -18,62 +18,62 @@ public class ConversionFormatUtil {
   /**
    * XHTML document name for conversion
    */
-  private static String XHTML = "xhtml";
+  private static final String XHTML = "xhtml";
   
   /**
    * DITA document name for conversion
    */
-  private static String DITA = "dita";
+  private static final String DITA = "dita";
   
   /**
    * Excel document name for conversion
    */
-  private static String EXCEL = "excel";
+  private static final String EXCEL = "excel";
   
   /**
    * Word document name for conversion
    */
-  private static String WORD = "word";
+  private static final String WORD = "word";
   
   /**
    * XML document name for conversion
    */
-  private static String XML = "xml";
+  private static final String XML = "xml";
   
   /**
    * JSON document name for conversion
    */
-  private static String JSON = "json";
+  private static final String JSON = "json";
   
   /**
    * MARKDOWN document name for conversion
    */
-  private static String MARKDOWN = "markdown";
+  private static final String MARKDOWN = "markdown";
   
   /**
    * MD document name for conversion
    */
-  private static String MD = "md";
+  private static final String MD = "md";
   
   /**
    * DB5 document name for conversion
    */
-  private static String DB5 = "db5";
+  private static final String DB5 = "db5";
   
   /**
    * DB4 document name for conversion
    */
-  private static String DB4 = "db4";
+  private static final String DB4 = "db4";
   
   /**
    * DOCBOOK4 document name for conversion
    */
-  private static String DOCBOOK4 = "docbook4";
+  private static final String DOCBOOK4 = "docbook4";
   
   /**
    * DOCBOOK5 document name for conversion
    */
-  private static String DOCBOOK5 = "docbook5";
+  private static final String DOCBOOK5 = "docbook5";
   
   /**
    * Private constructor.
