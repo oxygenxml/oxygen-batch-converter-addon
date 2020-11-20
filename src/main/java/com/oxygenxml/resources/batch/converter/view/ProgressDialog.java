@@ -30,7 +30,7 @@ import ro.sync.ecss.extensions.commons.ui.OKCancelDialog;
  * @author Cosmin Duna
  *
  */
-public class ProgressDialog extends OKCancelDialog implements ProgressDialogInteractor {
+public class ProgressDialog extends OKCancelDialog implements ProgressDialogInteractor {  //NOSONAR parent
 
 	/**
 	 * Default serial version ID

@@ -12,6 +12,7 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.PegdownExtensions;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
@@ -45,7 +46,7 @@ public class MarkdownToHtmlConverter implements Converter {
 		String convertedContent = null;
 
 		// create the parser
-		final DataHolder options = PegdownOptionsAdapter.flexmarkOptions(true, Extensions.ALL - Extensions.EXTANCHORLINKS);
+		final DataHolder options = PegdownOptionsAdapter.flexmarkOptions(true, PegdownExtensions.ALL - PegdownExtensions.EXTANCHORLINKS);
 
 		Parser parser = Parser.builder(options).build();
 		HtmlRenderer renderer = HtmlRenderer.builder(options).build();
