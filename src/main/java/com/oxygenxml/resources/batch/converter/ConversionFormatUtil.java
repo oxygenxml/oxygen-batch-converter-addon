@@ -10,20 +10,71 @@ import java.util.Map;
  *
  */
 public class ConversionFormatUtil {
-  
+  /**
+   * HTML document name for conversion
+   */
   private static final String HTML = "html";
-  private static String DB5 = "db5";
-  private static String MD = "md";
-  private static String DITA = "dita";
-  private static String MARKDOWN = "markdown";
-  private static String EXCEL = "excel";
-  private static String WORD = "word";
-  private static String XML = "xml";
-  private static String JSON = "json";
+  
+  /**
+   * XHTML document name for conversion
+   */
   private static String XHTML = "xhtml";
+  
+  /**
+   * DITA document name for conversion
+   */
+  private static String DITA = "dita";
+  
+  /**
+   * Excel document name for conversion
+   */
+  private static String EXCEL = "excel";
+  
+  /**
+   * Word document name for conversion
+   */
+  private static String WORD = "word";
+  
+  /**
+   * XML document name for conversion
+   */
+  private static String XML = "xml";
+  
+  /**
+   * JSON document name for conversion
+   */
+  private static String JSON = "json";
+  
+  /**
+   * MARKDOWN document name for conversion
+   */
+  private static String MARKDOWN = "markdown";
+  
+  /**
+   * MD document name for conversion
+   */
+  private static String MD = "md";
+  
+  /**
+   * DB5 document name for conversion
+   */
+  private static String DB5 = "db5";
+  
+  /**
+   * DB4 document name for conversion
+   */
   private static String DB4 = "db4";
+  
+  /**
+   * DOCBOOK4 document name for conversion
+   */
   private static String DOCBOOK4 = "docbook4";
+  
+  /**
+   * DOCBOOK5 document name for conversion
+   */
   private static String DOCBOOK5 = "docbook5";
+  
   /**
    * Private constructor.
    */

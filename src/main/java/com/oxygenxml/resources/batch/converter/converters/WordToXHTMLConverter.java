@@ -14,7 +14,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
@@ -27,7 +26,6 @@ import org.apache.poi.hwpf.HWPFDocumentCore;
 import org.apache.poi.hwpf.converter.AbstractWordUtils;
 import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
-import org.apache.poi.hwpf.converter.WordToHtmlUtils;
 import org.w3c.dom.Document;
 import org.zwobble.mammoth.DocumentConverter;
 import org.zwobble.mammoth.Result;
@@ -131,7 +129,7 @@ public class WordToXHTMLConverter implements Converter {
 		HWPFDocumentCore wordDocument = AbstractWordUtils.loadDoc(file);
 
 		WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
-				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()); //NOSONAR
+				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()); //NOSONAR because we need an new instance here id:cwe, owasp-a4
 		wordToHtmlConverter.setPicturesManager(picturesManager);
 
 		wordToHtmlConverter.processDocument(wordDocument);
@@ -143,7 +141,7 @@ public class WordToXHTMLConverter implements Converter {
 			DOMSource domSource = new DOMSource(htmlDocument);
 			StreamResult streamResult = new StreamResult(stringWriter);
 
-			TransformerFactory tf = TransformerFactory.newInstance(); //NOSONAR
+			TransformerFactory tf = TransformerFactory.newInstance(); //NOSONAR because we need an new instance here id:cwe, owasp-a4
 			Transformer serializer = tf.newTransformer();
 			serializer.setOutputProperty( OutputKeys.ENCODING, UTF );
 			serializer.setOutputProperty( OutputKeys.INDENT, "yes" );
