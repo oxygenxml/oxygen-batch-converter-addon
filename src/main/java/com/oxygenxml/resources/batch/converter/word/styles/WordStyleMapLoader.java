@@ -1,21 +1,13 @@
 package com.oxygenxml.resources.batch.converter.word.styles;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.log4j.Logger;
-
-import com.oxygenxml.resources.batch.converter.converters.ExcelToDITAConverter;
 import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
-import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
-import com.oxygenxml.resources.batch.converter.translator.Tags;
-import com.oxygenxml.resources.batch.converter.translator.Translator;
 
 /**
  * Loader for the style map used in conversion from Word format.
@@ -23,20 +15,18 @@ import com.oxygenxml.resources.batch.converter.translator.Translator;
  * @author cosmin_duna
  */
 public class WordStyleMapLoader {
-  /**
-   * Logger.
-   */
-  private static final Logger logger = Logger.getLogger(WordStyleMapLoader.class);
   
   /**
-   * Translator
+   * Private constructor
    */
-  private static Translator translator = new OxygenTranslator();
+  private WordStyleMapLoader() {
+    //avoid instatiation
+  }
   
   /**
    * Path to style map configuration file.
    */
-  private static final String STYLE_MAP_PATH = "/config/wordStyleMap.xml";
+  private static final String STYLE_MAP_PATH = "/config/wordStyleMap.xml"; //NOSONAR
 
   /**
    * An imposed file of style map. It's used in TCs.
@@ -64,15 +54,11 @@ public class WordStyleMapLoader {
       } else {
         styleMapFile = imposedStyleMap;
       }
-
-      if(styleMapFile != null) {
-        JAXBContext context = JAXBContext.newInstance(WordStyleMap.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        WordStyleMap styleMapObj = (WordStyleMap) unmarshaller.unmarshal(styleMapFile);
-        styleMap = convertToStringFormat(styleMapObj);
-      } else {
-        throw(new JAXBException(translator.getTranslation(Tags.CONFIG_FILE_NOT_FOUND,"")));
-      }
+      
+      JAXBContext context = JAXBContext.newInstance(WordStyleMap.class);
+      Unmarshaller unmarshaller = context.createUnmarshaller();
+      WordStyleMap styleMapObj = (WordStyleMap) unmarshaller.unmarshal(styleMapFile);
+      styleMap = convertToStringFormat(styleMapObj);
     }
     return styleMap;
   }
@@ -86,13 +72,13 @@ public class WordStyleMapLoader {
    */
   private static final String convertToStringFormat(WordStyleMap styleMap) {
     StringBuilder toRet = new StringBuilder();
-    ArrayList<WordStyleToHtmlRelation> styleToHtmlList = styleMap.getStyleToHtmlList();
+    List<WordStyleToHtmlRelation> styleToHtmlList = styleMap.getStyleToHtmlList();
     for (WordStyleToHtmlRelation styleToHtmlRelation : styleToHtmlList) {
      appendStyleInfo(toRet, styleToHtmlRelation.getElement(),
          styleToHtmlRelation.getStyleName(), styleToHtmlRelation.getResultedHTML());
     }
     
-    ArrayList<CustomToDefaultStyleRelation> customToDefaultList = styleMap.getCustomToDefaultList();
+    List<CustomToDefaultStyleRelation> customToDefaultList = styleMap.getCustomToDefaultList();
     for (int i = 0; i < customToDefaultList.size(); i++) {
       CustomToDefaultStyleRelation styleRelation = customToDefaultList.get(i);
       String defaultStyle = styleRelation.getDefaultStyle();

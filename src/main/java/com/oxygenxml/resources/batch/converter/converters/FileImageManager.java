@@ -111,7 +111,7 @@ public class FileImageManager implements PicturesManager, ImageConverter.ImgElem
       // Do nothing
     } 
 	  if(!isLinkedImage) {
-	    String extension = "png";
+	    String extension;
 	    String contentType = image.getContentType();
 	    if (contentType != null && MIME_EXTENSION.containsKey(contentType)) {
 	      extension = MIME_EXTENSION.get(contentType);

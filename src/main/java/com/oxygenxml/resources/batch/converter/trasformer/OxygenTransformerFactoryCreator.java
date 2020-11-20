@@ -6,8 +6,6 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
-
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
@@ -18,11 +16,6 @@ import ro.sync.exml.workspace.api.util.XMLUtilAccess;
  */
 public class OxygenTransformerFactoryCreator implements TransformerFactoryCreator{
 
-	/**
-	 * Logger
-	 */
-	 private static final Logger logger = Logger.getLogger(OxygenTransformerFactoryCreator.class);
-	
 	/**
 	 * Create a transformer using  XMLUtilAccess.
 	 * @throws TransformerConfigurationException 

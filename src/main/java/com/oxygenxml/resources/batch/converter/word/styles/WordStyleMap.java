@@ -1,6 +1,6 @@
 package com.oxygenxml.resources.batch.converter.word.styles;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,7 +22,7 @@ public class WordStyleMap {
    */
   @XmlElementWrapper(name = "toHTML")
   @XmlElement(name = "relation")
-  private ArrayList<WordStyleToHtmlRelation> styleToHtmlList;
+  private List<WordStyleToHtmlRelation> styleToHtmlList;
   
   
   /**
@@ -30,13 +30,13 @@ public class WordStyleMap {
    */
   @XmlElementWrapper(name = "customToDefault")
   @XmlElement(name = "styleRelation")
-  private ArrayList<CustomToDefaultStyleRelation> customToDefaultList;
+  private List<CustomToDefaultStyleRelation> customToDefaultList;
 
 
   /**
    * @return The relations between word styles and HTML elements
    */
-  public ArrayList<WordStyleToHtmlRelation> getStyleToHtmlList() {
+  public List<WordStyleToHtmlRelation> getStyleToHtmlList() {
     return styleToHtmlList;
   }
   
@@ -45,14 +45,14 @@ public class WordStyleMap {
    * 
    * @param styleToHtmlList The relations between word styles and HTML elements
    */
-  public void setStyleToHtmlList(ArrayList<WordStyleToHtmlRelation> styleToHtmlList) {
+  public void setStyleToHtmlList(List<WordStyleToHtmlRelation> styleToHtmlList) {
     this.styleToHtmlList = styleToHtmlList;
   }
   
   /**
    * @return The relations between custom styles and default elements
    */
-  public ArrayList<CustomToDefaultStyleRelation> getCustomToDefaultList() {
+  public List<CustomToDefaultStyleRelation> getCustomToDefaultList() {
     return customToDefaultList;
   }
   
@@ -61,7 +61,7 @@ public class WordStyleMap {
    * 
    * @param customToDefaultList The relations between custom styles and default elements
    */
-  public void setCustomToDefaultList(ArrayList<CustomToDefaultStyleRelation> customToDefaultList) {
+  public void setCustomToDefaultList(List<CustomToDefaultStyleRelation> customToDefaultList) {
     this.customToDefaultList = customToDefaultList;
   }
 }

@@ -54,10 +54,10 @@ public class ProjectManagerEditor {
 			Method getProjectManager = pluginWorkspaceAccess.getClass().getMethod("getProjectManager");
 
 			// get the projectManager class
-			Class projectManagerClass = getProjectManager.getReturnType();
+			Class<?> projectManagerClass = getProjectManager.getReturnType();
 
 			// get the projectPopupMenuCustomizer interface
-			Class projectPopupMenuCustomizerClass = Class
+			Class<?> projectPopupMenuCustomizerClass = Class
 					.forName("ro.sync.exml.workspace.api.standalone.project.ProjectPopupMenuCustomizer");
 
 			// create a ProxyInstance of projectPopupMenuCustomizer
@@ -99,7 +99,7 @@ public class ProjectManagerEditor {
 			Method getProjectManager = pluginWorkspaceAccess.getClass().getMethod("getProjectManager");
 
 			// get the projectManager class
-			Class projectManagerClass = getProjectManager.getReturnType();
+			Class<?> projectManagerClass = getProjectManager.getReturnType();
 
 			// get the projectManager
 			Object projectManager = getProjectManager.invoke(pluginWorkspaceAccess);

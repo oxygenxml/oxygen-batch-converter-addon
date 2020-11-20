@@ -1,6 +1,5 @@
 package com.oxygenxml.resources.batch.converter.extensions;
 
-import com.oxygenxml.resources.batch.converter.ConversionFormat;
 import com.oxygenxml.resources.batch.converter.ConversionFormatUtil;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 /**
