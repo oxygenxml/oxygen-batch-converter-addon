@@ -77,7 +77,8 @@ public class MarkdownToDitaInternalConverter implements Converter {
       
       @Override
       public boolean shouldCreateShortdescParagraph() {
-        return userInputsProvider.getAdditionalOptionValue(OptionTags.CREATE_SHORT_DESCRIPTION);
+        Boolean shouldCreateShortdesc = userInputsProvider.getAdditionalOptionValue(OptionTags.CREATE_SHORT_DESCRIPTION);
+        return shouldCreateShortdesc != null && shouldCreateShortdesc;
       }
     });
 
@@ -100,8 +101,10 @@ public class MarkdownToDitaInternalConverter implements Converter {
       convertedContent = sw.toString();
 
     }catch (TransformerException e) {
+      e.printStackTrace();
         throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
     } catch (IOException e) {
+      e.printStackTrace();
       throw new TransformerException(e.getMessage(), e.getCause());
     }finally {
       // return the initial property of trasformerFactory
