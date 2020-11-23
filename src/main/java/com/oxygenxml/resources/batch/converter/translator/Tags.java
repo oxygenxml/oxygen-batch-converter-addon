@@ -112,4 +112,9 @@ public class Tags {
    *  en: The configuration file was not found.
    */
   public static final String CONFIG_FILE_NOT_FOUND = "Config_file_not_found";
+  
+  /**
+   * Create short description from the first paragraph
+   */
+  public static final String CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH = "Create_short_description_from_paragraph";
 }

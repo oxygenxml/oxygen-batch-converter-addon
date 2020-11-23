@@ -229,7 +229,6 @@
 		<val lang="nl_NL">Conversion successful</val>
 	</key>
 	
-	
 	<key value="Progress_Dialog_Message_Conv">
 		<comment>Message added in progress monitor.</comment>
 		<val lang="en_US">Conversion in progress</val>
@@ -266,7 +265,6 @@
 		<val lang="nl_NL">Create DITA maps for {0} documents containing multiple headings</val>
 	</key>
 	
-	
 	<key value="Config_file_not_found">
 		<comment>Error message presented when the configuration file is not found.</comment>
 		<val lang="en_US">The configuration file was not found.</val>
@@ -275,4 +273,13 @@
 		<val lang="ja_JP">The configuration file was not found.</val>
 		<val lang="nl_NL">The configuration file was not found.</val>
 	</key>
+	
+	<key value="Create_short_description_from_paragraph">
+		<val lang="en_US">Create short description</val>
+		<val lang="de_DE">Create short description</val>
+		<val lang="fr_FR">Create short description</val>
+		<val lang="ja_JP">Create short description</val>
+		<val lang="nl_NL">Create short description</val>
+	</key>
+	
 </translation>
