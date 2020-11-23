@@ -257,22 +257,13 @@
 		<val lang="nl_NL">Create DITA maps for Word documents containing multiple sections</val>
 	</key>
 	
-	<key value="Create_Dita_Map_Option_MD">
+	<key value="Create_Dita_Map_Option_For">
 		<comment>Option used to configure if the result will be a DITA Map or a DITA Topic.</comment>
-		<val lang="en_US">Create DITA maps for Markdown documents containing multiple headings</val>
-		<val lang="de_DE">Create DITA maps for Markdown documents containing multiple headings</val>
-		<val lang="fr_FR">Create DITA maps for Markdown documents containing multiple headings</val>
-		<val lang="ja_JP">Create DITA maps for Markdown documents containing multiple headings</val>
-		<val lang="nl_NL">Create DITA maps for Markdown documents containing multiple headings</val>
-	</key>
-	
-	<key value="Create_Dita_Map_Option_HTML">
-		<comment>Option used to configure if the result will be a DITA Map or a DITA Topic.</comment>
-		<val lang="en_US">Create DITA maps for HTML documents containing multiple headings</val>
-		<val lang="de_DE">Create DITA maps for HTML documents containing multiple headings</val>
-		<val lang="fr_FR">Create DITA maps for HTML documents containing multiple headings</val>
-		<val lang="ja_JP">Create DITA maps for HTML documents containing multiple headings</val>
-		<val lang="nl_NL">Create DITA maps for HTML documents containing multiple headings</val>
+		<val lang="en_US">Create DITA maps for {0} documents containing multiple headings</val>
+		<val lang="de_DE">Create DITA maps for {0} documents containing multiple headings</val>
+		<val lang="fr_FR">Create DITA maps for {0} documents containing multiple headings</val>
+		<val lang="ja_JP">Create DITA maps for {0} documents containing multiple headings</val>
+		<val lang="nl_NL">Create DITA maps for {0} documents containing multiple headings</val>
 	</key>
 	
 	

@@ -19,4 +19,13 @@ public class OxygenTranslator implements Translator {
 	  }
 	  return toRet;
 	}
+	
+	/**
+	 * Get translated message
+	 * @param key The key Tag
+	 * @return The message translated
+	 */
+	public String getTranslation(String key) {
+	 return getTranslation(key, "");
+	}
 }
