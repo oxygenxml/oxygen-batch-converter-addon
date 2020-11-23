@@ -28,7 +28,7 @@ public class ConverterAdditionalOptionsProvider {
    */
   private static Map<String, String> addionalOptionToTranslationTag = new HashMap<String, String>();
   static {
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, Tags.CREATE_DITA_MAP_OPTION_WORD);
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_WORD));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "Markdown"));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "HTML"));
   }
@@ -59,11 +59,11 @@ public class ConverterAdditionalOptionsProvider {
   }
   
   /**
-   * Get the translation tag associated with the given additional option.
+   * Get the translated message associated with the given additional option.
    * 
    * @param additionalOption The additional option.
    * 
-   * @return The translation tag associated with the option.
+   * @return The translation message associated with the option.
    */
   public static final String getTranslationMessageFor(String additionalOption) {
     return addionalOptionToTranslationTag.get(additionalOption);
