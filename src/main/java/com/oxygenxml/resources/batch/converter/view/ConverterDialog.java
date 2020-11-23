@@ -154,8 +154,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		
 		List<String> imposedAdditionalOptions = ConverterAdditionalOptionsProvider.getImposedAdditionalOptions(converterType);
 		for (String imposedOption : imposedAdditionalOptions) {
-		  JCheckBox optionCombo = new JCheckBox(translator.getTranslation(
-		      ConverterAdditionalOptionsProvider.getTranslationMessageFor(imposedOption), ""));
+		  JCheckBox optionCombo = new JCheckBox (ConverterAdditionalOptionsProvider.getTranslationMessageFor(imposedOption));
 		  additionalOptions.put(imposedOption, optionCombo);
 		  gbc.gridy++;
 	    convertorPanel.add(optionCombo, gbc);

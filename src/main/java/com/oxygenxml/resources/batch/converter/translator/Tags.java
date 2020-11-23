@@ -45,8 +45,6 @@ public class Tags {
 	 */
 	public static final String REMOVE_TABLE = "Remove_Table_Button_Conv";
 
-	
-	
 	/**
 	 * Label for select output type.
 	 */
@@ -86,7 +84,6 @@ public class Tags {
 	 */
 	public static final String SUCCESS_STATUS = "Success_Status_Conv";
 
-	
 	/**
 	 * Message in progress dialog. 
 	 */
@@ -107,7 +104,7 @@ public class Tags {
   /**
    * Option used to configure if the result will be a DITA Map or a DITA Topic.
    * 
-   *  en: Create DITA Maps for Markdown documents containing multiple sections 
+   *  en: Create DITA Maps for {0} documents containing multiple sections 
    */
   public static final String CREATE_DITA_MAP_OPTION_FOR = "Create_Dita_Map_Option_For";
   

@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
