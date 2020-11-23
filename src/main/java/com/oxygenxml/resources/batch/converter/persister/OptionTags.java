@@ -36,5 +36,10 @@ public class OptionTags {
     *  will be a DITA Map or a DITA Topic.
     */
    public static final String CREATE_DITA_MAP_FROM_HTML = "create.dita.map.from.html";
+   
+   /**
+    * Create short description from first paragraph 
+    */
+   public static final String CREATE_SHORT_DESCRIPTION = "create.first.description";
 
 }

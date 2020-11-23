@@ -25,10 +25,12 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.XMLFilterImpl;
 
+import com.elovirta.dita.markdown.ExternalOptionProvider;
 import com.elovirta.dita.markdown.MarkdownReader;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.doctype.DitaConstants;
 import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
+import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
@@ -56,7 +58,7 @@ public class MarkdownToDitaInternalConverter implements Converter {
    * @throws TransformerException
    */
   @Override
-  public ConversionResult convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider) throws TransformerException {
+  public ConversionResult convert(File originalFileLocation, Reader contentReader, TransformerFactoryCreator transformerCreator, final UserInputsProvider userInputsProvider) throws TransformerException {
     // content to return
     String convertedContent = "";
 
@@ -71,7 +73,13 @@ public class MarkdownToDitaInternalConverter implements Converter {
     System.setProperty(KEY_TRANSFORMER_FACTORY, VALUE_TRANSFORMER_FACTORY);
     
     // reader for markdown document
-    final MarkdownReader r = new MarkdownReader();
+    final MarkdownReader r = new MarkdownReader(new ExternalOptionProvider() {
+      
+      @Override
+      public boolean shouldCreateShortdescParagraph() {
+        return userInputsProvider.getAdditionalOptionValue(OptionTags.CREATE_SHORT_DESCRIPTION);
+      }
+    });
 
     try {
       // input source of document to convert

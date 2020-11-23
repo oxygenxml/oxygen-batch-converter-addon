@@ -21,6 +21,7 @@ public class MarkdownToDitaConverter extends PipelineConverter {
     converters.add(new MarkdownToDitaInternalConverter());
     Boolean shouldCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
         OptionTags.CREATE_DITA_MAP_FROM_MD);
+    
     if(shouldCreateDitaMap != null && shouldCreateDitaMap) {
       converters.add(new MapWithTopicsConverter());
     }

@@ -31,6 +31,7 @@ public class ConverterAdditionalOptionsProvider {
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_WORD));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "Markdown"));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "HTML"));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_SHORT_DESCRIPTION, translator.getTranslation(Tags.CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH));
   }
   
   /**
@@ -52,6 +53,7 @@ public class ConverterAdditionalOptionsProvider {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_WORD);
     } else if(ConverterTypes.MD_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_MD);
+      options.add(OptionTags.CREATE_SHORT_DESCRIPTION);
     } else if(ConverterTypes.HTML_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_HTML);
     }
