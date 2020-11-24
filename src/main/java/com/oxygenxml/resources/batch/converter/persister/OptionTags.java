@@ -40,6 +40,6 @@ public class OptionTags {
    /**
     * Create short description from first paragraph 
     */
-   public static final String CREATE_SHORT_DESCRIPTION = "create.first.description";
+   public static final String CREATE_SHORT_DESCRIPTION = "create.short.description";
 
 }
