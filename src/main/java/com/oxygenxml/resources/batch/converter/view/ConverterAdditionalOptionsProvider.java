@@ -52,6 +52,7 @@ public class ConverterAdditionalOptionsProvider {
     if( ConverterTypes.WORD_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_WORD);
     } else if(ConverterTypes.MD_TO_DITA.equals(convertionType)) {
+      options.add(OptionTags.SEPARATOR);
       options.add(OptionTags.CREATE_DITA_MAP_FROM_MD);
       options.add(OptionTags.CREATE_SHORT_DESCRIPTION);
     } else if(ConverterTypes.HTML_TO_DITA.equals(convertionType)) {
