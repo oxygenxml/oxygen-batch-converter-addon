@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersister;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
+import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
@@ -139,7 +140,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		gbc.weighty = 1;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.insets = new Insets(0, 0, 7, 0);
+		gbc.insets = new Insets(0, 0, 6, 0);
 		convertorPanel.add(inputPanel, gbc);
 	
 		//-----Add the output panel
@@ -154,10 +155,16 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		
 		List<String> imposedAdditionalOptions = ConverterAdditionalOptionsProvider.getImposedAdditionalOptions(converterType);
 		for (String imposedOption : imposedAdditionalOptions) {
-		  JCheckBox optionCombo = new JCheckBox (ConverterAdditionalOptionsProvider.getTranslationMessageFor(imposedOption));
-		  additionalOptions.put(imposedOption, optionCombo);
-		  gbc.gridy++;
-	    convertorPanel.add(optionCombo, gbc);
+		  System.out.println(imposedOption);
+		  if(imposedOption.equals(OptionTags.SEPARATOR)) {
+		    gbc.insets = new Insets(7, 0, 6, 0);
+		  } else {
+		    JCheckBox optionCombo = new JCheckBox (ConverterAdditionalOptionsProvider.getTranslationMessageFor(imposedOption));
+	      additionalOptions.put(imposedOption, optionCombo);
+	      gbc.gridy++;
+	      convertorPanel.add(optionCombo, gbc);
+		    gbc.insets = new Insets(0, 0, 7, 0);
+		  }
     }
 		
 		this.add(convertorPanel);
