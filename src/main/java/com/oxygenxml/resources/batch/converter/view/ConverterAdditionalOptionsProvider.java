@@ -35,6 +35,11 @@ public class ConverterAdditionalOptionsProvider {
   }
   
   /**
+   * Separator between aditional options
+   */
+  public static final String ADDITIONAL_OPTIONS_SEPARATOR = "separator_between_additional_options";
+  
+  /**
    * Private constructor.
    */
   private ConverterAdditionalOptionsProvider() {
@@ -52,7 +57,7 @@ public class ConverterAdditionalOptionsProvider {
     if( ConverterTypes.WORD_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_WORD);
     } else if(ConverterTypes.MD_TO_DITA.equals(convertionType)) {
-      options.add(OptionTags.SEPARATOR);
+      options.add(ADDITIONAL_OPTIONS_SEPARATOR);
       options.add(OptionTags.CREATE_DITA_MAP_FROM_MD);
       options.add(OptionTags.CREATE_SHORT_DESCRIPTION);
     } else if(ConverterTypes.HTML_TO_DITA.equals(convertionType)) {

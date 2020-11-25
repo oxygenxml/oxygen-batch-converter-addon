@@ -42,9 +42,4 @@ public class OptionTags {
     */
    public static final String CREATE_SHORT_DESCRIPTION = "create.short.description";
    
-   /**
-    * Separator
-    */
-   public static final String SEPARATOR = "separator";
-
 }

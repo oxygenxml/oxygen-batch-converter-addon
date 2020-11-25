@@ -80,6 +80,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	private static final String LINK_TO_GIT_HUB = "https://github.com/oxygenxml/oxygen-resources-convertor";
 	
 	/**
+	 * The inset used between components
+	 */
+	private static final int INSET_BETWEEN_COMPONENTS = 6;
+	
+	/**
 	 * The additional 
 	 */
 	private Map<String, JCheckBox> additionalOptions = new HashMap<String, JCheckBox>();
@@ -140,7 +145,8 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		gbc.weighty = 1;
 		gbc.anchor = GridBagConstraints.NORTHWEST;
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.insets = new Insets(0, 0, 6, 0);
+		Insets betweenComponentsInsets = new Insets(0, 0, INSET_BETWEEN_COMPONENTS, 0);
+        gbc.insets = betweenComponentsInsets;
 		convertorPanel.add(inputPanel, gbc);
 	
 		//-----Add the output panel
@@ -155,15 +161,14 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		
 		List<String> imposedAdditionalOptions = ConverterAdditionalOptionsProvider.getImposedAdditionalOptions(converterType);
 		for (String imposedOption : imposedAdditionalOptions) {
-		  System.out.println(imposedOption);
-		  if(imposedOption.equals(OptionTags.SEPARATOR)) {
-		    gbc.insets = new Insets(7, 0, 6, 0);
+		  if(imposedOption.equals(ConverterAdditionalOptionsProvider.ADDITIONAL_OPTIONS_SEPARATOR)) {
+		    gbc.insets = new Insets(INSET_BETWEEN_COMPONENTS * 2, 0, INSET_BETWEEN_COMPONENTS, 0);
 		  } else {
+		    gbc.gridy++;
 		    JCheckBox optionCombo = new JCheckBox (ConverterAdditionalOptionsProvider.getTranslationMessageFor(imposedOption));
 	      additionalOptions.put(imposedOption, optionCombo);
-	      gbc.gridy++;
 	      convertorPanel.add(optionCombo, gbc);
-		    gbc.insets = new Insets(0, 0, 7, 0);
+		    gbc.insets = betweenComponentsInsets;
 		  }
     }
 		
