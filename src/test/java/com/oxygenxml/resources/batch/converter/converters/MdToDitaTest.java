@@ -314,8 +314,8 @@ public class MdToDitaTest {
    */
   @Test
   public void testFirstParagraphAsShortdesc() throws TransformerException, IOException {
-    File inputFile  = new File("test-sample/EXM-45707/testShortdesc.md");
-    File expectedOutputFile  = new File("test-sample/EXM-45707/testShortdescOutput.dita");
+    File inputFile  = new File("test-sample/EXM-46055/testShortdesc.md");
+    File expectedOutputFile  = new File("test-sample/EXM-46055/testShortdescOutput.dita");
     final File outputFolder = new File(inputFile.getParentFile(), "output");
     
     TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();

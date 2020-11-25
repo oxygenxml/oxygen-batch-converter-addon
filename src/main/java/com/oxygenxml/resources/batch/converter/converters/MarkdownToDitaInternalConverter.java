@@ -77,7 +77,8 @@ public class MarkdownToDitaInternalConverter implements Converter {
       
       @Override
       public boolean shouldCreateShortdescParagraph() {
-        return userInputsProvider.getAdditionalOptionValue(OptionTags.CREATE_SHORT_DESCRIPTION);
+        Boolean shouldCreateShortdesc = userInputsProvider.getAdditionalOptionValue(OptionTags.CREATE_SHORT_DESCRIPTION);
+        return shouldCreateShortdesc != null && shouldCreateShortdesc;
       }
     });
 
