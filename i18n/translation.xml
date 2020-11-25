@@ -275,11 +275,11 @@
 	</key>
 	
 	<key value="Create_short_description_from_paragraph">
-		<val lang="en_US">Create short description</val>
-		<val lang="de_DE">Create short description</val>
-		<val lang="fr_FR">Create short description</val>
-		<val lang="ja_JP">Create short description</val>
-		<val lang="nl_NL">Create short description</val>
+		<val lang="en_US">Create short description elements</val>
+		<val lang="de_DE">Create short description elements</val>
+		<val lang="fr_FR">Create short description elements</val>
+		<val lang="ja_JP">Create short description elements</val>
+		<val lang="nl_NL">Create short description elements</val>
 	</key>
 	
 </translation>
