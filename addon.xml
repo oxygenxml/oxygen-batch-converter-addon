@@ -35,8 +35,14 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                 </div>
                 <hr/>
                 <div>
-                    <h3>What's new in version 2.0.1</h3>
-                    <p>Made add-on compatible with the new features added in Oxygen 23.</p>
+					<h3>What's new in version 2.1.0</h3>
+                    <ol>
+                        <li>Added a new option for converting Markdown documents with multiple headings into <b>DITA maps with referenced DITA topics</b> (Markdown to DITA).</li>
+                        <li>Added a new option for creating DITA <i>short description</i> elements in the Markdown to DITA conversion.</li>
+                        <li>Improved the Markdown to DITA conversion to allow conversions of documents that start with a high heading level or increase the heading level with more than one unit.</li>
+                        <li>Added a new option for converting HTML documents with multiple headings into <b>DITA maps with referenced DITA topics</b>(HTML to DITA)..</li>
+                        <li>Fixed various small bugs in the HTML to DITA and Word to DITA conversions.</li>
+                    </ol>
                 </div>
             </body>
         </html>
@@ -59,8 +65,9 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
 The Plugin may include certain of the following third party software components. 
 The copyright notices, disclaimers and license terms applicable to such third party software components are listed below:
 
-markdown-1.3.0.jar
-Site: https://github.com/jelovirt/dita-ot-markdown/ 
+oxygen-patched-lwdita-for-batch-converter-2.4.1.jar
+Patch for Lightweight DITA for DITA-OT library.
+Site: https://github.com/jelovirt/org.lwdita 
 License: Apache License 2.0 ( http://www.apache.org/licenses/LICENSE-2.0)
 
 mammoth-1.4.0.jar
