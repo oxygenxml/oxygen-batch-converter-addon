@@ -36,13 +36,13 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                 <hr/>
                 <div>
 					<h3>What's new in version 2.1.0</h3>
-                    <ol>
+                    <ul>
                         <li>Added a new option for converting Markdown documents with multiple headings into <b>DITA maps with referenced DITA topics</b> (Markdown to DITA).</li>
                         <li>Added a new option for creating DITA <i>short description</i> elements in the Markdown to DITA conversion.</li>
                         <li>Improved the Markdown to DITA conversion to allow conversions of documents that start with a high heading level or increase the heading level with more than one unit.</li>
-                        <li>Added a new option for converting HTML documents with multiple headings into <b>DITA maps with referenced DITA topics</b>(HTML to DITA)..</li>
+                        <li>Added a new option for converting HTML documents with multiple headings into <b>DITA maps with referenced DITA topics</b> (HTML to DITA).</li>
                         <li>Fixed various small bugs in the HTML to DITA and Word to DITA conversions.</li>
-                    </ol>
+                    </ul>
                 </div>
             </body>
         </html>
