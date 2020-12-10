@@ -19,7 +19,10 @@ before_script:
   - ./travis/checkForTag.sh
 script:
   - mvn clean
-  - mvn install org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
+  - mvn install 
+  - chmod +x travis/install-openjdk11.sh
+  - ./travis/install-openjdk11.sh --emit-java-home
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
 before_deploy:
   - ./travis/deploy.sh
 deploy:
