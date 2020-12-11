@@ -31,7 +31,7 @@ When this option is selected, all headings from your Markdown document will be s
 When this option is not selected, the output will be a topic with nested topics or sections according to the number of headings from the document.
 
 The **Create short description elements** option from the conversion dialog box allows you to decide if the **shortdesc** elements are created in the output DITA document. 
-When this option is selected, the first paragraph before the headings from the Markdown document will be converted into DITA short description elements (**<shortdesc>**).
+When this option is selected, the first paragraph before the headings from the Markdown document will be converted into DITA short description elements.
 When this option is not selected, the  output will not contain the short description element.
 
 ## HTML to DITA
