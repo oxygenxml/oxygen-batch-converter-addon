@@ -50,7 +50,7 @@ The add-on is compatible with Oxygen XML Editor/Author/Developer version 20.0 or
 1. Go to **Help->Install new add-ons** to open an add-on selection dialog box.
 2. Enter or paste https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml in the **Show add-ons from** field.
 3. Select the **Batch Converter** add-on and click **Next**.
-4. Select the **I accept all terms of the end user license agreement** option and click **Finish**.
+4. Read the end-user license agreement. Then select the **I accept all terms of the end-user license agreement** option and click **Finish**.
 5. Restart the application. 
 
 Result: A **Batch Converter** submenu will now be available in the **Tools** menu and in the contextual menu. This submenu will contain a list of the various types of available conversions. Selecting one of the types of conversions will open a dialog box where you can configure options for the conversion.
