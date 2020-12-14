@@ -20,7 +20,8 @@ before_script:
 script:
   - mvn clean
   - mvn install 
-  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -F 11
+  - chmod +x travis/install-openjdk11.sh
+  - ./travis/install-openjdk11.sh -F 11 --emit-java-home
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
 before_deploy:
   - ./travis/deploy.sh
