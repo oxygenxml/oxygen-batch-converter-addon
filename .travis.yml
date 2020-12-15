@@ -21,7 +21,8 @@ script:
   - mvn clean
   - mvn install 
   - chmod +x travis/install-openjdk11.sh
-  - ./travis/install-openjdk11.sh && mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
+  - wget https://raw.githubusercontent.com/oxygenxml/oxygen-resources-converter/master/travis/install-openjdk11.sh && . ./install-openjdk11.sh
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
 before_deploy:
   - ./travis/deploy.sh
 deploy:
