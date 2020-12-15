@@ -20,7 +20,7 @@ before_script:
 script:
   - mvn clean
   - mvn install 
-  - chmod +x travis/install-openjdk11.sh
+  - chmod +wx travis/install-openjdk11.sh
   - ./travis/install-openjdk11.sh -F 11 --emit-java-home
   - echo "${JAVA_HOME}"
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
