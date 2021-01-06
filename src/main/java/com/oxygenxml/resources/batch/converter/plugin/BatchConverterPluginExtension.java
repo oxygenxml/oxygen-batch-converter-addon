@@ -28,7 +28,6 @@ import ro.sync.exml.workspace.api.standalone.MenuBarCustomizer;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.actions.MenusAndToolbarsContributorCustomizer;
 import ro.sync.exml.workspace.api.standalone.ui.Menu;
-import ro.sync.ui.application.menu.IApplicationMenu;
 
 /**
  * Plugin extension - Resources Batch Converter
@@ -122,9 +121,9 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
 		batchConvertMenu = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
-		Menu batchConverterMenuForImport = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
+		Menu additionalConversionsMenu = new Menu(translator.getTranslation(Tags.ADDITIONAL_CONVERSIONS, ""));
 		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenu, actions);
-		BatchConverterPluginUtil.addActionsInMenu(batchConverterMenuForImport, actions);
+		BatchConverterPluginUtil.addActionsInMenu(additionalConversionsMenu, actions);
 		
 		int indexToInsertInTools = -1;
 		JMenu importSubmenu = null;
@@ -137,7 +136,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
         if(importSubmenu == null) {
           importSubmenu = searchForImportSubMenu(currentMenu, pluginWorkspaceAccess);
           if (importSubmenu != null) {
-            importSubmenu.add(batchConverterMenuForImport, importSubmenu.getItemCount());
+            importSubmenu.add(additionalConversionsMenu, importSubmenu.getItemCount());
           }
         }
         if (indexToInsertInTools == -1) {

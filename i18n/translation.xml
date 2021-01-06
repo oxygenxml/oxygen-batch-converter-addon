@@ -282,4 +282,12 @@
 		<val lang="nl_NL">Create short description elements</val>
 	</key>
 	
+	<key value="Additional_conversions">
+        <comment>The name of a submenu that contains conversions</comment>
+        <val lang="en_US">Additional conversions</val>
+        <val lang="de_DE">Additional conversions</val>
+        <val lang="fr_FR">Additional conversions</val>
+        <val lang="ja_JP">Additional conversions</val>
+        <val lang="nl_NL">Additional conversions</val>
+    </key>
 </translation>
