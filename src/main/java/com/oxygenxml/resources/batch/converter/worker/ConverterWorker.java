@@ -1,9 +1,8 @@
 package com.oxygenxml.resources.batch.converter.worker;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
@@ -159,10 +158,10 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
       WSEditorPage currentPage = currentEditorAccess.getCurrentPage();
       if(currentPage instanceof WSDITAMapEditorPage) {
         WSDITAMapEditorPage dmmPage = (WSDITAMapEditorPage) currentPage;
-        AuthorDocumentController documentController = dmmPage.getDocumentController();
+        final AuthorDocumentController documentController = dmmPage.getDocumentController();
         AuthorNode[] selectedNodes = dmmPage.getSelectedNodes(true);
         if(selectedNodes.length > 0) {
-          AuthorNode targetNode = selectedNodes[0];
+          final AuthorNode targetNode = selectedNodes[0];
           
           URL baseURL = targetNode.getXMLBaseURL();
           if(dmmInsertType == InsertType.INSERT_BEFORE || dmmInsertType == InsertType.INSERT_AFTER) {
@@ -172,13 +171,24 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
             }
           }
           try {
-            documentController.beginCompoundEdit();
-            String xmlFragment = createTopicReferencesFragment(convertedFiles, baseURL);
-            documentController.insertXMLFragment(xmlFragment, targetNode, dmmInsertType.getOxyConstant());
-          } catch (AuthorOperationException e) {
-            oxygenProblemReporter.reportProblem(e, null);
-          } finally {
-            documentController.endCompoundEdit();
+            final String xmlFragment = createTopicReferencesFragment(convertedFiles, baseURL);
+            SwingUtilities.invokeAndWait(new Runnable() {
+              @Override
+              public void run() {
+                documentController.beginCompoundEdit();
+                try {
+                  documentController.insertXMLFragment(xmlFragment, targetNode, dmmInsertType.getOxyConstant());
+                } catch (AuthorOperationException e) {
+                  oxygenProblemReporter.reportProblem(e, null);
+                } finally {
+                  documentController.endCompoundEdit();
+                }
+              }
+            });
+          } catch (InvocationTargetException e) {
+            logger.debug(e.getMessage(), e);
+          } catch (InterruptedException e) {
+            logger.debug(e.getMessage(), e);
           }
         }
       }
