@@ -282,6 +282,14 @@
 		<val lang="nl_NL">Create short description elements</val>
 	</key>
 	
+	<key value="Import">
+		<comment>Import button.</comment>
+		<val lang="en_US">Import</val>
+		<val lang="de_DE">Import</val>
+		<val lang="fr_FR">Import</val>
+		<val lang="ja_JP">Import</val>
+		<val lang="nl_NL">Import</val>
+	</key>
 	<key value="Additional_conversions">
         <comment>The name of a submenu that contains conversions</comment>
         <val lang="en_US">Additional conversions</val>
@@ -290,4 +298,36 @@
         <val lang="ja_JP">Additional conversions</val>
         <val lang="nl_NL">Additional conversions</val>
     </key>
+	<key value="Import_from_word.to.dita">
+		<comment>The title of the import from word dialog.</comment>
+		<val lang="en_US">Import from MS Word</val>
+		<val lang="de_DE">Import from MS Word</val>
+		<val lang="fr_FR">Import from MS Word</val>
+		<val lang="ja_JP">Import from MS Word</val>
+		<val lang="nl_NL">Import from MS Word</val>
+	</key>
+	<key value="Import_from_excel.to.dita">
+		<comment>The title of the import from word dialog.</comment>
+		<val lang="en_US">Import from MS Excel</val>
+		<val lang="de_DE">Import from MS Excel</val>
+		<val lang="fr_FR">Import from MS Excel</val>
+		<val lang="ja_JP">Import from MS Excel</val>
+		<val lang="nl_NL">Import from MS Excel</val>
+	</key>
+	<key value="Import_from_html.to.dita">
+		<comment>The title of the import from word dialog.</comment>
+		<val lang="en_US">Import from HTML</val>
+		<val lang="de_DE">Import from HTML</val>
+		<val lang="fr_FR">Import from HTML</val>
+		<val lang="ja_JP">Import from HTML</val>
+		<val lang="nl_NL">Import from HTML</val>
+	</key>
+	<key value="Import_from_md.to.dita">
+		<comment>The title of the import from word dialog.</comment>
+		<val lang="en_US">Import from Markdown</val>
+		<val lang="de_DE">Import from Markdown</val>
+		<val lang="fr_FR">Import from Markdown</val>
+		<val lang="ja_JP">Import from Markdown</val>
+		<val lang="nl_NL">Import from Markdown</val>
+	</key>
 </translation>

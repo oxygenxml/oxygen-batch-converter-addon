@@ -16,6 +16,12 @@ public interface BatchConverterInteractor extends UserInputsProvider{
 	public void setOutputFolder(String text);
 	
 	/**
+   * Get the output folder path.
+   * @return The path of output folder.
+   */
+	public String getOutputFolderPath();
+	
+	/**
    * Set the selected value for the given additional option.
    * 
    * @param additionalOptionId The id of the additional option.

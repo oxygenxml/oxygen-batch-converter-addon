@@ -102,7 +102,7 @@ public class InputPanel extends JPanel {
 						"");
 
 				if (files != null) {
-					if (modelTable.getRowCount() == 0) {
+					if (modelTable.getRowCount() == 0 && convertorInteractor.getOutputFolderPath().isEmpty()) {
 						convertorInteractor.setOutputFolder(files[0].getParent() + File.separator + "output");
 					}
 
@@ -127,7 +127,7 @@ public class InputPanel extends JPanel {
 					List<File> listToAdd =	ConverterFileUtils.getAllFiles(file,
 						Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
 
-					if(!listToAdd.isEmpty()){
+					if(!listToAdd.isEmpty() && convertorInteractor.getOutputFolderPath().isEmpty()){
 						convertorInteractor.setOutputFolder(file.toString()+ File.separator + "output");
 					}
 					
@@ -155,7 +155,6 @@ public class InputPanel extends JPanel {
 
 				if (modelTable.getRowCount() == 0) {
 					convertorInteractor.setEnableConvert(false);
-					convertorInteractor.setOutputFolder("");
 				}
 
 				remvBtn.setEnabled(false);

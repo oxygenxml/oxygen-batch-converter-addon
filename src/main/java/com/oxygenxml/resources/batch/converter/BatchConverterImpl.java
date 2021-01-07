@@ -3,6 +3,7 @@ package com.oxygenxml.resources.batch.converter;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -67,7 +68,7 @@ public class BatchConverterImpl implements BatchConverter {
 		/**
 		 * Number of converted files
 		 */
-		private int convertedFile;
+		private int noOfConvertedFiles;
 		
 		/**
 		 * Number of files that cannot be converted.
@@ -128,15 +129,16 @@ public class BatchConverterImpl implements BatchConverter {
   * @return <code>true</code> if the process of conversion was finished successfully, <code>false</code> otherwise.
   */
 	@Override
-	public boolean convertFiles(String inputFormat, String outputFormat, UserInputsProvider inputsProvider) {
+	public List<File> convertFiles(String inputFormat, String outputFormat, UserInputsProvider inputsProvider) {
 	  String converterType = ConversionFormatUtil.getConverterType(inputFormat, outputFormat);
+	  List<File> convertedFiles = new ArrayList<>();
 	  if(converterType != null) {
-	    convertFiles(converterType, inputsProvider);
+	    convertedFiles = convertFiles(converterType, inputsProvider);
 	  } else {
 	     problemReporter.reportProblem(new Exception(
 	         "The " + inputFormat + " to " + outputFormat + " conversion format is not supported."), null);
 	  }
-	  return false;
+	  return convertedFiles;
 	}
 	
 	/**
@@ -150,10 +152,10 @@ public class BatchConverterImpl implements BatchConverter {
 	 *         successfully, <code>false</code> otherwise.
 	 */
 	@Override
-	public boolean convertFiles(String converterType, UserInputsProvider inputsProvider) {
-		
+	public List<File> convertFiles(String converterType, UserInputsProvider inputsProvider) {
+		List<File> convertedFiles = new ArrayList<File>();
 		isSuccessfully = true;
-		convertedFile = 0;
+		noOfConvertedFiles = 0;
 		failedFile = 0;
 				
 		// create the converter
@@ -202,7 +204,8 @@ public class BatchConverterImpl implements BatchConverter {
             ExtensionGetter.getOutputExtension(converterType), outputFolder);
 				
 				//convert and print the current file.
-				convertAndPrintFile(currentFile, outputFile, converter, contentPrinter, converterType, inputsProvider);
+				convertedFiles.add(
+				    convertAndPrintFile(currentFile, outputFile, converter, contentPrinter, converterType, inputsProvider));
 			}
 
 		} else {
@@ -211,8 +214,8 @@ public class BatchConverterImpl implements BatchConverter {
 		}
 
 		//report the finish status
-		statusReporter.conversionFinished(convertedFile, failedFile);
-		return isSuccessfully;
+		statusReporter.conversionFinished(noOfConvertedFiles, failedFile);
+		return convertedFiles;
 	}
 	
 	
@@ -224,10 +227,12 @@ public class BatchConverterImpl implements BatchConverter {
 	 * @param contentPrinter  The contentPrinter.
 	 * @param converterType   The converterType.
    * @param inputsProvider  Provider for the user inputs like input files, output directory and another options.
+   * 
+   * @return The converted file, or <code>null</code> if conversion failed
  	 */
-	private void convertAndPrintFile(File file, File outputFile, Converter converter, ContentPrinter contentPrinter,
+	private File convertAndPrintFile(File file, File outputFile, Converter converter, ContentPrinter contentPrinter,
 			String converterType, UserInputsProvider inputsProvider) {
-
+	  File convertedFile = null;
 		try {
 			ConversionResult conversionResult = converter.convert(file, null, transformerFactoryCreator, inputsProvider);
 			String convertedContent = conversionResult.getConvertedContent();
@@ -251,8 +256,8 @@ public class BatchConverterImpl implements BatchConverter {
 				contentPrinter.print(conversionResult, transformerFactoryCreator, converterType, outputFile,
 						StyleSourceGetter.getStyleSource(converterType));
 
-				convertedFile++;
-
+				noOfConvertedFiles++;
+				convertedFile = outputFile;
 				if (inputsProvider.mustOpenConvertedFiles()) {
 					// open the converted file
 					URL convertedFileUrl;
@@ -272,5 +277,6 @@ public class BatchConverterImpl implements BatchConverter {
 		if(logger.isDebugEnabled()) {
 			logger.debug("Conversion " + (isSuccessfully ? "successful" : "fail"));
 		}
+		return convertedFile;
 	}
 }

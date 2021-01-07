@@ -122,4 +122,15 @@ public class Tags {
    * en: Additional conversions
    */
   public static final String ADDITIONAL_CONVERSIONS = "Additional_conversions";
+  
+  /**
+   * en: Import
+   */
+  public static final String IMPORT = "Import";
+  
+  /**
+   * en: Import from 
+   */
+  public static final String IMPORT_FROM = "Import_from";
+  
 }
