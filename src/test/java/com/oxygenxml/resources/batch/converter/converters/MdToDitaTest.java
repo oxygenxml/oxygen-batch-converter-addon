@@ -26,7 +26,7 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
 import tests.utils.ProblemReporterTestImpl;
-import tests.utils.ProgressDialogInteractorTestImpl;
+import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 
@@ -50,7 +50,7 @@ public class MdToDitaTest {
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
 		
-		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
 		final List<File> inputFiles = new ArrayList<File>();
@@ -107,7 +107,7 @@ public class MdToDitaTest {
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
 		
-		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
 				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
 		final List<File> inputFiles = new ArrayList<File>();
@@ -161,7 +161,7 @@ public class MdToDitaTest {
     TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
     ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
     
-    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
         new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
     final List<File> inputFiles = new ArrayList<File>();
@@ -215,7 +215,7 @@ public class MdToDitaTest {
     TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
     ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
     
-    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
         new ConvertorWorkerInteractorTestImpl() , transformerCreator);
   
     final List<File> inputFiles = new ArrayList<File>();
@@ -268,7 +268,7 @@ public class MdToDitaTest {
     TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
     ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
     
-    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
         new ConvertorWorkerInteractorTestImpl() , transformerCreator);
   
     final List<File> inputFiles = new ArrayList<File>();
@@ -321,7 +321,7 @@ public class MdToDitaTest {
     TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
     ProblemReporterTestImpl problemReporter = new ProblemReporterTestImpl();
     
-    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ProgressDialogInteractorTestImpl(),
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
         new ConvertorWorkerInteractorTestImpl() , transformerCreator);
   
     final List<File> inputFiles = new ArrayList<File>();

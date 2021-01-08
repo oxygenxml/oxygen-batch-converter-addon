@@ -1,5 +1,6 @@
 package com.oxygenxml.resources.batch.converter.plugin;
 
+import java.awt.Component;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.Icon;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import com.oxygenxml.resources.batch.converter.resources.Images;
@@ -62,6 +64,91 @@ public class BatchConverterPluginUtil {
 
     return menu;
   }
+  
+  /**
+   * Search for the submenu with the given id into the given menu.
+   * 
+   * @param menu                  The menu
+   * @param submenuId             The id of the submenu to search
+   * @param pluginWorkspaceAccess StandalonePluginWorkspace
+   * 
+   * @return The submenu, or <code>null</code> if it cannot be found.
+   */
+  public static JMenu searchForSubMenu(JMenu menu, String submenuId, StandalonePluginWorkspace pluginWorkspaceAccess) {
+    JMenu importSubmenu = null;
+    Component[] menuComponents = menu.getMenuComponents();
+    for (int i = 0; i < menuComponents.length; i++) {
+      Component currrentComponent = menuComponents[i];
+      if(currrentComponent instanceof JMenu) {
+        JMenu submenu = (JMenu) currrentComponent;
+        if(submenu.getItemCount() > 0) {
+          Action action = submenu.getItem(0).getAction();
+          if (action != null) {
+            String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
+            // The actionId is in format: menuNameId/menuItemActionID
+            int indexOfSlash = actionID.indexOf('/');
+
+            // check the menuNameId
+            if (indexOfSlash != -1 && submenuId.equals(actionID.substring(0, indexOfSlash))) {
+              importSubmenu = submenu;
+              break;
+            }
+          }
+        }
+      }
+    }
+    return importSubmenu;
+  }
+  
+  /**
+   * Search for actions into the given menu.
+   * 
+   * @param menu                    The menu to search.
+   * @param perfectOptionActionId   The id of the perfect action to find.
+   * @param secondOptionActionId    The action id of the second option, if the perfect one cannot be found.
+   * @param searchOnlyInEnableActions To search only in enable actions, <code>false</code> to search in all action
+   * @param pluginWorkspaceAccess   Access to plugin workspace.
+   * 
+   * @return The index of action in menu, 
+   */
+ public static int searchForActionInMenu(JMenu menu, String menuId, String perfectOptionActionId, String secondOptionActionId,
+     boolean searchOnlyInEnableActions, StandalonePluginWorkspace pluginWorkspaceAccess) {
+   int index = -1;
+   // iterate over menu items in currentMenu
+   int sizeMenu = menu.getItemCount();
+   for (int i = 0; i < sizeMenu; i++) {
+     JMenuItem menuItem = menu.getItem(i);
+
+     if (menuItem != null) {
+       Action action = menuItem.getAction();
+       if (action != null 
+           && (!searchOnlyInEnableActions || action.isEnabled())) {
+         // get the actionID
+         String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
+         if (actionID != null) {
+           // The actionId is in format: menuNameId/menuItemActionID
+           int indexOfSlash = actionID.indexOf('/');
+           // check the menuNameId
+           if (menuId == null || menuId.equals(actionID.substring(0, indexOfSlash))) {
+             if (perfectOptionActionId != null && perfectOptionActionId.equals(actionID.substring(indexOfSlash + 1))) {
+               index = i;
+               // The perfect option was found. Break here
+               break;
+             } else if (secondOptionActionId != null && secondOptionActionId.equals(actionID.substring(indexOfSlash + 1))) {
+               // Save this position but continue to search for the perfect options
+               index = i;
+             }
+           } else {
+             // Don't match the menu id
+             break;
+           }
+         }
+       }
+     }
+   }
+   return index;
+ 
+ }
   
   /**
    * Get the Icon from given URL.

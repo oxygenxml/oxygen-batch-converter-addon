@@ -128,9 +128,4 @@ public class Tags {
    */
   public static final String IMPORT = "Import";
   
-  /**
-   * en: Import from 
-   */
-  public static final String IMPORT_FROM = "Import_from";
-  
 }

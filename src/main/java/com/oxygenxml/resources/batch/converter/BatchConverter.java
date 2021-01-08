@@ -27,5 +27,6 @@ public interface BatchConverter {
    * 
    * @return The list with converted files. Never <code>null</code>.
    */
+	//This method is used from the batch converter command line script from Oxygen. You must not change the signature.
   public List<File> convertFiles(String inputFormat, String outputFormat, UserInputsProvider inputsProvider); 
 }

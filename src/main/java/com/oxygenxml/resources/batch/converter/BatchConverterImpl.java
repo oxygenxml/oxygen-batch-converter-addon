@@ -21,6 +21,7 @@ import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
 import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
+import com.oxygenxml.resources.batch.converter.worker.ConverterStatusReporter;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -41,12 +42,12 @@ public class BatchConverterImpl implements BatchConverter {
 	/**
 	 * Status reporter.
 	 */
-	private StatusReporter statusReporter;
+	private StatusReporter oxyStatusReporter;
 	
 	/**
 	 * Progress dialog interactor.
 	 */
-	private ProgressDialogInteractor progressDialogInteractor;
+	private ConverterStatusReporter converterStatusReporter;
 	/**
 	 * Worker interactor.
 	 */
@@ -87,8 +88,24 @@ public class BatchConverterImpl implements BatchConverter {
 	   * @param transformerFactoryCreator
 	   *          Transformer factory creator.
 	   */
-	  public BatchConverterImpl(ProblemReporter problemReporter, StatusReporter statusReporter, ProgressDialogInteractor progressDialogInteractor) {
-	    this(problemReporter, statusReporter, progressDialogInteractor, new ConvertorWorkerInteractor() {
+		// This constructor is used from the batch converter command line script from Oxygen. You must not change the signature.
+	  public BatchConverterImpl(ProblemReporter problemReporter, StatusReporter statusReporter, final ProgressDialogInteractor progressDialogInteractor) {
+	    this(problemReporter, statusReporter, new ConverterStatusReporter() {
+        
+	      @Override
+	      public void conversionStarts() {
+	        // Do nothing
+	      }
+        @Override
+        public void conversionStartsFor(File inputFile) {
+          progressDialogInteractor.conversionInProgress(inputFile);
+        }
+        
+        @Override
+        public void conversionHasFinished(List<File> resultedDocuments, File outputDir) {
+          // Do nothing
+        }
+      }, new ConvertorWorkerInteractor() {
         @Override
         public boolean isCancelled() {
           return false;
@@ -110,11 +127,11 @@ public class BatchConverterImpl implements BatchConverter {
 	 *          Transformer factory creator.
 	 */
 	public BatchConverterImpl(ProblemReporter problemReporter, StatusReporter statusReporter,
-			ProgressDialogInteractor progressDialogInteractor, ConvertorWorkerInteractor workerInteractor,
+			ConverterStatusReporter converterStatusReporter, ConvertorWorkerInteractor workerInteractor,
 			TransformerFactoryCreator transformerFactoryCreator) {
 		this.problemReporter = problemReporter;
-		this.statusReporter = statusReporter;
-		this.progressDialogInteractor = progressDialogInteractor;
+		this.oxyStatusReporter = statusReporter;
+		this.converterStatusReporter = converterStatusReporter;
 		this.workerInteractor = workerInteractor;
 		this.transformerFactoryCreator = transformerFactoryCreator;
 	}
@@ -196,8 +213,7 @@ public class BatchConverterImpl implements BatchConverter {
 					logger.debug("File to convert: " + currentFile);
 				}
 				
-				// update the progress dialog note.
-				progressDialogInteractor.conversionInProgress(currentFile);
+				converterStatusReporter.conversionStartsFor(currentFile);
 
 				//generate the output file.
 				File outputFile = ConverterFileUtils.getUniqueOutputFile(currentFile, 
@@ -214,7 +230,7 @@ public class BatchConverterImpl implements BatchConverter {
 		}
 
 		//report the finish status
-		statusReporter.conversionFinished(noOfConvertedFiles, failedFile);
+		oxyStatusReporter.conversionFinished(noOfConvertedFiles, failedFile);
 		return convertedFiles;
 	}
 	

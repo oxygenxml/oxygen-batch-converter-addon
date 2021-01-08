@@ -55,7 +55,7 @@ public class OutputPanel extends JPanel{
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(10, 0, 0, 0);
-		add(new JLabel(translator.getTranslation(Tags.ADD_OUTPUT_FOLDER_LABEL, "")), gbc);
+		add(new JLabel(translator.getTranslation(Tags.ADD_OUTPUT_FOLDER_LABEL)), gbc);
 
 		// -------------add output field
 		gbc.gridy++;

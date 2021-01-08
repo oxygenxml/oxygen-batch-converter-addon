@@ -41,9 +41,9 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	private static final String PREDECESSOR_ITEM_ACTION_ID = "Project/Compare";
 
 	/**
-	 * Actions to be add.
+	 * The menu to be add.
 	 */
-	private Map<String, List<Action>> actions;
+	private Menu menuToAdd;
 
 	/**
 	 * Translator
@@ -57,10 +57,10 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	 *          The action that open the DocBook checker.
 	 */
 	public ProjectPopupMenuCustomizerInvocationHandler(StandalonePluginWorkspace pluginWorkspaceAccess,
-			Map<String, List<Action>> actions, Translator translator) {
+	    Menu menuToAdd, Translator translator) {
 
 		this.pluginWorkspaceAccess = pluginWorkspaceAccess;
-		this.actions = actions;
+		this.menuToAdd = menuToAdd;
 		this.translator = translator;
 	}
 
@@ -75,12 +75,6 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 
 			// if the method name equals with "customizePopUpMenu"
 			if (method.getName().equals("customizePopUpMenu")) {
-				
-				// create a menu
-				Menu batchConvertMenu = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
-
-				// Add actions in menu.
-				batchConvertMenu = BatchConverterPluginUtil.addActionsInMenu(batchConvertMenu, actions);
 				
 				// cast the args[0] at JPopupMenu
 				JPopupMenu popupMenu = (JPopupMenu) args[0];
@@ -109,7 +103,7 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 				popupMenu.addSeparator();
 
 				// add menuItem at popupMenu
-				popupMenu.add(batchConvertMenu, index+1);
+				popupMenu.add(menuToAdd, index+1);
 
 			}
 

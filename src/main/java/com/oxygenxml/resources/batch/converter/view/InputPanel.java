@@ -83,9 +83,9 @@ public class InputPanel extends JPanel {
 		scrollPane = new JScrollPane((JTable)tableFiles);
 		scrollPane.setPreferredSize(new Dimension(450, 100));
 		
-		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE, "") + "...");
-		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE, "") + "...");
-		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE, ""));
+		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE) + "...");
+		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE) + "...");
+		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE));
 		remvBtn.setEnabled(false);
 
 		// initialize the panel
@@ -247,7 +247,7 @@ public class InputPanel extends JPanel {
 		gbc.gridy = 0;
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL, "")), gbc);
+		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL)), gbc);
 
 		// ------add scrollPane
 		gbc.gridy++;

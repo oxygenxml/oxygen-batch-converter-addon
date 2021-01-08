@@ -2,36 +2,27 @@ package com.oxygenxml.resources.batch.converter.plugin;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.resources.batch.converter.actions.ConvertAction;
+import com.oxygenxml.resources.batch.converter.actions.ImportAction;
 import com.oxygenxml.resources.batch.converter.dmm.InsertType;
 import com.oxygenxml.resources.batch.converter.dmm.InsertTypeProvider;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
-import com.oxygenxml.resources.batch.converter.view.ConverterDialog;
 
-import ro.sync.ecss.extensions.api.AuthorDocumentController;
-import ro.sync.ecss.extensions.api.node.AuthorNode;
 import ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension;
-import ro.sync.exml.workspace.api.PluginWorkspace;
-import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
-import ro.sync.exml.workspace.api.editor.WSEditor;
-import ro.sync.exml.workspace.api.editor.page.WSEditorPage;
 import ro.sync.exml.workspace.api.editor.page.ditamap.WSDITAMapEditorPage;
 import ro.sync.exml.workspace.api.standalone.MenuBarCustomizer;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
@@ -41,7 +32,7 @@ import ro.sync.exml.workspace.api.standalone.ui.Menu;
 /**
  * Plugin extension - Resources Batch Converter
  */
-public class BatchConverterPluginExtension implements WorkspaceAccessPluginExtension {
+public class BatchConverterPluginExtension implements WorkspaceAccessPluginExtension, PluginMenusInteractor{
 
 	/**
 	 * The id of Tools menu where converter action will be place.
@@ -74,9 +65,9 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private static final String REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID = "Reference_to_current_edited_file";
 	
 	/**
-	 * Menu that contains items with all converter actions.
+	 * The Batch converter menu from the Project view.
 	 */
-	private Menu batchConvertMenu;
+	private Menu batchConvertMenuFromProject;
 
 	/**
 	 * Translator
@@ -121,8 +112,11 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		  }
 		});
 
+		
+		batchConvertMenuFromProject = new Menu(translator.getTranslation(Tags.MENU_TEXT));
+		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuFromProject, convertActions);
 		// add a menu with actions in contextual menu of ProjectManager
-		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, convertActions, translator);
+		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, batchConvertMenuFromProject, translator);
 
 	}
 
@@ -145,9 +139,9 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private void addConvertActionsInMenuBar(JMenuBar mainMenuBar, Map<String, List<Action>> actions,
 			StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-		batchConvertMenu = new Menu(translator.getTranslation(Tags.MENU_TEXT, ""));
-		Menu additionalConversionsMenu = new Menu(translator.getTranslation(Tags.ADDITIONAL_CONVERSIONS, ""));
-		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenu, actions);
+	  Menu batchConvertMenuForTools = new Menu(translator.getTranslation(Tags.MENU_TEXT));
+		Menu additionalConversionsMenu = new Menu(translator.getTranslation(Tags.ADDITIONAL_CONVERSIONS));
+		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuForTools, actions);
 		BatchConverterPluginUtil.addActionsInMenu(additionalConversionsMenu, actions);
 		
 		int indexToInsertInTools = -1;
@@ -159,15 +153,16 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
       if(currentMenu != null) {
         
         if(importSubmenu == null) {
-          importSubmenu = searchForImportSubMenu(currentMenu, pluginWorkspaceAccess);
+          importSubmenu = BatchConverterPluginUtil.searchForSubMenu(currentMenu, IMPORT_MENU_ID, pluginWorkspaceAccess);
           if (importSubmenu != null) {
             importSubmenu.add(additionalConversionsMenu, importSubmenu.getItemCount());
           }
         }
         if (indexToInsertInTools == -1) {
           indexToInsertInTools = searchLocationInToolsMenu(currentMenu, pluginWorkspaceAccess);
+          
           if (indexToInsertInTools != -1) {
-            currentMenu.add(batchConvertMenu, indexToInsertInTools);
+            currentMenu.add(batchConvertMenuForTools, indexToInsertInTools);
           }
         }
         
@@ -194,9 +189,12 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
         
         String menuId = pluginWorkspaceAccess.getActionsProvider().getActionID(currentMenu);
         if(InsertTypeProvider.isInsertDmmMenuId(menuId)) {
-          menuIndex = searchLocationInDmmSubmenu(currentMenu, pluginWorkspaceAccess);
+          menuIndex = BatchConverterPluginUtil.searchForActionInMenu(currentMenu, null,
+              REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID, REFERENCE_ACTION_ID, true, pluginWorkspaceAccess);
           if(menuIndex != -1) {
-            Menu importMenu = new Menu(translator.getTranslation(Tags.IMPORT, ""));
+            // Position after this action.
+            menuIndex++;
+            Menu importMenu = new Menu(translator.getTranslation(Tags.IMPORT));
             InsertType insertType = InsertTypeProvider.getInsertTypeFor(menuId);
             importMenu.add(createImportActionsList(insertType, pluginWorkspaceAccess));
             currentMenu.add(importMenu, menuIndex);
@@ -206,45 +204,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     }
   }
 
-  /**
-   * Search for actions location in the given submenu from the contextul menu of DMM.
-   * 
-   * @param dmmSubmenu   The submenu from DMM contextul menu.
-   * @param pluginWorkspaceAccess Access to plugin workspace.
-   * 
-   * @return Index where the actions can be inserted, or -1 when it canot be found.
-   */
-  private int searchLocationInDmmSubmenu(JMenu dmmSubmenu, StandalonePluginWorkspace pluginWorkspaceAccess) {
-    int index = -1;
-    int sizeMenu = dmmSubmenu.getItemCount();
-    for (int j = 0; j < sizeMenu; j++) {
-      JMenuItem menuItem = dmmSubmenu.getItem(j);
-
-      if (menuItem != null) {
-        Action action = menuItem.getAction();
-        if (action != null && action.isEnabled()) {
-          // get the actionID
-          String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
-          if (actionID != null) {
-            // The actionId is in format: menuNameId/menuItemActionID
-            int indexOfSlash = actionID.indexOf('/');
-
-            if (indexOfSlash != -1 
-                && REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
-              index = j + 1;
-              // This is the perfect position. Break here.
-              break;
-            } else if (indexOfSlash != -1 
-                && REFERENCE_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
-              index = j + 1;
-            }
-          }
-        }
-      }
-    }
-    return index;
-  }
-
+  
 /**
  * Search for position to insert the menu with actions in given menu.
  * 
@@ -256,158 +216,20 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
  */
   private int searchLocationInToolsMenu(JMenu menu, StandalonePluginWorkspace pluginWorkspaceAccess) {
     int index = -1;
-    // iterate over menu items in currentMenu
-    int sizeMenu = menu.getItemCount();
-    for (int i = 0; i < sizeMenu; i++) {
-      JMenuItem menuItem = menu.getItem(i);
-
-      if (menuItem != null) {
-        Action action = menuItem.getAction();
-        if (action != null) {
-          // get the actionID
-          String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
-
-          if (actionID != null) {
-            // The actionId is in format: menuNameId/menuItemActionID
-            int indexOfSlash = actionID.indexOf('/');
-
-            // check the menuNameId
-            if (TOOLS_MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
-            	index = 0;
-              // the menuNameId is MENU_ID
-              // check the menuItemActionID
-              if (PRECEDING_TOOLS_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
-                // the MenuIdemActionId is PRECEDING_MENU_ITEM_ACTION_ID.
-                // this is the index
-                index = i + 1;
-                break;
-              }
-              // In Oxygen 22, the PRECEDING_MENU_ITEM_ACTION_ID was moved from this menu.
-              // We need a new reference action id.
-              if (NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID.equals(actionID.substring(indexOfSlash + 1))) {
-                index = i - 1;
-                break;
-              }
-              
-            } else {
-              // the menuNameId is not MENU_NAME
-              break;
-            }
-          }
-        }
-      }
+    index = BatchConverterPluginUtil.searchForActionInMenu(
+        menu, TOOLS_MENU_ID, PRECEDING_TOOLS_MENU_ITEM_ACTION_ID, null, false, pluginWorkspaceAccess);
+    if(index != -1) {
+      index++;
+    } else {
+      // In Oxygen 22, the PRECEDING_TOOLS_MENU_ITEM_ACTION_ID was moved from this menu.
+      // We need a new reference action id.
+      index = BatchConverterPluginUtil.searchForActionInMenu(
+          menu, TOOLS_MENU_ID, NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID, null, false, pluginWorkspaceAccess);
+      if(index != -1) {
+        index--;
+      }              
     }
     return index;
-  }
-
-  /**
-   * Search for the "Import" submenu into the given menu.
-   * 
-   * @param menu                  The menu to search.
-   * @param pluginWorkspaceAccess StandalonePluginWorkspace
-   * 
-   * @return The "Import" submenu, or <code>null</code> if it cannot be found.
-   */
-  private JMenu searchForImportSubMenu(JMenu menu, StandalonePluginWorkspace pluginWorkspaceAccess) {
-    JMenu importSubmenu = null;
-    Component[] menuComponents = menu.getMenuComponents();
-    for (int i = 0; i < menuComponents.length; i++) {
-      Component currrentComponent = menuComponents[i];
-      if(currrentComponent instanceof JMenu) {
-        JMenu submenu = (JMenu) currrentComponent;
-        if(submenu.getItemCount() > 0) {
-          Action action = submenu.getItem(0).getAction();
-          if (action != null) {
-            String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
-            // The actionId is in format: menuNameId/menuItemActionID
-            int indexOfSlash = actionID.indexOf('/');
-
-            // check the menuNameId
-            if (indexOfSlash != -1 && IMPORT_MENU_ID.equals(actionID.substring(0, indexOfSlash))) {
-              importSubmenu = submenu;
-              break;
-            }
-          }
-        }
-      }
-    }
-    return importSubmenu;
-  }
-	
-	/**
-	 * Create the Swing action which shows the converter according to converter
-	 * type.
-	 * 
-	 * @param convertorType
-	 *          The type of converter.
-	 * @param pluginWorkspaceAccess
-	 *          The plugin workspace access.
-	 * @return The converter action
-	 */
-	@SuppressWarnings("serial")
-	private AbstractAction createConvertorAction(final String converterType,
-			final StandalonePluginWorkspace pluginWorkspaceAccess) {
-
-		return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)+ "...") {
-			@Override
-			public void actionPerformed(ActionEvent actionevent) {
-
-				List<File> selectedFile = new ArrayList<File>();
-
-				JMenuItem menuItemAction = (JMenuItem) (actionevent.getSource());
-
-				// if is not JMenu from Toolbar
-				if (!batchConvertMenu.equals(((JPopupMenu) menuItemAction.getParent()).getInvoker())) {
-					// get the selectedFile from ProjectManager
-					selectedFile = ProjectManagerEditor.getSelectedFiles(pluginWorkspaceAccess, converterType);
-				}
-
-			new ConverterDialog(converterType, InsertType.NO_INSERT, selectedFile, null,
-						(JFrame) pluginWorkspaceAccess.getParentFrame(), translator);
-
-			}
-		};
-	}
-	
-	 /**
-   * Create the Swing action which shows the converter according to converter
-   * type.
-   * 
-   * @param convertorType          The type of converter.
-   * @param pluginWorkspaceAccess  The plugin workspace access.
-   * 
-   * @return The converter action
-   */
-  @SuppressWarnings("serial")
-  private AbstractAction createImportAction(final String converterType, final InsertType insertType,
-      final StandalonePluginWorkspace pluginWorkspaceAccess) {
-
-    return new AbstractAction(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType)+ "...") {
-      @Override
-      public void actionPerformed(ActionEvent actionevent) {
-        List<File> inputFiles = new ArrayList<File>();
-        File outputdir = null;
-        
-        WSEditor currentEditorAccess = pluginWorkspaceAccess.getCurrentEditorAccess(PluginWorkspace.DITA_MAPS_EDITING_AREA);
-        if(currentEditorAccess != null) {
-          WSEditorPage currentPage = currentEditorAccess.getCurrentPage();
-          if(currentPage instanceof WSDITAMapEditorPage) {
-            WSDITAMapEditorPage dmmPage = (WSDITAMapEditorPage) currentPage;
-            AuthorNode[] selectedNodes = dmmPage.getSelectedNodes(true);
-            if(selectedNodes.length > 0) {
-              try {
-                outputdir = new File(selectedNodes[0].getXMLBaseURL().toURI()).getParentFile();
-              } catch (URISyntaxException e) {
-                // Do nothing
-              }
-            }
-          }
-        }
-        new ConverterDialog(converterType, insertType, inputFiles, outputdir,
-            (JFrame) pluginWorkspaceAccess.getParentFrame(), translator);
-
-      }
-    };
   }
 
   /**
@@ -420,10 +242,10 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
    */
   private Action[] createImportActionsList(InsertType insertType, StandalonePluginWorkspace pluginWorkspaceAccess) {
     Action[] importActionList = new Action[4];
-    importActionList[0] = createImportAction(ConverterTypes.HTML_TO_DITA, insertType, pluginWorkspaceAccess);
-    importActionList[1] = createImportAction(ConverterTypes.MD_TO_DITA, insertType, pluginWorkspaceAccess);
-    importActionList[2] = createImportAction(ConverterTypes.EXCEL_TO_DITA, insertType, pluginWorkspaceAccess);
-    importActionList[3] = createImportAction(ConverterTypes.WORD_TO_DITA, insertType, pluginWorkspaceAccess);
+    importActionList[0] = new ImportAction(ConverterTypes.HTML_TO_DITA, insertType, translator);
+    importActionList[1] = new ImportAction(ConverterTypes.MD_TO_DITA, insertType, translator);
+    importActionList[2] = new ImportAction(ConverterTypes.EXCEL_TO_DITA, insertType, translator);
+    importActionList[3] = new ImportAction(ConverterTypes.WORD_TO_DITA, insertType, translator);
     return importActionList;
   }
   
@@ -437,33 +259,54 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	  Map<String, List<Action>> toReturn = new HashMap<String, List<Action>>();
 		List<Action> dita = new ArrayList<Action>();
 		
-		dita.add(createConvertorAction(ConverterTypes.HTML_TO_DITA, pluginWorkspaceAccess));
-		dita.add(createConvertorAction(ConverterTypes.MD_TO_DITA, pluginWorkspaceAccess));
-		dita.add(createConvertorAction(ConverterTypes.EXCEL_TO_DITA, pluginWorkspaceAccess));
-		dita.add(createConvertorAction(ConverterTypes.WORD_TO_DITA, pluginWorkspaceAccess));
+		dita.add(new ConvertAction(ConverterTypes.HTML_TO_DITA, translator, this));
+		dita.add(new ConvertAction(ConverterTypes.MD_TO_DITA, translator, this));
+		dita.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
+		dita.add(new ConvertAction(ConverterTypes.WORD_TO_DITA, translator, this));
 		toReturn.put("ditaSection", dita);
 		
 		List<Action> xhtml = new ArrayList<Action>();
-		xhtml.add(createConvertorAction(ConverterTypes.HTML_TO_XHTML, pluginWorkspaceAccess));
-		xhtml.add(createConvertorAction(ConverterTypes.MD_TO_XHTML, pluginWorkspaceAccess));
-		xhtml.add(createConvertorAction(ConverterTypes.WORD_TO_XHTML, pluginWorkspaceAccess));
+		xhtml.add(new ConvertAction(ConverterTypes.HTML_TO_XHTML, translator, this));
+		xhtml.add(new ConvertAction(ConverterTypes.MD_TO_XHTML, translator, this));
+		xhtml.add(new ConvertAction(ConverterTypes.WORD_TO_XHTML, translator, this));
 		toReturn.put("xhtmlSection", xhtml);
 		
 		List<Action> json = new ArrayList<Action>();
-		json.add(createConvertorAction(ConverterTypes.XML_TO_JSON, pluginWorkspaceAccess));
-		json.add(createConvertorAction(ConverterTypes.JSON_TO_XML, pluginWorkspaceAccess));
+		json.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
+		json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
 		toReturn.put("jsonSection", json);
 		
 		List<Action> docbook = new ArrayList<Action>();
-		docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB4, pluginWorkspaceAccess));
-		docbook.add(createConvertorAction(ConverterTypes.HTML_TO_DB5, pluginWorkspaceAccess));
-		docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB4, pluginWorkspaceAccess));
-		docbook.add(createConvertorAction(ConverterTypes.MD_TO_DB5, pluginWorkspaceAccess));
-		docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB4, pluginWorkspaceAccess));
-		docbook.add(createConvertorAction(ConverterTypes.WORD_TO_DB5, pluginWorkspaceAccess));
+		docbook.add(new ConvertAction(ConverterTypes.HTML_TO_DB4, translator, this));
+		docbook.add(new ConvertAction(ConverterTypes.HTML_TO_DB5, translator, this));
+		docbook.add(new ConvertAction(ConverterTypes.MD_TO_DB4, translator, this));
+		docbook.add(new ConvertAction(ConverterTypes.MD_TO_DB5, translator, this));
+		docbook.add(new ConvertAction(ConverterTypes.WORD_TO_DB4, translator, this));
+		docbook.add(new ConvertAction(ConverterTypes.WORD_TO_DB5, translator, this));
 		toReturn.put("docbookSection", docbook);
 
 		return toReturn;
 	}
+
+  /**
+   * Check if the action with the given event is invoked from the contextual menu of the Project view.
+   * 
+   * @param event The action event.
+   * 
+   * @return <code>true</code> if the action is invoked from the contextual menu of the Project view,
+   *  <code>false</code> when is invoked from other places 
+   */
+  @Override
+  public boolean isInvokedFromProjectMenu(ActionEvent e) {
+    boolean isInvokedFromProjectMenu = false;
+    Object source = e.getSource();
+    if(source instanceof JMenuItem) {
+      JMenuItem menuItemAction = (JMenuItem) source;
+      // if is not JMenu from Toolbar
+      isInvokedFromProjectMenu = batchConvertMenuFromProject.equals(((JPopupMenu) menuItemAction.getParent()).getInvoker());
+    }
+
+    return isInvokedFromProjectMenu;
+  }
 
 }

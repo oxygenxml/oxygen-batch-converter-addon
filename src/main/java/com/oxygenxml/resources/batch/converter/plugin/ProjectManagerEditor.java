@@ -6,9 +6,6 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
-import javax.swing.Action;
 
 import org.apache.log4j.Logger;
 
@@ -17,7 +14,10 @@ import com.oxygenxml.resources.batch.converter.proxy.ProjectPopupMenuCustomizerI
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
+import ro.sync.exml.workspace.api.standalone.ui.Menu;
 
 /**
  * Project manager editor.
@@ -44,10 +44,10 @@ public class ProjectManagerEditor {
 	 * 
 	 * @param pluginWorkspaceAccess
 	 *          The StandalonePluginWorkspace.
-	 * @param actions
-	 *          The actions to add
+	 * @param menuToAdd
+	 *          The menu to add
 	 */
-	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, Map<String, List<Action>> actions, Translator translator) {
+	public static void addPopUpMenuCustomizer(StandalonePluginWorkspace pluginWorkspaceAccess, Menu menuToAdd, Translator translator) {
 		// try to get method from 19.1 version
 		try {
 			// get the getProjectManager method
@@ -63,7 +63,7 @@ public class ProjectManagerEditor {
 			// create a ProxyInstance of projectPopupMenuCustomizer
 			Object proxyProjectPopupMenuCustomizerImpl = Proxy.newProxyInstance(
 					projectPopupMenuCustomizerClass.getClassLoader(), new Class[] { projectPopupMenuCustomizerClass },
-					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, actions, translator));
+					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, menuToAdd, translator));
 
 			// get the project manager object
 			Object projectManager = getProjectManager.invoke(pluginWorkspaceAccess);
@@ -88,21 +88,22 @@ public class ProjectManagerEditor {
 	 * @return If oxygen version is 19.1 return a list with files paths ,
 	 *         else return a empty list.
 	 */
-	public static List<File> getSelectedFiles(StandalonePluginWorkspace pluginWorkspaceAccess, String converterType) {
+	public static List<File> getSelectedFiles(String converterType) {
 		List<File> toReturn = new ArrayList<File>();
 		
 		// the input types
 		List<String> inputTypes = Arrays.asList(ExtensionGetter.getInputExtension(converterType) );
 		
 		try {
+		  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
 			// get the getProjectManager method
-			Method getProjectManager = pluginWorkspaceAccess.getClass().getMethod("getProjectManager");
+			Method getProjectManager = pluginWorkspace.getClass().getMethod("getProjectManager");
 
 			// get the projectManager class
 			Class<?> projectManagerClass = getProjectManager.getReturnType();
 
 			// get the projectManager
-			Object projectManager = getProjectManager.invoke(pluginWorkspaceAccess);
+			Object projectManager = getProjectManager.invoke(pluginWorkspace);
 
 			// get the getSelectedFiles method
 			Method getSelectedFiles = projectManagerClass.getMethod("getSelectedFiles");
@@ -119,7 +120,6 @@ public class ProjectManagerEditor {
 		} catch (Exception e) {
 			logger.debug(e.getMessage(), e);
 		}
-
 		return toReturn;
 	}
 	

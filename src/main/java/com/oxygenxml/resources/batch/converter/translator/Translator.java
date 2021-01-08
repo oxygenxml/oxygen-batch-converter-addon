@@ -8,9 +8,11 @@ package com.oxygenxml.resources.batch.converter.translator;
 public interface Translator {
 	
 	/**
-	 * Get the translation from the given key;
-	 * @param key the key.
-	 * @return the translation.
+	 * Get the translation from the given key with the given suffix.
+	 * 
+	 * @param key          The message key.
+	 * 
+	 * @return The message.
 	 */
-	public String getTranslation(String key, String convertorType);
+	public String getTranslation(String key);
 }

@@ -68,7 +68,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 	  //Add 'Operation in progress' label.
-    JLabel taskNameLabel = new JLabel(translator.getTranslation(Tags.PROGRESS_DIALOG_MESSAGE,""));
+    JLabel taskNameLabel = new JLabel(translator.getTranslation(Tags.PROGRESS_DIALOG_MESSAGE));
     Icon icon = null;
     try {
       icon = (Icon) UIManager.get("OptionPane.informationIcon");
@@ -128,7 +128,7 @@ public class ProgressDialog extends OKCancelDialog implements ProgressDialogInte
 	
 		add(panel);
 		
-		setTitle(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType));
+		setTitle(translator.getTranslation(Tags.MENU_ITEM_TEXT + converterType));
 		getOkButton().setVisible(false);
 		
 		setResizable(false);

@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
-import com.oxygenxml.resources.batch.converter.dmm.InsertType;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersister;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
-import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
@@ -49,11 +45,6 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 */
 	private	OutputPanel outputPanel;
 
-	/**
-	 * Converter worker.
-	 */
-	private transient ConverterWorker converterWorker;
-	
 	/**
 	 * CheckBox for select to open converted files after conversion.
 	 */
@@ -90,30 +81,29 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	private Map<String, JCheckBox> additionalOptions = new HashMap<String, JCheckBox>();
 
 	/**
-	 * The type of insertion to be made in DMM after conversion.
+	 * The parent frame
 	 */
-  private InsertType dmmInsertType;
-	
+  private JFrame parentFrame;
+
   /**
    * Constructor
    * 
    * @param converterType The type of converter.
-   * @param dmmInsertType The type of insertion to be made in dmm after conversion.
    * @param toConvertFiles List with files to convert.
    * @param outputDir The ouput directory.
    * @param parentFrame The parent frame.
    * @param translator Translator.
    */
-	public ConverterDialog(String converterType, InsertType dmmInsertType, List<File> toConvertFiles, File outputDir, JFrame parentFrame, Translator translator) {
+	public ConverterDialog(String converterType, List<File> toConvertFiles, File outputDir, JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
 		this.converterType = converterType;
-    this.dmmInsertType = dmmInsertType;
+    this.parentFrame = parentFrame;
 		this.translator = translator;
 		contentPersister = new ContentPersisterImpl();
 		
 		inputPanel = new InputPanel(converterType, translator, this);
 		outputPanel = new OutputPanel(translator);
-		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX , ""));
+		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX));
 		
 		initGUI();
 		
@@ -121,17 +111,8 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		contentPersister.loadState(this);
 		getOkButton().setEnabled(!toConvertFiles.isEmpty());
 		
-		setTitle(translator.getTranslation(Tags.MENU_ITEM_TEXT, converterType));
-		if(dmmInsertType == InsertType.NO_INSERT) {
-		  setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON, ""));
-		} else {
-		  setTitle(translator.getTranslation(Tags.IMPORT_FROM, converterType));
-		  setOkButtonText(translator.getTranslation(Tags.IMPORT, ""));
-		}
-		setResizable(true);
-		pack();
-		setMinimumSize(new Dimension(getSize().width , getSize().height));
-		setLocationRelativeTo(parentFrame);
+		setTitle(translator.getTranslation(Tags.MENU_ITEM_TEXT + converterType));
+		setOkButtonText(translator.getTranslation(Tags.CONVERT_BUTTON));
 		
 		if(outputDir != null) {
 		  setOutputFolder(outputDir.getAbsolutePath());
@@ -140,18 +121,25 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 			inputPanel.addFilesInTable(toConvertFiles);
 			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent() + File.separator + "output");
 		}
-		
-		setVisible(true);
 	}
 
+	/**
+	 * Show the converted dialog.
+	 */
+	public void showDialog() {
+	  setResizable(true);
+    pack();
+    setMinimumSize(new Dimension(getSize().width , getSize().height));
+    setLocationRelativeTo(parentFrame);
+    setVisible(true);
+	}
+	
 	/**
 	 * Initialize the GUI.
 	 * 
 	 */
 	private void initGUI(){
-		
 		JPanel convertorPanel = new JPanel( new GridBagLayout());
-		
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		//-----Add the input panel
@@ -196,34 +184,13 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	 */
 	@Override
 	protected void doOK() {
-
 		if (outputPanel.getOutputPath().isEmpty()) {
 			//output panel is empty.
 			//show a warning message.
-			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE,""));
+			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE));
 		} else {
-
-			//create a progress dialog
-			final ProgressDialog progressDialog = new ProgressDialog((JFrame)super.getParent(), translator, converterType);
-
-			//create a converter worker.
-			converterWorker = new ConverterWorker(converterType, dmmInsertType, this, progressDialog);
-
-			//add a action listener on cancel button for progress dialog
-			progressDialog.addCancelActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					converterWorker.cancel(true);
-					progressDialog.dispose();
-				}
-			});
-
-			//start the worker.
-			converterWorker.execute();
-
 			// Save the state of dialog.
 			contentPersister.saveState(this);
-			
 			super.doOK();
 		}
 	}
