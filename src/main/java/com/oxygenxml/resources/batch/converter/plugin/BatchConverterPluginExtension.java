@@ -39,30 +39,35 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	 */
 	private static final String TOOLS_MENU_ID = "Tools";
 	
+	/**
+   * The id of File menu where converter action will be place.
+	 */
+	private static final String FILE_MENU_ID = "File";
+	
 	 /**
    * The id of Import sub-menu where converter action will be place.
    */
-  private static final String IMPORT_MENU_ID = "Import";
+  private static final String IMPORT_MENU_ID = "File/Import";
 
 	/**
 	 * The preceding menu item.
 	 */
-	private static final String PRECEDING_TOOLS_MENU_ITEM_ACTION_ID = "XML_to_JSON";
+	private static final String PRECEDING_TOOLS_MENU_ITEM_ACTION_ID = "Tools/XML_to_JSON";
 
 	/**
 	 * The new succeeding menu item.
 	 * PRECEDING_MENU_ITEM_ACTION_ID was moved in Oxygen 22.
 	 */
-	private static final String NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID = "Format_and_indent_files";
+	private static final String NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID = "Tools/Format_and_indent_files";
  
 	/**
 	 * The Id of the "Reference" action from the contextual menu of DMM.
 	 */
-	private static final String REFERENCE_ACTION_ID = "Reference";
+	private static final String REFERENCE_ACTION_ID = "ACTION_WITH_NO_SHORTCUT/Reference";
 	/**
    * The Id of the "Reference to currently edited file" action from the contextual menu of DMM.
    */
-	private static final String REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID = "Reference_to_current_edited_file";
+	private static final String REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID = "ACTION_WITH_NO_SHORTCUT/Reference_to_current_edited_file";
 	
 	/**
 	 * The Batch converter menu from the Project view.
@@ -144,29 +149,35 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuForTools, actions);
 		BatchConverterPluginUtil.addActionsInMenu(additionalConversionsMenu, actions);
 		
-		int indexToInsertInTools = -1;
-		JMenu importSubmenu = null;
+		boolean foundFileMenu = false;
+	  boolean foundToolsMenu = false;
 
 		int menuBarSize = mainMenuBar.getMenuCount();
     for (int i = 0; i < menuBarSize; i++) {
       JMenu currentMenu = mainMenuBar.getMenu(i);
       if(currentMenu != null) {
-        
-        if(importSubmenu == null) {
-          importSubmenu = BatchConverterPluginUtil.searchForSubMenu(currentMenu, IMPORT_MENU_ID, pluginWorkspaceAccess);
+        String currentMenuId = pluginWorkspaceAccess.getActionsProvider().getActionID(currentMenu);
+
+        if (TOOLS_MENU_ID.equals(currentMenuId)) {
+          foundToolsMenu = true;
+          int indexToInsertInTools = searchLocationInToolsMenu(currentMenu, pluginWorkspaceAccess);
+          if(indexToInsertInTools == -1) {
+            // Fallback: Add in the last position.
+            indexToInsertInTools = currentMenu.getItemCount();
+          }
+          currentMenu.add(batchConvertMenuForTools, indexToInsertInTools);
+        }
+
+        if (FILE_MENU_ID.equals(currentMenuId)) {
+          foundFileMenu = true;
+          JMenu importSubmenu = BatchConverterPluginUtil.searchForSubMenu(currentMenu, IMPORT_MENU_ID, pluginWorkspaceAccess);
           if (importSubmenu != null) {
             importSubmenu.add(additionalConversionsMenu, importSubmenu.getItemCount());
           }
+
         }
-        if (indexToInsertInTools == -1) {
-          indexToInsertInTools = searchLocationInToolsMenu(currentMenu, pluginWorkspaceAccess);
-          
-          if (indexToInsertInTools != -1) {
-            currentMenu.add(batchConvertMenuForTools, indexToInsertInTools);
-          }
-        }
-        
-        if (indexToInsertInTools != -1 && importSubmenu != null) {
+
+        if (foundToolsMenu && foundFileMenu) {
           break;
         }
       }
@@ -189,7 +200,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
         
         String menuId = pluginWorkspaceAccess.getActionsProvider().getActionID(currentMenu);
         if(InsertTypeProvider.isInsertDmmMenuId(menuId)) {
-          menuIndex = BatchConverterPluginUtil.searchForActionInMenu(currentMenu, null,
+          menuIndex = BatchConverterPluginUtil.searchForActionInMenu(currentMenu,
               REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID, REFERENCE_ACTION_ID, true, pluginWorkspaceAccess);
           if(menuIndex != -1) {
             // Position after this action.
@@ -206,9 +217,9 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 
   
 /**
- * Search for position to insert the menu with actions in given menu.
+ * Search for position to insert the menu with actions in given Tools menu.
  * 
- * @param menu                    The menu to search.
+ * @param menu                    The Tools menu.
  * @param pluginWorkspaceAccess   Access to plugin workspace.
  * 
  * @return The index of menu, or 0 if the menu is good, but a position cannot be found
@@ -217,14 +228,14 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
   private int searchLocationInToolsMenu(JMenu menu, StandalonePluginWorkspace pluginWorkspaceAccess) {
     int index = -1;
     index = BatchConverterPluginUtil.searchForActionInMenu(
-        menu, TOOLS_MENU_ID, PRECEDING_TOOLS_MENU_ITEM_ACTION_ID, null, false, pluginWorkspaceAccess);
+        menu, PRECEDING_TOOLS_MENU_ITEM_ACTION_ID, null, false, pluginWorkspaceAccess);
     if(index != -1) {
       index++;
     } else {
       // In Oxygen 22, the PRECEDING_TOOLS_MENU_ITEM_ACTION_ID was moved from this menu.
       // We need a new reference action id.
       index = BatchConverterPluginUtil.searchForActionInMenu(
-          menu, TOOLS_MENU_ID, NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID, null, false, pluginWorkspaceAccess);
+          menu, NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID, null, false, pluginWorkspaceAccess);
       if(index != -1) {
         index--;
       }              

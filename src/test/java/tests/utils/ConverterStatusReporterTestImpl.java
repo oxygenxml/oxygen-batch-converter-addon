@@ -13,17 +13,17 @@ import com.oxygenxml.resources.batch.converter.worker.ConverterStatusReporter;
 public class ConverterStatusReporterTestImpl implements ConverterStatusReporter {
 
   @Override
-  public void conversionStarts() {
+  public void conversionStarted() {
     // Do nothing
   }
 
   @Override
-  public void conversionStartsFor(File inputFile) {
+  public void conversionInProgress(File inputFile) {
     System.out.println("Note: "+ inputFile.getAbsolutePath());
   }
 
   @Override
-  public void conversionHasFinished(List<File> resultedDocuments, File outputDirectory) {
+  public void conversionFinished(List<File> resultedDocuments, File outputDirectory) {
     // Do nothing
   }
 }

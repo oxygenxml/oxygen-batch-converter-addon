@@ -13,14 +13,14 @@ public interface ConverterStatusReporter {
   /**
    * Notify that the conversion process starts.
    */
-  public void conversionStarts();
+  public void conversionStarted();
   
   /**
    * Notify that the conversion process starts for the given input file.
    * 
    * @param inputFile The file foreach the conversion process starts
    */
-  public void conversionStartsFor(File inputFile);
+  public void conversionInProgress(File inputFile);
   
   /**
    * Notify that the conversion process has finished.
@@ -28,5 +28,5 @@ public interface ConverterStatusReporter {
    * @param resultedDocuments The documents resulted in conversion process.
    * @param outputDirectory The output dir that contains resulted documents.
    */
-  public void conversionHasFinished(List<File> resultedDocuments, File outputDirectory);
+  public void conversionFinished(List<File> resultedDocuments, File outputDirectory);
 }

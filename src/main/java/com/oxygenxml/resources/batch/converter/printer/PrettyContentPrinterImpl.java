@@ -16,7 +16,7 @@ import org.xml.sax.InputSource;
 
 import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;

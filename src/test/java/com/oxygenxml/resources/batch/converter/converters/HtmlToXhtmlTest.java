@@ -19,7 +19,7 @@ import com.oxygenxml.resources.batch.converter.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import tests.utils.ConvertorWorkerInteractorTestImpl;

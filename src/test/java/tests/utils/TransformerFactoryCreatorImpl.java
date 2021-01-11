@@ -7,13 +7,14 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
+
 /**
  * Implementation of TransformerFactoryCreator for JUnits 
  * @author Cosmin Duna
  *
  */
-public class TransformerFactoryCreatorImpl
-		implements com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator {
+public class TransformerFactoryCreatorImpl implements TransformerFactoryCreator {
 
 	/**
 	 * Logger

@@ -31,7 +31,7 @@ import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.doctype.DitaConstants;
 import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
 public class MarkdownToDitaInternalConverter implements Converter {

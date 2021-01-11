@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import org.json.XML;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 

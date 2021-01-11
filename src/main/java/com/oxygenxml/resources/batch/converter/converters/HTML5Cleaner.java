@@ -11,7 +11,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
 /**
  * Additional processing of the well-formed HTML5 content before to apply conversion to DITA or DocBook.

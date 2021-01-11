@@ -52,12 +52,9 @@ public abstract class ConvertActionBase extends AbstractAction {
    */
   @Override
   public void actionPerformed(ActionEvent e) {
-    List<File> imposedInputFile = getImposedInputFiles(e);
-    File imposedOutputDirectory = getImposedOutputDirectory();
-
     JFrame parentFrame = (JFrame) PluginWorkspaceProvider.getPluginWorkspace().getParentFrame();
     final ConverterDialog converterDialog = new ConverterDialog(
-        converterType, imposedInputFile, imposedOutputDirectory,
+        converterType,  getImposedInputFiles(e), getImposedOutputDirectory(),
         parentFrame, translator);
 
     customizeDialog(converterDialog);
@@ -69,20 +66,20 @@ public abstract class ConvertActionBase extends AbstractAction {
     //create a converter worker.
     final ConverterWorker converterWorker = new ConverterWorker(converterType,  converterDialog,  new ConverterStatusReporter() {
       @Override
-      public void conversionStarts() {
+      public void conversionStarted() {
         //set the progress dialog visible 
         progressDialog.setDialogVisible(true);
       }
       
       @Override
-      public void conversionStartsFor(File inputFile) {
+      public void conversionInProgress(File inputFile) {
         progressDialog.conversionInProgress(inputFile);
       }
       
       @Override
-      public void conversionHasFinished(List<File> resultedDocuments, File outputDir) {
+      public void conversionFinished(List<File> resultedDocuments, File outputDir) {
         progressDialog.close();
-        executeConversionPostprocessing(resultedDocuments, outputDir);
+        ConvertActionBase.this.conversionFinished(resultedDocuments, outputDir);
       }
     });
 
@@ -123,10 +120,10 @@ public abstract class ConvertActionBase extends AbstractAction {
  public abstract void customizeDialog(ConverterDialog converterDialog);
  
  /**
-  * Execute the conversion post-processing
+  * Conversion finished. This method can be implemented to execute the conversion post-processing
   * 
   * @param convertedDocuments The converted documents.
   * @param outputDir          The output directory that contains the converted documents.
   */
- public abstract void executeConversionPostprocessing(List<File> convertedDocuments, File outputDir);
+ public abstract void conversionFinished(List<File> convertedDocuments, File outputDir);
 }

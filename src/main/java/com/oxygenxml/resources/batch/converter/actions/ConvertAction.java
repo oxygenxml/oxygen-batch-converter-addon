@@ -93,7 +93,7 @@ public class ConvertAction extends ConvertActionBase {
    * @param outputDir          The output directory that contains the converted documents.
    */
   @Override
-  public void executeConversionPostprocessing(List<File> convertedDocuments, final File outputDir) {
+  public void conversionFinished(List<File> convertedDocuments, final File outputDir) {
     if(isInvokedFromProject) {
       //refresh the output folder from the project manager.
       PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();   

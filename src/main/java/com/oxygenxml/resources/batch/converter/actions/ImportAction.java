@@ -2,7 +2,6 @@ package com.oxygenxml.resources.batch.converter.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,9 +102,10 @@ public class ImportAction extends ConvertActionBase{
    * @param outputDir          The output directory that contains the converted documents.
    */
   @Override
-  public void executeConversionPostprocessing(List<File> convertedDocuments, File outputDir) {
+  public void conversionFinished(List<File> convertedDocuments, File outputDir) {
     if(dmmInsertType != InsertType.NO_INSERT && !convertedDocuments.isEmpty()) {
-      InsertTopicRefUtil.insertTopicReferencesInDMM(convertedDocuments, dmmInsertType);
+      WSEditor dmmEditor = PluginWorkspaceProvider.getPluginWorkspace().getCurrentEditorAccess(PluginWorkspace.DITA_MAPS_EDITING_AREA);
+      InsertTopicRefUtil.insertTopicReferencesInDMM(convertedDocuments, dmmInsertType, dmmEditor);
     }
   }
 

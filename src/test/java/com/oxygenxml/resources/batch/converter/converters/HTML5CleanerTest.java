@@ -7,7 +7,7 @@ import java.io.StringReader;
 
 import org.junit.Test;
 
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
 import tests.utils.TransformerFactoryCreatorImpl;
 

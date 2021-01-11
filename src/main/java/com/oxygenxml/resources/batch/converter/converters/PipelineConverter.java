@@ -7,7 +7,7 @@ import java.io.StringReader;
 import javax.xml.transform.TransformerException;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
 /**
  * A complex converter with uses a pipeline of converters

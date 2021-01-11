@@ -33,7 +33,7 @@ import org.zwobble.mammoth.Result;
 import org.zwobble.mammoth.images.ImageConverter;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.word.styles.WordStyleMapLoader;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;

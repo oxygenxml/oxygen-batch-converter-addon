@@ -11,7 +11,7 @@ import javax.xml.transform.TransformerException;
 import org.w3c.tidy.Tidy;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 
 /**

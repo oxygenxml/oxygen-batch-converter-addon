@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,13 @@ import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
+import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
 import tests.utils.ProblemReporterTestImpl;
-import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 

@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 import com.oxygenxml.resources.batch.converter.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
 import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
 /**
  * A simple content printer implementation.

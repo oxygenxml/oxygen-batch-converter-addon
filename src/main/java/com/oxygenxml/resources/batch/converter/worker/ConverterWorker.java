@@ -3,25 +3,18 @@ package com.oxygenxml.resources.batch.converter.worker;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
 import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
-import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.reporter.OxygenProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.OxygenStatusReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ResultsUtil;
+import com.oxygenxml.resources.batch.converter.transformer.OxygenTransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
-import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
-
-import ro.sync.exml.workspace.api.PluginWorkspace;
-import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
-import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
-import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 
 /**
  * Worker that execute the conversion.
@@ -83,7 +76,7 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 		oxygenStatusReporter.setStatusMessage(translator.getTranslation(Tags.PROGRESS_STATUS));
 		List<File> convertedFiles = null;
 		try {
-		  converterStatusReporter.conversionStarts();
+		  converterStatusReporter.conversionStarted();
 
 		  //delete reported problems from other conversion
 		  ResultsUtil.deleteReportedProblems();
@@ -94,23 +87,9 @@ public class ConverterWorker extends SwingWorker<Void, Void> implements Converto
 
 		  //convert the files
 		  convertedFiles = convertor.convertFiles(converterType, inputsProvider);
-
-		  //refresh the output folder from the project manager.
-		  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();		
-		  final ProjectController projectManager = ((StandalonePluginWorkspace)pluginWorkspace).getProjectManager();
-
-		  //refresh the project manager parent directory
-		  SwingUtilities.invokeLater(new Runnable() {
-		    @Override
-		    public void run() {
-		      projectManager.refreshFolders(new File[]{inputsProvider.getOutputFolder().getParentFile()});
-
-		    }
-		  });
-		  
 		} finally {
 		  // Notify that the conversion has finished
-		  converterStatusReporter.conversionHasFinished(convertedFiles, inputsProvider.getOutputFolder());
+		  converterStatusReporter.conversionFinished(convertedFiles, inputsProvider.getOutputFolder());
     }
 
 		return null;

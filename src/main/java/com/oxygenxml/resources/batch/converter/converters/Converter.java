@@ -6,7 +6,7 @@ import java.io.Reader;
 import javax.xml.transform.TransformerException;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
 /**
  * Interface for convert a document in other type.

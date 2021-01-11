@@ -18,8 +18,8 @@ import com.oxygenxml.resources.batch.converter.printer.StyleSourceGetter;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
-import com.oxygenxml.resources.batch.converter.trasformer.OxygenTransformerFactoryCreator;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.OxygenTransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConverterStatusReporter;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
@@ -93,16 +93,16 @@ public class BatchConverterImpl implements BatchConverter {
 	    this(problemReporter, statusReporter, new ConverterStatusReporter() {
         
 	      @Override
-	      public void conversionStarts() {
+	      public void conversionStarted() {
 	        // Do nothing
 	      }
         @Override
-        public void conversionStartsFor(File inputFile) {
+        public void conversionInProgress(File inputFile) {
           progressDialogInteractor.conversionInProgress(inputFile);
         }
         
         @Override
-        public void conversionHasFinished(List<File> resultedDocuments, File outputDir) {
+        public void conversionFinished(List<File> resultedDocuments, File outputDir) {
           // Do nothing
         }
       }, new ConvertorWorkerInteractor() {
@@ -213,7 +213,7 @@ public class BatchConverterImpl implements BatchConverter {
 					logger.debug("File to convert: " + currentFile);
 				}
 				
-				converterStatusReporter.conversionStartsFor(currentFile);
+				converterStatusReporter.conversionInProgress(currentFile);
 
 				//generate the output file.
 				File outputFile = ConverterFileUtils.getUniqueOutputFile(currentFile, 

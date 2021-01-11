@@ -7,7 +7,7 @@ import java.io.Reader;
 import javax.xml.transform.TransformerException;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.utils.ConverterReaderUtils;
 import com.vladsch.flexmark.html.HtmlRenderer;

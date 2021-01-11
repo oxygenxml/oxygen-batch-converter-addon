@@ -6,7 +6,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 
 import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
 /**
  * Interface for print converted content.

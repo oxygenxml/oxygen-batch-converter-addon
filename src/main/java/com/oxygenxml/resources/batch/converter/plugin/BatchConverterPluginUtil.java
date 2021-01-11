@@ -75,29 +75,18 @@ public class BatchConverterPluginUtil {
    * @return The submenu, or <code>null</code> if it cannot be found.
    */
   public static JMenu searchForSubMenu(JMenu menu, String submenuId, StandalonePluginWorkspace pluginWorkspaceAccess) {
-    JMenu importSubmenu = null;
+    JMenu menuToRet = null;
     Component[] menuComponents = menu.getMenuComponents();
     for (int i = 0; i < menuComponents.length; i++) {
       Component currrentComponent = menuComponents[i];
       if(currrentComponent instanceof JMenu) {
-        JMenu submenu = (JMenu) currrentComponent;
-        if(submenu.getItemCount() > 0) {
-          Action action = submenu.getItem(0).getAction();
-          if (action != null) {
-            String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
-            // The actionId is in format: menuNameId/menuItemActionID
-            int indexOfSlash = actionID.indexOf('/');
-
-            // check the menuNameId
-            if (indexOfSlash != -1 && submenuId.equals(actionID.substring(0, indexOfSlash))) {
-              importSubmenu = submenu;
-              break;
-            }
-          }
+        String currentId = pluginWorkspaceAccess.getActionsProvider().getActionID(currrentComponent);
+        if(submenuId.equals(currentId)) {
+          menuToRet = (JMenu)currrentComponent;
         }
       }
     }
-    return importSubmenu;
+    return menuToRet;
   }
   
   /**
@@ -111,7 +100,7 @@ public class BatchConverterPluginUtil {
    * 
    * @return The index of action in menu, 
    */
- public static int searchForActionInMenu(JMenu menu, String menuId, String perfectOptionActionId, String secondOptionActionId,
+ public static int searchForActionInMenu(JMenu menu, String perfectOptionActionId, String secondOptionActionId,
      boolean searchOnlyInEnableActions, StandalonePluginWorkspace pluginWorkspaceAccess) {
    int index = -1;
    // iterate over menu items in currentMenu
@@ -126,21 +115,13 @@ public class BatchConverterPluginUtil {
          // get the actionID
          String actionID = pluginWorkspaceAccess.getOxygenActionID(action);
          if (actionID != null) {
-           // The actionId is in format: menuNameId/menuItemActionID
-           int indexOfSlash = actionID.indexOf('/');
-           // check the menuNameId
-           if (menuId == null || menuId.equals(actionID.substring(0, indexOfSlash))) {
-             if (perfectOptionActionId != null && perfectOptionActionId.equals(actionID.substring(indexOfSlash + 1))) {
-               index = i;
-               // The perfect option was found. Break here
-               break;
-             } else if (secondOptionActionId != null && secondOptionActionId.equals(actionID.substring(indexOfSlash + 1))) {
-               // Save this position but continue to search for the perfect options
-               index = i;
-             }
-           } else {
-             // Don't match the menu id
+           if (perfectOptionActionId != null && perfectOptionActionId.equals(actionID)) {
+             index = i;
+             // The perfect option was found. Break here
              break;
+           } else if (secondOptionActionId != null && secondOptionActionId.equals(actionID)) {
+             // Save this position but continue to search for the perfect options
+             index = i;
            }
          }
        }

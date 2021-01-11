@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
-import com.oxygenxml.resources.batch.converter.trasformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;

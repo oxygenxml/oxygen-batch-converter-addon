@@ -11,19 +11,17 @@ import javax.swing.SwingUtilities;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.actions.ImportAction;
 import com.oxygenxml.resources.batch.converter.reporter.OxygenProblemReporter;
 
 import ro.sync.ecss.dita.DITAAccess;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.AuthorOperationException;
 import ro.sync.ecss.extensions.api.node.AuthorNode;
-import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.editor.WSEditor;
 import ro.sync.exml.workspace.api.editor.page.WSEditorPage;
 import ro.sync.exml.workspace.api.editor.page.ditamap.WSDITAMapEditorPage;
-import ro.sync.util.URLUtil;
+import ro.sync.exml.workspace.api.util.UtilAccess;
 
 /**
  * This class contains utility methods used to insert topicrefs in the map opened in DMM.
@@ -50,10 +48,9 @@ public final class InsertTopicRefUtil {
    * @param convertedFiles     The converted files
    * @param insertType         The type of insertion to be made.
    */
-  public static void insertTopicReferencesInDMM(List<File> convertedFiles, InsertType insertType) {
-    WSEditor currentEditorAccess = PluginWorkspaceProvider.getPluginWorkspace().getCurrentEditorAccess(PluginWorkspace.DITA_MAPS_EDITING_AREA);
-    if(currentEditorAccess != null) {
-      WSEditorPage currentPage = currentEditorAccess.getCurrentPage();
+  public static void insertTopicReferencesInDMM(List<File> convertedFiles, InsertType insertType, WSEditor dmmEditor) {
+    if(dmmEditor != null) {
+      WSEditorPage currentPage = dmmEditor.getCurrentPage();
       if(currentPage instanceof WSDITAMapEditorPage) {
         WSDITAMapEditorPage dmmPage = (WSDITAMapEditorPage) currentPage;
         final AuthorDocumentController documentController = dmmPage.getDocumentController();
@@ -78,7 +75,6 @@ public final class InsertTopicRefUtil {
                 try {
                   documentController.insertXMLFragmentSchemaAware(xmlFragment, offset);
                 } catch (AuthorOperationException e) {
-                  e.printStackTrace();
                   new OxygenProblemReporter().reportProblem(e, null);
                 }
               }
@@ -130,13 +126,13 @@ public final class InsertTopicRefUtil {
           "getAutoInsertTopicRefElementName", AuthorDocumentController.class, int.class);
       topicRefElementName = (String)getInsertTopicRefElementNameMethod.invoke(null, controller, offset);
     } catch (NoSuchMethodException e) {
-      // Ignore. We hava this method starting with 23.1. We will use the default in the older versions.
+      // Ignore. We have this method starting with 23.1. We will use the default in the older versions.
     } catch (IllegalAccessException e) {
-      // Ignore. We hava this method starting with 23.1. We will use the default in the older versions.
+      // Ignore. We have this method starting with 23.1. We will use the default in the older versions.
     } catch (IllegalArgumentException e) {
-      // Ignore. We hava this method starting with 23.1. We will use the default in the older versions.
+      // Ignore. We have this method starting with 23.1. We will use the default in the older versions.
     } catch (InvocationTargetException e) {
-      // Ignore. We hava this method starting with 23.1. We will use the default in the older versions.
+      // Ignore. We have this method starting with 23.1. We will use the default in the older versions.
     }
     
     return topicRefElementName;
@@ -154,7 +150,8 @@ public final class InsertTopicRefUtil {
     for (File file : files) {
       String relativePath = file.getAbsolutePath();
       try {
-        relativePath = URLUtil.makeRelative(baseURL, URLUtil.correct(file));
+        UtilAccess utilAccess = PluginWorkspaceProvider.getPluginWorkspace().getUtilAccess();
+        relativePath = utilAccess.makeRelative(baseURL, utilAccess.convertFileToURL(file));
       } catch (MalformedURLException e) {
         // We will keep the absolute path
         logger.debug(e.getMessage(), e);
