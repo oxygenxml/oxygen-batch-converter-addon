@@ -2,6 +2,7 @@ package com.oxygenxml.resources.batch.converter.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
