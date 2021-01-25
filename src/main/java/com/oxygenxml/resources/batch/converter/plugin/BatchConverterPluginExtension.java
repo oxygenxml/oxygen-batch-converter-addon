@@ -3,7 +3,7 @@ package com.oxygenxml.resources.batch.converter.plugin;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -267,36 +267,43 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	 * @return
 	 */
 	private Map<String, List<Action>> createConvertActionsMap(StandalonePluginWorkspace pluginWorkspaceAccess) {
-	  Map<String, List<Action>> toReturn = new HashMap<String, List<Action>>();
-		List<Action> dita = new ArrayList<Action>();
-		
-		dita.add(new ConvertAction(ConverterTypes.HTML_TO_DITA, translator, this));
-		dita.add(new ConvertAction(ConverterTypes.MD_TO_DITA, translator, this));
-		dita.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
-		dita.add(new ConvertAction(ConverterTypes.WORD_TO_DITA, translator, this));
-		toReturn.put("ditaSection", dita);
-		
-		List<Action> xhtml = new ArrayList<Action>();
-		xhtml.add(new ConvertAction(ConverterTypes.HTML_TO_XHTML, translator, this));
-		xhtml.add(new ConvertAction(ConverterTypes.MD_TO_XHTML, translator, this));
-		xhtml.add(new ConvertAction(ConverterTypes.WORD_TO_XHTML, translator, this));
-		toReturn.put("xhtmlSection", xhtml);
-		
-		List<Action> json = new ArrayList<Action>();
-		json.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
-		json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
-		toReturn.put("jsonSection", json);
-		
-		List<Action> docbook = new ArrayList<Action>();
-		docbook.add(new ConvertAction(ConverterTypes.HTML_TO_DB4, translator, this));
-		docbook.add(new ConvertAction(ConverterTypes.HTML_TO_DB5, translator, this));
-		docbook.add(new ConvertAction(ConverterTypes.MD_TO_DB4, translator, this));
-		docbook.add(new ConvertAction(ConverterTypes.MD_TO_DB5, translator, this));
-		docbook.add(new ConvertAction(ConverterTypes.WORD_TO_DB4, translator, this));
-		docbook.add(new ConvertAction(ConverterTypes.WORD_TO_DB5, translator, this));
-		toReturn.put("docbookSection", docbook);
 
-		return toReturn;
+    Map<String, List<Action>> toReturn = new LinkedHashMap<String, List<Action>>();
+    List<Action> excel = new ArrayList<Action>();
+    List<Action> markdown = new ArrayList<Action>();
+    List<Action> html = new ArrayList<Action>();
+    List<Action> json = new ArrayList<Action>();
+    List<Action> word = new ArrayList<Action>();
+    List<Action> xml = new ArrayList<Action>();
+    
+    excel.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
+    toReturn.put("excelSection", excel);
+    
+    html.add(new ConvertAction(ConverterTypes.HTML_TO_XHTML, translator, this));
+    html.add(new ConvertAction(ConverterTypes.HTML_TO_DITA, translator, this));
+    html.add(new ConvertAction(ConverterTypes.HTML_TO_DB4, translator, this));
+    html.add(new ConvertAction(ConverterTypes.HTML_TO_DB5, translator, this));
+    toReturn.put("htmlSection", html);
+    
+    json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
+    toReturn.put("jsonSection", json);
+    
+    markdown.add(new ConvertAction(ConverterTypes.MD_TO_DITA, translator, this));
+    markdown.add(new ConvertAction(ConverterTypes.MD_TO_DB4, translator, this));
+    markdown.add(new ConvertAction(ConverterTypes.MD_TO_DB5, translator, this));
+    markdown.add(new ConvertAction(ConverterTypes.MD_TO_XHTML, translator, this));
+    toReturn.put("markdownSection", markdown);
+    
+    word.add(new ConvertAction(ConverterTypes.WORD_TO_DITA, translator, this));
+    word.add(new ConvertAction(ConverterTypes.WORD_TO_DB4, translator, this));
+    word.add(new ConvertAction(ConverterTypes.WORD_TO_DB5, translator, this));
+    word.add(new ConvertAction(ConverterTypes.WORD_TO_XHTML, translator, this));
+    toReturn.put("wordSection", word);
+    
+    xml.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
+    toReturn.put("xml", xml);
+
+    return toReturn;
 	}
 
   /**
