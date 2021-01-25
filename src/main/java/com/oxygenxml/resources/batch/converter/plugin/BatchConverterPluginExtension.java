@@ -269,24 +269,16 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
 	private Map<String, List<Action>> createConvertActionsMap(StandalonePluginWorkspace pluginWorkspaceAccess) {
 
     Map<String, List<Action>> toReturn = new LinkedHashMap<String, List<Action>>();
-    List<Action> excel = new ArrayList<Action>();
     List<Action> markdown = new ArrayList<Action>();
     List<Action> html = new ArrayList<Action>();
-    List<Action> json = new ArrayList<Action>();
     List<Action> word = new ArrayList<Action>();
-    List<Action> xml = new ArrayList<Action>();
-    
-    excel.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
-    toReturn.put("excelSection", excel);
+    List<Action> xmlAndJson = new ArrayList<Action>();
     
     html.add(new ConvertAction(ConverterTypes.HTML_TO_XHTML, translator, this));
     html.add(new ConvertAction(ConverterTypes.HTML_TO_DITA, translator, this));
     html.add(new ConvertAction(ConverterTypes.HTML_TO_DB4, translator, this));
     html.add(new ConvertAction(ConverterTypes.HTML_TO_DB5, translator, this));
     toReturn.put("htmlSection", html);
-    
-    json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
-    toReturn.put("jsonSection", json);
     
     markdown.add(new ConvertAction(ConverterTypes.MD_TO_DITA, translator, this));
     markdown.add(new ConvertAction(ConverterTypes.MD_TO_DB4, translator, this));
@@ -298,10 +290,12 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     word.add(new ConvertAction(ConverterTypes.WORD_TO_DB4, translator, this));
     word.add(new ConvertAction(ConverterTypes.WORD_TO_DB5, translator, this));
     word.add(new ConvertAction(ConverterTypes.WORD_TO_XHTML, translator, this));
+    word.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
     toReturn.put("wordSection", word);
     
-    xml.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
-    toReturn.put("xml", xml);
+    xmlAndJson.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
+    xmlAndJson.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
+    toReturn.put("xmlAndJsonSection", xmlAndJson);
 
     return toReturn;
 	}
