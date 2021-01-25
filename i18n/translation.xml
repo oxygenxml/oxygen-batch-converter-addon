@@ -10,11 +10,11 @@
 	
 	<key value="Menu_Text_Conv">
 		<comment>The text of menu that contains the converters.</comment>
-		<val lang="en_US">Batch Converter</val>
-		<val lang="de_DE">Batch Converter</val>
-		<val lang="fr_FR">Batch Convertisseur</val>
-		<val lang="ja_JP">Batch Converter</val>
-		<val lang="nl_NL">Batch Converter</val>
+		<val lang="en_US">Batch Documents Converter</val>
+		<val lang="de_DE">Batch Documents Converter</val>
+		<val lang="fr_FR">Batch Documents Converter</val>
+		<val lang="ja_JP">Batch Documents Converter</val>
+		<val lang="nl_NL">Batch Documents Converter</val>
 	</key>
 	
 	<key value="Menu_Item_Text_Conv_html.to.xhtml">

@@ -11,7 +11,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
         <xt:oxy_version>20.0+</xt:oxy_version>
         <xt:type>plugin</xt:type>
         <xt:author>Syncro Soft</xt:author>
-        <xt:name>Batch Converter</xt:name>
+        <xt:name>Batch Documents Converter</xt:name>
         <xt:description><html xmlns="http://www.w3.org/1999/xhtml">
             <head>
                 <title>Oxygen resources converter</title>
