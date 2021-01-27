@@ -280,16 +280,16 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     html.add(new ConvertAction(ConverterTypes.HTML_TO_DB5, translator, this));
     toReturn.put("htmlSection", html);
     
+    markdown.add(new ConvertAction(ConverterTypes.MD_TO_XHTML, translator, this));
     markdown.add(new ConvertAction(ConverterTypes.MD_TO_DITA, translator, this));
     markdown.add(new ConvertAction(ConverterTypes.MD_TO_DB4, translator, this));
     markdown.add(new ConvertAction(ConverterTypes.MD_TO_DB5, translator, this));
-    markdown.add(new ConvertAction(ConverterTypes.MD_TO_XHTML, translator, this));
     toReturn.put("markdownSection", markdown);
     
+    word.add(new ConvertAction(ConverterTypes.WORD_TO_XHTML, translator, this));
     word.add(new ConvertAction(ConverterTypes.WORD_TO_DITA, translator, this));
     word.add(new ConvertAction(ConverterTypes.WORD_TO_DB4, translator, this));
     word.add(new ConvertAction(ConverterTypes.WORD_TO_DB5, translator, this));
-    word.add(new ConvertAction(ConverterTypes.WORD_TO_XHTML, translator, this));
     word.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
     toReturn.put("wordSection", word);
     
