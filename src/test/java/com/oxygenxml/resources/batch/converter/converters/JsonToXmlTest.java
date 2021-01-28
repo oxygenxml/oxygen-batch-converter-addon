@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class JsonToXmlTest {
 	
 		File sample  = new File("test-sample/jsonTest.json");		
 		File goodSample = new File("test-sample/xmlTest.xml");
-		final File outputFolder = sample.getParentFile();
+		final File outputFolder = new File(sample.getParentFile(), "out");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -75,9 +74,7 @@ public class JsonToXmlTest {
 			assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
 
 		} finally {
-			Files.delete(convertedFile.toPath());
+		  FileComparationUtil.deleteRecursivelly(outputFolder);    
 		}
-
 	}
-		
 }

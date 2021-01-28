@@ -1,0 +1,15 @@
+---
+para:
+  '#text': 'The CPU must be at least '
+  phrase:
+  - os: linux
+    '#text': dual
+  - os: windows
+    '#text': quad
+  '#text1': ' core at minimum '
+  phrase#1:
+  - os: linux
+    '#text': 1.5
+  - os: windows
+    '#text': 2
+  '#text2': GHz.

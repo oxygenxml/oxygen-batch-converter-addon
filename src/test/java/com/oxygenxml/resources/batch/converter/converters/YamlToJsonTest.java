@@ -28,32 +28,29 @@ import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 
 /**
- * JUnit for XML to JSON conversion.
- * @author Cosmin Duna
- *
+ *  Test for YAML to JSON conversion.
  */
-public class XmlToJsonTest {
+public class YamlToJsonTest {
+  @Test
+  public void test() throws TransformerException, IOException {
+  
+    File sample  = new File("test-sample/yamlTest.yaml");   
+    File goodSample = new File("test-sample/jsonTest.json");
+    final File outputFolder = new File(sample.getParentFile(), "out");
+    
+    TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+    ProblemReporter problemReporter = new ProblemReporterTestImpl();
+    
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
+        new ConvertorWorkerInteractorTestImpl() , transformerCreator);
 
-	@Test
-	public void test() throws TransformerException, IOException {
-		
-		File sample  = new File("test-sample/xmlTest.xml");		
-		File goodSample = new File("test-sample/jsonTest.json");
-		final File outputFolder = new File(sample.getParentFile(), "out");
-		
-		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
-		ProblemReporter problemReporter = new ProblemReporterTestImpl();
-		
-		BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
-				new ConvertorWorkerInteractorTestImpl() , transformerCreator);
-
-		final List<File> inputFiles = new ArrayList<File>();
-		inputFiles.add(sample);
-				
-		File fileToRead = ConverterFileUtils.getOutputFile(sample, FileExtensionType.JSON_OUTPUT_EXTENSION , outputFolder);
-		
-		try {
-			converter.convertFiles(ConverterTypes.XML_TO_JSON, new UserInputsProvider() {
+    final List<File> inputFiles = new ArrayList<File>();
+    inputFiles.add(sample);
+        
+    File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.JSON_OUTPUT_EXTENSION , outputFolder);
+    
+    try {
+      converter.convertFiles(ConverterTypes.YAML_TO_JSON, new UserInputsProvider() {
         @Override
         public boolean mustOpenConvertedFiles() {
           return false;
@@ -71,11 +68,10 @@ public class XmlToJsonTest {
           return null;
         }
       });
+      assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
 
-			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
-
-		} finally {
-		  FileComparationUtil.deleteRecursivelly(outputFolder);    
-		}
-	}
+    } finally {
+      FileComparationUtil.deleteRecursivelly(outputFolder);    
+    }
+  }
 }

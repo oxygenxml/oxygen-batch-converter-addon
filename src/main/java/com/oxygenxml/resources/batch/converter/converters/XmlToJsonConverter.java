@@ -52,7 +52,7 @@ public class XmlToJsonConverter implements Converter {
 
 			JSONObject jsonObj = XML.toJSONObject(contentToParse);
 
-			convertedContent = jsonObj.toString(4, false);
+			convertedContent = jsonObj.toString(2, false);
 
 		}
 		catch (JSONException | IOException e) {

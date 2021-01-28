@@ -38,7 +38,7 @@ public class YamlToJsonConverter implements Converter {
       } else {
         yamlContent = ConverterReaderUtils.getString(contentReader);
       }
-      convertedContent = new YamlJsonConverter().convertYamlToJson(yamlContent, 4, false);
+      convertedContent = new YamlJsonConverter().convertYamlToJson(yamlContent, 2, false);
       
     } catch (IOException e) {
       throw new TransformerException(e.getMessage(), e.getCause());

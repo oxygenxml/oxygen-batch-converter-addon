@@ -15,11 +15,11 @@
     "phrase#1": [
       {
         "os": "linux",
-        "#text": "1.5"
+        "#text": 1.5
       },
       {
         "os": "windows",
-        "#text": "2"
+        "#text": 2
       }
     ],
     "#text2": "GHz."
