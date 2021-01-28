@@ -169,13 +169,6 @@
 			<version>1.1.7</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
-	<!-- 	<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.18</version>
-		</dependency> -->
-
 		<!-- https://mvnrepository.com/artifact/org.dita-ot/dost -->
 		<dependency>
 			<groupId>org.dita-ot</groupId>

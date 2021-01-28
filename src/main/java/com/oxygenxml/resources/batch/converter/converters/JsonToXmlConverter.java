@@ -63,9 +63,7 @@ public class JsonToXmlConverter implements Converter {
 				convertedContent.append(xmlContent);
 			}
 			
-		} catch (IOException e) {
-			throw new TransformerException(e.getMessage(), e.getCause());
-		} catch (JSONException e) {
+		} catch (IOException | JSONException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 

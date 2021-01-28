@@ -65,7 +65,22 @@
 		<val lang="ja_JP">JSON to XML</val>
 		<val lang="nl_NL">JSON to XML</val>
 	</key>
-
+	<key value="Menu_Item_Text_Conv_yaml.to.json">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">YAML to JSON</val>
+		<val lang="de_DE">YAML to JSON</val>
+		<val lang="fr_FR">YAML vers JSON</val>
+		<val lang="ja_JP">YAML to JSON</val>
+		<val lang="nl_NL">YAML to JSON</val>
+	</key>
+	<key value="Menu_Item_Text_Conv_json.to.yaml">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">JSON to YAML</val>
+		<val lang="de_DE">JSON to YAML</val>
+		<val lang="fr_FR">JSON vers YAML</val>
+		<val lang="ja_JP">JSON to YAML</val>
+		<val lang="nl_NL">JSON to YAML</val>
+	</key>
 
 	<key value="Menu_Item_Text_Conv_html.to.db5">
 		<comment>Text from MenuItem.</comment>

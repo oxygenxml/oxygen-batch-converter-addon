@@ -38,6 +38,14 @@ public class ConverterTypes {
 	 * JSON -> XML
 	 */
 	public static final String JSON_TO_XML = "_json.to.xml";
+	 /**
+   * YAML -> JSON
+   */
+  public static final String YAML_TO_JSON = "_yaml.to.json";
+  /**
+   * JSON -> YAML
+   */
+  public static final String JSON_TO_YAML = "_json.to.yaml";
 	
 	/**
 	 * HTML -> Docbook4

@@ -55,10 +55,7 @@ public class XmlToJsonConverter implements Converter {
 			convertedContent = jsonObj.toString(4, false);
 
 		}
-		catch (JSONException e) {
-			throw new TransformerException(e.getMessage(), e.getCause());
-		}		
-		catch (IOException e) {
+		catch (JSONException | IOException e) {
 			throw new TransformerException(e.getMessage(), e.getCause());
 		}
 

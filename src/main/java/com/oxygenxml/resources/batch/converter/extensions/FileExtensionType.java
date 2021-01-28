@@ -28,10 +28,16 @@ public class FileExtensionType {
 	 * Extensions of XML type.
 	 */
 	protected static final String[] INPUT_XML_EXTENSIONS = new String[] { "xml" };
+	
 	/**
 	 * Extensions of JSON type.
 	 */
 	protected static final String[] INPUT_JSON_EXTENSIONS = new String[] { "json" };
+	
+	/**
+   * Extensions of YAML type.
+   */
+  protected static final String[] INPUT_YAML_EXTENSIONS = new String[] { "yaml", "yml" };
 
 	/**
 	 * Extensions of Excel type.
@@ -67,8 +73,15 @@ public class FileExtensionType {
 	 * XML output type
 	 */
 	public static final String XML_OUTPUT_EXTENSION = "xml";
+	
 	/**
 	 * JSON output type
 	 */
 	public static final String JSON_OUTPUT_EXTENSION = "json";
+	
+	 /**
+   * YAML output type
+   */
+  public static final String YAML_OUTPUT_EXTENSION = "yaml";
+	
 }

@@ -34,125 +34,125 @@ import ro.sync.exml.workspace.api.standalone.ui.Menu;
  */
 public class BatchConverterPluginExtension implements WorkspaceAccessPluginExtension, PluginMenusInteractor{
 
-	/**
-	 * The id of Tools menu where converter action will be place.
-	 */
-	private static final String TOOLS_MENU_ID = "Tools";
-	
-	/**
+  /**
+   * The id of Tools menu where converter action will be place.
+   */
+  private static final String TOOLS_MENU_ID = "Tools";
+  
+  /**
    * The id of File menu where converter action will be place.
-	 */
-	private static final String FILE_MENU_ID = "File";
-	
-	 /**
+   */
+  private static final String FILE_MENU_ID = "File";
+  
+   /**
    * The id of Import sub-menu where converter action will be place.
    */
   private static final String IMPORT_MENU_ID = "File/Import";
 
-	/**
-	 * The preceding menu item.
-	 */
-	private static final String PRECEDING_TOOLS_MENU_ITEM_ACTION_ID = "Tools/XML_to_JSON";
+  /**
+   * The preceding menu item.
+   */
+  private static final String PRECEDING_TOOLS_MENU_ITEM_ACTION_ID = "Tools/XML_to_JSON";
 
-	/**
-	 * The new succeeding menu item.
-	 * PRECEDING_MENU_ITEM_ACTION_ID was moved in Oxygen 22.
-	 */
-	private static final String NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID = "Tools/Format_and_indent_files";
+  /**
+   * The new succeeding menu item.
+   * PRECEDING_MENU_ITEM_ACTION_ID was moved in Oxygen 22.
+   */
+  private static final String NEW_SUCCEEDING_TOOLS_MENU_ITEM_ACTION_ID = "Tools/Format_and_indent_files";
  
-	/**
-	 * The Id of the "Reference" action from the contextual menu of DMM.
-	 */
-	private static final String REFERENCE_ACTION_ID = "ACTION_WITH_NO_SHORTCUT/Reference";
-	/**
+  /**
+   * The Id of the "Reference" action from the contextual menu of DMM.
+   */
+  private static final String REFERENCE_ACTION_ID = "ACTION_WITH_NO_SHORTCUT/Reference";
+  /**
    * The Id of the "Reference to currently edited file" action from the contextual menu of DMM.
    */
-	private static final String REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID = "ACTION_WITH_NO_SHORTCUT/Reference_to_current_edited_file";
-	
-	/**
-	 * The Batch converter menu from the Project view.
-	 */
-	private Menu batchConvertMenuFromProject;
+  private static final String REFERENCE_TO_CURRENT_EDITED_FILE_ACTION_ID = "ACTION_WITH_NO_SHORTCUT/Reference_to_current_edited_file";
+  
+  /**
+   * The Batch converter menu from the Project view.
+   */
+  private Menu batchConvertMenuFromProject;
 
-	/**
-	 * Translator
-	 */
-	private Translator translator = new OxygenTranslator();
-	
-	/**
-	 * Flag that is <code>true</code> when the actions are added in Tools toolbar.
-	 */
-	private boolean actionsInserted; 
-	
-	/**
-	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationStarted(ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace)
-	 */
-	@Override
-	public void applicationStarted(final StandalonePluginWorkspace pluginWorkspaceAccess) {
-	  
-	  actionsInserted = false;
-	  
-		// List with actions.
-		final Map<String, List<Action>> convertActions = createConvertActionsMap(pluginWorkspaceAccess);
+  /**
+   * Translator
+   */
+  private Translator translator = new OxygenTranslator();
+  
+  /**
+   * Flag that is <code>true</code> when the actions are added in Tools toolbar.
+   */
+  private boolean actionsInserted; 
+  
+  /**
+   * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationStarted(ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace)
+   */
+  @Override
+  public void applicationStarted(final StandalonePluginWorkspace pluginWorkspaceAccess) {
+    
+    actionsInserted = false;
+    
+    // List with actions.
+    final Map<String, List<Action>> convertActions = createConvertActionsMap(pluginWorkspaceAccess);
 
-		// Create a menu with actions and add it to Oxygen
-		pluginWorkspaceAccess.addMenuBarCustomizer(new MenuBarCustomizer() {
-			/**
-			 * @see ro.sync.exml.workspace.api.standalone.MenuBarCustomizer#customizeMainMenu(javax.swing.JMenuBar)
-			 */
-			@Override
-			public void customizeMainMenu(JMenuBar mainMenuBar) {
-			  // Check if the actions are added. 
-			  if(!actionsInserted) {
-			    addConvertActionsInMenuBar(mainMenuBar, convertActions, pluginWorkspaceAccess);
-			    actionsInserted = true;
-			  }
-			}
-		});
-		
-		pluginWorkspaceAccess.addMenusAndToolbarsContributorCustomizer(new MenusAndToolbarsContributorCustomizer() {
-		  @Override
-		  public void customizeDITAMapPopUpMenu(JPopupMenu popUp, WSDITAMapEditorPage ditaMapEditorPage) {
-		    enrichDmmContextualMenu(popUp, pluginWorkspaceAccess);
-		  }
-		});
+    // Create a menu with actions and add it to Oxygen
+    pluginWorkspaceAccess.addMenuBarCustomizer(new MenuBarCustomizer() {
+      /**
+       * @see ro.sync.exml.workspace.api.standalone.MenuBarCustomizer#customizeMainMenu(javax.swing.JMenuBar)
+       */
+      @Override
+      public void customizeMainMenu(JMenuBar mainMenuBar) {
+        // Check if the actions are added. 
+        if(!actionsInserted) {
+          addConvertActionsInMenuBar(mainMenuBar, convertActions, pluginWorkspaceAccess);
+          actionsInserted = true;
+        }
+      }
+    });
+    
+    pluginWorkspaceAccess.addMenusAndToolbarsContributorCustomizer(new MenusAndToolbarsContributorCustomizer() {
+      @Override
+      public void customizeDITAMapPopUpMenu(JPopupMenu popUp, WSDITAMapEditorPage ditaMapEditorPage) {
+        enrichDmmContextualMenu(popUp, pluginWorkspaceAccess);
+      }
+    });
 
-		
-		batchConvertMenuFromProject = new Menu(translator.getTranslation(Tags.MENU_TEXT));
-		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuFromProject, convertActions);
-		// add a menu with actions in contextual menu of ProjectManager
-		ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, batchConvertMenuFromProject, translator);
+    
+    batchConvertMenuFromProject = new Menu(translator.getTranslation(Tags.MENU_TEXT));
+    BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuFromProject, convertActions);
+    // add a menu with actions in contextual menu of ProjectManager
+    ProjectManagerEditor.addPopUpMenuCustomizer(pluginWorkspaceAccess, batchConvertMenuFromProject, translator);
 
-	}
+  }
 
-	/**
-	 * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationClosing()
-	 */
-	@Override
-	public boolean applicationClosing() {
-		// You can reject the application closing here
-		return true;
-	}
+  /**
+   * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationClosing()
+   */
+  @Override
+  public boolean applicationClosing() {
+    // You can reject the application closing here
+    return true;
+  }
 
-	/**
-	 * Add the given converter actions in the given JMenuBar.
-	 *
-	 * @param mainMenuBar           The menuBar
-	 * @param actions               Map with converter actions to add.
-	 * @param pluginWorkspaceAccess The oxygen PluginWorkspaceAccess.
-	 */
-	private void addConvertActionsInMenuBar(JMenuBar mainMenuBar, Map<String, List<Action>> actions,
-			StandalonePluginWorkspace pluginWorkspaceAccess) {
+  /**
+   * Add the given converter actions in the given JMenuBar.
+   *
+   * @param mainMenuBar           The menuBar
+   * @param actions               Map with converter actions to add.
+   * @param pluginWorkspaceAccess The oxygen PluginWorkspaceAccess.
+   */
+  private void addConvertActionsInMenuBar(JMenuBar mainMenuBar, Map<String, List<Action>> actions,
+      StandalonePluginWorkspace pluginWorkspaceAccess) {
 
-	  Menu batchConvertMenuForTools = new Menu(translator.getTranslation(Tags.MENU_TEXT));
-		Menu additionalConversionsMenu = new Menu(translator.getTranslation(Tags.ADDITIONAL_CONVERSIONS));
-		BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuForTools, actions);
-		BatchConverterPluginUtil.addActionsInMenu(additionalConversionsMenu, actions);
-		
-		boolean foundFileMenu = false;
-	  boolean foundToolsMenu = false;
+    Menu batchConvertMenuForTools = new Menu(translator.getTranslation(Tags.MENU_TEXT));
+    Menu additionalConversionsMenu = new Menu(translator.getTranslation(Tags.ADDITIONAL_CONVERSIONS));
+    BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuForTools, actions);
+    BatchConverterPluginUtil.addActionsInMenu(additionalConversionsMenu, actions);
+    
+    boolean foundFileMenu = false;
+    boolean foundToolsMenu = false;
 
-		int menuBarSize = mainMenuBar.getMenuCount();
+    int menuBarSize = mainMenuBar.getMenuCount();
     for (int i = 0; i < menuBarSize; i++) {
       JMenu currentMenu = mainMenuBar.getMenu(i);
       if(currentMenu != null) {
@@ -182,8 +182,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
         }
       }
     }
-	}
-	
+  }
+  
   /**
    * Enrich contextul menu from DMM with plugin actions.
    *
@@ -260,19 +260,19 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     return importActionList;
   }
   
-	/**
-	 * Create a list with Swing actions for all converters.
-	 * 
-	 * @param pluginWorkspaceAccess
-	 * @return
-	 */
-	private Map<String, List<Action>> createConvertActionsMap(StandalonePluginWorkspace pluginWorkspaceAccess) {
+  /**
+   * Create a list with Swing actions for all converters.
+   * 
+   * @param pluginWorkspaceAccess
+   * @return
+   */
+  private Map<String, List<Action>> createConvertActionsMap(StandalonePluginWorkspace pluginWorkspaceAccess) {
 
     Map<String, List<Action>> toReturn = new LinkedHashMap<String, List<Action>>();
     List<Action> markdown = new ArrayList<Action>();
     List<Action> html = new ArrayList<Action>();
     List<Action> word = new ArrayList<Action>();
-    List<Action> xmlAndJson = new ArrayList<Action>();
+    List<Action> json = new ArrayList<Action>();
     
     html.add(new ConvertAction(ConverterTypes.HTML_TO_XHTML, translator, this));
     html.add(new ConvertAction(ConverterTypes.HTML_TO_DITA, translator, this));
@@ -293,12 +293,14 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     word.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
     toReturn.put("wordSection", word);
     
-    xmlAndJson.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
-    xmlAndJson.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
-    toReturn.put("xmlAndJsonSection", xmlAndJson);
+    json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
+    json.add(new ConvertAction(ConverterTypes.JSON_TO_YAML, translator, this));
+    json.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
+    json.add(new ConvertAction(ConverterTypes.YAML_TO_JSON, translator, this));
+    toReturn.put("jsonSection", json);
 
     return toReturn;
-	}
+  }
 
   /**
    * Check if the action with the given event is invoked from the contextual menu of the Project view.
@@ -317,8 +319,6 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
       // if is not JMenu from Toolbar
       isInvokedFromProjectMenu = batchConvertMenuFromProject.equals(((JPopupMenu) menuItemAction.getParent()).getInvoker());
     }
-
     return isInvokedFromProjectMenu;
   }
-
 }

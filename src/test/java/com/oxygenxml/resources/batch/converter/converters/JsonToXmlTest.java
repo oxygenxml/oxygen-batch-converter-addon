@@ -21,10 +21,10 @@ import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
+import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
 import tests.utils.ProblemReporterTestImpl;
-import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.StatusReporterImpl;
 import tests.utils.TransformerFactoryCreatorImpl;
 /**

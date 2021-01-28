@@ -46,6 +46,11 @@ public class ConversionFormatUtil {
   private static final String JSON = "json";
   
   /**
+   * YAML document name for conversion
+   */
+  private static final String YAML = "yaml";
+  
+  /**
    * MARKDOWN document name for conversion
    */
   private static final String MARKDOWN = "markdown";
@@ -85,7 +90,7 @@ public class ConversionFormatUtil {
   /**
    * A map between conversion formats and converter types
    */
-  private static final Map<ConversionFormat, String> CONVERSION_FORMATS_TO_CONVERTER_TYPES = new HashMap<ConversionFormat, String>();
+  private static final Map<ConversionFormat, String> CONVERSION_FORMATS_TO_CONVERTER_TYPES = new HashMap<>();
   static {
    
     CONVERSION_FORMATS_TO_CONVERTER_TYPES.put(new ConversionFormat(HTML, DITA), ConverterTypes.HTML_TO_DITA);
@@ -96,6 +101,8 @@ public class ConversionFormatUtil {
     
     CONVERSION_FORMATS_TO_CONVERTER_TYPES.put(new ConversionFormat(XML, JSON), ConverterTypes.XML_TO_JSON);
     CONVERSION_FORMATS_TO_CONVERTER_TYPES.put(new ConversionFormat(JSON, XML), ConverterTypes.JSON_TO_XML);
+    CONVERSION_FORMATS_TO_CONVERTER_TYPES.put(new ConversionFormat(YAML, JSON), ConverterTypes.YAML_TO_JSON);
+    CONVERSION_FORMATS_TO_CONVERTER_TYPES.put(new ConversionFormat(JSON, YAML), ConverterTypes.JSON_TO_YAML);
     
     CONVERSION_FORMATS_TO_CONVERTER_TYPES.put(new ConversionFormat(HTML, XHTML), ConverterTypes.HTML_TO_XHTML);
     CONVERSION_FORMATS_TO_CONVERTER_TYPES.put(new ConversionFormat(MD, XHTML), ConverterTypes.MD_TO_XHTML);

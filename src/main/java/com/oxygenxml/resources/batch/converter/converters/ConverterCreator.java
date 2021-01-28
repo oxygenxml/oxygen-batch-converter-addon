@@ -37,6 +37,12 @@ public class ConverterCreator {
 
   	} else if(ConverterTypes.JSON_TO_XML.equals(converterType)){
   		return new JsonToXmlConverter();
+  		
+  	} else if(ConverterTypes.YAML_TO_JSON.equals(converterType)){
+      return new YamlToJsonConverter();
+
+    } else if(ConverterTypes.JSON_TO_YAML.equals(converterType)){
+      return new JsonToYamlConverter();
 
   	} else if(ConverterTypes.MD_TO_DB5.equals(converterType)){
   		return new MarkdownToDocbook5Converter();
