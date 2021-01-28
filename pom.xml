@@ -123,6 +123,13 @@
 		
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-basic-utilities</artifactId>
+			<version>23.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-yaml-validator-and-converter</artifactId>
 			<version>23.1-SNAPSHOT</version>
 			<scope>provided</scope>
@@ -376,6 +383,22 @@
 							<repositoryLayout>default</repositoryLayout>
 							<groupId>com.oxygenxml</groupId>
 							<artifactId>oxygen-patched-json</artifactId>
+							<version>23.1-SNAPSHOT</version>
+							<packaging>jar</packaging>
+							<generatePom>true</generatePom>
+						</configuration>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>install-external-basic-utilities</id>
+						<phase>clean</phase>
+						<configuration>
+							<file>${basedir}/lib/oxygen-basic-utilities-23.1-SNAPSHOT.jar</file>
+							<repositoryLayout>default</repositoryLayout>
+							<groupId>com.oxygenxml</groupId>
+							<artifactId>oxygen-basic-utilities</artifactId>
 							<version>23.1-SNAPSHOT</version>
 							<packaging>jar</packaging>
 							<generatePom>true</generatePom>
