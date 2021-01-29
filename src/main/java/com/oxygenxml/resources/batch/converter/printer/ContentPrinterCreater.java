@@ -22,7 +22,9 @@ public class ContentPrinterCreater {
 	 * @return The contentPrinter
 	 */
 	public static ContentPrinter create(String converterType){
-		if(ConverterTypes.XML_TO_JSON.equals(converterType)){
+		if(ConverterTypes.XML_TO_JSON.equals(converterType) 
+		    || ConverterTypes.YAML_TO_JSON.equals(converterType)
+		    || ConverterTypes.JSON_TO_YAML.equals(converterType)){
 			//return a printer that does't edit(indent) the content of conversion.
 			return new SimpleContentPrinterImpl();
 		}else {
