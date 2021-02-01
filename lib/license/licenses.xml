@@ -15,6 +15,16 @@
             </licenses>
         </dependency>
         <dependency>
+            <groupId>com.oxygenxml</groupId> 
+            <artifactId>oxygen-yaml-validator-and-converter</artifactId> 
+            <licenses>
+                <license>
+                    <name>The Apache Software License, Version 2.0</name>
+                    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+                </license>
+            </licenses>
+        </dependency>
+        <dependency>
             <groupId>com.ibm.icu</groupId>
             <artifactId>icu4j</artifactId>
             <licenses>
