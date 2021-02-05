@@ -294,8 +294,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     toReturn.put("wordSection", word);
     
     json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
-    json.add(new ConvertAction(ConverterTypes.JSON_TO_YAML, translator, this));
     json.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
+    json.add(new ConvertAction(ConverterTypes.JSON_TO_YAML, translator, this));
     json.add(new ConvertAction(ConverterTypes.YAML_TO_JSON, translator, this));
     toReturn.put("jsonSection", json);
 
