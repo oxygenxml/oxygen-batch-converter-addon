@@ -6,12 +6,12 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
     xsi:schemaLocation="http://www.oxygenxml.com/ns/extension http://www.oxygenxml.com/ns/extension/extensions.xsd">
     <xt:extension xmlns:xt="http://www.oxygenxml.com/ns/extension"
         id="com.oxygenxml.resources.batch.converter.plugin">
-        <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/2.1.0/oxygen-batch-converter-2.1.0-plugin.jar"/>
-        <xt:version>2.1.0</xt:version>
+        <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/3.0.0/oxygen-batch-converter-3.0.0-plugin.jar"/>
+        <xt:version>3.0.0</xt:version>
         <xt:oxy_version>20.0+</xt:oxy_version>
         <xt:type>plugin</xt:type>
         <xt:author>Syncro Soft</xt:author>
-        <xt:name>Batch Converter</xt:name>
+        <xt:name>Batch Documents Converter</xt:name>
         <xt:description><html xmlns="http://www.w3.org/1999/xhtml">
             <head>
                 <title>Oxygen resources converter</title>
@@ -35,14 +35,23 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                 </div>
                 <hr/>
                 <div>
+                    <h3>What's new in version 3.0.0</h3>
+                    <ol>
+                        <li>Added two new conversions: YAML to JSON and JSON to YAML.</li>
+                        <li>Added import actions to the "Append child", "Insert Before", and "Insert After" sub-menus from the DITA Maps Manager's contextual menu. They convert documents and automatically insert them in the DITA map.</li>
+                        <li>Added the converter actions to the "File->Import/Convert->Additional conversions" sub-menu.</li>
+                        <li>Re-organized the converter actions for easier access.</li>
+                    </ol>
+                </div>
+                <div>
 					<h3>What's new in version 2.1.0</h3>
-                    <ul>
+                    <ol>
                         <li>Added a new option for converting Markdown documents with multiple headings into <b>DITA maps with referenced DITA topics</b> (Markdown to DITA).</li>
                         <li>Added a new option for creating DITA <i>short description</i> elements in the Markdown to DITA conversion.</li>
                         <li>Improved the Markdown to DITA conversion to allow conversions of documents that start with a high heading level or increase the heading level with more than one unit.</li>
-                        <li>Added a new option for converting HTML documents with multiple headings into <b>DITA maps with referenced DITA topics</b> (HTML to DITA).</li>
+                        <li>Added a new option for converting HTML documents with multiple headings into <b>DITA maps with referenced DITA topics</b>(HTML to DITA).</li>
                         <li>Fixed various small bugs in the HTML to DITA and Word to DITA conversions.</li>
-                    </ul>
+                    </ol>
                 </div>
             </body>
         </html>
