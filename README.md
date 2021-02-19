@@ -60,12 +60,12 @@ Result: A **Batch Converter** submenu will now be available in the **Tools** men
 ## Converting a document:
 
 1. Select the type of conversion from one of the following sub-menus 
- * **Batch Documents Converter** located in the **Tools** menu 
- * **Additional conversions** located in the **File -> Import/Convert** sub-menu.
- * **Import** located in the **Append child**, **Insert Before**, and **Insert After** sub-menus from the contextual menu of the **DITA Maps Manager** view.
-1. Add the **Input files**.
-1. Choose the path of the **Output folder** that will contain the converted document.
-1. Click the **Convert** button (or **Import** for the actions invoked from the contextual menu of the **DITA Maps Manager** view).
+- **Batch Documents Converter** located in the **Tools** menu 
+- **Additional conversions** located in the **File -> Import/Convert** sub-menu.
+- **Import** located in the **Append child**, **Insert Before**, and **Insert After** sub-menus from the contextual menu of the **DITA Maps Manager** view.
+2. Add the **Input files**.
+3. Choose the path of the **Output folder** that will contain the converted document.
+4. Click the **Convert** button (or **Import** for the actions invoked from the contextual menu of the **DITA Maps Manager** view).
 
 or:
 
