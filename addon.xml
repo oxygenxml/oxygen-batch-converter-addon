@@ -37,9 +37,9 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                 <div>
                     <h3>What's new in version 3.0.0</h3>
                     <ol>
-                        <li>Added two new conversions: YAML to JSON and JSON to YAML.</li>
-                        <li>Added import actions to the "Append child", "Insert Before", and "Insert After" sub-menus from the DITA Maps Manager's contextual menu. They convert documents and automatically insert them in the DITA map.</li>
-                        <li>Added the converter actions to the "File->Import/Convert->Additional conversions" sub-menu.</li>
+                        <li>Added two new conversions: <b>YAML to JSON</b> and <b>JSON to YAML</b>.</li>
+                        <li>Added import actions to the <i>Append child</i>, <i>Insert Before</i>, and <i>Insert After</i> sub-menus from the DITA Maps Manager's contextual menu. They convert documents and automatically insert them in the DITA map.</li>
+                        <li>Added the converter actions to the <i>File->Import/Convert->Additional conversions</i> sub-menu.</li>
                         <li>Re-organized the converter actions for easier access.</li>
                     </ol>
                 </div>
