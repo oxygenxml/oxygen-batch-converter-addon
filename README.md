@@ -1,21 +1,23 @@
 # Oxygen Batch Documents Converter add-on for Oxygen XML Editor
 This add-on can be installed in Oxygen XML Editor to enable batch conversions between the following formats:  
 
-* HTML to DITA
-* Markdown to DITA
-* Excel to DITA
-* Word to DITA
-
-* XML to JSON
-* JSON to XML
-
 * HTML to XHTML
-* Markdown to XHTML
-* Word to XHTML
-
+* HTML to DITA
 * HTML to DocBook4 / DocBook5
-* Markdown to DocBook4 / DocBook5 
+
+* Markdown to XHTML
+* Markdown to DITA
+* Markdown to DocBook4 / DocBook5
+ 
+* Word to XHTML
+* Word to DITA
 * Word to DocBook4 / DocBook5
+* Excel to DITA
+
+* JSON to XML
+* XML to JSON
+* JSON to YAML
+* YAML to JSON
 
 ## Word to DITA
 This conversion works best if you only use the default MS Word styles to semantically mark up your document.
@@ -57,20 +59,29 @@ Result: A **Batch Converter** submenu will now be available in the **Tools** men
 
 ## Converting a document:
 
-1. Select the type of conversion from the **Tools -> Batch Converter** submenu.
+1. Select the type of conversion from one of the following sub-menus 
+ * **Batch Documents Converter** located in the **Tools** menu 
+ * **Additional conversions** located in the **File -> Import/Convert** sub-menu.
+ * **Import** located in the **Append child**, **Insert Before**, and **Insert After** sub-menus from the contextual menu of the **DITA Maps Manager** view.
 1. Add the **Input files**.
 1. Choose the path of the **Output folder** that will contain the converted document.
-1. Click the **Convert** button.
+1. Click the **Convert** button (or **Import** for the actions invoked from the contextual menu of the **DITA Maps Manager** view).
 
 or:
 
-1. Select a folder or a set of files in the Project view, right-click, choose **Batch Convertor**. 
+1. Select a folder or a set of files in the **Project** view, right-click, choose **Batch Convertor**. 
 1. Choose the path of the **Output folder** that will contain the converted document.
 1. Click the **Convert** button.
 
+When actions are invoked from the contextual menu of the **DITA Maps Manager** view, 
+the resulting documents from the conversion are automatically inserted in the map as follows:
+* Actions from **Append child** inserts map nodes as children of the currently selected node.
+* Actions from **Insert Before** inserts map nodes as siblings of the currently selected node, above the current node in the map.
+* Actions from **Insert After** inserts map nodes as siblings of the currently selected node, below the current node in the map.
+
 Copyright and License
 ---------------------
-Copyright 2018-2019 Syncro Soft SRL.
+Copyright 2018-2021 Syncro Soft SRL.
 
 This project is licensed under [Apache License 2.0](https://github.com/oxygenxml/oxygen-resources-converter/blob/master/LICENSE)
 
