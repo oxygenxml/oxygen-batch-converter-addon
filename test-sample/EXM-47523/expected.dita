@@ -6,18 +6,18 @@
    <title>_sample#@</title>
    <body>
       <table id="_Name_2_">
-         <title>"Name #&amp;2"</title>
+         <title>"Name #2"</title>
          <tgroup cols="2">
             <thead>
                <row>
-                  <entry>dsda@32_</entry>
-                  <entry>v</entry>
+                  <entry>a</entry>
+                  <entry>b</entry>
                </row>
             </thead>
             <tbody>
                <row>
-                  <entry>&lt;bla</entry>
-                  <entry>@#dfsad</entry>
+                  <entry/>
+                  <entry/>
                </row>
             </tbody>
          </tgroup>

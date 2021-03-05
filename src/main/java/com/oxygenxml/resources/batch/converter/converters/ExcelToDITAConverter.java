@@ -31,6 +31,9 @@ import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCre
 import com.oxygenxml.resources.batch.converter.utils.XmlUtil;
 
 import ro.sync.basic.xml.BasicXmlUtil;
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
 /**
  * The converter from EXCEL to DITA
@@ -114,7 +117,7 @@ public class ExcelToDITAConverter implements Converter {
 		}
 	
 		sb.append("<topic id='" + XmlUtil.getValidIDFromName(name) + "'>");
-		sb.append("<title>" + BasicXmlUtil.escapeXMLText(name) + "</title>");
+		sb.append("<title>" + escapeText(name) + "</title>");
 		Workbook workbook = createWorkbook(extension, is);
 		int noSheets = 0;
 		if(workbook != null) {
@@ -126,7 +129,7 @@ public class ExcelToDITAConverter implements Converter {
 			Iterator<Row> iterator = datatypeSheet.iterator();
 			if (iterator.hasNext()) {
 				sb.append("<table id='").append(XmlUtil.getValidIDFromName(datatypeSheet.getSheetName())).append("'>");
-				sb.append("<title>").append(BasicXmlUtil.escapeXMLText(datatypeSheet.getSheetName())).append("</title>");
+				sb.append("<title>").append(escapeText(datatypeSheet.getSheetName())).append("</title>");
 				List<StringBuilder> rowsData = new ArrayList<StringBuilder>();
 				// For each sheet we have a table
 				int maxColCount = 0;
@@ -140,7 +143,7 @@ public class ExcelToDITAConverter implements Converter {
 						colCount++;
 						Cell currentCell = cellIterator.next();
 						rowData.append("<entry>");
-						rowData.append(BasicXmlUtil.escapeXMLText(getImportRepresentation(currentCell, true)));
+						rowData.append(escapeText(getImportRepresentation(currentCell, true)));
 						rowData.append("</entry>");
 					}
 					if (colCount > maxColCount) {
@@ -362,5 +365,20 @@ public class ExcelToDITAConverter implements Converter {
 		// This is unformatted, that is Excel type.
 		DataFormatter formatter = new DataFormatter();
 		return formatter.formatCellValue(cell);
+	}
+	
+	/**
+	 * Escape invalid chars in XML from the given text
+	 * @param text The text to escape.
+	 * 
+	 * @return The escaped text.
+	 */
+	private static String escapeText(String text) {
+	  String toRet = text;
+	  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+	  if (pluginWorkspace != null) {
+	    toRet = pluginWorkspace.getXMLUtilAccess().escapeTextValue(text);
+	  }
+	  return toRet;
 	}
 }
