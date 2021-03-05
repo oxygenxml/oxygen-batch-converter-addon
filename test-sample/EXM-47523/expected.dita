@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="_sample_">
+   <title>_sample#@</title>
+   <body>
+      <table id="_Name_2_">
+         <title>"Name #&amp;2"</title>
+         <tgroup cols="2">
+            <thead>
+               <row>
+                  <entry>dsda@32_</entry>
+                  <entry>v</entry>
+               </row>
+            </thead>
+            <tbody>
+               <row>
+                  <entry>&lt;bla</entry>
+                  <entry>@#dfsad</entry>
+               </row>
+            </tbody>
+         </tgroup>
+      </table>
+   </body>
+</topic>

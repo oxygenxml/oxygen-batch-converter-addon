@@ -28,6 +28,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
+import com.oxygenxml.resources.batch.converter.utils.XmlUtil;
+
+import ro.sync.basic.xml.BasicXmlUtil;
 
 /**
  * The converter from EXCEL to DITA
@@ -109,8 +112,9 @@ public class ExcelToDITAConverter implements Converter {
 				name = name.substring(0, name.lastIndexOf('.'));
 			}
 		}
-		sb.append("<topic id='" + name + "'>");
-		sb.append("<title>" + name + "</title>");
+	
+		sb.append("<topic id='" + XmlUtil.getValidIDFromName(name) + "'>");
+		sb.append("<title>" + BasicXmlUtil.escapeXMLText(name) + "</title>");
 		Workbook workbook = createWorkbook(extension, is);
 		int noSheets = 0;
 		if(workbook != null) {
@@ -121,8 +125,8 @@ public class ExcelToDITAConverter implements Converter {
 			Sheet datatypeSheet = workbook.getSheetAt(i);
 			Iterator<Row> iterator = datatypeSheet.iterator();
 			if (iterator.hasNext()) {
-				sb.append("<table id='" + datatypeSheet.getSheetName().replace(' ', '_') + "'>");
-				sb.append("<title>").append(datatypeSheet.getSheetName()).append("</title>");
+				sb.append("<table id='").append(XmlUtil.getValidIDFromName(datatypeSheet.getSheetName())).append("'>");
+				sb.append("<title>").append(BasicXmlUtil.escapeXMLText(datatypeSheet.getSheetName())).append("</title>");
 				List<StringBuilder> rowsData = new ArrayList<StringBuilder>();
 				// For each sheet we have a table
 				int maxColCount = 0;
@@ -136,7 +140,7 @@ public class ExcelToDITAConverter implements Converter {
 						colCount++;
 						Cell currentCell = cellIterator.next();
 						rowData.append("<entry>");
-						rowData.append(getImportRepresentation(currentCell, true).replace("<", "&lt;").replace("&", "&amp;"));
+						rowData.append(BasicXmlUtil.escapeXMLText(getImportRepresentation(currentCell, true)));
 						rowData.append("</entry>");
 					}
 					if (colCount > maxColCount) {
