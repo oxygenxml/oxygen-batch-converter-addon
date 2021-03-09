@@ -115,18 +115,29 @@ public class XHTMLToDITAConverter implements Converter {
 		String topicStartElement = '<' + TOPIC_ROOT_ELEMENT_NAME;
 		int topicStartElementLenght = topicStartElement.length();
 		StringBuilder contentToReturn = new StringBuilder();
-		
  		int indexOfTopicTag = ditaContent.indexOf(topicStartElement);
 		int beginIndex = 0;
-		int topicsCounter = 1;
+		int idIndex = -1;
+		int topicIdsCounter = 1;
 		while (indexOfTopicTag != -1) {
-			indexOfTopicTag += topicStartElementLenght;
-			contentToReturn.append(ditaContent.substring(beginIndex, indexOfTopicTag));
-			// Add the id attribute.
-			contentToReturn.append(TOPIC_ATTRIBUTES).append(topicsCounter).append("\"");
-			beginIndex = indexOfTopicTag;
-			indexOfTopicTag = ditaContent.indexOf(topicStartElement, indexOfTopicTag);
-			topicsCounter++;
+		  indexOfTopicTag += topicStartElementLenght;
+		  int indexOfTopicEndTag = ditaContent.indexOf('>', indexOfTopicTag);
+		  if(indexOfTopicEndTag != -1) {
+		    if(idIndex < indexOfTopicTag) {
+		      idIndex = ditaContent.indexOf("id=", indexOfTopicTag);
+		    }
+		    contentToReturn.append(ditaContent.substring(beginIndex, indexOfTopicTag));
+		    if (idIndex == -1 || (idIndex != -1 && idIndex > indexOfTopicEndTag)) {
+		      // Add the id attribute.
+		      contentToReturn.append(TOPIC_ATTRIBUTES).append(topicIdsCounter).append("\"");
+		      topicIdsCounter++;
+		    }
+
+		    beginIndex = indexOfTopicTag;
+		    indexOfTopicTag = ditaContent.indexOf(topicStartElement, indexOfTopicTag);
+		  } else {
+		    break;
+		  }
 		}
 		
 		contentToReturn.append(ditaContent.substring(beginIndex));
