@@ -49,6 +49,7 @@ public class HtmlToXhtmlConverter implements Converter {
 				t.setForceOutput(true);
 				t.setDropProprietaryTags(false);
 				t.setDropProprietaryAttributes(false);
+				t.setFixUri(false);
 				
 				if (contentReader == null) {
 					contentReader = ConverterReaderUtils.createReader(originalFileLocation);
