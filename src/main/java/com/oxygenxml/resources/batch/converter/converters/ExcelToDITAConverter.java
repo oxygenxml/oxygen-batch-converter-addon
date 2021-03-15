@@ -30,10 +30,8 @@ import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.XmlUtil;
 
-import ro.sync.basic.xml.BasicXmlUtil;
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
-import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
 /**
  * The converter from EXCEL to DITA

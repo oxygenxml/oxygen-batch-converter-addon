@@ -27,8 +27,8 @@ public class ConverterCreator {
   		return new HtmlToXhtmlConverter();
 
   	} else if(ConverterTypes.HTML_TO_DITA.equals(converterType)){
-  		return new HtmlToDitaConverter();
-
+  		return new HtmlToDitaConverter(true);
+  		
   	} else if(ConverterTypes.MD_TO_DITA.equals(converterType)){
   		return new MarkdownToDitaConverter();
 

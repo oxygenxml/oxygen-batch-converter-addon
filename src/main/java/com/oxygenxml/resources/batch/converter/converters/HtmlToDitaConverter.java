@@ -13,7 +13,23 @@ import com.oxygenxml.resources.batch.converter.persister.OptionTags;
  *
  */
 public class HtmlToDitaConverter extends PipelineConverter{
-
+  
+  /**
+   * <code>true</code> to update the references to the local files,
+   *  <code>false</code> to not change the path and extension of the references.
+   */
+  private boolean shouldUpdateLocalFileReferences;
+  
+  /**
+   * Constructor.
+   * 
+   * @param shouldUpdateLocalFileReferences <code>true</code> to update the references to the external files,
+   *  <code>false</code> to not change the path and extension of the references.
+   */
+  public HtmlToDitaConverter(boolean shouldUpdateLocalFileReferences) {
+    this.shouldUpdateLocalFileReferences = shouldUpdateLocalFileReferences;
+  }
+  
   /**
    * Get the converters used in HTML to DITA conversion.
    */
@@ -22,7 +38,7 @@ public class HtmlToDitaConverter extends PipelineConverter{
     List<Converter> converters = new ArrayList<Converter>();
     converters.add( new HtmlToXhtmlConverter());
     converters.add(new HTML5Cleaner());
-    converters.add(new XHTMLToDITAConverter());
+    converters.add(new XHTMLToDITAConverter(shouldUpdateLocalFileReferences));
     
     Boolean shouldCreateDitaMap = userInputsProvider.getAdditionalOptionValue(
         OptionTags.CREATE_DITA_MAP_FROM_HTML);

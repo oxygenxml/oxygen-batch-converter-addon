@@ -36,6 +36,22 @@ public class XHTMLToDITAConverter implements Converter {
    * The attributes from the topic root element.
    */
   private static final String TOPIC_ATTRIBUTES =  " id=\"topicID";
+
+  /**
+   * <code>true</code> to update the references to the local files,
+   *  <code>false</code> to not change the path and extension of the references.
+   */
+  private boolean shouldUpdateLocalFileReferences;
+  
+  /**
+   * Constructor.
+   * 
+   * @param shouldUpdateLocalFileReferences <code>true</code> to update the references to the external files,
+   *  <code>false</code> to not change the path and extension of the references.
+   */
+  public XHTMLToDITAConverter(boolean shouldUpdateLocalFileReferences) {
+    this.shouldUpdateLocalFileReferences = shouldUpdateLocalFileReferences;
+  }
   
 	/**
 	 * Convert the given XHTML to DITA.
@@ -79,6 +95,9 @@ public class XHTMLToDITAConverter implements Converter {
 		transformer.setParameter("context.path.names", TOPIC_ROOT_ELEMENT_NAME);
 		transformer.setParameter("wrapMultipleSectionsInARoot", Boolean.TRUE);
 		transformer.setParameter("wrapElementsBeforeHeadingInSection", Boolean.TRUE);
+		if (shouldUpdateLocalFileReferences) {
+		  transformer.setParameter("updateExtensionAndPathOfLocalFileReferences", Boolean.TRUE);
+		}
 
 		final ConversionResult conversionResult;
 		try {
