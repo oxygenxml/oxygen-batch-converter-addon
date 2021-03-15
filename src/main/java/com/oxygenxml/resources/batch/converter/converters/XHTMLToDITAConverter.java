@@ -117,7 +117,11 @@ public class XHTMLToDITAConverter implements Converter {
 			}
 			
 		}catch (TransformerException e) {
-			throw new TransformerException(e.getException().getMessage() , e.getException().getCause());
+		  Throwable exception = e;
+		  if(e.getException() != null) {
+		    exception = e.getException();
+		  }
+			throw new TransformerException(exception.getMessage() , exception.getCause());
 		}
 		
 		return conversionResult;
