@@ -50,12 +50,17 @@ The add-on is compatible with Oxygen XML Editor/Author/Developer version 20.0 or
 ## How to Install
 
 1. Go to **Help->Install new add-ons** to open an add-on selection dialog box.
-2. Enter or paste https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml in the **Show add-ons from** field.
-3. Select the **Batch Converter** add-on and click **Next**.
+2. Enter or paste https://www.oxygenxml.com/InstData/Addons/default/updateSite.xml in the **Show add-ons from** field.
+3. Select the **Batch Documents Converter** add-on and click **Next**.
 4. Read the end-user license agreement. Then select the **I accept all terms of the end-user license agreement** option and click **Finish**.
 5. Restart the application. 
 
-Result: A **Batch Converter** submenu will now be available in the **Tools** menu and in the contextual menu. This submenu will contain a list of the various types of available conversions. Selecting one of the types of conversions will open a dialog box where you can configure options for the conversion.
+Result: A **Batch Documents Converter** submenu will now be available in the **Tools** menu and in the contextual menu. This submenu will contain a list of the various types of available conversions. Selecting one of the types of conversions will open a dialog box where you can configure options for the conversion.
+
+The add-on can also be installed using the following alternative installation procedure:
+1. Go to the [Releases page](https://github.com/oxygenxml/oxygen-resources-converter/releases/latest) and download the `oxygen-batch-converter-{version}-plugin.jar` file.
+2. Unzip it inside `{oXygenInstallDir}/plugins`. Make sure you don't create any intermediate folders. After unzipping the archive, the file system should look like this: `{oXygenInstallDir}/plugins/oxygen-batch-converter-x.y.z`, and inside this folder, there should be a `plugin.xml`file.
+
 
 ## Converting a document:
 
