@@ -175,17 +175,11 @@ public class BatchConverterImpl implements BatchConverter {
 		noOfConvertedFiles = 0;
 		failedFile = 0;
 				
-		// create the converter
+		if(logger.isDebugEnabled()) {
+		  logger.debug("Converter type: " + converterType);
+		}
 		Converter converter = ConverterCreator.create(converterType);
-		if(logger.isDebugEnabled()) {
-			logger.debug("Created converter: " + converter);
-		}
-		
-		// create a content printer
 		ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
-		if(logger.isDebugEnabled()) {
-			logger.debug("Content printer: " + contentPrinter);
-		}
 		
 		//make the output directory if it doesn't exist
 		File outputFolder = inputsProvider.getOutputFolder();
@@ -252,9 +246,6 @@ public class BatchConverterImpl implements BatchConverter {
 		try {
 			ConversionResult conversionResult = converter.convert(file, null, transformerFactoryCreator, inputsProvider);
 			String convertedContent = conversionResult.getConvertedContent();
-			if(logger.isDebugEnabled()) {
-			  logger.debug("Converted content: " + convertedContent);
-			}
 			
 			if (convertedContent != null) {
 				if(logger.isDebugEnabled()) {
@@ -284,8 +275,13 @@ public class BatchConverterImpl implements BatchConverter {
 			}
 
 		} catch (MalformedURLException e) {
-			logger.debug(e.getMessage(), e);
+		  if(logger.isDebugEnabled()) {
+		    logger.debug(e.getMessage(), e);
+		  }
 		} catch (Exception e) {
+		  if(logger.isDebugEnabled()) {
+        logger.debug(e.getMessage(), e);
+      }
 			problemReporter.reportProblem(e, file);
 			isSuccessfully = false;
 			failedFile++;
