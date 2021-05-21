@@ -82,9 +82,6 @@ public class PrettyContentPrinterImpl implements ContentPrinter {
 		    } catch (MalformedURLException e) {
 		      logger.debug(e.getMessage(), e);
         }
-		  } else {
-		    // For TCs.
-		    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		  }
 
 		  InputSource inputSource = new InputSource(convertedContent);

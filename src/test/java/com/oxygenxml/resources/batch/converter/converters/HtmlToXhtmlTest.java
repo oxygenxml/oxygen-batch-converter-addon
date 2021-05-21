@@ -134,4 +134,58 @@ public class HtmlToXhtmlTest {
 		}
 	
 	}
+
+  /**
+   * <p><b>Description:</b> Test "pre" element content is preserved and no extra new lines are added.</p>
+   * <p><b>Bug ID:</b> EXM-47898</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testPreservePreContent() throws Exception {
+  
+  	File sample  = new File("test-sample/EXM-47898/samplePre.html");		
+  	File expectedResult = new File("test-sample/EXM-47898/expected.xhtml");
+  	final File outputFolder = sample.getParentFile();
+  	
+  	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+  	ProblemReporter problemReporter = new ProblemReporterTestImpl();
+  	
+  	BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
+  			new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+  	final List<File> inputFiles = new ArrayList<File>();
+  	inputFiles.add(sample);
+  			
+  	File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+  	
+  	try {
+  		converter.convertFiles(ConverterTypes.HTML_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+  
+  		assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
+  
+  	} finally {
+  		Files.delete(convertedFile.toPath());
+  	}
+  
+  }
 }

@@ -14,6 +14,7 @@ mammoth-1.4.0.jar
 Site: https://github.com/mwilliamson/java-mammoth
 License: BSD 2-Clause "Simplified" License ( https://raw.githubusercontent.com/mwilliamson/java-mammoth/master/LICENSE)
 
-jtidy-1.0.jar
+oxygen-patched-jtidy-for-batch-converter-24.0-SNAPSHOT.jar
+Patch for JTidy library.
 Site: https://github.com/jtidy/jtidy
 License: Java HTML Tidy - JTidy License ( https://raw.githubusercontent.com/jtidy/jtidy/master/LICENSE.txt)

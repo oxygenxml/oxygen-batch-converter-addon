@@ -92,6 +92,12 @@
 			<artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId>
 			<version>2.4.1</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-jtidy-for-batch-converter</artifactId>
+			<version>24.0-SNAPSHOT</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
@@ -133,19 +139,6 @@
 			<artifactId>oxygen-yaml-validator-and-converter</artifactId>
 			<version>23.1-SNAPSHOT</version>
 			<scope>provided</scope>
-		</dependency>
-
-		<!-- https://github.com/jtidy/jtidy -->
-		<dependency>
-			<groupId>jtidy</groupId>
-			<artifactId>jtidy</artifactId>
-			<version>1.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>ant</groupId>
-					<artifactId>ant</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark-all -->
@@ -337,7 +330,7 @@
 			<!-- Add lwdita-2.4.1.jar, 
 			json.jar,
 			mammoth-1.4.0-SNAPSHOT.jar 
-			and jtidy-1.0.jar in local repository -->
+			and oxygen-patched-jtidy-for-batch-converter-24.0-SNAPSHOT.jar in local repository -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -352,6 +345,22 @@
 							<groupId>com.oxygenxml</groupId>
 							<artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId>
 							<version>2.4.1</version>
+							<packaging>jar</packaging>
+							<generatePom>true</generatePom>
+						</configuration>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>install-external-jtidy</id>
+						<phase>clean</phase>
+						<configuration>
+							<file>${basedir}/lib/oxygen-patched-jtidy-for-batch-converter-24.0-SNAPSHOT.jar</file>
+							<repositoryLayout>default</repositoryLayout>
+							<groupId>com.oxygenxml</groupId>
+							<artifactId>oxygen-patched-jtidy-for-batch-converter</artifactId>
+							<version>24.0-SNAPSHOT</version>
 							<packaging>jar</packaging>
 							<generatePom>true</generatePom>
 						</configuration>
@@ -416,22 +425,6 @@
 							<groupId>com.oxygenxml</groupId>
 							<artifactId>oxygen-yaml-validator-and-converter</artifactId>
 							<version>23.1-SNAPSHOT</version>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>install-external-jtidy</id>
-						<phase>clean</phase>
-						<configuration>
-							<file>${basedir}/lib/jtidy-1.0.jar</file>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>jtidy</groupId>
-							<artifactId>jtidy</artifactId>
-							<version>1.0</version>
 							<packaging>jar</packaging>
 							<generatePom>true</generatePom>
 						</configuration>
