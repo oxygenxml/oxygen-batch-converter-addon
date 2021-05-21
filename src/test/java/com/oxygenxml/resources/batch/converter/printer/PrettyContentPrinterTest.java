@@ -20,24 +20,6 @@ import tests.utils.TransformerFactoryCreatorImpl;
  *
  */
 public class PrettyContentPrinterTest extends TestCase {
-
-	/**
-	 * The output file used to test.
-	 */
-	File outputFile;
-	
-	@Override
-	protected void setUp() throws Exception {
-		outputFile = new File("test-sample/outputFile.xml");
-		super.setUp();
-	}
-	
-	@Override
-	protected void tearDown() throws Exception {
-		outputFile.delete();
-		super.tearDown();
-	}
-	
 	/**
 	 * <p><b>Description:</b>The content to print is write in the output file
 	 *  even if the indent fails.</p>
@@ -50,34 +32,39 @@ public class PrettyContentPrinterTest extends TestCase {
 	 */
 	@Test
 	public void testPrettyPrintFallback() throws TransformerException, IOException {
-		String contentToPrint = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-				"<p>Withour root.</p>\n" + 
-				"<topic id=\"topicID\">\n" + 
-				"    <title>title</title>\n" + 
-				"    <body>\n" + 
-				"        <section>\n" + 
-				"            <title>DESCRIPTION</title>\n" + 
-				"        </section>\n" + 
-				"    </body>\n" + 
-				"</topic>";
-	
-		PrettyContentPrinterImpl printerImpl = new PrettyContentPrinterImpl();
-		printerImpl.print(new ConversionResult(contentToPrint), 
-				new TransformerFactoryCreatorImpl(),
-				ConverterTypes.HTML_TO_DITA,
-				outputFile,
-				null);
-	
-		assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
-				"<!DOCTYPE topic PUBLIC \"-//OASIS//DTD DITA Topic//EN\" \"topic.dtd\">\n" + 
-				"<p>Withour root.</p>\n" + 
-				"<topic id=\"topicID\">\n" + 
-				"    <title>title</title>\n" + 
-				"    <body>\n" + 
-				"        <section>\n" + 
-				"            <title>DESCRIPTION</title>\n" + 
-				"        </section>\n" + 
-				"    </body>\n" + 
-				"</topic>", FileComparationUtil.readFile(outputFile.toString()));
+	  File outputFile = new File("test-sample/prettyPrintTest/outputFile.xml");
+	  try {
+	    String contentToPrint = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
+	        "<p>Withour root.</p>\n" + 
+	        "<topic id=\"topicID\">\n" + 
+	        "    <title>title</title>\n" + 
+	        "    <body>\n" + 
+	        "        <section>\n" + 
+	        "            <title>DESCRIPTION</title>\n" + 
+	        "        </section>\n" + 
+	        "    </body>\n" + 
+	        "</topic>";
+
+	    PrettyContentPrinterImpl printerImpl = new PrettyContentPrinterImpl();
+	    printerImpl.print(new ConversionResult(contentToPrint), 
+	        new TransformerFactoryCreatorImpl(),
+	        ConverterTypes.HTML_TO_DITA,
+	        outputFile,
+	        null);
+
+	    assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+	        "<!DOCTYPE topic PUBLIC \"-//OASIS//DTD DITA Topic//EN\" \"topic.dtd\">\n" + 
+	        "<p>Withour root.</p>\n" + 
+	        "<topic id=\"topicID\">\n" + 
+	        "    <title>title</title>\n" + 
+	        "    <body>\n" + 
+	        "        <section>\n" + 
+	        "            <title>DESCRIPTION</title>\n" + 
+	        "        </section>\n" + 
+	        "    </body>\n" + 
+	        "</topic>", FileComparationUtil.readFile(outputFile.toString()));
+	  } finally {
+	    FileComparationUtil.deleteRecursivelly(outputFile.getParentFile());
+	  }
 	}
 }
