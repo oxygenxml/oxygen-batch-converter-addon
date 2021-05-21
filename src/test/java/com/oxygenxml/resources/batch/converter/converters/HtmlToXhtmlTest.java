@@ -23,6 +23,7 @@ import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCre
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import tests.utils.ConvertorWorkerInteractorTestImpl;
+import tests.utils.FileComparationUtil;
 import tests.utils.ProblemReporterTestImpl;
 import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.StatusReporterImpl;
@@ -37,10 +38,9 @@ public class HtmlToXhtmlTest {
 
 	@Test
 	public void testConversion() throws TransformerException, IOException {
-	
 		File sample  = new File("test-sample/htmlTest.html");		
 		File expectedResult = new File("test-sample/expected/HtmlToXhtml.xhtml");
-		final File outputFolder = sample.getParentFile();
+		final File outputFolder = new File(sample.getParentFile(), "out");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -76,7 +76,7 @@ public class HtmlToXhtmlTest {
 			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
 
 		} finally {
-			Files.delete(convertedFile.toPath());
+		  FileComparationUtil.deleteRecursivelly(outputFolder);
 		}
 
 	}
@@ -91,10 +91,9 @@ public class HtmlToXhtmlTest {
    */
 	@Test
 	public void testUnknownTagsAreNotRemoved() throws Exception {
-	
 		File sample  = new File("test-sample/htmlWithUnknownTags.html");		
 		File expectedResult = new File("test-sample/expected/XHtmlWithUnknownTags.xhtml");
-		final File outputFolder = sample.getParentFile();
+		final File outputFolder = new File(sample.getParentFile(), "out");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -130,7 +129,7 @@ public class HtmlToXhtmlTest {
 			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
 	
 		} finally {
-			Files.delete(convertedFile.toPath());
+		  FileComparationUtil.deleteRecursivelly(outputFolder);
 		}
 	
 	}
@@ -145,10 +144,9 @@ public class HtmlToXhtmlTest {
    */
   @Test
   public void testPreservePreContent() throws Exception {
-  
   	File sample  = new File("test-sample/EXM-47898/samplePre.html");		
   	File expectedResult = new File("test-sample/EXM-47898/expected.xhtml");
-  	final File outputFolder = sample.getParentFile();
+  	final File outputFolder = new File(sample.getParentFile(), "out");
   	
   	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
   	ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -184,7 +182,7 @@ public class HtmlToXhtmlTest {
   		assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
   
   	} finally {
-  		Files.delete(convertedFile.toPath());
+  	  FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
   
   }

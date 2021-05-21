@@ -1,30 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE dita
   PUBLIC "-//OASIS//DTD DITA Composite//EN" "ditabase.dtd">
-<dita>
-   <topic id="heading-a">
-      <title>Heading A</title>
-      <body>
-         <p>Content A.</p>
-         <section id="heading-a1">
-            <title>Heading A.1</title>
-            <p>Content A.1.</p>
-         </section>
-         <section id="heading-a2">
-            <title>Heading A.2</title>
-            <p>Content A.2.</p>
-         </section>
-      </body>
-   </topic>
-   <topic id="heading-b">
-      <title>Heading B</title>
-      <body>
-         <p>Content B.</p>
-         <section id="heading-b1">
-            <title>Heading B.1</title>
-            <p>Content B.1.</p>
-         </section>
-      </body>
-   </topic>
-</dita>
+<dita><topic id="heading-a"><title>Heading A</title><body><p>Content A.</p><section id="heading-a1"><title>Heading A.1</title><p>Content A.1.</p></section><section id="heading-a2"><title>Heading A.2</title><p>Content A.2.</p></section></body></topic><topic id="heading-b"><title>Heading B</title><body><p>Content B.</p><section id="heading-b1"><title>Heading B.1</title><p>Content B.1.</p></section></body></topic></dita>

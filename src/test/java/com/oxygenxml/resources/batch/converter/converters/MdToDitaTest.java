@@ -22,6 +22,7 @@ import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
+import ro.sync.basic.io.FileSystemUtil;
 import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
@@ -85,8 +86,7 @@ public class MdToDitaTest {
       String actual = FileComparationUtil.readFile(convertedFile.getAbsolutePath()).toString();
       assertEquals(expected, actual);
 		} finally {
-			Files.delete(convertedFile.toPath());
-			Files.delete(outputFolder.toPath());
+		  FileComparationUtil.deleteRecursivelly(outputFolder);
 		}
 	}
 	
@@ -137,10 +137,7 @@ public class MdToDitaTest {
 			assertEquals(FileComparationUtil.readFile(goodOutput.getAbsolutePath()),
 					FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
 		} finally {
-			if(convertedFile.exists()) {
-				Files.delete(convertedFile.toPath());
-				Files.delete(outputFolder.toPath());
-			}
+		  FileComparationUtil.deleteRecursivelly(outputFolder);
 		}
 	}
 	
@@ -191,10 +188,7 @@ public class MdToDitaTest {
       assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
           FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
     } finally {
-      if(convertedFile.exists()) {
-        Files.delete(convertedFile.toPath());
-        Files.delete(outputFolder.toPath());
-      }
+      FileComparationUtil.deleteRecursivelly(outputFolder);
     }
   }
 
@@ -245,10 +239,7 @@ public class MdToDitaTest {
       assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
           FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
     } finally {
-      if(convertedFile.exists()) {
-        Files.delete(convertedFile.toPath());
-        Files.delete(outputFolder.toPath());
-      }
+//      FileComparationUtil.deleteRecursivelly(outputFolder);
     }
   }
   
@@ -298,10 +289,7 @@ public class MdToDitaTest {
       assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
           FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
     } finally {
-      if(convertedFile.exists()) {
-        Files.delete(convertedFile.toPath());
-        Files.delete(outputFolder.toPath());
-      }
+      FileComparationUtil.deleteRecursivelly(outputFolder);
     }
   }
   
@@ -354,10 +342,7 @@ public class MdToDitaTest {
       assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
           FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
     } finally {
-      if(convertedFile.exists()) {
-        Files.delete(convertedFile.toPath());
-        Files.delete(outputFolder.toPath());
-      }
+      FileComparationUtil.deleteRecursivelly(outputFolder);
     }
   }
 }

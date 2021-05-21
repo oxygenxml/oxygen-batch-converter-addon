@@ -1,12 +1,13 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.oxygenxml.resources.batch.converter.BatchConverter;
@@ -35,7 +36,7 @@ public class ExcelToDitaTest {
 	public void testConversion() throws Exception {
 		File sample  = new File("test-sample/excel.xls");		
 		File expectedOutput = new File("test-sample/excelToDITA.dita");
-		final File outputFolder = sample.getParentFile();
+		final File outputFolder = new File(sample.getParentFile(), "out");
 		
 		TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
 		ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -67,9 +68,10 @@ public class ExcelToDitaTest {
           return null;
         }
       });
-			 assertTrue(FileComparationUtil.compareLineToLine(expectedOutput, convertedFile));
+      assertEquals(FileUtils.readFileToString(expectedOutput), FileUtils.readFileToString(convertedFile));
+
 		} finally {
-			Files.delete(convertedFile.toPath());
+		  FileComparationUtil.deleteRecursivelly(outputFolder); 
 		}
 	}
 
@@ -85,7 +87,7 @@ public class ExcelToDitaTest {
   public void testInvalidCharsAreEscaped() throws Exception {
   	File inputFile  = new File("test-sample/EXM-47523/_sample#@.xlsx");		
   	File expectedOutput = new File("test-sample/EXM-47523/expected.dita");
-  	final File outputFolder = inputFile.getParentFile();
+  	final File outputFolder = new File(inputFile.getParentFile(), "out");
   	
   	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
   	ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -119,7 +121,7 @@ public class ExcelToDitaTest {
       });
   		assertTrue(FileComparationUtil.compareLineToLine(expectedOutput, convertedFile));
   	} finally {
-  		Files.delete(convertedFile.toPath());
+  	  FileComparationUtil.deleteRecursivelly(outputFolder); 
   	}
   }
 }
