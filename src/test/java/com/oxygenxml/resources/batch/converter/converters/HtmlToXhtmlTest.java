@@ -83,7 +83,7 @@ public class HtmlToXhtmlTest {
 
   /**
    * <p><b>Description:</b> Test unknown tags are not ignored in HTML to XHTML conversion.</p>
-   * <p><b>Bug ID:</b> EXM-20562</p>
+   * <p><b>Bug ID:</b> EXM-43766</p>
    *
    * @author cosmin_duna
    *
