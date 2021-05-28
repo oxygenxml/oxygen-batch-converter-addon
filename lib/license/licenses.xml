@@ -35,7 +35,7 @@
             </licenses>
         </dependency>
         <dependency>
-            <groupId>org.zwobble.mammoth</groupId>
+            <groupId>com.oxygenxml</groupId>
             <artifactId>mammoth</artifactId>
             <licenses>
                 <license>
@@ -53,6 +53,16 @@
                     <url>https://raw.githubusercontent.com/jtidy/jtidy/master/LICENSE.txt</url>
                 </license>
             </licenses>
+        </dependency>
+        <dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId>
+	        <licenses>
+		        <license>
+					<name>The Apache Software License, Version 2.0</name>
+					<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+				</license>
+			</licenses>
         </dependency>
     </dependencies>
 </licenseSummary>

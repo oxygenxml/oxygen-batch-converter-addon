@@ -25,6 +25,7 @@
 	<properties>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
+    	<oxy.snapshot.version>24.0-SNAPSHOT</oxy.snapshot.version>
   	</properties>
 	
 	<repositories>
@@ -90,13 +91,19 @@
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId>
-			<version>2.4.1</version>
+			<version>${oxy.snapshot.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-patched-jtidy-for-batch-converter</artifactId>
-			<version>24.0-SNAPSHOT</version>
+			<version>${oxy.snapshot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-mammoth-for-batch-converter</artifactId>
+			<version>${oxy.snapshot.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
@@ -224,11 +231,6 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-		    <groupId>org.zwobble.mammoth</groupId>
-		    <artifactId>mammoth</artifactId>
-		    <version>1.4.0-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -323,114 +325,6 @@
 								</resource>
 							</resources>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Add lwdita-2.4.1.jar, 
-			json.jar,
-			mammoth-1.4.0-SNAPSHOT.jar 
-			and oxygen-patched-jtidy-for-batch-converter-24.0-SNAPSHOT.jar in local repository -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.2</version>
-				<executions>
-					<execution>
-						<id>install-external-org.lwdita</id>
-						<phase>clean</phase>
-						<configuration>
-							<file>${basedir}/lib/oxygen-patched-lwdita-for-batch-converter-2.4.1.jar</file>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>com.oxygenxml</groupId>
-							<artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId>
-							<version>2.4.1</version>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>install-external-jtidy</id>
-						<phase>clean</phase>
-						<configuration>
-							<file>${basedir}/lib/oxygen-patched-jtidy-for-batch-converter-24.0-SNAPSHOT.jar</file>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>com.oxygenxml</groupId>
-							<artifactId>oxygen-patched-jtidy-for-batch-converter</artifactId>
-							<version>24.0-SNAPSHOT</version>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>install-external-mammoth</id>
-						<phase>clean</phase>
-						<configuration>
-							<file>${basedir}/lib/mammoth-1.4.0-SNAPSHOT.jar</file>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>org.zwobble.mammoth</groupId>
-							<artifactId>mammoth</artifactId>
-							<version>1.4.0-SNAPSHOT</version>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>install-external-org.json</id>
-						<phase>clean</phase>
-						<configuration>
-							<file>${basedir}/lib/oxygen-patched-json-23.1-SNAPSHOT.jar</file>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>com.oxygenxml</groupId>
-							<artifactId>oxygen-patched-json</artifactId>
-							<version>23.1-SNAPSHOT</version>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>install-external-basic-utilities</id>
-						<phase>clean</phase>
-						<configuration>
-							<file>${basedir}/lib/oxygen-basic-utilities-23.1-SNAPSHOT.jar</file>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>com.oxygenxml</groupId>
-							<artifactId>oxygen-basic-utilities</artifactId>
-							<version>23.1-SNAPSHOT</version>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>install-external-yaml</id>
-						<phase>clean</phase>
-						<configuration>
-							<file>${basedir}/lib/oxygen-yaml-validator-and-converter-23.1-SNAPSHOT.jar</file>
-							<repositoryLayout>default</repositoryLayout>
-							<groupId>com.oxygenxml</groupId>
-							<artifactId>oxygen-yaml-validator-and-converter</artifactId>
-							<version>23.1-SNAPSHOT</version>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-						</configuration>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
