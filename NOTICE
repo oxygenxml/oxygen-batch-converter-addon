@@ -5,12 +5,13 @@
 =========================================================================
 This product includes software from the following projects:
 
-oxygen-patched-lwdita-for-batch-converter-2.4.1.jar
+oxygen-patched-lwdita-for-batch-converter-24.0-SNAPSHOT.jar
 Patch for Lightweight DITA for DITA-OT library.
 Site: https://github.com/jelovirt/org.lwdita 
 License: Apache License 2.0 ( http://www.apache.org/licenses/LICENSE-2.0)
 
-mammoth-1.4.0.jar
+oxygen-patched-mammoth-for-batch-converter-24.0-SNAPSHOT.jar
+Patch for Java Mammoth library.
 Site: https://github.com/mwilliamson/java-mammoth
 License: BSD 2-Clause "Simplified" License ( https://raw.githubusercontent.com/mwilliamson/java-mammoth/master/LICENSE)
 
