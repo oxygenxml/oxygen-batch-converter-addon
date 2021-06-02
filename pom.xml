@@ -85,6 +85,16 @@
 			<artifactId>oxygen-sdk</artifactId>
 			<version>19.1.0.0</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oxygen</groupId>
+					<artifactId>oxygen-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
