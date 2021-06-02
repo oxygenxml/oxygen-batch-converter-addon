@@ -130,23 +130,27 @@
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-patched-json</artifactId>
-			<version>23.1-SNAPSHOT</version>
-			<scope>provided</scope>
+			<version>${oxy.snapshot.version}</version>
 		</dependency>
-		
+		<!-- Basic-utilities is used by oxygen-patched-json -->
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-basic-utilities</artifactId>
-			<version>23.1-SNAPSHOT</version>
-			<scope>provided</scope>
+			<version>${oxy.snapshot.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-yaml-validator-and-converter</artifactId>
-			<version>23.1-SNAPSHOT</version>
-			<scope>provided</scope>
+			<version>${oxy.snapshot.version}</version>
 		</dependency>
+		<!-- jackson-core is used by yaml-validator-and-converter. -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.11.1</version>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark-all -->
 		<dependency>
