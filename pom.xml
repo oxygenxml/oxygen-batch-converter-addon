@@ -1,9 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.oxygenxml</groupId>
 	<artifactId>oxygen-batch-converter</artifactId>
 	<version>1.0</version>
+  
+   	<parent>
+  		<groupId>com.oxygenxml</groupId>
+	    <artifactId>oxygen-superpom-tools</artifactId>
+	    <version>24.0-SNAPSHOT</version>
+  	</parent>
   
     <developers>
       <developer>
@@ -25,6 +30,8 @@
 	<properties>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
+    	<!-- We want sonar. -->
+		<sonar.skip>false</sonar.skip>
     	<oxy.snapshot.version>24.0-SNAPSHOT</oxy.snapshot.version>
   	</properties>
 	
@@ -244,7 +251,6 @@
 			<!-- Copy the runtime dependencies to the lib folder. -->
 			<plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.8</version>
 				<executions>
 					<execution>
 						<phase>generate-resources</phase>
@@ -264,7 +270,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.2</version>
 				<configuration>
 					<outputDirectory>${project.build.directory}/build</outputDirectory>
 				</configuration>
@@ -272,7 +277,6 @@
 
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
 				<executions>
 					<execution>
 						<id>make-assembly</id>
@@ -292,7 +296,6 @@
 
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.0.2</version>
 				<executions>
 					<execution>
 						<id>copy-resources-addon</id>
