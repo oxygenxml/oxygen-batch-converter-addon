@@ -252,6 +252,20 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-smart-paste</artifactId>
+			<version>${oxy.snapshot.version}</version>
+			<classifier>dita-xslt</classifier>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-smart-paste</artifactId>
+			<version>${oxy.snapshot.version}</version>
+			<classifier>docbook-xslt</classifier>
+			<type>zip</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -272,9 +286,35 @@
 							<includeScope>runtime</includeScope>
 						</configuration>
 					</execution>
+					<execution>
+						<id>unpack-dita-smart-paste-stylesheets</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/main/resources/stylesheets/dita</outputDirectory>
+							<includeArtifactIds>oxygen-smart-paste</includeArtifactIds>
+							<includeClassifiers>dita-xslt</includeClassifiers>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+					<execution>
+						<id>unpack-docbook-smart-paste-stylesheets</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/main/resources/stylesheets/docbook</outputDirectory>
+							<includeArtifactIds>oxygen-smart-paste</includeArtifactIds>
+							<includeClassifiers>docbook-xslt</includeClassifiers>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
-
+			
 			<!-- We only want the final JAR package in the target folder so that it's 
 				easier for users to identify it. -->
 			<plugin>

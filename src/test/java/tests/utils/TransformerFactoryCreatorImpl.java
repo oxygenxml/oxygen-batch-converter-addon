@@ -9,6 +9,9 @@ import org.apache.log4j.Logger;
 
 import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 
+import net.sf.saxon.Configuration;
+import net.sf.saxon.TransformerFactoryImpl;
+
 /**
  * Implementation of TransformerFactoryCreator for JUnits 
  * @author Cosmin Duna
@@ -24,14 +27,14 @@ public class TransformerFactoryCreatorImpl implements TransformerFactoryCreator 
 	@Override
 	public Transformer createTransformer(StreamSource streamSource) {
 
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-
+		TransformerFactory transformerFactory = new TransformerFactoryImpl(new Configuration());
+	
 		Transformer transformer = null;
 		try {
 			if (streamSource != null) {
 				transformer = transformerFactory.newTransformer(streamSource);
 			} else {
-				transformer = transformerFactory.newTransformer();
+			  transformer = transformerFactory.newTransformer();
 			}
 		} catch (TransformerConfigurationException e) {
 			logger.debug(e.getMessage(), e);

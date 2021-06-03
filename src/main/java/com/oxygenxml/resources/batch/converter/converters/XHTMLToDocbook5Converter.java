@@ -1,10 +1,10 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import java.net.URL;
+
 import javax.xml.transform.Transformer;
 
 import com.oxygenxml.resources.batch.converter.doctype.Doctypes;
-
-import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**
  * Converter implementation for XHTML to Docbook5
@@ -31,10 +31,8 @@ public class XHTMLToDocbook5Converter extends StylesheetConverter {
    */
   @Override
   public String getStylesheetPath() {
-    // get the XSL path from oxygen
-    String xslPath = PluginWorkspaceProvider.getPluginWorkspace().getUtilAccess().expandEditorVariables("${frameworks}",
-        null);
-    return xslPath + "/docbook/resources/xhtml2db5Driver.xsl";
+    URL xsltURL = getClass().getClassLoader().getResource("stylesheets/docbook/xhtml2db5Driver.xsl");
+    return xsltURL.toExternalForm();
   }
   
   /**

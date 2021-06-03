@@ -3,6 +3,7 @@ package com.oxygenxml.resources.batch.converter.converters;
 import java.io.File;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.net.URL;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -17,7 +18,6 @@ import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCre
 import nu.validator.htmlparser.common.DoctypeExpectation;
 import nu.validator.htmlparser.common.Heuristics;
 import nu.validator.htmlparser.sax.HtmlParser;
-import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 
 /**
  * Converter implementation for XHTML to DITA
@@ -77,15 +77,11 @@ public class XHTMLToDITAConverter implements Converter {
 		parser.setDoctypeExpectation(DoctypeExpectation.AUTO);
 		parser.setHeuristics(Heuristics.ICU);
 
-		// get the XSL path from oxygen
-		String xslPath = PluginWorkspaceProvider.getPluginWorkspace().getUtilAccess().expandEditorVariables("${frameworks}",
-				null);
-		xslPath = xslPath + "/dita/resources/xhtml2ditaDriver.xsl";
-
+		URL xsltURL = getClass().getClassLoader().getResource("stylesheets/dita/xhtml2ditaDriver.xsl");
 		StringWriter sw = new StringWriter();
 		StreamResult result = new StreamResult(sw);
 
-		final StreamSource src = new StreamSource(xslPath);
+		final StreamSource src = new StreamSource(xsltURL.toExternalForm());
 
 		// create the transformer
 		Transformer transformer = transformerCreator.createTransformer(src);

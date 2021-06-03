@@ -45,7 +45,7 @@ public class HTML5CleanerTest {
         sample, new StringReader(xhtmlContent), transformerCreator, null).getConvertedContent();
     
     assertEquals("The procesed XHTML should not containt 'main' and 'article' elements.",
-        "<?xml version=\"1.0\" encoding=\"utf-8\"?><html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n" + 
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?><html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n" + 
         "<head>\n" + 
         "<title>Title</title>\n" + 
         "</head>\n" + 
