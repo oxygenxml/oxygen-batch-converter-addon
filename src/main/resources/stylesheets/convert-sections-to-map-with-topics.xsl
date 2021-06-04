@@ -9,7 +9,7 @@
     <xsl:output name="dita" exclude-result-prefixes="#all" indent="yes" doctype-public="-//OASIS//DTD DITA Composite//EN" doctype-system="ditabase.dtd"/>
    
     <xsl:param name="matchElement" select="('dita', 'section', 'topic', 'task', 'glossentry', 'concept', 'glossgroup', 'reference', 'troubleshooting')"/>
-    <xsl:import href="http://www.oxygenxml.com/extensions/frameworks/dita/refactoring/convert-nested-topics-to-new-topic.xsl"/>
+    <xsl:import href="topics-extraction-stylesheets/convert-nested-topics-to-new-topic.xsl"/>
     
     <xsl:template match="/*">
         <xsl:choose>

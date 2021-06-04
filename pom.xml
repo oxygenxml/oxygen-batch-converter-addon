@@ -266,6 +266,13 @@
 			<classifier>docbook-xslt</classifier>
 			<type>zip</type>
 		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-dita-topics-extractor</artifactId>
+			<version>${oxy.snapshot.version}</version>
+			<classifier>xslt</classifier>
+			<type>zip</type>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -309,6 +316,19 @@
 							<outputDirectory>src/main/resources/stylesheets/docbook</outputDirectory>
 							<includeArtifactIds>oxygen-smart-paste</includeArtifactIds>
 							<includeClassifiers>docbook-xslt</includeClassifiers>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+					<execution>
+						<id>unpack-dita-topics-extraction-stylesheets</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/main/resources/stylesheets/topics-extraction-stylesheets</outputDirectory>
+							<includeArtifactIds>oxygen-dita-topics-extractor</includeArtifactIds>
+							<includeClassifiers>xslt</includeClassifiers>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
 					</execution>
