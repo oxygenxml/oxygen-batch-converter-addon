@@ -17,6 +17,7 @@ import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
+import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.util.PrettyPrintException;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
@@ -38,15 +39,18 @@ public class MapWithTopicsConverter extends StylesheetConverter{
   public ConversionResult convert(File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator,
       UserInputsProvider userInputsProvider) throws TransformerException {
     
-    XMLUtilAccess xmlUtilAccess = PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess();
-    try {
-      String prettyPrintedContent = xmlUtilAccess.prettyPrint(
-          contentReader, originalFile.toURI().toURL().toExternalForm());
-      contentReader = new StringReader(prettyPrintedContent);
-    } catch (PrettyPrintException e) {
-      logger.debug(e.getMessage(), e);
-    } catch (MalformedURLException e) {
-      logger.debug(e.getMessage(), e);
+    PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+    if (pluginWorkspace != null) {
+      XMLUtilAccess xmlUtilAccess = pluginWorkspace.getXMLUtilAccess();
+      try {
+        String prettyPrintedContent = xmlUtilAccess.prettyPrint(
+            contentReader, originalFile.toURI().toURL().toExternalForm());
+        contentReader = new StringReader(prettyPrintedContent);
+      } catch (PrettyPrintException e) {
+        logger.debug(e.getMessage(), e);
+      } catch (MalformedURLException e) {
+        logger.debug(e.getMessage(), e);
+      }
     }
     return super.convert(originalFile, contentReader, transformerCreator, userInputsProvider);
   }

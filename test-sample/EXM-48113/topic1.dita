@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="converting-a-document"><title>Converting a document:</title><body><ol><li><p>Select the type of conversion from the <b>Tools -&gt; Batch Converter</b> submenu.</p></li><li><p>Add the <b>Input files</b>.</p></li><li><p>Choose the path of the <b>Output folder</b> that will contain the converted document.</p></li><li><p>Click the <b>Convert</b> button.</p></li></ol></body></topic>

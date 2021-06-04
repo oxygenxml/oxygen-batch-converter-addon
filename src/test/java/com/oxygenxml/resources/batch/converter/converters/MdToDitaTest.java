@@ -343,4 +343,81 @@ public class MdToDitaTest {
       FileComparationUtil.deleteRecursivelly(outputFolder);
     }
   }
+
+  /**
+   * <p><b>Description:</b> Test extract sections in topics.</p>
+   * <p><b>Bug ID:</b> EXM-48113</p>
+   * 
+   * @author cosmin_duna
+   */
+  @Test
+  public void testExtractSectionsInTopics() throws Exception {
+    File sample  = new File("test-sample/markdownTest.md");		
+    final File outputFolder = new File(sample.getParentFile(), "output");
+
+    TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+    ProblemReporter problemReporter = new ProblemReporterTestImpl();
+
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
+        new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+
+    final List<File> inputFiles = new ArrayList<File>();
+    inputFiles.add(sample);
+
+    File convertedFile = ConverterFileUtils.getOutputFile(sample, FileExtensionType.DITA_MAP_OUTPUT_EXTENSION , outputFolder);
+    try {
+      converter.convertFiles(ConverterTypes.MD_TO_DITA, 
+          new UserInputsProvider() {
+
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          Boolean toRet = null;
+          if(OptionTags.CREATE_DITA_MAP_FROM_MD.equals(additionalOptionId)) {
+            toRet = Boolean.TRUE;
+          }
+          return toRet;
+        }
+      });
+
+      String actual = FileComparationUtil.readFile(convertedFile.getAbsolutePath());
+      File expectedMap  = new File("test-sample/EXM-48113/expectedMap.ditamap");   
+      String expected = FileComparationUtil.readFile(expectedMap.getAbsolutePath());
+      assertEquals(expected, actual);
+
+      File firstTopic = new File(outputFolder, "markdownTest_oxygen_batch_converter_add-on_for_oxygen_xml_editor.dita");
+      actual = FileComparationUtil.readFile(firstTopic.getAbsolutePath());
+      File expectedTopic = new File("test-sample/EXM-48113/topic3.dita");   
+      expected = FileComparationUtil.readFile(expectedTopic.getAbsolutePath());
+      assertEquals(expected, actual);
+
+      File secondTopic = new File(outputFolder, "markdownTest_installation.dita");
+      actual = FileComparationUtil.readFile(secondTopic.getAbsolutePath());
+      expectedTopic = new File("test-sample/EXM-48113/topic2.dita");   
+      expected = FileComparationUtil.readFile(expectedTopic.getAbsolutePath());
+      assertEquals(expected, actual);
+
+      File thirdTopic = new File(outputFolder, "markdownTest_converting_a_document.dita");
+      actual = FileComparationUtil.readFile(thirdTopic.getAbsolutePath());
+      expectedTopic = new File("test-sample/EXM-48113/topic1.dita");   
+      expected = FileComparationUtil.readFile(expectedTopic.getAbsolutePath());
+      assertEquals(expected, actual);
+    } finally {
+      FileComparationUtil.deleteRecursivelly(outputFolder);
+    }
+  }
 }
