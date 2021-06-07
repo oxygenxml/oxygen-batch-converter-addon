@@ -21,7 +21,6 @@ import org.w3c.css.sac.InputSource;
 import junit.framework.TestCase;
 import ro.sync.ecss.css.csstopdf.facade.AuthorDocumentFacade;
 import ro.sync.ecss.css.csstopdf.facade.AuthorDocumentFacadeFactory;
-import ro.sync.ecss.css.csstopdf.facade.CatalogResolverFacade;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
 import ro.sync.ecss.extensions.api.node.AuthorDocument;
 import ro.sync.ecss.extensions.api.node.AuthorDocumentFragment;
@@ -39,10 +38,6 @@ import ro.sync.exml.workspace.api.util.UtilAccess;
 @RunWith(PowerMockRunner.class)
 public class InsertTopicRefUtilTest extends TestCase{
 
-  /**
-   * The relative path to catalogs.
-   */
-  private static final String CATALOG = "config/catalogs/catalog.xml";
   /**
    * The author document controller.
    */
@@ -149,12 +144,6 @@ public class InsertTopicRefUtilTest extends TestCase{
    * @throws Exception
    */
   private WSEditor createEditor(String inputXML)  throws Exception {
-    String defaultCatalog = new File(CATALOG).toURI().toString();
-
-    // Sets the catalogs
-    String[] catalogURIs = new String[] { defaultCatalog };
-    CatalogResolverFacade.setCatalogs(catalogURIs, "public");
-
     // Create a AuthorDocumentController
     AuthorDocumentFacadeFactory facadeFactory = new AuthorDocumentFacadeFactory();
     InputSource[] cssInputSources = new InputSource[] { new InputSource(new StringReader("* {display: block;}")) };
