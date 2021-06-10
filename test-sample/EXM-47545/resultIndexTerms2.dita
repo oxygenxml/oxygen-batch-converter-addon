@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="topicID1"><title>Title</title><body><p>Some content with an index <indexterm>MainEntry</indexterm> entry</p><p>An index with cross-ref <indexterm>entry1<index-see>MainEntry</index-see></indexterm></p><p>More complex index with subentry <indexterm>entry2<indexterm>subentry</indexterm><index-see>See
+MainEntry</index-see></indexterm></p><p>Entry with other information <indexterm>entry3<indexterm>subentry2</indexterm><indexterm>subentry3</indexterm><index-see>MainEntry</index-see></indexterm></p></body></topic>
