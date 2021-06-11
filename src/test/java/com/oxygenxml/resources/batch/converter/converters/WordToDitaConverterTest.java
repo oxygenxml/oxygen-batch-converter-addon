@@ -222,4 +222,57 @@ public class WordToDitaConverterTest extends TestCase{
       FileComparationUtil.deleteRecursivelly(outputFolder);
     }
   }
+
+  /**
+   * <p><b>Description:</b> Test that footnotes from Word are properly converted in DITA.</p>
+   * <p><b>Bug ID:</b> EXM-47800</p>
+   *
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testProcessFootnotes() throws Exception {
+    File inputFile  = new File("test-sample/EXM-47800/sampleFootnote.docx");		
+    File expectedResultFile = new File("test-sample/EXM-47800/sampleFootnote.dita");
+    final File outputFolder  = new File(inputFile.getParentFile(), "output");
+  
+    TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+    ProblemReporter problemReporter = new ProblemReporterTestImpl();
+  
+    BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
+        new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+    final List<File> inputFiles = new ArrayList<File>();
+    inputFiles.add(inputFile);
+  
+    File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.DITA_OUTPUT_EXTENSION , outputFolder);
+  
+    try {
+      converter.convertFiles(ConverterTypes.WORD_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+  
+      String actualResult = FileUtils.readFileToString(fileToRead);
+      String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+      assertEquals(expected, actualResult);
+    } finally {
+      FileComparationUtil.deleteRecursivelly(outputFolder);
+    }
+  }
 }

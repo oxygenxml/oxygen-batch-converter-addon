@@ -56,6 +56,30 @@ public class WordToXHTMLConverter implements Converter {
 	 */
 	private static final String DOCX_EXTENSION = "docx";
 
+	/**
+	 * <code>true</code> when should convert notes (footnotes and endnotes) into a list,
+	 *  <code>false</code> to convert them into simple paragraphs
+	 */
+	boolean shouldConvertNotesIntoAList = true;
+	
+	/**
+   * Constructor.
+   */
+	public WordToXHTMLConverter() {
+  }
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param shouldConvertNotesIntoAList <code>true</code> to convert notes(footnotes and endnotes) into a list,
+	 *          <code>false</code> to convert them in paragraphs.
+	 */
+	public WordToXHTMLConverter(boolean shouldConvertNotesIntoAList) {
+	  this.shouldConvertNotesIntoAList = shouldConvertNotesIntoAList;
+  }
+	
+	
+	
 	@Override
 	public ConversionResult convert(
 			File originalFile, Reader contentReader, TransformerFactoryCreator transformerCreator, UserInputsProvider userInputsProvider)
@@ -99,7 +123,8 @@ public class WordToXHTMLConverter implements Converter {
     }
 	  DocumentConverter converter = new DocumentConverter()
 	      .addStyleMap(styleMap)
-				.imageConverter(imagesManager);
+				.imageConverter(imagesManager)
+				.setConverterNotesToList(shouldConvertNotesIntoAList);
 		
 		Result<String> result = converter.convertToHtml(file);
 		if(logger.isDebugEnabled()) {
