@@ -42,9 +42,9 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                         <li>Cross-references are now handled properly when converting Word to HTML/DITA.</li>
                         <li>Index entries, footnotes and endnotes are now handled properly when converting Word to DITA.</li>
                         <li>References to local HTML documents are now automatically updated when converting HTML to DITA.</li>
-                        <li>Fixed an issue with HTML to DITA conversions where extra new lines were added when converting "pre" elements.</li>
+                        <li>Fixed an issue with HTML to DITA/DocBook conversions where extra new lines were added when converting "pre" elements.</li>
                         <li>Fixed an issue with Excel to DITA conversions that sometimes resulted in table elements with invalid IDs (<a href="https://github.com/oxygenxml/oxygen-resources-converter/issues/51">#51</a>).</li>
-                        <li>Fixed an issue with Word/HTML to DITA conversions that caused spaces between inline elements to be removed.</li>
+                        <li>Fixed an issue with Word/HTML to DITA/DocBook conversions that caused spaces between inline elements to be removed.</li>
                         <li>Updated the Java Mammoth library to version 1.4.2.</li>
                         <li>Updated the jTidy library to version 1.0.2.</li>
                     </ol>
