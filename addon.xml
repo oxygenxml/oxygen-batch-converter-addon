@@ -21,12 +21,14 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                     <p>This add-on contributes actions in the Tools menu and contextual menu to enable batch conversion between various formats: 
                     </p>
                     	<ul>
+                    		<li>Word to XHTML/DITA/DocBook</li>
                     		<li>HTML to XHTML/DITA/DocBook</li>
                     		<li>Markdown to XHTML/DITA/DocBook</li>
+                    		<li>Excel to DITA</li>
                     		<li>XML to JSON</li>
                     		<li>JSON to XML</li>
-                    		<li>Excel to DITA</li>
-                    		<li>Word to XHTML/DITA/DocBook</li>
+                    		<li>YAML to JSON</li>
+                    		<li>JSON to YAML</li>
                     	</ul>
                     <p>For more details see <a
                         href="https://github.com/oxygenxml/oxygen-resources-convertor"
