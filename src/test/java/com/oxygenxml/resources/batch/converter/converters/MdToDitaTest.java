@@ -11,15 +11,15 @@ import javax.xml.transform.TransformerException;
 
 import org.junit.Test;
 
+import com.oxygenxml.batch.converter.core.ConverterTypes;
+import com.oxygenxml.batch.converter.core.extensions.FileExtensionType;
+import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
+import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.BatchConverter;
 import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
-import com.oxygenxml.resources.batch.converter.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
-import com.oxygenxml.resources.batch.converter.extensions.FileExtensionType;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
-import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
-import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.ConvertorWorkerInteractorTestImpl;

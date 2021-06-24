@@ -4,7 +4,7 @@ import java.io.StringReader;
 
 import javax.xml.transform.stream.StreamSource;
 
-import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.batch.converter.core.ConverterTypes;
 
 /**
  * Getter for the style source.

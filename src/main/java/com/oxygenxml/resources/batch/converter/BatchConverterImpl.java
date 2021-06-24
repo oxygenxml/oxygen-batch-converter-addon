@@ -8,10 +8,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
-import com.oxygenxml.resources.batch.converter.converters.Converter;
-import com.oxygenxml.resources.batch.converter.converters.ConverterCreator;
-import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
+import com.oxygenxml.batch.converter.core.ConversionFormatUtil;
+import com.oxygenxml.batch.converter.core.converters.ConversionResult;
+import com.oxygenxml.batch.converter.core.converters.Converter;
+import com.oxygenxml.batch.converter.core.converters.ConverterCreator;
+import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
+import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
+import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
 import com.oxygenxml.resources.batch.converter.printer.StyleSourceGetter;
@@ -19,8 +22,6 @@ import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
 import com.oxygenxml.resources.batch.converter.transformer.OxygenTransformerFactoryCreator;
-import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
-import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.worker.ConverterStatusReporter;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
 

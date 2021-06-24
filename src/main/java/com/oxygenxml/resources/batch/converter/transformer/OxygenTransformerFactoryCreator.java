@@ -5,6 +5,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 
+import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
+
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
@@ -40,11 +42,9 @@ public class OxygenTransformerFactoryCreator implements TransformerFactoryCreato
         shouldUseHE = true;
       }
     }
-      
     return PluginWorkspaceProvider.getPluginWorkspace().getXMLUtilAccess().
         createXSLTTransformer(styleSource , null,
             shouldUseHE ? XMLUtilAccess.TRANSFORMER_SAXON_HOME_EDITION
                 : XMLUtilAccess.TRANSFORMER_SAXON_PROFESSIONAL_EDITION);
   }
-
 }

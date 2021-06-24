@@ -1,6 +1,6 @@
 package com.oxygenxml.resources.batch.converter.printer;
 
-import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.batch.converter.core.ConverterTypes;
 
 /**
  * Class for create the printer that write the converted content.

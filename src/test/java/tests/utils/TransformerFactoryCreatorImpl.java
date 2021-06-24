@@ -7,7 +7,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
+import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
 
 import net.sf.saxon.Configuration;
 import net.sf.saxon.TransformerFactoryImpl;

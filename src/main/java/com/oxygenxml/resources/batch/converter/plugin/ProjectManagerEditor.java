@@ -9,10 +9,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.oxygenxml.resources.batch.converter.extensions.ExtensionGetter;
+import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
+import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.proxy.ProjectPopupMenuCustomizerInvocationHandler;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
-import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;

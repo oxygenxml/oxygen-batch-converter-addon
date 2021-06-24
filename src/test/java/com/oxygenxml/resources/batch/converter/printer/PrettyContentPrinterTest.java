@@ -7,8 +7,8 @@ import javax.xml.transform.TransformerException;
 
 import org.junit.Test;
 
-import com.oxygenxml.resources.batch.converter.ConverterTypes;
-import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
+import com.oxygenxml.batch.converter.core.ConverterTypes;
+import com.oxygenxml.batch.converter.core.converters.ConversionResult;
 
 import junit.framework.TestCase;
 import tests.utils.FileComparationUtil;

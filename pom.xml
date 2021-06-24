@@ -6,7 +6,7 @@
   
    	<parent>
   		<groupId>com.oxygenxml</groupId>
-	    <artifactId>oxygen-superpom-tools</artifactId>
+	    <artifactId>oxygen-superpom-standard</artifactId>
 	    <version>24.0-SNAPSHOT</version>
   	</parent>
   
@@ -32,7 +32,6 @@
     	<maven.compiler.target>1.8</maven.compiler.target>
     	<!-- We want sonar. -->
 		<sonar.skip>false</sonar.skip>
-    	<oxy.snapshot.version>24.0-SNAPSHOT</oxy.snapshot.version>
   	</properties>
 	
 	<repositories>
@@ -50,14 +49,18 @@
 	</repositories>
 
 	<dependencies>
-
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
-			<scope>test</scope>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-batch-converter-core</artifactId>
+			<version>${oxygen.version}</version>
 		</dependency>
+		<!-- Force this version of POI -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito</artifactId>
@@ -71,14 +74,6 @@
 			<scope>test</scope>
 		</dependency>		
 		
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <version>1.10.19</version>
-		    <scope>test</scope>
-		</dependency>
-	
 		<!-- https://mvnrepository.com/artifact/com.oxygenxml/oxygen-sdk -->
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
@@ -104,175 +99,6 @@
 			<version>2.3.1</version>
 			<scope>provided</scope>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId>
-			<version>${oxy.snapshot.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-patched-jtidy-for-batch-converter</artifactId>
-			<version>${oxy.snapshot.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-patched-mammoth-for-batch-converter</artifactId>
-			<version>${oxy.snapshot.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>4.1.0</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
-	 	<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi-scratchpad</artifactId>
-		    <version>4.1.0</version>
-		</dependency> 
-
-		<!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io -->
-		<dependency>
-			<groupId>org.apache.directory.studio</groupId>
-			<artifactId>org.apache.commons.io</artifactId>
-			<version>2.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-patched-json</artifactId>
-			<version>${oxy.snapshot.version}</version>
-		</dependency>
-		<!-- Basic-utilities is used by oxygen-patched-json -->
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-basic-utilities</artifactId>
-			<version>${oxy.snapshot.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-yaml-validator-and-converter</artifactId>
-			<version>${oxy.snapshot.version}</version>
-		</dependency>
-		<!-- jackson-core is used by yaml-validator-and-converter. -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.11.1</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark-all -->
-		<dependency>
-		    <groupId>com.vladsch.flexmark</groupId>
-		    <artifactId>flexmark-all</artifactId>
-		    <version>0.50.18</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.vladsch.flexmark/flexmark-profile-pegdown -->
-		<dependency>
-			<groupId>com.vladsch.flexmark</groupId>
-			<artifactId>flexmark-profile-pegdown</artifactId>
-			<version>0.50.18</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/nu.validator.htmlparser/htmlparser -->
-		<dependency>
-			<groupId>nu.validator.htmlparser</groupId>
-			<artifactId>htmlparser</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.parboiled/parboiled-core -->
-		<dependency>
-			<groupId>org.parboiled</groupId>
-			<artifactId>parboiled-core</artifactId>
-			<version>1.1.7</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.dita-ot/dost -->
-		<dependency>
-			<groupId>org.dita-ot</groupId>
-			<artifactId>dost</artifactId>
-			<version>3.4.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-io</groupId>
-					<artifactId>commons-io</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>commons-codec</groupId>
-					<artifactId>commons-codec</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>net.sf.saxon</groupId>
-   					 <artifactId>Saxon-HE</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.guava</groupId>
-					<artifactId>guava</artifactId>
-				</exclusion>
-
-				<exclusion>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xml-resolver</groupId>
-					<artifactId>xml-resolver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xml-apis</groupId>
-					<artifactId>xml-apis</artifactId>
-				</exclusion>
-				
-				<exclusion>
-					<groupId>org.apache.ant</groupId>
-					<artifactId>ant</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.ant</groupId>
-					<artifactId>ant-apache-resolver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.ant</groupId>
-					<artifactId>ant-launcher</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.ibm.icu</groupId>
-					<artifactId>icu4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-smart-paste</artifactId>
-			<version>${oxy.snapshot.version}</version>
-			<classifier>dita-xslt</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-smart-paste</artifactId>
-			<version>${oxy.snapshot.version}</version>
-			<classifier>docbook-xslt</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen-dita-topics-extractor</artifactId>
-			<version>${oxy.snapshot.version}</version>
-			<classifier>xslt</classifier>
-			<type>zip</type>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -291,45 +117,6 @@
 						<configuration>
 							<outputDirectory>${project.build.directory}/lib</outputDirectory>
 							<includeScope>runtime</includeScope>
-						</configuration>
-					</execution>
-					<execution>
-						<id>unpack-dita-smart-paste-stylesheets</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>src/main/resources/stylesheets/dita</outputDirectory>
-							<includeArtifactIds>oxygen-smart-paste</includeArtifactIds>
-							<includeClassifiers>dita-xslt</includeClassifiers>
-							<overWriteSnapshots>true</overWriteSnapshots>
-						</configuration>
-					</execution>
-					<execution>
-						<id>unpack-docbook-smart-paste-stylesheets</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>src/main/resources/stylesheets/docbook</outputDirectory>
-							<includeArtifactIds>oxygen-smart-paste</includeArtifactIds>
-							<includeClassifiers>docbook-xslt</includeClassifiers>
-							<overWriteSnapshots>true</overWriteSnapshots>
-						</configuration>
-					</execution>
-					<execution>
-						<id>unpack-dita-topics-extraction-stylesheets</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>src/main/resources/stylesheets/topics-extraction-stylesheets</outputDirectory>
-							<includeArtifactIds>oxygen-dita-topics-extractor</includeArtifactIds>
-							<includeClassifiers>xslt</includeClassifiers>
-							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
 					</execution>
 				</executions>

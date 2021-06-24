@@ -14,9 +14,9 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 
-import com.oxygenxml.resources.batch.converter.converters.ConversionResult;
-import com.oxygenxml.resources.batch.converter.doctype.DoctypeGetter;
-import com.oxygenxml.resources.batch.converter.transformer.TransformerFactoryCreator;
+import com.oxygenxml.batch.converter.core.converters.ConversionResult;
+import com.oxygenxml.batch.converter.core.doctype.DoctypeGetter;
+import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;

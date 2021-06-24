@@ -13,7 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import com.oxygenxml.resources.batch.converter.ConverterTypes;
+import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.actions.ConvertAction;
 import com.oxygenxml.resources.batch.converter.actions.ImportAction;
 import com.oxygenxml.resources.batch.converter.dmm.InsertType;

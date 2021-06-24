@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="installation"><title>Installation</title><body><p>The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1.</p><p>You can install the add-on by using Oxygen's add-ons support. In Oxygen, go to Help-&gt;Install new add-ons... and use this add-on repository URL:</p><p><xref href="https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml" scope="external">https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml</xref></p><p>then continue the installation process.</p></body></topic>
+<topic id="installation">
+    <title>Installation</title>
+    <body>
+      <p>The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1.</p>
+      <p>You can install the add-on by using Oxygen's add-ons support. In Oxygen, go to Help-&gt;Install new add-ons... and use this add-on repository URL:</p>
+      <p>
+        <xref href="https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml" scope="external">https://raw.githubusercontent.com/oxygenxml/oxygen-resources-convertor/master/build/addon.xml</xref>
+      </p>
+      <p>then continue the installation process.</p>
+    </body>
+  </topic>
