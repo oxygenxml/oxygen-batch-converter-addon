@@ -37,12 +37,12 @@ public class WordToXHtmlConverterTest extends TestCase{
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    WordStyleMapLoader.imposeStyleMapURL(new File("config/wordStyleMap.xml"));
+    WordStyleMapLoader.imposeStyleMapFile(new File("config/wordStyleMap.xml"));
   }
   
   @Override
   protected void tearDown() throws Exception {
-    WordStyleMapLoader.imposeStyleMapURL(null);
+    WordStyleMapLoader.imposeStyleMapFile(null);
     super.tearDown();
   }
   
@@ -448,7 +448,7 @@ public class WordToXHtmlConverterTest extends TestCase{
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
   		    FileUtils.readFileToString(fileToRead));
   	} finally {
-  	  WordStyleMapLoader.imposeStyleMapURL(null);
+  	  WordStyleMapLoader.imposeStyleMapFile(null);
   		FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
   }
@@ -480,7 +480,7 @@ public class WordToXHtmlConverterTest extends TestCase{
   			
   	File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
   	
-  	WordStyleMapLoader.imposeStyleMapURL(customStyleMap);
+  	WordStyleMapLoader.imposeStyleMapFile(customStyleMap);
   	try {
   		converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
         @Override
@@ -503,7 +503,7 @@ public class WordToXHtmlConverterTest extends TestCase{
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
   		    FileUtils.readFileToString(fileToRead));
   	} finally {
-  	  WordStyleMapLoader.imposeStyleMapURL(null);
+  	  WordStyleMapLoader.imposeStyleMapFile(null);
   		FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
   }

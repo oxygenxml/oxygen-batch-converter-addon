@@ -35,12 +35,12 @@ public class WordToDitaConverterTest extends TestCase{
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    WordStyleMapLoader.imposeStyleMapURL(new File("config/wordStyleMap.xml"));
+    WordStyleMapLoader.imposeStyleMapFile(new File("config/wordStyleMap.xml"));
   }
 
   @Override
   protected void tearDown() throws Exception {
-    WordStyleMapLoader.imposeStyleMapURL(null);
+    WordStyleMapLoader.imposeStyleMapFile(null);
     super.tearDown();
   }
 

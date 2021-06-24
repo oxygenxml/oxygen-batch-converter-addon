@@ -15,6 +15,8 @@ import com.oxygenxml.batch.converter.core.converters.ConverterCreator;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
 import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
+import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
+import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
 import com.oxygenxml.resources.batch.converter.printer.StyleSourceGetter;
@@ -135,6 +137,12 @@ public class BatchConverterImpl implements BatchConverter {
 		this.converterStatusReporter = converterStatusReporter;
 		this.workerInteractor = workerInteractor;
 		this.transformerFactoryCreator = transformerFactoryCreator;
+		
+		File baseDir = BatchConverterPlugin.getInstance().getDescriptor().getBaseDir();
+		File styleMapFile = new File(baseDir, "/config/wordStyleMap.xml");
+		if (styleMapFile.exists()) {
+		  WordStyleMapLoader.imposeStyleMapFile(styleMapFile);
+		}
 	}
 	 
   /**
@@ -179,6 +187,7 @@ public class BatchConverterImpl implements BatchConverter {
 		if(logger.isDebugEnabled()) {
 		  logger.debug("Converter type: " + converterType);
 		}
+		
 		Converter converter = ConverterCreator.create(converterType);
 		ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
 		
