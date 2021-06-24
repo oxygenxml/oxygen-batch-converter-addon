@@ -138,10 +138,13 @@ public class BatchConverterImpl implements BatchConverter {
 		this.workerInteractor = workerInteractor;
 		this.transformerFactoryCreator = transformerFactoryCreator;
 		
-		File baseDir = BatchConverterPlugin.getInstance().getDescriptor().getBaseDir();
-		File styleMapFile = new File(baseDir, "/config/wordStyleMap.xml");
-		if (styleMapFile.exists()) {
-		  WordStyleMapLoader.imposeStyleMapFile(styleMapFile);
+		BatchConverterPlugin pluginInstance = BatchConverterPlugin.getInstance();
+		if (pluginInstance != null) {
+		  File baseDir = pluginInstance.getDescriptor().getBaseDir();
+		  File styleMapFile = new File(baseDir, "/config/wordStyleMap.xml");
+		  if (styleMapFile.exists()) {
+		    WordStyleMapLoader.imposeStyleMapFile(styleMapFile);
+		  }
 		}
 	}
 	 
