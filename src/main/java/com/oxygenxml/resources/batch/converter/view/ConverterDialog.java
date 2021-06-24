@@ -203,7 +203,8 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 
 	@Override
 	public File getOutputFolder() {
-		return new File(outputPanel.getOutputPath());
+	  // This is a directory used to add output files.
+		return new File(outputPanel.getOutputPath()); // NOSONAR cwe, owasp-a4, wasc
 	}
 
 	@Override

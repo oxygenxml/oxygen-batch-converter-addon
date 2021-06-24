@@ -76,7 +76,7 @@ public class ImportAction extends ConvertActionBase{
         AuthorNode[] selectedNodes = dmmPage.getSelectedNodes(true);
         if(selectedNodes.length > 0) {
           try {
-            outputdir = new File(selectedNodes[0].getXMLBaseURL().toURI()).getParentFile();
+            outputdir = new File(selectedNodes[0].getXMLBaseURL().toURI()).getParentFile(); // NOSONAR cwe, owasp-a4, wasc; This is a directory
           } catch (URISyntaxException e) {
             // Do nothing
           }
