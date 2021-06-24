@@ -1,18 +1,11 @@
 package com.oxygenxml.resources.batch.converter.proxy;
 
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
 
-import javax.swing.Action;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import org.apache.log4j.Logger;
-
-import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPluginUtil;
-import com.oxygenxml.resources.batch.converter.translator.Tags;
-import com.oxygenxml.resources.batch.converter.translator.Translator;
 
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.ui.Menu;
@@ -46,22 +39,16 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	private Menu menuToAdd;
 
 	/**
-	 * Translator
-	 */
-	private Translator translator;
-	
-	/**
 	 * Constructor
 	 * 
 	 * @param checkerDocBook
 	 *          The action that open the DocBook checker.
 	 */
 	public ProjectPopupMenuCustomizerInvocationHandler(StandalonePluginWorkspace pluginWorkspaceAccess,
-	    Menu menuToAdd, Translator translator) {
+	    Menu menuToAdd) {
 
 		this.pluginWorkspaceAccess = pluginWorkspaceAccess;
 		this.menuToAdd = menuToAdd;
-		this.translator = translator;
 	}
 
 	/**

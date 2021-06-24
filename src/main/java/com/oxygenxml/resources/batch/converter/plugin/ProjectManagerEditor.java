@@ -63,7 +63,7 @@ public class ProjectManagerEditor {
 			// create a ProxyInstance of projectPopupMenuCustomizer
 			Object proxyProjectPopupMenuCustomizerImpl = Proxy.newProxyInstance(
 					projectPopupMenuCustomizerClass.getClassLoader(), new Class[] { projectPopupMenuCustomizerClass },
-					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, menuToAdd, translator));
+					new ProjectPopupMenuCustomizerInvocationHandler(pluginWorkspaceAccess, menuToAdd));
 
 			// get the project manager object
 			Object projectManager = getProjectManager.invoke(pluginWorkspaceAccess);
