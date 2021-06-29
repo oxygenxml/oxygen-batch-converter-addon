@@ -64,7 +64,7 @@ public abstract class ConvertActionBase extends AbstractAction {
     final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator, converterType);
 
     //create a converter worker.
-    final ConverterWorker converterWorker = new ConverterWorker(converterType,  converterDialog,  new ConverterStatusReporter() {
+    final ConverterWorker converterWorker = new ConverterWorker(converterType,  converterDialog.getUserInputsProvider(),  new ConverterStatusReporter() {
       @Override
       public void conversionStarted() {
         //set the progress dialog visible 

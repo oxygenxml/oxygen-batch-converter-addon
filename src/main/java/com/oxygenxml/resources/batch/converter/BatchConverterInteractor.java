@@ -7,7 +7,7 @@ import java.util.Set;
  * @author Cosmin Duna
  *
  */
-public interface BatchConverterInteractor extends UserInputsProvider{
+public interface BatchConverterInteractor {
 
 	/**
 	 * Set the output folder path.
