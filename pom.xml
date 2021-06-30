@@ -30,8 +30,6 @@
 	<properties>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
-    	<!-- We want sonar. -->
-		<sonar.skip>false</sonar.skip>
   	</properties>
 	
 	<repositories>
