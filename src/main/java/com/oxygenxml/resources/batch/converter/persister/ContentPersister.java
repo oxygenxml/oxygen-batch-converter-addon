@@ -1,7 +1,6 @@
 package com.oxygenxml.resources.batch.converter.persister;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
-import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 
 /**
  * Used for save and persist  
@@ -13,9 +12,8 @@ public interface ContentPersister {
 	/**
 	 * Save content before close the dialog.
 	 * @param interactor Interactor with batch converter dialog.
-	 * @param inputsProvider Inputs provider
 	 */
-	 void saveState(BatchConverterInteractor interactor, UserInputsProvider inputsProvider);
+	 void saveState(BatchConverterInteractor interactor);
 	
 	/**
 	 * Load content before start the dialog.

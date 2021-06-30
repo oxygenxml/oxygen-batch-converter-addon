@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
-import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.options.WSOptionsStorage;
@@ -24,18 +23,18 @@ public class ContentPersisterImpl implements ContentPersister {
 	  * @param interactor Interactor with Batch converter dialog.
 	  */
 	@Override
-	public void saveState(BatchConverterInteractor interactor, UserInputsProvider inputsProvider) {
+	public void saveState(BatchConverterInteractor interactor) {
 		WSOptionsStorage optionsStorage = PluginWorkspaceProvider.getPluginWorkspace().getOptionsStorage();
 
 		// save state of openConvertedDocument checkBox
-		optionsStorage.setOption(OptionTags.OPEN_CONVERTED_DOCUMENT, String.valueOf(inputsProvider.mustOpenConvertedFiles()));
+		optionsStorage.setOption(OptionTags.OPEN_CONVERTED_DOCUMENT, String.valueOf(interactor.mustOpenConvertedFiles()));
 		
 		Set<String> additionalOptions = interactor.getAdditionalOptions();
 		if(additionalOptions != null) {
 		  Iterator<String> additionalOptionsIterator = additionalOptions.iterator();
 		  while (additionalOptionsIterator.hasNext()) {
         String option = additionalOptionsIterator.next();
-        Boolean additionalOptionValue = inputsProvider.getAdditionalOptionValue(option);
+        Boolean additionalOptionValue = interactor.getAdditionalOptionValue(option);
         if(additionalOptionValue != null) {
           optionsStorage.setOption(option, String.valueOf(additionalOptionValue));
         }

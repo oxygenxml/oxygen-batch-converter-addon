@@ -1,7 +1,5 @@
 package com.oxygenxml.resources.batch.converter;
 
-import java.io.File;
-
 import com.oxygenxml.batch.converter.core.ConversionInputsProvider;
 
 /**
@@ -10,20 +8,12 @@ import com.oxygenxml.batch.converter.core.ConversionInputsProvider;
  * @author cosmin_duna
  *
  */
-public abstract class UserInputsProvider implements ConversionInputsProvider {
+public interface UserInputsProvider extends ConversionInputsProvider {
 
 	/**
 	 * Return if the converted file must be opened.
 	 * @return <code>true</code> if converted files must be opened, <code>false</code>otherwise.
 	 */
-	public abstract boolean mustOpenConvertedFiles();
+	public boolean mustOpenConvertedFiles();
 	
-  /**
-   * The media output folder
-   * @return The path of the media output folder.
-   */
-  @Override
-  public File getMediaOutputFolder() {
-    return new File(getOutputFolder(), "media/");
-  }
 }

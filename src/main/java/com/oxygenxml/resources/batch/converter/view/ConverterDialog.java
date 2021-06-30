@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
-import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersister;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
@@ -29,7 +28,7 @@ import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
  * @author Cosmin Duna
  *
  */
-public class ConverterDialog extends OKCancelDialog implements BatchConverterInteractor { //NOSONAR parent
+public class ConverterDialog extends OKCancelDialog implements BatchConverterInteractor{ //NOSONAR parent
 
 	/**
 	 * Default serial version ID
@@ -191,9 +190,21 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 			PluginWorkspaceProvider.getPluginWorkspace().showWarningMessage(translator.getTranslation(Tags.EMPTY_OUTPUT_MESSAGE));
 		} else {
 			// Save the state of dialog.
-			contentPersister.saveState(this, getUserInputsProvider());
+			contentPersister.saveState(this);
 			super.doOK();
 		}
+	}
+
+	@Override
+	public List<File> getInputFiles() {
+		return inputPanel.getFilesFromTable();
+	}
+
+
+	@Override
+	public File getOutputFolder() {
+	  // This is a directory used to add output files.
+		return new File(outputPanel.getOutputPath()); // NOSONAR cwe, owasp-a4, wasc
 	}
 
 	@Override
@@ -217,39 +228,9 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		return LINK_TO_GIT_HUB;
 	}
 
-	/**
-	 * Get a provider for the user inputs.
-	 * 
-	 * @return A provider for the user inputs.
-	 */
-	public UserInputsProvider getUserInputsProvider() {
-	  return new UserInputsProvider() {
-	    @Override
-	    public List<File> getInputFiles() {
-	      return inputPanel.getFilesFromTable();
-	    }
-
-	    @Override
-	    public File getOutputFolder() {
-	      // This is a directory used to add output files.
-	      return new File(outputPanel.getOutputPath()); // NOSONAR cwe, owasp-a4, wasc
-	    }
-	    
-      @Override
-      public Boolean getAdditionalOptionValue(String additionalOptionId) {
-        Boolean toRet = null;
-        JCheckBox optionCombo = additionalOptions.get(additionalOptionId);
-        if (optionCombo != null) {
-          toRet = optionCombo.isSelected();
-        }
-        return toRet;
-      }
-      
-      @Override
-      public boolean mustOpenConvertedFiles() {
-        return openFilesCBox.isSelected();
-      }
-    };
+	@Override
+	public boolean mustOpenConvertedFiles() {
+		return openFilesCBox.isSelected();
 	}
 	
   @Override
@@ -257,7 +238,15 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
     openFilesCBox.setSelected(state);
   }
 
-
+	@Override
+	public Boolean getAdditionalOptionValue(String additionalOptionId) {
+	  Boolean toRet = null;
+	  JCheckBox optionCombo = additionalOptions.get(additionalOptionId);
+	  if (optionCombo != null) {
+	    toRet = optionCombo.isSelected();
+	  }
+	  return toRet;
+	}
 	
 	@Override
 	public Set<String> getAdditionalOptions() {
