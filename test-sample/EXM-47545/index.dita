@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="topicID1"><title/><body><p>Text urmat de index entry: <indexterm>bla</indexterm></p></body></topic>
+<topic id="topicID1"><title>index</title><body><p>Text urmat de index entry: <indexterm>bla</indexterm></p></body></topic>
