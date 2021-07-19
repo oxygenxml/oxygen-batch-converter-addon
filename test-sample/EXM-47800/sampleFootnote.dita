@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="id"><title>sampleFootnote</title><body><p>Text</p><p>Footnote: <fn>Footnote content</fn></p><p>Another footnote <fn>Footnote 2 content</fn></p><p>EndNote: <fn>Endnote content</fn></p></body></topic>
+<topic id="id"><title>sampleFootnote</title><body><p>Text</p><p>Footnote: <fn>Footnote content</fn></p><p>Another footnote <fn>Footnote 2 content</fn></p><p>EndNote: <fn outputclass="endnote">Endnote content</fn></p></body></topic>
