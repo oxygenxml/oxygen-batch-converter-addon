@@ -20,7 +20,7 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * YAML to JSON
 
 ## Word to DITA
-This conversion works best if you only use the default MS Word styles to semantically mark up your document.
+This conversion works best if you only use the default MS Word styles to semantically mark up your document. 
  
 The **Create DITA maps from Word documents containing multiple sections** option from the conversion dialog box allows you to decide whether the output will be a DITA map or a DITA topic.
 When this option is selected, all sections from your Word document marked by titles or headings will be separated into individual DITA topics and referenced in a DITA map. If the word document does not contain multiple sections, the output will be a single topic.
