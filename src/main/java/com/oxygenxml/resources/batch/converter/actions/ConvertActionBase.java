@@ -16,6 +16,7 @@ import com.oxygenxml.resources.batch.converter.worker.ConverterStatusReporter;
 import com.oxygenxml.resources.batch.converter.worker.ConverterWorker;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
 /**
  * Base the action that convert documents.
@@ -60,40 +61,42 @@ public abstract class ConvertActionBase extends AbstractAction {
     customizeDialog(converterDialog);
     converterDialog.showDialog();
     
-    //create a progress dialog
-    final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator, converterType);
-
-    //create a converter worker.
-    final ConverterWorker converterWorker = new ConverterWorker(converterType,  converterDialog,  new ConverterStatusReporter() {
-      @Override
-      public void conversionStarted() {
-        //set the progress dialog visible 
-        progressDialog.setDialogVisible(true);
-      }
+    if(converterDialog.getResult() == OKCancelDialog.RESULT_OK) {
+      //create a progress dialog
+      final ProgressDialog progressDialog = new ProgressDialog(parentFrame, translator, converterType);
       
-      @Override
-      public void conversionInProgress(File inputFile) {
-        progressDialog.conversionInProgress(inputFile);
-      }
+      //create a converter worker.
+      final ConverterWorker converterWorker = new ConverterWorker(converterType,  converterDialog,  new ConverterStatusReporter() {
+        @Override
+        public void conversionStarted() {
+          //set the progress dialog visible 
+          progressDialog.setDialogVisible(true);
+        }
+        
+        @Override
+        public void conversionInProgress(File inputFile) {
+          progressDialog.conversionInProgress(inputFile);
+        }
+        
+        @Override
+        public void conversionFinished(List<File> resultedDocuments, File outputDir) {
+          progressDialog.close();
+          ConvertActionBase.this.conversionFinished(resultedDocuments, outputDir);
+        }
+      });
       
-      @Override
-      public void conversionFinished(List<File> resultedDocuments, File outputDir) {
-        progressDialog.close();
-        ConvertActionBase.this.conversionFinished(resultedDocuments, outputDir);
-      }
-    });
-
-    //add a action listener on cancel button for progress dialog
-    progressDialog.addCancelActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        converterWorker.cancel(true);
-        progressDialog.dispose();
-      }
-    });
-
-    //start the worker.
-    converterWorker.execute();
+      //add a action listener on cancel button for progress dialog
+      progressDialog.addCancelActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          converterWorker.cancel(true);
+          progressDialog.dispose();
+        }
+      });
+      
+      //start the worker.
+      converterWorker.execute();
+    }
   }
   
  /**
