@@ -19,4 +19,7 @@
  
  <extension type="WorkspaceAccess" 
   class="com.oxygenxml.resources.batch.converter.plugin.BatchConverterPluginExtension"/>
+  
+  <extension type="OptionPage" 
+ 	class="com.oxygenxml.resources.batch.converter.plugin.BatchConverterOptionPageExtension"/>
 </plugin>

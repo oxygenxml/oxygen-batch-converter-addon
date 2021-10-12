@@ -7,7 +7,78 @@
 		<language description="Japanese" lang="ja_JP" />
 		<language description="Dutch" lang="nl_NL" />
 	</languageList>
-	
+	<key value="word_element">
+		<comment>Name for table heading for the MS Word elements.</comment>
+		<val lang="en_US">Word element</val>
+		<val lang="de_DE">Word element</val>
+		<val lang="fr_FR">Word element</val>
+		<val lang="ja_JP">Word element</val>
+		<val lang="nl_NL">Word element</val>
+	</key>
+	<key value="word_style">
+		<comment>Name for table heading for the MS Word styles.</comment>
+		<val lang="en_US">Word style</val>
+		<val lang="de_DE">Word style</val>
+		<val lang="fr_FR">Word style</val>
+		<val lang="ja_JP">Word style</val>
+		<val lang="nl_NL">Word style</val>
+	</key>
+	<key value="html_element">
+		<comment>Name for table heading for the HTML elements.</comment>
+		<val lang="en_US">HTML element</val>
+		<val lang="de_DE">HTML element</val>
+		<val lang="fr_FR">HTML element</val>
+		<val lang="ja_JP">HTML element</val>
+		<val lang="nl_NL">HTML element</val>
+	</key>
+	<key value="word_styles_mapping">
+		<comment>Section name for presenting MS Word styles mapping configuration.</comment>
+		<val lang="en_US">Word styles mapping</val>
+		<val lang="de_DE">Word styles mapping</val>
+		<val lang="fr_FR">Word styles mapping</val>
+		<val lang="ja_JP">Word styles mapping</val>
+		<val lang="nl_NL">Word styles mapping</val>
+	</key>
+	<key value="word_config_description">
+		<comment>Description of configuration for the MS Word conversions</comment>
+		<val lang="en_US">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="de_DE">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="fr_FR">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="ja_JP">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="nl_NL">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+	</key>
+	<key value="new">
+		<comment>Button for adding a new element.</comment>
+		<val lang="en_US">New</val>
+		<val lang="de_DE">New</val>
+		<val lang="fr_FR">New</val>
+		<val lang="ja_JP">New</val>
+		<val lang="nl_NL">New</val>
+	</key>
+	<key value="edit">
+		<comment>Button for editing an element.</comment>
+		<val lang="en_US">Edit</val>
+		<val lang="de_DE">Edit</val>
+		<val lang="fr_FR">Edit</val>
+		<val lang="ja_JP">Edit</val>
+		<val lang="nl_NL">Edit</val>
+	</key>
+	<key value="delete">
+		<comment>Button for deleting an element.</comment>
+		<val lang="en_US">Delete</val>
+		<val lang="de_DE">Delete</val>
+		<val lang="fr_FR">Delete</val>
+		<val lang="ja_JP">Delete</val>
+		<val lang="nl_NL">Delete</val>
+	</key>
+	<key value="export">
+		<comment>Button for exporting setting.</comment>
+		<val lang="en_US">Export</val>
+		<val lang="de_DE">Export</val>
+		<val lang="fr_FR">Export</val>
+		<val lang="ja_JP">Export</val>
+		<val lang="nl_NL">Export</val>
+	</key>
 	<key value="Menu_Text_Conv">
 		<comment>The text of menu that contains the converters.</comment>
 		<val lang="en_US">Batch Documents Converter</val>
@@ -16,7 +87,6 @@
 		<val lang="ja_JP">Batch Documents Converter</val>
 		<val lang="nl_NL">Batch Documents Converter</val>
 	</key>
-	
 	<key value="Menu_Item_Text_Conv_html.to.xhtml">
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">HTML to XHTML</val>

@@ -9,13 +9,16 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.oxygenxml.batch.converter.core.ConversionFormatUtil;
+import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.batch.converter.core.converters.ConversionResult;
 import com.oxygenxml.batch.converter.core.converters.Converter;
 import com.oxygenxml.batch.converter.core.converters.ConverterCreator;
+import com.oxygenxml.batch.converter.core.converters.WordToXHTMLConverter;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
 import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
+import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
@@ -27,7 +30,9 @@ import com.oxygenxml.resources.batch.converter.transformer.OxygenTransformerFact
 import com.oxygenxml.resources.batch.converter.worker.ConverterStatusReporter;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
 
+import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 
 /**
  * Batch converter implementation.
@@ -193,6 +198,17 @@ public class BatchConverterImpl implements BatchConverter {
 		
 		Converter converter = ConverterCreator.create(converterType);
 		ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
+		
+		if(ConverterTypes.WORD_TO_XHTML.equals(converterType) || ConverterTypes.WORD_TO_DITA.equals(converterType)){
+		  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+		  if(pluginWorkspace != null) {
+		    WSOptionsStorage optionsStorage = pluginWorkspace.getOptionsStorage();
+		    String wordStylesMapConfig = optionsStorage.getOption(OptionTags.WORD_STYLES_MAP_CONFIG, "");
+		    if (!wordStylesMapConfig.isEmpty()) {
+		      WordStyleMapLoader.imposeStyleMap(wordStylesMapConfig);
+		    }
+		  }
+    } 
 		
 		//make the output directory if it doesn't exist
 		File outputFolder = inputsProvider.getOutputFolder();

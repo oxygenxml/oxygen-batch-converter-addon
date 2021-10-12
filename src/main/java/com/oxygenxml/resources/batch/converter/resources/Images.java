@@ -19,5 +19,9 @@ public class Images {
 	 */
 	public static final String CHOOSER_ICON = "images/Open16.png";
 	
+	 /**
+   * Path to icon for button that presents more informations.
+   */
+  public static final String SHOW_HELP_ICON = "images/ShowHelp16.png";
 	
 }

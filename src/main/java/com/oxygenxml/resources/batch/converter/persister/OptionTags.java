@@ -42,4 +42,9 @@ public class OptionTags {
     */
    public static final String CREATE_SHORT_DESCRIPTION = "create.short.description";
    
+   /**
+    * The word styles map configuration.
+    */
+   public static final String WORD_STYLES_MAP_CONFIG = "word.styles.map.config";
+   
 }

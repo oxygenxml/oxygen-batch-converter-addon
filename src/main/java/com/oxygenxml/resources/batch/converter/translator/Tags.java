@@ -128,4 +128,40 @@ public class Tags {
    */
   public static final String IMPORT = "Import";
   
+  /**
+   * en: Word element
+   */
+  public static final String WORD_ELEMENT = "word_element";
+  /**
+   * en: Word style
+   */
+  public static final String WORD_STYLE = "word_style";
+  /**
+   * en: HTML element
+   */
+  public static final String HTML_ELEMENT = "html_element";
+  /**
+   * en: Word styles mapping
+   */
+  public static final String WORD_STYLES_MAPPING = "word_styles_mapping";
+  /**
+   * en: The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.
+   */
+  public static final String WORD_CONFIG_DESCRIPTION = "word_config_description";
+  /**
+   * en: New
+   */
+  public static final String NEW = "new";
+  /**
+   * en: Edit
+   */
+  public static final String EDIT = "edit";
+  /**
+   * en: Delete
+   */
+  public static final String DELETE = "delete";
+  /**
+   * en: Export
+   */
+  public static final String EXPORT = "export";
 }

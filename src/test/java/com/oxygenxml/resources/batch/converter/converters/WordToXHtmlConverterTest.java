@@ -35,14 +35,8 @@ import tests.utils.TransformerFactoryCreatorImpl;
 public class WordToXHtmlConverterTest extends TestCase{
 
   @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    WordStyleMapLoader.imposeStyleMapFile(new File("config/wordStyleMap.xml"));
-  }
-  
-  @Override
   protected void tearDown() throws Exception {
-    WordStyleMapLoader.imposeStyleMapFile(null);
+    WordStyleMapLoader.imposeStyleMapURL(null);
     super.tearDown();
   }
   
