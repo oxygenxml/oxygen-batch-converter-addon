@@ -7,7 +7,7 @@
    	<parent>
   		<groupId>com.oxygenxml</groupId>
 	    <artifactId>oxygen-superpom-standard</artifactId>
-	    <version>24.0-SNAPSHOT</version>
+	    <version>24.1-SNAPSHOT</version>
   	</parent>
   
     <developers>
