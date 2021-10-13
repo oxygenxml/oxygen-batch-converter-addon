@@ -1,5 +1,6 @@
 package com.oxygenxml.resources.batch.converter.view;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -56,6 +57,11 @@ public class BatchConverterOptionPanel extends JPanel{
   private static final String WORD_CONFIG_DOCUMENTATION = "https://www.oxygenxml.com/doc/ug-editor/topics/batch-converter-addon.html";
   
   /**
+   * Inset used between buttons
+   */
+  private static final int INSET_BETWEEN_BUTTONS = 3;
+  
+  /**
    * The table that contains word styles mapping
    */
   private final JTable wordMappingtable;
@@ -84,6 +90,11 @@ public class BatchConverterOptionPanel extends JPanel{
    * The export button.
    */
   private Button exportButton;
+  
+  /**
+   * The import button.
+   */
+  private Button importButton;
   
   /**
    * Constructor
@@ -203,6 +214,18 @@ public class BatchConverterOptionPanel extends JPanel{
       }
     });
     buttonsPanel.add(exportButton);
+    buttonsPanel.add(Box.createRigidArea(new Dimension(INSET_BETWEEN_BUTTONS, 0)));
+
+    importButton = new Button(new AbstractAction(messages.getMessage(Tags.IMPORT)) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        File inputFile = PluginWorkspaceProvider.getPluginWorkspace().chooseFile(null, 
+            new String[] { FileExtensionType.XML_OUTPUT_EXTENSION },
+            "", false);
+        WordStylesConfigUtil.importWordStylesMapConfiguration(wordMappingtableModel, inputFile);
+      }
+    });
+    buttonsPanel.add(importButton);
     
     buttonsPanel.add(Box.createHorizontalGlue());
     
@@ -213,6 +236,7 @@ public class BatchConverterOptionPanel extends JPanel{
       }
     });
     buttonsPanel.add(newRowButton);
+    buttonsPanel.add(Box.createRigidArea(new Dimension(INSET_BETWEEN_BUTTONS, 0)));
     
     editRowButton = new Button(new AbstractAction(messages.getMessage(Tags.EDIT)) {
       @Override
@@ -221,6 +245,7 @@ public class BatchConverterOptionPanel extends JPanel{
       }
     });
     buttonsPanel.add(editRowButton);
+    buttonsPanel.add(Box.createRigidArea(new Dimension(INSET_BETWEEN_BUTTONS, 0)));
     
     deleteRowButton = new Button(new AbstractAction(messages.getMessage(Tags.DELETE)) {
       @Override

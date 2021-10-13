@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.log4j.Logger;
 
@@ -96,6 +97,72 @@ public class WordStylesConfigUtil {
     }
   }
   
+  /**
+   * Import the word styles mapping into the given table in xml format into the given output file.
+   * 
+   * @param wordMappingtableModel The model that contains styles mapping
+   * @param outputFile The output file.
+   */
+  public static void importWordStylesMapConfiguration(DefaultTableModel tabelModelWithConfig, File configFile) {
+    if (configFile != null) {
+      try {
+        JAXBContext context = JAXBContext.newInstance(WordStyleMap.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        WordStyleMap stylesMap = (WordStyleMap) unmarshaller.unmarshal(configFile);
+        
+        List<WordStyleToHtmlRelation> styleToHtmlList = stylesMap.getStyleToHtmlList();
+        if(styleToHtmlList != null) {
+          for (WordStyleToHtmlRelation styleToHtmlRelation : styleToHtmlList) {
+            tabelModelWithConfig.addRow(new String[] {
+                styleToHtmlRelation.getElement() != null ? styleToHtmlRelation.getElement() : "",
+                styleToHtmlRelation.getStyleName() != null ? styleToHtmlRelation.getStyleName() : "",
+                getHTMLElement(styleToHtmlRelation.getResultedHTML())});
+          }
+
+          List<CustomToDefaultStyleRelation> customToDefaultList = stylesMap.getCustomToDefaultList();
+          if(customToDefaultList != null) {
+            for (int i = 0; i < customToDefaultList.size(); i++) {
+              CustomToDefaultStyleRelation styleRelation = customToDefaultList.get(i);
+              String defaultStyle = styleRelation.getDefaultStyle();
+              int nuOfStyles = styleToHtmlList.size();
+              for (int j = 0; j < nuOfStyles; j++) {
+                WordStyleToHtmlRelation styleToHtmlRelation = styleToHtmlList.get(j);
+                String styleName = styleToHtmlRelation.getStyleName();
+
+                if(styleName != null && styleName.equals(defaultStyle)) {
+                  tabelModelWithConfig.addRow(new String[] {
+                      styleToHtmlRelation.getElement() != null ? styleToHtmlRelation.getElement() : "",
+                          styleRelation.getCustomStyle() != null ? styleRelation.getCustomStyle() : "",
+                      getHTMLElement(styleToHtmlRelation.getResultedHTML())});
+                  break;
+                }
+              }
+            }
+          }
+        }
+      } catch (JAXBException e1) {
+        logger.debug(e1.getMessage(), e1);
+      }
+    }
+  }
+  
+  /**
+   * Get the html element in string format from the given resultedHTML object.
+   * 
+   * @param resultedHTML The resultedHTML object to be processed.
+   * 
+   * @return The html element in string format
+   */
+  private static String getHTMLElement (ResultedHtml resultedHTML) {
+    String element = "";
+    if (resultedHTML != null && resultedHTML.getName() != null) {
+      element =  resultedHTML.getName();
+      if (Boolean.toString(true).equals(resultedHTML.getFresh())) {
+        element += ":fresh";
+      }
+    }
+    return element;
+  }
   
   /**
    * Set the given word styles mapping in given table model.

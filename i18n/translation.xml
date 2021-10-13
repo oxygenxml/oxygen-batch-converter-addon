@@ -41,11 +41,11 @@
 	</key>
 	<key value="word_config_description">
 		<comment>Description of configuration for the MS Word conversions</comment>
-		<val lang="en_US">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
-		<val lang="de_DE">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
-		<val lang="fr_FR">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
-		<val lang="ja_JP">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
-		<val lang="nl_NL">The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="en_US">All conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="de_DE">All conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="fr_FR">All conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="ja_JP">All conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
+		<val lang="nl_NL">All conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.</val>
 	</key>
 	<key value="new">
 		<comment>Button for adding a new element.</comment>

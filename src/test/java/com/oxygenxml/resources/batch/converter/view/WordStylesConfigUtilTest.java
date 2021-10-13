@@ -80,6 +80,38 @@ public class WordStylesConfigUtilTest {
   }
   
   /**
+   * <p><b>Description:</b> Test import of Word styles mapping</p>
+   * <p><b>Bug ID:</b> EXM-45729</p>
+   *
+   * @author cosmin_duna
+   * @throws Exception 
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testImportWordStylesMapConfiguration() throws Exception {
+    File configFile  = new File("test-sample/EXM-45729/wordStylesConfig.xml");   
+
+    DefaultTableModel tableModel = new DefaultTableModel(0, 3);
+    WordStylesConfigUtil.importWordStylesMapConfiguration(tableModel, configFile);
+
+    assertEquals(
+        "-|p|-|Title|-|h1:fresh|\n" + 
+        "-|p|-|Subtitle|-|h2:fresh|\n" + 
+        "-|p|-|Heading 1|-|h1:fresh|\n" + 
+        "-|p.Heading1|-||-|h1:fresh|\n" + 
+        "-|r|-|Strong|-|strong|\n" + 
+        "-|b|-||-|strong|\n" + 
+        "-|i|-||-|em|\n" + 
+        "-|p:unordered-list(1)|-||-|ul > li:fresh|\n" + 
+        "-|p:unordered-list(2)|-||-|ul|ol > li > ul > li:fresh|\n" + 
+        "-|p:ordered-list(1)|-||-|ol > li:fresh|\n" + 
+        "-|p|-|Document Title|-|h1:fresh|\n" + 
+        "-|p|-|Document Subtitle|-|h2:fresh|\n",
+        serializeTable(tableModel));
+  }
+
+  /**
    * <p><b>Description:</b> Test set word styles mapping in table</p>
    * <p><b>Bug ID:</b> EXM-45729</p>
    *
