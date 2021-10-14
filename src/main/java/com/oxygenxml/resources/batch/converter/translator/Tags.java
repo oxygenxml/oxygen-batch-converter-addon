@@ -145,7 +145,7 @@ public class Tags {
    */
   public static final String WORD_STYLES_MAPPING = "word_styles_mapping";
   /**
-   * en: The conversions from Word documents(docx) can be configured by mapping Word elements formatted or not with styles to correspondent HTML elements.
+   * en: Conversions from Word documents (.docx) can be configured by mapping Word elements and styles to the corresponding HTML element.
    */
   public static final String WORD_CONFIG_DESCRIPTION = "word_config_description";
   /**
