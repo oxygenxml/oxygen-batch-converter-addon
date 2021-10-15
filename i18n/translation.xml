@@ -79,6 +79,14 @@
 		<val lang="ja_JP">Export</val>
 		<val lang="nl_NL">Export</val>
 	</key>
+	<key value="help">
+		<comment>Help button for opening documentation.</comment>
+		<val lang="en_US">Help</val>
+		<val lang="de_DE">Help</val>
+		<val lang="fr_FR">Help</val>
+		<val lang="ja_JP">Help</val>
+		<val lang="nl_NL">Help</val>
+	</key>
 	<key value="Menu_Text_Conv">
 		<comment>The text of menu that contains the converters.</comment>
 		<val lang="en_US">Batch Documents Converter</val>

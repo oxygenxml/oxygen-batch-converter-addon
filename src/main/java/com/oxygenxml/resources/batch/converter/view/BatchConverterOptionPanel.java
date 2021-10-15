@@ -38,6 +38,7 @@ import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.ui.Button;
 import ro.sync.exml.workspace.api.standalone.ui.ToolbarButton;
+import ro.sync.ui.application.ApplicationTable;
 
 /**
  * Option panel for Batc Documents Converter
@@ -64,7 +65,7 @@ public class BatchConverterOptionPanel extends JPanel{
   /**
    * The table that contains word styles mapping
    */
-  private final JTable wordMappingtable;
+  private final ApplicationTable wordMappingtable;
   
   /**
    * The model of the table that contains word styles mapping
@@ -105,7 +106,7 @@ public class BatchConverterOptionPanel extends JPanel{
         .getPluginWorkspace();
     PluginResourceBundle messages = pluginWorkspace.getResourceBundle();
 
-    wordMappingtable = new JTable() {
+    wordMappingtable = new ApplicationTable() {
       @Override
       public String getToolTipText(MouseEvent event) {
         String toolTipText = super.getToolTipText(event);
@@ -148,7 +149,20 @@ public class BatchConverterOptionPanel extends JPanel{
     
     wordMappingtable.setModel(wordMappingtableModel);
     wordMappingtable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+    // Edit on enter
+    wordMappingtable.setDefaultAction(
+        new AbstractAction() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            editRow();
+          }
+        },
+        // On double click
+        true,
+        // On enter
+        true
+        );
+    
     TableColumn column = wordMappingtable.getColumnModel().getColumn(2);
     column.setMinWidth(200);
     column.setPreferredWidth(200);
@@ -175,7 +189,7 @@ public class BatchConverterOptionPanel extends JPanel{
     
     constr.gridx++;
     constr.weightx = 0;
-    ToolbarButton buttonToProfiling = new ToolbarButton(new AbstractAction("Help") {
+    ToolbarButton buttonToProfiling = new ToolbarButton(new AbstractAction(messages.getMessage(Tags.HELP)) {
       @Override
       public void actionPerformed(ActionEvent e) {
         pluginWorkspace.openInExternalApplication(URLUtil.convertToURL(WORD_CONFIG_DOCUMENTATION), true);
@@ -186,8 +200,6 @@ public class BatchConverterOptionPanel extends JPanel{
     if (imageToLoad != null) {
       buttonToProfiling.setIcon(ro.sync.ui.Icons.getIcon(imageToLoad.toString()));
       buttonToProfiling.setText("");
-    } else {
-      buttonToProfiling.setText("Help");
     }
     add(buttonToProfiling, constr);
     

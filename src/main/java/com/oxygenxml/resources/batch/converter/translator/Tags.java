@@ -164,4 +164,8 @@ public class Tags {
    * en: Export
    */
   public static final String EXPORT = "export";
+  /**
+   * en: Help
+   */
+  public static final String HELP = "help";
 }
