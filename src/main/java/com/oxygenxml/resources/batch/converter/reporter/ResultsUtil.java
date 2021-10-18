@@ -26,7 +26,7 @@ public class ResultsUtil {
   /**
    * The key for for problem reported by add-on in Results.
    */
-  public static final String BATCH_CONVERTER_RESULTS_TAB_KEY = "Batch-Converter";
+  public static final String BATCH_CONVERTER_RESULTS_TAB_KEY = "Batch Documents Converter";
   
   /**
    * Private constructor

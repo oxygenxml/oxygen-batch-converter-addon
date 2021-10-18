@@ -168,4 +168,14 @@ public class Tags {
    * en: Help
    */
   public static final String HELP = "help";
+  /**
+   * en: Unrecognized '{0}' style for '{1}' Word element. You can configure the mapping between styles and elements in the Batch Documents Converter preferences page.
+   */
+  public static final String UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT = "unrecognize_style_for_word_element";
+  
+  /**
+   * en: Unrecognized '{0}' style ID for '{1}' Word element. You can configure the mapping between styles and elements in the Batch Documents Converter preferences page.
+   */
+  public static final String UNRECOGNIZE_STYLES_ID_FOR_WORD_ELEMENT = "unrecognize_style_id_for_word_element";
+}
 }
