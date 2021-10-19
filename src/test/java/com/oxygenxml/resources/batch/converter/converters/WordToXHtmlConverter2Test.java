@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -24,8 +25,12 @@ import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 
 import junit.framework.TestCase;
 import ro.sync.basic.io.IOUtil;
+import ro.sync.document.DocumentPositionedInfo;
+import ro.sync.exml.workspace.api.PluginResourceBundle;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.options.WSOptionsStorage;
+import ro.sync.exml.workspace.api.results.ResultsManager;
+import ro.sync.exml.workspace.api.results.ResultsManager.ResultType;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.util.PrettyPrintException;
 import ro.sync.exml.workspace.api.util.XMLUtilAccess;
@@ -158,5 +163,96 @@ public class WordToXHtmlConverter2Test extends TestCase{
           }
         });
     Mockito.when(pluginWSMock.getXMLUtilAccess()).thenReturn(xmlUtilAccess);
+  }
+
+  /**
+   * <p><b>Description:</b> Test warnings are presented when unrecognized styles are found in conversion process.</p>
+   * <p><b>Bug ID:</b> EXM-48983</p>
+   * @author cosmin_duna
+   *
+   * @throws Exception
+   */
+  @Test
+  public void testPresentUnrecognizedStylesWarnings() throws Exception {
+    File inputFile  = new File("test-sample/EXM-48983/sample.docx");   
+    final File outputFolder  = new File(inputFile.getParentFile(), "output");
+  
+    try {
+      StandalonePluginWorkspace pluginWSMock = Mockito.mock(StandalonePluginWorkspace.class);
+      PluginWorkspaceProvider.setPluginWorkspace(pluginWSMock);
+      
+      PluginResourceBundle pluginResourceBundle = Mockito.mock(PluginResourceBundle.class); 
+      Mockito.when(pluginResourceBundle.getMessage(Mockito.anyString())).thenReturn("Unrecognized \"{0}\" style ID for \"{1}\" Word element. ");
+      Mockito.when(pluginWSMock.getResourceBundle()).thenReturn(pluginResourceBundle);
+      
+      XMLUtilAccess xmlUtilAccess = Mockito.mock(XMLUtilAccess.class);
+      Mockito.when(xmlUtilAccess.prettyPrint(Mockito.any(Reader.class), Mockito.anyString())).then(
+          new Answer<String>() {
+            @Override
+            public String answer(InvocationOnMock invocation) throws Throwable {
+              Reader reader = invocation.getArgumentAt(0, Reader.class);
+              return IOUtil.readSimple(reader);
+            }
+          });
+      Mockito.when(pluginWSMock.getXMLUtilAccess()).thenReturn(xmlUtilAccess);
+      
+      WSOptionsStorage wsOptions = Mockito.mock(WSOptionsStorage.class);
+      Mockito.when(wsOptions.getOption(Mockito.anyString(), Mockito.anyString())).thenReturn("");
+      Mockito.when(pluginWSMock.getOptionsStorage()).thenReturn(wsOptions);
+
+      ResultsManager resultsManager = Mockito.mock(ResultsManager.class);
+      Mockito.when(pluginWSMock.getResultsManager()).thenReturn(resultsManager);
+      ArgumentCaptor<DocumentPositionedInfo> dpiCaptor = ArgumentCaptor.forClass(DocumentPositionedInfo.class);
+
+      
+      TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
+      ProblemReporter problemReporter = new ProblemReporterTestImpl();
+  
+      BatchConverter converter = new BatchConverterImpl(problemReporter, new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
+          new ConvertorWorkerInteractorTestImpl() , transformerCreator);
+  
+      final List<File> inputFiles = new ArrayList<File>();
+      inputFiles.add(inputFile);
+  
+      File fileToRead = ConverterFileUtils.getOutputFile(inputFile, FileExtensionType.XHTML_OUTPUT_EXTENSION , outputFolder);
+  
+      converter.convertFiles(ConverterTypes.WORD_TO_XHTML, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+      });
+  
+      assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+          "<!DOCTYPE html\n" + 
+          "  SYSTEM \"about:legacy-compat\">\n" + 
+          "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" + 
+          "<head><title/></head>\n" + 
+          "<body><p>Title</p><p>Some content</p><p>Heading1</p><p>Some text with <strong>bold</strong> <em>italic</em> <u>underline</u>.</p><ul><li>Li1</li><li>li2</li></ul>\n" + 
+          "</body>\n" + 
+          "</html>",
+          FileUtils.readFileToString(fileToRead));
+      
+      Mockito.verify(resultsManager, Mockito.times(2)).addResult(Mockito.any(String.class), dpiCaptor.capture(), Mockito.any(ResultType.class), Mockito.anyBoolean(), Mockito.anyBoolean());
+
+      List<DocumentPositionedInfo> capturedPeople = dpiCaptor.getAllValues();
+      assertEquals("Unrecognized \"MyTitle\" style ID for \"p\" Word element. ", capturedPeople.get(0).getMessage());
+      assertEquals("Unrecognized \"MyHeading\" style ID for \"p\" Word element. ", capturedPeople.get(1).getMessage());
+    } finally {
+      PluginWorkspaceProvider.setPluginWorkspace(null);
+      FileComparationUtil.deleteRecursivelly(outputFolder);
+    }
   }
 }
