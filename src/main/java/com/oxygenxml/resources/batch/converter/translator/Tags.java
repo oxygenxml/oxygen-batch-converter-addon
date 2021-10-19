@@ -178,4 +178,3 @@ public class Tags {
    */
   public static final String UNRECOGNIZE_STYLES_ID_FOR_WORD_ELEMENT = "unrecognize_style_id_for_word_element";
 }
-}

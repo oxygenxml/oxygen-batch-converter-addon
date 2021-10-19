@@ -16,13 +16,11 @@ import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.batch.converter.core.converters.ConversionResult;
 import com.oxygenxml.batch.converter.core.converters.Converter;
 import com.oxygenxml.batch.converter.core.converters.ConverterCreator;
-import com.oxygenxml.batch.converter.core.converters.WordToXHTMLConverter;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
 import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
-import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinter;
 import com.oxygenxml.resources.batch.converter.printer.ContentPrinterCreater;
 import com.oxygenxml.resources.batch.converter.printer.StyleSourceGetter;
@@ -42,6 +40,7 @@ import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 import ro.sync.exml.workspace.api.results.ResultsManager;
+import ro.sync.exml.workspace.api.results.ResultsManager.ResultType;
 
 /**
  * Batch converter implementation.
@@ -231,7 +230,6 @@ public class BatchConverterImpl implements BatchConverter {
           });
         }
       }
-		  }
     } 
 		
 		//make the output directory if it doesn't exist
