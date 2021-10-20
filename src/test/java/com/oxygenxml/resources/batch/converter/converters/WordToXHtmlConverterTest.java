@@ -356,6 +356,8 @@ public class WordToXHtmlConverterTest extends TestCase{
   	File inputFile  = new File("test-sample/EXM-44654/input.docx");		
   	File expectedResultFile = new File("test-sample/EXM-44654/expectedOutput.xhtml");
   	final File outputFolder  = new File(inputFile.getParentFile(), "output");
+  	File customStyleMap = new File("test-sample/EXM-44654/wordStyleMap.xml");
+  	WordStyleMapLoader.imposeStyleMapFile(customStyleMap);
   	
   	TransformerFactoryCreator transformerCreator = new TransformerFactoryCreatorImpl();
   	ProblemReporter problemReporter = new ProblemReporterTestImpl();
@@ -458,7 +460,7 @@ public class WordToXHtmlConverterTest extends TestCase{
    */
   @Test
   public void testConversionFromDocx_customStyleMap() throws IOException {
-  	File inputFile  = new File("test-sample/EXM-45677/input.docx");		
+  	File inputFile  = new File("test-sample/EXM-45677/inputCustomStyles.docx");		
   	File expectedResultFile = new File("test-sample/EXM-45677/expectedCustomOutput.xhtml");
   	final File outputFolder  = new File(inputFile.getParentFile(), "output");
   	File customStyleMap = new File("test-sample/EXM-45677/wordStyleMap.xml");

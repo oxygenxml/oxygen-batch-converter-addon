@@ -76,7 +76,7 @@ public class WordToXHtmlConverter2Test extends TestCase{
             "p[style-name='Document Subtitle'] => h2.document:fresh\n"+
             "p:unordered-list(1) => ul.mylist > li:fresh > p"
         );
-    File inputFile  = new File("test-sample/EXM-45677/input.docx");   
+    File inputFile  = new File("test-sample/EXM-45677/inputCustomStyles.docx");   
     final File outputFolder  = new File(inputFile.getParentFile(), "output");
 
     try {
