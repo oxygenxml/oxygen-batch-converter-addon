@@ -1,5 +1,6 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
+import java.awt.GridBagConstraints;
 import java.io.File;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -249,7 +250,9 @@ public class WordToXHtmlConverter2Test extends TestCase{
 
       List<DocumentPositionedInfo> capturedPeople = dpiCaptor.getAllValues();
       assertEquals("Unrecognized \"MyTitle\" style ID for \"p\" Word element. ", capturedPeople.get(0).getMessage());
+      assertTrue(capturedPeople.get(0).getSystemID().contains("sample.docx"));
       assertEquals("Unrecognized \"MyHeading\" style ID for \"p\" Word element. ", capturedPeople.get(1).getMessage());
+      assertTrue(capturedPeople.get(1).getSystemID().contains("sample.docx"));
     } finally {
       PluginWorkspaceProvider.setPluginWorkspace(null);
       FileComparationUtil.deleteRecursivelly(outputFolder);
