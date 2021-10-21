@@ -3,9 +3,11 @@ package com.oxygenxml.resources.batch.converter;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.zwobble.mammoth.internal.conversion.UnknownStylesReporter;
@@ -216,15 +218,23 @@ public class BatchConverterImpl implements BatchConverter {
         if (resultsManager != null) {
           WordStyleMapLoader.setUnknownStylesReporter(new UnknownStylesReporter() {
             @Override
-            public void reportUnknownStyle(String element, Style style) {
+            public void reportUnknownStyle(String element, Style style, Optional<Path> documentPath) {
               String message;
               if (style.getName().isPresent()) {
                 message = MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getName().get(), element);
               } else {
                 message = MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getStyleId(), element);
               }
+              String location = null;
+              if(documentPath.isPresent()) {
+                try {
+                  location = documentPath.get().toUri().toURL().toExternalForm();
+                } catch (MalformedURLException e) {
+                  logger.debug(e.getMessage(), e);
+                }
+              }
               resultsManager.addResult(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY,
-                  new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, message),
+                  new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, message, location),
                   ResultType.PROBLEM, true, true);
             }
           });
