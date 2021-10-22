@@ -23,6 +23,7 @@ import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
+import com.oxygenxml.resources.batch.converter.translator.Tags;
 
 import junit.framework.TestCase;
 import ro.sync.basic.io.IOUtil;
@@ -183,7 +184,19 @@ public class WordToXHtmlConverter2Test extends TestCase{
       PluginWorkspaceProvider.setPluginWorkspace(pluginWSMock);
       
       PluginResourceBundle pluginResourceBundle = Mockito.mock(PluginResourceBundle.class); 
-      Mockito.when(pluginResourceBundle.getMessage(Mockito.anyString())).thenReturn("Unrecognized \"{0}\" style ID for \"{1}\" Word element. ");
+      Mockito.when(pluginResourceBundle.getMessage(Mockito.anyString())).thenAnswer(new Answer<String>() {
+
+        @Override
+        public String answer(InvocationOnMock invocation) throws Throwable {
+          if (invocation.getArgumentAt(0, String.class).equals(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT)) {
+            return  "Unrecognized \"{0}\" style ID for \"{1}\" Word element.";
+          } else if (invocation.getArgumentAt(0, String.class).equals(Tags.CONFIG_WORD_MAPPING_IN_PREFERENCES_PAGE)) {
+            return "You can configure the mapping between styles and elements in the Batch Documents Converter preferences page.";
+          } else {
+            return "";
+          }
+        }
+      });
       Mockito.when(pluginWSMock.getResourceBundle()).thenReturn(pluginResourceBundle);
       
       XMLUtilAccess xmlUtilAccess = Mockito.mock(XMLUtilAccess.class);
@@ -249,9 +262,13 @@ public class WordToXHtmlConverter2Test extends TestCase{
       Mockito.verify(resultsManager, Mockito.times(2)).addResult(Mockito.any(String.class), dpiCaptor.capture(), Mockito.any(ResultType.class), Mockito.anyBoolean(), Mockito.anyBoolean());
 
       List<DocumentPositionedInfo> capturedPeople = dpiCaptor.getAllValues();
-      assertEquals("Unrecognized \"MyTitle\" style ID for \"p\" Word element. ", capturedPeople.get(0).getMessage());
+      assertEquals("Unrecognized \"MyTitle\" style ID for \"p\" Word element."
+          + " You can configure the mapping between styles and elements in the Batch Documents Converter preferences page.",
+          capturedPeople.get(0).getMessage());
       assertTrue(capturedPeople.get(0).getSystemID().contains("sample.docx"));
-      assertEquals("Unrecognized \"MyHeading\" style ID for \"p\" Word element. ", capturedPeople.get(1).getMessage());
+      assertEquals("Unrecognized \"MyHeading\" style ID for \"p\" Word element."
+          + " You can configure the mapping between styles and elements in the Batch Documents Converter preferences page.",
+          capturedPeople.get(1).getMessage());
       assertTrue(capturedPeople.get(1).getSystemID().contains("sample.docx"));
     } finally {
       PluginWorkspaceProvider.setPluginWorkspace(null);

@@ -219,12 +219,14 @@ public class BatchConverterImpl implements BatchConverter {
           WordStyleMapLoader.setUnknownStylesReporter(new UnknownStylesReporter() {
             @Override
             public void reportUnknownStyle(String element, Style style, Optional<Path> documentPath) {
-              String message;
+              StringBuilder message = new StringBuilder();
               if (style.getName().isPresent()) {
-                message = MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getName().get(), element);
+                message.append(MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getName().get(), element));
               } else {
-                message = MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getStyleId(), element);
+                message.append(MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getStyleId(), element));
               }
+              message.append(" ").append(translator.getTranslation(Tags.CONFIG_WORD_MAPPING_IN_PREFERENCES_PAGE));
+              
               String location = null;
               if(documentPath.isPresent()) {
                 try {
@@ -234,7 +236,7 @@ public class BatchConverterImpl implements BatchConverter {
                 }
               }
               resultsManager.addResult(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY,
-                  new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, message, location),
+                  new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, message.toString(), location),
                   ResultType.PROBLEM, true, true);
             }
           });
