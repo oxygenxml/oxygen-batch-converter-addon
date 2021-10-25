@@ -47,13 +47,13 @@
 		<val lang="ja_JP">Word style</val>
 		<val lang="nl_NL">Word style</val>
 	</key>
-	<key value="html_element">
+	<key value="html_elements">
 		<comment>Name for table heading for the HTML elements.</comment>
-		<val lang="en_US">HTML element</val>
-		<val lang="de_DE">HTML element</val>
-		<val lang="fr_FR">HTML element</val>
-		<val lang="ja_JP">HTML element</val>
-		<val lang="nl_NL">HTML element</val>
+		<val lang="en_US">HTML elements</val>
+		<val lang="de_DE">HTML elements</val>
+		<val lang="fr_FR">HTML elements</val>
+		<val lang="ja_JP">HTML elements</val>
+		<val lang="nl_NL">HTML elements</val>
 	</key>
 	<key value="word_styles_mapping">
 		<comment>Section name for presenting MS Word styles mapping configuration.</comment>

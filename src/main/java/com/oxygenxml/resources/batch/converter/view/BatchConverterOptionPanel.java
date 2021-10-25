@@ -136,7 +136,7 @@ public class BatchConverterOptionPanel extends JPanel{
           break;
 
         case 2 :
-          name = messages.getMessage(Tags.HTML_ELEMENT);
+          name = messages.getMessage(Tags.HTML_ELEMENTS);
           break;
 
         default:

@@ -137,9 +137,9 @@ public class Tags {
    */
   public static final String WORD_STYLE = "word_style";
   /**
-   * en: HTML element
+   * en: HTML elements
    */
-  public static final String HTML_ELEMENT = "html_element";
+  public static final String HTML_ELEMENTS = "html_elements";
   /**
    * en: Word styles mapping
    */
