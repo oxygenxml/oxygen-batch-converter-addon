@@ -19,29 +19,7 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * JSON to YAML
 * YAML to JSON
 
-## Word to DITA
-This conversion works best if you only use the default MS Word styles to semantically mark up your document. 
- 
-The **Create DITA maps from Word documents containing multiple sections** option from the conversion dialog box allows you to decide whether the output will be a DITA map or a DITA topic.
-When this option is selected, all sections from your Word document marked by titles or headings will be separated into individual DITA topics and referenced in a DITA map. If the word document does not contain multiple sections, the output will be a single topic.
-When this option is not selected, the output will be a topic with nested topics or sections according to the number of sections from the Word document.
-
-## Markdown to DITA
- 
-The **Create DITA maps from Markdown documents containing multiple headings** option from the conversion dialog box allows you to decide whether the output will be a DITA map or a DITA topic.
-When this option is selected, all headings from your Markdown document will be separated into individual DITA topics and referenced in a DITA map. If the Markdown document does not contain multiple sections, the output will be a single topic.
-When this option is not selected, the output will be a topic with nested topics or sections according to the number of headings from the document.
-
-The **Create short description elements** option from the conversion dialog box allows you to decide if the **shortdesc** elements are created in the output DITA document. 
-When this option is selected, the first paragraph before the headings from the Markdown document will be converted into DITA short description elements.
-When this option is not selected, the  output will not contain the short description element.
-
-## HTML to DITA
- 
-The **Create DITA maps from HTML documents containing multiple headings** option from the conversion dialog box allows you to decide whether the output will be a DITA map or a DITA topic.
-When this option is selected, all headings from your HTML document will be separated into individual DITA topics and referenced in a DITA map. If the HTML document does not contain multiple sections, the output will be a single topic.
-When this option is not selected, the output will be a topic with nested topics or sections according to the number of headings from the document.
-
+For more information about the add-on see the following documentation topic: [Batch Documents Converter Add-on](https://www.oxygenxml.com/doc/ug-editor/topics/batch-converter-addon.html)
 
 ## Compatibility
 
