@@ -13,9 +13,10 @@ import java.net.URL;
 import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
@@ -46,7 +47,6 @@ import ro.sync.ui.application.ApplicationTable;
  * @author cosmin_duna
  */
 public class BatchConverterOptionPanel extends JPanel{
-
   /**
    * Logger
    */
@@ -56,6 +56,16 @@ public class BatchConverterOptionPanel extends JPanel{
    * The link to documentation for word conversion configuration
    */
   private static final String WORD_CONFIG_DOCUMENTATION = "https://www.oxygenxml.com/doc/ug-editor/topics/batch-converter-addon.html";
+  
+  /**
+   * The values for heading levels
+   */
+  private static final Integer[] HEADING_LEVEL_VALUES = new Integer[] {1, 2, 3, 4, 5, 6};
+  
+  /**
+   * The default maximum heading level for creating topics
+   */
+  private static final Integer DEFAULT_HEADING_LEVEL_FOR_CREATING_TOPICS = 5;
   
   /**
    * Inset used between buttons
@@ -96,6 +106,11 @@ public class BatchConverterOptionPanel extends JPanel{
    * The import button.
    */
   private Button importButton;
+  
+  /**
+   * The combo for selecting the maximum heading level for creating topics.
+   */
+  private JComboBox<Integer> maxHeadingLevel;
   
   /**
    * Constructor
@@ -275,6 +290,31 @@ public class BatchConverterOptionPanel extends JPanel{
     constr.insets = new Insets(2, 2, 2, 2);
     add(buttonsPanel, constr);
 
+    constr.gridy++;
+    constr.weightx = 1;
+    constr.insets = new Insets(15, 0, 0, 0);
+    add(new SectionPane(messages.getMessage(Tags.CONVERT_TO_DITA)), constr);
+    
+    JPanel maxHeadingPanel = new JPanel(new GridBagLayout());
+    GridBagConstraints innerPanelConstr = new GridBagConstraints();
+    innerPanelConstr.gridx = 0;
+    innerPanelConstr.gridy = 0;
+    innerPanelConstr.fill = GridBagConstraints.HORIZONTAL;
+    innerPanelConstr.anchor = GridBagConstraints.WEST;
+    innerPanelConstr.insets = new Insets(0, 1, 0, 1);
+    maxHeadingPanel.add(new JLabel(messages.getMessage(Tags.MAX_HEADING_LEVEL_FOR_CREATING_TOPICS)), innerPanelConstr);
+   
+    innerPanelConstr.gridx++;
+    innerPanelConstr.fill = GridBagConstraints.HORIZONTAL;
+    innerPanelConstr.weightx = 1;
+    maxHeadingLevel = new JComboBox<>(HEADING_LEVEL_VALUES);
+    maxHeadingLevel.setEditable(false);
+    maxHeadingPanel.add(maxHeadingLevel, innerPanelConstr);
+    
+    constr.gridy++;
+    constr.insets = new Insets(0, 0, 0, 0);
+    add(maxHeadingPanel, constr);
+    
     loadPageState();
   }
   
@@ -355,6 +395,9 @@ public class BatchConverterOptionPanel extends JPanel{
     WSOptionsStorage optionsStorage = PluginWorkspaceProvider.getPluginWorkspace().getOptionsStorage();
     if (optionsStorage != null) {
       optionsStorage.setOption(OptionTags.WORD_STYLES_MAP_CONFIG, WordStylesConfigUtil.serializeWordStylesMapping(wordMappingtableModel));
+      
+      Integer maxHeadingValue = (Integer) maxHeadingLevel.getSelectedItem();
+      optionsStorage.setOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, maxHeadingValue.toString());
     }
   }
 
@@ -373,6 +416,9 @@ public class BatchConverterOptionPanel extends JPanel{
         }
       }
       WordStylesConfigUtil.setWordStylesMappingInTable(loaded, wordMappingtableModel);
+      
+      Integer maxHeadingValue = new Integer(optionsStorage.getOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, DEFAULT_HEADING_LEVEL_FOR_CREATING_TOPICS.toString()));
+      maxHeadingLevel.setSelectedItem(maxHeadingValue);
     }
   }
   
@@ -387,5 +433,6 @@ public class BatchConverterOptionPanel extends JPanel{
       logger.debug(e.getMessage(), e);
     }
     WordStylesConfigUtil.setWordStylesMappingInTable(defaultStylesMapping, wordMappingtableModel);
+    maxHeadingLevel.setSelectedItem(DEFAULT_HEADING_LEVEL_FOR_CREATING_TOPICS);
   }
 }

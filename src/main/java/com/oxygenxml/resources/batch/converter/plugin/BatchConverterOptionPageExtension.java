@@ -69,7 +69,8 @@ public class BatchConverterOptionPageExtension extends OptionPagePluginExtension
    */
   public String[] getProjectLevelOptionKeys() {
     return  new String[] {
-        OptionTags.WORD_STYLES_MAP_CONFIG
+        OptionTags.WORD_STYLES_MAP_CONFIG,
+        OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS
     };
   }
 }

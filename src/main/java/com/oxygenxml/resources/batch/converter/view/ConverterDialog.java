@@ -17,11 +17,13 @@ import javax.swing.JPanel;
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersister;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
+import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
 /**
@@ -264,6 +266,14 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	
 	@Override
 	public int getMaxHeadingLevelForCreatingTopics() {
-	  return 0;
+	  int maxHeadingLevel = 0;
+	  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+    if (pluginWorkspace != null) {
+      WSOptionsStorage optionsStorage = pluginWorkspace.getOptionsStorage();
+      if (optionsStorage != null) {
+        maxHeadingLevel = new Integer(optionsStorage.getOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, Integer.toString(5)));;
+      }
+    }
+	  return maxHeadingLevel;
 	}
 }

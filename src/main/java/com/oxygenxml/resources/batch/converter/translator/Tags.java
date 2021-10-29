@@ -183,4 +183,12 @@ public class Tags {
    */
   public static final String CONFIG_WORD_MAPPING_IN_PREFERENCES_PAGE = "configure_word_mapping_in_preferences_page";
   
+  /**
+   * en: Convert to DITA
+   */
+  public static final String CONVERT_TO_DITA = "convert_to_DITA";
+  /**
+   * en: Maximum heading level for creating topics
+   */
+  public static final String MAX_HEADING_LEVEL_FOR_CREATING_TOPICS = "max_heading_level_for_creating_topics";
 }

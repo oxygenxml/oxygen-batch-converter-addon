@@ -7,6 +7,22 @@
 		<language description="Japanese" lang="ja_JP" />
 		<language description="Dutch" lang="nl_NL" />
 	</languageList>
+	<key value="convert_to_DITA">
+		<comment>Section in option page for conversions to DITA.</comment>
+		<val lang="en_US">Convert to DITA</val>
+		<val lang="de_DE">Convert to DITA</val>
+		<val lang="fr_FR">Convert to DITA</val>
+		<val lang="ja_JP">Convert to DITA</val>
+		<val lang="nl_NL">Convert to DITA</val>
+	</key>
+	<key value="max_heading_level_for_creating_topics">
+		<comment>Options for setting the maximum heading level that allows creating of DITA topics.</comment>
+		<val lang="en_US">Maximum heading level for creating topics:</val>
+		<val lang="de_DE">Maximum heading level for creating topics:</val>
+		<val lang="fr_FR">Maximum heading level for creating topics:</val>
+		<val lang="ja_JP">Maximum heading level for creating topics:</val>
+		<val lang="nl_NL">Maximum heading level for creating topics:</val>
+	</key>		
 	<key value="unrecognize_style_for_word_element">
 		<comment>Warning presented when a unrecognized style is found.</comment>
 		<val lang="en_US">Unrecognized "{0}" style for "{1}" Word element.</val>

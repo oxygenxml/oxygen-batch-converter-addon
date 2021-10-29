@@ -47,4 +47,8 @@ public class OptionTags {
     */
    public static final String WORD_STYLES_MAP_CONFIG = "word.styles.map.config";
    
+   /**
+    * Max heading level for creating DITA topics.
+    */
+   public static final String MAX_HEADING_LEVEL_FOR_TOPICS = "max.heading.leve.for.topics";
 }
