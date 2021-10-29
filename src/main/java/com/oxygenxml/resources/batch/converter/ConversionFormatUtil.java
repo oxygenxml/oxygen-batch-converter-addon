@@ -6,12 +6,27 @@ package com.oxygenxml.resources.batch.converter;
  * 
  * @author cosmin_duna
  */
-public class ConversionFormatUtil extends com.oxygenxml.batch.converter.core.ConversionFormatUtil { // #NOSONAR
+public final class ConversionFormatUtil {
 
   /**
-   * Private constructor.
+   * Constructor.
+   *
+   * @throws UnsupportedOperationException when invoked.
    */
   private ConversionFormatUtil() {
-    // Avoid instantiation
+    // Private to avoid instantiations
+    throw new UnsupportedOperationException("Instantiation of this utility class is not allowed!");
+  }
+  
+  /**
+   * Check if the given conversion format is supported.
+   * 
+   * @param inputFormat  The input format to check.
+   * @param outputFormat The output format to check.
+   * 
+   * @return <code>true</code> if it's supported, <code>false</code> otherwise.
+   */
+  public static boolean isSupportedConversionFormat(String inputFormat, String outputFormat) {
+    return com.oxygenxml.batch.converter.core.ConversionFormatUtil.isSupportedConversionFormat(inputFormat, outputFormat);
   }
 }
