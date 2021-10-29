@@ -20,6 +20,7 @@ import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
+import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
@@ -261,5 +262,8 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
     }
 	}
 	
-
+	@Override
+	public int getMaxHeadingLevelForCreatingTopics() {
+	  return 0;
+	}
 }

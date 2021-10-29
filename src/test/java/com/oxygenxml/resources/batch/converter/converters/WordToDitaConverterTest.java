@@ -80,6 +80,10 @@ public class WordToDitaConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 5;
+        }
       });
 
       String actualResult = FileUtils.readFileToString(fileToRead);
@@ -154,6 +158,10 @@ public class WordToDitaConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
 
       String actualResult = FileUtils.readFileToString(fileToRead);
@@ -206,6 +214,10 @@ public class WordToDitaConverterTest extends TestCase{
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
         }
       });
 
@@ -260,6 +272,10 @@ public class WordToDitaConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
   
       String actualResult = FileUtils.readFileToString(fileToRead);
@@ -312,6 +328,10 @@ public class WordToDitaConverterTest extends TestCase{
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
         }
       });
   

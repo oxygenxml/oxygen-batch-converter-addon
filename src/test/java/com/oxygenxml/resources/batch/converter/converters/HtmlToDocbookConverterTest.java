@@ -73,6 +73,10 @@ public class HtmlToDocbookConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
 
 			String actualResult = FileUtils.readFileToString(fileToRead);
@@ -125,6 +129,10 @@ public class HtmlToDocbookConverterTest extends TestCase{
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
         }
       });
   

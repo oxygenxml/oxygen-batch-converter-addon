@@ -82,6 +82,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
 
 			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
@@ -142,6 +146,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
 
 			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img"),
@@ -199,6 +207,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
         }
       });
 	
@@ -272,6 +284,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
   
   		String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
@@ -334,6 +350,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
   		    FileUtils.readFileToString(fileToRead));
@@ -388,6 +408,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
   		    FileUtils.readFileToString(fileToRead));
@@ -439,6 +463,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
         }
       });
   		assertEquals(FileUtils.readFileToString(expectedResultFile),
@@ -494,6 +522,10 @@ public class WordToXHtmlConverterTest extends TestCase{
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
         }
       });
   		assertEquals(FileUtils.readFileToString(expectedResultFile),

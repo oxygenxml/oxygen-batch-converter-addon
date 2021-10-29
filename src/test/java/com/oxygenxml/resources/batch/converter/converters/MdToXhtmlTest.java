@@ -71,6 +71,10 @@ public class MdToXhtmlTest {
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
 
 	     assertEquals(FileUtils.readFileToString(expectedOutputFile), FileUtils.readFileToString(convertedFile));

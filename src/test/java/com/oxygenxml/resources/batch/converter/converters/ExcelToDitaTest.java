@@ -67,6 +67,10 @@ public class ExcelToDitaTest {
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
       assertEquals(FileUtils.readFileToString(expectedOutput), FileUtils.readFileToString(convertedFile));
 
@@ -117,6 +121,10 @@ public class ExcelToDitaTest {
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
         }
       });
   		assertTrue(FileComparationUtil.compareLineToLine(expectedOutput, convertedFile));

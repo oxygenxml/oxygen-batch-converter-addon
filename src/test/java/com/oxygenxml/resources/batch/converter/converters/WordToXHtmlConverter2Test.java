@@ -110,6 +110,10 @@ public class WordToXHtmlConverter2Test extends TestCase{
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
+        }
       });
 
       assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
@@ -246,6 +250,10 @@ public class WordToXHtmlConverter2Test extends TestCase{
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 0;
         }
       });
   

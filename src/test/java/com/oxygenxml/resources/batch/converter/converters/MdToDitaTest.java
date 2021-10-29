@@ -78,6 +78,10 @@ public class MdToDitaTest {
             public Boolean getAdditionalOptionValue(String additionalOptionId) {
               return null;
             }
+            @Override
+            public int getMaxHeadingLevelForCreatingTopics() {
+              return 1;
+            }
           });
 
 		  String expected = FileComparationUtil.readFile(goodSample.getAbsolutePath()).toString();
@@ -130,6 +134,10 @@ public class MdToDitaTest {
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
 			
 			assertEquals(FileComparationUtil.readFile(goodOutput.getAbsolutePath()),
@@ -180,6 +188,10 @@ public class MdToDitaTest {
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
         }
       });
       
@@ -232,6 +244,10 @@ public class MdToDitaTest {
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
       
       assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()),
@@ -281,6 +297,10 @@ public class MdToDitaTest {
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
         }
       });
       
@@ -334,6 +354,10 @@ public class MdToDitaTest {
             return true;
           };
           return false;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
         }
       });
       
@@ -391,6 +415,10 @@ public class MdToDitaTest {
             toRet = Boolean.TRUE;
           }
           return toRet;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
         }
       });
 

@@ -70,6 +70,10 @@ public class HtmlToXhtmlTest {
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
 
 			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
@@ -123,6 +127,10 @@ public class HtmlToXhtmlTest {
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
 	
 			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
@@ -175,6 +183,10 @@ public class HtmlToXhtmlTest {
         @Override
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
+        }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
         }
       });
   

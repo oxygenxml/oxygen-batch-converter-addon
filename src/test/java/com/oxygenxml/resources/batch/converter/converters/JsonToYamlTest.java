@@ -68,6 +68,10 @@ public class JsonToYamlTest {
         public Boolean getAdditionalOptionValue(String additionalOptionId) {
           return null;
         }
+        @Override
+        public int getMaxHeadingLevelForCreatingTopics() {
+          return 1;
+        }
       });
       assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
 
