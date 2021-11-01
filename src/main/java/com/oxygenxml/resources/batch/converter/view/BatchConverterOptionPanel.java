@@ -26,6 +26,7 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.batch.converter.core.converters.XHTMLToDITAConverter;
 import com.oxygenxml.batch.converter.core.extensions.FileExtensionType;
 import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
@@ -61,11 +62,6 @@ public class BatchConverterOptionPanel extends JPanel{
    * The values for heading levels
    */
   private static final Integer[] HEADING_LEVEL_VALUES = new Integer[] {1, 2, 3, 4, 5, 6};
-  
-  /**
-   * The default maximum heading level for creating topics
-   */
-  private static final Integer DEFAULT_HEADING_LEVEL_FOR_CREATING_TOPICS = 5;
   
   /**
    * Inset used between buttons
@@ -417,7 +413,7 @@ public class BatchConverterOptionPanel extends JPanel{
       }
       WordStylesConfigUtil.setWordStylesMappingInTable(loaded, wordMappingtableModel);
       
-      Integer maxHeadingValue = new Integer(optionsStorage.getOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, DEFAULT_HEADING_LEVEL_FOR_CREATING_TOPICS.toString()));
+      Integer maxHeadingValue = new Integer(optionsStorage.getOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, XHTMLToDITAConverter.DEFAULT_MAX_HEADING_LEVEL_FOR_CREATING_TOPICS.toString()));
       maxHeadingLevel.setSelectedItem(maxHeadingValue);
     }
   }
@@ -433,6 +429,6 @@ public class BatchConverterOptionPanel extends JPanel{
       logger.debug(e.getMessage(), e);
     }
     WordStylesConfigUtil.setWordStylesMappingInTable(defaultStylesMapping, wordMappingtableModel);
-    maxHeadingLevel.setSelectedItem(DEFAULT_HEADING_LEVEL_FOR_CREATING_TOPICS);
+    maxHeadingLevel.setSelectedItem(XHTMLToDITAConverter.DEFAULT_MAX_HEADING_LEVEL_FOR_CREATING_TOPICS);
   }
 }
