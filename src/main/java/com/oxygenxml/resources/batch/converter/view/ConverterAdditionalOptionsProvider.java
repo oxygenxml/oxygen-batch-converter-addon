@@ -28,7 +28,7 @@ public class ConverterAdditionalOptionsProvider {
    */
   private static Map<String, String> addionalOptionToTranslationTag = new HashMap<String, String>();
   static {
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_WORD));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "Word"));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "Markdown"));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_OPTION_FOR), "HTML"));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_SHORT_DESCRIPTION, translator.getTranslation(Tags.CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH));
