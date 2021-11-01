@@ -69,7 +69,7 @@ public class JsonToYamlTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });

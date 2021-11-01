@@ -81,7 +81,7 @@ public class WordToDitaConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 5;
         }
       });
@@ -159,7 +159,7 @@ public class WordToDitaConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -216,7 +216,7 @@ public class WordToDitaConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -273,7 +273,7 @@ public class WordToDitaConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -330,7 +330,7 @@ public class WordToDitaConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });

@@ -71,7 +71,7 @@ public class HtmlToXhtmlTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -128,7 +128,7 @@ public class HtmlToXhtmlTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -185,7 +185,7 @@ public class HtmlToXhtmlTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });

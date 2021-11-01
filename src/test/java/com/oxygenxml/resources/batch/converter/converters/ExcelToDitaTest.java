@@ -68,7 +68,7 @@ public class ExcelToDitaTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -123,7 +123,7 @@ public class ExcelToDitaTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });

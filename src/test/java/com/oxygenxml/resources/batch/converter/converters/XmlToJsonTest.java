@@ -71,7 +71,7 @@ public class XmlToJsonTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });

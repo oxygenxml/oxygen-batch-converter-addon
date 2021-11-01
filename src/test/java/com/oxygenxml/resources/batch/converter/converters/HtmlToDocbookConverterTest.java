@@ -74,7 +74,7 @@ public class HtmlToDocbookConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -131,7 +131,7 @@ public class HtmlToDocbookConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });

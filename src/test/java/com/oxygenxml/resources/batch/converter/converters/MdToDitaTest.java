@@ -79,7 +79,7 @@ public class MdToDitaTest {
               return null;
             }
             @Override
-            public int getMaxHeadingLevelForCreatingTopics() {
+            public Integer getMaxHeadingLevelForCreatingTopics() {
               return 1;
             }
           });
@@ -135,7 +135,7 @@ public class MdToDitaTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -190,7 +190,7 @@ public class MdToDitaTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -245,7 +245,7 @@ public class MdToDitaTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -299,7 +299,7 @@ public class MdToDitaTest {
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -356,7 +356,7 @@ public class MdToDitaTest {
           return false;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });
@@ -417,7 +417,7 @@ public class MdToDitaTest {
           return toRet;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 1;
         }
       });

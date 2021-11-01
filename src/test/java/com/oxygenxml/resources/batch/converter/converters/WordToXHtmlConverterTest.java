@@ -83,7 +83,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -147,7 +147,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -209,7 +209,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -285,7 +285,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -351,7 +351,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -409,7 +409,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -465,7 +465,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -524,7 +524,7 @@ public class WordToXHtmlConverterTest extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });

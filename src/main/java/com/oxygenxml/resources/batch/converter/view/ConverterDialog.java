@@ -265,7 +265,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	}
 	
 	@Override
-	public int getMaxHeadingLevelForCreatingTopics() {
+	public Integer getMaxHeadingLevelForCreatingTopics() {
 	  int maxHeadingLevel = 0;
 	  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
     if (pluginWorkspace != null) {

@@ -111,7 +111,7 @@ public class WordToXHtmlConverter2Test extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
@@ -252,7 +252,7 @@ public class WordToXHtmlConverter2Test extends TestCase{
           return null;
         }
         @Override
-        public int getMaxHeadingLevelForCreatingTopics() {
+        public Integer getMaxHeadingLevelForCreatingTopics() {
           return 0;
         }
       });
