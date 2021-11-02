@@ -54,22 +54,4 @@ public interface BatchConverterInteractor extends UserInputsProvider{
 	 */
 	public void setEnableConvert(boolean state);
 	
-  /**
-   * Get the maximum heading level for creating DITA Topics when converting to DITA.
-   * 
-   * @return the maximum heading level for creating DITA Topics when converting to DITA.
-   */
-	@Override
-	default Integer getMaxHeadingLevelForCreatingTopics() {
-    int maxHeadingLevel = 0;
-    PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
-    if (pluginWorkspace != null) {
-      WSOptionsStorage optionsStorage = pluginWorkspace.getOptionsStorage();
-      if (optionsStorage != null) {
-        maxHeadingLevel = new Integer(optionsStorage.getOption(
-            OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, Integer.toString(ConverterDefaults.DEFAULT_MAX_HEADING_LEVEL_FOR_CREATING_TOPICS)));
-      }
-    }
-    return maxHeadingLevel;
-  }
 }
