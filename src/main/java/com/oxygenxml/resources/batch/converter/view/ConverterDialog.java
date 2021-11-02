@@ -263,17 +263,4 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
      optionCombo.setSelected(state);
     }
 	}
-	
-	@Override
-	public Integer getMaxHeadingLevelForCreatingTopics() {
-	  int maxHeadingLevel = 0;
-	  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
-    if (pluginWorkspace != null) {
-      WSOptionsStorage optionsStorage = pluginWorkspace.getOptionsStorage();
-      if (optionsStorage != null) {
-        maxHeadingLevel = new Integer(optionsStorage.getOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, Integer.toString(5)));;
-      }
-    }
-	  return maxHeadingLevel;
-	}
 }

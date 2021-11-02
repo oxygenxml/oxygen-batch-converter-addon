@@ -26,6 +26,7 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
 
+import com.oxygenxml.batch.converter.core.converters.ConverterDefaults;
 import com.oxygenxml.batch.converter.core.converters.XHTMLToDITAConverter;
 import com.oxygenxml.batch.converter.core.extensions.FileExtensionType;
 import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
@@ -413,7 +414,7 @@ public class BatchConverterOptionPanel extends JPanel{
       }
       WordStylesConfigUtil.setWordStylesMappingInTable(loaded, wordMappingtableModel);
       
-      Integer maxHeadingValue = new Integer(optionsStorage.getOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, XHTMLToDITAConverter.DEFAULT_MAX_HEADING_LEVEL_FOR_CREATING_TOPICS.toString()));
+      Integer maxHeadingValue = new Integer(optionsStorage.getOption(OptionTags.MAX_HEADING_LEVEL_FOR_TOPICS, ConverterDefaults.DEFAULT_MAX_HEADING_LEVEL_FOR_CREATING_TOPICS.toString()));
       maxHeadingLevel.setSelectedItem(maxHeadingValue);
     }
   }
@@ -429,6 +430,6 @@ public class BatchConverterOptionPanel extends JPanel{
       logger.debug(e.getMessage(), e);
     }
     WordStylesConfigUtil.setWordStylesMappingInTable(defaultStylesMapping, wordMappingtableModel);
-    maxHeadingLevel.setSelectedItem(XHTMLToDITAConverter.DEFAULT_MAX_HEADING_LEVEL_FOR_CREATING_TOPICS);
+    maxHeadingLevel.setSelectedItem(ConverterDefaults.DEFAULT_MAX_HEADING_LEVEL_FOR_CREATING_TOPICS);
   }
 }
