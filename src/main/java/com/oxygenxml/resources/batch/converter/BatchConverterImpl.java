@@ -310,6 +310,9 @@ public class BatchConverterImpl implements BatchConverter {
 			ConversionResult conversionResult = converter.convert(file, null, transformerFactoryCreator, inputsProvider);
 			String convertedContent = conversionResult.getConvertedContent();
 			
+			List<String> conversionProblems = conversionResult.getConversionProblems();
+			reportEncounteredProblems(conversionProblems);
+			
 			if (convertedContent != null) {
 				if(logger.isDebugEnabled()) {
 					logger.debug("Print converted content in: " + outputFile);
@@ -354,4 +357,25 @@ public class BatchConverterImpl implements BatchConverter {
 		}
 		return convertedFile;
 	}
+
+	/**
+	 * Report problems encountered in the conversion process.
+	 * 
+	 * @param conversionProblems The problem to report.
+	 */
+  private void reportEncounteredProblems(List<String> conversionProblems) {
+    if(!conversionProblems.isEmpty()) {
+      PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+      if(pluginWorkspace != null) {
+        ResultsManager resultsManager = pluginWorkspace.getResultsManager();
+        if (resultsManager != null) {
+          for (String problem : conversionProblems) {
+            resultsManager.addResult(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY,
+                new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, problem),
+                ResultType.PROBLEM, true, true);
+          }
+        }
+      }
+    }
+  }
 }
