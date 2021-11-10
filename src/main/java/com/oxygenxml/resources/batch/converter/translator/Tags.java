@@ -184,4 +184,9 @@ public class Tags {
    * en: Maximum heading level for creating topics
    */
   public static final String MAX_HEADING_LEVEL_FOR_CREATING_TOPICS = "max_heading_level_for_creating_topics";
+
+  /**
+   * en: Conversion options.
+   */
+  public static final String CONVERSION_OPTIONS = "conversion_options";
 }

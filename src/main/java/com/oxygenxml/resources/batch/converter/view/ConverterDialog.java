@@ -14,16 +14,15 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersister;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
-import com.oxygenxml.resources.batch.converter.persister.OptionTags;
+import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
-import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
-import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 import ro.sync.exml.workspace.api.standalone.ui.OKCancelDialog;
 
 /**
@@ -178,6 +177,22 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		    gbc.insets = betweenComponentsInsets;
 		  }
     }
+		
+		if( ConverterTypes.WORD_TO_XHTML.equals(converterType) || ConverterTypes.WORD_TO_DITA.equals(converterType)
+		    || ConverterTypes.WORD_TO_DB4.equals(converterType) || ConverterTypes.WORD_TO_DB5.equals(converterType)) {
+		  gbc.gridy++;
+		  gbc.insets = new Insets(INSET_BETWEEN_COMPONENTS * 2, 0, INSET_BETWEEN_COMPONENTS, 0);
+		  gbc.weightx = 1;
+		  gbc.fill = GridBagConstraints.NONE;
+		  convertorPanel.add(new LinkLabel(translator.getTranslation(Tags.CONVERSION_OPTIONS)) {
+		    @Override
+		    protected void performAction() {
+		      String pageToShow = BatchConverterPlugin.getInstance().getDescriptor().getName() + "_PLUGIN_KEY";
+		      PluginWorkspaceProvider.getPluginWorkspace().showPreferencesPages(
+		          new String[] { pageToShow }, pageToShow, true);      
+		    }
+		  }, gbc);
+		}
 		
 		this.add(convertorPanel);
 	}

@@ -7,6 +7,14 @@
 		<language description="Japanese" lang="ja_JP" />
 		<language description="Dutch" lang="nl_NL" />
 	</languageList>
+	<key value="conversion_options">
+		<comment>Link to conversion options.</comment>
+		<val lang="en_US">Conversion options</val>
+		<val lang="de_DE">Conversion options</val>
+		<val lang="fr_FR">Conversion options</val>
+		<val lang="ja_JP">Conversion options</val>
+		<val lang="nl_NL">Conversion options</val>
+	</key>
 	<key value="convert_to_DITA">
 		<comment>Section in option page for conversions to DITA.</comment>
 		<val lang="en_US">Convert to DITA</val>
