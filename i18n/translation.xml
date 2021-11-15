@@ -17,11 +17,11 @@
 	</key>
 	<key value="convert_to_DITA">
 		<comment>Section in option page for conversions to DITA.</comment>
-		<val lang="en_US">Convert to DITA</val>
-		<val lang="de_DE">Convert to DITA</val>
-		<val lang="fr_FR">Convert to DITA</val>
-		<val lang="ja_JP">Convert to DITA</val>
-		<val lang="nl_NL">Convert to DITA</val>
+		<val lang="en_US">Conversions to DITA</val>
+		<val lang="de_DE">Conversions to DITA</val>
+		<val lang="fr_FR">Conversions to DITA</val>
+		<val lang="ja_JP">Conversions to DITA</val>
+		<val lang="nl_NL">Conversions to DITA</val>
 	</key>
 	<key value="max_heading_level_for_creating_topics">
 		<comment>Options for setting the maximum heading level that allows creating of DITA topics.</comment>
@@ -89,11 +89,11 @@
 	</key>
 	<key value="word_config_description">
 		<comment>Description of configuration for the MS Word conversions</comment>
-		<val lang="en_US">Conversions from Word documents (.docx) can be configured by mapping Word elements and styles to the corresponding HTML element.</val>
-		<val lang="de_DE">Conversions from Word documents (.docx) can be configured by mapping Word elements and styles to the corresponding HTML element.</val>
-		<val lang="fr_FR">Conversions from Word documents (.docx) can be configured by mapping Word elements and styles to the corresponding HTML element.</val>
-		<val lang="ja_JP">Conversions from Word documents (.docx) can be configured by mapping Word elements and styles to the corresponding HTML element.</val>
-		<val lang="nl_NL">Conversions from Word documents (.docx) can be configured by mapping Word elements and styles to the corresponding HTML element.</val>
+		<val lang="en_US">Conversion of Word documents (.docx) to HTML can be configured by mapping Word elements and styles to the corresponding HTML elements. HTML is also used as an intermediary format for the Word to DITA/DocBook conversions.</val>
+		<val lang="de_DE">Conversion of Word documents (.docx) to HTML can be configured by mapping Word elements and styles to the corresponding HTML elements. HTML is also used as an intermediary format for the Word to DITA/DocBook conversions.</val>
+		<val lang="fr_FR">Conversion of Word documents (.docx) to HTML can be configured by mapping Word elements and styles to the corresponding HTML elements. HTML is also used as an intermediary format for the Word to DITA/DocBook conversions.</val>
+		<val lang="ja_JP">Conversion of Word documents (.docx) to HTML can be configured by mapping Word elements and styles to the corresponding HTML elements. HTML is also used as an intermediary format for the Word to DITA/DocBook conversions.</val>
+		<val lang="nl_NL">Conversion of Word documents (.docx) to HTML can be configured by mapping Word elements and styles to the corresponding HTML elements. HTML is also used as an intermediary format for the Word to DITA/DocBook conversions.</val>
 	</key>
 	<key value="new">
 		<comment>Button for adding a new element.</comment>
