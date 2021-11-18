@@ -223,7 +223,7 @@ public class BatchConverterImpl implements BatchConverter {
               if (style.getName().isPresent()) {
                 message.append(MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getName().get(), element));
               } else {
-                message.append(MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getStyleId(), element));
+                message.append(MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_ID_FOR_WORD_ELEMENT), style.getStyleId(), element));
               }
               message.append(" ").append(translator.getTranslation(Tags.CONFIG_WORD_MAPPING_IN_PREFERENCES_PAGE));
               
