@@ -37,6 +37,27 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                 </div>
                 <hr/>
                 <div>
+                    <h3>What's new in version 3.2.0</h3>
+			        <ol>
+			            <li>Added a preferences page that contains an option for customizing the conversions from Word (Word to HTML/DITA/DocBook) by mapping Word styles to HTML elements.</li>
+			            <li>Warnings are now presented if unrecognized Word styles are found when converting Word documents.</li>
+			            <li>All '<i>class</i>' attributes are converted from the intermediary HTML into DITA
+			                    '<i>outputclass</i>' attributes when processing Word to DITA.</li>
+			            <li>Improved the hierarchy level obtained in conversions from Word/HTML to DITA maps.</li>
+			            <li>Added an option for choosing the maximum heading level for creating nested topics or separate DITA topic files when converting Word/HTML to DITA.</li>
+			            <li>The file name is used as the title when the document doesn't contain headings in Word/HTML to DITA conversions.</li>
+			            <li>The table of contents is ignored when converting Word to HTML/DITA.</li>
+			            <li>Added an '<i>outputclass</i>' attribute with an "<i>endnote</i>" value on the
+			                    '<i>fn</i>' DITA elements that resulted from Word endnotes.</li>
+			            <li>Copied relative resources into the output folder in HTML to DITA conversions.</li>
+			            <li>Superscript and subscript are allowed when converting Markdown to DITA.</li>
+			            <li>Fixed some cases where internal references were not converted properly in Word to HTML/DITA conversions.</li>
+			            <li>Fixed a case where equations were not converted in Word to HTML/DITA conversions.</li>
+			            <li>Fixed an issue where a space between underline elements and other inline elements was ignored.</li>
+			            <li>Fixed an error in HTML to XHTML conversions when processing elements with whitespace content.</li>
+			        </ol>
+                </div>
+                <div>
                     <h3>What's new in version 3.1.0</h3>
                     <ol>
                         <li>Cross-references are now handled properly when converting Word to HTML/DITA.</li>
