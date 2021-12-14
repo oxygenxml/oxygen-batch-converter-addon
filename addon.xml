@@ -39,9 +39,12 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                 <div>
                     <h3>What's new in version 3.2.1</h3>
 			        <ol>
+			            <li><b>Critical/Security:</b> The add-on no longer distributes Apache Log4j libraries to avoid the
+			                Log4Shell exploit. For more info see: <a
+			                    href="https://www.randori.com/blog/cve-2021-44228/"
+			                    >CVE-2021-44228</a>.</li>
 			            <li>Audio, video, picture, object, and iframe elements are handled when converting HTML to DITA.</li>
 			            <li>Fixed a case where the table of contents was not ignored when converting Word to DITA.</li>
-			            <li>Removed the Apache Log4j 2 dependency from the add-on.</li>
 			        </ol>
                 </div>
                 <div>
