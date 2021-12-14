@@ -8,7 +8,7 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
         id="com.oxygenxml.resources.batch.converter.plugin">
         <xt:location   href="https://github.com/oxygenxml/oxygen-resources-convertor/releases/download/${project.version}/${project.build.finalName}-plugin.jar"/>
         <xt:version>${project.version}</xt:version>
-        <xt:oxy_version>20.0+</xt:oxy_version>
+        <xt:oxy_version>22.1+</xt:oxy_version>
         <xt:type>plugin</xt:type>
         <xt:author>Syncro Soft</xt:author>
         <xt:name>Batch Documents Converter</xt:name>
@@ -36,6 +36,14 @@ https://www.oxygenxml.com/doc/versions/18.1/ug-editor/topics/packing-and-deployi
                     </p>
                 </div>
                 <hr/>
+                <div>
+                    <h3>What's new in version 3.2.1</h3>
+			        <ol>
+			            <li>Audio, video, picture, object, and iframe elements are handled when converting HTML to DITA.</li>
+			            <li>Fixed a case where the table of contents was not ignored when converting Word to DITA.</li>
+			            <li>Removed the Apache Log4j 2 dependency from the add-on.</li>
+			        </ol>
+                </div>
                 <div>
                     <h3>What's new in version 3.2.0</h3>
 			        <ol>
