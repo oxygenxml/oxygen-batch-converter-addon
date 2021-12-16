@@ -23,7 +23,7 @@ For more information about the add-on see the following documentation topic: [Ba
 
 ## Compatibility
 
-The add-on is compatible with Oxygen XML Editor/Author/Developer version 20.0 or newer. 
+The add-on is compatible with Oxygen XML Editor/Author/Developer version 22.1 or newer. 
 
 ## How to Install
 
