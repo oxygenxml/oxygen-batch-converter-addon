@@ -280,6 +280,14 @@
 		<val lang="ja_JP">Word to DocBook 5</val>
 		<val lang="nl_NL">Word to DocBook 5</val>
 	</key>
+	<key value="Menu_Item_Text_Conv_confluence.to.dita">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">Confluence to DITA</val>
+		<val lang="de_DE">Confluence to DITA</val>
+		<val lang="fr_FR">Confluence to DITA</val>
+		<val lang="ja_JP">Confluence to DITA</val>
+		<val lang="nl_NL">Confluence to DITA</val>
+	</key>
 
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
