@@ -288,6 +288,14 @@
 		<val lang="ja_JP">Confluence to DITA</val>
 		<val lang="nl_NL">Confluence to DITA</val>
 	</key>
+		<key value="Menu_Item_Text_Conv_docbook.to.dita">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">DocBook to DITA</val>
+		<val lang="de_DE">DocBook to DITA</val>
+		<val lang="fr_FR">DocBook to DITA</val>
+		<val lang="ja_JP">DocBook to DITA</val>
+		<val lang="nl_NL">DocBook to DITA</val>
+	</key>
 
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
@@ -396,13 +404,21 @@
 		<val lang="nl_NL">Please specify an output folder!</val>
 	</key>
 	
-	<key value="Create_Dita_Map_Option_For">
+	<key value="create_dita_map_from_documents_with_multiple_headings">
 		<comment>Option used to configure if the result will be a DITA Map or a DITA Topic.</comment>
 		<val lang="en_US">Create DITA maps from {0} documents containing multiple headings</val>
 		<val lang="de_DE">Create DITA maps from {0} documents containing multiple headings</val>
 		<val lang="fr_FR">Create DITA maps from {0} documents containing multiple headings</val>
 		<val lang="ja_JP">Create DITA maps from {0} documents containing multiple headings</val>
 		<val lang="nl_NL">Create DITA maps from {0} documents containing multiple headings</val>
+	</key>
+	<key value="create_dita_map_from_documents_with_multiple_sections">
+		<comment>Option used to configure if the result will be a DITA Map or a DITA Topic.</comment>
+		<val lang="en_US">Create DITA maps from {0} documents containing multiple sections</val>
+		<val lang="de_DE">Create DITA maps from {0} documents containing multiple sections</val>
+		<val lang="fr_FR">Create DITA maps from {0} documents containing multiple sections</val>
+		<val lang="ja_JP">Create DITA maps from {0} documents containing multiple sections</val>
+		<val lang="nl_NL">Create DITA maps from {0} documents containing multiple sections</val>
 	</key>
 	
 	<key value="Config_file_not_found">

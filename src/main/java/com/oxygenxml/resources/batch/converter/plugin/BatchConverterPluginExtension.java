@@ -257,7 +257,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     importActionList[1] = new ImportAction(ConverterTypes.MD_TO_DITA, insertType, translator);
     importActionList[2] = new ImportAction(ConverterTypes.EXCEL_TO_DITA, insertType, translator);
     importActionList[3] = new ImportAction(ConverterTypes.WORD_TO_DITA, insertType, translator);
-    importActionList[4] = new ImportAction(ConverterTypes.CONFLUENCE_TO_DITA, insertType, translator);
+    importActionList[4] = new ImportAction(ConverterTypes.DOCBOOK_TO_DITA, insertType, translator);
+    importActionList[5] = new ImportAction(ConverterTypes.CONFLUENCE_TO_DITA, insertType, translator);
     return importActionList;
   }
   
@@ -273,6 +274,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     List<Action> markdown = new ArrayList<>();
     List<Action> html = new ArrayList<>();
     List<Action> word = new ArrayList<>();
+    List<Action> docbook = new ArrayList<>();
     List<Action> json = new ArrayList<>();
     List<Action> confluence = new ArrayList<>();
     
@@ -294,6 +296,9 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     word.add(new ConvertAction(ConverterTypes.WORD_TO_DB5, translator, this));
     word.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
     toReturn.put("wordSection", word);
+    
+    docbook.add(new ConvertAction(ConverterTypes.DOCBOOK_TO_DITA, translator, this));
+    toReturn.put("docbookSection", docbook);
     
     json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
     json.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));

@@ -97,9 +97,16 @@ public class Tags {
   /**
    * Option used to configure if the result will be a DITA Map or a DITA Topic.
    * 
-   *  en: Create DITA Maps for {0} documents containing multiple sections 
+   *  en: Create DITA Maps from {0} documents containing multiple headings 
    */
-  public static final String CREATE_DITA_MAP_OPTION_FOR = "Create_Dita_Map_Option_For";
+  public static final String CREATE_DITA_MAP_FROM_DOCUMENT_HEADINGS = "create_dita_map_from_documents_with_multiple_headings";
+  
+  /**
+   * Option used to configure if the result will be a DITA Map or a DITA Topic.
+   * 
+   *  en: Create DITA Maps from {0} documents containing multiple sections. 
+   */
+  public static final String CREATE_DITA_MAP_FROM_DOCUMENT_SECTIONS = "create_dita_map_from_documents_with_multiple_sections";
   
   /**
    *  en: The configuration file was not found.
