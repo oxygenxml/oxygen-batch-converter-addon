@@ -252,7 +252,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
    * @return the array with import actions for the DMM contextual menu.
    */
   private Action[] createImportActionsList(InsertType insertType, StandalonePluginWorkspace pluginWorkspaceAccess) {
-    Action[] importActionList = new Action[5];
+    Action[] importActionList = new Action[6];
     importActionList[0] = new ImportAction(ConverterTypes.HTML_TO_DITA, insertType, translator);
     importActionList[1] = new ImportAction(ConverterTypes.MD_TO_DITA, insertType, translator);
     importActionList[2] = new ImportAction(ConverterTypes.EXCEL_TO_DITA, insertType, translator);
