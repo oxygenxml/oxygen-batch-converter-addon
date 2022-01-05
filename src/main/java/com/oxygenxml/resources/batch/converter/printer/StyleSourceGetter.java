@@ -21,13 +21,13 @@ public class StyleSourceGetter {
   }
 	
 	/**
-	 * XSL for MD to DITA.
+	 * XSL for ignoring extra attributes when printing.
 	 */
-	private static final String MD_TO_DITA_XSL= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
+	private static final String IGNORE_EXTRA_ATTRS_XSL= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
 			"<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n" + 
 			"    xmlns:ditaarch=\"http://dita.oasis-open.org/architecture/2005/\"\n" + 
 			"    xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" + 
-			"    exclude-result-prefixes=\"xs\"\n" + 
+			"    exclude-result-prefixes=\"xs ditaarch\"\n" + 
 			"    version=\"2.0\">\n" + 
 			"\n" + 
 			"    <xsl:template match=\"node()|@*\">\n" + 
@@ -35,9 +35,10 @@ public class StyleSourceGetter {
 			"            <xsl:apply-templates select=\"node()|@*\"/>\n" + 
 			"        </xsl:copy>\n" + 
 			"    </xsl:template>\n" + 
-			"    <xsl:template match=\"topic/@class\" />\n" + 
-			"    <xsl:template match=\"topic/@ditaarch:DITAArchVersion\" />\n" + 
-			"    <xsl:template match=\"topic/@domains\" />\n" + 
+			"    <xsl:template match=\"*/@class\" />\n" + 
+			"    <xsl:template match=\"*/@ditaarch:DITAArchVersion\" />\n" + 
+			"    <xsl:template match=\"*/@*[local-name() = 'ditaarch']\" />\n" + 
+			"    <xsl:template match=\"*/@domains\" />\n" + 
 			"</xsl:stylesheet>";
 	
 	/**
@@ -46,9 +47,11 @@ public class StyleSourceGetter {
 	 * @return the style source
 	 */
 	public static StreamSource getStyleSource(String converterType){
-		if(ConverterTypes.MD_TO_DITA.equals(converterType) ){
+		if(ConverterTypes.MD_TO_DITA.equals(converterType) 
+		    || ConverterTypes.DOCBOOK_TO_DITA.equals(converterType)){
 			//return a style source
-			return  new StreamSource(new StringReader(MD_TO_DITA_XSL));
+		  System.out.println("IGNORE_EXTRA_ATTRS_XSL: " + IGNORE_EXTRA_ATTRS_XSL);
+			return  new StreamSource(new StringReader(IGNORE_EXTRA_ATTRS_XSL));
 		}	else{
 			return null;
 		}
