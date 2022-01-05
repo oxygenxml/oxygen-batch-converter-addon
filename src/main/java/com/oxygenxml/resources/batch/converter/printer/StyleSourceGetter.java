@@ -48,9 +48,8 @@ public class StyleSourceGetter {
 	 */
 	public static StreamSource getStyleSource(String converterType){
 		if(ConverterTypes.MD_TO_DITA.equals(converterType) 
-		    || ConverterTypes.DOCBOOK_TO_DITA.equals(converterType)){
-			//return a style source
-		  System.out.println("IGNORE_EXTRA_ATTRS_XSL: " + IGNORE_EXTRA_ATTRS_XSL);
+		    || ConverterTypes.DOCBOOK_TO_DITA.equals(converterType)
+		    || ConverterTypes.CONFLUENCE_TO_DITA.equals(converterType)){
 			return  new StreamSource(new StringReader(IGNORE_EXTRA_ATTRS_XSL));
 		}	else{
 			return null;
