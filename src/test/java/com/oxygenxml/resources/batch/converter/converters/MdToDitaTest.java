@@ -427,19 +427,19 @@ public class MdToDitaTest {
       String expected = FileComparationUtil.readFile(expectedMap.getAbsolutePath());
       assertEquals(expected, actual);
 
-      File firstTopic = new File(outputFolder, "markdownTest_oxygen_batch_converter_add-on_for_oxygen_xml_editor.dita");
+      File firstTopic = new File(outputFolder, "oxygen_batch_converter_add-on_for_oxygen_xml_editor.dita");
       actual = FileComparationUtil.readFile(firstTopic.getAbsolutePath());
       File expectedTopic = new File("test-sample/EXM-48113/topic3.dita");   
       expected = FileComparationUtil.readFile(expectedTopic.getAbsolutePath());
       assertEquals(expected, actual);
 
-      File secondTopic = new File(outputFolder, "markdownTest_installation.dita");
+      File secondTopic = new File(outputFolder, "installation.dita");
       actual = FileComparationUtil.readFile(secondTopic.getAbsolutePath());
       expectedTopic = new File("test-sample/EXM-48113/topic2.dita");   
       expected = FileComparationUtil.readFile(expectedTopic.getAbsolutePath());
       assertEquals(expected, actual);
 
-      File thirdTopic = new File(outputFolder, "markdownTest_converting_a_document.dita");
+      File thirdTopic = new File(outputFolder, "converting_a_document.dita");
       actual = FileComparationUtil.readFile(thirdTopic.getAbsolutePath());
       expectedTopic = new File("test-sample/EXM-48113/topic1.dita");   
       expected = FileComparationUtil.readFile(expectedTopic.getAbsolutePath());
