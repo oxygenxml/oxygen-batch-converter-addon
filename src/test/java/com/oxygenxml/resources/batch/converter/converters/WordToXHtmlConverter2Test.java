@@ -1,6 +1,5 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
-import java.awt.GridBagConstraints;
 import java.io.File;
 import java.io.Reader;
 import java.util.ArrayList;
