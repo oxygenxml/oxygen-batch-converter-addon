@@ -119,12 +119,31 @@ public class WordToXHtmlConverter2Test extends TestCase{
           "<!DOCTYPE html\n" + 
           "  SYSTEM \"about:legacy-compat\">\n" + 
           "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" + 
-          "<head><title/></head>\n" + 
-          "<body><h1>Title styleTitle style2</h1><p class=\"subtitle\">Subtitle</p><h2>Heading 1</h2>"
-          + "<p>Some <p class=\"underline\">underlined text</p></p><h2>Heading 2</h2><p><b>Strong text</b></p>"
-          + "<h2>Heading 6</h2><ul class=\"mylist\"><li><p>Li1</p></li><li><p>Li2</p></li></ul>"
-          + "<h1 class=\"document\">Document Title (custom)</h1><h2 class=\"document\">Document Subtitle(custom)</h2>\n" + 
-          "</body>\n" + 
+          "  <head>\n" + 
+          "    <title/>\n" + 
+          "  </head>\n" + 
+          "  <body>\n" + 
+          "    <h1>Title styleTitle style2</h1>\n" + 
+          "    <p class=\"subtitle\">Subtitle</p>\n" + 
+          "    <h2>Heading 1</h2>\n" + 
+          "    <p>Some <p class=\"underline\">underlined text</p>\n" + 
+          "    </p>\n" + 
+          "    <h2>Heading 2</h2>\n" + 
+          "    <p>\n" + 
+          "      <b>Strong text</b>\n" + 
+          "    </p>\n" + 
+          "    <h2>Heading 6</h2>\n" + 
+          "    <ul class=\"mylist\">\n" + 
+          "      <li>\n" + 
+          "        <p>Li1</p>\n" + 
+          "      </li>\n" + 
+          "      <li>\n" + 
+          "        <p>Li2</p>\n" + 
+          "      </li>\n" + 
+          "    </ul>\n" + 
+          "    <h1 class=\"document\">Document Title (custom)</h1>\n" + 
+          "    <h2 class=\"document\">Document Subtitle(custom)</h2>\n" + 
+          "  </body>\n" + 
           "</html>",
           FileUtils.readFileToString(fileToRead));
     } finally {
@@ -260,9 +279,21 @@ public class WordToXHtmlConverter2Test extends TestCase{
           "<!DOCTYPE html\n" + 
           "  SYSTEM \"about:legacy-compat\">\n" + 
           "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" + 
-          "<head><title/></head>\n" + 
-          "<body><p>Title</p><p>Some content</p><p>Heading1</p><p>Some text with <strong>bold</strong> <em>italic</em> <u>underline</u>.</p><ul><li>Li1</li><li>li2</li></ul>\n" + 
-          "</body>\n" + 
+          "  <head>\n" + 
+          "    <title/>\n" + 
+          "  </head>\n" + 
+          "  <body>\n" + 
+          "    <p>Title</p>\n" + 
+          "    <p>Some content</p>\n" + 
+          "    <p>Heading1</p>\n" + 
+          "    <p>Some text with <strong>bold</strong>\n" + 
+          "      <em>italic</em>\n" + 
+          "      <u>underline</u>.</p>\n" + 
+          "    <ul>\n" + 
+          "      <li>Li1</li>\n" + 
+          "      <li>li2</li>\n" + 
+          "    </ul>\n" + 
+          "  </body>\n" + 
           "</html>",
           FileUtils.readFileToString(fileToRead));
       

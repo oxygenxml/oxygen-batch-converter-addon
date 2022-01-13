@@ -1,1 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><para>The CPU must be at least <phrase><os>linux</os>dual</phrase><phrase><os>windows</os>quad</phrase> core at minimum <phrase><os>linux</os>1.5</phrase><phrase><os>windows</os>2</phrase>GHz.</para>
+<?xml version="1.0" encoding="UTF-8"?><para>The CPU must be at least <phrase>
+    <os>linux</os>dual</phrase>
+  <phrase>
+    <os>windows</os>quad</phrase> core at minimum <phrase>
+    <os>linux</os>1.5</phrase>
+  <phrase>
+    <os>windows</os>2</phrase>GHz.</para>
