@@ -257,7 +257,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     importActionList[1] = new ImportAction(ConverterTypes.MD_TO_DITA, insertType, translator);
     importActionList[2] = new ImportAction(ConverterTypes.EXCEL_TO_DITA, insertType, translator);
     importActionList[3] = new ImportAction(ConverterTypes.WORD_TO_DITA, insertType, translator);
-    importActionList[4] = new ImportAction(ConverterTypes.CONFLUENCE_TO_DITA, insertType, translator);
+    importActionList[4] = new ImportAction(ConverterTypes.CONFLUENCE_TO_DITAMAP, insertType, translator);
     importActionList[5] = new ImportAction(ConverterTypes.DOCBOOK_TO_DITA, insertType, translator);
     return importActionList;
   }
@@ -297,7 +297,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     word.add(new ConvertAction(ConverterTypes.EXCEL_TO_DITA, translator, this));
     toReturn.put("wordSection", word);
     
-    confluence.add(new ConvertAction(ConverterTypes.CONFLUENCE_TO_DITA, translator, this));
+    confluence.add(new ConvertAction(ConverterTypes.CONFLUENCE_TO_DITAMAP, translator, this));
     toReturn.put("confluenceSection", confluence);
     
     docbook.add(new ConvertAction(ConverterTypes.DOCBOOK_TO_DITA, translator, this));
