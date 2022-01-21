@@ -305,6 +305,16 @@
 		<val lang="ja_JP">Input files:</val>
 		<val lang="nl_NL">Input files:</val>
 	</key>
+	
+		<key value="Add_Input_Label_Conv_Confluence">
+		<comment>Add input label for confluence convertor</comment>
+		<val lang="en_US">For the input file, choose the "index.html" file that resulted from the Confluence-HTML export process.</val>
+		<val lang="de_DE">For the input file, choose the "index.html" file that resulted from the Confluence-HTML export process.</val>
+		<val lang="fr_FR">For the input file, choose the "index.html" file that resulted from the Confluence-HTML export process.</val>
+		<val lang="ja_JP">For the input file, choose the "index.html" file that resulted from the Confluence-HTML export process.</val>
+		<val lang="nl_NL">For the input file, choose the "index.html" file that resulted from the Confluence-HTML export process.</val>
+	</key>
+	
 	<key value="Add_File_Table_Button_Conv">
 		<comment>Button for add files in table.</comment>
 		<val lang="en_US">Add files</val>

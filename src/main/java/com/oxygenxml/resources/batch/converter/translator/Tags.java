@@ -29,6 +29,11 @@ public class Tags {
 	 * Label for add input files.
 	 */
 	public static final String ADD_INPUT_FILES_LABEL = "Add_Input_Label_Conv";
+	
+	 /**
+   * Label for confluence information message.
+   */
+  public static final String ADD_INPUT_FILES_LABEL_CONFLUENCE = "Add_Input_Label_Conv_Confluence";
 
 	/**
 	 * Add file button of table.

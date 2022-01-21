@@ -22,6 +22,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
@@ -67,11 +68,21 @@ public class InputPanel extends JPanel {
 	 * Button for remove elements from table
 	 */
 	private JButton remvBtn;
+	
+	/**
+	 * The converter type
+	 */
+	private String converterType;
 
 	/**
 	 * Translator
 	 */
 	private transient Translator translator;
+	
+	 /**
+   * The inset used between components
+   */
+  private static final int INSET_BETWEEN_COMPONENTS = 6;
 
 
 	/**
@@ -79,6 +90,7 @@ public class InputPanel extends JPanel {
 	 */
 	public InputPanel(final String converterType, final Translator translator, final BatchConverterInteractor convertorInteractor) {
 		this.translator = translator;
+		this.converterType = converterType;
 
 		scrollPane = new JScrollPane((JTable)tableFiles);
 		scrollPane.setPreferredSize(new Dimension(450, 100));
@@ -247,6 +259,14 @@ public class InputPanel extends JPanel {
 		gbc.gridy = 0;
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
+		
+		if (ConverterTypes.CONFLUENCE_TO_DITAMAP.equals(converterType)) {
+		  gbc.insets = new Insets(0, 0, INSET_BETWEEN_COMPONENTS, 0);
+		  this.add(new MultilineLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL_CONFLUENCE)), gbc);
+		}
+		
+		gbc.gridy++;
+		gbc.insets = new Insets(0, 0, 0, 0);
 		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL)), gbc);
 
 		// ------add scrollPane
@@ -267,8 +287,10 @@ public class InputPanel extends JPanel {
 		JPanel btnsPanel = new JPanel();
 		btnsPanel.setLayout(new GridLayout(1, 3));
 		btnsPanel.setOpaque(false);
-
-		btnsPanel.add(addFolderBtn);
+		
+		if (!ConverterTypes.CONFLUENCE_TO_DITAMAP.equals(converterType)) {
+		  btnsPanel.add(addFolderBtn);
+    }
 		btnsPanel.add(addFilesBtn);
 		btnsPanel.add(remvBtn);
 
