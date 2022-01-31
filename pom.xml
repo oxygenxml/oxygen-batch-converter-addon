@@ -84,6 +84,14 @@
 			</exclusions>
 		</dependency>
 		
+		<!-- We need log4j1 in TCs because the old version of the 20.1.0.0 version of sdk uses log4j.  -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
