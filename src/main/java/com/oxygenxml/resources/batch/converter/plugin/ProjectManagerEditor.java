@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
@@ -36,7 +37,7 @@ public class ProjectManagerEditor {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(ProjectManagerEditor.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectManagerEditor.class);
 
 	/**
 	 * For 19.1 oxygen version add a Menu with given actions in contextual menu

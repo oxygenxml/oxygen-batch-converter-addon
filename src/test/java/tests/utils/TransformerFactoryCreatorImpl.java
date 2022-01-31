@@ -5,7 +5,8 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
 
@@ -22,7 +23,7 @@ public class TransformerFactoryCreatorImpl implements TransformerFactoryCreator 
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(TransformerFactoryCreatorImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(TransformerFactoryCreatorImpl.class);
 
 	@Override
 	public Transformer createTransformer(StreamSource streamSource) {

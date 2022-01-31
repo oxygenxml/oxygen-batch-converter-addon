@@ -9,7 +9,8 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.oxygenxml.resources.batch.converter.reporter.OxygenProblemReporter;
 
@@ -32,7 +33,7 @@ public final class InsertTopicRefUtil {
   /**
    * Logger
    */
-   private static final Logger logger = Logger.getLogger(InsertTopicRefUtil.class);
+   private static final Logger logger = LoggerFactory.getLogger(InsertTopicRefUtil.class);
    
   /**
    * Private constructor.

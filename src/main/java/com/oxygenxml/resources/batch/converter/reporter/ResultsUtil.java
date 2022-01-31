@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ro.sync.document.DocumentPositionedInfo;
 import ro.sync.exml.workspace.api.PluginWorkspace;
@@ -21,7 +22,7 @@ public class ResultsUtil {
   /**
    * Logger for logging.
    */
-  private static final Logger logger = Logger.getLogger(ResultsUtil.class);
+  private static final Logger logger = LoggerFactory.getLogger(ResultsUtil.class);
   
   /**
    * The key for for problem reported by add-on in Results.
