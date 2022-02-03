@@ -6,8 +6,8 @@ import java.net.MalformedURLException;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.log4j.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ro.sync.document.DocumentPositionedInfo;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -23,7 +23,7 @@ public class OxygenProblemReporter implements ProblemReporter {
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(OxygenProblemReporter.class);
+	private static final Logger logger = LoggerFactory.getLogger(OxygenProblemReporter.class);
 	 
 	/**
 	 * Result manager.

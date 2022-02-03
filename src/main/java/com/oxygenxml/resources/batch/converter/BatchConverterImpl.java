@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zwobble.mammoth.internal.conversion.UnknownStylesReporter;
 import org.zwobble.mammoth.internal.documents.Style;
 
@@ -54,7 +55,7 @@ public class BatchConverterImpl implements BatchConverter {
   /**
    * Logger
    */
-   private static final Logger logger = Logger.getLogger(BatchConverterImpl.class);
+   private static final Logger logger = LoggerFactory.getLogger(BatchConverterImpl.class);
    
    /**
     * Problem reporter.

@@ -5,7 +5,8 @@ import java.lang.reflect.Method;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.ui.Menu;
@@ -21,7 +22,7 @@ public class ProjectPopupMenuCustomizerInvocationHandler implements java.lang.re
 	/**
 	 * Logger
 	 */
-	private static final Logger logger = Logger.getLogger(ProjectPopupMenuCustomizerInvocationHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectPopupMenuCustomizerInvocationHandler.class);
 
 	/**
 	 * PluginWorkspaceAccess

@@ -13,7 +13,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.oxygenxml.batch.converter.core.word.styles.CustomToDefaultStyleRelation;
 import com.oxygenxml.batch.converter.core.word.styles.ResultedHtml;
@@ -34,7 +35,7 @@ public class WordStylesConfigUtil {
   /**
    * Logger
    */
-  private static final Logger logger = Logger.getLogger(WordStylesConfigUtil.class);
+  private static final Logger logger = LoggerFactory.getLogger(WordStylesConfigUtil.class);
 
   /**
    * Pattern used to extract Word style rules from text format

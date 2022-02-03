@@ -24,7 +24,8 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.xml.bind.JAXBException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.oxygenxml.batch.converter.core.converters.ConverterDefaults;
 import com.oxygenxml.batch.converter.core.converters.XHTMLToDITAConverter;
@@ -52,7 +53,7 @@ public class BatchConverterOptionPanel extends JPanel{
   /**
    * Logger
    */
-  private static final Logger logger = Logger.getLogger(BatchConverterOptionPanel.class);
+  private static final Logger logger = LoggerFactory.getLogger(BatchConverterOptionPanel.class);
   
   /**
    * The link to documentation for word conversion configuration

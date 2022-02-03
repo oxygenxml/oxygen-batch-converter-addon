@@ -51,32 +51,7 @@
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-batch-converter-core</artifactId>
 			<version>${oxygen.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-1.2-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-core</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-		
-		<dependency>
-      		<groupId>org.apache.logging.log4j</groupId>
-      		<artifactId>log4j-1.2-api</artifactId>
-      		<scope>provided</scope>
-    	</dependency>
-    	<dependency>
-      		<groupId>org.apache.logging.log4j</groupId>
-      		<artifactId>log4j-core</artifactId>
-      		<scope>provided</scope>
-    	</dependency>
 		
 		<dependency>
 			<groupId>org.powermock</groupId>
@@ -107,6 +82,14 @@
 					<artifactId>log4j</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		
+		<!-- We need log4j1 in TCs because the old version of the 20.1.0.0 version of sdk uses log4j.  -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>test</scope>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->

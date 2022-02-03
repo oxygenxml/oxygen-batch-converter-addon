@@ -4,7 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 /**
@@ -17,7 +18,7 @@ public class OxygenStatusReporter implements StatusReporter {
 	/**
 	 * Logger
 	 */
-	 private static final Logger logger = Logger.getLogger(OxygenStatusReporter.class);
+	 private static final Logger logger = LoggerFactory.getLogger(OxygenStatusReporter.class);
 	
 	 /**
 	  * Report the given message.
