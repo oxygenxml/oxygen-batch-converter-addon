@@ -6,6 +6,7 @@
 	</appender>
  
  	<logger name="com.oxygenxml.resources.batch.converter" level="info" />
+ 	<logger name="com.oxygenxml.batch.converter.core" level="info" />
 
 	<root level="info">
 		<appender-ref ref="R" />
