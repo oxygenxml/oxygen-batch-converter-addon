@@ -1,0 +1,1924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<third-party>
+    <component id="com.fasterxml.jackson.core:jackson-annotations:2.12.6" product="editor">
+        <name>Jackson-annotations</name>
+        <version>2.12.6</version>
+        <project-info>
+            <about>Core annotations used for value types, used by Jackson data binding package.</about>
+            <licensor>FasterXML</licensor>
+            <start-year>2008</start-year>
+            <project-url>http://github.com/FasterXML/jackson</project-url>
+        </project-info>
+        <license>
+            <type>The Apache Software License, Version 2.0</type>
+            <content>http://github.com/FasterXML/jackson</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="com.fasterxml.jackson.core:jackson-core:2.12.6" product="editor">
+        <name>Jackson-core</name>
+        <version>2.12.6</version>
+        <project-info>
+            <about>Core Jackson processing abstractions (aka Streaming API), implementation for JSON</about>
+            <licensor>FasterXML</licensor>
+            <start-year>2008</start-year>
+            <project-url>https://github.com/FasterXML/jackson-core</project-url>
+        </project-info>
+        <license>
+            <type>The Apache Software License, Version 2.0</type>
+            <content>
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="com.fasterxml.jackson.core:jackson-databind:2.12.6" product="editor">
+        <name>jackson-databind</name>
+        <version>2.12.6</version>
+        <project-info>
+            <about>General data-binding functionality for Jackson: works on core streaming API</about>
+            <licensor>FasterXML</licensor>
+            <start-year>2008</start-year>
+            <project-url>http://github.com/FasterXML/jackson</project-url>
+        </project-info>
+        <license>
+            <type>The Apache Software License, Version 2.0</type>
+            <content>http://github.com/FasterXML/jackson</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.12.6" product="editor">
+        <name>Jackson-dataformat-YAML</name>
+        <version>2.12.6</version>
+        <project-info>
+            <about>Support for reading and writing YAML-encoded data via Jackson abstractions.</about>
+            <licensor>FasterXML</licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/FasterXML/jackson-dataformats-text</project-url>
+        </project-info>
+        <license>
+            <type>The Apache Software License, Version 2.0</type>
+            <content>https://github.com/FasterXML/jackson-dataformats-text</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="com.github.virtuald:curvesapi:1.06" product="editor">
+        <name>curvesapi</name>
+        <version>1.06</version>
+        <project-info>
+            <about>Implementation of various mathematical curves that define themselves over a set of control points. The API is written in Java. The curves supported are: Bezier, B-Spline, Cardinal Spline, Catmull-Rom Spline, Lagrange, Natural Cubic Spline, and NURBS.</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/virtuald/curvesapi</project-url>
+        </project-info>
+        <license>
+            <type>BSD License</type>
+            <content>https://github.com/virtuald/curvesapi</content>
+            <url>http://opensource.org/licenses/BSD-3-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-all:0.50.18" product="editor">
+        <name>flexmark-all</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java core and all extension modules and converters</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-all</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-abbreviation:0.50.18" product="editor">
+        <name>flexmark-java extension for abbreviations in text</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for defining abbreviations and turning appearance of these abbreviations in text into links with titles consisting of the expansion of the abbreviation</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-abbreviation</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-admonition:0.50.18" product="editor">
+        <name>flexmark-java extension for admonition syntax</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for admonition syntax</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-admonition</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-anchorlink:0.50.18" product="editor">
+        <name>flexmark-java extension to generate anchor links for headers</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for generating anchor links for headings using GitHub compatible algorithm</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-anchorlink</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-aside:0.50.18" product="editor">
+        <name>flexmark-java extension for converting | to aside tags</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for converting | to aside tags</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-aside</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-attributes:0.50.18" product="editor">
+        <name>flexmark-java extension for attributes</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for attributes</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-attributes</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-autolink:0.50.18" product="editor">
+        <name>flexmark-java extension for autolinking</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for turning plain URLs and email addresses into links</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-autolink</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-definition:0.50.18" product="editor">
+        <name>flexmark-java extension for definition</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for definition</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-definition</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-emoji:0.50.18" product="editor">
+        <name>flexmark-java extension for emoji shortcuts</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for emoji shortcuts using Emoji-Cheat-Sheet.com http://www.emoji-cheat-sheet.com/</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-emoji</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-enumerated-reference:0.50.18" product="editor">
+        <name>flexmark-java extension for enumerated reference</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for enumerated reference processing</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-enumerated-reference</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-escaped-character:0.50.18" product="editor">
+        <name>flexmark-java extension for escaped_character</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for escaped_character</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-escaped-character</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-footnotes:0.50.18" product="editor">
+        <name>flexmark-java extension for footnotes</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for footnote inline elments and footnote definitions</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-footnotes</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-issues:0.50.18" product="editor">
+        <name>flexmark-java extension for GitHub issue syntax</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for GitHub issue syntax</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-gfm-issues</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.50.18" product="editor">
+        <name>flexmark-java extension for strikethrough</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for GFM strikethrough using ~~ (GitHub Flavored Markdown)</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-gfm-strikethrough</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-tables:0.50.18" product="editor">
+        <name>flexmark-java extension for tables</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for GFM tables using "|" pipes (GitHub Flavored Markdown)</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-gfm-tables</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-tasklist:0.50.18" product="editor">
+        <name>flexmark-java extension for generating GitHub style task list items</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension to convert bullet list items that start with [ ] to a TaskListItem node</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-gfm-tasklist</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-users:0.50.18" product="editor">
+        <name>flexmark-java extension for GitHub user syntax</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for GitHub user syntax</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-gfm-users</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-gitlab:0.50.18" product="editor">
+        <name>flexmark-java extension for GitLab Flavoured Markdown</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for GitLab Flavoured Markdown</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-gitlab</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-ins:0.50.18" product="editor">
+        <name>flexmark-java extension for ins</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for ins</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-ins</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-jekyll-front-matter:0.50.18" product="editor">
+        <name>flexmark-java extension for jekyll_front_matter</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for jekyll_front_matter</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-jekyll-front-matter</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-jekyll-tag:0.50.18" product="editor">
+        <name>flexmark-java extension for jekyll tag parsing</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for jekyll tag parsing</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-jekyll-tag</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-macros:0.50.18" product="editor">
+        <name>flexmark-java extension for processing macros</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for processing macros</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-macros</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-media-tags:0.50.18" product="editor">
+        <name>flexmark-java extension for HTML5 media tags</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension parsing and rendering HTML5 media tags</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-media-tags</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-superscript:0.50.18" product="editor">
+        <name>flexmark-java extension for superscript</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for superscript</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-superscript</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-toc:0.50.18" product="editor">
+        <name>flexmark-java extension for toc</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for toc</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-toc</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-typographic:0.50.18" product="editor">
+        <name>flexmark-java extension for typographic</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for typographic</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-typographic</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-wikilink:0.50.18" product="editor">
+        <name>flexmark-java extension for wiki links</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension parsing and rendering wiki links</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-wikilink</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-yaml-front-matter:0.50.18" product="editor">
+        <name>flexmark-java extension for YAML front matter</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for YAML front matter</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-yaml-front-matter</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-ext-youtube-embedded:0.50.18" product="editor">
+        <name>flexmark-ext-youtube-embedded</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-ext-youtube-embedded</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-formatter:0.50.18" product="editor">
+        <name>flexmark-java extension for formatter</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for formatter</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-formatter</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-jira-converter:0.50.18" product="editor">
+        <name>flexmark-java extension for jira_converter</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for jira_converter</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-jira-converter</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-profile-pegdown:0.50.18" product="editor">
+        <name>flexmark-java pegdown profile</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for setting flexmark options by using pegdown extension flags</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-profile-pegdown</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-util:0.50.18" product="editor">
+        <name>flexmark-java utilities</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java utility classes</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-util</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark-youtrack-converter:0.50.18" product="editor">
+        <name>flexmark-java extension for YouTrack conversion</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>flexmark-java extension for YouTrack conversion</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark-youtrack-converter</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="com.vladsch.flexmark:flexmark:0.50.18" product="editor">
+        <name>flexmark-java core</name>
+        <version>0.50.18</version>
+        <project-info>
+            <about>Core of flexmark-java (implementation of CommonMark for parsing markdown and rendering to HTML)</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/vsch/flexmark-java/flexmark</project-url>
+        </project-info>
+        <license>
+            <type>BSD 2-Clause License</type>
+            <content>Copyright (c) 2015-2016, Atlassian Pty Ltd
+All rights reserved.
+
+Copyright (c) 2016-2018, Vladimir Schneider,
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</content>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </component>
+    <component id="commons-codec:commons-codec:1.14" product="editor">
+        <name>Apache Commons Codec</name>
+        <version>1.14</version>
+        <project-info>
+            <about>The Apache Commons Codec package contains simple encoder and decoders for
+     various formats such as Base64 and Hexadecimal.  In addition to these
+     widely used encoders and decoders, the codec package also maintains a
+     collection of phonetic encoding utilities.</about>
+            <licensor>The Apache Software Foundation</licensor>
+            <start-year>2002</start-year>
+            <project-url>https://commons.apache.org/proper/commons-codec/</project-url>
+        </project-info>
+        <license>
+            <type>Apache License, Version 2.0</type>
+            <content>https://commons.apache.org/proper/commons-codec/</content>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="isorelax:isorelax:20030108" product="editor">
+        <name>isorelax</name>
+        <version>20030108</version>
+        <project-info>
+            <about></about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url></project-url>
+        </project-info>
+        <license>
+            <type></type>
+            <content>null</content>
+            <url></url>
+        </license>
+    </component>
+    <component id="nu.validator.htmlparser:htmlparser:1.4" product="editor">
+        <name>htmlparser</name>
+        <version>1.4</version>
+        <project-info>
+            <about>The Validator.nu HTML Parser is an implementation of the HTML5 parsing algorithm in Java for applications. The parser is designed to work as a drop-in replacement for the XML parser in applications that already support XHTML 1.x content with an XML parser and use SAX, DOM or XOM to interface with the parser.</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>http://about.validator.nu/htmlparser/</project-url>
+        </project-info>
+        <license>
+            <type>The MIT License</type>
+            <content>http://about.validator.nu/htmlparser/</content>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </component>
+    <component id="org.apache.commons:commons-collections4:4.3" product="editor">
+        <name>Apache Commons Collections</name>
+        <version>4.3</version>
+        <project-info>
+            <about>The Apache Commons Collections package contains types that extend and augment the Java Collections Framework.</about>
+            <licensor>The Apache Software Foundation</licensor>
+            <start-year>2001</start-year>
+            <project-url>http://commons.apache.org/proper/commons-collections/</project-url>
+        </project-info>
+        <license>
+            <type>Apache License, Version 2.0</type>
+            <content>http://commons.apache.org/proper/commons-collections/</content>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="org.apache.commons:commons-compress:1.21" product="editor">
+        <name>Apache Commons Compress</name>
+        <version>1.21</version>
+        <project-info>
+            <about>Apache Commons Compress software defines an API for working with
+compression and archive formats.  These include: bzip2, gzip, pack200,
+lzma, xz, Snappy, traditional Unix Compress, DEFLATE, DEFLATE64, LZ4,
+Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
+            <licensor>The Apache Software Foundation</licensor>
+            <start-year>2002</start-year>
+            <project-url>https://commons.apache.org/proper/commons-compress/</project-url>
+        </project-info>
+        <license>
+            <type>Apache License, Version 2.0</type>
+            <content>https://commons.apache.org/proper/commons-compress/</content>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="org.apache.commons:commons-math3:3.6.1" product="editor">
+        <name>Apache Commons Math</name>
+        <version>3.6.1</version>
+        <project-info>
+            <about>The Apache Commons Math project is a library of lightweight, self-contained mathematics and statistics components addressing the most common practical problems not immediately available in the Java programming language or commons-lang.</about>
+            <licensor>The Apache Software Foundation</licensor>
+            <start-year>2003</start-year>
+            <project-url>http://commons.apache.org/proper/commons-math/</project-url>
+        </project-info>
+        <license>
+            <type>Apache License, Version 2.0</type>
+            <content>http://commons.apache.org/proper/commons-math/</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="org.apache.poi:poi:4.1.0" product="editor">
+        <name>Apache POI</name>
+        <version>4.1.0</version>
+        <project-info>
+            <about>Apache POI - Java API To Access Microsoft Format Files</about>
+            <licensor>Apache Software Foundation</licensor>
+            <start-year></start-year>
+            <project-url>http://poi.apache.org/</project-url>
+        </project-info>
+        <license>
+            <type>The Apache Software License, Version 2.0</type>
+            <content>http://poi.apache.org/</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="org.apache.xmlbeans:xmlbeans:3.1.0" product="editor">
+        <name>XmlBeans</name>
+        <version>3.1.0</version>
+        <project-info>
+            <about>XmlBeans main jar</about>
+            <licensor>XmlBeans</licensor>
+            <start-year></start-year>
+            <project-url>https://xmlbeans.apache.org/</project-url>
+        </project-info>
+        <license>
+            <type>The Apache Software License, Version 2.0</type>
+            <content>https://xmlbeans.apache.org/</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="org.dita-ot:dost:3.4.0" product="editor">
+        <name>DITA Open Toolkit</name>
+        <version>3.4.0</version>
+        <project-info>
+            <about>DITA-OT base library</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://www.dita-ot.org/</project-url>
+        </project-info>
+        <license>
+            <type>The Apache License, Version 2.0</type>
+            <content>https://www.dita-ot.org/</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+    <component id="org.nibor.autolink:autolink:0.6.0" product="editor">
+        <name>autolink-java</name>
+        <version>0.6.0</version>
+        <project-info>
+            <about>Java library to extract links (URLs, email addresses) from plain text;
+        fast, small and smart about recognizing where links end</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/robinst/autolink-java</project-url>
+        </project-info>
+        <license>
+            <type>MIT License</type>
+            <content>The MIT License (MIT)
+
+Copyright (c) 2015 Robin Stocker
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+</content>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </component>
+    <component id="org.relaxng:jing:20181222" product="editor">
+        <name>Jing</name>
+        <version>20181222</version>
+        <project-info>
+            <about>Jing, a tool for validating documents against RelaxNG schemas.</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>http://www.thaiopensource.com/relaxng/jing.html</project-url>
+        </project-info>
+        <license>
+            <type>3-clause BSD license</type>
+            <content>http://www.thaiopensource.com/relaxng/jing.html</content>
+            <url>https://github.com/relaxng/jing-trang/blob/master/copying.txt</url>
+        </license>
+    </component>
+    <component id="org.yaml:snakeyaml:1.28" product="editor">
+        <name>SnakeYAML</name>
+        <version>1.28</version>
+        <project-info>
+            <about>YAML 1.1 parser and emitter for Java</about>
+            <licensor></licensor>
+            <start-year>2008</start-year>
+            <project-url>http://www.snakeyaml.org</project-url>
+        </project-info>
+        <license>
+            <type>Apache License, Version 2.0</type>
+            <content>http://www.snakeyaml.org</content>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </component>
+</third-party>

@@ -17,20 +17,17 @@
           <include>**/*</include>
         </includes>
       </fileSet>
-
-      <fileSet>
-          <directory>target/generated-resources</directory>
-          <outputDirectory>license</outputDirectory>
-          <includes>
-            <include>**/*</include>
-          </includes>
-         </fileSet>
   </fileSets>
 
   <files>
     <file>
       <source>target/build/${project.build.finalName}.jar</source>
       <outputDirectory>/lib</outputDirectory>
+    </file>
+    <file>
+      <source>third-party-components.xml</source>
+      <outputDirectory>/lib</outputDirectory>
+      <filtered>true</filtered>
     </file>
     <file>
       <source>plugin.xml</source>
