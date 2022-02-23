@@ -31,6 +31,7 @@
 	<properties>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
+    	<oxygen.sdk.version>20.1.0.0</oxygen.sdk.version>
   	</properties>
 	
 	<repositories>
@@ -71,7 +72,7 @@
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-sdk</artifactId>
-			<version>20.1.0.0</version>
+			<version>${oxygen.sdk.version}</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -84,6 +85,27 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- dirty hack
+		    in oxygen-plugins-superpom we have this "oxygen.jar" dependency which is actually oxygen-sdk !?
+		    we want to have the same version 
+		-->
+		<dependency>
+      <groupId>com.oxygenxml</groupId>
+      <artifactId>oxygen</artifactId>
+      <version>${oxygen.sdk.version}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.oxygen</groupId>
+          <artifactId>oxygen-annotations</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 		
 		<!-- We need log4j1 in TCs because the old version of the 20.1.0.0 version of sdk uses log4j.  -->
 		<dependency>
@@ -115,7 +137,6 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
