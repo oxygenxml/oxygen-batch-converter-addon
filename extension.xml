@@ -30,6 +30,16 @@
                 </div>
                 <hr/>
                 <div>
+                    <h3>What's new in version 4.0.0</h3>
+                    <ol>
+                        <li>Added a Confluence to DITA conversion.</li>
+                        <li>Added a DocBook to DITA conversion.</li>
+                        <li>Improved the name of the extracted DITA topic files when converting to a DITA map with topics.</li>
+                        <li>Improved the title extraction of the DITA map when converting to a DITA map with topics.</li>
+                        <li>The 'alt' attributes from images are now handled properly when converting HTML to DITA.</li>
+                    </ol>
+                </div>
+                <div>
                     <h3>What's new in version 3.2.1</h3>
                     <ol>
                         <li><b>Critical/Security:</b> The add-on no longer distributes Apache Log4j
