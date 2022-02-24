@@ -57,10 +57,6 @@
 			<exclusions>
 				<exclusion>
 					<groupId>com.oxygenxml</groupId>
-					<artifactId>oxygen-patched-json</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.oxygenxml</groupId>
 					<artifactId>oxygen-basic-utilities</artifactId>
 				</exclusion>
 				<exclusion>
@@ -148,12 +144,12 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-patched-json</artifactId>
 			<version>${oxygen.sdk.snapshot.version}</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-basic-utilities</artifactId>
