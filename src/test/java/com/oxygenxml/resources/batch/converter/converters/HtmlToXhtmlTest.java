@@ -76,7 +76,7 @@ public class HtmlToXhtmlTest {
         }
       });
 
-			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
+			assertEquals(FileComparationUtil.readFile(expectedResult.getAbsolutePath()), FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
 
 		} finally {
 		  FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -133,7 +133,7 @@ public class HtmlToXhtmlTest {
         }
       });
 	
-			assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
+			assertEquals(FileComparationUtil.readFile(expectedResult.getAbsolutePath()), FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
 	
 		} finally {
 		  FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -190,7 +190,7 @@ public class HtmlToXhtmlTest {
         }
       });
   
-  		assertEquals(FileUtils.readFileToString(expectedResult), FileUtils.readFileToString(convertedFile));
+  		assertEquals(FileComparationUtil.readFile(expectedResult.getAbsolutePath()), FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
   
   	} finally {
   	  FileComparationUtil.deleteRecursivelly(outputFolder);

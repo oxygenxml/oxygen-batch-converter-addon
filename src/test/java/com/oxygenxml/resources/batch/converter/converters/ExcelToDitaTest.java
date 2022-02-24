@@ -72,7 +72,7 @@ public class ExcelToDitaTest {
           return 1;
         }
       });
-      assertEquals(FileUtils.readFileToString(expectedOutput), FileUtils.readFileToString(convertedFile));
+      assertEquals(FileComparationUtil.readFile(expectedOutput.getAbsolutePath()), FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
 
 		} finally {
 		  FileComparationUtil.deleteRecursivelly(outputFolder); 

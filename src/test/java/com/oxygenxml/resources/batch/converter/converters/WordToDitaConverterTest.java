@@ -86,8 +86,8 @@ public class WordToDitaConverterTest extends TestCase{
         }
       });
 
-      String actualResult = FileUtils.readFileToString(fileToRead);
-      String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+      String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
+      String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
       assertEquals(filterMathAttributes(expected),
           filterMathAttributes(actualResult));
 
@@ -164,8 +164,8 @@ public class WordToDitaConverterTest extends TestCase{
         }
       });
 
-      String actualResult = FileUtils.readFileToString(fileToRead);
-      String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+      String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
+      String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
       assertEquals(expected, actualResult);
     } finally {
       FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -221,8 +221,8 @@ public class WordToDitaConverterTest extends TestCase{
         }
       });
 
-      String actualResult = FileUtils.readFileToString(fileToRead);
-      String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+      String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
+      String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
       assertEquals(expected, actualResult);
     } finally {
       FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -278,8 +278,8 @@ public class WordToDitaConverterTest extends TestCase{
         }
       });
   
-      String actualResult = FileUtils.readFileToString(fileToRead);
-      String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+      String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
+      String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
       assertEquals(expected, actualResult);
     } finally {
       FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -335,8 +335,8 @@ public class WordToDitaConverterTest extends TestCase{
         }
       });
   
-      String actualResult = FileUtils.readFileToString(fileToRead);
-      String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+      String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
+      String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
       assertEquals(expected, actualResult);
     } finally {
       FileComparationUtil.deleteRecursivelly(outputFolder);

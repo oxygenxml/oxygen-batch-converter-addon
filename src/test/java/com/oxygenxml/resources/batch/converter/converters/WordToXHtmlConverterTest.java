@@ -88,9 +88,9 @@ public class WordToXHtmlConverterTest extends TestCase{
         }
       });
 
-			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
+			String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
 			assertEquals(filterMathAttributes(expected),
-					filterMathAttributes(FileUtils.readFileToString(fileToRead)));
+					filterMathAttributes(FileComparationUtil.readFile(fileToRead.getAbsolutePath())));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
@@ -152,8 +152,8 @@ public class WordToXHtmlConverterTest extends TestCase{
         }
       });
 
-			assertEquals(FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img"),
-					FileUtils.readFileToString(fileToRead));
+			assertEquals(FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img"),
+					FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
@@ -214,9 +214,9 @@ public class WordToXHtmlConverterTest extends TestCase{
         }
       });
 	
-			String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", File.separatorChar+"img");
+			String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", File.separatorChar+"img");
 			assertEquals(filterMathAttributes(expected),
-					filterMathAttributes(FileUtils.readFileToString(fileToRead)));
+					filterMathAttributes(FileComparationUtil.readFile(fileToRead.getAbsolutePath())));
 	
 			File mediaFolder = new File(outputFolder, "media");
 			assertTrue(!mediaFolder.exists());
@@ -290,8 +290,8 @@ public class WordToXHtmlConverterTest extends TestCase{
         }
       });
   
-  		String expected = FileUtils.readFileToString(expectedResultFile).replace("\\img", "/img");
-  		assertEquals(expected, FileUtils.readFileToString(fileToRead));
+  		String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
+  		assertEquals(expected, FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
   
   		File mediaFolder = new File(outputFolder, "media");
   		File[] images = mediaFolder.listFiles();
@@ -355,8 +355,8 @@ public class WordToXHtmlConverterTest extends TestCase{
           return 0;
         }
       });
-  		assertEquals(FileUtils.readFileToString(expectedResultFile),
-  		    FileUtils.readFileToString(fileToRead));
+  		assertEquals(FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()),
+  		    FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
   	} finally {
   		FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
@@ -413,8 +413,8 @@ public class WordToXHtmlConverterTest extends TestCase{
           return 0;
         }
       });
-  		assertEquals(FileUtils.readFileToString(expectedResultFile),
-  		    FileUtils.readFileToString(fileToRead));
+  		assertEquals(FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()),
+  		    FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
   	} finally {
   		FileComparationUtil.deleteRecursivelly(outputFolder);
   	}
@@ -469,8 +469,8 @@ public class WordToXHtmlConverterTest extends TestCase{
           return 0;
         }
       });
-  		assertEquals(FileUtils.readFileToString(expectedResultFile),
-  		    FileUtils.readFileToString(fileToRead));
+  		assertEquals(FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()),
+  		    FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
   	} finally {
   	  WordStyleMapLoader.imposeStyleMapFile(null);
   		FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -528,8 +528,8 @@ public class WordToXHtmlConverterTest extends TestCase{
           return 0;
         }
       });
-  		assertEquals(FileUtils.readFileToString(expectedResultFile),
-  		    FileUtils.readFileToString(fileToRead));
+  		assertEquals(FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()),
+  		    FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
   	} finally {
   	  WordStyleMapLoader.imposeStyleMapFile(null);
   		FileComparationUtil.deleteRecursivelly(outputFolder);

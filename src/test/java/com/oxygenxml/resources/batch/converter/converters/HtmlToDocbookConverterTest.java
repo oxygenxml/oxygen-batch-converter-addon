@@ -79,8 +79,8 @@ public class HtmlToDocbookConverterTest extends TestCase{
         }
       });
 
-			String actualResult = FileUtils.readFileToString(fileToRead);
-			String expected = FileUtils.readFileToString(expectedResultFile);
+			String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
+			String expected =  FileComparationUtil.readFile(expectedResultFile.getAbsolutePath());
       assertEquals(expected, actualResult);
 
 		} finally {
@@ -136,8 +136,8 @@ public class HtmlToDocbookConverterTest extends TestCase{
         }
       });
   
-  		String actualResult = FileUtils.readFileToString(fileToRead);
-  		String expected = FileUtils.readFileToString(expectedResultFile);
+  		String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
+  		String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath());
       assertEquals(expected, actualResult);
   
   	} finally {

@@ -145,7 +145,7 @@ public class WordToXHtmlConverter2Test extends TestCase{
           "    <h2 class=\"document\">Document Subtitle(custom)</h2>\n" + 
           "  </body>\n" + 
           "</html>",
-          FileUtils.readFileToString(fileToRead));
+          FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
     } finally {
       PluginWorkspaceProvider.setPluginWorkspace(null);
       FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -295,7 +295,7 @@ public class WordToXHtmlConverter2Test extends TestCase{
           "    </ul>\n" + 
           "  </body>\n" + 
           "</html>",
-          FileUtils.readFileToString(fileToRead));
+          FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
       
       Mockito.verify(resultsManager, Mockito.times(2)).addResult(Mockito.any(String.class), dpiCaptor.capture(), Mockito.any(ResultType.class), Mockito.anyBoolean(), Mockito.anyBoolean());
 

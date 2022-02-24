@@ -76,6 +76,7 @@ public class FileComparationUtil {
 		} finally {
 			fileReader.close();
 		}
+		fileContents = fileContents.replace("\r", "");
 		return fileContents;
 	}
 	

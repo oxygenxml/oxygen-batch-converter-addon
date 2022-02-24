@@ -77,7 +77,7 @@ public class MdToXhtmlTest {
         }
       });
 
-	     assertEquals(FileUtils.readFileToString(expectedOutputFile), FileUtils.readFileToString(convertedFile));
+	     assertEquals(FileComparationUtil.readFile(expectedOutputFile.getAbsolutePath()), FileComparationUtil.readFile(convertedFile.getAbsolutePath()));
 		} finally {
 		  FileComparationUtil.deleteRecursivelly(outputFolder);    
 		}

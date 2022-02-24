@@ -1,7 +1,5 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 
+import junit.framework.TestCase;
 import tests.utils.ConverterStatusReporterTestImpl;
 import tests.utils.ConvertorWorkerInteractorTestImpl;
 import tests.utils.FileComparationUtil;
@@ -32,7 +31,7 @@ import tests.utils.TransformerFactoryCreatorImpl;
  * @author Cosmin Duna
  *
  */
-public class XmlToJsonTest {
+public class XmlToJsonTest extends TestCase{
 
 	@Test
 	public void test() throws TransformerException, IOException {
@@ -76,8 +75,8 @@ public class XmlToJsonTest {
         }
       });
 
-			assertTrue(FileComparationUtil.compareLineToLine(goodSample, fileToRead));
-
+			assertEquals(FileComparationUtil.readFile(goodSample.getAbsolutePath()),
+			    FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
 		} finally {
 		  FileComparationUtil.deleteRecursivelly(outputFolder);    
 		}
