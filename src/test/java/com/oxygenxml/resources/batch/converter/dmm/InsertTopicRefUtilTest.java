@@ -19,6 +19,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.w3c.css.sac.InputSource;
 
 import junit.framework.TestCase;
+import ro.sync.ecss.component.CSSInputSource;
+import ro.sync.ecss.component.CSSSourceTypes;
 import ro.sync.ecss.css.csstopdf.facade.AuthorDocumentFacade;
 import ro.sync.ecss.css.csstopdf.facade.AuthorDocumentFacadeFactory;
 import ro.sync.ecss.extensions.api.AuthorDocumentController;
@@ -146,7 +148,8 @@ public class InsertTopicRefUtilTest extends TestCase{
   private WSEditor createEditor(String inputXML)  throws Exception {
     // Create a AuthorDocumentController
     AuthorDocumentFacadeFactory facadeFactory = new AuthorDocumentFacadeFactory();
-    InputSource[] cssInputSources = new InputSource[] { new InputSource(new StringReader("* {display: block;}")) };
+    CSSInputSource[] cssInputSources = new CSSInputSource[] { new CSSInputSource(
+        new InputSource(new StringReader("* {display: block;}")), CSSSourceTypes.SOURCE_DOCUMENT) };
     StringReader reader = new StringReader(inputXML);
     AuthorDocumentFacade facade = facadeFactory.createFacade(new StreamSource(reader), cssInputSources, null,
         new File("."));

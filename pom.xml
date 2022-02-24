@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
   
-   <parent>
+  <parent>
     <groupId>com.oxygenxml</groupId>
     <artifactId>oxygen-addons-superpom</artifactId>
     <version>24.1-SNAPSHOT</version>
@@ -31,7 +31,8 @@
 	<properties>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
-    	<oxygen.sdk.version>20.1.0.0</oxygen.sdk.version>
+    	<oxygen.sdk.version>22.1.0.0</oxygen.sdk.version>
+    	<oxygen.sdk.snapshot.version>22.1-SNAPSHOT</oxygen.sdk.snapshot.version>
   	</properties>
 	
 	<repositories>
@@ -53,6 +54,20 @@
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-batch-converter-core</artifactId>
 			<version>${oxygen.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oxygenxml</groupId>
+					<artifactId>oxygen-patched-json</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oxygenxml</groupId>
+					<artifactId>oxygen-basic-utilities</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oxygenxml</groupId>
+					<artifactId>oxygen-validation-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
@@ -80,8 +95,12 @@
 					<artifactId>oxygen-annotations</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-1.2-api</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -91,27 +110,30 @@
 		    we want to have the same version 
 		-->
 		<dependency>
-      <groupId>com.oxygenxml</groupId>
-      <artifactId>oxygen</artifactId>
-      <version>${oxygen.sdk.version}</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.oxygen</groupId>
-          <artifactId>oxygen-annotations</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>log4j</groupId>
-          <artifactId>log4j</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-		
-		<!-- We need log4j1 in TCs because the old version of the 20.1.0.0 version of sdk uses log4j.  -->
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen</artifactId>
+			<version>${oxygen.sdk.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oxygen</groupId>
+					<artifactId>oxygen-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.logging.log4j</groupId>
+					<artifactId>log4j-1.2-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+			
+		<!--We need log4j2 in TCs because the old version of the 22.1.0.0 version of sdk uses log4j2.  -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
@@ -124,6 +146,19 @@
 		    <groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-json</artifactId>
+			<version>${oxygen.sdk.snapshot.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-basic-utilities</artifactId>
+			<version>${oxygen.sdk.snapshot.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
