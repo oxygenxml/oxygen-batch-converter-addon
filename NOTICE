@@ -10,12 +10,12 @@ Patch for Lightweight DITA for DITA-OT library.
 Site: https://github.com/jelovirt/org.lwdita 
 License: Apache License 2.0 ( http://www.apache.org/licenses/LICENSE-2.0)
 
-oxygen-patched-mammoth-for-batch-converter-24.0-SNAPSHOT.jar
+oxygen-patched-mammoth-for-batch-converter
 Patch for Java Mammoth library.
 Site: https://github.com/mwilliamson/java-mammoth
 License: BSD 2-Clause "Simplified" License ( https://raw.githubusercontent.com/mwilliamson/java-mammoth/master/LICENSE)
 
-oxygen-patched-jtidy-for-batch-converter-24.0-SNAPSHOT.jar
+oxygen-patched-jtidy-for-batch-converter
 Patch for JTidy library.
 Site: https://github.com/jtidy/jtidy
 License: Java HTML Tidy - JTidy License ( https://raw.githubusercontent.com/jtidy/jtidy/master/LICENSE.txt)
