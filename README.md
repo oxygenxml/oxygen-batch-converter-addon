@@ -14,6 +14,10 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * Word to DocBook4 / DocBook5
 * Excel to DITA
 
+* Confluence to DITA
+
+* DocBook to DITA
+
 * JSON to XML
 * XML to JSON
 * JSON to YAML
