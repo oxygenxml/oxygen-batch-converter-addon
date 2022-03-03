@@ -11,7 +11,7 @@
 		<comment>Link to conversion options.</comment>
 		<val lang="en_US">Conversion options</val>
 		<val lang="de_DE">Umwandlungsoptionen</val>
-		<val lang="fr_FR">Conversion options</val>
+		<val lang="fr_FR">Options de conversion</val>
 		<val lang="ja_JP">変換オプション</val>
 		<val lang="nl_NL">Conversieopties</val>
 	</key>
@@ -19,7 +19,7 @@
 		<comment>Section in option page for conversions to DITA.</comment>
 		<val lang="en_US">Conversions to DITA</val>
 		<val lang="de_DE">Umwandlungen nach DITA</val>
-		<val lang="fr_FR">Conversions to DITA</val>
+		<val lang="fr_FR">Conversions vers DITA</val>
 		<val lang="ja_JP">DITA への変換</val>
 		<val lang="nl_NL">Conversie naar DITA</val>
 	</key>
@@ -28,7 +28,7 @@
 			topics.</comment>
 		<val lang="en_US">Maximum heading level for creating topics:</val>
 		<val lang="de_DE">Maximale Überschriftenebene für die Topic-Erstellung:</val>
-		<val lang="fr_FR">Maximum heading level for creating topics:</val>
+		<val lang="fr_FR">Niveau maximal des titres pour la création de topics:</val>
 		<val lang="ja_JP">トピックを作成するための最大見出しレベル:</val>
 		<val lang="nl_NL">Maximumkopniveau voor het aanmaken van onderwerpen:</val>
 	</key>
@@ -36,7 +36,7 @@
 		<comment>Warning presented when a unrecognized style is found.</comment>
 		<val lang="en_US">Unrecognized "{0}" style for "{1}" Word element.</val>
 		<val lang="de_DE">Unerkannter "{0}" Stil für "{1}" Word-Element.</val>
-		<val lang="fr_FR">Unrecognized "{0}" style for "{1}" Word element.</val>
+		<val lang="fr_FR">Style "{0}" non reconnu pour l''élément Word "{1}".</val>
 		<val lang="ja_JP">"{1}" Word 要素の "{0}" スタイルが認識されませんでした。</val>
 		<val lang="nl_NL">Niet erkende stijl '{0}' voor '{1}' Word-element.</val>
 	</key>
@@ -44,7 +44,7 @@
 		<comment>Warning presented when a unrecognized style is found.</comment>
 		<val lang="en_US">Unrecognized "{0}" style ID for "{1}" Word element.</val>
 		<val lang="de_DE">Unerkannte "{0}" Stil-ID für "{1}" Word-Element.</val>
-		<val lang="fr_FR">Unrecognized "{0}" style ID for "{1}" Word element.</val>
+		<val lang="fr_FR">ID de style "{0}" non reconnu pour l''élément Word "{1}".</val>
 		<val lang="ja_JP">"{1}" Word 要素の "{0}" スタイル ID が認識されませんでした。</val>
 		<val lang="nl_NL">Niet erkende stijl-ID '{0}' voor '{1}' Word.</val>
 	</key>
@@ -54,8 +54,8 @@
 			Documents Converter preferences page.</val>
 		<val lang="de_DE">Sie können das Mapping zwischen Stilen und Elementen in den
 			Benutzereinstellungen des Batch Documents Converter einstellen.</val>
-		<val lang="fr_FR">You can configure the mapping between styles and elements in the Batch
-			Documents Converter preferences page.</val>
+		<val lang="fr_FR">Vous pouvez configurer le mappage entre les styles et les éléments dans
+			la page des préférences du Convertisseur de Documents par Lots.</val>
 		<val lang="ja_JP">バッチドキュメントコンバーターの設定ページで、スタイルと要素間のマッピングを構成できます。</val>
 		<val lang="nl_NL">U kan de toewijzing tussen stijlen en elementen in de pagina met de
 			voorkeuren voor Partijdocumentenomzetter configureren.</val>
@@ -64,7 +64,7 @@
 		<comment>Name for table heading for the MS Word elements.</comment>
 		<val lang="en_US">Word element</val>
 		<val lang="de_DE">Word-Element</val>
-		<val lang="fr_FR">Word element</val>
+		<val lang="fr_FR">Élément Word</val>
 		<val lang="ja_JP">Word 要素</val>
 		<val lang="nl_NL">Word-element</val>
 	</key>
@@ -72,7 +72,7 @@
 		<comment>Name for table heading for the MS Word styles.</comment>
 		<val lang="en_US">Word style</val>
 		<val lang="de_DE">Word-Stil</val>
-		<val lang="fr_FR">Word style</val>
+		<val lang="fr_FR">Style Word</val>
 		<val lang="ja_JP">Word スタイル</val>
 		<val lang="nl_NL">Word-stijl</val>
 	</key>
@@ -80,7 +80,7 @@
 		<comment>Name for table heading for the HTML elements.</comment>
 		<val lang="en_US">HTML elements</val>
 		<val lang="de_DE">HTML-Elemente</val>
-		<val lang="fr_FR">HTML elements</val>
+		<val lang="fr_FR">Éléments HTML</val>
 		<val lang="ja_JP">XTML要素</val>
 		<val lang="nl_NL">HTML-elementen</val>
 	</key>
@@ -88,7 +88,7 @@
 		<comment>Section name for presenting MS Word styles mapping configuration.</comment>
 		<val lang="en_US">Word styles mapping</val>
 		<val lang="de_DE">Word-Stil-Mapping</val>
-		<val lang="fr_FR">Word styles mapping</val>
+		<val lang="fr_FR">Mappage des styles Word</val>
 		<val lang="ja_JP">Word スタイルのマッピング</val>
 		<val lang="nl_NL">Overzicht van Word-stijlen</val>
 	</key>
@@ -101,9 +101,9 @@
 			werden, durch Mapping der Word-Elemente und -Stile auf die zugehörigen HTML-Elemente.
 			HTML wird ebenfalls als Zwischenformat für die Word-nach-DITA/DocBook-Umwandlung
 			verwendet.</val>
-		<val lang="fr_FR">Conversion of Word documents (.docx) to HTML can be configured by mapping
-			Word elements and styles to the corresponding HTML elements. HTML is also used as an
-			intermediary format for the Word to DITA/DocBook conversions.</val>
+		<val lang="fr_FR">La conversion des documents Word (.docx) en HTML peut être configurée en mappant
+			les éléments et les styles de Word aux éléments HTML correspondants. Le HTML est également utilisé comme
+			format intermédiaire pour les conversions de Word vers DITA/DocBook.</val>
 		<val lang="ja_JP">Word ドキュメント (.docx) から HTML への変換は、Word 要素とスタイルを対応する HTML
 			要素にマッピングすることで構成できます。HTML は、Word から DITA/DocBook への変換の中間フォーマットとしても使用されます。</val>
 		<val lang="nl_NL">Conversie van Word-documenten (.docx) naar HTML kan worden geconfigureerd
@@ -115,7 +115,7 @@
 		<comment>Button for adding a new element.</comment>
 		<val lang="en_US">New</val>
 		<val lang="de_DE">Neu</val>
-		<val lang="fr_FR">New</val>
+		<val lang="fr_FR">Nouveau</val>
 		<val lang="ja_JP">新規</val>
 		<val lang="nl_NL">Nieuw</val>
 	</key>
@@ -123,7 +123,7 @@
 		<comment>Button for editing an element.</comment>
 		<val lang="en_US">Edit</val>
 		<val lang="de_DE">Bearbeiten</val>
-		<val lang="fr_FR">Edit</val>
+		<val lang="fr_FR">Modifier</val>
 		<val lang="ja_JP">編集</val>
 		<val lang="nl_NL">Bewerken</val>
 	</key>
@@ -131,7 +131,7 @@
 		<comment>Button for deleting an element.</comment>
 		<val lang="en_US">Delete</val>
 		<val lang="de_DE">Löschen</val>
-		<val lang="fr_FR">Delete</val>
+		<val lang="fr_FR">Supprimer</val>
 		<val lang="ja_JP">削除</val>
 		<val lang="nl_NL">Verwijderen</val>
 	</key>
@@ -139,7 +139,7 @@
 		<comment>Button for exporting setting.</comment>
 		<val lang="en_US">Export</val>
 		<val lang="de_DE">Exportieren</val>
-		<val lang="fr_FR">Export</val>
+		<val lang="fr_FR">Exporter</val>
 		<val lang="ja_JP">エクスポート</val>
 		<val lang="nl_NL">Exporteren</val>
 	</key>
@@ -147,7 +147,7 @@
 		<comment>Help button for opening documentation.</comment>
 		<val lang="en_US">Help</val>
 		<val lang="de_DE">Hilfe</val>
-		<val lang="fr_FR">Help</val>
+		<val lang="fr_FR">Aide</val>
 		<val lang="ja_JP">ヘルプ</val>
 		<val lang="nl_NL">Help</val>
 	</key>
@@ -155,7 +155,7 @@
 		<comment>The text of menu that contains the converters.</comment>
 		<val lang="en_US">Batch Documents Converter</val>
 		<val lang="de_DE">Batch Documents Converter</val>
-		<val lang="fr_FR">Batch Documents Converter</val>
+		<val lang="fr_FR">Convertisseur de Documents par Lots</val>
 		<val lang="ja_JP">バッチドキュメントコンバーター</val>
 		<val lang="nl_NL">Programma voor batchconversie van documenten</val>
 	</key>
@@ -300,7 +300,7 @@
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">Confluence to DITA</val>
 		<val lang="de_DE">Confluence zu DITA</val>
-		<val lang="fr_FR">Confluence to DITA</val>
+		<val lang="fr_FR">Confluence vers DITA</val>
 		<val lang="ja_JP">Confluence から DITA</val>
 		<val lang="nl_NL">Confluence naar DITA</val>
 	</key>
@@ -308,7 +308,7 @@
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">DocBook to DITA</val>
 		<val lang="de_DE">DocBook zu DITA</val>
-		<val lang="fr_FR">DocBook to DITA</val>
+		<val lang="fr_FR">DocBook vers DITA</val>
 		<val lang="ja_JP">DocBook から DITA</val>
 		<val lang="nl_NL">DocBook naar DITA</val>
 	</key>
@@ -329,8 +329,8 @@
 		<val lang="de_DE">Fügen Sie die von Confluence generierten "index.html" Datei(en) in dem
 			HTML-Export-Prozess als Eingabedatei(en) hinzu, um die Umwandlung nach DITA
 			durchzuführen.</val>
-		<val lang="fr_FR">Add the "index.html" file(s) generated by the Confluence to HTML export
-			process as input file(s) to perform the conversion to DITA.</val>
+		<val lang="fr_FR">Ajouter le(s) fichier(s) "index.html" généré(s) par le processus d'exportation de
+			Confluence vers HTML comme fichier(s) d'entrée pour effectuer la conversion vers DITA.</val>
 		<val lang="ja_JP">Confluence から HTML へのエクスポートプロセスによって生成された "index.html"
 			ファイルを入力ファイルとして追加して、DITA への変換を実行します。</val>
 		<val lang="nl_NL">Voeg de 'index.html' bestand(en) zoals gegenereerd door het exportproces
@@ -442,7 +442,7 @@
 		<val lang="en_US">Create DITA maps from {0} documents containing multiple headings</val>
 		<val lang="de_DE">Erstelle DITA-Maps aus {0} Dokumenten, die mehrere Überschriften
 			enthalten</val>
-		<val lang="fr_FR">Create DITA maps from {0} documents containing multiple headings</val>
+		<val lang="fr_FR">Créer des DITA maps à partir de {0} documents contenant plusieurs titres</val>
 		<val lang="ja_JP">複数の見出しを含む {0} ドキュメントから DITA マップを作成する</val>
 		<val lang="nl_NL">DITA-mappen vanuit {0}-documenten met meerdere kopregels aanmaken</val>
 	</key>
@@ -452,7 +452,7 @@
 		<val lang="en_US">Create DITA maps from {0} documents containing multiple sections</val>
 		<val lang="de_DE">Erstelle DITA-Maps aus {0} Dokumenten, die mehrere Sektionen
 			enthalten</val>
-		<val lang="fr_FR">Create DITA maps from {0} documents containing multiple sections</val>
+		<val lang="fr_FR">Créer des DITA maps à partir de {0} documents contenant plusieurs sections</val>
 		<val lang="ja_JP">複数のセクションを含む {0} ドキュメントから DITA マップを作成する</val>
 		<val lang="nl_NL">DITA-mappen vanuit {0}-documenten met meerdere secties aanmaken</val>
 	</key>
@@ -461,7 +461,7 @@
 		<comment>Error message presented when the configuration file is not found.</comment>
 		<val lang="en_US">The configuration file was not found.</val>
 		<val lang="de_DE">Die Konfigurationsdatei wurde nicht gefunden.</val>
-		<val lang="fr_FR">The configuration file was not found.</val>
+		<val lang="fr_FR">Le fichier de configuration n'a pas été trouvé.</val>
 		<val lang="ja_JP">構成ファイルが見つかりませんでした。</val>
 		<val lang="nl_NL">Het configuratiebestand is niet gevonden.</val>
 	</key>
@@ -469,7 +469,7 @@
 	<key value="Create_short_description_from_paragraph">
 		<val lang="en_US">Create short description elements</val>
 		<val lang="de_DE">Erstelle Kurzbeschreibungselemenet</val>
-		<val lang="fr_FR">Create short description elements</val>
+		<val lang="fr_FR">Créer les éléments description courte</val>
 		<val lang="ja_JP">短い説明要素を作成する</val>
 		<val lang="nl_NL">Korte beschrijvingselementen aanmaken</val>
 	</key>
@@ -478,7 +478,7 @@
 		<comment>Import button.</comment>
 		<val lang="en_US">Import</val>
 		<val lang="de_DE">Importieren</val>
-		<val lang="fr_FR">Import</val>
+		<val lang="fr_FR">Importer</val>
 		<val lang="ja_JP">インポート</val>
 		<val lang="nl_NL">Importeren</val>
 	</key>
@@ -486,7 +486,7 @@
 		<comment>The name of a submenu that contains conversions</comment>
 		<val lang="en_US">Additional conversions</val>
 		<val lang="de_DE">Zusätzliche Konvertierungen</val>
-		<val lang="fr_FR">Additional conversions</val>
+		<val lang="fr_FR">Conversions supplémentaires</val>
 		<val lang="ja_JP">追加の変換</val>
 		<val lang="nl_NL">Aanvullende conversies</val>
 	</key>
@@ -494,7 +494,7 @@
 		<comment>The title of the import from word dialog.</comment>
 		<val lang="en_US">Import from MS Word</val>
 		<val lang="de_DE">MS Word importieren</val>
-		<val lang="fr_FR">Import from MS Word</val>
+		<val lang="fr_FR">Importer depuis MS Word</val>
 		<val lang="ja_JP">MS Word からインポートする</val>
 		<val lang="nl_NL">Vanuit MS Word importeren</val>
 	</key>
@@ -502,7 +502,7 @@
 		<comment>The title of the import from word dialog.</comment>
 		<val lang="en_US">Import from MS Excel</val>
 		<val lang="de_DE">MS Excel importieren</val>
-		<val lang="fr_FR">Import from MS Excel</val>
+		<val lang="fr_FR">Importer depuis MS Excel</val>
 		<val lang="ja_JP">MS Excel からインポートする</val>
 		<val lang="nl_NL">Vanuit MS Excel importeren</val>
 	</key>
@@ -510,7 +510,7 @@
 		<comment>The title of the import from word dialog.</comment>
 		<val lang="en_US">Import from HTML</val>
 		<val lang="de_DE">HTML importieren</val>
-		<val lang="fr_FR">Import from HTML</val>
+		<val lang="fr_FR">Importer depuis HTML</val>
 		<val lang="ja_JP">HTML からインポートする</val>
 		<val lang="nl_NL">Vanuit HTML importeren</val>
 	</key>
@@ -518,7 +518,7 @@
 		<comment>The title of the import from word dialog.</comment>
 		<val lang="en_US">Import from Markdown</val>
 		<val lang="de_DE">Markdown importieren</val>
-		<val lang="fr_FR">Import from Markdown</val>
+		<val lang="fr_FR">Importer depuis Markdown</val>
 		<val lang="ja_JP">Markdown からインポートする</val>
 		<val lang="nl_NL">Vanuit Markdown importeren</val>
 	</key>
