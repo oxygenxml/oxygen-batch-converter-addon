@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter;
 
 import java.io.File;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -23,6 +24,8 @@ import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.printers.ContentPrinter;
 import com.oxygenxml.batch.converter.core.printers.ContentPrinterCreater;
 import com.oxygenxml.batch.converter.core.printers.StyleSourceGetter;
+import com.oxygenxml.batch.converter.core.printers.XMLFormatter;
+import com.oxygenxml.batch.converter.core.printers.XMLFormatterException;
 import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
 import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
@@ -44,6 +47,8 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 import ro.sync.exml.workspace.api.results.ResultsManager;
 import ro.sync.exml.workspace.api.results.ResultsManager.ResultType;
+import ro.sync.exml.workspace.api.util.PrettyPrintException;
+import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 
 /**
  * Batch converter implementation.
@@ -202,13 +207,26 @@ public class BatchConverterImpl implements BatchConverter {
 		if(logger.isDebugEnabled()) {
 		  logger.debug("Converter type: " + converterType);
 		}
-		
 		Converter converter = ConverterCreator.create(converterType);
-		ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
 		
 		if(ConverterTypes.WORD_TO_XHTML.equals(converterType) || ConverterTypes.WORD_TO_DITA.equals(converterType)){
 		  PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
 		  if(pluginWorkspace != null) {
+		    // EXM-50080: Impose the prettyPrinter from XMLUtilAccess
+		    XMLUtilAccess xmlUtilAccess = pluginWorkspace.getXMLUtilAccess();
+	      if(xmlUtilAccess != null) {
+	        ContentPrinterCreater.imposeXmlContentFormatter(new XMLFormatter() {
+	          @Override
+	          public String prettyPrint(String xmlContent) throws XMLFormatterException {
+	            try {
+	              return xmlUtilAccess.prettyPrint(new StringReader(xmlContent), null);
+	            } catch (PrettyPrintException e) {
+	              throw new XMLFormatterException(e.getMessage());
+	            }
+	          }
+	        });
+	      }
+		    
 		    WSOptionsStorage optionsStorage = pluginWorkspace.getOptionsStorage();
 		    String wordStylesMapConfig = optionsStorage.getOption(OptionTags.WORD_STYLES_MAP_CONFIG, "");
 		    if (!wordStylesMapConfig.isEmpty()) {
@@ -245,6 +263,7 @@ public class BatchConverterImpl implements BatchConverter {
       }
     } 
 		
+    ContentPrinter contentPrinter = ContentPrinterCreater.create(converterType);
 		//make the output directory if it doesn't exist
 		File outputFolder = inputsProvider.getOutputFolder();
     if(!outputFolder.exists()){
