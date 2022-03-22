@@ -26,6 +26,7 @@ import com.oxygenxml.resources.batch.converter.translator.Tags;
 
 import junit.framework.TestCase;
 import ro.sync.basic.io.IOUtil;
+import ro.sync.basic.prettyprint.SimplePrettyPrinter;
 import ro.sync.document.DocumentPositionedInfo;
 import ro.sync.exml.workspace.api.PluginResourceBundle;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
@@ -183,7 +184,7 @@ public class WordToXHtmlConverter2Test extends TestCase{
           @Override
           public String answer(InvocationOnMock invocation) throws Throwable {
             Reader reader = invocation.getArgumentAt(0, Reader.class);
-            return IOUtil.readSimple(reader);
+            return SimplePrettyPrinter.prettyPrint(IOUtil.readSimple(reader));
           }
         });
     Mockito.when(pluginWSMock.getXMLUtilAccess()).thenReturn(xmlUtilAccess);
@@ -227,7 +228,7 @@ public class WordToXHtmlConverter2Test extends TestCase{
             @Override
             public String answer(InvocationOnMock invocation) throws Throwable {
               Reader reader = invocation.getArgumentAt(0, Reader.class);
-              return IOUtil.readSimple(reader);
+              return SimplePrettyPrinter.prettyPrint(IOUtil.readSimple(reader));
             }
           });
       Mockito.when(pluginWSMock.getXMLUtilAccess()).thenReturn(xmlUtilAccess);
