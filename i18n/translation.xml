@@ -7,6 +7,14 @@
 		<language description="Japanese" lang="ja_JP"/>
 		<language description="Dutch" lang="nl_NL"/>
 	</languageList>
+	<key value="filter_div_elements">
+		<comment>Option for filtering the HTML 'div' elements when processing a HTML document.</comment>
+		<val lang="en_US">Filter the 'div' elements</val>
+		<val lang="de_DE">Filter the 'div' elements</val>
+		<val lang="fr_FR">Filter the 'div' elements</val>
+		<val lang="ja_JP">Filter the 'div' elements</val>
+		<val lang="nl_NL">Filter the 'div' elements</val>
+	</key>
 	<key value="conversion_options">
 		<comment>Link to conversion options.</comment>
 		<val lang="en_US">Conversion options</val>

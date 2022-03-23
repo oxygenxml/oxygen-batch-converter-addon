@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
+import com.oxygenxml.resources.batch.converter.view.ConverterAdditionalOptionsProvider;
 
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.options.WSOptionsStorage;
@@ -61,7 +62,8 @@ public class ContentPersisterImpl implements ContentPersister {
       Iterator<String> additionalOptionsIterator = additionalOptions.iterator();
       while (additionalOptionsIterator.hasNext()) {
         String option = additionalOptionsIterator.next();
-        value = optionsStorage.getOption(option, String.valueOf(true)); 
+        value = optionsStorage.getOption(option,
+            String.valueOf(ConverterAdditionalOptionsProvider.getDefaultValueFor(option))); 
         interactor.setAdditionalOptionValue(option, Boolean.valueOf(value));
       }
     }

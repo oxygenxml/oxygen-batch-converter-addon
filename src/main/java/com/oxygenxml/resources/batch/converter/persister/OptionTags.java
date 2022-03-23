@@ -1,11 +1,13 @@
 package com.oxygenxml.resources.batch.converter.persister;
 
+import com.oxygenxml.batch.converter.core.ConversionOptionTags;
+
 /**
  * The option tags used in add-on.
  * 
  * @author cosmin_duna
  */
-public class OptionTags {
+public class OptionTags extends ConversionOptionTags {
   
   /**
    * Private constructor.
@@ -18,35 +20,6 @@ public class OptionTags {
    * Key for openConvertedDocument checkBox.
    */
    public static final String OPEN_CONVERTED_DOCUMENT = "open.converted.document.batch.converter";
-   
-   /**
-    * Option used to configure if the result of the conversion from Word
-    *  will be a DITA Map or a DITA Topic.
-    */
-   public static final String CREATE_DITA_MAP_FROM_WORD = "create.dita.map.from.word";
-   
-   /**
-    * Option used to configure if the result of the conversion from Markdown
-    *  will be a DITA Map or a DITA Topic.
-    */
-   public static final String CREATE_DITA_MAP_FROM_MD = "create.dita.map.from.md";
-   
-   /**
-    * Option used to configure if the result of the conversion from HTML
-    *  will be a DITA Map or a DITA Topic.
-    */
-   public static final String CREATE_DITA_MAP_FROM_HTML = "create.dita.map.from.html";
-   
-   /**
-    * Option used to configure if the result of the conversion from DocBook
-    *  will be a DITA Map or a DITA Topic.
-    */
-   public static final String CREATE_DITA_MAP_FROM_DOCBOOK = "create.dita.map.from.docbook";
-   
-   /**
-    * Create short description from first paragraph 
-    */
-   public static final String CREATE_SHORT_DESCRIPTION = "create.short.description";
    
    /**
     * The word styles map configuration.

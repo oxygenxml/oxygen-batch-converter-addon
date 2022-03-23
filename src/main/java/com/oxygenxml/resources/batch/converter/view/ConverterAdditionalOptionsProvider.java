@@ -24,15 +24,22 @@ public class ConverterAdditionalOptionsProvider {
   private static OxygenTranslator translator = new OxygenTranslator();
   
   /**
-   * Map between options and translation tags.
+   * Map between options and options info.
    */
-  private static Map<String, String> addionalOptionToTranslationTag = new HashMap<>();
+  private static Map<String, AdditionalOptionsInfo> addionalOptionToTranslationTag = new HashMap<>();
   static {
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_HEADINGS), "Word"));
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_HEADINGS), "Markdown"));
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_HEADINGS), "HTML"));
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_DOCBOOK, MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_SECTIONS), "DocBook"));
-    addionalOptionToTranslationTag.put(OptionTags.CREATE_SHORT_DESCRIPTION, translator.getTranslation(Tags.CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_WORD, 
+        new AdditionalOptionsInfo(MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_HEADINGS), "Word"), true));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_MD,
+        new AdditionalOptionsInfo(MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_HEADINGS), "Markdown"), true));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_HTML,
+        new AdditionalOptionsInfo(MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_HEADINGS), "HTML"), true));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_DOCBOOK,
+        new AdditionalOptionsInfo(MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_SECTIONS), "DocBook"), true));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_SHORT_DESCRIPTION,
+        new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH), false));
+    addionalOptionToTranslationTag.put(OptionTags.FILTER_DIV_ELEMENTS_FROM_HTML,
+        new AdditionalOptionsInfo(translator.getTranslation(Tags.FILTER_DIV_ELEMENTS), false));
   }
   
   /**
@@ -62,7 +69,9 @@ public class ConverterAdditionalOptionsProvider {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_MD);
       options.add(OptionTags.CREATE_SHORT_DESCRIPTION);
     } else if(ConverterTypes.HTML_TO_DITA.equals(convertionType)) {
+      options.add(ADDITIONAL_OPTIONS_SEPARATOR);
       options.add(OptionTags.CREATE_DITA_MAP_FROM_HTML);
+      options.add(OptionTags.FILTER_DIV_ELEMENTS_FROM_HTML);
     } else if(ConverterTypes.DOCBOOK_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_DOCBOOK);
     }
@@ -77,6 +86,27 @@ public class ConverterAdditionalOptionsProvider {
    * @return The translation message associated with the option.
    */
   public static final String getTranslationMessageFor(String additionalOption) {
-    return addionalOptionToTranslationTag.get(additionalOption);
+    String toRet = "";
+    AdditionalOptionsInfo additionalOptionsInfo = addionalOptionToTranslationTag.get(additionalOption);
+    if(additionalOptionsInfo != null) {
+      toRet = additionalOptionsInfo.getMessage();
+    }
+    return toRet;
+  }
+  
+  /**
+   * Get the default boolean value the given additional option.
+   * 
+   * @param additionalOption The additional option.
+   * 
+   * @return The default boolean value the given additional option
+   */
+  public static final boolean getDefaultValueFor(String additionalOption) {
+    boolean toRet = true;
+    AdditionalOptionsInfo additionalOptionsInfo = addionalOptionToTranslationTag.get(additionalOption);
+    if(additionalOptionsInfo != null) {
+      toRet = additionalOptionsInfo.getDefaultValue();
+    }
+    return toRet;
   }
 }
