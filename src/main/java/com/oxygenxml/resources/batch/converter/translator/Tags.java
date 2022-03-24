@@ -201,9 +201,4 @@ public class Tags {
    * en: Conversion options.
    */
   public static final String CONVERSION_OPTIONS = "conversion_options";
-  
-  /**
-   * en: Filter the 'div' elements
-   */
-  public static final String FILTER_DIV_ELEMENTS = "filter_div_elements";
 }
