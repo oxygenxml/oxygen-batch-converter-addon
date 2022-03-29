@@ -201,4 +201,11 @@ public class Tags {
    * en: Conversion options.
    */
   public static final String CONVERSION_OPTIONS = "conversion_options";
+  
+  /**
+   * Option used to configure if the result will be a DITA Map or a DITA Topic.
+   * 
+   *  en: Create DITA map. 
+   */
+  public static final String CREATE_DITA_MAP = "create_dita_map";
 }

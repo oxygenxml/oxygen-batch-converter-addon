@@ -7,6 +7,15 @@
 		<language description="Japanese" lang="ja_JP"/>
 		<language description="Dutch" lang="nl_NL"/>
 	</languageList>
+		<key value="create_dita_map">
+		<comment>Option used to configure if the result will be a DITA Map or a DITA
+			Topic.</comment>
+		<val lang="en_US">Create DITA map</val>
+		<val lang="de_DE">Create DITA map</val>
+		<val lang="fr_FR">Create DITA map</val>
+		<val lang="ja_JP">Create DITA map</val>
+		<val lang="nl_NL">Create DITA map</val>
+	</key>
 	<key value="conversion_options">
 		<comment>Link to conversion options.</comment>
 		<val lang="en_US">Conversion options</val>
@@ -312,6 +321,15 @@
 		<val lang="ja_JP">DocBook から DITA</val>
 		<val lang="nl_NL">DocBook naar DITA</val>
 	</key>
+	<key value="Menu_Item_Text_Conv_openapi.to.dita">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">OpenAPI to DITA</val>
+		<val lang="de_DE">OpenAPI zu DITA</val>
+		<val lang="fr_FR">OpenAPI vers DITA</val>
+		<val lang="ja_JP">OpenAPI から DITA</val>
+		<val lang="nl_NL">OpenAPI naar DITA</val>
+	</key>
+	
 
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>

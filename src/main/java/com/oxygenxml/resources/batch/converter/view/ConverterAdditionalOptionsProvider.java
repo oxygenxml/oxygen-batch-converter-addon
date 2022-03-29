@@ -38,6 +38,8 @@ public class ConverterAdditionalOptionsProvider {
         new AdditionalOptionsInfo(MessageFormat.format(translator.getTranslation(Tags.CREATE_DITA_MAP_FROM_DOCUMENT_SECTIONS), "DocBook"), true));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_SHORT_DESCRIPTION,
         new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH), false));
+    addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_OPEN_API,
+        new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_DITA_MAP), true));
   }
   
   /**
@@ -70,6 +72,8 @@ public class ConverterAdditionalOptionsProvider {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_HTML);
     } else if(ConverterTypes.DOCBOOK_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_DOCBOOK);
+    } else if(ConverterTypes.OPENAPI_TO_DITA.equals(convertionType)) {
+      options.add(OptionTags.CREATE_DITA_MAP_FROM_OPEN_API);
     }
     return options;
   }

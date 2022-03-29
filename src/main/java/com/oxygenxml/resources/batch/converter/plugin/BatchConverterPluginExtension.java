@@ -252,13 +252,14 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
    * @return the array with import actions for the DMM contextual menu.
    */
   private Action[] createImportActionsList(InsertType insertType, StandalonePluginWorkspace pluginWorkspaceAccess) {
-    Action[] importActionList = new Action[6];
+    Action[] importActionList = new Action[7];
     importActionList[0] = new ImportAction(ConverterTypes.HTML_TO_DITA, insertType, translator);
     importActionList[1] = new ImportAction(ConverterTypes.MD_TO_DITA, insertType, translator);
     importActionList[2] = new ImportAction(ConverterTypes.EXCEL_TO_DITA, insertType, translator);
     importActionList[3] = new ImportAction(ConverterTypes.WORD_TO_DITA, insertType, translator);
     importActionList[4] = new ImportAction(ConverterTypes.CONFLUENCE_TO_DITAMAP, insertType, translator);
     importActionList[5] = new ImportAction(ConverterTypes.DOCBOOK_TO_DITA, insertType, translator);
+    importActionList[6] = new ImportAction(ConverterTypes.OPENAPI_TO_DITA, insertType, translator);
     return importActionList;
   }
   
@@ -277,6 +278,7 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     List<Action> docbook = new ArrayList<>();
     List<Action> json = new ArrayList<>();
     List<Action> confluence = new ArrayList<>();
+    List<Action> openAPI = new ArrayList<>();
     
     html.add(new ConvertAction(ConverterTypes.HTML_TO_XHTML, translator, this));
     html.add(new ConvertAction(ConverterTypes.HTML_TO_DITA, translator, this));
@@ -302,6 +304,9 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     
     docbook.add(new ConvertAction(ConverterTypes.DOCBOOK_TO_DITA, translator, this));
     toReturn.put("docbookSection", docbook);
+    
+    openAPI.add(new ConvertAction(ConverterTypes.OPENAPI_TO_DITA, translator, this));
+    toReturn.put("openAPI", openAPI);
     
     json.add(new ConvertAction(ConverterTypes.JSON_TO_XML, translator, this));
     json.add(new ConvertAction(ConverterTypes.XML_TO_JSON, translator, this));
