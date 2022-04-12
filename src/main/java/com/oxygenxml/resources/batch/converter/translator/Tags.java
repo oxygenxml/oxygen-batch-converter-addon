@@ -203,9 +203,9 @@ public class Tags {
   public static final String CONVERSION_OPTIONS = "conversion_options";
   
   /**
-   * Option used to configure if the result will be a DITA Map or a DITA Topic.
+   * Option used to configure if the result will be DITA Maps or DITA Topics in conversion from OpenAPI.
    * 
-   *  en: Create DITA map. 
+   *  en: Create DITA maps from OpenAPI documents
    */
-  public static final String CREATE_DITA_MAP = "create_dita_map";
+  public static final String CREATE_DITA_MAPS_FROM_OPENAPI = "create_dita_maps_from_openapi";
 }

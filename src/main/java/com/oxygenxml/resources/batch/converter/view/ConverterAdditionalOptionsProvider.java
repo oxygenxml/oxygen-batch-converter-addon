@@ -39,7 +39,7 @@ public class ConverterAdditionalOptionsProvider {
     addionalOptionToTranslationTag.put(OptionTags.CREATE_SHORT_DESCRIPTION,
         new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH), false));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_OPEN_API,
-        new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_DITA_MAP), true));
+        new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_DITA_MAPS_FROM_OPENAPI), true));
   }
   
   /**

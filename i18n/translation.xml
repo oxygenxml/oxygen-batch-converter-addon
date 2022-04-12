@@ -7,14 +7,14 @@
 		<language description="Japanese" lang="ja_JP"/>
 		<language description="Dutch" lang="nl_NL"/>
 	</languageList>
-		<key value="create_dita_map">
-		<comment>Option used to configure if the result will be a DITA Map or a DITA
-			Topic.</comment>
-		<val lang="en_US">Create DITA map</val>
-		<val lang="de_DE">Create DITA map</val>
-		<val lang="fr_FR">Create DITA map</val>
-		<val lang="ja_JP">Create DITA map</val>
-		<val lang="nl_NL">Create DITA map</val>
+		<key value="create_dita_maps_from_openapi">
+		<comment>Option used to configure if the result will be DITA Maps or DITA
+			Topics in conversion from OpenAPI format</comment>
+		<val lang="en_US">Create DITA maps from OpenAPI documents</val>
+		<val lang="de_DE">Create DITA maps from OpenAPI documents</val>
+		<val lang="fr_FR">Create DITA maps from OpenAPI documents</val>
+		<val lang="ja_JP">Create DITA maps from OpenAPI documents</val>
+		<val lang="nl_NL">Create DITA maps from OpenAPI documents</val>
 	</key>
 	<key value="conversion_options">
 		<comment>Link to conversion options.</comment>
