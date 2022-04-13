@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <third-party>
-    <component id="com.fasterxml.jackson.core:jackson-annotations:2.12.6" product="editor">
+    <component id="com.fasterxml.jackson.core:jackson-annotations:2.13.2" product="editor">
         <name>Jackson-annotations</name>
-        <version>2.12.6</version>
+        <version>2.13.2</version>
         <project-info>
             <about>Core annotations used for value types, used by Jackson data binding package.</about>
             <licensor>FasterXML</licensor>
@@ -15,9 +15,9 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="com.fasterxml.jackson.core:jackson-core:2.12.6" product="editor">
+    <component id="com.fasterxml.jackson.core:jackson-core:2.13.2" product="editor">
         <name>Jackson-core</name>
-        <version>2.12.6</version>
+        <version>2.13.2</version>
         <project-info>
             <about>Core Jackson processing abstractions (aka Streaming API), implementation for JSON</about>
             <licensor>FasterXML</licensor>
@@ -232,9 +232,9 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="com.fasterxml.jackson.core:jackson-databind:2.12.6" product="editor">
+    <component id="com.fasterxml.jackson.core:jackson-databind:2.13.2.2" product="editor">
         <name>jackson-databind</name>
-        <version>2.12.6</version>
+        <version>2.13.2.2</version>
         <project-info>
             <about>General data-binding functionality for Jackson: works on core streaming API</about>
             <licensor>FasterXML</licensor>
@@ -247,9 +247,9 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.12.6" product="editor">
+    <component id="com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2" product="editor">
         <name>Jackson-dataformat-YAML</name>
-        <version>2.12.6</version>
+        <version>2.13.2</version>
         <project-info>
             <about>Support for reading and writing YAML-encoded data via Jackson abstractions.</about>
             <licensor>FasterXML</licensor>
