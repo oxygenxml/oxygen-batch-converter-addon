@@ -12,7 +12,7 @@
 			Topics in conversion from OpenAPI format</comment>
 		<val lang="en_US">Create DITA maps from OpenAPI documents</val>
 		<val lang="de_DE">Create DITA maps from OpenAPI documents</val>
-		<val lang="fr_FR">Create DITA maps from OpenAPI documents</val>
+			<val lang="fr_FR">Créer des DITA maps à partir de documents OpenAPI</val>
 		<val lang="ja_JP">Create DITA maps from OpenAPI documents</val>
 		<val lang="nl_NL">Create DITA maps from OpenAPI documents</val>
 	</key>
