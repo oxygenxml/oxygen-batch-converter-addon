@@ -18,6 +18,7 @@ import org.zwobble.mammoth.internal.documents.Style;
 import com.oxygenxml.batch.converter.core.ConversionFormatUtil;
 import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.batch.converter.core.converters.ConversionResult;
+import com.oxygenxml.batch.converter.core.converters.ConvertedFilesManager;
 import com.oxygenxml.batch.converter.core.converters.Converter;
 import com.oxygenxml.batch.converter.core.converters.ConverterCreator;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
@@ -199,7 +200,7 @@ public class BatchConverterImpl implements BatchConverter {
 	 */
 	@Override
 	public List<File> convertFiles(String converterType, UserInputsProvider inputsProvider) {
-		List<File> convertedFiles = new ArrayList<File>();
+	  ConvertedFilesManager convertedFilesManager = new ConvertedFilesManager();
 		isSuccessfully = true;
 		noOfConvertedFiles = 0;
 		failedFile = 0;
@@ -291,15 +292,17 @@ public class BatchConverterImpl implements BatchConverter {
 					logger.debug("File to convert: " + currentFile);
 				}
 				
-				converterStatusReporter.conversionInProgress(currentFile);
+				if(!convertedFilesManager.isFileAlreadyConverted(currentFile)) {
+				  converterStatusReporter.conversionInProgress(currentFile);
 
-				//generate the output file.
-				File outputFile = ConverterFileUtils.getUniqueOutputFile(currentFile, 
-            ExtensionGetter.getOutputExtension(converterType), outputFolder);
-				
-				//convert and print the current file.
-				convertedFiles.add(
-				    convertAndPrintFile(currentFile, outputFile, converter, contentPrinter, converterType, inputsProvider));
+				  //convert and print the current file.
+				  File outputFile = convertAndPrintFile(
+				      currentFile,
+				      ConverterFileUtils.getUniqueOutputFile(currentFile, ExtensionGetter.getOutputExtension(converterType), outputFolder),
+				      converter, contentPrinter, converterType, inputsProvider);
+				  
+				  convertedFilesManager.addConvertedFile(currentFile, outputFile);
+				}
 			}
 
 		} else {
@@ -309,7 +312,7 @@ public class BatchConverterImpl implements BatchConverter {
 
 		//report the finish status
 		oxyStatusReporter.conversionFinished(noOfConvertedFiles, failedFile);
-		return convertedFiles;
+		return convertedFilesManager.getAllOutputFiles();
 	}
 	
 	
