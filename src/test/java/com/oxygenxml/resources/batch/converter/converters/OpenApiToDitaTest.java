@@ -109,8 +109,10 @@ public class OpenApiToDitaTest {
     assertEquals("Only 2 files should be created in the output folder."
         + " The 'definitions.json' shouldn't be converted twice. Files: " + Arrays.asList(outputFiles),
         2, outputFiles.length);
-    assertTrue(outputFiles[0].getAbsolutePath().endsWith("definitions.dita"));
-    assertTrue(outputFiles[1].getAbsolutePath().endsWith("externalReference.dita"));
+    assertTrue(Arrays.toString(outputFiles).contains("definitions.dita"));
+    assertTrue(Arrays.toString(outputFiles).contains("externalReference.dita"));
+    
+    File outputFile = new File(outputDir, "externalReference.dita");
     assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
         "<!DOCTYPE dita\n" + 
         "  PUBLIC \"-//OASIS//DTD DITA Composite//EN\" \"ditabase.dtd\">\n" + 
@@ -198,7 +200,7 @@ public class OpenApiToDitaTest {
         "    <title>Components</title>\n" + 
         "    <body/>\n" + 
         "  </topic>\n" + 
-        "</dita>", IOUtil.readFile(outputFiles[1]));
+        "</dita>", IOUtil.readFile(outputFile));
   }
       
 }
