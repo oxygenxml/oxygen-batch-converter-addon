@@ -131,15 +131,11 @@ public class OpenApiToDitaTest {
         "    <body/>\n" + 
         "    <topic id=\"get-_x2f_pets\" outputclass=\"openapi-operation\">\n" + 
         "      <title id=\"get-_x2f_pets-title\" outputclass=\"openapi-operation-title\">\n" + 
-        "        <ph id=\"get-_x2f_pets-title-ph\">get<ph> /pets</ph>\n" + 
-        "        </ph>\n" + 
+        "        <codeph id=\"method\" outputclass=\"openapi-operation-method\">GET</codeph>\n" + 
+        "        <codeph id=\"path\" outputclass=\"openapi-operation-path\">/pets</codeph>\n" + 
         "      </title>\n" + 
         "      <body>\n" + 
         "        <bodydiv id=\"get-_x2f_pets-description\" outputclass=\"openapi-operation-description\">Returns all pets from the system that the user has access to</bodydiv>\n" + 
-        "        <p outputclass=\"openapi-operation-method-path\">\n" + 
-        "          <codeph id=\"method\" outputclass=\"openapi-operation-method\">GET</codeph>\n" + 
-        "          <codeph id=\"path\" outputclass=\"openapi-operation-path\">/pets</codeph>\n" + 
-        "        </p>\n" + 
         "        <section outputclass=\"openapi-responses\">\n" + 
         "          <title>Responses</title>\n" + 
         "          <dl outputclass=\"openapi-responses-list\">\n" + 
