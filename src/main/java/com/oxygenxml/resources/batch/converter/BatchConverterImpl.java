@@ -200,7 +200,8 @@ public class BatchConverterImpl implements BatchConverter {
 	 */
 	@Override
 	public List<File> convertFiles(String converterType, UserInputsProvider inputsProvider) {
-	  ConvertedFilesManager convertedFilesManager = new ConvertedFilesManager();
+	  ConvertedFilesManager convertedFilesManager = ConvertedFilesManager.getInstance();
+	  convertedFilesManager.clearConvertedFiles();
 		isSuccessfully = true;
 		noOfConvertedFiles = 0;
 		failedFile = 0;
