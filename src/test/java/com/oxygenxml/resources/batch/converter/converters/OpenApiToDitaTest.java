@@ -131,8 +131,8 @@ public class OpenApiToDitaTest {
         "    <body/>\n" + 
         "    <topic id=\"get_pets\" outputclass=\"openapi-operation\">\n" + 
         "      <title id=\"get_pets-title\" outputclass=\"openapi-operation-title\">\n" + 
-        "        <codeph id=\"method\" outputclass=\"openapi-operation-method\">GET</codeph>\n" + 
-        "        <codeph id=\"path\" outputclass=\"openapi-operation-path\">/pets</codeph>\n" + 
+        "        <ph id=\"method\" outputclass=\"openapi-operation-method-get\">GET</ph>\n" + 
+        "        <ph id=\"path\" outputclass=\"openapi-operation-path\">/pets</ph>\n" + 
         "      </title>\n" + 
         "      <body>\n" + 
         "        <bodydiv id=\"get_pets-description\" outputclass=\"openapi-operation-description\">Returns all pets from the system that the user has access to</bodydiv>\n" + 
@@ -146,21 +146,23 @@ public class OpenApiToDitaTest {
         "                <dl outputclass=\"openapi-response-properties\">\n" + 
         "                  <dlentry outputclass=\"openapi-response-content\">\n" + 
         "                    <dt>Media types</dt>\n" + 
-        "                    <dd>\n" + 
+        "                    <dd outputclass=\"openapi-mediaTypes-data\">\n" + 
         "                      <dl outputclass=\"openapi-mediaTypes\">\n" + 
         "                        <dlentry outputclass=\"openapi-mediaType\">\n" + 
         "                          <dt outputclass=\"openapi-mediaType-key\">application/json</dt>\n" + 
         "                          <dd>\n" + 
-        "                            <p outputclass=\"openapi-mediaType-schema\">\n" + 
-        "                              <b>Schema:</b>\n" + 
-        "                              <dl outputclass=\"openapi-schema-values\">\n" + 
-        "                                <dlentry>\n" + 
-        "                                  <dt>type</dt>\n" + 
-        "                                  <dd>array</dd>\n" + 
-        "                                </dlentry>\n" + 
-        "                                <dlentry>\n" + 
-        "                                  <dt>items</dt>\n" + 
-        "                                  <dd>\n" + 
+        "                            <dl outputclass=\"openapi-mediaType-fields-list\">\n" + 
+        "                              <dlentry outputclass=\"openapi-mediaType-schema\">\n" + 
+        "                                <dt>Schema</dt>\n" + 
+        "                                <dd>\n" + 
+        "                                  <dl outputclass=\"openapi-schema-values\">\n" + 
+        "                                    <dlentry>\n" + 
+        "                                    <dt>type</dt>\n" + 
+        "                                    <dd>array</dd>\n" + 
+        "                                    </dlentry>\n" + 
+        "                                    <dlentry>\n" + 
+        "                                    <dt>items</dt>\n" + 
+        "                                    <dd>\n" + 
         "                                    <dl outputclass=\"openapi-schema-values\">\n" + 
         "                                    <dlentry>\n" + 
         "                                    <dt>$ref</dt>\n" + 
@@ -169,10 +171,12 @@ public class OpenApiToDitaTest {
         "                                    </dd>\n" + 
         "                                    </dlentry>\n" + 
         "                                    </dl>\n" + 
-        "                                  </dd>\n" + 
-        "                                </dlentry>\n" + 
-        "                              </dl>\n" + 
-        "                            </p>\n" + 
+        "                                    </dd>\n" + 
+        "                                    </dlentry>\n" + 
+        "                                  </dl>\n" + 
+        "                                </dd>\n" + 
+        "                              </dlentry>\n" + 
+        "                            </dl>\n" + 
         "                          </dd>\n" + 
         "                        </dlentry>\n" + 
         "                      </dl>\n" + 
