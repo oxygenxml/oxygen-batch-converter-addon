@@ -126,8 +126,8 @@ public class OpenApiToDitaTest {
         "      </p>\n" + 
         "    </body>\n" + 
         "  </topic>\n" + 
-        "  <topic id=\"allPaths\" outputclass=\"openapi-allPaths\">\n" + 
-        "    <title>All paths</title>\n" + 
+        "  <topic id=\"defaultTag\" outputclass=\"openapi-tag\">\n" + 
+        "    <title outputclass=\"openapi-tag-title\">API methods: default</title>\n" + 
         "    <body/>\n" + 
         "    <topic id=\"get_pets\" outputclass=\"openapi-operation\">\n" + 
         "      <title id=\"get_pets-title\" outputclass=\"openapi-operation-title\">\n" + 
