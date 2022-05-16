@@ -40,6 +40,8 @@ public class ConverterAdditionalOptionsProvider {
         new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_SHORT_DESCRIPTION_FROM_PARAGRAPH), false));
     addionalOptionToTranslationTag.put(OptionTags.CREATE_DITA_MAP_FROM_OPEN_API,
         new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_DITA_MAPS_FROM_OPENAPI), true));
+    addionalOptionToTranslationTag.put(OptionTags.IGNORE_DIV_ELEMENTS_FROM_HTML,
+        new AdditionalOptionsInfo(translator.getTranslation(Tags.IGNORE_DIV_ELEMENTS), false));
   }
   
   /**
@@ -69,7 +71,9 @@ public class ConverterAdditionalOptionsProvider {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_MD);
       options.add(OptionTags.CREATE_SHORT_DESCRIPTION);
     } else if(ConverterTypes.HTML_TO_DITA.equals(convertionType)) {
+      options.add(ADDITIONAL_OPTIONS_SEPARATOR);
       options.add(OptionTags.CREATE_DITA_MAP_FROM_HTML);
+      options.add(OptionTags.IGNORE_DIV_ELEMENTS_FROM_HTML);
     } else if(ConverterTypes.DOCBOOK_TO_DITA.equals(convertionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_DOCBOOK);
     } else if(ConverterTypes.OPENAPI_TO_DITA.equals(convertionType)) {

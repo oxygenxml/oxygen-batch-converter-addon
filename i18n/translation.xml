@@ -16,6 +16,14 @@
 		<val lang="ja_JP">Create DITA maps from OpenAPI documents</val>
 		<val lang="nl_NL">Create DITA maps from OpenAPI documents</val>
 	</key>
+		<key value="ignore_div_elements">
+		<comment>Option for ignorinng the HTML 'div' elements when processing a HTML document.</comment>
+		<val lang="en_US">Ignore HTML 'div' elements</val>
+		<val lang="de_DE">Ignore HTML 'div' elements</val>
+		<val lang="fr_FR">Ignore HTML 'div' elements</val>
+		<val lang="ja_JP">Ignore HTML 'div' elements</val>
+		<val lang="nl_NL">Ignore HTML 'div' elements</val>
+	</key>
 	<key value="conversion_options">
 		<comment>Link to conversion options.</comment>
 		<val lang="en_US">Conversion options</val>

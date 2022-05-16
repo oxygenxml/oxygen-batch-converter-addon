@@ -208,4 +208,9 @@ public class Tags {
    *  en: Create DITA maps from OpenAPI documents
    */
   public static final String CREATE_DITA_MAPS_FROM_OPENAPI = "create_dita_maps_from_openapi";
+  
+  /**
+   * en: Ignore html 'div' elements
+   */
+  public static final String IGNORE_DIV_ELEMENTS = "ignore_div_elements";
 }

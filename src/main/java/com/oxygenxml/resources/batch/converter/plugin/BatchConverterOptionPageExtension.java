@@ -1,10 +1,7 @@
 package com.oxygenxml.resources.batch.converter.plugin;
 
 import javax.swing.JComponent;
-import javax.xml.bind.JAXBException;
 
-import com.oxygenxml.batch.converter.core.word.styles.WordStyleMap;
-import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.view.BatchConverterOptionPanel;
 
