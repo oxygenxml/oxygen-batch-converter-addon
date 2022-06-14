@@ -28,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oxygenxml.batch.converter.core.converters.ConverterDefaults;
-import com.oxygenxml.batch.converter.core.converters.XHTMLToDITAConverter;
 import com.oxygenxml.batch.converter.core.extensions.FileExtensionType;
 import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
@@ -41,6 +40,7 @@ import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.ui.Button;
+import ro.sync.exml.workspace.api.standalone.ui.Table;
 import ro.sync.exml.workspace.api.standalone.ui.ToolbarButton;
 import ro.sync.ui.application.ApplicationTable;
 
@@ -119,7 +119,7 @@ public class BatchConverterOptionPanel extends JPanel{
         .getPluginWorkspace();
     PluginResourceBundle messages = pluginWorkspace.getResourceBundle();
 
-    wordMappingtable = new ApplicationTable() {
+    wordMappingtable = new Table() {
       @Override
       public String getToolTipText(MouseEvent event) {
         String toolTipText = super.getToolTipText(event);
@@ -137,6 +137,7 @@ public class BatchConverterOptionPanel extends JPanel{
     };
     
     wordMappingtableModel = new DefaultTableModel(0, 3) {
+      @Override
       public String getColumnName(int column) {
         String name; 
         switch (column) {
@@ -184,7 +185,7 @@ public class BatchConverterOptionPanel extends JPanel{
     JScrollPane scPane = new JScrollPane(wordMappingtable);
     scPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     scPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-   
+    scPane.setPreferredSize(new Dimension(scPane.getPreferredSize().width, 200));
     
     GridBagConstraints constr = new GridBagConstraints();
     constr.gridx = 0;
