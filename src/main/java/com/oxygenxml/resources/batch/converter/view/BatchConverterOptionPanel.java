@@ -33,6 +33,7 @@ import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
+import com.oxygenxml.resources.batch.converter.utils.HiDPIUtil;
 
 import ro.sync.basic.util.URLUtil;
 import ro.sync.exml.workspace.api.PluginResourceBundle;
@@ -45,11 +46,17 @@ import ro.sync.exml.workspace.api.standalone.ui.ToolbarButton;
 import ro.sync.ui.application.ApplicationTable;
 
 /**
- * Option panel for Batc Documents Converter
+ * Option panel for Batch Documents Converter
  * 
  * @author cosmin_duna
  */
 public class BatchConverterOptionPanel extends JPanel{
+  
+  /**
+   * Preferred length used 
+   */
+  private static final int PREFFERED_LENGTH = 200;
+
   /**
    * Logger
    */
@@ -119,7 +126,7 @@ public class BatchConverterOptionPanel extends JPanel{
         .getPluginWorkspace();
     PluginResourceBundle messages = pluginWorkspace.getResourceBundle();
 
-    wordMappingtable = new Table() {
+    wordMappingtable = new Table(){
       @Override
       public String getToolTipText(MouseEvent event) {
         String toolTipText = super.getToolTipText(event);
@@ -185,7 +192,8 @@ public class BatchConverterOptionPanel extends JPanel{
     JScrollPane scPane = new JScrollPane(wordMappingtable);
     scPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     scPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    scPane.setPreferredSize(new Dimension(scPane.getPreferredSize().width, 200));
+    scPane.setPreferredSize(new Dimension(scPane.getPreferredSize().width,
+                                          HiDPIUtil.getHiDPISize(PREFFERED_LENGTH)));
     
     GridBagConstraints constr = new GridBagConstraints();
     constr.gridx = 0;
