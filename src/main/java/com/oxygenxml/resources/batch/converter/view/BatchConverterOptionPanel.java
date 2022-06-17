@@ -55,7 +55,7 @@ public class BatchConverterOptionPanel extends JPanel{
   /**
    * Preferred length used 
    */
-  private static final int PREFFERED_LENGTH = 200;
+  private static final int WORD_MAPPING_TABLE_PREFFERED_HEIGHT = 200;
 
   /**
    * Logger
@@ -193,7 +193,7 @@ public class BatchConverterOptionPanel extends JPanel{
     scPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     scPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     scPane.setPreferredSize(new Dimension(scPane.getPreferredSize().width,
-                                          HiDPIUtil.getHiDPISize(PREFFERED_LENGTH)));
+                                          HiDPIUtil.getHiDPISize(WORD_MAPPING_TABLE_PREFFERED_HEIGHT)));
     
     GridBagConstraints constr = new GridBagConstraints();
     constr.gridx = 0;
