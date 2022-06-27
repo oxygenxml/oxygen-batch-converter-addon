@@ -196,10 +196,6 @@ public class OpenApiToDitaTest {
         "      </body>\n" + 
         "    </topic>\n" + 
         "  </topic>\n" + 
-        "  <topic id=\"components\" outputclass=\"openapi-components\">\n" + 
-        "    <title>Components</title>\n" + 
-        "    <body/>\n" + 
-        "  </topic>\n" + 
         "</dita>", IOUtil.readFile(outputFile));
   }
       
