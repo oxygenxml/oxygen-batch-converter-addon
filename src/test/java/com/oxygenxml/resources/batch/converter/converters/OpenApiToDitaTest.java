@@ -117,85 +117,86 @@ public class OpenApiToDitaTest {
         "<!DOCTYPE dita\n" + 
         "  PUBLIC \"-//OASIS//DTD DITA Composite//EN\" \"ditabase.dtd\">\n" + 
         "<dita>\n" + 
-        "  <topic id=\"introTopic\" outputclass=\"openapi-introduction\">\n" + 
-        "    <title outputclass=\"openapi-title\">Swagger Petstore - OpenAPI 3.0</title>\n" + 
-        "    <body>\n" + 
-        "      <p>\n" + 
-        "        <ph>Version:</ph>\n" + 
-        "        <ph outputclass=\"openapi-version\">1.0.11</ph>\n" + 
-        "      </p>\n" + 
-        "    </body>\n" + 
-        "  </topic>\n" + 
-        "  <topic id=\"defaultTag\" outputclass=\"openapi-tag\">\n" + 
-        "    <title outputclass=\"openapi-tag-title\">API methods: default</title>\n" + 
-        "    <body/>\n" + 
-        "    <topic id=\"get_pets\" outputclass=\"openapi-operation\">\n" + 
-        "      <title id=\"get_pets-title\" outputclass=\"openapi-operation-title\">\n" + 
-        "        <ph id=\"method\" outputclass=\"openapi-operation-method-get\">GET</ph>\n" + 
-        "        <ph id=\"path\" outputclass=\"openapi-operation-path\">/pets</ph>\n" + 
-        "      </title>\n" + 
+        "   <topic id=\"introTopic\" outputclass=\"openapi-introduction\">\n" + 
+        "      <title outputclass=\"openapi-title\">Swagger Petstore - OpenAPI 3.0</title>\n" + 
         "      <body>\n" + 
-        "        <bodydiv id=\"get_pets-description\" outputclass=\"openapi-operation-description\">Returns all pets from the system that the user has access to</bodydiv>\n" + 
-        "        <section outputclass=\"openapi-responses\">\n" + 
-        "          <title>Responses</title>\n" + 
-        "          <dl outputclass=\"openapi-responses-list\">\n" + 
-        "            <dlentry outputclass=\"openapi-response\">\n" + 
-        "              <dt outputclass=\"openapi-response-key\">200</dt>\n" + 
-        "              <dd>\n" + 
-        "                <div outputclass=\"openapi-response-description\">A list of pets.</div>\n" + 
-        "                <dl outputclass=\"openapi-response-properties\">\n" + 
-        "                  <dlentry outputclass=\"openapi-response-content\">\n" + 
-        "                    <dt>Media types</dt>\n" + 
-        "                    <dd outputclass=\"openapi-mediaTypes-data\">\n" + 
-        "                      <dl outputclass=\"openapi-mediaTypes\">\n" + 
-        "                        <dlentry outputclass=\"openapi-mediaType\">\n" + 
-        "                          <dt outputclass=\"openapi-mediaType-key\">application/json</dt>\n" + 
-        "                          <dd>\n" + 
-        "                            <dl outputclass=\"openapi-mediaType-fields-list\">\n" + 
-        "                              <dlentry outputclass=\"openapi-mediaType-schema\">\n" + 
-        "                                <dt>Schema</dt>\n" + 
-        "                                <dd>\n" + 
-        "                                  <dl outputclass=\"openapi-schema-values\">\n" + 
-        "                                    <dlentry>\n" + 
-        "                                    <dt>type</dt>\n" + 
-        "                                    <dd>array</dd>\n" + 
-        "                                    </dlentry>\n" + 
-        "                                    <dlentry>\n" + 
-        "                                    <dt>items</dt>\n" + 
-        "                                    <dd>\n" + 
-        "                                    <dl outputclass=\"openapi-schema-values\">\n" + 
-        "                                    <dlentry>\n" + 
-        "                                    <dt>$ref</dt>\n" + 
-        "                                    <dd>\n" + 
-        "                                    <xref href=\"definitions.dita#schemas/pet\" outputclass=\"openapi-reference\"/>\n" + 
-        "                                    </dd>\n" + 
-        "                                    </dlentry>\n" + 
-        "                                    </dl>\n" + 
-        "                                    </dd>\n" + 
-        "                                    </dlentry>\n" + 
-        "                                  </dl>\n" + 
-        "                                </dd>\n" + 
-        "                              </dlentry>\n" + 
-        "                            </dl>\n" + 
-        "                          </dd>\n" + 
-        "                        </dlentry>\n" + 
-        "                      </dl>\n" + 
-        "                    </dd>\n" + 
-        "                  </dlentry>\n" + 
-        "                </dl>\n" + 
-        "              </dd>\n" + 
-        "            </dlentry>\n" + 
-        "            <dlentry outputclass=\"openapi-response\">\n" + 
-        "              <dt outputclass=\"openapi-response-key\">400</dt>\n" + 
-        "              <dd>\n" + 
-        "                <xref href=\"definitions2.dita#responses/error400\" outputclass=\"openapi-reference\"/>\n" + 
-        "              </dd>\n" + 
-        "            </dlentry>\n" + 
-        "          </dl>\n" + 
-        "        </section>\n" + 
+        "         <p>\n" + 
+        "            <ph>Version:</ph>\n" + 
+        "            <ph outputclass=\"openapi-version\">1.0.11</ph>\n" + 
+        "         </p>\n" + 
         "      </body>\n" + 
-        "    </topic>\n" + 
-        "  </topic>\n" + 
+        "   </topic>\n" + 
+        "   <topic outputclass=\"openapi-tag\" id=\"defaultTag\">\n" + 
+        "      <title outputclass=\"openapi-tag-title\">API methods: default</title>\n" + 
+        "      <body/>\n" + 
+        "      <topic id=\"get_pets\" outputclass=\"openapi-operation\">\n" + 
+        "         <title outputclass=\"openapi-operation-title\" id=\"get_pets-title\">\n" + 
+        "            <ph id=\"method\" outputclass=\"openapi-operation-method-get\">GET</ph>\n" + 
+        "            <ph id=\"path\" outputclass=\"openapi-operation-path\">/pets</ph>\n" + 
+        "         </title>\n" + 
+        "         <body>\n" + 
+        "            <bodydiv outputclass=\"openapi-operation-description\" id=\"get_pets-description\">Returns all pets from the system that the user has access to</bodydiv>\n" + 
+        "            <section outputclass=\"openapi-responses\">\n" + 
+        "               <title>Responses</title>\n" + 
+        "               <dl outputclass=\"openapi-responses-list\">\n" + 
+        "                  <dlentry outputclass=\"openapi-response\">\n" + 
+        "                     <dt outputclass=\"openapi-response-key\">200</dt>\n" + 
+        "                     <dd>\n" + 
+        "                        <div outputclass=\"openapi-response-description\">A list of pets.</div>\n" + 
+        "                        <dl outputclass=\"openapi-response-properties\">\n" + 
+        "                           <dlentry outputclass=\"openapi-response-content\">\n" + 
+        "                              <dt>Media types</dt>\n" + 
+        "                              <dd outputclass=\"openapi-mediaTypes-data\">\n" + 
+        "                                 <dl outputclass=\"openapi-mediaTypes\">\n" + 
+        "                                    <dlentry outputclass=\"openapi-mediaType\">\n" + 
+        "                                       <dt outputclass=\"openapi-mediaType-key\">application/json</dt>\n" + 
+        "                                       <dd>\n" + 
+        "                                          <dl outputclass=\"openapi-mediaType-fields-list\">\n" + 
+        "                                             <dlentry outputclass=\"openapi-mediaType-schema\">\n" + 
+        "                                                <dt>Schema</dt>\n" + 
+        "                                                <dd>\n" + 
+        "                                                   <dl outputclass=\"openapi-schema-values\">\n" + 
+        "                                                      <dlentry>\n" + 
+        "                                                         <dt>type</dt>\n" + 
+        "                                                         <dd>array</dd>\n" + 
+        "                                                      </dlentry>\n" + 
+        "                                                      <dlentry>\n" + 
+        "                                                         <dt>items</dt>\n" + 
+        "                                                         <dd>\n" + 
+        "                                                            <dl outputclass=\"openapi-schema-values\">\n" + 
+        "                                                               <dlentry>\n" + 
+        "                                                                  <dt>$ref</dt>\n" + 
+        "                                                                  <dd>\n" + 
+        "                                                                     <xref outputclass=\"openapi-reference\" href=\"definitions.dita#schemas/pet\"/>\n" + 
+        "                                                                  </dd>\n" + 
+        "                                                               </dlentry>\n" + 
+        "                                                            </dl>\n" + 
+        "                                                         </dd>\n" + 
+        "                                                      </dlentry>\n" + 
+        "                                                   </dl>\n" + 
+        "                                                </dd>\n" + 
+        "                                             </dlentry>\n" + 
+        "                                          </dl>\n" + 
+        "                                       </dd>\n" + 
+        "                                    </dlentry>\n" + 
+        "                                 </dl>\n" + 
+        "                              </dd>\n" + 
+        "                           </dlentry>\n" + 
+        "                        </dl>\n" + 
+        "                     </dd>\n" + 
+        "                  </dlentry>\n" + 
+        "                  <dlentry outputclass=\"openapi-response\">\n" + 
+        "                     <dt outputclass=\"openapi-response-key\">400</dt>\n" + 
+        "                     <dd>\n" + 
+        "                        <xref outputclass=\"openapi-reference\"\n" + 
+        "                              href=\"definitions2.dita#responses/error400\"/>\n" + 
+        "                     </dd>\n" + 
+        "                  </dlentry>\n" + 
+        "               </dl>\n" + 
+        "            </section>\n" + 
+        "         </body>\n" + 
+        "      </topic>\n" + 
+        "   </topic>\n" + 
         "</dita>", IOUtil.readFile(outputFile));
   }
       
