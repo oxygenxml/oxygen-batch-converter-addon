@@ -24,7 +24,6 @@ import com.oxygenxml.batch.converter.core.converters.ConverterCreator;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.printers.ContentPrinter;
 import com.oxygenxml.batch.converter.core.printers.ContentPrinterCreater;
-import com.oxygenxml.batch.converter.core.printers.StyleSourceGetter;
 import com.oxygenxml.batch.converter.core.printers.XMLFormatter;
 import com.oxygenxml.batch.converter.core.printers.XMLFormatterException;
 import com.oxygenxml.batch.converter.core.transformer.TransformerFactoryCreator;
