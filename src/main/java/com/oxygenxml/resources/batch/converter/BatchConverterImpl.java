@@ -351,8 +351,7 @@ public class BatchConverterImpl implements BatchConverter {
 				}
 				
 				// print the converted content.
-				contentPrinter.print(conversionResult, transformerFactoryCreator, converterType, outputFile,
-						StyleSourceGetter.getStyleSource(converterType));
+				contentPrinter.print(conversionResult, transformerFactoryCreator, converterType, outputFile);
 
 				noOfConvertedFiles++;
 				convertedFile = outputFile;
