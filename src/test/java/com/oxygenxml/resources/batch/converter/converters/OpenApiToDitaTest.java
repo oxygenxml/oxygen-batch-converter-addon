@@ -130,7 +130,8 @@ public class OpenApiToDitaTest {
         "      <title outputclass=\"openapi-tag-title\">API methods: default</title>\n" + 
         "      <body/>\n" + 
         "      <topic id=\"get_pets\" outputclass=\"openapi-operation\">\n" + 
-        "         <title outputclass=\"openapi-operation-title\" id=\"get_pets-title\">\n" + 
+        "         <title outputclass=\"openapi-operation-title openapi-method-get\"\n" + 
+        "                id=\"get_pets-title\">\n" + 
         "            <ph id=\"method\" outputclass=\"openapi-operation-method-get\">GET</ph>\n" + 
         "            <ph id=\"path\" outputclass=\"openapi-operation-path\">/pets</ph>\n" + 
         "         </title>\n" + 
