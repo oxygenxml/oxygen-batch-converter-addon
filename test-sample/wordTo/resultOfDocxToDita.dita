@@ -2,11 +2,11 @@
 <!DOCTYPE dita
   PUBLIC "-//OASIS//DTD DITA Composite//EN" "ditabase.dtd">
 <dita>
-  <topic id="id_1">
+  <topic id="title_text">
     <title>Title text</title>
     <body/>
   </topic>
-  <topic id="id_2">
+  <topic id="heading">
     <title>Heading</title>
     <body>
       <p>
