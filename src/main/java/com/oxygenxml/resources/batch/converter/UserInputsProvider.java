@@ -25,4 +25,14 @@ public interface UserInputsProvider extends ConversionInputsProvider {
   default Integer getMaxHeadingLevelForCreatingTopics() {
     return UserInputsProviderUtil.getMaxHeadingLevelForCreatingTopicsOption();
   }
+  
+  /**
+   * The format shouldn't be added on Batch Converter add-on
+   *  
+   * @return <code>null</code> because the format shouldn't be added on Batch Converter add-on .
+   */
+  @Override
+  default String getFormatForSameTypeReferences() {
+    return null;
+  }
 }
