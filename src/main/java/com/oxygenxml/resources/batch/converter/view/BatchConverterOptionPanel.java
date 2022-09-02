@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
@@ -399,6 +401,10 @@ public class BatchConverterOptionPanel extends JPanel{
    * Save the state of the options in WSOptionStorage.
    */
   public void savePageState() {
+    TableCellEditor cellEditor = wordMappingtable.getCellEditor();
+    if(cellEditor != null) {
+      cellEditor.stopCellEditing();
+    }
     WSOptionsStorage optionsStorage = PluginWorkspaceProvider.getPluginWorkspace().getOptionsStorage();
     if (optionsStorage != null) {
       optionsStorage.setOption(OptionTags.WORD_STYLES_MAP_CONFIG, WordStylesConfigUtil.serializeWordStylesMapping(wordMappingtableModel));
