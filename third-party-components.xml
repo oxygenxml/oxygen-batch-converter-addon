@@ -1906,9 +1906,9 @@ SOFTWARE.
             <url>https://github.com/relaxng/jing-trang/blob/master/copying.txt</url>
         </license>
     </component>
-    <component id="org.yaml:snakeyaml:1.28" product="editor">
+    <component id="org.yaml:snakeyaml:1.31" product="editor">
         <name>SnakeYAML</name>
-        <version>1.28</version>
+        <version>1.31</version>
         <project-info>
             <about>YAML 1.1 parser and emitter for Java</about>
             <licensor></licensor>
