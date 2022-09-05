@@ -2,6 +2,7 @@ package com.oxygenxml.resources.batch.converter.plugin;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,8 +23,11 @@ import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
+import ro.sync.basic.util.URLUtil;
 import ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension;
+import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.editor.page.ditamap.WSDITAMapEditorPage;
+import ro.sync.exml.workspace.api.listeners.WSEditorChangeListener;
 import ro.sync.exml.workspace.api.standalone.MenuBarCustomizer;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.actions.MenusAndToolbarsContributorCustomizer;
@@ -82,8 +86,8 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
   /**
    * Flag that is <code>true</code> when the actions are added in Tools toolbar.
    */
-  private boolean actionsInserted; 
-  
+  private boolean actionsInserted;
+
   /**
    * @see ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension#applicationStarted(ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace)
    */
@@ -113,11 +117,12 @@ public class BatchConverterPluginExtension implements WorkspaceAccessPluginExten
     pluginWorkspaceAccess.addMenusAndToolbarsContributorCustomizer(new MenusAndToolbarsContributorCustomizer() {
       @Override
       public void customizeDITAMapPopUpMenu(JPopupMenu popUp, WSDITAMapEditorPage ditaMapEditorPage) {
-        enrichDmmContextualMenu(popUp, pluginWorkspaceAccess);
+        if(URLUtil.isFromLocalDrive(ditaMapEditorPage.getParentEditor().getEditorLocation())) {
+          enrichDmmContextualMenu(popUp, pluginWorkspaceAccess);
+        }
       }
     });
 
-    
     batchConvertMenuFromProject = new Menu(translator.getTranslation(Tags.MENU_TEXT));
     BatchConverterPluginUtil.addActionsInMenu(batchConvertMenuFromProject, convertActions);
     // add a menu with actions in contextual menu of ProjectManager
