@@ -6,23 +6,27 @@
 		<language description="French" lang="fr_FR"/>
 		<language description="Japanese" lang="ja_JP"/>
 		<language description="Dutch" lang="nl_NL"/>
+		<language description="Chinese" lang="zh_CN"/>
 	</languageList>
-		<key value="create_dita_maps_from_openapi">
-		<comment>Option used to configure if the result will be DITA Maps or DITA
-			Topics in conversion from OpenAPI format</comment>
+	<key value="create_dita_maps_from_openapi">
+		<comment>Option used to configure if the result will be DITA Maps or DITA Topics in
+			conversion from OpenAPI format</comment>
 		<val lang="en_US">Create DITA maps from OpenAPI documents</val>
 		<val lang="de_DE">Create DITA maps from OpenAPI documents</val>
-			<val lang="fr_FR">Créer des DITA maps à partir de documents OpenAPI</val>
+		<val lang="fr_FR">Créer des DITA maps à partir de documents OpenAPI</val>
 		<val lang="ja_JP">Create DITA maps from OpenAPI documents</val>
 		<val lang="nl_NL">Create DITA maps from OpenAPI documents</val>
+		<val lang="zh_CN">Create DITA maps from OpenAPI documents</val>
 	</key>
-		<key value="ignore_div_elements">
-		<comment>Option for ignorinng the HTML 'div' elements when processing a HTML document.</comment>
+	<key value="ignore_div_elements">
+		<comment>Option for ignorinng the HTML 'div' elements when processing a HTML
+			document.</comment>
 		<val lang="en_US">Ignore HTML 'div' elements</val>
 		<val lang="de_DE">Ignore HTML 'div' elements</val>
 		<val lang="fr_FR">Ignore HTML 'div' elements</val>
 		<val lang="ja_JP">Ignore HTML 'div' elements</val>
 		<val lang="nl_NL">Ignore HTML 'div' elements</val>
+		<val lang="zh_CN">Ignore HTML 'div' elements</val>
 	</key>
 	<key value="conversion_options">
 		<comment>Link to conversion options.</comment>
@@ -31,6 +35,7 @@
 		<val lang="fr_FR">Options de conversion</val>
 		<val lang="ja_JP">変換オプション</val>
 		<val lang="nl_NL">Conversieopties</val>
+		<val lang="zh_CN">Conversion options</val>
 	</key>
 	<key value="convert_to_DITA">
 		<comment>Section in option page for conversions to DITA.</comment>
@@ -39,6 +44,7 @@
 		<val lang="fr_FR">Conversions vers DITA</val>
 		<val lang="ja_JP">DITA への変換</val>
 		<val lang="nl_NL">Conversie naar DITA</val>
+		<val lang="zh_CN">Conversions to DITA</val>
 	</key>
 	<key value="max_heading_level_for_creating_topics">
 		<comment>Options for setting the maximum heading level that allows creating of DITA
@@ -48,6 +54,7 @@
 		<val lang="fr_FR">Niveau maximal des titres pour la création de topics:</val>
 		<val lang="ja_JP">トピックを作成するための最大見出しレベル:</val>
 		<val lang="nl_NL">Maximumkopniveau voor het aanmaken van onderwerpen:</val>
+		<val lang="zh_CN">Maximum heading level for creating topics:</val>
 	</key>
 	<key value="unrecognize_style_for_word_element">
 		<comment>Warning presented when a unrecognized style is found.</comment>
@@ -56,6 +63,7 @@
 		<val lang="fr_FR">Style "{0}" non reconnu pour l''élément Word "{1}".</val>
 		<val lang="ja_JP">"{1}" Word 要素の "{0}" スタイルが認識されませんでした。</val>
 		<val lang="nl_NL">Niet erkende stijl '{0}' voor '{1}' Word-element.</val>
+		<val lang="zh_CN">Unrecognized "{0}" style for "{1}" Word element.</val>
 	</key>
 	<key value="unrecognize_style_id_for_word_element">
 		<comment>Warning presented when a unrecognized style is found.</comment>
@@ -64,6 +72,7 @@
 		<val lang="fr_FR">ID de style "{0}" non reconnu pour l''élément Word "{1}".</val>
 		<val lang="ja_JP">"{1}" Word 要素の "{0}" スタイル ID が認識されませんでした。</val>
 		<val lang="nl_NL">Niet erkende stijl-ID '{0}' voor '{1}' Word.</val>
+		<val lang="zh_CN">Unrecognized "{0}" style ID for "{1}" Word element.</val>
 	</key>
 	<key value="configure_word_mapping_in_preferences_page">
 		<comment>Warning presented when a unrecognized style is found.</comment>
@@ -71,11 +80,13 @@
 			Documents Converter preferences page.</val>
 		<val lang="de_DE">Sie können das Mapping zwischen Stilen und Elementen in den
 			Benutzereinstellungen des Batch Documents Converter einstellen.</val>
-		<val lang="fr_FR">Vous pouvez configurer le mappage entre les styles et les éléments dans
-			la page des préférences du Convertisseur de Documents par Lots.</val>
+		<val lang="fr_FR">Vous pouvez configurer le mappage entre les styles et les éléments dans la
+			page des préférences du Convertisseur de Documents par Lots.</val>
 		<val lang="ja_JP">バッチドキュメントコンバーターの設定ページで、スタイルと要素間のマッピングを構成できます。</val>
 		<val lang="nl_NL">U kan de toewijzing tussen stijlen en elementen in de pagina met de
 			voorkeuren voor Partijdocumentenomzetter configureren.</val>
+		<val lang="zh_CN">You can configure the mapping between styles and elements in the Batch
+			Documents Converter preferences page.</val>
 	</key>
 	<key value="word_element">
 		<comment>Name for table heading for the MS Word elements.</comment>
@@ -84,6 +95,7 @@
 		<val lang="fr_FR">Élément Word</val>
 		<val lang="ja_JP">Word 要素</val>
 		<val lang="nl_NL">Word-element</val>
+		<val lang="zh_CN">Word element</val>
 	</key>
 	<key value="word_style">
 		<comment>Name for table heading for the MS Word styles.</comment>
@@ -92,6 +104,7 @@
 		<val lang="fr_FR">Style Word</val>
 		<val lang="ja_JP">Word スタイル</val>
 		<val lang="nl_NL">Word-stijl</val>
+		<val lang="zh_CN">Word style</val>
 	</key>
 	<key value="html_elements">
 		<comment>Name for table heading for the HTML elements.</comment>
@@ -100,6 +113,7 @@
 		<val lang="fr_FR">Éléments HTML</val>
 		<val lang="ja_JP">XTML要素</val>
 		<val lang="nl_NL">HTML-elementen</val>
+		<val lang="zh_CN">HTML elements</val>
 	</key>
 	<key value="word_styles_mapping">
 		<comment>Section name for presenting MS Word styles mapping configuration.</comment>
@@ -108,6 +122,7 @@
 		<val lang="fr_FR">Mappage des styles Word</val>
 		<val lang="ja_JP">Word スタイルのマッピング</val>
 		<val lang="nl_NL">Overzicht van Word-stijlen</val>
+		<val lang="zh_CN">Word styles mapping</val>
 	</key>
 	<key value="word_config_description">
 		<comment>Description of configuration for the MS Word conversions</comment>
@@ -118,15 +133,19 @@
 			werden, durch Mapping der Word-Elemente und -Stile auf die zugehörigen HTML-Elemente.
 			HTML wird ebenfalls als Zwischenformat für die Word-nach-DITA/DocBook-Umwandlung
 			verwendet.</val>
-		<val lang="fr_FR">La conversion des documents Word (.docx) en HTML peut être configurée en mappant
-			les éléments et les styles de Word aux éléments HTML correspondants. Le HTML est également utilisé comme
-			format intermédiaire pour les conversions de Word vers DITA/DocBook.</val>
+		<val lang="fr_FR">La conversion des documents Word (.docx) en HTML peut être configurée en
+			mappant les éléments et les styles de Word aux éléments HTML correspondants. Le HTML est
+			également utilisé comme format intermédiaire pour les conversions de Word vers
+			DITA/DocBook.</val>
 		<val lang="ja_JP">Word ドキュメント (.docx) から HTML への変換は、Word 要素とスタイルを対応する HTML
 			要素にマッピングすることで構成できます。HTML は、Word から DITA/DocBook への変換の中間フォーマットとしても使用されます。</val>
 		<val lang="nl_NL">Conversie van Word-documenten (.docx) naar HTML kan worden geconfigureerd
 			door Word-elementen en Word-stijlen aan de betreffende HTML-elementen toe te wijzen.
 			HTML wordt ook gebruikt als een tussenopmaak voor de conversies van Word naar
 			DITA/DocBook.</val>
+		<val lang="zh_CN">Conversion of Word documents (.docx) to HTML can be configured by mapping
+			Word elements and styles to the corresponding HTML elements. HTML is also used as an
+			intermediary format for the Word to DITA/DocBook conversions.</val>
 	</key>
 	<key value="new">
 		<comment>Button for adding a new element.</comment>
@@ -135,6 +154,7 @@
 		<val lang="fr_FR">Nouveau</val>
 		<val lang="ja_JP">新規</val>
 		<val lang="nl_NL">Nieuw</val>
+		<val lang="zh_CN">New</val>
 	</key>
 	<key value="edit">
 		<comment>Button for editing an element.</comment>
@@ -143,6 +163,7 @@
 		<val lang="fr_FR">Modifier</val>
 		<val lang="ja_JP">編集</val>
 		<val lang="nl_NL">Bewerken</val>
+		<val lang="zh_CN">Edit</val>
 	</key>
 	<key value="delete">
 		<comment>Button for deleting an element.</comment>
@@ -151,6 +172,7 @@
 		<val lang="fr_FR">Supprimer</val>
 		<val lang="ja_JP">削除</val>
 		<val lang="nl_NL">Verwijderen</val>
+		<val lang="zh_CN">Delete</val>
 	</key>
 	<key value="export">
 		<comment>Button for exporting setting.</comment>
@@ -159,6 +181,7 @@
 		<val lang="fr_FR">Exporter</val>
 		<val lang="ja_JP">エクスポート</val>
 		<val lang="nl_NL">Exporteren</val>
+		<val lang="zh_CN">Export</val>
 	</key>
 	<key value="help">
 		<comment>Help button for opening documentation.</comment>
@@ -167,6 +190,7 @@
 		<val lang="fr_FR">Aide</val>
 		<val lang="ja_JP">ヘルプ</val>
 		<val lang="nl_NL">Help</val>
+		<val lang="zh_CN">Help</val>
 	</key>
 	<key value="Menu_Text_Conv">
 		<comment>The text of menu that contains the converters.</comment>
@@ -175,6 +199,7 @@
 		<val lang="fr_FR">Convertisseur de Documents par Lots</val>
 		<val lang="ja_JP">バッチドキュメントコンバーター</val>
 		<val lang="nl_NL">Programma voor batchconversie van documenten</val>
+		<val lang="zh_CN">Batch Documents Converter</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_html.to.xhtml">
 		<comment>Text from MenuItem.</comment>
@@ -183,6 +208,7 @@
 		<val lang="fr_FR">HTML vers XHTML</val>
 		<val lang="ja_JP">HTML から XHTML</val>
 		<val lang="nl_NL">HTML naar XHTML</val>
+		<val lang="zh_CN">HTML to XHTML</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_html.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -191,6 +217,7 @@
 		<val lang="fr_FR">HTML vers DITA</val>
 		<val lang="ja_JP">HTML から DITA</val>
 		<val lang="nl_NL">HTML naar DITA</val>
+		<val lang="zh_CN">HTML to DITA</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_md.to.xhtml">
 		<comment>Text from MenuItem.</comment>
@@ -199,6 +226,7 @@
 		<val lang="fr_FR">Markdown vers XHTML</val>
 		<val lang="ja_JP">Markdown から XHTML</val>
 		<val lang="nl_NL">Markdown naar XHTML</val>
+		<val lang="zh_CN">Markdown to XHTML</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_md.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -207,6 +235,7 @@
 		<val lang="fr_FR">Markdown vers DITA</val>
 		<val lang="ja_JP">Markdown から DITA</val>
 		<val lang="nl_NL">Markdown naar DITA</val>
+		<val lang="zh_CN">Markdown to DITA</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_xml.to.json">
 		<comment>Text from MenuItem.</comment>
@@ -215,6 +244,7 @@
 		<val lang="fr_FR">XML vers JSON</val>
 		<val lang="ja_JP">XML から JSON</val>
 		<val lang="nl_NL">XML naar JSON</val>
+		<val lang="zh_CN">XML to JSON</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_json.to.xml">
 		<comment>Text from MenuItem.</comment>
@@ -223,6 +253,7 @@
 		<val lang="fr_FR">JSON vers XML</val>
 		<val lang="ja_JP">JSON から XML</val>
 		<val lang="nl_NL">JSON naar XML</val>
+		<val lang="zh_CN">JSON to XML</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_yaml.to.json">
 		<comment>Text from MenuItem.</comment>
@@ -231,6 +262,7 @@
 		<val lang="fr_FR">YAML vers JSON</val>
 		<val lang="ja_JP">YAML から JSON</val>
 		<val lang="nl_NL">YAML naar JSON</val>
+		<val lang="zh_CN">YAML to JSON</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_json.to.yaml">
 		<comment>Text from MenuItem.</comment>
@@ -239,6 +271,7 @@
 		<val lang="fr_FR">JSON vers YAML</val>
 		<val lang="ja_JP">JSON から YAML</val>
 		<val lang="nl_NL">JSON naar YAML</val>
+		<val lang="zh_CN">JSON to YAML</val>
 	</key>
 
 	<key value="Menu_Item_Text_Conv_html.to.db5">
@@ -248,6 +281,7 @@
 		<val lang="fr_FR">HTML vers DocBook 5</val>
 		<val lang="ja_JP">HTML から DocBook 5</val>
 		<val lang="nl_NL">HTML naar DocBook 5</val>
+		<val lang="zh_CN">HTML to DocBook 5</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_html.to.db4">
 		<comment>Text from MenuItem.</comment>
@@ -256,6 +290,7 @@
 		<val lang="fr_FR">HTML vers DocBook 4</val>
 		<val lang="ja_JP">HTML から DocBook 4</val>
 		<val lang="nl_NL">HTML naar DocBook 4</val>
+		<val lang="zh_CN">HTML to DocBook 4</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_md.to.db5">
 		<comment>Text from MenuItem.</comment>
@@ -264,6 +299,7 @@
 		<val lang="fr_FR">Markdown vers DocBook 5</val>
 		<val lang="ja_JP">Markdown から DocBook 5</val>
 		<val lang="nl_NL">Markdown naar DocBook 5</val>
+		<val lang="zh_CN">Markdown to DocBook 5</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_md.to.db4">
 		<comment>Text from MenuItem.</comment>
@@ -272,6 +308,7 @@
 		<val lang="fr_FR">Markdown vers DocBook 4</val>
 		<val lang="ja_JP">Markdown から DocBook 4</val>
 		<val lang="nl_NL">Markdown naar DocBook 4</val>
+		<val lang="zh_CN">Markdown to DocBook 4</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_excel.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -280,6 +317,7 @@
 		<val lang="fr_FR">Excel vers DITA</val>
 		<val lang="ja_JP">Excel から DITA</val>
 		<val lang="nl_NL">Excel naar DITA</val>
+		<val lang="zh_CN">Excel to DITA</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.xhtml">
 		<comment>Text from MenuItem.</comment>
@@ -288,6 +326,7 @@
 		<val lang="fr_FR">Word vers XHTML</val>
 		<val lang="ja_JP">Word から XHTML</val>
 		<val lang="nl_NL">Word naar XHTML</val>
+		<val lang="zh_CN">Word to XHTML</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -296,6 +335,7 @@
 		<val lang="fr_FR">Word vers DITA</val>
 		<val lang="ja_JP">Word から DITA</val>
 		<val lang="nl_NL">Word naar DITA</val>
+		<val lang="zh_CN">Word to DITA</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.db4">
 		<comment>Text from MenuItem.</comment>
@@ -304,6 +344,7 @@
 		<val lang="fr_FR">Word vers DocBook 4</val>
 		<val lang="ja_JP">Word から DocBook 4</val>
 		<val lang="nl_NL">Word naar DocBook 4</val>
+		<val lang="zh_CN">Word to DocBook 4</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_word.to.db5">
 		<comment>Text from MenuItem.</comment>
@@ -312,6 +353,7 @@
 		<val lang="fr_FR">Word vers DocBook 5</val>
 		<val lang="ja_JP">Word から DocBook 5</val>
 		<val lang="nl_NL">Word naar DocBook 5</val>
+		<val lang="zh_CN">Word to DocBook 5</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_confluence.to.ditamap">
 		<comment>Text from MenuItem.</comment>
@@ -320,6 +362,7 @@
 		<val lang="fr_FR">Confluence vers DITA</val>
 		<val lang="ja_JP">Confluence から DITA</val>
 		<val lang="nl_NL">Confluence naar DITA</val>
+		<val lang="zh_CN">Confluence to DITA</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_docbook.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -328,6 +371,7 @@
 		<val lang="fr_FR">DocBook vers DITA</val>
 		<val lang="ja_JP">DocBook から DITA</val>
 		<val lang="nl_NL">DocBook naar DITA</val>
+		<val lang="zh_CN">DocBook to DITA</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_openapi.to.dita">
 		<comment>Text from MenuItem.</comment>
@@ -336,8 +380,9 @@
 		<val lang="fr_FR">OpenAPI vers DITA</val>
 		<val lang="ja_JP">OpenAPI から DITA</val>
 		<val lang="nl_NL">OpenAPI naar DITA</val>
+		<val lang="zh_CN">OpenAPI to DITA</val>
 	</key>
-	
+
 
 	<key value="Add_Input_Label_Conv">
 		<comment>Add input label</comment>
@@ -346,6 +391,7 @@
 		<val lang="fr_FR">Fichiers:</val>
 		<val lang="ja_JP">入力ファイル:</val>
 		<val lang="nl_NL">Invoerbestanden:</val>
+		<val lang="zh_CN">Input files:</val>
 	</key>
 
 	<key value="Add_Input_Label_Conv_Confluence">
@@ -355,13 +401,16 @@
 		<val lang="de_DE">Fügen Sie die von Confluence generierten "index.html" Datei(en) in dem
 			HTML-Export-Prozess als Eingabedatei(en) hinzu, um die Umwandlung nach DITA
 			durchzuführen.</val>
-		<val lang="fr_FR">Ajouter le(s) fichier(s) "index.html" généré(s) par le processus d'exportation de
-			Confluence vers HTML comme fichier(s) d'entrée pour effectuer la conversion vers DITA.</val>
+		<val lang="fr_FR">Ajouter le(s) fichier(s) "index.html" généré(s) par le processus
+			d'exportation de Confluence vers HTML comme fichier(s) d'entrée pour effectuer la
+			conversion vers DITA.</val>
 		<val lang="ja_JP">Confluence から HTML へのエクスポートプロセスによって生成された "index.html"
 			ファイルを入力ファイルとして追加して、DITA への変換を実行します。</val>
 		<val lang="nl_NL">Voeg de 'index.html' bestand(en) zoals gegenereerd door het exportproces
 			van Confluence naar HTML als invoerbestand(en) toe om de conversie naar DITA uit te
 			voeren.</val>
+		<val lang="zh_CN">Add the "index.html" file(s) generated by the Confluence to HTML export
+			process as input file(s) to perform the conversion to DITA.</val>
 	</key>
 
 	<key value="Add_File_Table_Button_Conv">
@@ -371,6 +420,7 @@
 		<val lang="fr_FR">Ajouter des fichiers</val>
 		<val lang="ja_JP">ファイルを追加する</val>
 		<val lang="nl_NL">Bestanden toevoegen</val>
+		<val lang="zh_CN">Add files</val>
 	</key>
 	<key value="Add_Folder_Table_Button_Conv">
 		<comment>Button for add folder in table.</comment>
@@ -379,6 +429,7 @@
 		<val lang="fr_FR">Ajouter un dossier</val>
 		<val lang="ja_JP">フォルダーを追加する</val>
 		<val lang="nl_NL">Map toevoegen</val>
+		<val lang="zh_CN">Add folder</val>
 	</key>
 	<key value="Remove_Table_Button_Conv">
 		<comment>Button for remove row from table</comment>
@@ -387,6 +438,7 @@
 		<val lang="fr_FR">Supprimer</val>
 		<val lang="ja_JP">削除</val>
 		<val lang="nl_NL">Verwijderen</val>
+		<val lang="zh_CN">Remove</val>
 	</key>
 
 
@@ -398,6 +450,7 @@
 		<val lang="fr_FR">Dossier de destination:</val>
 		<val lang="ja_JP">出力フォルダー:</val>
 		<val lang="nl_NL">Uitvoermap:</val>
+		<val lang="zh_CN">Output folder:</val>
 	</key>
 
 	<key value="Open_File_Check_Box">
@@ -407,6 +460,7 @@
 		<val lang="fr_FR">Ouvrir les fichiers convertis</val>
 		<val lang="ja_JP">変換されたファイルを開く</val>
 		<val lang="nl_NL">De geconverteerde bestanden openen</val>
+		<val lang="zh_CN">Open the converted files</val>
 	</key>
 
 	<key value="Convert_Button_Conv">
@@ -416,6 +470,7 @@
 		<val lang="fr_FR">Convertir</val>
 		<val lang="ja_JP">変換</val>
 		<val lang="nl_NL">Converteren</val>
+		<val lang="zh_CN">Convert</val>
 	</key>
 
 
@@ -426,6 +481,7 @@
 		<val lang="fr_FR">Conversion en cours</val>
 		<val lang="ja_JP">変換中です</val>
 		<val lang="nl_NL">Conversie wordt uitgevoerd</val>
+		<val lang="zh_CN">Conversion in progress</val>
 	</key>
 	<key value="Fail_Status_Conv">
 		<comment>Fail status</comment>
@@ -434,6 +490,7 @@
 		<val lang="fr_FR">Conversion échouée</val>
 		<val lang="ja_JP">変換失敗</val>
 		<val lang="nl_NL">Conversie mislukt</val>
+		<val lang="zh_CN">Conversion failed</val>
 	</key>
 	<key value="Success_Status_Conv">
 		<comment>Success status</comment>
@@ -442,6 +499,7 @@
 		<val lang="fr_FR">Conversion réussie</val>
 		<val lang="ja_JP">変換成功</val>
 		<val lang="nl_NL">Conversie gelukt</val>
+		<val lang="zh_CN">Conversion successful</val>
 	</key>
 
 	<key value="Progress_Dialog_Message_Conv">
@@ -451,6 +509,7 @@
 		<val lang="fr_FR">Conversion en cours</val>
 		<val lang="ja_JP">変換中です</val>
 		<val lang="nl_NL">Conversie wordt uitgevoerd</val>
+		<val lang="zh_CN">Conversion in progress</val>
 	</key>
 
 	<key value="Empty_Output_Message_Conv">
@@ -460,6 +519,7 @@
 		<val lang="fr_FR">Veuillez spécifier un dossier de destination!</val>
 		<val lang="ja_JP">出力フォルダーを指定してください!</val>
 		<val lang="nl_NL">Specificeer een uitvoermap!</val>
+		<val lang="zh_CN">Please specify an output folder!</val>
 	</key>
 
 	<key value="create_dita_map_from_documents_with_multiple_headings">
@@ -468,9 +528,11 @@
 		<val lang="en_US">Create DITA maps from {0} documents containing multiple headings</val>
 		<val lang="de_DE">Erstelle DITA-Maps aus {0} Dokumenten, die mehrere Überschriften
 			enthalten</val>
-		<val lang="fr_FR">Créer des DITA maps à partir de {0} documents contenant plusieurs titres</val>
+		<val lang="fr_FR">Créer des DITA maps à partir de {0} documents contenant plusieurs
+			titres</val>
 		<val lang="ja_JP">複数の見出しを含む {0} ドキュメントから DITA マップを作成する</val>
 		<val lang="nl_NL">DITA-mappen vanuit {0}-documenten met meerdere kopregels aanmaken</val>
+		<val lang="zh_CN">Create DITA maps from {0} documents containing multiple headings</val>
 	</key>
 	<key value="create_dita_map_from_documents_with_multiple_sections">
 		<comment>Option used to configure if the result will be a DITA Map or a DITA
@@ -478,9 +540,11 @@
 		<val lang="en_US">Create DITA maps from {0} documents containing multiple sections</val>
 		<val lang="de_DE">Erstelle DITA-Maps aus {0} Dokumenten, die mehrere Sektionen
 			enthalten</val>
-		<val lang="fr_FR">Créer des DITA maps à partir de {0} documents contenant plusieurs sections</val>
+		<val lang="fr_FR">Créer des DITA maps à partir de {0} documents contenant plusieurs
+			sections</val>
 		<val lang="ja_JP">複数のセクションを含む {0} ドキュメントから DITA マップを作成する</val>
 		<val lang="nl_NL">DITA-mappen vanuit {0}-documenten met meerdere secties aanmaken</val>
+		<val lang="zh_CN">Create DITA maps from {0} documents containing multiple sections</val>
 	</key>
 
 	<key value="Config_file_not_found">
@@ -490,6 +554,7 @@
 		<val lang="fr_FR">Le fichier de configuration n'a pas été trouvé.</val>
 		<val lang="ja_JP">構成ファイルが見つかりませんでした。</val>
 		<val lang="nl_NL">Het configuratiebestand is niet gevonden.</val>
+		<val lang="zh_CN">The configuration file was not found.</val>
 	</key>
 
 	<key value="Create_short_description_from_paragraph">
@@ -498,6 +563,7 @@
 		<val lang="fr_FR">Créer les éléments description courte</val>
 		<val lang="ja_JP">短い説明要素を作成する</val>
 		<val lang="nl_NL">Korte beschrijvingselementen aanmaken</val>
+		<val lang="zh_CN">Create short description elements</val>
 	</key>
 
 	<key value="Import">
@@ -507,6 +573,7 @@
 		<val lang="fr_FR">Importer</val>
 		<val lang="ja_JP">インポート</val>
 		<val lang="nl_NL">Importeren</val>
+		<val lang="zh_CN">Import</val>
 	</key>
 	<key value="Additional_conversions">
 		<comment>The name of a submenu that contains conversions</comment>
@@ -515,6 +582,7 @@
 		<val lang="fr_FR">Conversions supplémentaires</val>
 		<val lang="ja_JP">追加の変換</val>
 		<val lang="nl_NL">Aanvullende conversies</val>
+		<val lang="zh_CN">Additional conversions</val>
 	</key>
 	<key value="Import_from_word.to.dita">
 		<comment>The title of the import from word dialog.</comment>
@@ -523,6 +591,7 @@
 		<val lang="fr_FR">Importer depuis MS Word</val>
 		<val lang="ja_JP">MS Word からインポートする</val>
 		<val lang="nl_NL">Vanuit MS Word importeren</val>
+		<val lang="zh_CN">Import from MS Word</val>
 	</key>
 	<key value="Import_from_excel.to.dita">
 		<comment>The title of the import from word dialog.</comment>
@@ -531,6 +600,7 @@
 		<val lang="fr_FR">Importer depuis MS Excel</val>
 		<val lang="ja_JP">MS Excel からインポートする</val>
 		<val lang="nl_NL">Vanuit MS Excel importeren</val>
+		<val lang="zh_CN">Import from MS Excel</val>
 	</key>
 	<key value="Import_from_html.to.dita">
 		<comment>The title of the import from word dialog.</comment>
@@ -539,6 +609,7 @@
 		<val lang="fr_FR">Importer depuis HTML</val>
 		<val lang="ja_JP">HTML からインポートする</val>
 		<val lang="nl_NL">Vanuit HTML importeren</val>
+		<val lang="zh_CN">Import from HTML</val>
 	</key>
 	<key value="Import_from_md.to.dita">
 		<comment>The title of the import from word dialog.</comment>
@@ -547,5 +618,6 @@
 		<val lang="fr_FR">Importer depuis Markdown</val>
 		<val lang="ja_JP">Markdown からインポートする</val>
 		<val lang="nl_NL">Vanuit Markdown importeren</val>
+		<val lang="zh_CN">Import from Markdown</val>
 	</key>
 </translation>
