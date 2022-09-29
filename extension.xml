@@ -30,6 +30,54 @@
                 </div>
                 <hr/>
                 <div>
+                    <h3>What's new in version 5.0.0</h3>
+                    <ul>
+                        <li><b>OpenAPI to DITA</b>
+                            <ul>
+                                <li>You can now convert JSON or YAML files that use and conform to the OpenAPI specification (versions 2.0, 3.0, or 3.1) to DITA documents and there is a 'Create DITA maps from OpenAPI documents' option that can be selected to instruct the converter to split the documents into separate topics that are referenced in a DITA map.</li>
+                            </ul>
+                        </li>
+                        <li><b>Word to HTML/DITA</b>
+                            <ul>
+                                <li>Improved the Word styles mapping configuration by inheriting the style configuration of the custom style from the base style.</li>
+                                <li>SVG images embedded in Word documents are preserved as SVG.</li>
+                                <li>IDs that result from image and table bookmarks are now handled better to find the correct location.</li>
+                                <li>Improved the IDs generation on topics and sections by using the text from headings.</li>
+                                <li>Improved the handling of tables by preserving header row information during the conversion.</li>
+                                <li>Fixed a case where a list that contains content between list items was broken into multiple lists.</li>
+                                <li>Fixed a case where multiple ordered lists were merged into one.</li>
+                                <li>Fixed a case where the conversion failed when the document contains duplicate mappings between numberings and styles.</li>
+                                <li>Fixed a case where WMF images were not handled by the converter.</li>
+                                <li>Fixed a case where the DITA result contained an invalid MathML equation.</li>
+                                <li>Fixed a case where the DITA result contained images wrapped in the 'b' element.</li>
+                                <li>Fixed a case where the value edited in the Word Styles Mapping table from the preferences page was not saved.</li>
+                                <li>Updated the Java-Mammoth library used for Word to HTML/DITA conversions to version 1.5.0.</li>
+                            </ul>
+                        </li>
+                        <li><b>HTML to DITA</b>
+                            <ul>
+                                <li>Improved the conversion of object elements from HTML by adding a proper 'outputclass' attribute in the DITA result.</li>
+                                <li>Added an option in the conversion dialog box that allows you to decide whether or not the 'div' elements will be ignored.</li>
+                                <li>Fixed a case where 'id' and 'class' attributes were lost when breaking paragraphs by processing the 'br' elements.</li>
+                            </ul>
+                        </li>
+                        <li><b>Markdown to DITA</b>
+                            <ul>
+                                <li>Added support for the Markdown abbreviations.</li>
+                                <li>Improved the handling of the local references.</li>
+                                <li>Improved the conversion to allow processing of headings specified as HTML in the Markdown documents.</li>
+                                <li>Improved the handling of the HTML anchor elements in the Markdown documents.</li>
+                            </ul>
+                        </li>
+                        <li><b>Others</b>
+                            <ul>
+                                <li>The formatting of 'pre' elements are prevented when converting HTML to XHTML.</li>
+                                <li>Fixed the layout of the preferences page because it was not entirely visible on low resolution screens.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
                     <h3>What's new in version 4.0.0</h3>
                     <ol>
                         <li>Added a Confluence to DITA conversion.</li>
