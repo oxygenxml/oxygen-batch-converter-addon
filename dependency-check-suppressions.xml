@@ -12,4 +12,12 @@
       <filePath regex="true">.*[\\/]?oxygen-patched-mammoth-for-batch-converter-.*</filePath>
       <cve>CVE-2022-31569</cve>
     </suppress>
+    <suppress>
+        <notes><![CDATA[
+      file name: jackson-databind-2.13.2.2.jar
+      ]]></notes>
+        <filePath regex="true">.*[\\/]?jackson-databind-2\.13\.2\.2\.jar</filePath>
+        <cve>CVE-2022-42003</cve>
+        <cve>CVE-2022-42004</cve>
+    </suppress>       
 </suppressions>
