@@ -30,6 +30,12 @@
                 </div>
                 <hr/>
                 <div>
+                    <h4>What's new in version 5.0.1</h4>
+                    <ul>
+                        <li>Fixed a case on Word to HTML/DITA conversion where content between two different lists was included in the last list item from the first list.</li>
+                    </ul>
+                </div>
+                <div>
                     <h3>What's new in version 5.0.0</h3>
                     <ul>
                         <li><b>OpenAPI to DITA</b>
