@@ -18,6 +18,9 @@
                         <li>HTML to XHTML/DITA/DocBook</li>
                         <li>Markdown to XHTML/DITA/DocBook</li>
                         <li>Excel to DITA</li>
+                        <li>OpenAPI to DITA</li>
+                        <li>Confluence to DITA</li>
+                        <li>DocBook to DITA</li>
                         <li>XML to JSON</li>
                         <li>JSON to XML</li>
                         <li>YAML to JSON</li>
@@ -30,9 +33,9 @@
                 </div>
                 <hr/>
                 <div>
-                    <h4>What's new in version 5.0.1</h4>
+                    <h3>What's new in version 5.0.1</h3>
                     <ul>
-                        <li>Fixed a case on Word to HTML/DITA conversion where content between two different lists was included in the last list item from the first list.</li>
+                        <li>Fixed an issue with Word to HTML/DITA conversions where content was incorrectly merged between two different lists.</li>
                     </ul>
                 </div>
                 <div>
