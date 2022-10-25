@@ -87,7 +87,7 @@ public class WordToDitaConverterTest extends TestCase{
       });
 
       String actualResult = FileComparationUtil.readFile(fileToRead.getAbsolutePath());
-      String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
+      String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\image", "/image");
       assertEquals(filterMathAttributes(expected),
           filterMathAttributes(actualResult));
 
@@ -96,7 +96,7 @@ public class WordToDitaConverterTest extends TestCase{
       assertEquals(1, images.length);
 
       String imageName = images[0].getName();
-      assertEquals("img.tif", imageName);
+      assertEquals("image1.tif", imageName);
 
     } finally {
       FileComparationUtil.deleteRecursivelly(outputFolder);

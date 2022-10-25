@@ -88,7 +88,7 @@ public class WordToXHtmlConverterTest extends TestCase{
         }
       });
 
-			String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
+			String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\image", "/image");
 			assertEquals(filterMathAttributes(expected),
 					filterMathAttributes(FileComparationUtil.readFile(fileToRead.getAbsolutePath())));
 
@@ -97,7 +97,7 @@ public class WordToXHtmlConverterTest extends TestCase{
 			assertEquals(1, images.length);
 			
 			String imageName = images[0].getName();
-			assertEquals("img.tif", imageName);
+			assertEquals("image1.tif", imageName);
 			
 		} finally {
 			FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -152,14 +152,14 @@ public class WordToXHtmlConverterTest extends TestCase{
         }
       });
 
-			assertEquals(FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img"),
+			assertEquals(FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\image", "/image"),
 					FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
 
 			File mediaFolder = new File(outputFolder, "media");
 			File[] images = mediaFolder.listFiles();
 			assertEquals(2, images.length);
-			assertTrue(Arrays.asList(images).toString().contains("img(1).png"));
-	   	assertTrue(Arrays.asList(images).toString().contains("img.png"));
+			assertTrue(Arrays.asList(images).toString().contains("image-1.png"));
+	   	assertTrue(Arrays.asList(images).toString().contains("image.png"));
 			
 		} finally {
 			FileComparationUtil.deleteRecursivelly(outputFolder);
@@ -290,7 +290,7 @@ public class WordToXHtmlConverterTest extends TestCase{
         }
       });
   
-  		String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\img", "/img");
+  		String expected = FileComparationUtil.readFile(expectedResultFile.getAbsolutePath()).replace("\\image", "/image");
   		assertEquals(expected, FileComparationUtil.readFile(fileToRead.getAbsolutePath()));
   
   		File mediaFolder = new File(outputFolder, "media");
