@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <third-party>
-    <component id="com.fasterxml.jackson.core:jackson-annotations:2.13.2" product="editor">
+    <component id="com.fasterxml.jackson.core:jackson-annotations:2.13.2" draft="false" product="editor">
         <name>Jackson-annotations</name>
         <version>2.13.2</version>
         <project-info>
@@ -15,7 +15,7 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="com.fasterxml.jackson.core:jackson-core:2.13.2" product="editor">
+    <component id="com.fasterxml.jackson.core:jackson-core:2.13.2" draft="false" product="editor">
         <name>Jackson-core</name>
         <version>2.13.2</version>
         <project-info>
@@ -232,7 +232,7 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="com.fasterxml.jackson.core:jackson-databind:2.13.2.2" product="editor">
+    <component id="com.fasterxml.jackson.core:jackson-databind:2.13.2.2" draft="false" product="editor">
         <name>jackson-databind</name>
         <version>2.13.2.2</version>
         <project-info>
@@ -247,7 +247,7 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2" product="editor">
+    <component id="com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2" draft="false" product="editor">
         <name>Jackson-dataformat-YAML</name>
         <version>2.13.2</version>
         <project-info>
@@ -262,7 +262,7 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="com.github.virtuald:curvesapi:1.06" product="editor">
+    <component id="com.github.virtuald:curvesapi:1.06" draft="false" product="editor">
         <name>curvesapi</name>
         <version>1.06</version>
         <project-info>
@@ -277,7 +277,7 @@
             <url>http://opensource.org/licenses/BSD-3-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-all:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-all:0.50.18" draft="false" product="editor">
         <name>flexmark-all</name>
         <version>0.50.18</version>
         <project-info>
@@ -318,7 +318,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-abbreviation:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-abbreviation:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for abbreviations in text</name>
         <version>0.50.18</version>
         <project-info>
@@ -359,7 +359,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-anchorlink:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-anchorlink:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension to generate anchor links for headers</name>
         <version>0.50.18</version>
         <project-info>
@@ -400,7 +400,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-aside:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-aside:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for converting | to aside tags</name>
         <version>0.50.18</version>
         <project-info>
@@ -441,7 +441,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-attributes:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-attributes:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for attributes</name>
         <version>0.50.18</version>
         <project-info>
@@ -482,7 +482,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-autolink:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-autolink:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for autolinking</name>
         <version>0.50.18</version>
         <project-info>
@@ -523,7 +523,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-definition:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-definition:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for definition</name>
         <version>0.50.18</version>
         <project-info>
@@ -564,7 +564,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-emoji:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-emoji:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for emoji shortcuts</name>
         <version>0.50.18</version>
         <project-info>
@@ -605,7 +605,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-escaped-character:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-escaped-character:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for escaped_character</name>
         <version>0.50.18</version>
         <project-info>
@@ -646,7 +646,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-footnotes:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-footnotes:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for footnotes</name>
         <version>0.50.18</version>
         <project-info>
@@ -687,7 +687,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for strikethrough</name>
         <version>0.50.18</version>
         <project-info>
@@ -728,7 +728,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-gfm-tables:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-tables:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for tables</name>
         <version>0.50.18</version>
         <project-info>
@@ -769,7 +769,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-gfm-tasklist:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-gfm-tasklist:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for generating GitHub style task list items</name>
         <version>0.50.18</version>
         <project-info>
@@ -810,7 +810,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-ins:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-ins:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for ins</name>
         <version>0.50.18</version>
         <project-info>
@@ -851,7 +851,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-jekyll-front-matter:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-jekyll-front-matter:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for jekyll_front_matter</name>
         <version>0.50.18</version>
         <project-info>
@@ -892,7 +892,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-jekyll-tag:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-jekyll-tag:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for jekyll tag parsing</name>
         <version>0.50.18</version>
         <project-info>
@@ -933,7 +933,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-superscript:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-superscript:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for superscript</name>
         <version>0.50.18</version>
         <project-info>
@@ -974,7 +974,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-toc:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-toc:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for toc</name>
         <version>0.50.18</version>
         <project-info>
@@ -1015,7 +1015,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-typographic:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-typographic:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for typographic</name>
         <version>0.50.18</version>
         <project-info>
@@ -1056,7 +1056,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-wikilink:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-wikilink:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for wiki links</name>
         <version>0.50.18</version>
         <project-info>
@@ -1097,7 +1097,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-ext-yaml-front-matter:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-ext-yaml-front-matter:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for YAML front matter</name>
         <version>0.50.18</version>
         <project-info>
@@ -1138,7 +1138,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-formatter:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-formatter:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for formatter</name>
         <version>0.50.18</version>
         <project-info>
@@ -1179,7 +1179,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-jira-converter:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-jira-converter:0.50.18" draft="false" product="editor">
         <name>flexmark-java extension for jira_converter</name>
         <version>0.50.18</version>
         <project-info>
@@ -1220,7 +1220,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-profile-pegdown:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-profile-pegdown:0.50.18" draft="false" product="editor">
         <name>flexmark-java pegdown profile</name>
         <version>0.50.18</version>
         <project-info>
@@ -1261,7 +1261,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark-util:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark-util:0.50.18" draft="false" product="editor">
         <name>flexmark-java utilities</name>
         <version>0.50.18</version>
         <project-info>
@@ -1302,7 +1302,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.vladsch.flexmark:flexmark:0.50.18" product="editor">
+    <component id="com.vladsch.flexmark:flexmark:0.50.18" draft="false" product="editor">
         <name>flexmark-java core</name>
         <version>0.50.18</version>
         <project-info>
@@ -1343,7 +1343,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="commons-codec:commons-codec:1.14" product="editor">
+    <component id="commons-codec:commons-codec:1.14" draft="false" product="editor">
         <name>Apache Commons Codec</name>
         <version>1.14</version>
         <project-info>
@@ -1361,7 +1361,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="isorelax:isorelax:20030108" product="editor">
+    <component id="isorelax:isorelax:20030108" draft="false" product="editor">
         <name>isorelax</name>
         <version>20030108</version>
         <project-info>
@@ -1376,7 +1376,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url></url>
         </license>
     </component>
-    <component id="nu.validator.htmlparser:htmlparser:1.4" product="editor">
+    <component id="nu.validator.htmlparser:htmlparser:1.4" draft="false" product="editor">
         <name>htmlparser</name>
         <version>1.4</version>
         <project-info>
@@ -1391,7 +1391,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </component>
-    <component id="org.apache.commons:commons-collections4:4.3" product="editor">
+    <component id="org.apache.commons:commons-collections4:4.3" draft="false" product="editor">
         <name>Apache Commons Collections</name>
         <version>4.3</version>
         <project-info>
@@ -1406,7 +1406,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.commons:commons-compress:1.21" product="editor">
+    <component id="org.apache.commons:commons-compress:1.21" draft="false" product="editor">
         <name>Apache Commons Compress</name>
         <version>1.21</version>
         <project-info>
@@ -1424,7 +1424,7 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.commons:commons-math3:3.6.1" product="editor">
+    <component id="org.apache.commons:commons-math3:3.6.1" draft="false" product="editor">
         <name>Apache Commons Math</name>
         <version>3.6.1</version>
         <project-info>
@@ -1439,7 +1439,7 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.poi:poi:4.1.0" product="editor">
+    <component id="org.apache.poi:poi:4.1.0" draft="false" product="editor">
         <name>Apache POI</name>
         <version>4.1.0</version>
         <project-info>
@@ -1454,7 +1454,7 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.xmlbeans:xmlbeans:3.1.0" product="editor">
+    <component id="org.apache.xmlbeans:xmlbeans:3.1.0" draft="false" product="editor">
         <name>XmlBeans</name>
         <version>3.1.0</version>
         <project-info>
@@ -1469,7 +1469,7 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.dita-ot:dost:3.4.0" product="editor">
+    <component id="org.dita-ot:dost:3.4.0" draft="false" product="editor">
         <name>DITA Open Toolkit</name>
         <version>3.4.0</version>
         <project-info>
@@ -1484,7 +1484,7 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.nibor.autolink:autolink:0.6.0" product="editor">
+    <component id="org.nibor.autolink:autolink:0.6.0" draft="false" product="editor">
         <name>autolink-java</name>
         <version>0.6.0</version>
         <project-info>
@@ -1522,7 +1522,7 @@ SOFTWARE.
             <url>http://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </component>
-    <component id="org.relaxng:jing:20181222" product="editor">
+    <component id="org.relaxng:jing:20181222" draft="false" product="editor">
         <name>Jing</name>
         <version>20181222</version>
         <project-info>
@@ -1535,21 +1535,6 @@ SOFTWARE.
             <type>3-clause BSD license</type>
             <content>http://www.thaiopensource.com/relaxng/jing.html</content>
             <url>https://github.com/relaxng/jing-trang/blob/master/copying.txt</url>
-        </license>
-    </component>
-    <component id="org.yaml:snakeyaml:1.31" product="editor">
-        <name>SnakeYAML</name>
-        <version>1.31</version>
-        <project-info>
-            <about>YAML 1.1 parser and emitter for Java</about>
-            <licensor></licensor>
-            <start-year>2008</start-year>
-            <project-url>http://www.snakeyaml.org</project-url>
-        </project-info>
-        <license>
-            <type>Apache License, Version 2.0</type>
-            <content>http://www.snakeyaml.org</content>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
 </third-party>
