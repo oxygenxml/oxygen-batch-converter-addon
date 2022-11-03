@@ -31,8 +31,8 @@
 	<properties>
     	<maven.compiler.source>1.8</maven.compiler.source>
     	<maven.compiler.target>1.8</maven.compiler.target>
-    	<oxygen.sdk.version>23.0.0.0</oxygen.sdk.version>
-    	<oxygen.sdk.snapshot.version>23.0-SNAPSHOT</oxygen.sdk.snapshot.version>
+    	<oxygen.sdk.version>23.1.0.0</oxygen.sdk.version>
+    	<oxygen.sdk.snapshot.version>23.1-SNAPSHOT</oxygen.sdk.snapshot.version>
   	</properties>
 	
 	<repositories>
