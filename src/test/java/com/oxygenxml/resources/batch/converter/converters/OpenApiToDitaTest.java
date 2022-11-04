@@ -122,7 +122,7 @@ public class OpenApiToDitaTest {
         "      <body>\n" + 
         "         <p>\n" + 
         "            <ph>Version:</ph>\n" + 
-        "            <ph outputclass=\"openapi-version\">1.0.11</ph>\n" + 
+        "            <b outputclass=\"openapi-version\">1.0.11</b>\n" + 
         "         </p>\n" + 
         "      </body>\n" + 
         "   </topic>\n" + 
