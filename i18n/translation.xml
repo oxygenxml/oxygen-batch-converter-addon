@@ -270,6 +270,24 @@
 		<val lang="nl_NL">JSON naar YAML</val>
 		<val lang="zh_CN">JSON到YAML</val>
 	</key>
+	<key value="Menu_Item_Text_Conv_yaml.to.xml">
+    <comment>Text from MenuItem.</comment>
+    <val lang="en_US">YAML to XML</val>
+    <val lang="de_DE">YAML zu XML</val>
+    <val lang="fr_FR">YAML vers XML</val>
+    <val lang="ja_JP">YAML から XML</val>
+    <val lang="nl_NL">YAML naar XML</val>
+    <val lang="zh_CN">YAML到XML</val>
+  </key>
+  <key value="Menu_Item_Text_Conv_xml.to.yaml">
+    <comment>Text from MenuItem.</comment>
+    <val lang="en_US">XML to YAML</val>
+    <val lang="de_DE">XML zu YAML</val>
+    <val lang="fr_FR">XML vers YAML</val>
+    <val lang="ja_JP">XML から YAML</val>
+    <val lang="nl_NL">XML naar YAML</val>
+    <val lang="zh_CN">XML到YAML</val>
+  </key>
 
 	<key value="Menu_Item_Text_Conv_html.to.db5">
 		<comment>Text from MenuItem.</comment>

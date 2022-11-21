@@ -22,6 +22,8 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * XML to JSON
 * JSON to YAML
 * YAML to JSON
+* YAML to XML
+* XML to YAML
 
 For more information about the add-on see the following documentation topic: [Batch Documents Converter Add-on](https://www.oxygenxml.com/doc/ug-editor/topics/batch-converter-addon.html)
 
