@@ -21,9 +21,9 @@
                         <li>OpenAPI to DITA</li>
                         <li>Confluence to DITA</li>
                         <li>DocBook to DITA</li>
-                        <li>XML to JSON</li>
+                        <li>XML to JSON/YAML</li>
                         <li>JSON to XML</li>
-                        <li>YAML to JSON</li>
+                        <li>YAML to JSON/XML</li>
                         <li>JSON to YAML</li>
                     </ul>
                     <p>For more details see <a
