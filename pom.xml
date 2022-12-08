@@ -9,7 +9,7 @@
   </parent>
   
 	<artifactId>oxygen-batch-converter-addon</artifactId>
-	<version>5.0.2-SNAPSHOT</version>
+	<version>5.1.0-SNAPSHOT</version>
   
     <developers>
       <developer>
