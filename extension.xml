@@ -33,6 +33,36 @@
                 </div>
                 <hr/>
                 <div>
+                    <h3>What's new in version 5.1.0</h3>
+                    <ul>
+                        <li>Added two new conversions: <b>YAML to XML</b> and <b>XML to YAML</b>.</li>
+                        <li>
+                            <b>Word to HTML/DITA</b>
+                            <ul>
+                                <li>The processing of table captions was improved. The table is now obtained
+                                    with a caption child in HTML or with a title in DITA. </li>
+                                <li>The width of table columns is now preserved.</li>
+                                <li> The processing of figure captions was improved. For XHTML, a
+                                    <i>&lt;figure></i> element is obtained with a
+                                    <i>&lt;figcaption></i> child element. For DITA, a
+                                    <i>&lt;fig></i> element is obtained with a <i>&lt;title></i>
+                                    child element. </li>
+                                <li>The saving of images was improved and the name from the Word internal
+                                    structure is preserved.</li>
+                                <li>Fixed an issue where the content was incorrectly merged between two
+                                    different unordered lists.</li>
+                            </ul></li>
+                        <li>
+                            <b>Others</b>
+                            <ul>
+                                <li>Removed the SnakeYAML library because this is already available in Oxygen.</li>
+                                <li>Increased the minimum required version of Oxygen to 23.1.</li>
+                                <li>Removed some Flexmark Java Extension libraries that are not used when converting Markdown.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
                     <h3>What's new in version 5.0.1</h3>
                     <ul>
                         <li>Fixed an issue with Word to HTML/DITA conversions where content was incorrectly merged between two different lists.</li>
