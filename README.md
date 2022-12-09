@@ -19,17 +19,17 @@ This add-on can be installed in Oxygen XML Editor to enable batch conversions be
 * DocBook to DITA
 
 * JSON to XML
-* XML to JSON
 * JSON to YAML
+* XML to JSON
+* XML to YAML
 * YAML to JSON
 * YAML to XML
-* XML to YAML
 
 For more information about the add-on see the following documentation topic: [Batch Documents Converter Add-on](https://www.oxygenxml.com/doc/ug-editor/topics/batch-converter-addon.html)
 
 ## Compatibility
 
-The add-on is compatible with Oxygen XML Editor/Author/Developer version 22.1 or newer. 
+The add-on is compatible with Oxygen XML Editor/Author/Developer version 23.1 or newer. 
 
 ## How to Install
 
