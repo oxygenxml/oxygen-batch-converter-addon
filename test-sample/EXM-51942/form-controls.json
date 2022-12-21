@@ -1,0 +1,8 @@
+{
+    "formControls": {
+        "pre": "text:before {\r\n         content: oxy_editor(type, text, edit, \"#text\");\r\n}",
+        "p#1": [
+            {"#text": "The function signature consists in property name -> property value pairs. For the previous\r\n             example we have two properties: "}
+        ]
+    }
+}
