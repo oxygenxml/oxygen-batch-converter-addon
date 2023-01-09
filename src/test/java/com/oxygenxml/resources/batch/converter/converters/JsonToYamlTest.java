@@ -91,7 +91,7 @@ public class JsonToYamlTest {
    * @throws Exception
    */
   @Test
-  public void testEXM51942() throws TransformerException, IOException {
+  public void testLineWidthOptionAffectsConvertedYamlFiles() throws TransformerException, IOException {
     int oldOption = Options.getInstance().getIntegerProperty(APIAccessibleOptionTags.EDITOR_LINE_WIDTH);
     Options.getInstance().setIntegerProperty(APIAccessibleOptionTags.EDITOR_LINE_WIDTH, 40);
     
@@ -134,9 +134,6 @@ public class JsonToYamlTest {
         }
       });
       
-      // To see the contents
-      // assertEquals(new String(Files.readAllBytes(Paths.get(goodSample.getAbsolutePath())), Charsets.UTF_8),
-      //              new String(Files.readAllBytes(Paths.get(convertedFile.getAbsolutePath())), Charsets.UTF_8));
       assertTrue(FileComparationUtil.compareLineToLine(goodSample, convertedFile));
 
     } finally {
