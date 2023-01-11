@@ -1,0 +1,19 @@
+---
+$schema: http://json-schema.org/draft-07/schema#
+title: Personal schema.
+type: object
+properties:
+  personnel:
+    title: The 'personnel' property
+    description: Defines the personnel as a collection of person entries.
+    type: object
+    properties:
+      person:
+        $ref: '#/definitions/personType'
+    additionalProperties: false
+definitions:
+  personType:
+    title: The 'person' property
+    description: Specifies information about a person.
+    type: array
+    uniqueItems: true
