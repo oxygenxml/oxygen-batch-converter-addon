@@ -35,7 +35,6 @@ import com.oxygenxml.batch.converter.core.word.styles.WordStyleMapLoader;
 import com.oxygenxml.resources.batch.converter.persister.OptionTags;
 import com.oxygenxml.resources.batch.converter.resources.Images;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
-import com.oxygenxml.resources.batch.converter.utils.HiDPIUtil;
 
 import ro.sync.basic.util.URLUtil;
 import ro.sync.exml.workspace.api.PluginResourceBundle;
@@ -195,7 +194,7 @@ public class BatchConverterOptionPanel extends JPanel{
     scPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     scPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     scPane.setPreferredSize(new Dimension(scPane.getPreferredSize().width,
-                                          HiDPIUtil.getHiDPISize(WORD_MAPPING_TABLE_PREFFERED_HEIGHT)));
+                                          WORD_MAPPING_TABLE_PREFFERED_HEIGHT));
     
     GridBagConstraints constr = new GridBagConstraints();
     constr.gridx = 0;
