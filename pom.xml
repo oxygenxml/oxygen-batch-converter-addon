@@ -67,12 +67,6 @@
 		</dependency>
 		
 		<dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.31</version>
-            <scope>test</scope>
-        </dependency>
-		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito</artifactId>
 			<version>1.6.2</version>
