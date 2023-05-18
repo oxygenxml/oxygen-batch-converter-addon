@@ -70,6 +70,13 @@
 			</exclusions>
 		</dependency>
 		
+		<dependency>
+	       <groupId>org.yaml</groupId>
+	       <artifactId>snakeyaml</artifactId>
+	       <version>1.33</version>
+	       <scope>provided</scope>
+        </dependency>
+                
 		<!--  This is already in Oxygen -->
 		<dependency>
             <groupId>com.sun.xml.bind</groupId>
