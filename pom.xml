@@ -63,6 +63,10 @@
 					<groupId>com.oxygenxml</groupId>
 					<artifactId>oxygen-validation-api</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		
