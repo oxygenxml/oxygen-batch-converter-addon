@@ -30,7 +30,7 @@
           </ol>
         </li>
       </ol>
-      <table>
+      <table colsep="1" frame="all" rowsep="1">
         <tgroup cols="4">
           <colspec colname="col1" colnum="1" colwidth="1*"/>
           <colspec colname="col2" colnum="2" colwidth="1*"/>
@@ -58,7 +58,7 @@
               </entry>
               <entry>
                 <p>
-                  <table>
+                  <table colsep="1" frame="all" rowsep="1">
                     <tgroup cols="2">
                       <colspec colname="col1" colnum="1" colwidth="1*"/>
                       <colspec colname="col2" colnum="2" colwidth="1*"/>
