@@ -33,6 +33,39 @@
                 </div>
                 <hr/>
                 <div>
+                    <h3>What's new in version 5.1.1</h3>
+                    <ul>
+                        <li>
+                            <b>OpenAPI to DITA</b>
+                            <ul>
+                                <li>Fixed an issue where OpenAPI to DITA conversion failed when the document contained the "*/*" MIME type.</li>
+                                <li>Fixed invalid IDs on topics resulting from OpenAPI tags that contained multiple words separated by spaces.</li>
+                                <li>Fixed a case where the description from responses was lost during the conversion of OpenAPI v2.</li>
+                            </ul></li><li>
+                                <b>Word to HTML/DITA</b>
+                                <ul>
+                                    <li>Added frame, rowsep, and colsep attributes to tables from the resulting DITA documents.</li>
+                                    <li>Fixed a case where the resulting tables have duplicate IDs.</li>
+                                    <li>Added a default configuration in the Word Styles Mapping table for codeblocks.</li>
+                                    <li>Fixed a case where the custom styles based on normal style that don't have a Word style mapping are not reported as unknown.</li>
+                                </ul></li>
+                        <li>
+                            <b>Confluence to DITA</b>
+                            <ul>
+                                <li>Fixed XSLT error that occurred when converting Confluence documents with duplicate IDs.</li>
+                                <li>Removed queries from image paths. This prevents publishing errors caused by the presence of a query component in the URI.</li>
+                            </ul></li>
+                        <li>
+                            <b>Others</b>
+                            <ul>
+                                <li>Updated the JTidy library to version 1.0.4.</li>
+                                <li>Increased the minimum required version of Oxygen to 25.1.</li>
+                                <li>Removed the Jackson libraries because these are already available in Oxygen.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
                     <h3>What's new in version 5.1.0</h3>
                     <ul>
                         <li>Added two new conversions: <b>YAML to XML</b> and <b>XML to YAML</b>.</li>
