@@ -38,21 +38,21 @@
                         <li>
                             <b>OpenAPI to DITA</b>
                             <ul>
-                                <li>Fixed an issue where OpenAPI to DITA conversion failed when the document contained the "*/*" MIME type.</li>
+                                <li>Fixed an issue where the OpenAPI to DITA conversion failed when the document contained the "*/*" MIME type.</li>
                                 <li>Fixed invalid IDs on topics resulting from OpenAPI tags that contained multiple words separated by spaces.</li>
                                 <li>Fixed a case where the description from responses was lost during the conversion of OpenAPI v2.</li>
                             </ul></li><li>
                                 <b>Word to HTML/DITA</b>
                                 <ul>
-                                    <li>Added frame, rowsep, and colsep attributes to tables from the resulting DITA documents.</li>
-                                    <li>Fixed a case where the resulting tables have duplicate IDs.</li>
-                                    <li>Added a default configuration in the Word Styles Mapping table for codeblocks.</li>
-                                    <li>Fixed a case where the custom styles based on normal style that don't have a Word style mapping are not reported as unknown.</li>
+                                    <li>Added 'frame', 'rowsep', and 'colsep' attributes to tables from the resulting DITA documents.</li>
+                                    <li>Fixed a case where the resulting tables had duplicate IDs.</li>
+                                    <li>Added a default configuration for codeblocks in the Word Styles Mapping table.</li>
+                                    <li>Fixed a case where the custom styles based on a normal style that didn't have a Word style mapping were not properly reported as unknown.</li>
                                 </ul></li>
                         <li>
                             <b>Confluence to DITA</b>
                             <ul>
-                                <li>Fixed XSLT error that occurred when converting Confluence documents with duplicate IDs.</li>
+                                <li>Fixed an XSLT error that occurred when converting Confluence documents with duplicate IDs.</li>
                                 <li>Removed queries from image paths. This prevents publishing errors caused by the presence of a query component in the URI.</li>
                             </ul></li>
                         <li>
