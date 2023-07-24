@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dita
-  PUBLIC "-//OASIS//DTD DITA Composite//EN" "ditabase.dtd">
-<dita>
-  <topic id="heading-a">
+  PUBLIC "-//OASIS//DTD DITA 2.x Composite//EN" "ditabase.dtd">
+<dita specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
+  <topic id="heading-a" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
     <title>Heading A</title>
     <body>
       <p>Content A.</p>
     </body>
-    <topic id="heading-a1">
+    <topic id="heading-a1" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
       <title>Heading A.1</title>
       <body>
         <p>Content A.1.</p>
       </body>
     </topic>
-    <topic id="heading-a2">
+    <topic id="heading-a2" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
       <title>Heading A.2</title>
       <body>
         <p>Content A.2.</p>
       </body>
     </topic>
   </topic>
-  <topic id="heading-b">
+  <topic id="heading-b" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
     <title>Heading B</title>
     <body>
       <p>Content B.</p>
     </body>
-    <topic id="heading-b1">
+    <topic id="heading-b1" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
       <title>Heading B.1</title>
       <body>
         <p>Content B.1.</p>

@@ -137,14 +137,18 @@ public class OpenApiToDitaTest {
         "            </ph>\n" + 
         "         </title>\n" + 
         "         <body>\n" + 
-        "            <bodydiv outputclass=\"openapi-operation-description\" id=\"get_pets-description\">Returns all pets from the system that the user has access to</bodydiv>\n" + 
+        "            <bodydiv outputclass=\"openapi-operation-description\" id=\"get_pets-description\">\n" + 
+        "               <p>Returns all pets from the system that the user has access to</p>\n" + 
+        "            </bodydiv>\n" + 
         "            <section outputclass=\"openapi-responses\">\n" + 
         "               <title>Responses</title>\n" + 
         "               <dl outputclass=\"openapi-responses-list\">\n" + 
         "                  <dlentry outputclass=\"openapi-response\">\n" + 
         "                     <dt outputclass=\"openapi-response-key\">200</dt>\n" + 
         "                     <dd>\n" + 
-        "                        <div outputclass=\"openapi-response-description\">A list of pets.</div>\n" + 
+        "                        <div outputclass=\"openapi-response-description\">\n" + 
+        "                           <p>A list of pets.</p>\n" + 
+        "                        </div>\n" + 
         "                        <dl outputclass=\"openapi-response-properties\">\n" + 
         "                           <dlentry outputclass=\"openapi-response-content\">\n" + 
         "                              <dt>Media types</dt>\n" + 

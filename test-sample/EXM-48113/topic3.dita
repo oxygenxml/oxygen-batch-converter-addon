@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="oxygen-batch-converter-add-on-for-oxygen-xml-editor">
+<topic id="oxygen-batch-converter-add-on-for-oxygen-xml-editor" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
   <title>Oxygen Batch Converter add-on for Oxygen XML Editor</title>
   <body>
     <p>This add-on can be installed in Oxygen XML Editor to enable batch conversions between the following formats:</p>
     <ul>
-      <li>
-        <p>HTML to XHTML</p>
-      </li>
-      <li>
-        <p>HTML to DITA</p>
-      </li>
-      <li>
-        <p>Markdown to XHTML</p>
-      </li>
-      <li>
-        <p>Markdown to DITA</p>
-      </li>
-      <li>
-        <p>XML to JSON</p>
-      </li>
-      <li>
-        <p>JSON to XML</p>
-      </li>
+      <li>HTML to XHTML</li>
+      <li>HTML to DITA</li>
+      <li>Markdown to XHTML</li>
+      <li>Markdown to DITA</li>
+      <li>XML to JSON</li>
+      <li>JSON to XML</li>
     </ul>
   </body>
   
