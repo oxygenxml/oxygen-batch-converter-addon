@@ -29,10 +29,9 @@
     </developers>
 
 	<properties>
-    	<maven.compiler.source>11</maven.compiler.source>
-    	<maven.compiler.target>11</maven.compiler.target>
-    	<oxygen.sdk.version>25.1.0.0</oxygen.sdk.version>
-    	<oxygen.sdk.snapshot.version>25.1-SNAPSHOT</oxygen.sdk.snapshot.version>
+    	<maven.compiler.source>17</maven.compiler.source>
+    	<maven.compiler.target>17</maven.compiler.target>
+        <target.jre.version>17</target.jre.version>
   	</properties>
 	
 	<repositories>
@@ -107,7 +106,7 @@
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-sdk</artifactId>
-			<version>${oxygen.sdk.version}</version>
+			<version>${oxygen.version}</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -129,31 +128,6 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- dirty hack
-		    in oxygen-plugins-superpom we have this "oxygen.jar" dependency which is actually oxygen-sdk !?
-		    we want to have the same version 
-		-->
-		<dependency>
-			<groupId>com.oxygenxml</groupId>
-			<artifactId>oxygen</artifactId>
-			<version>${oxygen.sdk.version}</version>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>com.oxygen</groupId>
-					<artifactId>oxygen-annotations</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.logging.log4j</groupId>
-					<artifactId>log4j-1.2-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-			
 		<!--We need log4j2 in TCs because the old version of the 22.1.0.0 version of sdk uses log4j2.  -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -181,7 +155,6 @@
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-basic-utilities</artifactId>
-			<version>${oxygen.sdk.snapshot.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
