@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-  PUBLIC "-//OASIS//DTD DITA 2.x Topic//EN" "topic.dtd">
-<topic id="oxygen-batch-converter-add-on-for-oxygen-xml-editor" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="oxygen-batch-converter-add-on-for-oxygen-xml-editor">
   <title>Oxygen Batch Converter add-on for Oxygen XML Editor</title>
   <body>
     <p>This add-on can be installed in Oxygen XML Editor to enable batch conversions between the following formats:</p>
@@ -14,7 +14,7 @@
       <li>JSON to XML</li>
     </ul>
   </body>
-  <topic id="installation" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
+  <topic id="installation">
     <title>Installation</title>
     <body>
       <p>The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1.</p>
@@ -25,7 +25,7 @@
       <p>then continue the installation process.</p>
     </body>
   </topic>
-  <topic id="converting-a-document" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
+  <topic id="converting-a-document">
     <title>Converting a document:</title>
     <body>
       <ol>

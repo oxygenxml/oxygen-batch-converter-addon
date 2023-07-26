@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="converting-a-document" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
+<topic id="converting-a-document">
     <title>Converting a document:</title>
     <body>
       <ol>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="installation" specializations="@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product">
+<topic id="installation">
     <title>Installation</title>
     <body>
       <p>The add-on is compatible with Oxygen XML Editor (or XML Author) version 19.1.</p>
