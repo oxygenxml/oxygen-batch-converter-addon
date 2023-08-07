@@ -195,7 +195,7 @@ public class OpenApiToDitaTest {
         "                     <dt outputclass=\"openapi-response-key\">400</dt>\n" + 
         "                     <dd>\n" + 
         "                        <xref outputclass=\"openapi-reference\"\n" + 
-        "                             href=\"definitions2.dita#responses/error400\"/>\n" + 
+        "                              href=\"definitions2.dita#responses/error400\"/>\n" + 
         "                     </dd>\n" + 
         "                  </dlentry>\n" + 
         "               </dl>\n" + 
