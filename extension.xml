@@ -36,6 +36,7 @@
                     <h3>What's new in version 5.3.0</h3>
                     <ul>
                         <li>The Markdown to DITA conversion used by the Oxygen Batch Converter add-on was updated to be compatible with all enhancements made in version 5.5.0 of the org.lwdita DITA OT plugin.</li>
+                        <li>Increased the minimum required version of Oxygen to 26.0.</li>
                     </ul>
                 </div>
                 <div>
