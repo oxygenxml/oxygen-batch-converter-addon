@@ -109,5 +109,13 @@
       ]]></notes>
         <filePath regex="true">.*oxygen-patched-jtidy-for-batch-converter-26\.0-SNAPSHOT\.jar[\\/]META-INF[\\/]maven[\\/]com\.github\.jtidy[\\/]jtidy[\\/]pom\.xml</filePath>
         <cve>CVE-2023-34623</cve>
-    </suppress> 
+    </suppress>
+    <suppress>
+        <notes><![CDATA[
+        EXM-53853: oxygen-patched-json uses json-20231013.jar. It's a detection false-positive
+      ]]></notes>
+        <filePath regex="true">.*oxygen-patched-json.*\.jar[\\/]META-INF[\\/]maven[\\/]org\.json[\\/]json[\\/]pom\.xml</filePath>
+        <cve>CVE-2023-5072</cve>
+    </suppress>
+    
 </suppressions>
