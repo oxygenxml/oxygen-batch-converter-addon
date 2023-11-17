@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.oxygenxml</groupId>
     <artifactId>oxygen-addons-superpom</artifactId>
-    <version>26.0-SNAPSHOT</version>
+    <version>26.1-SNAPSHOT</version>
   </parent>
   
 	<artifactId>oxygen-batch-converter-addon</artifactId>
@@ -106,7 +106,7 @@
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-sdk</artifactId>
-			<version>${oxygen.version}</version>
+			<version>26.0-SNAPSHOT</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
