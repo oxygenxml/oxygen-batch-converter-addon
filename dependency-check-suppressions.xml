@@ -60,7 +60,7 @@
         <notes><![CDATA[
       EXM-52720, EXM-52798: oxygen-patched-json uses json-20230227.jar. It's a detection false-positive
       ]]></notes>
-        <filePath regex="true">.*oxygen-patched-json-26\.0-SNAPSHOT\.jar[\\/]META-INF[\\/]maven[\\/]org\.json[\\/]json[\\/]pom\.xml</filePath>
+        <filePath regex="true">.*oxygen-patched-json-[0-9]{2}\.[0-9]-SNAPSHOT\.jar[\\/]META-INF[\\/]maven[\\/]org\.json[\\/]json[\\/]pom\.xml</filePath>
         <cve>CVE-2022-45688</cve>
     </suppress>
     <suppress>
