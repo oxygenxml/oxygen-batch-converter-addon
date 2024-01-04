@@ -332,36 +332,36 @@ public class BatchConverterImpl implements BatchConverter {
 	  File convertedFile = null;
 		try {
 			ConversionResult conversionResult = converter.convert(file, null, transformerFactoryCreator, inputsProvider);
-			String convertedContent = conversionResult.getConvertedContent();
-			
-			List<String> conversionProblems = conversionResult.getConversionProblems();
-			reportEncounteredProblems(conversionProblems);
-			
-			if (convertedContent != null) {
-				if(logger.isDebugEnabled()) {
-					logger.debug("Print converted content in: " + outputFile);
-				}
-				
-				if (conversionResult.getImposedOutputFileExtension() != null) {
-			    outputFile = ConverterFileUtils.getUniqueOutputFile(
-			        file, 
-			        conversionResult.getImposedOutputFileExtension(),
-	            inputsProvider.getOutputFolder());
-				}
-				
-				// print the converted content.
-				contentPrinter.print(conversionResult, transformerFactoryCreator, converterType, outputFile);
-
-				noOfConvertedFiles++;
-				convertedFile = outputFile;
-				if (inputsProvider.mustOpenConvertedFiles()) {
-					// open the converted file
-					URL convertedFileUrl;
-					convertedFileUrl = outputFile.toURI().toURL();
-					PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl);
-				}
-
+			if (!conversionResult.shouldSkipPrinting()) {
+			  String convertedContent = conversionResult.getConvertedContent();
+			  
+			  List<String> conversionProblems = conversionResult.getConversionProblems();
+			  reportEncounteredProblems(conversionProblems);
+			  
+			  if (convertedContent != null) {
+			    if(logger.isDebugEnabled()) {
+			      logger.debug("Print converted content in: " + outputFile);
+			    }
+			    
+			    if (conversionResult.getImposedOutputFileExtension() != null) {
+			      outputFile = ConverterFileUtils.getUniqueOutputFile(
+			          file, 
+			          conversionResult.getImposedOutputFileExtension(),
+			          inputsProvider.getOutputFolder());
+			    }
+			    
+			    // print the converted content.
+			    contentPrinter.print(conversionResult, transformerFactoryCreator, converterType, outputFile);
+			  }
 			}
+			noOfConvertedFiles++;
+      convertedFile = outputFile;
+      if (inputsProvider.mustOpenConvertedFiles()) {
+        // open the converted file
+        URL convertedFileUrl;
+        convertedFileUrl = outputFile.toURI().toURL();
+        PluginWorkspaceProvider.getPluginWorkspace().open(convertedFileUrl);
+      }
 
 		} catch (MalformedURLException e) {
 		  if(logger.isDebugEnabled()) {

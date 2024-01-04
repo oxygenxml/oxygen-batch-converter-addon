@@ -271,24 +271,23 @@
 		<val lang="zh_CN">JSON到YAML</val>
 	</key>
 	<key value="Menu_Item_Text_Conv_yaml.to.xml">
-    <comment>Text from MenuItem.</comment>
-    <val lang="en_US">YAML to XML</val>
-    <val lang="de_DE">YAML zu XML</val>
-    <val lang="fr_FR">YAML vers XML</val>
-    <val lang="ja_JP">YAML から XML</val>
-    <val lang="nl_NL">YAML naar XML</val>
-    <val lang="zh_CN">YAML到XML</val>
+	    <comment>Text from MenuItem.</comment>
+	    <val lang="en_US">YAML to XML</val>
+	    <val lang="de_DE">YAML zu XML</val>
+	    <val lang="fr_FR">YAML vers XML</val>
+	    <val lang="ja_JP">YAML から XML</val>
+	    <val lang="nl_NL">YAML naar XML</val>
+	    <val lang="zh_CN">YAML到XML</val>
   </key>
   <key value="Menu_Item_Text_Conv_xml.to.yaml">
-    <comment>Text from MenuItem.</comment>
-    <val lang="en_US">XML to YAML</val>
-    <val lang="de_DE">XML zu YAML</val>
-    <val lang="fr_FR">XML vers YAML</val>
-    <val lang="ja_JP">XML から YAML</val>
-    <val lang="nl_NL">XML naar YAML</val>
-    <val lang="zh_CN">XML到YAML</val>
+	    <comment>Text from MenuItem.</comment>
+	    <val lang="en_US">XML to YAML</val>
+	    <val lang="de_DE">XML zu YAML</val>
+	    <val lang="fr_FR">XML vers YAML</val>
+	    <val lang="ja_JP">XML から YAML</val>
+	    <val lang="nl_NL">XML naar YAML</val>
+	    <val lang="zh_CN">XML到YAML</val>
   </key>
-
 	<key value="Menu_Item_Text_Conv_html.to.db5">
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">HTML to DocBook 5</val>
@@ -633,5 +632,32 @@
 		<val lang="ja_JP">Markdown からインポートする</val>
 		<val lang="nl_NL">Vanuit Markdown importeren</val>
 		<val lang="zh_CN">从标记处导入</val>
+	</key>
+	<key value="Restrict_additional_content" distribution="common">
+		<comment>XSD to JSON Schema option</comment>
+		<val lang="en_US">Restrict additional content</val>
+		<val lang="de_DE">Beschränke zusätzlichen Inhalt</val>
+		<val lang="fr_FR">Restreindre le contenu additionnel</val>
+		<val lang="ja_JP">追加コンテンツを制限する</val>
+		<val lang="nl_NL">Extra inhoud beperken</val>
+		<val lang="zh_CN">限制附加内容</val>
+	</key>
+	<key value="Preserve_case_of_names_from_the_XSD">
+		<comment>XSD to JSON Schema dialog option to keep in JSON Schema the case of names from XSD.</comment>
+		<val lang="en_US">Preserve case of names from the XSD</val>
+		<val lang="de_DE">Fall der Namen aus dem XSD beibehalten</val>
+		<val lang="fr_FR">Préserver la casse des noms de la XSD</val>
+		<val lang="ja_JP">XSD からの名前の大文字と小文字を区別する</val>
+		<val lang="nl_NL">Hoofdlettergebruik van namen uit de XSD behouden</val>
+		<val lang="zh_CN">保留XSD中名称的大小写</val>
+	</key>
+	<key value="Menu_Item_Text_Conv_xsd.to.jsonschema">
+		<comment>Text from MenuItem.</comment>
+		<val lang="en_US">XSD to JSON Schema</val>
+		<val lang="de_DE">XSD to JSON Schema</val>
+		<val lang="fr_FR">XSD to JSON Schema</val>
+		<val lang="ja_JP">XSD to JSON Schema</val>
+		<val lang="nl_NL">XSD to JSON Schema</val>
+		<val lang="zh_CN">XSD to JSON Schema</val>
 	</key>
 </translation>

@@ -213,4 +213,16 @@ public class Tags {
    * en: Ignore html 'div' elements
    */
   public static final String IGNORE_DIV_ELEMENTS = "ignore_div_elements";
+  
+  /**
+   * XSD to JSON Schema dialog option to keep in JSON Schema the case of names from XSD.
+   * 
+   * en: Preserve case of names from the XSD.
+   */
+  public static final String PRESERVE_CASE_OF_NAMES_FROM_THE_XSD = "Preserve_case_of_names_from_the_XSD";
+  
+  /**
+   * en: Restrict additional content
+   */
+  public static final String RESTRICT_ADDITIONAL_CONTENT = "Restrict_additional_content";
 }

@@ -42,6 +42,10 @@ public class ConverterAdditionalOptionsProvider {
         new AdditionalOptionsInfo(translator.getTranslation(Tags.CREATE_DITA_MAPS_FROM_OPENAPI), true));
     addionalOptionToTranslationTag.put(OptionTags.IGNORE_DIV_ELEMENTS_FROM_HTML,
         new AdditionalOptionsInfo(translator.getTranslation(Tags.IGNORE_DIV_ELEMENTS), false));
+    addionalOptionToTranslationTag.put(OptionTags.PRESERVE_CASE_OF_NAMES_FROM_THE_XSD,
+        new AdditionalOptionsInfo(translator.getTranslation(Tags.PRESERVE_CASE_OF_NAMES_FROM_THE_XSD), true));
+    addionalOptionToTranslationTag.put(OptionTags.RESTRICT_ADDITIONAL_CONTENT,
+        new AdditionalOptionsInfo(translator.getTranslation(Tags.RESTRICT_ADDITIONAL_CONTENT), false));
   }
   
   /**
@@ -58,26 +62,30 @@ public class ConverterAdditionalOptionsProvider {
   
   /**
    * The the imposed options according to given conversion type.
-   * @param convertionType The conversion type.
+   * @param conversionType The conversion type.
    * 
    * @return The additional imposed options.
    */
-  public static final List<String> getImposedAdditionalOptions(String convertionType){
+  public static final List<String> getImposedAdditionalOptions(String conversionType){
     List<String> options= new ArrayList<>();
-    if( ConverterTypes.WORD_TO_DITA.equals(convertionType)) {
+    if( ConverterTypes.WORD_TO_DITA.equals(conversionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_WORD);
-    } else if(ConverterTypes.MD_TO_DITA.equals(convertionType)) {
+    } else if(ConverterTypes.MD_TO_DITA.equals(conversionType)) {
       options.add(ADDITIONAL_OPTIONS_SEPARATOR);
       options.add(OptionTags.CREATE_DITA_MAP_FROM_MD);
       options.add(OptionTags.CREATE_SHORT_DESCRIPTION);
-    } else if(ConverterTypes.HTML_TO_DITA.equals(convertionType)) {
+    } else if(ConverterTypes.HTML_TO_DITA.equals(conversionType)) {
       options.add(ADDITIONAL_OPTIONS_SEPARATOR);
       options.add(OptionTags.CREATE_DITA_MAP_FROM_HTML);
       options.add(OptionTags.IGNORE_DIV_ELEMENTS_FROM_HTML);
-    } else if(ConverterTypes.DOCBOOK_TO_DITA.equals(convertionType)) {
+    } else if(ConverterTypes.DOCBOOK_TO_DITA.equals(conversionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_DOCBOOK);
-    } else if(ConverterTypes.OPENAPI_TO_DITA.equals(convertionType)) {
+    } else if(ConverterTypes.OPENAPI_TO_DITA.equals(conversionType)) {
       options.add(OptionTags.CREATE_DITA_MAP_FROM_OPEN_API);
+    } else if(ConverterTypes.XSD_TO_JSONSCHEMA.equals(conversionType)) {
+      options.add(ADDITIONAL_OPTIONS_SEPARATOR);
+      options.add(OptionTags.RESTRICT_ADDITIONAL_CONTENT);
+      options.add(OptionTags.PRESERVE_CASE_OF_NAMES_FROM_THE_XSD);
     }
     return options;
   }
