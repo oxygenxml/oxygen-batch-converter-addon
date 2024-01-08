@@ -25,6 +25,7 @@
                         <li>JSON to XML</li>
                         <li>YAML to JSON/XML</li>
                         <li>JSON to YAML</li>
+                        <li>XSD to JSON Schema</li>
                     </ul>
                     <p>For more details see <a
                             href="https://www.oxygenxml.com/doc/ug-editor/topics/batch-converter-addon.html"
