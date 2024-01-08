@@ -1849,22 +1849,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="commons-validator:commons-validator:1.6" draft="false" product="editor">
-        <name>Apache Commons Validator</name>
-        <version>1.6</version>
-        <project-info>
-            <about>Apache Commons Validator provides the building blocks for both client side validation and server side data validation.
-    It may be used standalone or with a framework like Struts.</about>
-            <licensor>The Apache Software Foundation</licensor>
-            <start-year>2002</start-year>
-            <project-url>http://commons.apache.org/proper/commons-validator/</project-url>
-        </project-info>
-        <license>
-            <type>Apache License, Version 2.0</type>
-            <content>http://commons.apache.org/proper/commons-validator/</content>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </component>
     <component id="isorelax:isorelax:20030108" draft="false" product="editor">
         <name>isorelax</name>
         <version>20030108</version>
