@@ -3959,7 +3959,6 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
         </project-info>
         <license>
             <type>CDDL License</type>
-            <content>http://jaxb.java.net/jaxb-xjc</content>
             <content>
                 COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.1
 
