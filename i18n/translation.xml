@@ -51,7 +51,7 @@
 			topics.</comment>
 		<val lang="en_US">Maximum heading level for creating topics:</val>
 		<val lang="de_DE">Maximale Überschriftenebene für die Topic-Erstellung:</val>
-		<val lang="fr_FR">Niveau maximal des titres pour la création de topics:</val>
+		<val lang="fr_FR">Niveau maximal des titres pour la création de topics :</val>
 		<val lang="ja_JP">トピックを作成するための最大見出しレベル:</val>
 		<val lang="nl_NL">Maximumkopniveau voor het aanmaken van onderwerpen:</val>
 		<val lang="zh_CN">创建Topic主题的最大标题级别：</val>
@@ -402,7 +402,7 @@
 		<comment>Add input label</comment>
 		<val lang="en_US">Input files:</val>
 		<val lang="de_DE">Eingabedateien:</val>
-		<val lang="fr_FR">Fichiers:</val>
+		<val lang="fr_FR">Fichiers :</val>
 		<val lang="ja_JP">入力ファイル:</val>
 		<val lang="nl_NL">Invoerbestanden:</val>
 		<val lang="zh_CN">输入文件：</val>
@@ -460,7 +460,7 @@
 		<comment>Add output folder label</comment>
 		<val lang="en_US">Output folder:</val>
 		<val lang="de_DE">Ausgabeverzeichnis:</val>
-		<val lang="fr_FR">Dossier de destination:</val>
+		<val lang="fr_FR">Dossier de destination :</val>
 		<val lang="ja_JP">出力フォルダー:</val>
 		<val lang="nl_NL">Uitvoermap:</val>
 		<val lang="zh_CN">导出文件夹：</val>
@@ -529,7 +529,7 @@
 		<comment>Warning message when output path is empty.</comment>
 		<val lang="en_US">Please specify an output folder!</val>
 		<val lang="de_DE">Bitte legen Sie ein Ausgabeverzeichnis fest!</val>
-		<val lang="fr_FR">Veuillez spécifier un dossier de destination!</val>
+		<val lang="fr_FR">Veuillez spécifier un dossier de destination !</val>
 		<val lang="ja_JP">出力フォルダーを指定してください!</val>
 		<val lang="nl_NL">Specificeer een uitvoermap!</val>
 		<val lang="zh_CN">请指定导出文件夹！</val>
@@ -655,7 +655,7 @@
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">XSD to JSON Schema</val>
 		<val lang="de_DE">XSD to JSON Schema</val>
-		<val lang="fr_FR">XSD to JSON Schema</val>
+		<val lang="fr_FR">XSD vers JSON Schema</val>
 		<val lang="ja_JP">XSD to JSON Schema</val>
 		<val lang="nl_NL">XSD to JSON Schema</val>
 		<val lang="zh_CN">XSD to JSON Schema</val>
