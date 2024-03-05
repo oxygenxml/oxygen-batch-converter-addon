@@ -37,8 +37,8 @@
                     <h3>What's new in version 6.0.0</h3>
                     <ul>
                         <li>You can now convert XSD to JSON Schema (version 2020-12).</li>
-                        <li>Improvements on Word to HTML/DITA related to lists with custom styles processing.</li>
-                        <li>Updated the Apache POI library (used for conversions from Word (only doc format) and Excel) to version 5.2.5.</li>
+                        <li>Improvements were implemented related to lists with custom styles processing for Word to HTML/DITA conversions.</li>
+                        <li>Updated the Apache POI library (used for conversions from Word and Excel) to version 5.2.5.</li>
                     </ul>
                 </div>
                 <div class="whatsnew">
