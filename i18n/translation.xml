@@ -651,7 +651,7 @@
 		<val lang="nl_NL">Hoofdlettergebruik van namen uit de XSD behouden</val>
 		<val lang="zh_CN">保留XSD中名称的大小写</val>
 	</key>
-	<key value="Menu_Item_Text_Conv_xsd.to.jsonschema">
+	<key value="Menu_Item_Text_Conv_xsd.to.json">
 		<comment>Text from MenuItem.</comment>
 		<val lang="en_US">XSD to JSON Schema</val>
 		<val lang="de_DE">XSD to JSON Schema</val>
