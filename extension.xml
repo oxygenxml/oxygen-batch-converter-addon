@@ -34,6 +34,14 @@
                 </div>
                 <hr/>
                 <div class="whatsnew">
+                    <h3>What's new in version 6.0.0</h3>
+                    <ul>
+                        <li>You can now convert XSD to JSON Schema (version 2020-12).</li>
+                        <li>Improvements on Word to HTML/DITA related to lists with custom styles processing.</li>
+                        <li>Updated the Apache POI library (used for conversions from Word (only doc format) and Excel) to version 5.2.5.</li>
+                    </ul>
+                </div>
+                <div class="whatsnew">
                     <h3>What's new in version 5.3.0</h3>
                     <ul>
                         <li>The Markdown to DITA conversion was updated to be compatible with all enhancements made in version 5.5.0 of the org.lwdita DITA OT plugin.</li>
