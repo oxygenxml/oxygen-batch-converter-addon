@@ -2354,7 +2354,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <url>http://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </component>
-    <component id="com.zaxxer:SparseBitSet:1.3" draft="false" product="webapp">
+    <component id="com.zaxxer:SparseBitSet:1.3" draft="false" product="editor">
         <name>SparseBitSet</name>
         <version>1.3</version>
         <project-info>
@@ -6354,7 +6354,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</content>
             <url>https://github.com/relaxng/jing-trang/blob/master/copying.txt</url>
         </license>
     </component>
-    <component id="org.xmlresolver:xmlresolver:5.2.2" draft="false" product="webapp">
+    <component id="org.xmlresolver:xmlresolver:5.2.2" draft="false" product="editor">
 		<name>XML Resolver</name>
 		<version>5.2.2</version>
 		<project-info>
