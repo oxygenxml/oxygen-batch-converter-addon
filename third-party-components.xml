@@ -2537,7 +2537,7 @@ END OF TERMS AND CONDITIONS
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="commons-codec:commons-codec:1.145" draft="false" product="editor">
+    <component id="commons-codec:commons-codec:1.15" draft="false" product="editor">
         <name>Apache Commons Codec</name>
         <version>1.15</version>
         <project-info>
