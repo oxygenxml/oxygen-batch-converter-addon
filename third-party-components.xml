@@ -2537,9 +2537,9 @@ END OF TERMS AND CONDITIONS
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="commons-codec:commons-codec:1.14" draft="false" product="editor">
+    <component id="commons-codec:commons-codec:1.145" draft="false" product="editor">
         <name>Apache Commons Codec</name>
-        <version>1.14</version>
+        <version>1.15</version>
         <project-info>
             <about>The Apache Commons Codec package contains simple encoder and decoders for
      various formats such as Base64 and Hexadecimal.  In addition to these
@@ -4764,9 +4764,9 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.dita-ot:dost:4.2.3" draft="false" product="editor">
+    <component id="org.dita-ot:dost:4.3.0" draft="false" product="editor">
         <name>DITA Open Toolkit</name>
-        <version>4.2.3</version>
+        <version>4.3.0</version>
         <project-info>
             <about>DITA-OT base library</about>
             <licensor></licensor>
