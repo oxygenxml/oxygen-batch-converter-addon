@@ -256,6 +256,16 @@
                     </suppressionFiles>
                 </configuration>
             </plugin>
+
+	  <plugin>
+	    <groupId>ro.sync.compliance</groupId>
+		<artifactId>compliance-mvn-dependency-check-to-sbom</artifactId>
+		<configuration>
+			<tags>jira-bdc, rocket-raccoons</tags>
+		</configuration>
+	</plugin>
+
+			
 		</plugins>
 		
 		<pluginManagement>
