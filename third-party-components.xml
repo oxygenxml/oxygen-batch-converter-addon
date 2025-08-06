@@ -3247,9 +3247,9 @@ DEALINGS IN THE SOFTWARE.</content>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.commons:commons-compress:1.21" draft="false" product="editor">
+    <component id="org.apache.commons:commons-compress:1.26.0" draft="false" product="editor">
         <name>Apache Commons Compress</name>
-        <version>1.21</version>
+        <version>1.26.0</version>
         <project-info>
             <about>Apache Commons Compress software defines an API for working with
 compression and archive formats.  These include: bzip2, gzip, pack200,
