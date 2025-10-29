@@ -3900,9 +3900,9 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.poi:poi-ooxml-lite:5.2.5" draft="false" product="editor">
+    <component id="org.apache.poi:poi-ooxml-lite:5.4.1" draft="false" product="editor">
         <name>Apache POI</name>
-        <version>5.2.5</version>
+        <version>5.4.1</version>
         <project-info>
             <about>Apache POI - Java API To Access Microsoft Format Files</about>
             <licensor>Apache Software Foundation</licensor>
@@ -4113,12 +4113,12 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.</content>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.poi:poi-ooxml:5.2.5" draft="false" product="editor">
+    <component id="org.apache.poi:poi-ooxml:5.4.1" draft="false" product="editor">
         <name>Apache POI - API based on OPC and OOXML schemas</name>
-        <version>5.2.5</version>
+        <version>5.4.1</version>
         <project-info>
             <about>Apache POI - Java API To Access Microsoft Format Files</about>
             <licensor>Apache Software Foundation</licensor>
@@ -4329,21 +4329,21 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.</content>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.poi:poi:5.2.5" draft="false" product="editor">
-        <name>Apache POI</name>
-        <version>5.2.5</version>
+    <component id="org.apache.poi:poi:5.4.1" draft="false" product="editor">
+        <name>Apache POI - Common</name>
+        <version>5.4.1</version>
         <project-info>
             <about>Apache POI - Java API To Access Microsoft Format Files</about>
             <licensor>Apache Software Foundation</licensor>
             <start-year></start-year>
-            <project-url>http://poi.apache.org/</project-url>
+            <project-url>https://poi.apache.org/</project-url>
         </project-info>
         <license>
-            <type>The Apache Software License, Version 2.0</type>
-            <content>
+            <type>Apache License, Version 2.0</type>
+           <content>
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -4545,12 +4545,12 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.</content>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="org.apache.xmlbeans:xmlbeans:5.2.0" draft="false" product="editor">
+    <component id="org.apache.xmlbeans:xmlbeans:5.3.0" draft="false" product="editor">
         <name>XmlBeans</name>
-        <version>5.2.0</version>
+        <version>5.3.0</version>
         <project-info>
             <about>XmlBeans main jar</about>
             <licensor>XmlBeans</licensor>
@@ -4761,7 +4761,7 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</about>
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.</content>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
     <component id="org.dita-ot:dost:4.3.0" draft="false" product="editor">
@@ -6355,16 +6355,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</content>
         </license>
     </component>
     <component id="org.xmlresolver:xmlresolver:5.3.3" draft="false" product="editor">
-		<name>XML Resolver</name>
-		<version>5.3.3</version>
-		<project-info>
-			<about>An XML entity/uri resolver</about>
-			<licensor/>
-		    <start-year/>
-			<project-url>https://github.com/xmlresolver/xmlresolver</project-url>
-		</project-info>
-		<license>
-			<type>The Apache License, Version 2.0</type>
+        <name>XML Resolver</name>
+        <version>5.3.3</version>
+        <project-info>
+            <about>An XML entity/uri resolver</about>
+            <licensor></licensor>
+            <start-year></start-year>
+            <project-url>https://github.com/xmlresolver/xmlresolver</project-url>
+        </project-info>
+        <license>
+            <type>The Apache License, Version 2.0</type>
             <content>
                                  Apache License
                            Version 2.0, January 2004
@@ -6569,5 +6569,5 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</content>
    limitations under the License.</content>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
-	</component>
+    </component>
 </third-party>
