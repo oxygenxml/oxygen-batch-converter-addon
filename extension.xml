@@ -34,6 +34,17 @@
                 </div>
                 <hr/>
                 <div class="whatsnew">
+                    <h3>What's new in version 6.1.0</h3>
+                    <ul>
+                        <li>Updated the Mammoth library (used for converting Word .docx files) to version 1.11.0.</li>
+                        <li>Updated the Apache POI library (used for converting Excel and Word .doc files) to version 5.4.1.</li>
+                        <li>The Markdown to DITA conversion was updated to be compatible with all enhancements made in version 5.7.0 of the org.lwdita DITA OT plugin.</li>
+                        <li>Fixed a case where titles starting with special characters generated invalid <code>id</code> attributes in the resulting DITA files during HTML to DITA conversion.</li>
+                        <li>Fixed the DITA topic file name generation in conversions to DITA map when the headings contains ','.</li>
+                        <li>Fixed a case where empty inline elements (such as <code>&lt;i&gt;</code> or <code>&lt;u&gt;</code>) with an <code>id</code> attribute were lost during HTML to DITA conversion.</li>
+                    </ul>
+                </div>
+                <div class="whatsnew">
                     <h3>What's new in version 6.0.0</h3>
                     <ul>
                         <li>You can now convert XSD to JSON Schema (version 2020-12).</li>
