@@ -1,0 +1,213 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.oxygenxml</groupId>
+	<artifactId>oxygen-batch-converter-cli</artifactId>
+	<version>6.2.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Oxygen Batch Converter CLI</name>
+	<description>Command-line interface for the Oxygen Batch Converter</description>
+
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<oxygen.version>28.0-SNAPSHOT</oxygen.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- Core converter library -->
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-batch-converter-core</artifactId>
+			<version>${oxygen.version}</version>
+		</dependency>
+
+		<!-- Needed by core at runtime -->
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-basic-utilities</artifactId>
+			<version>${oxygen.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-json</artifactId>
+			<version>${oxygen.version}</version>
+		</dependency>
+
+		<!-- YAML support -->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.33</version>
+		</dependency>
+
+		<!-- XSLT transformer (Saxon) -->
+		<dependency>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>Saxon-HE</artifactId>
+			<version>12.5</version>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.36</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.12</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- JAXB -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.6</version>
+		</dependency>
+
+		<!-- Runtime deps of the core converter (from the plugin distribution) -->
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-mammoth-for-batch-converter</artifactId>
+			<version>${oxygen.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-jtidy-for-batch-converter</artifactId>
+			<version>${oxygen.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-lwdita-for-batch-converter</artifactId>
+			<version>${oxygen.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-yaml-validator-and-converter</artifactId>
+			<version>${oxygen.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.dita-ot</groupId>
+			<artifactId>dost</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+
+		<!-- Flexmark (Markdown parsing) -->
+		<dependency>
+			<groupId>com.vladsch.flexmark</groupId>
+			<artifactId>flexmark-all</artifactId>
+			<version>0.64.0</version>
+		</dependency>
+
+		<!-- Apache POI (Excel and Word support) -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>5.4.1</version>
+		</dependency>
+
+		<!-- Commons IO -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.18.0</version>
+		</dependency>
+
+		<!-- Guava (used by lwdita/markdown converter) -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>32.0.1-jre</version>
+		</dependency>
+
+		<!-- JSON processing -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20231013</version>
+		</dependency>
+
+		<!-- Jing (RELAX NG validation) -->
+		<dependency>
+			<groupId>org.relaxng</groupId>
+			<artifactId>jing</artifactId>
+			<version>20220510</version>
+		</dependency>
+
+		<!-- XML resolver -->
+		<dependency>
+			<groupId>org.xmlresolver</groupId>
+			<artifactId>xmlresolver</artifactId>
+			<version>5.3.3</version>
+		</dependency>
+
+		<!-- JAXB XJC and related (for OpenAPI/XSD conversions) -->
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-jaxb-core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-patched-jsonix-schema-compiler</artifactId>
+			<version>1.2.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.5.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>com.oxygenxml.batch.converter.cli.BatchConverterCli</mainClass>
+								</transformer>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+							</transformers>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

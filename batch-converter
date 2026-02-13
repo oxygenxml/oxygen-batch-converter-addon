@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Oxygen Batch Converter CLI wrapper
+#
+# Converts files between formats (Word, HTML, Markdown, JSON, YAML, XML, etc.)
+#
+# Usage:
+#   batch-converter -i <input-format> -o <output-format> [-d <output-dir>] <input-files...>
+#   batch-converter --list
+#   batch-converter --help
+#
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+JAR_FILE="$SCRIPT_DIR/cli/target/oxygen-batch-converter-cli-6.2.0-SNAPSHOT.jar"
+
+if [ ! -f "$JAR_FILE" ]; then
+  echo "Error: CLI JAR not found at $JAR_FILE"
+  echo "Build it first: cd cli && mvn package -DskipTests"
+  exit 1
+fi
+
+exec java -jar "$JAR_FILE" "$@"
