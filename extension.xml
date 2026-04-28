@@ -36,7 +36,7 @@
                 <div class="whatsnew">
                     <h3>What's new in version 6.2.0</h3>
                     <ul>
-                        <li>When adding input files using the <b>Add Folder</b> button, the subfolder structure of the source directory is now preserved in the output folder.</li>
+                        <li>When adding input files using the <b>Add Folder</b> button, the subfolder structure of the source directory is now preserved in the output folder. This makes it easier to navigate and identify the converted files, and prevents file name collisions when files with the same name exist in different subfolders of the source directory.</li>
                     </ul>
                 </div>
                 <div class="whatsnew">
