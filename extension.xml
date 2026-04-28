@@ -34,6 +34,12 @@
                 </div>
                 <hr/>
                 <div class="whatsnew">
+                    <h3>What's new in version 6.2.0</h3>
+                    <ul>
+                        <li>When adding input files using the <b>Add Folder</b> button, the subfolder structure of the source directory is now preserved in the output folder.</li>
+                    </ul>
+                </div>
+                <div class="whatsnew">
                     <h3>What's new in version 6.1.0</h3>
                     <ul>
                         <li>Updated the Mammoth library (used for converting Word .docx files) to version 1.11.0.</li>
