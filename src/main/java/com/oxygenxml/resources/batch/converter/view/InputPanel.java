@@ -2,7 +2,6 @@ package com.oxygenxml.resources.batch.converter.view;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.text.MessageFormat;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -123,8 +121,7 @@ public class InputPanel extends JPanel {
 		remvBtn.setEnabled(false);
 
 		infoLabel = new JLabel(translator.getTranslation(Tags.PRESERVE_FOLDER_STRUCTURE_INFO));
-		infoLabel.setFont(infoLabel.getFont().deriveFont(Font.ITALIC));
-		infoLabel.setForeground(UIManager.getColor("Label.disabledForeground"));
+		infoLabel.setIcon(IconsLoader.loadIcon(Icons.LICENSE_INFO));
 		infoLabel.setVisible(false);
 
 		// initialize the panel

@@ -473,12 +473,12 @@
 	</key>
 	<key value="Preserve_folder_structure_info">
 		<comment>Info label shown when files were added via Add Folder — subfolder structure will be preserved in output.</comment>
-		<val lang="en_US">Files added via "Add Folder" will preserve their subfolder structure in the output.</val>
-		<val lang="de_DE">Über "Verzeichnis hinzufügen" hinzugefügte Dateien behalten ihre Unterordnerstruktur in der Ausgabe bei.</val>
-		<val lang="fr_FR">Les fichiers ajoutés via "Ajouter un dossier" conserveront leur structure de sous-dossiers dans la sortie.</val>
-		<val lang="ja_JP">「フォルダーを追加する」で追加されたファイルは、出力でサブフォルダー構造を保持します。</val>
-		<val lang="nl_NL">Bestanden toegevoegd via "Map toevoegen" behouden hun submapstructuur in de uitvoer.</val>
-		<val lang="zh_CN">通过"添加文件夹"添加的文件将在输出中保留其子文件夹结构。</val>
+		<val lang="en_US">Subfolder structure is preserved in the output for files added via "Add Folder".</val>
+		<val lang="de_DE">Die Unterordnerstruktur wird in der Ausgabe für über "Verzeichnis hinzufügen" hinzugefügte Dateien beibehalten.</val>
+		<val lang="fr_FR">La structure des sous-dossiers est conservée dans la sortie pour les fichiers ajoutés via "Ajouter un dossier".</val>
+		<val lang="ja_JP">「フォルダーを追加する」で追加されたファイルのサブフォルダー構造は、出力に保持されます。</val>
+		<val lang="nl_NL">De submapstructuur wordt bewaard in de uitvoer voor bestanden toegevoegd via "Map toevoegen".</val>
+		<val lang="zh_CN">通过"添加文件夹"添加的文件，其子文件夹结构将保留在输出中。</val>
 	</key>
 
 
