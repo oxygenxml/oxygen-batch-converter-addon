@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
+import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersister;
 import com.oxygenxml.resources.batch.converter.persister.ContentPersisterImpl;
 import com.oxygenxml.resources.batch.converter.plugin.BatchConverterPlugin;
@@ -88,6 +89,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
   private JFrame parentFrame;
 
   /**
+   * Manages input files and their source root directories.
+   */
+  private InputFilesManager inputFilesManager;
+
+  /**
    * Constructor
    * 
    * @param converterType The type of converter.
@@ -102,8 +108,9 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
     this.parentFrame = parentFrame;
 		this.translator = translator;
 		contentPersister = new ContentPersisterImpl();
-		
-		inputPanel = new InputPanel(converterType, translator, this);
+
+		inputFilesManager = new InputFilesManager();
+		inputPanel = new InputPanel(converterType, translator, this, inputFilesManager);
 		outputPanel = new OutputPanel(translator);
 		openFilesCBox = new JCheckBox(translator.getTranslation(Tags.OPEN_FILE_CHECK_BOX));
 		
@@ -120,6 +127,7 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		  setOutputFolder(outputDir.getAbsolutePath());
 		} else if (!toConvertFiles.isEmpty()){
 			// Set the input files and the output folder
+			inputFilesManager.addFiles(toConvertFiles);
 			inputPanel.addFilesInTable(toConvertFiles);
 			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent() + File.separator + "output");
 		}
@@ -216,6 +224,11 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 	@Override
 	public List<File> getInputFiles() {
 		return inputPanel.getFilesFromTable();
+	}
+
+	@Override
+	public File getRootInputDirectoryForFile(File inputFile) {
+		return inputFilesManager.getRootDirectoryForFile(inputFile);
 	}
 
 

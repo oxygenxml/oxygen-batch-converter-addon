@@ -298,7 +298,7 @@ public class BatchConverterImpl implements BatchConverter {
 				  //convert and print the current file.
 				  File outputFile = convertAndPrintFile(
 				      currentFile,
-				      ConverterFileUtils.getUniqueOutputFile(currentFile, ExtensionGetter.getOutputExtension(converterType), outputFolder),
+				      getOutputFile(currentFile, ExtensionGetter.getOutputExtension(converterType), outputFolder, inputsProvider),
 				      converter, contentPrinter, converterType, inputsProvider);
 				  
 				  convertedFilesManager.addConvertedFile(currentFile, outputFile);
@@ -344,10 +344,11 @@ public class BatchConverterImpl implements BatchConverter {
 			    }
 			    
 			    if (conversionResult.getImposedOutputFileExtension() != null) {
-			      outputFile = ConverterFileUtils.getUniqueOutputFile(
-			          file, 
+			      outputFile = getOutputFile(
+			          file,
 			          conversionResult.getImposedOutputFileExtension(),
-			          inputsProvider.getOutputFolder());
+			          inputsProvider.getOutputFolder(),
+			          inputsProvider);
 			    }
 			    
 			    // print the converted content.
@@ -382,8 +383,22 @@ public class BatchConverterImpl implements BatchConverter {
 	}
 
 	/**
+	 * Compute the output file for the given input, preserving the source folder
+	 * structure when the file was collected from a root input directory.
+	 *
+	 * @param inputFile       The file being converted.
+	 * @param extension       The desired output extension.
+	 * @param outputFolder    The base output folder.
+	 * @param inputsProvider  Provider that knows the root directory per file.
+	 * @return A unique output file path.
+	 */
+  private File getOutputFile(File inputFile, String extension, File outputFolder, UserInputsProvider inputsProvider) {
+    return ConverterFileUtils.getStructurePreservingOutputFile(inputFile, extension, outputFolder, inputsProvider);
+  }
+
+	/**
 	 * Report problems encountered in the conversion process.
-	 * 
+	 *
 	 * @param conversionProblems The problem to report.
 	 */
   private void reportEncounteredProblems(List<String> conversionProblems) {

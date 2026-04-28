@@ -1,6 +1,9 @@
 package com.oxygenxml.resources.batch.converter.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.text.MessageFormat;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -8,6 +11,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,14 +22,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
 import com.oxygenxml.batch.converter.core.utils.ConverterFileUtils;
 import com.oxygenxml.resources.batch.converter.BatchConverterInteractor;
+import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 
@@ -34,7 +41,7 @@ import ro.sync.exml.workspace.api.standalone.ui.Table;
 
 /**
  * Panel for add input files
- * 
+ *
  * @author Cosmin Duna
  *
  */
@@ -68,7 +75,7 @@ public class InputPanel extends JPanel {
 	 * Button for remove elements from table
 	 */
 	private JButton remvBtn;
-	
+
 	/**
 	 * The converter type
 	 */
@@ -78,7 +85,18 @@ public class InputPanel extends JPanel {
 	 * Translator
 	 */
 	private transient Translator translator;
-	
+
+	/**
+	 * Manages the input files list and their root directory associations.
+	 */
+	private InputFilesManager inputFilesManager;
+
+	/**
+	 * Shown when at least one file was added via "Add Folder", to inform the user
+	 * that the subfolder structure will be preserved in the output.
+	 */
+	private JLabel infoLabel;
+
 	 /**
    * The inset used between components
    */
@@ -88,17 +106,26 @@ public class InputPanel extends JPanel {
 	/**
 	 * Constructor
 	 */
-	public InputPanel(final String converterType, final Translator translator, final BatchConverterInteractor convertorInteractor) {
+	public InputPanel(final String converterType, final Translator translator,
+			final BatchConverterInteractor convertorInteractor, final InputFilesManager inputFilesManager) {
 		this.translator = translator;
 		this.converterType = converterType;
+		this.inputFilesManager = inputFilesManager;
 
 		scrollPane = new JScrollPane((JTable)tableFiles);
 		scrollPane.setPreferredSize(new Dimension(450, 100));
-		
+
 		addFilesBtn = new JButton(translator.getTranslation(Tags.ADD_FILE_TABLE) + "...");
+		addFilesBtn.setToolTipText(buildTooltipWithExtensions(Tags.ADD_FILES_TOOLTIP, converterType, translator));
 		addFolderBtn = new JButton(translator.getTranslation(Tags.ADD_FOLDER_TABLE) + "...");
+		addFolderBtn.setToolTipText(buildTooltipWithExtensions(Tags.ADD_FOLDER_TOOLTIP, converterType, translator));
 		remvBtn = new JButton(translator.getTranslation(Tags.REMOVE_TABLE));
 		remvBtn.setEnabled(false);
+
+		infoLabel = new JLabel(translator.getTranslation(Tags.PRESERVE_FOLDER_STRUCTURE_INFO));
+		infoLabel.setFont(infoLabel.getFont().deriveFont(Font.ITALIC));
+		infoLabel.setForeground(UIManager.getColor("Label.disabledForeground"));
+		infoLabel.setVisible(false);
 
 		// initialize the panel
 		initPanel();
@@ -109,7 +136,7 @@ public class InputPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// open a file chooser
-				File[] files = PluginWorkspaceProvider.getPluginWorkspace().chooseFiles(null, "", 
+				File[] files = PluginWorkspaceProvider.getPluginWorkspace().chooseFiles(null, "",
 						ExtensionGetter.getInputExtension(converterType),
 						"");
 
@@ -118,8 +145,10 @@ public class InputPanel extends JPanel {
 						convertorInteractor.setOutputFolder(files[0].getParent() + File.separator + "output");
 					}
 
-					// add files in table
+					inputFilesManager.addFiles(Arrays.asList(files));
 					addFilesInTable(files);
+					tableFiles.repaint();
+					updateInfoLabel();
 
 					// set check button enable
 					convertorInteractor.setEnableConvert(true);
@@ -136,15 +165,16 @@ public class InputPanel extends JPanel {
 				File file = PluginWorkspaceProvider.getPluginWorkspace().chooseDirectory();
 
 				if (file != null) {
-					List<File> listToAdd =	ConverterFileUtils.getAllFiles(file,
-						Arrays.asList(ExtensionGetter.getInputExtension(converterType)) );
+					List<File> listToAdd = ConverterFileUtils.getAllFiles(file,
+						Arrays.asList(ExtensionGetter.getInputExtension(converterType)));
 
-					if(!listToAdd.isEmpty() && convertorInteractor.getOutputFolderPath().isEmpty()){
-						convertorInteractor.setOutputFolder(file.toString()+ File.separator + "output");
+					if (!listToAdd.isEmpty() && convertorInteractor.getOutputFolderPath().isEmpty()) {
+						convertorInteractor.setOutputFolder(file.toString() + File.separator + "output");
 					}
-					
-					// add files in table
+
+					inputFilesManager.addFilesFromFolder(listToAdd, file);
 					addFilesInTable(listToAdd);
+					updateInfoLabel();
 
 					// set convert button enable
 					convertorInteractor.setEnableConvert(true);
@@ -162,6 +192,8 @@ public class InputPanel extends JPanel {
 
 				for (int i = index1; i >= index0; i--) {
 					int modelRow = tableFiles.convertRowIndexToModel(i);
+					File removedFile = (File) modelTable.getValueAt(modelRow, 0);
+					inputFilesManager.removeFile(removedFile);
 					modelTable.removeRow(modelRow);
 				}
 
@@ -169,6 +201,7 @@ public class InputPanel extends JPanel {
 					convertorInteractor.setEnableConvert(false);
 				}
 
+				updateInfoLabel();
 				remvBtn.setEnabled(false);
 			}
 		});
@@ -177,13 +210,13 @@ public class InputPanel extends JPanel {
 
 	/**
 	 * Get file from files table.
-	 * 
+	 *
 	 * @return List with files.
 	 */
 	public List<File> getFilesFromTable() {
 		List<File> toReturn = new ArrayList<File>();
 		int size = modelTable.getRowCount();
-		
+
 		for (int i = 0; i < size; i++) {
 			toReturn.add( (File)modelTable.getValueAt(i, 0) );
 		}
@@ -192,7 +225,7 @@ public class InputPanel extends JPanel {
 
 	/**
 	 * Add files in table.
-	 * 
+	 *
 	 * @param files
 	 *          Vector with files.
 	 */
@@ -207,7 +240,7 @@ public class InputPanel extends JPanel {
 
 	/**
 	 * Add files in table.
-	 * 
+	 *
 	 * @param files
 	 *          List with files in string format.
 	 */
@@ -228,18 +261,53 @@ public class InputPanel extends JPanel {
 		for (int i = 0; i < size; i++) {
 			modelTable.removeRow(0);
 		}
+		inputFilesManager.clear();
+		updateInfoLabel();
 	}
 
-	
+	/**
+	 * Build a localized tooltip string for the given tag, substituting the accepted
+	 * input file extensions for the given converter type as the <code>{0}</code> placeholder.
+	 *
+	 * @param tag           The translation tag whose value contains a <code>{0}</code> placeholder.
+	 * @param converterType The type of converter.
+	 * @param translator    The translator.
+	 * @return The localized tooltip string with the extensions substituted.
+	 */
+	private static String buildTooltipWithExtensions(String tag, String converterType, Translator translator) {
+		String[] extensions = ExtensionGetter.getInputExtension(converterType);
+		StringBuilder extList = new StringBuilder();
+		for (int i = 0; i < extensions.length; i++) {
+			if (i > 0) {
+				extList.append(", ");
+			}
+			extList.append('.').append(extensions[i]);
+		}
+		return MessageFormat.format(translator.getTranslation(tag), extList.toString());
+	}
+
+	/**
+	 * Show or hide the info label depending on whether any folder mappings exist.
+	 */
+	private void updateInfoLabel() {
+		infoLabel.setVisible(inputFilesManager.hasFolderMappings());
+	}
+
 	/**
 	 * Method for initialize the Panel.
 	 */
 	private void initPanel() {
 
-		modelTable = new DefaultTableModel(0, 1);
+		modelTable = new DefaultTableModel(0, 1) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		// set modal on table
 		tableFiles.setModel(modelTable);
 		tableFiles.setTableHeader(null);
+		tableFiles.setDefaultRenderer(Object.class, new InputFileCellRenderer(inputFilesManager));
 
 		// add list selection listener on table
 		tableFiles.getSelectionModel().addListSelectionListener(listSelectionListener);
@@ -259,12 +327,12 @@ public class InputPanel extends JPanel {
 		gbc.gridy = 0;
 		gbc.weightx = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		
+
 		if (ConverterTypes.CONFLUENCE_TO_DITAMAP.equals(converterType)) {
 		  gbc.insets = new Insets(0, 0, INSET_BETWEEN_COMPONENTS, 0);
 		  this.add(new MultilineLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL_CONFLUENCE)), gbc);
 		}
-		
+
 		gbc.gridy++;
 		gbc.insets = new Insets(0, 0, 0, 0);
 		this.add(new JLabel(translator.getTranslation(Tags.ADD_INPUT_FILES_LABEL)), gbc);
@@ -287,7 +355,7 @@ public class InputPanel extends JPanel {
 		JPanel btnsPanel = new JPanel();
 		btnsPanel.setLayout(new GridLayout(1, 3));
 		btnsPanel.setOpaque(false);
-		
+
 		if (!ConverterTypes.CONFLUENCE_TO_DITAMAP.equals(converterType)) {
 		  btnsPanel.add(addFolderBtn);
     }
@@ -296,6 +364,14 @@ public class InputPanel extends JPanel {
 
 		// add btnsPanel
 		this.add(btnsPanel, gbc);
+
+		// ------add info label for folder structure preservation
+		gbc.gridy++;
+		gbc.weightx = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(4, 0, 0, 0);
+		this.add(infoLabel, gbc);
 
 	}
 
@@ -315,7 +391,7 @@ public class InputPanel extends JPanel {
 
 	/**
 	 * Check if table contains the given file.
-	 * 
+	 *
 	 * @param file
 	 *          The file.
 	 * @return <code>true</code>>if file is in table, <code>false</code>> if isn't.
@@ -330,5 +406,53 @@ public class InputPanel extends JPanel {
 		}
 
 		return toReturn;
+	}
+
+	/**
+	 * Cell renderer for the input files table.
+	 * Files added via "Add Folder" are displayed with their path relative to the
+	 * root directory; the full root path is shown in the tooltip.
+	 * Individually added files show their absolute path in both the cell and tooltip.
+	 */
+	private static class InputFileCellRenderer extends DefaultTableCellRenderer {
+
+		/**
+		 * Default serial version ID.
+		 */
+		private static final long serialVersionUID = 1L;
+
+		/**
+		 * Used to resolve the root directory for each file.
+		 */
+		private final InputFilesManager inputFilesManager;
+
+		/**
+		 * Constructor.
+		 *
+		 * @param inputFilesManager The manager that tracks root directories.
+		 */
+		InputFileCellRenderer(InputFilesManager inputFilesManager) {
+			this.inputFilesManager = inputFilesManager;
+		}
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value,
+				boolean isSelected, boolean hasFocus, int row, int column) {
+			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			if (value instanceof File) {
+				File file = (File) value;
+				File rootDir = inputFilesManager.getRootDirectoryForFile(file);
+				if (rootDir != null) {
+					Path relativePath = rootDir.toPath().relativize(file.toPath());
+					setText(relativePath.toString());
+					setToolTipText("<html><b>Root folder:</b> " + rootDir.getAbsolutePath()
+							+ "<br><b>File:</b> " + file.getAbsolutePath() + "</html>");
+				} else {
+					setText(file.getName());
+					setToolTipText(file.getAbsolutePath());
+				}
+			}
+			return this;
+		}
 	}
 }

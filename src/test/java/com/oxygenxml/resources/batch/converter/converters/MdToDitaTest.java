@@ -1,6 +1,7 @@
 package com.oxygenxml.resources.batch.converter.converters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -444,6 +445,57 @@ public class MdToDitaTest {
       expectedTopic = new File("test-sample/EXM-48113/topic1.dita");   
       expected = FileComparationUtil.readFile(expectedTopic.getAbsolutePath());
       assertEquals(expected, actual);
+    } finally {
+      FileComparationUtil.deleteRecursivelly(outputFolder);
+    }
+  }
+
+  /**
+   * <p><b>Description:</b> When files are added from a folder, the subfolder structure
+   * must be preserved in the output. Duplicate file names in different subfolders must
+   * each land in their own mirrored subdirectory.</p>
+   * <p><b>Bug ID:</b> BDC-107</p>
+   *
+   * @author cosmin_duna
+   */
+  @Test
+  public void testFolderStructureIsPreserved() throws Exception {
+    final File rootInputDir = new File("test-sample/folder-structure-test");
+    final File outputFolder = new File(rootInputDir.getParentFile(), "output-folder-structure-test");
+
+    List<File> inputFiles = ConverterFileUtils.getAllFiles(rootInputDir,
+        java.util.Arrays.asList(new String[]{"md"}));
+
+    BatchConverter converter = new BatchConverterImpl(new ProblemReporterTestImpl(),
+        new StatusReporterImpl(), new ConverterStatusReporterTestImpl(),
+        new ConvertorWorkerInteractorTestImpl(), new TransformerFactoryCreatorImpl());
+
+    try {
+      converter.convertFiles(ConverterTypes.MD_TO_DITA, new UserInputsProvider() {
+        @Override
+        public boolean mustOpenConvertedFiles() {
+          return false;
+        }
+        @Override
+        public File getOutputFolder() {
+          return outputFolder;
+        }
+        @Override
+        public List<File> getInputFiles() {
+          return inputFiles;
+        }
+        @Override
+        public Boolean getAdditionalOptionValue(String additionalOptionId) {
+          return null;
+        }
+        @Override
+        public File getRootInputDirectoryForFile(File inputFile) {
+          return rootInputDir;
+        }
+      });
+
+      assertTrue("sub1/topic.dita must exist", new File(outputFolder, "sub1/topic.dita").exists());
+      assertTrue("sub2/topic.dita must exist", new File(outputFolder, "sub2/topic.dita").exists());
     } finally {
       FileComparationUtil.deleteRecursivelly(outputFolder);
     }

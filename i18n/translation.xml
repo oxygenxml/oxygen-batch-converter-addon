@@ -453,6 +453,33 @@
 		<val lang="nl_NL">Verwijderen</val>
 		<val lang="zh_CN">删除</val>
 	</key>
+	<key value="Add_files_tooltip">
+		<comment>Tooltip for the Add Files button. {0} is replaced with the accepted file extensions (e.g. ".md, .markdown").</comment>
+		<val lang="en_US">Select {0} files to add.</val>
+		<val lang="de_DE">{0}-Dateien zum Hinzufügen auswählen.</val>
+		<val lang="fr_FR">Sélectionner des fichiers {0} à ajouter.</val>
+		<val lang="ja_JP">追加する {0} ファイルを選択します。</val>
+		<val lang="nl_NL">Selecteer {0}-bestanden om toe te voegen.</val>
+		<val lang="zh_CN">选择要添加的 {0} 文件。</val>
+	</key>
+	<key value="Add_folder_tooltip">
+		<comment>Tooltip for the Add Folder button. {0} is replaced with the accepted file extensions (e.g. ".md, .markdown").</comment>
+		<val lang="en_US">Adds all {0} files from the selected folder. The subfolder structure will be preserved in the output.</val>
+		<val lang="de_DE">Fügt alle {0}-Dateien aus dem ausgewählten Verzeichnis hinzu. Die Unterordnerstruktur wird in der Ausgabe beibehalten.</val>
+		<val lang="fr_FR">Ajoute tous les fichiers {0} du dossier sélectionné. La structure des sous-dossiers sera conservée dans la sortie.</val>
+		<val lang="ja_JP">選択したフォルダーからすべての {0} ファイルを追加します。サブフォルダー構造は出力に保持されます。</val>
+		<val lang="nl_NL">Voegt alle {0}-bestanden uit de geselecteerde map toe. De submapstructuur wordt bewaard in de uitvoer.</val>
+		<val lang="zh_CN">添加所选文件夹中的所有 {0} 文件。子文件夹结构将保留在输出中。</val>
+	</key>
+	<key value="Preserve_folder_structure_info">
+		<comment>Info label shown when files were added via Add Folder — subfolder structure will be preserved in output.</comment>
+		<val lang="en_US">Files added via "Add Folder" will preserve their subfolder structure in the output.</val>
+		<val lang="de_DE">Über "Verzeichnis hinzufügen" hinzugefügte Dateien behalten ihre Unterordnerstruktur in der Ausgabe bei.</val>
+		<val lang="fr_FR">Les fichiers ajoutés via "Ajouter un dossier" conserveront leur structure de sous-dossiers dans la sortie.</val>
+		<val lang="ja_JP">「フォルダーを追加する」で追加されたファイルは、出力でサブフォルダー構造を保持します。</val>
+		<val lang="nl_NL">Bestanden toegevoegd via "Map toevoegen" behouden hun submapstructuur in de uitvoer.</val>
+		<val lang="zh_CN">通过"添加文件夹"添加的文件将在输出中保留其子文件夹结构。</val>
+	</key>
 
 
 

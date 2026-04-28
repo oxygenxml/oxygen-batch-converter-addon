@@ -225,4 +225,19 @@ public class Tags {
    * en: Restrict additional content
    */
   public static final String RESTRICT_ADDITIONAL_CONTENT = "Restrict_additional_content";
+
+  /**
+   * en: Files added via "Add Folder" will preserve their subfolder structure in the output.
+   */
+  public static final String PRESERVE_FOLDER_STRUCTURE_INFO = "Preserve_folder_structure_info";
+
+  /**
+   * en: Tooltip for the Add Files button. {0} is replaced with the accepted extensions.
+   */
+  public static final String ADD_FILES_TOOLTIP = "Add_files_tooltip";
+
+  /**
+   * en: Tooltip for the Add Folder button. {0} is replaced with the accepted extensions.
+   */
+  public static final String ADD_FOLDER_TOOLTIP = "Add_folder_tooltip";
 }
