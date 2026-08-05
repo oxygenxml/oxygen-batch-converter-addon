@@ -169,6 +169,12 @@
 			<artifactId>oxygen-basic-utilities</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.oxygenxml</groupId>
+			<artifactId>oxygen-sandbox</artifactId>
+			<version>${oxygen.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
