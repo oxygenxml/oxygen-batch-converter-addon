@@ -1,0 +1,63 @@
+---
+personnel:
+  person:
+  - id: harris.anderson
+    photo: personal-images/harris.anderson.jpg
+    name:
+      given: Harris
+      family: Anderson
+    email: harris.anderson@example.com
+    link:
+      subordinates: robert.taylor helen.jackson michelle.taylor jason.chen harris.anderson brian.carter
+    url:
+      href: http://www.example.com/na/harris-anderson.html
+  - id: robert.taylor
+    photo: personal-images/robert.taylor.jpg
+    name:
+      given: Robert
+      family: Taylor
+    email: robert.taylor@example.com
+    link:
+      manager: harris.anderson
+    url:
+      href: http://www.example.com/na/robert-taylor.html
+  - id: helen.jackson
+    photo: personal-images/helen.jackson.jpg
+    name:
+      given: Helen
+      family: Jackson
+    email: hellen.jackson@example.com
+    link:
+      manager: harris.anderson
+    url:
+      href: http://www.example.com/na/hellen-jackson.html
+  - id: michelle.taylor
+    photo: personal-images/michelle.taylor.jpg
+    name:
+      given: Michelle
+      family: Taylor
+    email: michelle.taylor@example.com
+    link:
+      manager: harris.anderson
+    url:
+      href: http://www.example.com/na/michelle-taylor.html
+  - id: jason.chen
+    photo: personal-images/jason.chen.jpg
+    name:
+      given: Jason
+      family: Chen
+    email: jason.chen@example.com
+    link:
+      manager: harris.anderson
+    url:
+      href: http://www.example.com/na/jason-chen.html
+  - id: brian.carter
+    photo: personal-images/brian.carter.jpg
+    name:
+      given: Brian
+      family: Carter
+    email: brian.carter@example.com
+    link:
+      manager: harris.anderson
+    url:
+      href: http://www.example.com/na/brian-carter.html
