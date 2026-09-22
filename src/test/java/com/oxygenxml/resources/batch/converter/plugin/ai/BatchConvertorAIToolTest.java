@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.oxygenxml.batch.converter.core.ConversionOptionTags;
 import com.oxygenxml.batch.converter.core.ConverterTypes;
@@ -27,19 +28,22 @@ import com.oxygenxml.resources.batch.converter.InputFilesManager;
 
 import ro.sync.exml.plugin.ai.ExternalAIFunction;
 import ro.sync.exml.plugin.ai.ExternalServiceException;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
+import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 import tests.utils.FileComparationUtil;
 
 /**
- * Tests for {@link AIConvertor}, the AI function that converts documents.
+ * Tests for {@link BatchConvertorAITool}, the AI function that converts documents.
  *
  * @author vlad_greaca
  */
-public class AIConvertorTest {
+public class BatchConvertorAIToolTest {
 
   /**
    * The converter to test.
    */
-  private final AIConvertor convertor = new AIConvertor();
+  private final BatchConvertorAITool convertor = new BatchConvertorAITool();
 
   /**
    * The output folder used by the tests, deleted after each test.
@@ -169,8 +173,8 @@ public class AIConvertorTest {
 
       // Both documents are offered to the caller, each under its own sub-folder.
       List<Object> convertedFiles = result.getJSONArray("convertedFiles").toList();
-      assertTrue(convertedFiles.toString(), convertedFiles.contains(AIConvertor.toLocation(firstTopic)));
-      assertTrue(convertedFiles.toString(), convertedFiles.contains(AIConvertor.toLocation(secondTopic)));
+      assertTrue(convertedFiles.toString(), convertedFiles.contains(BatchConvertorAITool.toLocation(firstTopic)));
+      assertTrue(convertedFiles.toString(), convertedFiles.contains(BatchConvertorAITool.toLocation(secondTopic)));
     } finally {
       FileComparationUtil.deleteRecursivelly(inputFolder);
     }
@@ -404,5 +408,41 @@ public class AIConvertorTest {
     }
 
     assertFalse("Nothing should have been written for " + deniedLocation, outputFolder.exists());
+  }
+
+  /**
+   * <p><b>Description:</b> Test that a relative location is resolved against the current project.</p>
+   *
+   * <p><b>Bug ID:</b> EXM-57614</p>
+   *
+   * @author vlad_greaca
+   */
+  @Test
+  public void testRelativeLocationsAreProjectRelative() throws Exception {
+    File projectFolder = new File("test-sample/ai-project").getCanonicalFile();
+    try {
+      projectFolder.mkdirs();
+      StandalonePluginWorkspace pluginWSMock = Mockito.mock(StandalonePluginWorkspace.class);
+      ProjectController projectManagerMock = Mockito.mock(ProjectController.class);
+      Mockito.when(pluginWSMock.getProjectManager()).thenReturn(projectManagerMock);
+      Mockito.when(projectManagerMock.getCurrentProjectURL())
+          .thenReturn(new File(projectFolder, "project.xpr").toURI().toURL());
+      PluginWorkspaceProvider.setPluginWorkspace(pluginWSMock);
+
+      // A relative location lands in the project, not in the working directory of the application.
+      File inProject = new File(projectFolder, "docs/topic.md");
+      assertEquals(inProject, BatchConvertorAITool.toFile("docs/topic.md"));
+      assertEquals(projectFolder, BatchConvertorAITool.toFile("."));
+
+      // An absolute path and a file URL are locations on their own, the project does not apply.
+      assertEquals(inProject, BatchConvertorAITool.toFile(inProject.getAbsolutePath()));
+      assertEquals(inProject, BatchConvertorAITool.toFile(inProject.toURI().toURL().toExternalForm()));
+
+      // A remote location is not a local one, whatever project is opened.
+      assertNull(BatchConvertorAITool.toFile("http://www.oxygenxml.com/docs"));
+    } finally {
+      PluginWorkspaceProvider.setPluginWorkspace(null);
+      FileComparationUtil.deleteRecursivelly(projectFolder);
+    }
   }
 }

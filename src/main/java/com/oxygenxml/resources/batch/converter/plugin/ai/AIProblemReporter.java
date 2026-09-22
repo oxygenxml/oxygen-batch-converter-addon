@@ -19,7 +19,7 @@ import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 /**
  * {@link ProblemReporter} that collects the reported problems in JSON format.
  * <p>
- * The {@link AIConvertor} AI function returns the problems to the AI as part of its result, instead
+ * The {@link BatchConvertorAITool} AI function returns the problems to the AI as part of its result, instead
  * of presenting them in the interface the way {@link OxygenProblemReporter} does.
  *
  * @author vlad_greaca
@@ -45,7 +45,7 @@ class AIProblemReporter implements ProblemReporter {
 
     JSONObject problem = new JSONObject();
     if (docFile != null) {
-      problem.put("input", AIConvertor.toLocation(docFile));
+      problem.put("input", BatchConvertorAITool.toLocation(docFile));
     }
     problem.put("message", ex.getMessage() != null ? ex.getMessage() : ex.toString());
     problems.put(problem);

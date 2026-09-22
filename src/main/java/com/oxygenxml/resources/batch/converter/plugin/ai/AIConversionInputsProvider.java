@@ -16,7 +16,7 @@ import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.view.ConverterAdditionalOptionsProvider;
 
 /**
- * {@link UserInputsProvider} backed by the parameters of the {@link AIConvertor} AI function.
+ * {@link UserInputsProvider} backed by the parameters of the {@link BatchConvertorAITool} AI function.
  * <p>
  * The options the AI does not name keep the value the conversion dialog presents by default, so that
  * a conversion run by the AI matches the one the user would get from the interface.

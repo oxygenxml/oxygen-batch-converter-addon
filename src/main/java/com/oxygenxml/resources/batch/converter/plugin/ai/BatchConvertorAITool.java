@@ -7,6 +7,7 @@
 package com.oxygenxml.resources.batch.converter.plugin.ai;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -38,24 +39,22 @@ import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 import ro.sync.basic.util.URLUtil;
 import ro.sync.exml.plugin.ai.ExternalAIFunction;
 import ro.sync.exml.plugin.ai.ExternalServiceException;
+import ro.sync.exml.workspace.api.PluginWorkspace;
+import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
+import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 
 /**
- * AI tool that converts documents between formats using the Oxygen Batch Converter engine.
- * <p>
- * The caller specifies an input format, an output format, one or more input files (or directories)
- * and an output folder. The collected input files are handed to {@link BatchConverterImpl}, the same
- * engine used by the Batch Documents Converter dialog, so the conversion honours the options
- * configured by the user (Word styles map, XML pretty printing). The tool returns, in JSON format,
- * the produced output files together with any conversion problems.
+ * Tool that converts documents between formats using the Oxygen Batch Converter engine.
  *
  * @author vlad_greaca
  */
-public class AIConvertor implements ExternalAIFunction {
+public class BatchConvertorAITool implements ExternalAIFunction {
 
   /**
    * Logger for logging.
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(AIConvertor.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(BatchConvertorAITool.class.getName());
 
   /**
    * <code>true</code> when the running Oxygen provides the AI document-access API.
@@ -113,7 +112,7 @@ public class AIConvertor implements ExternalAIFunction {
    */
   @Override
   public String getDescription() {
-    return "Convert documents from one format to another using the Oxygen Batch Documents Converter. "
+    return "Convert documents from one format to another."
         + "Provide the input format, the output format, the input files (or directories) and the output "
         + "folder where the converted files are written. Supported conversions include HTML/Markdown/Word/"
         + "Excel/Confluence/DocBook/OpenAPI to DITA, HTML/Markdown/Word to XHTML or DocBook, and conversions "
@@ -149,15 +148,14 @@ public class AIConvertor implements ExternalAIFunction {
         .put("type", "array")
         .put("items", new JSONObject().put("type", "string"))
         .put("description",
-            "The input files or directories to convert, as absolute filesystem paths or file URLs. A "
-                + "relative path is resolved against the working directory of the application, so use "
-                + "absolute locations. Directories are searched recursively for files matching the input "
-                + "format and their folder structure is recreated in the output folder."));
+            "The input files or directories to convert, as filesystem paths or file URLs."
+                + "Directories are searched recursively for files matching the input format and their "
+                + "folder structure is recreated in the output folder."));
     properties.put("output_folder", new JSONObject()
         .put("type", "string")
         .put("description",
-            "The output folder where the converted files are written, as an absolute filesystem path or "
-                + "file URL. It is created if it does not exist."));
+            "The output folder where the converted files are written, as a filesystem path or file URL. "
+                + "It is created if it does not exist."));
     properties.put("split_sections", new JSONObject()
         .put("type", "boolean")
         .put("description",
@@ -217,7 +215,7 @@ public class AIConvertor implements ExternalAIFunction {
 
     String outputFolderPath = params.optString("output_folder", null);
     if (StringUtils.isBlank(outputFolderPath)) {
-      throw new IllegalArgumentException("The 'output_folder' must be provided.");
+      throw new IllegalArgumentException("The 'output_folder' must be provided.");  
     }
 
     String converterType = ConversionFormatUtil.getConverterType(inputFormat, outputFormat);
@@ -234,8 +232,7 @@ public class AIConvertor implements ExternalAIFunction {
 
     // The parameters are valid: resolve the inputs and expand the directories to the files matching
     // the input format, remembering the directory each file was collected from, so that the folder
-    // structure is recreated in the output. The AI named these locations itself, so a wrong one is
-    // reported instead of being dropped.
+    // structure is recreated in the output.
     List<String> nonLocalEntries = new ArrayList<>();
     List<String> missingEntries = new ArrayList<>();
     InputFilesManager inputFilesManager =
@@ -455,16 +452,57 @@ public class AIConvertor implements ExternalAIFunction {
   }
 
   /**
-   * Converts a location received from the AI to a file. {@link URLUtil#convertToURL(String)}
-   * accepts an absolute or relative filesystem path, with either slash, as well as a file URL.
+   * Converts a location received from the AI to a file. A relative path is resolved against the
+   * project currently opened in Oxygen, see {@link #getCurrentProjectURL()}. An absolute path, with
+   * either slash, and a file URL are locations on their own and are converted as they are.
    *
    * @param location The location to convert. Not blank.
    *
    * @return The corresponding file, or <code>null</code> if the location isn't a local one.
    */
   static File toFile(String location) {
-    URL url = URLUtil.convertToURL(location.trim());
-    return url != null ? URLUtil.getCanonicalFileFromFileUrl(url) : null;
+    String trimmedLocation = location.trim();
+    File file = null;
+    // A URL, of any protocol, is a location on its own: it is never resolved against the project,
+    // so that a remote one is still reported as not being on the local filesystem.
+    URL projectURL = URLUtil.isRelativePath(trimmedLocation) ? getCurrentProjectURL() : null;
+    if (projectURL != null) {
+      try {
+        // Resolves the path against the folder holding the project file, keeping an absolute one.
+        file = URLUtil.computeCanonicalFile(projectURL, trimmedLocation);
+      } catch (IOException e) {
+        LOGGER.debug(e.getMessage(), e);
+      }
+    }
+    if (file == null) {
+      // A URL, or a path with no project to resolve it against: the working directory of the
+      // application is then all there is to resolve it against.
+      URL url = URLUtil.convertToURL(trimmedLocation);
+      file = url != null ? URLUtil.getCanonicalFileFromFileUrl(url) : null;
+    }
+    return file;
+  }
+
+  /**
+   * Gets the location of the project currently opened in Oxygen. The relative locations named by the
+   * AI are resolved against the folder holding it, instead of against the working directory of the
+   * application, which is the Oxygen installation and has nothing to do with the documents the AI
+   * works on. That folder is also the root of the AI project sandbox, so a relative location is
+   * resolved where the AI is allowed to work.
+   *
+   * @return The URL of the project file, or <code>null</code> when Oxygen does not run standalone or
+   *         no project is opened.
+   */
+  private static URL getCurrentProjectURL() {
+    URL projectURL = null;
+    PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+    if (pluginWorkspace instanceof StandalonePluginWorkspace) {
+      ProjectController projectManager = ((StandalonePluginWorkspace) pluginWorkspace).getProjectManager();
+      if (projectManager != null) {
+        projectURL = projectManager.getCurrentProjectURL();
+      }
+    }
+    return projectURL;
   }
 
   /**
