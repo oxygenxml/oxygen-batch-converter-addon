@@ -337,10 +337,6 @@ public class BatchConvertorAITool implements ExternalAIFunction {
    * Resolves the input locations given by the AI and expands the directories among them to the files
    * matching the input format, keeping the files named individually and recording the root directory
    * of the expanded ones, so that the folder structure is recreated in the output.
-   * <p>
-   * The entries are named explicitly by the AI, so an unusable one is collected and reported rather
-   * than being silently dropped. The files collected by expanding a directory were not named by the
-   * AI, so the inaccessible ones among those are filtered out instead of failing the conversion.
    *
    * @param inputFilesArray  The input locations given by the AI.
    * @param converterType    The converter type.
@@ -357,9 +353,6 @@ public class BatchConvertorAITool implements ExternalAIFunction {
       throws ExternalServiceException {
     List<String> inputExtensions = Arrays.asList(ExtensionGetter.getInputExtension(converterType));
     InputFilesManager inputFilesManager = new InputFilesManager();
-    // The AI may name the same location more than once. The files are de-duplicated by the manager
-    // anyway, but only after being collected and checked, so the repeated entries are dropped here,
-    // before a directory is walked and its files put through the access rules a second time.
     Set<File> processedEntries = new HashSet<>();
     for (int i = 0; i < inputFilesArray.length(); i++) {
       String path = inputFilesArray.optString(i, null);
@@ -484,11 +477,7 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   }
 
   /**
-   * Gets the location of the project currently opened in Oxygen. The relative locations named by the
-   * AI are resolved against the folder holding it, instead of against the working directory of the
-   * application, which is the Oxygen installation and has nothing to do with the documents the AI
-   * works on. That folder is also the root of the AI project sandbox, so a relative location is
-   * resolved where the AI is allowed to work.
+   * Gets the location of the project currently opened in Oxygen.
    *
    * @return The URL of the project file, or <code>null</code> when Oxygen does not run standalone or
    *         no project is opened.
