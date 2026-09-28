@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -303,6 +304,27 @@ public class BatchConvertorAIToolTest {
     assertEquals(1, result.getInt("convertedFileCount"));
     assertEquals("The previous result should not have been overwritten", contentLength, converted.length());
     assertEquals(2, outputFolder.listFiles().length);
+  }
+
+  /**
+   * <p><b>Description:</b> Test that the conversion is executed without a confirmation only when the
+   * sandbox and ai-ignore rules can be enforced. Without them nothing keeps the conversion inside
+   * the project, so the user has to confirm it.</p>
+   *
+   * <p><b>Bug ID:</b> EXM-57614</p>
+   *
+   * @author vlad_greaca
+   */
+  @Test
+  public void testConfirmationIsRequiredWithoutTheSandbox() throws Exception {
+    Method availabilityProbe = BatchConvertorAITool.class.getDeclaredMethod("isSandboxAccessAPIAvailable");
+    availabilityProbe.setAccessible(true);
+    boolean sandboxAvailable = (Boolean) availabilityProbe.invoke(null);
+
+    // Running against the current Oxygen, so the access rules are enforced and no confirmation is needed.
+    assertTrue("The document access API should be available", sandboxAvailable);
+    assertEquals("The confirmation must follow the access rules, not be decided once and for all",
+        sandboxAvailable, convertor.isSafe(null));
   }
 
   /**

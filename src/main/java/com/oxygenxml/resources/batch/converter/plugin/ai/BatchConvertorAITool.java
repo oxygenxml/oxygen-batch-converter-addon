@@ -527,8 +527,10 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   @Override
   public boolean isSafe(String parameters) {
     // The conversion only adds files to the output folder: an existing file is never overwritten,
-    // a counter is added to the name instead, and nothing is removed. Sandbox and ai-ignore access
-    // is enforced in executeFunction via the predicates from the extra context.
-    return true;
+    // a counter is added to the name instead, and nothing is removed. That alone makes it safe only
+    // as long as the AI cannot choose freely where to read from and write to, which is what the
+    // sandbox and the ai-ignore rules decide. On an Oxygen that doesn't provide them there is
+    // nothing to keep the conversion inside the project, so the user is asked to confirm it.
+    return SANDBOX_ACCESS_API_AVAILABLE;
   }
 }
