@@ -33,14 +33,17 @@ import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
+import com.oxygenxml.resources.batch.converter.reporter.ResultsUtil;
 import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
 import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import ro.sync.basic.util.URLUtil;
+import ro.sync.document.DocumentPositionedInfo;
 import ro.sync.exml.plugin.ai.ExternalAIFunction;
 import ro.sync.exml.plugin.ai.ExternalServiceException;
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.results.ResultsManager;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 
@@ -116,8 +119,11 @@ public class BatchConvertorAITool implements ExternalAIFunction {
         + "Provide the input format, the output format, the input files (or directories) and the output "
         + "folder where the converted files are written. Supported conversions include HTML/Markdown/Word/"
         + "Excel/Confluence/DocBook/OpenAPI to DITA, HTML/Markdown/Word to XHTML or DocBook, and conversions "
-        + "between XML, JSON, YAML and XSD to JSON Schema. Returns the produced output files and any conversion "
-        + "problems in JSON format.";
+        + "between XML, JSON, YAML and XSD to JSON Schema. Returns the produced output files and the "
+        + "conversions that failed, in JSON format. When the conversion also raises warnings, like the "
+        + "unrecognized Word styles, these are reported in the Results panel and the result carries "
+        + "their \"warningCount\" and the \"warningsResultsTab\" holding them: read that tab when they "
+        + "matter. A result without those fields raised no warnings, so there is nothing to read.";
   }
 
   /**
@@ -170,6 +176,12 @@ public class BatchConvertorAITool implements ExternalAIFunction {
         .put("type", "integer")
         .put("description",
             "Optional. The maximum heading level used to create separate DITA topics when converting to DITA."));
+    properties.put("open_converted_files", new JSONObject()
+        .put("type", "boolean")
+        .put("description",
+            "Optional. Open the converted documents in Oxygen once the conversion is done, so that the "
+                + "user doesn't have to look for them. Defaults to true. Set it to false when converting "
+                + "many documents, or when the user only wants the files written."));
     properties.put("explanation", new JSONObject()
         .put("type", "string")
         .put("description",
@@ -215,8 +227,10 @@ public class BatchConvertorAITool implements ExternalAIFunction {
 
     String outputFolderPath = params.optString("output_folder", null);
     if (StringUtils.isBlank(outputFolderPath)) {
-      throw new IllegalArgumentException("The 'output_folder' must be provided.");  
+      throw new IllegalArgumentException("The 'output_folder' must be provided.");
     }
+
+    Integer maxHeadingLevelForTopics = readMaxHeadingLevelForTopics(params);
 
     String converterType = ConversionFormatUtil.getConverterType(inputFormat, outputFormat);
     if (converterType == null) {
@@ -225,7 +239,8 @@ public class BatchConvertorAITool implements ExternalAIFunction {
 
     File outputFolder = toFile(outputFolderPath);
     if (outputFolder == null) {
-      return error("The output folder is not a local folder: " + outputFolderPath);
+      return error("The output folder could not be resolved to a local folder: " + outputFolderPath
+          + ". Provide an absolute path or a file URL; a relative path is resolved against the opened project.");
     }
     // The converted documents are written here, so the output folder must be accessible as well.
     checkAccessAllowed(outputFolder, extraContext);
@@ -238,8 +253,9 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     InputFilesManager inputFilesManager =
         collectInputFiles(inputFilesArray, converterType, extraContext, nonLocalEntries, missingEntries);
     if (!nonLocalEntries.isEmpty()) {
-      return error("The following input files are not on the local filesystem: "
-          + String.join(", ", nonLocalEntries));
+      return error("The following input files could not be resolved to local files: "
+          + String.join(", ", nonLocalEntries)
+          + ". Provide absolute paths or file URLs; a relative path is resolved against the opened project.");
     }
     if (!missingEntries.isEmpty()) {
       return error("The following input files do not exist: " + String.join(", ", missingEntries));
@@ -254,8 +270,34 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     }
 
     return convertFiles(converterType, new AIConversionInputsProvider(inputFilesManager, outputFolder,
-        converterType, readRequestedOptions(params),
-        params.has("max_heading_level_for_topics") ? params.optInt("max_heading_level_for_topics") : null));
+        converterType, readRequestedOptions(params), maxHeadingLevelForTopics,
+        params.optBoolean("open_converted_files", true)));
+  }
+
+  /**
+   * Reads the maximum heading level for creating topics named by the AI.
+   *
+   * @param params The parameters given by the AI.
+   *
+   * @return The level, or <code>null</code> when the AI didn't name one, in which case the level
+   *         configured by the user is used.
+   *
+   * @throws IllegalArgumentException If the given level isn't a positive integer.
+   */
+  private static Integer readMaxHeadingLevelForTopics(JSONObject params) {
+    Integer maxHeadingLevel = null;
+    if (params.has("max_heading_level_for_topics")) {
+      // A value that isn't a number at all reads as the fallback and is rejected together with the
+      // numbers that make no sense as a heading level.
+      int level = params.optInt("max_heading_level_for_topics", -1);
+      if (level <= 0) {
+        throw new IllegalArgumentException(
+            "The 'max_heading_level_for_topics' must be a positive integer, but it was: "
+                + params.opt("max_heading_level_for_topics"));
+      }
+      maxHeadingLevel = level;
+    }
+    return maxHeadingLevel;
   }
 
   /**
@@ -310,10 +352,16 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   private String convertFiles(String converterType, UserInputsProvider inputsProvider) {
     AIProblemReporter problemReporter = new AIProblemReporter();
 
+    // The conversion adds the warnings it encounters to the Results panel, which is never cleared
+    // here, so only the ones this conversion adds count as its own.
+    int messagesBefore = countMessagesInConverterTab();
+
     // The constructor used by the command line script: it already runs the conversion without a
     // worker and without a progress dialog, using the Oxygen transformer factory.
     List<File> outputFiles = new BatchConverterImpl(problemReporter, NO_STATUS_REPORTING, NO_PROGRESS_DIALOG)
         .convertFiles(converterType, inputsProvider);
+
+    int raisedWarnings = countMessagesInConverterTab() - messagesBefore;
 
     JSONArray convertedFiles = new JSONArray();
     for (File outputFile : outputFiles) {
@@ -330,7 +378,35 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     result.put("convertedFiles", convertedFiles);
     result.put("problemCount", problems.length());
     result.put("problems", problems);
+    if (raisedWarnings > 0) {
+      // The warnings are not failures, so they are not repeated here, only counted and the tab
+      // holding them named, so that they are read when there are any and there is something to read.
+      result.put("warningCount", raisedWarnings);
+      result.put("warningsResultsTab", ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY);
+    }
     return result.toString();
+  }
+
+  /**
+   * Counts the messages currently held by the Results panel tab of the converter. A conversion that
+   * makes this number grow raised warnings, which is how the tab is only named in the result when
+   * there is something to read there.
+   *
+   * @return The number of messages, or <code>0</code> when there is no Results panel holding them,
+   *         in which case there is nothing to read from it either.
+   */
+  private static int countMessagesInConverterTab() {
+    int count = 0;
+    PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
+    if (pluginWorkspace != null) {
+      ResultsManager resultsManager = pluginWorkspace.getResultsManager();
+      if (resultsManager != null) {
+        List<DocumentPositionedInfo> results =
+            resultsManager.getAllResults(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY);
+        count = results != null ? results.size() : 0;
+      }
+    }
+    return count;
   }
 
   /**
@@ -435,8 +511,11 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   private static boolean isSandboxAccessAPIAvailable() {
     boolean available = false;
     try {
+      // Every helper called on the access path, both the ones that throw and the ones that filter.
       ExternalAIFunction.class.getMethod("checkDocumentAccessPermissions", String.class, Map.class);
       ExternalAIFunction.class.getMethod("checkNotIgnoredFromAiIgnoreFile", String.class, Map.class);
+      ExternalAIFunction.class.getMethod("isDocumentAccessAllowed", String.class, Map.class);
+      ExternalAIFunction.class.getMethod("isIgnoredFromAiIgnoreFile", String.class, Map.class);
       available = true;
     } catch (NoSuchMethodException e) { // NOSONAR - an older Oxygen, without the AI project sandbox.
       LOGGER.debug("The AI document access API is not available in this Oxygen version.");
@@ -456,22 +535,23 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   static File toFile(String location) {
     String trimmedLocation = location.trim();
     File file = null;
-    // A URL, of any protocol, is a location on its own: it is never resolved against the project,
-    // so that a remote one is still reported as not being on the local filesystem.
-    URL projectURL = URLUtil.isRelativePath(trimmedLocation) ? getCurrentProjectURL() : null;
-    if (projectURL != null) {
-      try {
-        // Resolves the path against the folder holding the project file, keeping an absolute one.
-        file = URLUtil.computeCanonicalFile(projectURL, trimmedLocation);
-      } catch (IOException e) {
-        LOGGER.debug(e.getMessage(), e);
-      }
-    }
-    if (file == null) {
-      // A URL, or a path with no project to resolve it against: the working directory of the
-      // application is then all there is to resolve it against.
+    // A URL, of any protocol, and an absolute path are locations on their own: they are never
+    // resolved against the project, so that a remote one is still reported as not being local.
+    if (!URLUtil.isRelativePath(trimmedLocation) || new File(trimmedLocation).isAbsolute()) {
       URL url = URLUtil.convertToURL(trimmedLocation);
       file = url != null ? URLUtil.getCanonicalFileFromFileUrl(url) : null;
+    } else {
+      URL projectURL = getCurrentProjectURL();
+      if (projectURL != null) {
+        try {
+          // Resolves the path against the folder holding the project file.
+          file = URLUtil.computeCanonicalFile(projectURL, trimmedLocation);
+        } catch (IOException e) {
+          LOGGER.debug(e.getMessage(), e);
+        }
+      }
+      // With no opened project the path is left unresolved: the working directory of the
+      // application is the installation folder, which is never what the AI meant.
     }
     return file;
   }

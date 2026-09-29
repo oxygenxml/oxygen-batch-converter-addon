@@ -26,10 +26,13 @@ import org.mockito.Mockito;
 import com.oxygenxml.batch.converter.core.ConversionOptionTags;
 import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.InputFilesManager;
+import com.oxygenxml.resources.batch.converter.reporter.ResultsUtil;
 
+import ro.sync.document.DocumentPositionedInfo;
 import ro.sync.exml.plugin.ai.ExternalAIFunction;
 import ro.sync.exml.plugin.ai.ExternalServiceException;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.results.ResultsManager;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 import tests.utils.FileComparationUtil;
@@ -111,23 +114,23 @@ public class BatchConvertorAIToolTest {
       assertNoConvertedDocuments(new JSONObject(convertor.executeFunction(new JSONObject()
           .put("input_format", "json")
           .put("output_format", "yaml")
-          .put("input_files", new JSONArray().put("test-sample/jsonTest.json"))
+          .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
           .put("output_folder", "http://www.oxygenxml.com/out")
           .toString(), null)), "http://www.oxygenxml.com/out");
 
       // A conversion between two formats that cannot be converted into one another. The formats the
       // caller asked for are named, it does not have to guess which of the two is the problem.
       assertNothingConverted("test-sample/ai-out-unsupported", "markdown", "excel",
-          new JSONArray().put("test-sample/markdownTest.md"), "markdown", "excel");
+          new JSONArray().put(absolute("test-sample/markdownTest.md")), "markdown", "excel");
 
       // A document the caller named that is not there.
       assertNothingConverted("test-sample/ai-out-no-input", "json", "yaml",
-          new JSONArray().put("test-sample/this-file-does-not-exist.json"),
+          new JSONArray().put(absolute("test-sample/this-file-does-not-exist.json")),
           "this-file-does-not-exist.json");
       
       // An existing folder that holds nothing of the input format: a good location, nothing to do.
       assertNothingConverted("test-sample/ai-out-no-match", "json", "yaml",
-          new JSONArray().put(emptyInputFolder.getPath()), "No input files matching");
+          new JSONArray().put(emptyInputFolder.getAbsolutePath()), "No input files matching");
     } finally {
       FileComparationUtil.deleteRecursivelly(emptyInputFolder);
     }
@@ -156,8 +159,8 @@ public class BatchConvertorAIToolTest {
       JSONObject result = new JSONObject(convertor.executeFunction(new JSONObject()
           .put("input_format", "json")
           .put("output_format", "yaml")
-          .put("input_files", new JSONArray().put(inputFolder.getPath()))
-          .put("output_folder", outputFolder.getPath())
+          .put("input_files", new JSONArray().put(inputFolder.getAbsolutePath()))
+          .put("output_folder", outputFolder.getAbsolutePath())
           .toString(), null));
 
       assertEquals(result.toString(), 0, result.getInt("problemCount"));
@@ -196,17 +199,17 @@ public class BatchConvertorAIToolTest {
     requestedOptions.put(ConversionOptionTags.CREATE_DITA_MAP_FROM_WORD, false);
 
     AIConversionInputsProvider markdownInputs = new AIConversionInputsProvider(new InputFilesManager(),
-        new File("out"), ConverterTypes.MD_TO_DITA, requestedOptions, 3);
+        new File("out"), ConverterTypes.MD_TO_DITA, requestedOptions, 3, false);
 
     assertEquals(Boolean.FALSE, markdownInputs.getAdditionalOptionValue(ConversionOptionTags.CREATE_DITA_MAP_FROM_MD));
     assertNull(markdownInputs.getAdditionalOptionValue(ConversionOptionTags.CREATE_DITA_MAP_FROM_WORD));
     assertEquals(Boolean.FALSE, markdownInputs.getAdditionalOptionValue(ConversionOptionTags.CREATE_SHORT_DESCRIPTION));
     assertEquals(Integer.valueOf(3), markdownInputs.getMaxHeadingLevelForCreatingTopics());
 
-    // Nothing was asked for here, so the dialog defaults stand. "Preserve case" defaults to true:
-    // leaving it unset would convert the names differently than the dialog does.
+    // Nothing was asked for here, so the defaults of the options stand. "Preserve case" defaults to
+    // true: leaving it unset would convert the names differently than the conversion is meant to.
     AIConversionInputsProvider xsdInputs = new AIConversionInputsProvider(new InputFilesManager(),
-        new File("out"), ConverterTypes.XSD_TO_JSONSCHEMA, new HashMap<>(), null);
+        new File("out"), ConverterTypes.XSD_TO_JSONSCHEMA, new HashMap<>(), null, false);
 
     assertEquals(Boolean.TRUE,
         xsdInputs.getAdditionalOptionValue(ConversionOptionTags.PRESERVE_CASE_OF_NAMES_FROM_THE_XSD));
@@ -261,8 +264,8 @@ public class BatchConvertorAIToolTest {
       JSONObject result = new JSONObject(convertor.executeFunction(new JSONObject()
           .put("input_format", "json")
           .put("output_format", "yaml")
-          .put("input_files", new JSONArray().put(inputFolder.getPath()))
-          .put("output_folder", outputFolder.getPath())
+          .put("input_files", new JSONArray().put(inputFolder.getAbsolutePath()))
+          .put("output_folder", outputFolder.getAbsolutePath())
           .toString(), extraContext));
 
       assertEquals(result.toString(), 0, result.getInt("problemCount"));
@@ -288,8 +291,8 @@ public class BatchConvertorAIToolTest {
     String parameters = new JSONObject()
         .put("input_format", "json")
         .put("output_format", "yaml")
-        .put("input_files", new JSONArray().put("test-sample/jsonTest.json"))
-        .put("output_folder", outputFolder.getPath())
+        .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
+        .put("output_folder", outputFolder.getAbsolutePath())
         .toString();
 
     convertor.executeFunction(parameters, null);
@@ -325,6 +328,155 @@ public class BatchConvertorAIToolTest {
     assertTrue("The document access API should be available", sandboxAvailable);
     assertEquals("The confirmation must follow the access rules, not be decided once and for all",
         sandboxAvailable, convertor.isSafe(null));
+  }
+
+  /**
+   * <p><b>Description:</b> Test that the converted documents are opened once the conversion is
+   * done, so that the user doesn't have to look for them, unless the AI asked otherwise.</p>
+   *
+   * <p><b>Bug ID:</b> EXM-57614</p>
+   *
+   * @author vlad_greaca
+   */
+  @Test
+  public void testConvertedFilesAreOpenedByDefault() throws Exception {
+    assertTrue(new JSONObject(convertor.getParameterDescriptions())
+        .getJSONObject("properties").has("open_converted_files"));
+
+    try {
+      PluginWorkspaceProvider.setPluginWorkspace(Mockito.mock(StandalonePluginWorkspace.class));
+
+      assertTrue("The converted documents should be opened by default",
+          newInputsProvider(true).mustOpenConvertedFiles());
+      assertFalse("The AI asked for the documents not to be opened",
+          newInputsProvider(false).mustOpenConvertedFiles());
+    } finally {
+      PluginWorkspaceProvider.setPluginWorkspace(null);
+    }
+
+    // With no interface there is nothing to open the documents in.
+    assertFalse(newInputsProvider(true).mustOpenConvertedFiles());
+  }
+
+  /**
+   * Builds a conversion inputs provider that only differs by whether the converted documents are
+   * opened once the conversion is done.
+   *
+   * @param openConvertedFiles <code>true</code> to open the converted documents.
+   *
+   * @return The inputs provider.
+   */
+  private static AIConversionInputsProvider newInputsProvider(boolean openConvertedFiles) {
+    return new AIConversionInputsProvider(new InputFilesManager(), new File("out"),
+        ConverterTypes.MD_TO_DITA, new HashMap<>(), null, openConvertedFiles);
+  }
+
+  /**
+   * <p><b>Description:</b> Test that the Results panel tab holding the warnings is named only when
+   * the conversion added warnings to it, so that the AI reads the tab when there is something to
+   * read there.</p>
+   *
+   * <p><b>Bug ID:</b> EXM-57614</p>
+   *
+   * @author vlad_greaca
+   */
+  @Test
+  public void testWarningsResultsTabIsNamedOnlyWhenThereAreWarnings() throws Exception {
+    outputFolder = new File("test-sample/ai-out-warnings-tab");
+    String parameters = new JSONObject()
+        .put("input_format", "json")
+        .put("output_format", "yaml")
+        .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
+        .put("output_folder", outputFolder.getAbsolutePath())
+        .toString();
+
+    // A conversion that raises no warnings leaves nothing to read in the Results panel.
+    JSONObject result = new JSONObject(convertor.executeFunction(parameters, null));
+    assertFalse(result.toString(), result.has("warningsResultsTab"));
+    assertFalse(result.toString(), result.has("warningCount"));
+    assertEquals(result.toString(), 0, result.getInt("problemCount"));
+    assertEquals(1, result.getInt("convertedFileCount"));
+
+    try {
+      // A conversion that adds warnings to the tab names it, so that they can be read from there.
+      StandalonePluginWorkspace pluginWSMock = Mockito.mock(StandalonePluginWorkspace.class);
+      ResultsManager resultsManagerMock = Mockito.mock(ResultsManager.class);
+      Mockito.when(pluginWSMock.getResultsManager()).thenReturn(resultsManagerMock);
+      Mockito.when(resultsManagerMock.getAllResults(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY))
+          .thenReturn(Arrays.asList(new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, "before")),
+              Arrays.asList(new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, "before"),
+                  new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, "first"),
+                  new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, "second")));
+      PluginWorkspaceProvider.setPluginWorkspace(pluginWSMock);
+
+      JSONObject withWarnings = new JSONObject(convertor.executeFunction(parameters, null));
+
+      // Only what this conversion added counts as its own, the tab is never cleared here.
+      assertEquals(withWarnings.toString(), 2, withWarnings.getInt("warningCount"));
+      assertEquals(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY,
+          withWarnings.getString("warningsResultsTab"));
+    } finally {
+      PluginWorkspaceProvider.setPluginWorkspace(null);
+    }
+  }
+
+  /**
+   * The absolute path of a file from the test samples. No project is opened while testing, so a
+   * relative location cannot be resolved and the conversion refuses it, see
+   * {@link #testRelativeLocationWithoutProjectIsRefused()}.
+   *
+   * @param testSamplePath The path of the file, relative to the project.
+   *
+   * @return The absolute path of the file.
+   */
+  private static String absolute(String testSamplePath) throws IOException {
+    return new File(testSamplePath).getCanonicalPath();
+  }
+
+  /**
+   * <p><b>Description:</b> Test that a relative location is refused when no project is opened,
+   * instead of being resolved against the installation folder of the application.</p>
+   *
+   * <p><b>Bug ID:</b> EXM-57614</p>
+   *
+   * @author vlad_greaca
+   */
+  @Test
+  public void testRelativeLocationWithoutProjectIsRefused() throws Exception {
+    assertNull(BatchConvertorAITool.toFile("test-sample/jsonTest.json"));
+
+    outputFolder = new File("test-sample/ai-out-relative");
+    JSONObject result = new JSONObject(convertor.executeFunction(new JSONObject()
+        .put("input_format", "json")
+        .put("output_format", "yaml")
+        .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
+        .put("output_folder", "ai-out-relative")
+        .toString(), null));
+
+    String reason = result.getString("error");
+    assertTrue(reason, reason.contains("absolute path"));
+    assertFalse("Nothing should have been written", outputFolder.exists());
+  }
+
+  /**
+   * <p><b>Description:</b> Test that a heading level that is not a positive integer is rejected,
+   * instead of being silently turned into zero.</p>
+   *
+   * <p><b>Bug ID:</b> EXM-57614</p>
+   *
+   * @author vlad_greaca
+   */
+  @Test
+  public void testMaxHeadingLevelIsValidated() throws Exception {
+    for (Object wrongLevel : Arrays.asList(0, -1, "not a number", JSONObject.NULL)) {
+      assertRejectedParameters(new JSONObject()
+          .put("input_format", "markdown")
+          .put("output_format", "dita")
+          .put("input_files", new JSONArray().put(absolute("test-sample/markdownTest.md")))
+          .put("output_folder", absolute("test-sample/ai-out-heading"))
+          .put("max_heading_level_for_topics", wrongLevel)
+          .toString(), "max_heading_level_for_topics");
+    }
   }
 
   /**
@@ -379,7 +531,7 @@ public class BatchConvertorAIToolTest {
         .put("input_format", inputFormat)
         .put("output_format", outputFormat)
         .put("input_files", inputFiles)
-        .put("output_folder", outputFolder.getPath())
+        .put("output_folder", outputFolder.getAbsolutePath())
         .toString(), null));
 
     assertNoConvertedDocuments(result, expectedInReason);
@@ -421,8 +573,8 @@ public class BatchConvertorAIToolTest {
       convertor.executeFunction(new JSONObject()
           .put("input_format", "json")
           .put("output_format", "yaml")
-          .put("input_files", new JSONArray().put("test-sample/jsonTest.json"))
-          .put("output_folder", outputFolder.getPath())
+          .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
+          .put("output_folder", outputFolder.getAbsolutePath())
           .toString(), deny(predicateKey, deniedLocation));
       fail("The conversion should have been refused for " + deniedLocation);
     } catch (ExternalServiceException e) {
