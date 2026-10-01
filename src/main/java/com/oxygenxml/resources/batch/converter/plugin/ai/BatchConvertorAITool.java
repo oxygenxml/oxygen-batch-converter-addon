@@ -67,6 +67,51 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   private static final boolean SANDBOX_ACCESS_API_AVAILABLE = isSandboxAccessAPIAvailable();
 
   /**
+   * The name of the parameter holding the format of the input files.
+   */
+  private static final String PARAM_INPUT_FORMAT = "input_format";
+
+  /**
+   * The name of the parameter holding the format of the output files.
+   */
+  private static final String PARAM_OUTPUT_FORMAT = "output_format";
+
+  /**
+   * The name of the parameter holding the files and directories to convert.
+   */
+  private static final String PARAM_INPUT_FILES = "input_files";
+
+  /**
+   * The name of the parameter holding the folder the converted files are written in.
+   */
+  private static final String PARAM_OUTPUT_FOLDER = "output_folder";
+
+  /**
+   * The name of the parameter asking for the sections to be split into separate files.
+   */
+  private static final String PARAM_SPLIT_SECTIONS = "split_sections";
+
+  /**
+   * The name of the parameter asking for short descriptions to be created.
+   */
+  private static final String PARAM_CREATE_SHORT_DESCRIPTION = "create_short_description";
+
+  /**
+   * The name of the parameter holding the maximum heading level for creating topics.
+   */
+  private static final String PARAM_MAX_HEADING_LEVEL_FOR_TOPICS = "max_heading_level_for_topics";
+
+  /**
+   * The name of the parameter asking for the converted files to be opened.
+   */
+  private static final String PARAM_OPEN_CONVERTED_FILES = "open_converted_files";
+
+  /**
+   * The name of the parameter holding the reason the AI gives for the conversion.
+   */
+  private static final String PARAM_EXPLANATION = "explanation";
+
+  /**
    * The AI function has no status bar and no progress dialog, the outcome of the conversion is
    * returned to the AI instead.
    */
@@ -140,49 +185,49 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   @Override
   public String getParameterDescriptions() {
     JSONObject properties = new JSONObject();
-    properties.put("input_format", new JSONObject()
+    properties.put(PARAM_INPUT_FORMAT, new JSONObject()
         .put("type", "string")
         .put("description",
             "The format of the input files. Possible values: \"html\", \"markdown\", \"word\", \"excel\", "
                 + "\"confluence\", \"docbook\", \"openapi\", \"json\", \"yaml\", \"xml\" or \"xsd\"."));
-    properties.put("output_format", new JSONObject()
+    properties.put(PARAM_OUTPUT_FORMAT, new JSONObject()
         .put("type", "string")
         .put("description",
             "The format of the output files. Possible values: \"xhtml\", \"dita\", \"docbook4\", \"docbook5\", "
                 + "\"json\", \"yaml\" or \"xml\"."));
-    properties.put("input_files", new JSONObject()
+    properties.put(PARAM_INPUT_FILES, new JSONObject()
         .put("type", "array")
         .put("items", new JSONObject().put("type", "string"))
         .put("description",
             "The input files or directories to convert, as filesystem paths or file URLs."
                 + "Directories are searched recursively for files matching the input format and their "
                 + "folder structure is recreated in the output folder."));
-    properties.put("output_folder", new JSONObject()
+    properties.put(PARAM_OUTPUT_FOLDER, new JSONObject()
         .put("type", "string")
         .put("description",
             "The output folder where the converted files are written, as a filesystem path or file URL. "
                 + "It is created if it does not exist."));
-    properties.put("split_sections", new JSONObject()
+    properties.put(PARAM_SPLIT_SECTIONS, new JSONObject()
         .put("type", "boolean")
         .put("description",
             "Optional. Split sections marked by titles or headings into separate files and create a DITA Map "
                 + "(only for Word, HTML, Markdown, DocBook and OpenAPI to DITA conversions). Defaults to true."));
-    properties.put("create_short_description", new JSONObject()
+    properties.put(PARAM_CREATE_SHORT_DESCRIPTION, new JSONObject()
         .put("type", "boolean")
         .put("description",
             "Optional. Create short description elements from the first paragraph after headings (only for "
                 + "Markdown to DITA conversions). Defaults to false."));
-    properties.put("max_heading_level_for_topics", new JSONObject()
+    properties.put(PARAM_MAX_HEADING_LEVEL_FOR_TOPICS, new JSONObject()
         .put("type", "integer")
         .put("description",
             "Optional. The maximum heading level used to create separate DITA topics when converting to DITA."));
-    properties.put("open_converted_files", new JSONObject()
+    properties.put(PARAM_OPEN_CONVERTED_FILES, new JSONObject()
         .put("type", "boolean")
         .put("description",
             "Optional. Open the converted documents in Oxygen once the conversion is done, so that the "
                 + "user doesn't have to look for them. Defaults to true. Set it to false when converting "
                 + "many documents, or when the user only wants the files written."));
-    properties.put("explanation", new JSONObject()
+    properties.put(PARAM_EXPLANATION, new JSONObject()
         .put("type", "string")
         .put("description",
             "One sentence, addressed to the user, explaining why you are calling this tool now and how "
@@ -194,7 +239,8 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     schema.put("type", "object");
     schema.put("properties", properties);
     schema.put("required", new JSONArray(
-        Arrays.asList("input_format", "output_format", "input_files", "output_folder", "explanation")));
+        Arrays.asList(PARAM_INPUT_FORMAT, PARAM_OUTPUT_FORMAT, PARAM_INPUT_FILES, PARAM_OUTPUT_FOLDER,
+            PARAM_EXPLANATION)));
     schema.put("additionalProperties", false);
     return schema.toString();
   }
@@ -212,22 +258,24 @@ public class BatchConvertorAITool implements ExternalAIFunction {
       throw new IllegalArgumentException("Invalid parameters: " + e.getMessage(), e);
     }
 
-    String inputFormat = params.optString("input_format", null);
-    String outputFormat = params.optString("output_format", null);
+    String inputFormat = params.optString(PARAM_INPUT_FORMAT, null);
+    String outputFormat = params.optString(PARAM_OUTPUT_FORMAT, null);
     if (StringUtils.isBlank(inputFormat) || StringUtils.isBlank(outputFormat)) {
-      throw new IllegalArgumentException("Both 'input_format' and 'output_format' must be provided.");
+      throw new IllegalArgumentException(
+          "Both '" + PARAM_INPUT_FORMAT + "' and '" + PARAM_OUTPUT_FORMAT + "' must be provided.");
     }
     inputFormat = inputFormat.trim().toLowerCase(Locale.ROOT);
     outputFormat = outputFormat.trim().toLowerCase(Locale.ROOT);
 
-    JSONArray inputFilesArray = params.optJSONArray("input_files");
+    JSONArray inputFilesArray = params.optJSONArray(PARAM_INPUT_FILES);
     if (inputFilesArray == null || inputFilesArray.length() == 0) {
-      throw new IllegalArgumentException("At least one input file must be provided in 'input_files'.");
+      throw new IllegalArgumentException(
+          "At least one input file must be provided in '" + PARAM_INPUT_FILES + "'.");
     }
 
-    String outputFolderPath = params.optString("output_folder", null);
+    String outputFolderPath = params.optString(PARAM_OUTPUT_FOLDER, null);
     if (StringUtils.isBlank(outputFolderPath)) {
-      throw new IllegalArgumentException("The 'output_folder' must be provided.");
+      throw new IllegalArgumentException("The '" + PARAM_OUTPUT_FOLDER + "' must be provided.");
     }
 
     Integer maxHeadingLevelForTopics = readMaxHeadingLevelForTopics(params);
@@ -271,7 +319,7 @@ public class BatchConvertorAITool implements ExternalAIFunction {
 
     return convertFiles(converterType, new AIConversionInputsProvider(inputFilesManager, outputFolder,
         converterType, readRequestedOptions(params), maxHeadingLevelForTopics,
-        params.optBoolean("open_converted_files", true)));
+        params.optBoolean(PARAM_OPEN_CONVERTED_FILES, true)));
   }
 
   /**
@@ -286,14 +334,14 @@ public class BatchConvertorAITool implements ExternalAIFunction {
    */
   private static Integer readMaxHeadingLevelForTopics(JSONObject params) {
     Integer maxHeadingLevel = null;
-    if (params.has("max_heading_level_for_topics")) {
+    if (params.has(PARAM_MAX_HEADING_LEVEL_FOR_TOPICS)) {
       // A value that isn't a number at all reads as the fallback and is rejected together with the
       // numbers that make no sense as a heading level.
-      int level = params.optInt("max_heading_level_for_topics", -1);
+      int level = params.optInt(PARAM_MAX_HEADING_LEVEL_FOR_TOPICS, -1);
       if (level <= 0) {
         throw new IllegalArgumentException(
-            "The 'max_heading_level_for_topics' must be a positive integer, but it was: "
-                + params.opt("max_heading_level_for_topics"));
+            "The '" + PARAM_MAX_HEADING_LEVEL_FOR_TOPICS + "' must be a positive integer, but it was: "
+                + params.opt(PARAM_MAX_HEADING_LEVEL_FOR_TOPICS));
       }
       maxHeadingLevel = level;
     }
@@ -314,11 +362,11 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     Map<String, Boolean> requestedOptions = new HashMap<>();
     // "Split sections" maps to creating a DITA Map. Each converter reads the option matching its own
     // input format and only one of them applies to a given conversion, so they are all requested.
-    putIfPresent(params, "split_sections", requestedOptions,
+    putIfPresent(params, PARAM_SPLIT_SECTIONS, requestedOptions,
         ConversionOptionTags.CREATE_DITA_MAP_FROM_WORD, ConversionOptionTags.CREATE_DITA_MAP_FROM_HTML,
         ConversionOptionTags.CREATE_DITA_MAP_FROM_MD, ConversionOptionTags.CREATE_DITA_MAP_FROM_DOCBOOK,
         ConversionOptionTags.CREATE_DITA_MAP_FROM_OPEN_API);
-    putIfPresent(params, "create_short_description", requestedOptions,
+    putIfPresent(params, PARAM_CREATE_SHORT_DESCRIPTION, requestedOptions,
         ConversionOptionTags.CREATE_SHORT_DESCRIPTION);
     return requestedOptions;
   }
