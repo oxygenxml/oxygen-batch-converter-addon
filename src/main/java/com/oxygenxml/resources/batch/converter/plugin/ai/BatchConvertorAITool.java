@@ -661,4 +661,17 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     // nothing to keep the conversion inside the project, so the user is asked to confirm it.
     return SANDBOX_ACCESS_API_AVAILABLE;
   }
+
+  /**
+   * The function writes the converted files to the output folder, so it is not read-only.
+   * <p>
+   * No {@code @Override}: the {@code ExternalAIFunction#isReadOnly()} API was added in Oxygen 29.0,
+   * and this add-on must also compile against older Oxygen versions.
+   * </p>
+   *
+   * @return <code>false</code>.
+   */
+  public boolean isReadOnly() {
+    return false;
+  }
 }
