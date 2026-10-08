@@ -172,11 +172,26 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   }
 
   /**
-   * @see ro.sync.exml.plugin.ai.ExternalAIFunction#getUIDecription()
+   * Returns a short description displayed in the UI when the function is executed.
+   * <p>
+   * Implements <code>ro.sync.exml.plugin.ai.ExternalAIFunction#getUIDescription()</code>, added in
+   * Oxygen 29.0. No <code>@Override</code> because the plugin compiles against an older SDK.
+   * </p>
+   *
+   * @return The UI description.
    */
-  @Override
-  public String getUIDecription() {
+  public String getUIDescription() {
     return "Convert documents";
+  }
+
+  /**
+   * Kept for compatibility with Oxygen versions older than 29.0, where the API method
+   * was named <code>getUIDecription()</code>.
+   *
+   * @return The same value as {@link #getUIDescription()}.
+   */
+  public String getUIDecription() {
+    return getUIDescription();
   }
 
   /**
