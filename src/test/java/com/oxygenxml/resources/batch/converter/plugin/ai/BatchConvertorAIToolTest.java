@@ -2,7 +2,6 @@ package com.oxygenxml.resources.batch.converter.plugin.ai;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -111,12 +110,12 @@ public class BatchConvertorAIToolTest {
       emptyInputFolder.mkdirs();
 
       // An output folder the converter cannot write into: it writes on the local filesystem only.
-      assertNoConvertedDocuments(new JSONObject(convertor.executeFunction(new JSONObject()
+      assertRejectedParameters(new JSONObject()
           .put("input_format", "json")
           .put("output_format", "yaml")
           .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
           .put("output_folder", "http://www.oxygenxml.com/out")
-          .toString(), null)), "http://www.oxygenxml.com/out");
+          .toString(), "http://www.oxygenxml.com/out");
 
       // A conversion between two formats that cannot be converted into one another. The formats the
       // caller asked for are named, it does not have to guess which of the two is the problem.
@@ -446,16 +445,37 @@ public class BatchConvertorAIToolTest {
     assertNull(BatchConvertorAITool.toFile("test-sample/jsonTest.json"));
 
     outputFolder = new File("test-sample/ai-out-relative");
-    JSONObject result = new JSONObject(convertor.executeFunction(new JSONObject()
+    assertRejectedParameters(new JSONObject()
         .put("input_format", "json")
         .put("output_format", "yaml")
         .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
         .put("output_folder", "ai-out-relative")
-        .toString(), null));
-
-    String reason = result.getString("error");
-    assertTrue(reason, reason.contains("absolute path"));
+        .toString(), "absolute path");
     assertFalse("Nothing should have been written", outputFolder.exists());
+  }
+
+  /**
+   * <p><b>Description:</b> Test that an output folder that cannot be created fails the call, without
+   * stopping what the AI is doing, rather than answering with the reason.</p>
+   *
+   * @author radu_coravu
+   */
+  @Test
+  public void testOutputFolderThatCannotBeCreatedFailsTheCall() throws Exception {
+    // A folder cannot be created inside a file.
+    File folderInsideAFile = new File(absolute("test-sample/jsonTest.json"), "out");
+    try {
+      convertor.executeFunction(new JSONObject()
+          .put("input_format", "json")
+          .put("output_format", "yaml")
+          .put("input_files", new JSONArray().put(absolute("test-sample/jsonTest.json")))
+          .put("output_folder", folderInsideAFile.getAbsolutePath())
+          .toString(), null);
+      fail("The conversion should have failed for " + folderInsideAFile);
+    } catch (ExternalServiceException e) {
+      assertTrue(e.getMessage(), e.getMessage().startsWith("Could not create the output folder: "));
+      assertFalse("A folder that cannot be created must not stop the AI", e.isFatal());
+    }
   }
 
   /**
@@ -480,17 +500,22 @@ public class BatchConvertorAIToolTest {
   }
 
   /**
-   * Asserts that the given parameters are rejected as invalid, naming the parameter at fault.
+   * Asserts that the given parameters are rejected as invalid, naming the parts of the request the
+   * caller has to correct. The rejection is thrown, so that AI Positron reports the call as failed
+   * rather than as an answer.
    *
    * @param parameters       The parameters to execute the function with.
-   * @param expectedInError  The text the rejection must name.
+   * @param expectedInError  The parts of the request the rejection must name.
    */
-  private void assertRejectedParameters(String parameters, String expectedInError) throws Exception {
+  private void assertRejectedParameters(String parameters, String... expectedInError) throws Exception {
     try {
-      convertor.executeFunction(parameters, null);
-      fail("These parameters should have been rejected: " + parameters);
+      String result = convertor.executeFunction(parameters, null);
+      fail("These parameters should have been rejected: " + parameters + ", the answer was: " + result);
     } catch (IllegalArgumentException e) {
-      assertTrue(e.getMessage(), e.getMessage().contains(expectedInError));
+      for (String expected : expectedInError) {
+        assertTrue("The rejection must name \"" + expected + "\", it was: " + e.getMessage(),
+            e.getMessage().contains(expected));
+      }
     }
   }
 
@@ -514,8 +539,8 @@ public class BatchConvertorAIToolTest {
   }
 
   /**
-   * Runs a conversion that is expected to be refused and asserts that no document was converted, the
-   * output folder was not created, and the caller was told what to correct.
+   * Runs a conversion that is expected to be refused and asserts that the caller was told what to
+   * correct, and the output folder was not created.
    *
    * @param outputFolderPath  The output folder to convert into, it must not exist afterwards.
    * @param inputFormat       The input format to ask for.
@@ -527,34 +552,13 @@ public class BatchConvertorAIToolTest {
       JSONArray inputFiles, String... expectedInReason) throws Exception {
     outputFolder = new File(outputFolderPath);
 
-    JSONObject result = new JSONObject(convertor.executeFunction(new JSONObject()
+    assertRejectedParameters(new JSONObject()
         .put("input_format", inputFormat)
         .put("output_format", outputFormat)
         .put("input_files", inputFiles)
         .put("output_folder", outputFolder.getAbsolutePath())
-        .toString(), null));
-
-    assertNoConvertedDocuments(result, expectedInReason);
+        .toString(), expectedInReason);
     assertFalse("Nothing should have been written for " + inputFiles, outputFolder.exists());
-  }
-
-  /**
-   * Asserts that the given outcome holds no converted document and gives a reason naming the parts
-   * of the request the caller has to correct.
-   *
-   * @param result            The outcome of the conversion.
-   * @param expectedInReason  The parts of the request the reason must name.
-   */
-  private static void assertNoConvertedDocuments(JSONObject result, String... expectedInReason) {
-    assertEquals("No document should have been converted: " + result, 0,
-        result.optJSONArray("convertedFiles") != null ? result.getJSONArray("convertedFiles").length() : 0);
-
-    String reason = result.optString("error", null);
-    assertNotNull("The caller must be told why nothing was converted, got: " + result, reason);
-    for (String expected : expectedInReason) {
-      assertTrue("The reason must name \"" + expected + "\", it was: " + reason,
-          reason.contains(expected));
-    }
   }
 
   /**

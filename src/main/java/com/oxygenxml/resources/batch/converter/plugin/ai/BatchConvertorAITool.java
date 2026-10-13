@@ -261,6 +261,16 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   }
 
   /**
+   * Converts the documents.
+   * <p>
+   * A request that cannot be carried out throws, so that AI Positron reports it as a failed tool
+   * call rather than as an answer: an {@link IllegalArgumentException} for a request the AI can
+   * correct - a parameter, a conversion that is not supported, a location that cannot be resolved or
+   * does not exist - and a non-fatal {@link ExternalServiceException} otherwise. Nothing is written
+   * in either case. Documents that fail to convert once the conversion runs are reported in its
+   * answer, next to the ones that were converted.
+   * </p>
+   *
    * @see ro.sync.exml.plugin.ai.ExternalAIFunction#executeFunction(java.lang.String, java.util.Map)
    */
   @Override
@@ -297,12 +307,13 @@ public class BatchConvertorAITool implements ExternalAIFunction {
 
     String converterType = ConversionFormatUtil.getConverterType(inputFormat, outputFormat);
     if (converterType == null) {
-      return error("The \"" + inputFormat + "\" to \"" + outputFormat + "\" conversion is not supported.");
+      throw new IllegalArgumentException(
+          "The \"" + inputFormat + "\" to \"" + outputFormat + "\" conversion is not supported.");
     }
 
     File outputFolder = toFile(outputFolderPath);
     if (outputFolder == null) {
-      return error("The output folder could not be resolved to a local folder: " + outputFolderPath
+      throw new IllegalArgumentException("The output folder could not be resolved to a local folder: " + outputFolderPath
           + ". Provide an absolute path or a file URL; a relative path is resolved against the opened project.");
     }
     // The converted documents are written here, so the output folder must be accessible as well.
@@ -316,20 +327,21 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     InputFilesManager inputFilesManager =
         collectInputFiles(inputFilesArray, converterType, extraContext, nonLocalEntries, missingEntries);
     if (!nonLocalEntries.isEmpty()) {
-      return error("The following input files could not be resolved to local files: "
+      throw new IllegalArgumentException("The following input files could not be resolved to local files: "
           + String.join(", ", nonLocalEntries)
           + ". Provide absolute paths or file URLs; a relative path is resolved against the opened project.");
     }
     if (!missingEntries.isEmpty()) {
-      return error("The following input files do not exist: " + String.join(", ", missingEntries));
+      throw new IllegalArgumentException("The following input files do not exist: " + String.join(", ", missingEntries));
     }
     if (inputFilesManager.isEmpty()) {
-      return error("No input files matching the \"" + inputFormat + "\" format were found.");
+      throw new IllegalArgumentException("No input files matching the \"" + inputFormat + "\" format were found.");
     }
 
     // Nothing is created until everything the conversion needs has been validated.
     if (!outputFolder.isDirectory() && !outputFolder.mkdirs()) {
-      return error("Could not create the output folder: " + outputFolder.getAbsolutePath());
+      // Not something the AI can correct, but no reason to stop the rest of what it is doing either.
+      throw new ExternalServiceException("Could not create the output folder: " + outputFolder.getAbsolutePath(), false);
     }
 
     return convertFiles(converterType, new AIConversionInputsProvider(inputFilesManager, outputFolder,
@@ -651,17 +663,6 @@ public class BatchConvertorAITool implements ExternalAIFunction {
       LOGGER.debug(e.getMessage(), e);
       return file.getAbsolutePath();
     }
-  }
-
-  /**
-   * Builds the JSON response for an operation that could not be carried out.
-   *
-   * @param message The error message.
-   *
-   * @return The JSON error response.
-   */
-  private static String error(String message) {
-    return new JSONObject().put("error", message).toString();
   }
 
   /**
