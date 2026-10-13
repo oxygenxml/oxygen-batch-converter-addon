@@ -458,6 +458,8 @@ public class BatchConvertorAIToolTest {
    * <p><b>Description:</b> Test that an output folder that cannot be created fails the call, without
    * stopping what the AI is doing, rather than answering with the reason.</p>
    *
+   * <p><b>Bug ID:</b> OPA-7275</p>
+   *
    * @author radu_coravu
    */
   @Test
