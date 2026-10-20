@@ -185,6 +185,19 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   }
 
   /**
+   * Returns the category used to group this function with other tools in the UI.
+   * <p>
+   * Implements <code>ro.sync.exml.plugin.ai.ExternalAIFunction#getCategory()</code>, added in
+   * Oxygen 29.0. No <code>@Override</code> because the plugin compiles against an older SDK.
+   * </p>
+   *
+   * @return The category.
+   */
+  public String getCategory() {
+    return "Conversion";
+  }
+
+  /**
    * Kept for compatibility with Oxygen versions older than 29.0, where the API method
    * was named <code>getUIDecription()</code>.
    *
