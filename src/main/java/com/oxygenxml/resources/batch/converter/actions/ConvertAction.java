@@ -2,11 +2,11 @@ package com.oxygenxml.resources.batch.converter.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.plugin.PluginMenusInteractor;
 import com.oxygenxml.resources.batch.converter.plugin.ProjectManagerEditor;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
@@ -62,8 +62,8 @@ public class ConvertAction extends ConvertActionBase {
    * @return the imposed input files
    */
   @Override
-  public List<File> getImposedInputFiles(ActionEvent event) {
-    List<File> selectedFile = new ArrayList<File>();
+  public InputFilesManager getImposedInputFiles(ActionEvent event) {
+    InputFilesManager selectedFile = new InputFilesManager();
     if (menuInteractor.isInvokedFromProjectMenu(event)) {
       isInvokedFromProject = true;
       // get the selectedFile from ProjectManager

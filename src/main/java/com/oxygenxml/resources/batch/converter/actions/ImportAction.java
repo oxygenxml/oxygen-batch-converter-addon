@@ -3,9 +3,9 @@ package com.oxygenxml.resources.batch.converter.actions;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
+import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.dmm.InsertTopicRefUtil;
 import com.oxygenxml.resources.batch.converter.dmm.InsertType;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
@@ -56,8 +56,8 @@ public class ImportAction extends ConvertActionBase{
    * @return the imposed input files
    */
   @Override
-  public List<File> getImposedInputFiles(ActionEvent actionEvent) {
-    return new ArrayList<File>();
+  public InputFilesManager getImposedInputFiles(ActionEvent actionEvent) {
+    return new InputFilesManager();
   }
   
   /**

@@ -251,6 +251,25 @@ public class InputPanel extends JPanel {
 	}
 
 	/**
+	 * Add the given imposed input files, keeping the folders they were collected from.
+	 *
+	 * @param imposedFiles The imposed input files.
+	 */
+	public void addImposedFiles(InputFilesManager imposedFiles) {
+		List<File> files = imposedFiles.getInputFiles();
+		for (File file : files) {
+			File rootDirectory = imposedFiles.getRootDirectoryForFile(file);
+			if (rootDirectory != null) {
+				inputFilesManager.addFilesFromFolder(Arrays.asList(file), rootDirectory);
+			} else {
+				inputFilesManager.addFiles(Arrays.asList(file));
+			}
+		}
+		addFilesInTable(files);
+		updateInfoLabel();
+	}
+
+	/**
 	 * Delete all rows from files table.
 	 */
 	public void clearTable() {

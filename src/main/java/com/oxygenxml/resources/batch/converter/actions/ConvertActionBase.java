@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 
+import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.view.ConverterDialog;
@@ -101,12 +102,12 @@ public abstract class ConvertActionBase extends AbstractAction {
   
  /**
   * Get the imposed input files.
-  * 
+  *
   * @param actionEvent The action event
-  * 
-  * @return the imposed input files
+  *
+  * @return the imposed input files, together with the folders they were collected from.
   */
- public abstract List<File> getImposedInputFiles(ActionEvent actionEvent);
+ public abstract InputFilesManager getImposedInputFiles(ActionEvent actionEvent);
 
  /**
   * Get the imposed output directory.

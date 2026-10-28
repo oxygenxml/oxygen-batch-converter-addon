@@ -97,12 +97,12 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
    * Constructor
    * 
    * @param converterType The type of converter.
-   * @param toConvertFiles List with files to convert.
+   * @param toConvertFiles The files to convert, together with the folders they were collected from.
    * @param outputDir The ouput directory.
    * @param parentFrame The parent frame.
    * @param translator Translator.
    */
-	public ConverterDialog(String converterType, List<File> toConvertFiles, File outputDir, JFrame parentFrame, Translator translator) {
+	public ConverterDialog(String converterType, InputFilesManager toConvertFiles, File outputDir, JFrame parentFrame, Translator translator) {
 		super(parentFrame, "" , true);
 		this.converterType = converterType;
     this.parentFrame = parentFrame;
@@ -127,9 +127,12 @@ public class ConverterDialog extends OKCancelDialog implements BatchConverterInt
 		  setOutputFolder(outputDir.getAbsolutePath());
 		} else if (!toConvertFiles.isEmpty()){
 			// Set the input files and the output folder
-			inputFilesManager.addFiles(toConvertFiles);
-			inputPanel.addFilesInTable(toConvertFiles);
-			setOutputFolder(toConvertFiles.get(toConvertFiles.size()-1).getParent() + File.separator + "output");
+			inputPanel.addImposedFiles(toConvertFiles);
+			List<File> inputFiles = toConvertFiles.getInputFiles();
+			File lastFile = inputFiles.get(inputFiles.size() - 1);
+			File rootDirectory = toConvertFiles.getRootDirectoryForFile(lastFile);
+			File outputParent = rootDirectory != null ? rootDirectory : lastFile.getParentFile();
+			setOutputFolder(outputParent + File.separator + "output");
 		}
 	}
 
