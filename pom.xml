@@ -111,7 +111,7 @@
 		<dependency>
 			<groupId>com.oxygenxml</groupId>
 			<artifactId>oxygen-sdk</artifactId>
-			<version>26.1.0.1</version>
+			<version>28.0.0.0</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>

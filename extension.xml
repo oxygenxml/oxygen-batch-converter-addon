@@ -1,7 +1,7 @@
 <xt:extension xmlns:xt="http://www.oxygenxml.com/ns/extension" id="com.oxygenxml.resources.batch.converter.plugin">
     <xt:location href="${project.build.finalName}-plugin.jar"/>
     <xt:version>${project.nosnapshot.version}</xt:version>
-    <xt:oxy_version>26.0+</xt:oxy_version>
+    <xt:oxy_version>28.0+</xt:oxy_version>
     <xt:type>plugin</xt:type>
     <xt:author>Syncro Soft</xt:author>
     <xt:name>Batch Documents Converter</xt:name>
@@ -38,6 +38,7 @@
                     <ul>
                         <li>Added a new AI function, <code>convert_documents</code>, allowing an installed Oxygen AI Positron add-on to convert documents between the supported formats.</li>
                         <li>When adding input files using the <b>Add Folder</b> button, the subfolder structure of the source directory is now preserved in the output folder. This makes it easier to navigate and identify the converted files, and prevents file name collisions when files with the same name exist in different subfolders of the source directory.</li>
+                        <li>Increased the minimum required version of Oxygen to 28.0.</li>
                     </ul>
                 </div>
                 <div class="whatsnew">
