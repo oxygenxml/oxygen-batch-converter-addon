@@ -8,13 +8,18 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerFactory;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,13 +32,16 @@ import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.reporter.ResultsUtil;
 
+import ro.sync.basic.io.IOUtil;
 import ro.sync.document.DocumentPositionedInfo;
 import ro.sync.exml.plugin.ai.ExternalAIFunction;
 import ro.sync.exml.plugin.ai.ExternalServiceException;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
+import ro.sync.exml.workspace.api.options.WSOptionsStorage;
 import ro.sync.exml.workspace.api.results.ResultsManager;
 import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
 import ro.sync.exml.workspace.api.standalone.project.ProjectController;
+import ro.sync.exml.workspace.api.util.XMLUtilAccess;
 import tests.utils.FileComparationUtil;
 
 /**
@@ -55,6 +63,7 @@ public class BatchConvertorAIToolTest {
 
   @After
   public void tearDown() throws IOException {
+    PluginWorkspaceProvider.setPluginWorkspace(null);
     if (outputFolder != null && outputFolder.exists()) {
       FileComparationUtil.deleteRecursivelly(outputFolder);
     }
@@ -174,8 +183,16 @@ public class BatchConvertorAIToolTest {
       assertTrue("sub2/topic.yaml must be the expected YAML",
           FileComparationUtil.compareLineToLine(expected, secondTopic));
 
-      // Both documents are offered to the caller, each under its own sub-folder.
-      List<Object> convertedFiles = result.getJSONArray("convertedFiles").toList();
+      // Both documents are offered to the caller, each under its own sub-folder, with their size.
+      List<String> convertedFiles = new ArrayList<>();
+      JSONArray convertedFilesArray = result.getJSONArray("convertedFiles");
+      for (int i = 0; i < convertedFilesArray.length(); i++) {
+        JSONObject convertedFile = convertedFilesArray.getJSONObject(i);
+        convertedFiles.add(convertedFile.getString("location"));
+        assertEquals(convertedFile.toString(), firstTopic.length(), convertedFile.getLong("sizeInBytes"));
+        // Not a DITA or XHTML document, so no words are counted.
+        assertFalse(convertedFile.toString(), convertedFile.has("wordCount"));
+      }
       assertTrue(convertedFiles.toString(), convertedFiles.contains(BatchConvertorAITool.toLocation(firstTopic)));
       assertTrue(convertedFiles.toString(), convertedFiles.contains(BatchConvertorAITool.toLocation(secondTopic)));
     } finally {
@@ -319,7 +336,7 @@ public class BatchConvertorAIToolTest {
    */
   @Test
   public void testConfirmationIsRequiredWithoutTheSandbox() throws Exception {
-    Method availabilityProbe = BatchConvertorAITool.class.getDeclaredMethod("isSandboxAccessAPIAvailable");
+    Method availabilityProbe = AbstractBatchConverterAITool.class.getDeclaredMethod("isSandboxAccessAPIAvailable");
     availabilityProbe.setAccessible(true);
     boolean sandboxAvailable = (Boolean) availabilityProbe.invoke(null);
 
@@ -624,5 +641,127 @@ public class BatchConvertorAIToolTest {
       PluginWorkspaceProvider.setPluginWorkspace(null);
       FileComparationUtil.deleteRecursivelly(projectFolder);
     }
+  }
+
+  /**
+   * <p><b>Description:</b> Test that a Word styles mapping given by the AI is applied to that conversion
+   * only, on top of the configured mapping, that the unmapped styles are returned, and that the converted
+   * files come with their size and word count.</p>
+   *
+   * <p><b>Bug ID:</b> BDC-163</p>
+   *
+   * @author cosmin_duna
+   */
+  @Test
+  public void testWordStylesMappingIsAppliedPerConversion() throws Exception {
+    outputFolder = new File("test-sample/ai-out-word-mapping");
+    // A Word conversion prints its result through the transformer of the running Oxygen.
+    mockWorkspaceForWordConversion();
+    JSONObject parameters = new JSONObject()
+        .put("input_format", "word")
+        .put("output_format", "xhtml")
+        .put("input_files", new JSONArray().put(absolute("test-sample/EXM-45677/inputCustomStyles.docx")))
+        .put("output_folder", outputFolder.getAbsolutePath())
+        .put("open_converted_files", false);
+
+    // Without a mapping the custom title is a plain paragraph and it is reported as unmapped.
+    JSONObject result = new JSONObject(convertor.executeFunction(parameters.toString(), null));
+    assertEquals(result.toString(), 0, result.getInt("problemCount"));
+    assertEquals(1, result.getInt("convertedFileCount"));
+    JSONObject convertedFile = result.getJSONArray("convertedFiles").getJSONObject(0);
+    File output = new File(outputFolder, "inputCustomStyles.xhtml");
+    assertEquals(BatchConvertorAITool.toLocation(output), convertedFile.getString("location"));
+    assertEquals(output.length(), convertedFile.getLong("sizeInBytes"));
+    assertTrue(convertedFile.toString(), convertedFile.getInt("wordCount") > 10);
+    String content = new String(Files.readAllBytes(output.toPath()), "UTF-8");
+    assertTrue(content, content.contains("<p>Document Title (custom)</p>"));
+    List<String> unmapped = new ArrayList<>();
+    JSONArray unmappedStyles = result.getJSONArray("unmappedStyles");
+    for (int i = 0; i < unmappedStyles.length(); i++) {
+      JSONObject style = unmappedStyles.getJSONObject(i);
+      unmapped.add(style.getString("element") + ":" + style.getString("styleId") + ":" + style.getString("name"));
+    }
+    assertEquals(Arrays.asList("p:DocumentTitle0:Document Title", "p:DocumentSubtitle:Document Subtitle"), unmapped);
+
+    // With a mapping the custom title becomes a heading, with the class the AI gave it.
+    parameters.put("word_styles_mapping", new JSONArray()
+        .put(new JSONObject().put("element", "p").put("style", "Document Title").put("html", "h1.doctitle:fresh"))
+        .put(new JSONObject().put("element", "p.DocumentSubtitle").put("html", "p.subtitle:fresh")));
+    result = new JSONObject(convertor.executeFunction(parameters.toString(), null));
+    assertEquals(result.toString(), 0, result.getInt("problemCount"));
+    File mappedOutput = new File(outputFolder, "inputCustomStyles(1).xhtml");
+    content = new String(Files.readAllBytes(mappedOutput.toPath()), "UTF-8");
+    assertTrue(content, content.contains("<h1 class=\"doctitle\">Document Title (custom)</h1>"));
+    assertTrue(content, content.contains("<p class=\"subtitle\">Document Subtitle(custom)</p>"));
+    // The default mapping still applies to the other styles.
+    assertTrue(content, content.contains("<h1>Title style</h1>"));
+    assertEquals(result.toString(), 0, result.getJSONArray("unmappedStyles").length());
+
+    // The mapping did not leak into the next conversion.
+    parameters.remove("word_styles_mapping");
+    result = new JSONObject(convertor.executeFunction(parameters.toString(), null));
+    content = new String(Files.readAllBytes(new File(outputFolder, "inputCustomStyles(2).xhtml").toPath()), "UTF-8");
+    assertTrue(content, content.contains("<p>Document Title (custom)</p>"));
+    assertEquals(2, result.getJSONArray("unmappedStyles").length());
+  }
+
+  /**
+   * Mocks the parts of the Oxygen workspace a Word conversion needs: the version and the XML utilities that
+   * create the transformer printing the result, with no mapping configured in the preferences.
+   */
+  private static void mockWorkspaceForWordConversion() throws Exception {
+    StandalonePluginWorkspace pluginWSMock = Mockito.mock(StandalonePluginWorkspace.class);
+    Mockito.when(pluginWSMock.getVersion()).thenReturn("29.0.0");
+    WSOptionsStorage optionsStorageMock = Mockito.mock(WSOptionsStorage.class);
+    Mockito.when(optionsStorageMock.getOption(Mockito.anyString(), Mockito.anyString())).then(
+        invocation -> invocation.getArgumentAt(1, String.class));
+    Mockito.when(pluginWSMock.getOptionsStorage()).thenReturn(optionsStorageMock);
+    XMLUtilAccess xmlUtilAccessMock = Mockito.mock(XMLUtilAccess.class);
+    Mockito.when(xmlUtilAccessMock.createXSLTTransformer(Mockito.any(Source.class), Mockito.any(), Mockito.anyInt()))
+        .then(invocation -> TransformerFactory.newInstance().newTransformer(invocation.getArgumentAt(0, Source.class)));
+    Mockito.when(xmlUtilAccessMock.prettyPrint(Mockito.any(Reader.class), Mockito.any()))
+        .then(invocation -> IOUtil.readSimple(invocation.getArgumentAt(0, Reader.class)));
+    Mockito.when(pluginWSMock.getXMLUtilAccess()).thenReturn(xmlUtilAccessMock);
+    PluginWorkspaceProvider.setPluginWorkspace(pluginWSMock);
+  }
+
+  /**
+   * <p><b>Description:</b> Test that an invalid Word styles mapping is rejected naming the rule to correct,
+   * and that the mapping is refused for the other input formats.</p>
+   *
+   * <p><b>Bug ID:</b> BDC-163</p>
+   *
+   * @author cosmin_duna
+   */
+  @Test
+  public void testWordStylesMappingIsValidated() throws Exception {
+    assertTrue(new JSONObject(convertor.getParameterDescriptions())
+        .getJSONObject("properties").has("word_styles_mapping"));
+    JSONObject parameters = new JSONObject()
+        .put("input_format", "word")
+        .put("output_format", "dita")
+        .put("input_files", new JSONArray().put(absolute("test-sample/EXM-45677/inputCustomStyles.docx")))
+        .put("output_folder", absolute("test-sample/ai-out-word-mapping-invalid"));
+
+    // Not an array.
+    assertRejectedParameters(parameters.put("word_styles_mapping", "p => h1").toString(), "word_styles_mapping");
+    // An unknown element.
+    assertRejectedParameters(parameters.put("word_styles_mapping", new JSONArray()
+        .put(new JSONObject().put("element", "div").put("html", "h1"))).toString(), "Rule 1", "element");
+    // A missing result.
+    assertRejectedParameters(parameters.put("word_styles_mapping", new JSONArray()
+        .put(new JSONObject().put("element", "p").put("style", "Note"))
+        .put(new JSONObject().put("element", "p").put("style", "Note").put("html", ""))).toString(), "Rule 1", "html");
+    // A quote in the style name would break the rule.
+    assertRejectedParameters(parameters.put("word_styles_mapping", new JSONArray()
+        .put(new JSONObject().put("element", "p").put("style", "It's").put("html", "p"))).toString(), "Rule 1", "quotes");
+    // A mapping for a format that has no Word styles.
+    assertRejectedParameters(parameters
+        .put("input_format", "markdown")
+        .put("input_files", new JSONArray().put(absolute("test-sample/markdownTest.md")))
+        .put("word_styles_mapping", new JSONArray()
+            .put(new JSONObject().put("element", "p").put("style", "Note").put("html", "div.note")))
+        .toString(), "word_styles_mapping", "markdown");
+    assertFalse("Nothing should have been written", new File("test-sample/ai-out-word-mapping-invalid").exists());
   }
 }

@@ -4,16 +4,11 @@ import java.io.File;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zwobble.mammoth.internal.conversion.UnknownStylesReporter;
-import org.zwobble.mammoth.internal.documents.Style;
 
 import com.oxygenxml.batch.converter.core.ConversionFormatUtil;
 import com.oxygenxml.batch.converter.core.ConverterTypes;
@@ -34,9 +29,9 @@ import com.oxygenxml.resources.batch.converter.reporter.ProblemReporter;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.reporter.ResultsUtil;
 import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
+import com.oxygenxml.resources.batch.converter.reporter.UnknownStylesResultsReporter;
 import com.oxygenxml.resources.batch.converter.transformer.OxygenTransformerFactoryCreator;
 import com.oxygenxml.resources.batch.converter.translator.OxygenTranslator;
-import com.oxygenxml.resources.batch.converter.translator.Tags;
 import com.oxygenxml.resources.batch.converter.translator.Translator;
 import com.oxygenxml.resources.batch.converter.worker.ConverterStatusReporter;
 import com.oxygenxml.resources.batch.converter.worker.ConvertorWorkerInteractor;
@@ -230,38 +225,18 @@ public class BatchConverterImpl implements BatchConverter {
 
 		if(ConverterTypes.WORD_TO_XHTML.equals(converterType) || ConverterTypes.WORD_TO_DITA.equals(converterType)){
 		  if(pluginWorkspace != null) {
-		    WSOptionsStorage optionsStorage = pluginWorkspace.getOptionsStorage();
-		    String wordStylesMapConfig = optionsStorage.getOption(OptionTags.WORD_STYLES_MAP_CONFIG, "");
-		    if (!wordStylesMapConfig.isEmpty()) {
-		      WordStyleMapLoader.imposeStyleMap(wordStylesMapConfig);
+		    // BDC-163: A conversion with a styles map of its own (the AI one) does not touch the global map.
+		    if (inputsProvider.getWordStylesMap() == null) {
+		      WSOptionsStorage optionsStorage = pluginWorkspace.getOptionsStorage();
+		      String wordStylesMapConfig = optionsStorage.getOption(OptionTags.WORD_STYLES_MAP_CONFIG, "");
+		      if (!wordStylesMapConfig.isEmpty()) {
+		        WordStyleMapLoader.imposeStyleMap(wordStylesMapConfig);
+		      }
 		    }
 		    
-        ResultsManager resultsManager = pluginWorkspace.getResultsManager();
-        if (resultsManager != null) {
-          WordStyleMapLoader.setUnknownStylesReporter(new UnknownStylesReporter() {
-            @Override
-            public void reportUnknownStyle(String element, Style style, Optional<Path> documentPath) {
-              StringBuilder message = new StringBuilder();
-              if (style.getName().isPresent()) {
-                message.append(MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_FOR_WORD_ELEMENT), style.getName().get(), element));
-              } else {
-                message.append(MessageFormat.format(translator.getTranslation(Tags.UNRECOGNIZE_STYLES_ID_FOR_WORD_ELEMENT), style.getStyleId(), element));
-              }
-              message.append(" ").append(translator.getTranslation(Tags.CONFIG_WORD_MAPPING_IN_PREFERENCES_PAGE));
-              
-              String location = null;
-              if(documentPath.isPresent()) {
-                try {
-                  location = documentPath.get().toUri().toURL().toExternalForm();
-                } catch (MalformedURLException e) {
-                  logger.debug(e.getMessage(), e);
-                }
-              }
-              resultsManager.addResult(ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY,
-                  new DocumentPositionedInfo(DocumentPositionedInfo.SEVERITY_WARN, message.toString(), location),
-                  ResultType.PROBLEM, true, true);
-            }
-          });
+		    UnknownStylesResultsReporter unknownStylesReporter = UnknownStylesResultsReporter.create(translator);
+        if (unknownStylesReporter != null) {
+          WordStyleMapLoader.setUnknownStylesReporter(unknownStylesReporter);
         }
       }
     } 

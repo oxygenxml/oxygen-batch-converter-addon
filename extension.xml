@@ -34,6 +34,14 @@
                 </div>
                 <hr/>
                 <div class="whatsnew">
+                    <h3>What's new in version 6.3.0</h3>
+                    <ul>
+                        <li>Added two read-only AI functions, <code>list_word_styles</code> and <code>preview_word_structure</code>, allowing an installed Oxygen AI Positron add-on to see the styles used by Word documents (with text samples and their current mapping) and to preview the DITA structure a styles mapping would produce, without writing any file.</li>
+                        <li>The <code>convert_documents</code> AI function accepts a <code>word_styles_mapping</code> parameter that maps custom Word styles to HTML/DITA structure for that conversion only, on top of the mapping configured in the preferences. Its result now lists the Word styles that remained unmapped and the size and word count of each converted file.</li>
+                        <li>Added the <b>word-to-dita-conversion</b> skill for the Oxygen AI Positron add-on, guiding the AI through inspecting a Word document, mapping its custom styles, previewing the structure, converting and post-processing the result.</li>
+                    </ul>
+                </div>
+                <div class="whatsnew">
                     <h3>What's new in version 6.2.0</h3>
                     <ul>
                         <li>Added a new AI function, <code>convert_documents</code>, allowing an installed Oxygen AI Positron add-on to convert documents between the supported formats.</li>

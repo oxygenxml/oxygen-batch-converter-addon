@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.zwobble.mammoth.internal.conversion.UnknownStylesReporter;
+
 import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.view.ConverterAdditionalOptionsProvider;
@@ -54,6 +56,16 @@ class AIConversionInputsProvider implements UserInputsProvider {
   private final boolean openConvertedFiles;
 
   /**
+   * The Word styles map of this conversion, or <code>null</code> to use the configured one.
+   */
+  private final String wordStylesMap;
+
+  /**
+   * The reporter collecting the unmapped Word styles of this conversion, or <code>null</code> for the global one.
+   */
+  private final UnknownStylesReporter unknownStylesReporter;
+
+  /**
    * Constructor.
    *
    * @param inputFilesManager                 The manager holding the input files.
@@ -68,10 +80,35 @@ class AIConversionInputsProvider implements UserInputsProvider {
   AIConversionInputsProvider(InputFilesManager inputFilesManager, File outputFolder, String converterType,
       Map<String, Boolean> requestedOptions, Integer maxHeadingLevelForCreatingTopics,
       boolean openConvertedFiles) {
+    this(inputFilesManager, outputFolder, converterType, requestedOptions, maxHeadingLevelForCreatingTopics,
+        openConvertedFiles, null, null);
+  }
+
+  /**
+   * Constructor.
+   *
+   * @param inputFilesManager                 The manager holding the input files.
+   * @param outputFolder                      The output folder.
+   * @param converterType                     The converter type, it decides which options apply.
+   * @param requestedOptions                  The options named by the AI, keyed by option id. The
+   *                                          ones that do not apply to this conversion are ignored.
+   * @param maxHeadingLevelForCreatingTopics  The maximum heading level for creating topics, or
+   *                                          <code>null</code> to use the configured one.
+   * @param openConvertedFiles                <code>true</code> to open the converted documents.
+   * @param wordStylesMap                     The Word styles map of this conversion, in the Java Mammoth
+   *                                          syntax, or <code>null</code> to use the configured one.
+   * @param unknownStylesReporter             The reporter collecting the unmapped Word styles of this
+   *                                          conversion, or <code>null</code> for the global one.
+   */
+  AIConversionInputsProvider(InputFilesManager inputFilesManager, File outputFolder, String converterType,
+      Map<String, Boolean> requestedOptions, Integer maxHeadingLevelForCreatingTopics,
+      boolean openConvertedFiles, String wordStylesMap, UnknownStylesReporter unknownStylesReporter) {
     this.inputFilesManager = inputFilesManager;
     this.outputFolder = outputFolder;
     this.maxHeadingLevelForCreatingTopics = maxHeadingLevelForCreatingTopics;
     this.openConvertedFiles = openConvertedFiles;
+    this.wordStylesMap = wordStylesMap;
+    this.unknownStylesReporter = unknownStylesReporter;
 
     // Only the options this conversion accepts are set, each one on the value the AI asked for or,
     // when it didn't ask, on the default of the option. The dialog list carries the separators it
@@ -127,6 +164,24 @@ class AIConversionInputsProvider implements UserInputsProvider {
   @Override
   public File getRootInputDirectoryForFile(File inputFile) {
     return inputFilesManager.getRootDirectoryForFile(inputFile);
+  }
+
+  /**
+   * The styles map built for this conversion: the rules given by the AI on top of the user's preferences.
+   *
+   * @see UserInputsProvider#getWordStylesMap()
+   */
+  @Override
+  public String getWordStylesMap() {
+    return wordStylesMap;
+  }
+
+  /**
+   * @see UserInputsProvider#getUnknownStylesReporter()
+   */
+  @Override
+  public UnknownStylesReporter getUnknownStylesReporter() {
+    return unknownStylesReporter;
   }
 
   /**

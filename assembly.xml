@@ -38,5 +38,10 @@
       <source>i18n/translation.xml</source>
       <outputDirectory>/i18n</outputDirectory>
     </file>
+    <!-- BDC-163: The skills AI Positron discovers in the add-on. -->
+    <file>
+      <source>ai-positron/word-to-dita-conversion/SKILL.md</source>
+      <outputDirectory>/ai-positron/word-to-dita-conversion</outputDirectory>
+    </file>
   </files>
 </assembly>

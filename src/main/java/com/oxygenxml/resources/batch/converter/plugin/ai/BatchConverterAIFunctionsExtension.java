@@ -27,6 +27,6 @@ public class BatchConverterAIFunctionsExtension implements PluginExtension {
    * @return The contributed AI functions. Never <code>null</code>.
    */
   public List<Object> getExternalAIFunctions() {
-    return Arrays.asList(new BatchConvertorAITool());
+    return Arrays.asList(new BatchConvertorAITool(), new ListWordStylesAITool(), new PreviewWordStructureAITool());
   }
 }

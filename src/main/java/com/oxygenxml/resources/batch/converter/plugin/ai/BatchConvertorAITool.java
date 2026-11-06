@@ -8,63 +8,50 @@ package com.oxygenxml.resources.batch.converter.plugin.ai;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.oxygenxml.batch.converter.core.ConversionFormatUtil;
 import com.oxygenxml.batch.converter.core.ConversionOptionTags;
+import com.oxygenxml.batch.converter.core.ConverterTypes;
 import com.oxygenxml.batch.converter.core.extensions.ExtensionGetter;
+import com.oxygenxml.batch.converter.core.word.inspect.WordDocumentInspector;
 import com.oxygenxml.resources.batch.converter.BatchConverterImpl;
 import com.oxygenxml.resources.batch.converter.InputFilesManager;
 import com.oxygenxml.resources.batch.converter.UserInputsProvider;
 import com.oxygenxml.resources.batch.converter.reporter.ProgressDialogInteractor;
 import com.oxygenxml.resources.batch.converter.reporter.ResultsUtil;
 import com.oxygenxml.resources.batch.converter.reporter.StatusReporter;
-import com.oxygenxml.resources.batch.converter.utils.ConverterFileUtils;
 
 import ro.sync.basic.util.URLUtil;
 import ro.sync.document.DocumentPositionedInfo;
-import ro.sync.exml.plugin.ai.ExternalAIFunction;
 import ro.sync.exml.plugin.ai.ExternalServiceException;
 import ro.sync.exml.workspace.api.PluginWorkspace;
 import ro.sync.exml.workspace.api.PluginWorkspaceProvider;
 import ro.sync.exml.workspace.api.results.ResultsManager;
-import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace;
-import ro.sync.exml.workspace.api.standalone.project.ProjectController;
 
 /**
  * Tool that converts documents between formats using the Oxygen Batch Converter engine.
  *
  * @author vlad_greaca
  */
-public class BatchConvertorAITool implements ExternalAIFunction {
+public class BatchConvertorAITool extends AbstractBatchConverterAITool {
 
   /**
    * Logger for logging.
    */
   private static final Logger LOGGER = LoggerFactory.getLogger(BatchConvertorAITool.class.getName());
-
-  /**
-   * <code>true</code> when the running Oxygen provides the AI document-access API.
-   *
-   * @see #isSandboxAccessAPIAvailable()
-   */
-  private static final boolean SANDBOX_ACCESS_API_AVAILABLE = isSandboxAccessAPIAvailable();
 
   /**
    * The name of the parameter holding the format of the input files.
@@ -75,11 +62,6 @@ public class BatchConvertorAITool implements ExternalAIFunction {
    * The name of the parameter holding the format of the output files.
    */
   private static final String PARAM_OUTPUT_FORMAT = "output_format";
-
-  /**
-   * The name of the parameter holding the files and directories to convert.
-   */
-  private static final String PARAM_INPUT_FILES = "input_files";
 
   /**
    * The name of the parameter holding the folder the converted files are written in.
@@ -107,9 +89,14 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   private static final String PARAM_OPEN_CONVERTED_FILES = "open_converted_files";
 
   /**
-   * The name of the parameter holding the reason the AI gives for the conversion.
+   * The Word input format.
    */
-  private static final String PARAM_EXPLANATION = "explanation";
+  private static final String WORD_INPUT_FORMAT = "word";
+
+  /**
+   * The extensions of the output files whose words are counted.
+   */
+  private static final List<String> COUNTED_OUTPUT_EXTENSIONS = Arrays.asList("dita", "ditamap", "xhtml", "html");
 
   /**
    * The AI function has no status bar and no progress dialog, the outcome of the conversion is
@@ -164,47 +151,22 @@ public class BatchConvertorAITool implements ExternalAIFunction {
         + "Provide the input format, the output format, the input files (or directories) and the output "
         + "folder where the converted files are written. Supported conversions include HTML/Markdown/Word/"
         + "Excel/Confluence/DocBook/OpenAPI to DITA, HTML/Markdown/Word to XHTML or DocBook, and conversions "
-        + "between XML, JSON, YAML and XSD to JSON Schema. Returns the produced output files and the "
-        + "conversions that failed, in JSON format. When the conversion also raises warnings, like the "
-        + "unrecognized Word styles, these are reported in the Results panel and the result carries "
+        + "between XML, JSON, YAML and XSD to JSON Schema. Returns the produced output files (with their size "
+        + "and word count) and the conversions that failed, in JSON format. For Word documents, custom styles "
+        + "can be mapped to HTML/DITA structure with \"word_styles_mapping\": use \"list_word_styles\" to see "
+        + "the styles and \"preview_word_structure\" to check the mapping first; the result then lists the "
+        + "styles that remained unmapped (\"unmappedStyles\"). When the conversion also raises warnings, like "
+        + "the unrecognized Word styles, these are reported in the Results panel and the result carries "
         + "their \"warningCount\" and the \"warningsResultsTab\" holding them: read that tab when they "
         + "matter. A result without those fields raised no warnings, so there is nothing to read.";
   }
 
   /**
-   * Returns a short description displayed in the UI when the function is executed.
-   * <p>
-   * Implements <code>ro.sync.exml.plugin.ai.ExternalAIFunction#getUIDescription()</code>, added in
-   * Oxygen 29.0. No <code>@Override</code> because the plugin compiles against an older SDK.
-   * </p>
-   *
-   * @return The UI description.
+   * @see AbstractBatchConverterAITool#getUIDescription()
    */
+  @Override
   public String getUIDescription() {
     return "Convert documents";
-  }
-
-  /**
-   * Returns the category used to group this function with other tools in the UI.
-   * <p>
-   * Implements <code>ro.sync.exml.plugin.ai.ExternalAIFunction#getCategory()</code>, added in
-   * Oxygen 29.0. No <code>@Override</code> because the plugin compiles against an older SDK.
-   * </p>
-   *
-   * @return The category.
-   */
-  public String getCategory() {
-    return "Conversion";
-  }
-
-  /**
-   * Kept for compatibility with Oxygen versions older than 29.0, where the API method
-   * was named <code>getUIDecription()</code>.
-   *
-   * @return The same value as {@link #getUIDescription()}.
-   */
-  public String getUIDecription() {
-    return getUIDescription();
   }
 
   /**
@@ -223,13 +185,10 @@ public class BatchConvertorAITool implements ExternalAIFunction {
         .put("description",
             "The format of the output files. Possible values: \"xhtml\", \"dita\", \"docbook4\", \"docbook5\", "
                 + "\"json\", \"yaml\" or \"xml\"."));
-    properties.put(PARAM_INPUT_FILES, new JSONObject()
-        .put("type", "array")
-        .put("items", new JSONObject().put("type", "string"))
-        .put("description",
-            "The input files or directories to convert, as filesystem paths or file URLs."
-                + "Directories are searched recursively for files matching the input format and their "
-                + "folder structure is recreated in the output folder."));
+    properties.put(PARAM_INPUT_FILES, inputFilesParameter(
+        "The input files or directories to convert, as filesystem paths or file URLs."
+            + "Directories are searched recursively for files matching the input format and their "
+            + "folder structure is recreated in the output folder."));
     properties.put(PARAM_OUTPUT_FOLDER, new JSONObject()
         .put("type", "string")
         .put("description",
@@ -249,6 +208,15 @@ public class BatchConvertorAITool implements ExternalAIFunction {
         .put("type", "integer")
         .put("description",
             "Optional. The maximum heading level used to create separate DITA topics when converting to DITA."));
+    properties.put(WordStylesMappingParameter.PARAM_WORD_STYLES_MAPPING, WordStylesMappingParameter.schema(
+        "Optional, only for the \"word\" input format. Rules mapping Word styles to the HTML elements the "
+            + "conversion is based on, applied on top of the mapping configured by the user in the preferences "
+            + "(which is not modified). Each rule is an object with \"element\" (\"p\", \"r\", \"b\", \"i\", "
+            + "\"u\", \"strike\", \"table\", \"p:unordered-list(n)\", \"p:ordered-list(n)\" or \"p.StyleId\"), "
+            + "an optional \"style\" (the Word style name) and \"html\" (e.g. \"h1:fresh\" for a title, "
+            + "\"h2:fresh\" for a heading, \"kbd\", \"i.filepath\", \"pre.codeblock:separator('\\n')\", "
+            + "\"blockquote\", \"div.note\", or \"!\" to drop the element). Use \"list_word_styles\" to see the "
+            + "styles of the documents and \"preview_word_structure\" to check the resulting outline."));
     properties.put(PARAM_OPEN_CONVERTED_FILES, new JSONObject()
         .put("type", "boolean")
         .put("description",
@@ -290,12 +258,7 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   @Override
   public String executeFunction(String parameters, Map<String, Object> extraContext)
       throws IllegalArgumentException, ExternalServiceException {
-    JSONObject params;
-    try {
-      params = parameters != null && !parameters.isEmpty() ? new JSONObject(parameters) : new JSONObject();
-    } catch (JSONException e) {
-      throw new IllegalArgumentException("Invalid parameters: " + e.getMessage(), e);
-    }
+    JSONObject params = parseParameters(parameters);
 
     String inputFormat = params.optString(PARAM_INPUT_FORMAT, null);
     String outputFormat = params.optString(PARAM_OUTPUT_FORMAT, null);
@@ -319,6 +282,12 @@ public class BatchConvertorAITool implements ExternalAIFunction {
 
     Integer maxHeadingLevelForTopics = readMaxHeadingLevelForTopics(params);
 
+    String wordStylesRules = WordStylesMappingParameter.readRules(params);
+    if (wordStylesRules != null && !WORD_INPUT_FORMAT.equals(inputFormat)) {
+      throw new IllegalArgumentException("The '" + WordStylesMappingParameter.PARAM_WORD_STYLES_MAPPING
+          + "' only applies to the \"" + WORD_INPUT_FORMAT + "\" input format, not to \"" + inputFormat + "\".");
+    }
+
     String converterType = ConversionFormatUtil.getConverterType(inputFormat, outputFormat);
     if (converterType == null) {
       throw new IllegalArgumentException(
@@ -337,24 +306,8 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     // The parameters are valid: resolve the inputs and expand the directories to the files matching
     // the input format, remembering the directory each file was collected from, so that the folder
     // structure is recreated in the output.
-    List<String> nonLocalEntries = new ArrayList<>();
-    List<String> missingEntries = new ArrayList<>();
-    InputFilesManager inputFilesManager =
-        collectInputFiles(inputFilesArray, converterType, extraContext, nonLocalEntries, missingEntries);
-    if (!nonLocalEntries.isEmpty()) {
-      throw new IllegalArgumentException(
-          "The following input files could not be resolved to local files: "
-          + String.join(", ", nonLocalEntries)
-          + ". Provide absolute paths or file URLs; a relative path is resolved against the opened project.");
-    }
-    if (!missingEntries.isEmpty()) {
-      throw new IllegalArgumentException(
-          "The following input files do not exist: " + String.join(", ", missingEntries));
-    }
-    if (inputFilesManager.isEmpty()) {
-      throw new IllegalArgumentException(
-          "No input files matching the \"" + inputFormat + "\" format were found.");
-    }
+    InputFilesManager inputFilesManager = resolveInputFiles(params,
+        Arrays.asList(ExtensionGetter.getInputExtension(converterType)), extraContext, inputFormat);
 
     // Nothing is created until everything the conversion needs has been validated.
     if (!outputFolder.isDirectory() && !outputFolder.mkdirs()) {
@@ -363,9 +316,35 @@ public class BatchConvertorAITool implements ExternalAIFunction {
           "Could not create the output folder: " + outputFolder.getAbsolutePath(), false);
     }
 
-    return convertFiles(converterType, new AIConversionInputsProvider(inputFilesManager, outputFolder,
+    // A Word conversion gets a styles map of its own: the rules given by the AI on top of the user's
+    // preferences, applied to this conversion only, and a reporter collecting the unmapped styles.
+    String wordStylesMap = null;
+    AIUnknownStylesReporter unknownStylesReporter = null;
+    if (isWordConverter(converterType)) {
+      try {
+        wordStylesMap = WordStylesMappingParameter.buildStyleMap(wordStylesRules);
+      } catch (IOException e) {
+        throw new ExternalServiceException(e.getMessage(), false);
+      }
+      unknownStylesReporter = new AIUnknownStylesReporter();
+    }
+
+    AIConversionInputsProvider inputsProvider = new AIConversionInputsProvider(inputFilesManager, outputFolder,
         converterType, readRequestedOptions(params), maxHeadingLevelForTopics,
-        params.optBoolean(PARAM_OPEN_CONVERTED_FILES, true)));
+        params.optBoolean(PARAM_OPEN_CONVERTED_FILES, true), wordStylesMap, unknownStylesReporter);
+    return convertFiles(converterType, inputsProvider, unknownStylesReporter);
+  }
+
+  /**
+   * Checks whether the given converter reads Word documents with the Word styles mapping.
+   *
+   * @param converterType The converter type.
+   *
+   * @return <code>true</code> for the Word to XHTML and Word to DITA converters.
+   */
+  private static boolean isWordConverter(String converterType) {
+    return ConverterTypes.WORD_TO_XHTML.equals(converterType) || ConverterTypes.WORD_TO_DITA.equals(converterType)
+        || ConverterTypes.WORD_TO_DB4.equals(converterType) || ConverterTypes.WORD_TO_DB5.equals(converterType);
   }
 
   /**
@@ -438,12 +417,15 @@ public class BatchConvertorAITool implements ExternalAIFunction {
   /**
    * Converts the input files through the batch converter engine.
    *
-   * @param converterType  The converter type resolved from the conversion formats.
-   * @param inputsProvider The conversion inputs provider.
+   * @param converterType          The converter type resolved from the conversion formats.
+   * @param inputsProvider         The conversion inputs provider.
+   * @param unknownStylesReporter  The reporter collecting the unmapped Word styles, or <code>null</code>
+   *                               when the conversion does not read Word documents.
    *
    * @return The JSON result describing the produced files and the conversion problems.
    */
-  private String convertFiles(String converterType, UserInputsProvider inputsProvider) {
+  private String convertFiles(String converterType, UserInputsProvider inputsProvider,
+      AIUnknownStylesReporter unknownStylesReporter) {
     AIProblemReporter problemReporter = new AIProblemReporter();
 
     // The conversion adds the warnings it encounters to the Results panel, which is never cleared
@@ -462,7 +444,7 @@ public class BatchConvertorAITool implements ExternalAIFunction {
       // A file the engine did not produce is recorded as a null output, the failure itself is
       // reported through the problem reporter.
       if (outputFile != null) {
-        convertedFiles.put(toLocation(outputFile));
+        convertedFiles.put(describeOutputFile(outputFile));
       }
     }
 
@@ -472,6 +454,9 @@ public class BatchConvertorAITool implements ExternalAIFunction {
     result.put("convertedFiles", convertedFiles);
     result.put("problemCount", problems.length());
     result.put("problems", problems);
+    if (unknownStylesReporter != null) {
+      result.put("unmappedStyles", WordInspectionJsonUtil.toJson(unknownStylesReporter.getUnmappedStyles()));
+    }
     if (raisedWarnings > 0) {
       // The warnings are not failures, so they are not repeated here, only counted and the tab
       // holding them named, so that they are read when there are any and there is something to read.
@@ -479,6 +464,30 @@ public class BatchConvertorAITool implements ExternalAIFunction {
       result.put("warningsResultsTab", ResultsUtil.BATCH_CONVERTER_RESULTS_TAB_KEY);
     }
     return result.toString();
+  }
+
+  /**
+   * Describes a produced file: its location, its size and, for the DITA and XHTML files, its word count,
+   * so that the AI can tell small or empty topics without reading every file.
+   *
+   * @param outputFile The produced file.
+   *
+   * @return The description.
+   */
+  static JSONObject describeOutputFile(File outputFile) {
+    JSONObject description = new JSONObject();
+    description.put(WordInspectionJsonUtil.KEY_LOCATION, toLocation(outputFile));
+    description.put("sizeInBytes", outputFile.length());
+    String extension = URLUtil.getExtension(outputFile.getName());
+    if (extension != null && COUNTED_OUTPUT_EXTENSIONS.contains(extension.toLowerCase(Locale.ROOT))) {
+      try {
+        String content = new String(Files.readAllBytes(outputFile.toPath()), StandardCharsets.UTF_8);
+        description.put("wordCount", WordDocumentInspector.countWords(content));
+      } catch (IOException e) {
+        LOGGER.debug(e.getMessage(), e);
+      }
+    }
+    return description;
   }
 
   /**
@@ -501,200 +510,6 @@ public class BatchConvertorAITool implements ExternalAIFunction {
       }
     }
     return count;
-  }
-
-  /**
-   * Resolves the input locations given by the AI and expands the directories among them to the files
-   * matching the input format, keeping the files named individually and recording the root directory
-   * of the expanded ones, so that the folder structure is recreated in the output.
-   *
-   * @param inputFilesArray  The input locations given by the AI.
-   * @param converterType    The converter type.
-   * @param extraContext     The extra context, used to enforce the AI sandbox / ai-ignore access rules.
-   * @param nonLocalEntries  Where to collect the entries that are not on the local filesystem.
-   * @param missingEntries   Where to collect the locations of the entries that do not exist.
-   *
-   * @return The manager holding the files to convert and their root directories.
-   *
-   * @throws ExternalServiceException If access to one of the entries is denied.
-   */
-  private InputFilesManager collectInputFiles(JSONArray inputFilesArray, String converterType,
-      Map<String, Object> extraContext, List<String> nonLocalEntries, List<String> missingEntries)
-      throws ExternalServiceException {
-    List<String> inputExtensions = Arrays.asList(ExtensionGetter.getInputExtension(converterType));
-    InputFilesManager inputFilesManager = new InputFilesManager();
-    Set<File> processedEntries = new HashSet<>();
-    for (int i = 0; i < inputFilesArray.length(); i++) {
-      String path = inputFilesArray.optString(i, null);
-      if (!StringUtils.isBlank(path)) {
-        File entry = toFile(path);
-        // Verify the entry the AI named: an unusable one is collected and reported here, so that the
-        // collection below is the same one the conversion dialog performs on entries the user picked.
-        if (entry == null) {
-          nonLocalEntries.add(path.trim());
-        } else if (!processedEntries.add(entry)) {
-          LOGGER.debug("Input was already collected and is ignored: {}", entry);
-        } else if (!entry.exists()) {
-          missingEntries.add(toLocation(entry));
-        } else {
-          checkAccessAllowed(entry, extraContext);
-          if (entry.isDirectory()) {
-            inputFilesManager.addFilesFromFolder(
-                filterAccessible(ConverterFileUtils.getAllFiles(entry, inputExtensions), extraContext), entry);
-          } else {
-            inputFilesManager.addFiles(Arrays.asList(entry));
-          }
-        }
-      }
-    }
-    return inputFilesManager;
-  }
-
-  /**
-   * Keeps only the files the AI is allowed to access.
-   *
-   * @param files        The files to filter.
-   * @param extraContext The extra context, used to enforce the AI sandbox / ai-ignore access rules.
-   *
-   * @return The accessible files.
-   */
-  private List<File> filterAccessible(List<File> files, Map<String, Object> extraContext) {
-    if (!SANDBOX_ACCESS_API_AVAILABLE) {
-      return files;
-    }
-    List<File> accessibleFiles = new ArrayList<>();
-    for (File file : files) {
-      String location = toLocation(file);
-      if (isDocumentAccessAllowed(location, extraContext) && !isIgnoredFromAiIgnoreFile(location, extraContext)) {
-        accessibleFiles.add(file);
-      } else {
-        LOGGER.debug("Input is not accessible to the AI and is ignored: {}", file);
-      }
-    }
-    return accessibleFiles;
-  }
-
-  /**
-   * Verifies that the AI is allowed to access the given file, both by the AI project sandbox and by
-   * the <code>.ai-ignore</code> rules.
-   *
-   * @param file         The file to check.
-   * @param extraContext The extra context holding the access predicates.
-   *
-   * @throws ExternalServiceException If access to the file is denied.
-   */
-  private void checkAccessAllowed(File file, Map<String, Object> extraContext) throws ExternalServiceException {
-    if (SANDBOX_ACCESS_API_AVAILABLE) {
-      String location = toLocation(file);
-      checkDocumentAccessPermissions(location, extraContext);
-      checkNotIgnoredFromAiIgnoreFile(location, extraContext);
-    }
-  }
-
-  /**
-   * Checks whether the document-access API is available in the running Oxygen version.
-   * <p>
-   * The add-on supports Oxygen 26.0 and newer, but the access helpers were only added to
-   * {@link ExternalAIFunction} in Oxygen 29.0. They are therefore called only after this probe
-   * confirms they exist, so that on an older Oxygen the calls are never linked. On those versions
-   * there is no AI project sandbox to enforce either, and no access predicate is passed in the
-   * extra context.
-   *
-   * @return <code>true</code> when the access helpers can be called.
-   */
-  private static boolean isSandboxAccessAPIAvailable() {
-    boolean available = false;
-    try {
-      // Every helper called on the access path, both the ones that throw and the ones that filter.
-      ExternalAIFunction.class.getMethod("checkDocumentAccessPermissions", String.class, Map.class);
-      ExternalAIFunction.class.getMethod("checkNotIgnoredFromAiIgnoreFile", String.class, Map.class);
-      ExternalAIFunction.class.getMethod("isDocumentAccessAllowed", String.class, Map.class);
-      ExternalAIFunction.class.getMethod("isIgnoredFromAiIgnoreFile", String.class, Map.class);
-      available = true;
-    } catch (NoSuchMethodException e) { // NOSONAR - an older Oxygen, without the AI project sandbox.
-      LOGGER.debug("The AI document access API is not available in this Oxygen version.");
-    }
-    return available;
-  }
-
-  /**
-   * Converts a location received from the AI to a file. A relative path is resolved against the
-   * project currently opened in Oxygen, see {@link #getCurrentProjectURL()}. An absolute path, with
-   * either slash, and a file URL are locations on their own and are converted as they are.
-   *
-   * @param location The location to convert. Not blank.
-   *
-   * @return The corresponding file, or <code>null</code> if the location isn't a local one.
-   */
-  static File toFile(String location) {
-    String trimmedLocation = location.trim();
-    File file = null;
-    // A URL, of any protocol, and an absolute path are locations on their own: they are never
-    // resolved against the project, so that a remote one is still reported as not being local.
-    if (!URLUtil.isRelativePath(trimmedLocation) || new File(trimmedLocation).isAbsolute()) {
-      URL url = URLUtil.convertToURL(trimmedLocation);
-      file = url != null ? URLUtil.getCanonicalFileFromFileUrl(url) : null;
-    } else {
-      URL projectURL = getCurrentProjectURL();
-      if (projectURL != null) {
-        try {
-          // Resolves the path against the folder holding the project file.
-          file = URLUtil.computeCanonicalFile(projectURL, trimmedLocation);
-        } catch (IOException e) {
-          LOGGER.debug(e.getMessage(), e);
-        }
-      }
-      // With no opened project the path is left unresolved: the working directory of the
-      // application is the installation folder, which is never what the AI meant.
-    }
-    return file;
-  }
-
-  /**
-   * Gets the location of the project currently opened in Oxygen.
-   *
-   * @return The URL of the project file, or <code>null</code> when Oxygen does not run standalone or
-   *         no project is opened.
-   */
-  private static URL getCurrentProjectURL() {
-    URL projectURL = null;
-    PluginWorkspace pluginWorkspace = PluginWorkspaceProvider.getPluginWorkspace();
-    if (pluginWorkspace instanceof StandalonePluginWorkspace) {
-      ProjectController projectManager = ((StandalonePluginWorkspace) pluginWorkspace).getProjectManager();
-      if (projectManager != null) {
-        projectURL = projectManager.getCurrentProjectURL();
-      }
-    }
-    return projectURL;
-  }
-
-  /**
-   * Computes the location to report for the given file, as a URL when possible.
-   *
-   * @param file The file.
-   *
-   * @return The location of the file.
-   */
-  static String toLocation(File file) {
-    try {
-      return URLUtil.correct(file).toExternalForm();
-    } catch (MalformedURLException e) {
-      LOGGER.debug(e.getMessage(), e);
-      return file.getAbsolutePath();
-    }
-  }
-
-  /**
-   * @see ro.sync.exml.plugin.ai.ExternalAIFunction#isSafe(java.lang.String)
-   */
-  @Override
-  public boolean isSafe(String parameters) {
-    // The conversion only adds files to the output folder: an existing file is never overwritten,
-    // a counter is added to the name instead, and nothing is removed. That alone makes it safe only
-    // as long as the AI cannot choose freely where to read from and write to, which is what the
-    // sandbox and the ai-ignore rules decide. On an Oxygen that doesn't provide them there is
-    // nothing to keep the conversion inside the project, so the user is asked to confirm it.
-    return SANDBOX_ACCESS_API_AVAILABLE;
   }
 
   /**
