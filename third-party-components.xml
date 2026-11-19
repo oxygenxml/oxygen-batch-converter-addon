@@ -2537,9 +2537,9 @@ END OF TERMS AND CONDITIONS
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </component>
-    <component id="commons-codec:commons-codec:1.18.0" draft="false" product="editor">
+    <component id="commons-codec:commons-codec:1.23.0" draft="false" product="editor">
         <name>Apache Commons Codec</name>
-        <version>1.18.0</version>
+        <version>1.23.0</version>
         <project-info>
             <about>The Apache Commons Codec component contains encoders and decoders for
      formats such as Base16, Base32, Base64, digest, and Hexadecimal. In addition to these
