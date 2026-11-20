@@ -72,6 +72,14 @@
                 </exclusion>
 			</exclusions>
 		</dependency>
+		<!-- BDC-170: Use a newer version than the one managed by the superpom. CVE-2026-119078 does not affect
+		 this add-on, as it affects only repeated doFinalize() calls on the Blake3 class, which is not used here.
+		 The update only keeps the dependency scanners from reporting it. -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.23.0</version>
+		</dependency>
 
 		
 		<dependency>
